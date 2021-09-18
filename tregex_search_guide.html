@@ -1,0 +1,1043 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset=utf-8>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="Content-Style" content="text/css">
+  <title>Tregex Search Guide</title>
+  <style>
+body {
+        background-color: #FFFFFF;
+        color: #111111;
+        margin: 15px auto;
+        padding: 0 10px;
+}
+@media (min-width: 800px) {
+        body {
+                max-width: 85%;
+        }
+}
+  </style>
+</head>
+<body>
+<br>
+<center><h1>Tregex Search Guide</h1></center>
+<br>
+
+<p align="justify">
+This guide provides an introduction to the Tregex query language. The content will generally apply to the search of all bracketed (Penn) style parsed corpora. This guide sources explanatory detail from README-tregex.txt, which is part of the Tregex distribution. Explanation is also taken from the manual that accompanies TGrep2, another search program with a closely related query language.
+</p>
+
+<h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
+
+<p align="justify">Tregex by Roger Levy and Galen Andrew (Levy and Andrew 2006) is a tool for browsing, searching, and even manipulating syntax trees in traditional bracketed (Penn) treebank notation. The tool is available at <tt><a href="http:&sol;&sol;nlp.stanford.edu&sol;software&sol;tregex.shtml">http:&sol;&sol;nlp.stanford.edu&sol;software&sol;tregex.shtml</a></tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Tregex can be invoked either with a browser interface by Anna Rafferty that works as a desktop application, or as a command line tool. This guide provides an introduction to the query language that Tregex uses when searching data.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Tregex query language closely resembles the query languages of TGrep by Richard Pito (Pito 1994) and TGrep2 by Douglas Rohde (Rohde 2005). TGrep was the original tree-matching program that came with the Penn Treebank. TGrep2 is a reimplementation that also added extensions, available at <tt><a href="https:&sol;&sol;github.com&sol;andreasvc&sol;tgrep2">https:&sol;&sol;github.com&sol;andreasvc&sol;tgrep2</a></tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Following TGrep and TGrep2, Tregex queries are expressed as patterns that consist of expressions to match nodes and relationships defining links or negated links to other nodes. Nodes of searched trees are matched either with simple character strings, or OR'd character strings, or regular expressions (see section <a href="#sec2">2</a>). Possible relationships are illustrated and detailed in section <a href="#sec3">3</a>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A complex node expression consists of a node expression followed by Boolean expressions of relationships, as explained in Section <a href="#sec4">4</a>. Also, nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (see section <a href="#sec5">5</a>). If you write a node description using a regular expression, you can assign its matching groups to variable names (see section <a href="#sec6">6</a>). Finally, patterns can be broken into multiple segments (see section <a href="#sec7">7</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Typically, spaces are optional in patterns. But for readability, it is usually best to place spaces between relationships, node expressions, and other operators.</p>
+
+<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;Specifying nodes in a Tregex pattern</h2>
+
+<p align="justify">Single tree nodes are matched in Tregex as follows:</p>
+<ul>
+<li>A wildcard, specified by two underscores (<tt>__</tt>), matches any node.</li>
+<li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
+<li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
+<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
+<li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;P&dollar;&sol;</tt> will match any node that does not end with <tt>P</tt>.</li>
+</ul>
+
+<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Tregex regular expressions</h3>
+
+<p align="justify">Tregex regular expressions follow Java conventions for expressing regular expressions. For details, see e.g.: <tt><a href="https:&sol;&sol;docs.oracle.com&sol;javase&sol;7&sol;docs&sol;api&sol;java&sol;util&sol;regex&sol;Pattern.html">https:&sol;&sol;docs.oracle.com&sol;javase&sol;7&sol;docs&sol;api&sol;java&sol;util&sol;regex&sol;Pattern.html</a></tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Specified as a string, a regular expression matches a node if there is a part of the node that is matched. For example, <tt>&sol;[PCV]P&sol;</tt> matches <tt>PP</tt>, <tt>CP-THT</tt>, <tt>ADVP</tt>, etc.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The caret (<tt>^</tt>) anchors the regular expression to the beginning of a matched node. So, <tt>&sol;^[PCV]P&sol;</tt> will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>. A dollar sign (<tt>&dollar;</tt>) as the last character will anchor the regular expression to the end of a matched node. For example, <tt>&sol;PRD&dollar;&sol;</tt> will not match <tt>NP-PRD2</tt> but will match <tt>NP-PRD</tt>. Use of both the caret and dollar-sign in <tt>&sol;^[NP]P&dollar;&sol;</tt> constrains the match to only <tt>NP</tt> and <tt>PP</tt>. A regular expression can also be constrained with <tt>&#92;b</tt> to mark a word boundary. Thus, <tt>&sol;^NP&#92;b&sol;</tt> will match <tt>NP</tt> and <tt>NP-PRD</tt> but will not match <tt>NPR</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;By default, regular expressions are case sensitive and so <tt>&sol;^The&dollar;&sol;</tt> and <tt>&sol;^the&dollar;&sol;</tt> match different nodes. Case insensitivity can be turned on by including the flag <tt>(?i)</tt> and then everything to the right will be case-insensitive, e.g., <tt>&sol;^(?i)the&dollar;&sol;</tt> matches: <tt>THE</tt> <tt>The</tt>, <tt>the</tt>, <tt>tHE</tt>, etc. Having turned case insensitivity on, it is possible to turn case insensitivity off with the flag <tt>(?-i)</tt> to become case sensitive again, e.g., <tt>&sol;^t(?i)h(?-i)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>tHe</tt>. It is also possible to limit the region of case insensitivity to a given variable group (see section <a href="#sec6">6</a>), e.g., while <tt>&sol;^t(h)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>&sol;^t(?i:h)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>tHe</tt>.</p>
+
+<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Relationships between nodes</h2>
+
+<p align="justify">Relationships define connections between nodes. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships are given in (<a href="#ex1">1</a>):</p>
+
+<dl>
+  <dt>(<a name="ex1">1</a>)</dt><dd></dd>
+</dl>
+<tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
+<tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;a&nbsp;descendant&nbsp;of)&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;dominates&nbsp;(is&nbsp;the&nbsp;parent&nbsp;of)&nbsp;B</tt><br>
+<tt>A&nbsp;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;the&nbsp;child&nbsp;of)&nbsp;B</tt><br>
+<tt>A&nbsp;..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;precedes&nbsp;B</tt><br>
+<tt>A&nbsp;,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;follows&nbsp;B</tt><br>
+<tt>A&nbsp;.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
+<tt>A&nbsp;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
+<tt>A&nbsp;$&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;not&nbsp;equal&nbsp;to&nbsp;B</tt><br>
+<tt>A&nbsp;$..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;precedes&nbsp;B</tt><br>
+<tt>A&nbsp;$,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;follows&nbsp;B</tt><br>
+<tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
+<tt>A&nbsp;$,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the above relationships as forward and backward links:</p>
+
+<dl>
+  <dt>(<a name="ex2">2</a>)</dt><dd></dd>
+</dl>
+<tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
+  <text x="357.72" y="55" text-anchor="middle">A</text>
+  <line x1="357.72" y1="70" x2="233.64" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="560.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="684.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="233.64" y="125" text-anchor="middle">B</text>
+  <line x1="233.64" y1="140" x2="171.6" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="233.64" y1="140" x2="405.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="171.6" y="195" text-anchor="middle">__C</text>
+  <line x1="171.6" y1="210" x2="128.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="171.6" y1="210" x2="300.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="265" text-anchor="middle">___D</text>
+  <line x1="128.7" y1="280" x2="42.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="128.7" y1="280" x2="128.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="128.7" y1="280" x2="214.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="42.9" y="335" text-anchor="middle">___E</text>
+  <line x1="42.9" y1="350" x2="42.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="42.9" y="405" text-anchor="middle">___w0</text>
+  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="335" text-anchor="middle">___F</text>
+  <line x1="128.7" y1="350" x2="128.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="405" text-anchor="middle">___w1</text>
+  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="214.5" y="335" text-anchor="middle">___G</text>
+  <line x1="214.5" y1="350" x2="214.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="214.5" y="405" text-anchor="middle">___w2</text>
+  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="300.3" y="265" text-anchor="middle">___H</text>
+  <line x1="300.3" y1="280" x2="300.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="300.3" y="335" text-anchor="middle">___w3</text>
+  <text x="405.24" y="195" text-anchor="middle">I</text>
+  <line x1="405.24" y1="210" x2="374.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="405.24" y1="210" x2="436.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="374.22" y="265" text-anchor="middle">J</text>
+  <line x1="374.22" y1="280" x2="374.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="374.22" y="335" text-anchor="middle">w4</text>
+  <text x="436.26" y="265" text-anchor="middle">K</text>
+  <line x1="436.26" y1="280" x2="436.26" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="436.26" y="335" text-anchor="middle">L</text>
+  <line x1="436.26" y1="350" x2="436.26" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="436.26" y="405" text-anchor="middle">w5</text>
+  <text x="560.34" y="125" text-anchor="middle">M</text>
+  <line x1="560.34" y1="140" x2="498.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="560.34" y1="140" x2="591.36" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="498.3" y="195" text-anchor="middle">N</text>
+  <line x1="498.3" y1="210" x2="498.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="498.3" y="265" text-anchor="middle">w6</text>
+  <text x="591.36" y="195" text-anchor="middle">O</text>
+  <line x1="591.36" y1="210" x2="560.34" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="591.36" y1="210" x2="622.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="560.34" y="265" text-anchor="middle">P</text>
+  <line x1="560.34" y1="280" x2="560.34" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="560.34" y="335" text-anchor="middle">w7</text>
+  <text x="622.38" y="265" text-anchor="middle">Q</text>
+  <line x1="622.38" y1="280" x2="622.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="622.38" y="335" text-anchor="middle">R</text>
+  <line x1="622.38" y1="350" x2="622.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="622.38" y="405" text-anchor="middle">w8</text>
+  <text x="684.42" y="125" text-anchor="middle">S</text>
+  <line x1="684.42" y1="140" x2="684.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="684.42" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex3">3</a>)</dt><dd></dd>
+</dl>
+<tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+<tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="504.24" height="357" viewBox="-16.5 17.5 661.32 465">
+  <rect x="299.16" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="314.16" y="55" text-anchor="middle">___A</text>
+  <line x1="314.16" y1="70" x2="190.08" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="314.16" y1="70" x2="473.22" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="314.16" y1="70" x2="597.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="175.08" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="190.08" y="125" text-anchor="middle">___B</text>
+  <line x1="190.08" y1="140" x2="128.04" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="190.08" y1="140" x2="318.12" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="113.04" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.04" y="195" text-anchor="middle">___C</text>
+  <line x1="128.04" y1="210" x2="97.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="128.04" y1="210" x2="225.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="82.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="97.02" y="265" text-anchor="middle">___D</text>
+  <line x1="97.02" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="97.02" y1="280" x2="100.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="97.02" y1="280" x2="163.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="34.98" y="335" text-anchor="middle">__E</text>
+  <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="34.98" y="405" text-anchor="middle">w0</text>
+  <text x="100.98" y="335" text-anchor="middle">F</text>
+  <line x1="100.98" y1="350" x2="100.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="100.98" y="405" text-anchor="middle">w1</text>
+  <text x="163.02" y="335" text-anchor="middle">G</text>
+  <line x1="163.02" y1="350" x2="163.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="163.02" y="405" text-anchor="middle">w2</text>
+  <text x="225.06" y="265" text-anchor="middle">H</text>
+  <line x1="225.06" y1="280" x2="225.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="225.06" y="335" text-anchor="middle">w3</text>
+  <text x="318.12" y="195" text-anchor="middle">I</text>
+  <line x1="318.12" y1="210" x2="287.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="318.12" y1="210" x2="349.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="287.1" y="265" text-anchor="middle">J</text>
+  <line x1="287.1" y1="280" x2="287.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="287.1" y="335" text-anchor="middle">w4</text>
+  <text x="349.14" y="265" text-anchor="middle">K</text>
+  <line x1="349.14" y1="280" x2="349.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="349.14" y="335" text-anchor="middle">L</text>
+  <line x1="349.14" y1="350" x2="349.14" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="349.14" y="405" text-anchor="middle">w5</text>
+  <text x="473.22" y="125" text-anchor="middle">M</text>
+  <line x1="473.22" y1="140" x2="411.18" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="473.22" y1="140" x2="504.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="411.18" y="195" text-anchor="middle">N</text>
+  <line x1="411.18" y1="210" x2="411.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="411.18" y="265" text-anchor="middle">w6</text>
+  <text x="504.24" y="195" text-anchor="middle">O</text>
+  <line x1="504.24" y1="210" x2="473.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="504.24" y1="210" x2="535.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="473.22" y="265" text-anchor="middle">P</text>
+  <line x1="473.22" y1="280" x2="473.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="473.22" y="335" text-anchor="middle">w7</text>
+  <text x="535.26" y="265" text-anchor="middle">Q</text>
+  <line x1="535.26" y1="280" x2="535.26" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="535.26" y="335" text-anchor="middle">R</text>
+  <line x1="535.26" y1="350" x2="535.26" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="535.26" y="405" text-anchor="middle">w8</text>
+  <text x="597.3" y="125" text-anchor="middle">S</text>
+  <line x1="597.3" y1="140" x2="597.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="597.3" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex4">4</a>)</dt><dd></dd>
+</dl>
+<tt>C&nbsp;&lt;&nbsp;__&nbsp;(immediately&nbsp;dominates,&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&nbsp;C&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="510.18" height="357" viewBox="-16.5 17.5 669.24 465">
+  <text x="318.12" y="55" text-anchor="middle">A</text>
+  <line x1="318.12" y1="70" x2="194.04" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="318.12" y1="70" x2="481.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="318.12" y1="70" x2="605.22" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="194.04" y="125" text-anchor="middle">B</text>
+  <line x1="194.04" y1="140" x2="132" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="194.04" y1="140" x2="326.04" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="117" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="132" y="195" text-anchor="middle">__C</text>
+  <line x1="132" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="132" y1="210" x2="225.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="78.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="93.06" y="265" text-anchor="middle">___D</text>
+  <line x1="93.06" y1="280" x2="31.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="93.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="155.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="335" text-anchor="middle">E</text>
+  <line x1="31.02" y1="350" x2="31.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="405" text-anchor="middle">w0</text>
+  <text x="93.06" y="335" text-anchor="middle">F</text>
+  <line x1="93.06" y1="350" x2="93.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="405" text-anchor="middle">w1</text>
+  <text x="155.1" y="335" text-anchor="middle">G</text>
+  <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="155.1" y="405" text-anchor="middle">w2</text>
+  <rect x="210.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="225.06" y="265" text-anchor="middle">___H</text>
+  <line x1="225.06" y1="280" x2="225.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="225.06" y="335" text-anchor="middle">w3</text>
+  <text x="326.04" y="195" text-anchor="middle">I</text>
+  <line x1="326.04" y1="210" x2="295.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="326.04" y1="210" x2="357.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="295.02" y="265" text-anchor="middle">J</text>
+  <line x1="295.02" y1="280" x2="295.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="295.02" y="335" text-anchor="middle">w4</text>
+  <text x="357.06" y="265" text-anchor="middle">K</text>
+  <line x1="357.06" y1="280" x2="357.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="357.06" y="335" text-anchor="middle">L</text>
+  <line x1="357.06" y1="350" x2="357.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="357.06" y="405" text-anchor="middle">w5</text>
+  <text x="481.14" y="125" text-anchor="middle">M</text>
+  <line x1="481.14" y1="140" x2="419.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="481.14" y1="140" x2="512.16" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="419.1" y="195" text-anchor="middle">N</text>
+  <line x1="419.1" y1="210" x2="419.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="419.1" y="265" text-anchor="middle">w6</text>
+  <text x="512.16" y="195" text-anchor="middle">O</text>
+  <line x1="512.16" y1="210" x2="481.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="512.16" y1="210" x2="543.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="481.14" y="265" text-anchor="middle">P</text>
+  <line x1="481.14" y1="280" x2="481.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="481.14" y="335" text-anchor="middle">w7</text>
+  <text x="543.18" y="265" text-anchor="middle">Q</text>
+  <line x1="543.18" y1="280" x2="543.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="543.18" y="335" text-anchor="middle">R</text>
+  <line x1="543.18" y1="350" x2="543.18" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="543.18" y="405" text-anchor="middle">w8</text>
+  <text x="605.22" y="125" text-anchor="middle">S</text>
+  <line x1="605.22" y1="140" x2="605.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="605.22" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex5">5</a>)</dt><dd></dd>
+</dl>
+<tt>I&nbsp;..&nbsp;__&nbsp;(preceeds)</tt><br>
+<tt>__&nbsp;,,&nbsp;I&nbsp;(follows)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
+  <text x="357.72" y="55" text-anchor="middle">A</text>
+  <line x1="357.72" y1="70" x2="186.12" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="500.94" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="672.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="186.12" y="125" text-anchor="middle">B</text>
+  <line x1="186.12" y1="140" x2="124.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="186.12" y1="140" x2="310.2" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="124.08" y="195" text-anchor="middle">C</text>
+  <line x1="124.08" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="124.08" y1="210" x2="217.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="265" text-anchor="middle">D</text>
+  <line x1="93.06" y1="280" x2="31.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="93.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="155.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="335" text-anchor="middle">E</text>
+  <line x1="31.02" y1="350" x2="31.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="405" text-anchor="middle">w0</text>
+  <text x="93.06" y="335" text-anchor="middle">F</text>
+  <line x1="93.06" y1="350" x2="93.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="405" text-anchor="middle">w1</text>
+  <text x="155.1" y="335" text-anchor="middle">G</text>
+  <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="155.1" y="405" text-anchor="middle">w2</text>
+  <text x="217.14" y="265" text-anchor="middle">H</text>
+  <line x1="217.14" y1="280" x2="217.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="217.14" y="335" text-anchor="middle">w3</text>
+  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="310.2" y="195" text-anchor="middle">__I</text>
+  <line x1="310.2" y1="210" x2="279.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="310.2" y1="210" x2="341.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="279.18" y="265" text-anchor="middle">J</text>
+  <line x1="279.18" y1="280" x2="279.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="279.18" y="335" text-anchor="middle">w4</text>
+  <text x="341.22" y="265" text-anchor="middle">K</text>
+  <line x1="341.22" y1="280" x2="341.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="341.22" y="335" text-anchor="middle">L</text>
+  <line x1="341.22" y1="350" x2="341.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="341.22" y="405" text-anchor="middle">w5</text>
+  <rect x="485.94" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="500.94" y="125" text-anchor="middle">___M</text>
+  <line x1="500.94" y1="140" x2="415.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="500.94" y1="140" x2="543.84" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="415.14" y="195" text-anchor="middle">___N</text>
+  <line x1="415.14" y1="210" x2="415.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="415.14" y="265" text-anchor="middle">___w6</text>
+  <rect x="528.84" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="543.84" y="195" text-anchor="middle">___O</text>
+  <line x1="543.84" y1="210" x2="500.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="543.84" y1="210" x2="586.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="485.94" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="500.94" y="265" text-anchor="middle">___P</text>
+  <line x1="500.94" y1="280" x2="500.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="485.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="500.94" y="335" text-anchor="middle">___w7</text>
+  <rect x="571.74" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="586.74" y="265" text-anchor="middle">___Q</text>
+  <line x1="586.74" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="571.74" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="586.74" y="335" text-anchor="middle">___R</text>
+  <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="571.74" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="586.74" y="405" text-anchor="middle">___w8</text>
+  <rect x="657.54" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="672.54" y="125" text-anchor="middle">___S</text>
+  <line x1="672.54" y1="140" x2="672.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="657.54" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="672.54" y="195" text-anchor="middle">___w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex6">6</a>)</dt><dd></dd>
+</dl>
+<tt>I&nbsp;,,&nbsp;__&nbsp;(follows)</tt><br>
+<tt>__&nbsp;..&nbsp;I&nbsp;(preceeds)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
+  <text x="357.72" y="55" text-anchor="middle">A</text>
+  <line x1="357.72" y1="70" x2="233.64" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="560.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="357.72" y1="70" x2="684.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="233.64" y="125" text-anchor="middle">B</text>
+  <line x1="233.64" y1="140" x2="171.6" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="233.64" y1="140" x2="405.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="171.6" y="195" text-anchor="middle">___C</text>
+  <line x1="171.6" y1="210" x2="128.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="171.6" y1="210" x2="300.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="265" text-anchor="middle">___D</text>
+  <line x1="128.7" y1="280" x2="42.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="128.7" y1="280" x2="128.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="128.7" y1="280" x2="214.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="42.9" y="335" text-anchor="middle">___E</text>
+  <line x1="42.9" y1="350" x2="42.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="42.9" y="405" text-anchor="middle">___w0</text>
+  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="335" text-anchor="middle">___F</text>
+  <line x1="128.7" y1="350" x2="128.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="128.7" y="405" text-anchor="middle">___w1</text>
+  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="214.5" y="335" text-anchor="middle">___G</text>
+  <line x1="214.5" y1="350" x2="214.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="214.5" y="405" text-anchor="middle">___w2</text>
+  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="300.3" y="265" text-anchor="middle">___H</text>
+  <line x1="300.3" y1="280" x2="300.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="300.3" y="335" text-anchor="middle">___w3</text>
+  <rect x="390.24" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="405.24" y="195" text-anchor="middle">__I</text>
+  <line x1="405.24" y1="210" x2="374.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="405.24" y1="210" x2="436.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="374.22" y="265" text-anchor="middle">J</text>
+  <line x1="374.22" y1="280" x2="374.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="374.22" y="335" text-anchor="middle">w4</text>
+  <text x="436.26" y="265" text-anchor="middle">K</text>
+  <line x1="436.26" y1="280" x2="436.26" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="436.26" y="335" text-anchor="middle">L</text>
+  <line x1="436.26" y1="350" x2="436.26" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="436.26" y="405" text-anchor="middle">w5</text>
+  <text x="560.34" y="125" text-anchor="middle">M</text>
+  <line x1="560.34" y1="140" x2="498.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="560.34" y1="140" x2="591.36" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="498.3" y="195" text-anchor="middle">N</text>
+  <line x1="498.3" y1="210" x2="498.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="498.3" y="265" text-anchor="middle">w6</text>
+  <text x="591.36" y="195" text-anchor="middle">O</text>
+  <line x1="591.36" y1="210" x2="560.34" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="591.36" y1="210" x2="622.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="560.34" y="265" text-anchor="middle">P</text>
+  <line x1="560.34" y1="280" x2="560.34" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="560.34" y="335" text-anchor="middle">w7</text>
+  <text x="622.38" y="265" text-anchor="middle">Q</text>
+  <line x1="622.38" y1="280" x2="622.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="622.38" y="335" text-anchor="middle">R</text>
+  <line x1="622.38" y1="350" x2="622.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="622.38" y="405" text-anchor="middle">w8</text>
+  <text x="684.42" y="125" text-anchor="middle">S</text>
+  <line x1="684.42" y1="140" x2="684.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="684.42" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex7">7</a>)</dt><dd></dd>
+</dl>
+<tt>I&nbsp;.&nbsp;__&nbsp;(immediately&nbsp;preceeds)</tt><br>
+<tt>__&nbsp;,&nbsp;I&nbsp;(immediately&nbsp;follows)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
+  <text x="322.08" y="55" text-anchor="middle">A</text>
+  <line x1="322.08" y1="70" x2="186.12" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="477.18" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="613.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="186.12" y="125" text-anchor="middle">B</text>
+  <line x1="186.12" y1="140" x2="124.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="186.12" y1="140" x2="310.2" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="124.08" y="195" text-anchor="middle">C</text>
+  <line x1="124.08" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="124.08" y1="210" x2="217.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="265" text-anchor="middle">D</text>
+  <line x1="93.06" y1="280" x2="31.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="93.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="155.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="335" text-anchor="middle">E</text>
+  <line x1="31.02" y1="350" x2="31.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="405" text-anchor="middle">w0</text>
+  <text x="93.06" y="335" text-anchor="middle">F</text>
+  <line x1="93.06" y1="350" x2="93.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="405" text-anchor="middle">w1</text>
+  <text x="155.1" y="335" text-anchor="middle">G</text>
+  <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="155.1" y="405" text-anchor="middle">w2</text>
+  <text x="217.14" y="265" text-anchor="middle">H</text>
+  <line x1="217.14" y1="280" x2="217.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="217.14" y="335" text-anchor="middle">w3</text>
+  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="310.2" y="195" text-anchor="middle">__I</text>
+  <line x1="310.2" y1="210" x2="279.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="310.2" y1="210" x2="341.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="279.18" y="265" text-anchor="middle">J</text>
+  <line x1="279.18" y1="280" x2="279.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="279.18" y="335" text-anchor="middle">w4</text>
+  <text x="341.22" y="265" text-anchor="middle">K</text>
+  <line x1="341.22" y1="280" x2="341.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="341.22" y="335" text-anchor="middle">L</text>
+  <line x1="341.22" y1="350" x2="341.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="341.22" y="405" text-anchor="middle">w5</text>
+  <rect x="462.18" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="477.18" y="125" text-anchor="middle">___M</text>
+  <line x1="477.18" y1="140" x2="415.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="477.18" y1="140" x2="520.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="415.14" y="195" text-anchor="middle">___N</text>
+  <line x1="415.14" y1="210" x2="415.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="415.14" y="265" text-anchor="middle">___w6</text>
+  <text x="520.08" y="195" text-anchor="middle">O</text>
+  <line x1="520.08" y1="210" x2="489.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="520.08" y1="210" x2="551.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="265" text-anchor="middle">P</text>
+  <line x1="489.06" y1="280" x2="489.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="335" text-anchor="middle">w7</text>
+  <text x="551.1" y="265" text-anchor="middle">Q</text>
+  <line x1="551.1" y1="280" x2="551.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="335" text-anchor="middle">R</text>
+  <line x1="551.1" y1="350" x2="551.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="405" text-anchor="middle">w8</text>
+  <text x="613.14" y="125" text-anchor="middle">S</text>
+  <line x1="613.14" y1="140" x2="613.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="613.14" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex8">8</a>)</dt><dd></dd>
+</dl>
+<tt>I&nbsp;,&nbsp;__&nbsp;(immediately&nbsp;follows)</tt><br>
+<tt>__&nbsp;.&nbsp;I&nbsp;(immediately&nbsp;preceeds)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
+  <text x="322.08" y="55" text-anchor="middle">A</text>
+  <line x1="322.08" y1="70" x2="198" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="489.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="613.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="198" y="125" text-anchor="middle">B</text>
+  <line x1="198" y1="140" x2="135.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="198" y1="140" x2="333.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="120.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="135.96" y="195" text-anchor="middle">___C</text>
+  <line x1="135.96" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="135.96" y1="210" x2="229.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="265" text-anchor="middle">D</text>
+  <line x1="93.06" y1="280" x2="31.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="93.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="93.06" y1="280" x2="155.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="335" text-anchor="middle">E</text>
+  <line x1="31.02" y1="350" x2="31.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="31.02" y="405" text-anchor="middle">w0</text>
+  <text x="93.06" y="335" text-anchor="middle">F</text>
+  <line x1="93.06" y1="350" x2="93.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="93.06" y="405" text-anchor="middle">w1</text>
+  <text x="155.1" y="335" text-anchor="middle">G</text>
+  <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="155.1" y="405" text-anchor="middle">w2</text>
+  <rect x="214.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="229.02" y="265" text-anchor="middle">___H</text>
+  <line x1="229.02" y1="280" x2="229.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="214.02" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="229.02" y="335" text-anchor="middle">___w3</text>
+  <rect x="318.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="333.96" y="195" text-anchor="middle">__I</text>
+  <line x1="333.96" y1="210" x2="302.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="333.96" y1="210" x2="364.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="302.94" y="265" text-anchor="middle">J</text>
+  <line x1="302.94" y1="280" x2="302.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="302.94" y="335" text-anchor="middle">w4</text>
+  <text x="364.98" y="265" text-anchor="middle">K</text>
+  <line x1="364.98" y1="280" x2="364.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="364.98" y="335" text-anchor="middle">L</text>
+  <line x1="364.98" y1="350" x2="364.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="364.98" y="405" text-anchor="middle">w5</text>
+  <text x="489.06" y="125" text-anchor="middle">M</text>
+  <line x1="489.06" y1="140" x2="427.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="489.06" y1="140" x2="520.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="427.02" y="195" text-anchor="middle">N</text>
+  <line x1="427.02" y1="210" x2="427.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="427.02" y="265" text-anchor="middle">w6</text>
+  <text x="520.08" y="195" text-anchor="middle">O</text>
+  <line x1="520.08" y1="210" x2="489.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="520.08" y1="210" x2="551.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="265" text-anchor="middle">P</text>
+  <line x1="489.06" y1="280" x2="489.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="335" text-anchor="middle">w7</text>
+  <text x="551.1" y="265" text-anchor="middle">Q</text>
+  <line x1="551.1" y1="280" x2="551.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="335" text-anchor="middle">R</text>
+  <line x1="551.1" y1="350" x2="551.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="405" text-anchor="middle">w8</text>
+  <text x="613.14" y="125" text-anchor="middle">S</text>
+  <line x1="613.14" y1="140" x2="613.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="613.14" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex9">9</a>)</dt><dd></dd>
+</dl>
+<tt>F&nbsp;$&nbsp;__&nbsp;(sister)</tt><br>
+<tt>__&nbsp;$&nbsp;F&nbsp;(sister)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
+  <text x="330" y="55" text-anchor="middle">A</text>
+  <line x1="330" y1="70" x2="205.92" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="330" y1="70" x2="504.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="330" y1="70" x2="628.98" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="205.92" y="125" text-anchor="middle">B</text>
+  <line x1="205.92" y1="140" x2="143.88" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="205.92" y1="140" x2="349.8" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="143.88" y="195" text-anchor="middle">C</text>
+  <line x1="143.88" y1="210" x2="112.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="143.88" y1="210" x2="256.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="112.86" y="265" text-anchor="middle">D</text>
+  <line x1="112.86" y1="280" x2="38.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="112.86" y1="280" x2="112.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="112.86" y1="280" x2="186.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="23.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="38.94" y="335" text-anchor="middle">___E</text>
+  <line x1="38.94" y1="350" x2="38.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="38.94" y="405" text-anchor="middle">w0</text>
+  <rect x="97.86" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="112.86" y="335" text-anchor="middle">__F</text>
+  <line x1="112.86" y1="350" x2="112.86" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="112.86" y="405" text-anchor="middle">w1</text>
+  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="186.78" y="335" text-anchor="middle">___G</text>
+  <line x1="186.78" y1="350" x2="186.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="186.78" y="405" text-anchor="middle">w2</text>
+  <text x="256.74" y="265" text-anchor="middle">H</text>
+  <line x1="256.74" y1="280" x2="256.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="256.74" y="335" text-anchor="middle">w3</text>
+  <text x="349.8" y="195" text-anchor="middle">I</text>
+  <line x1="349.8" y1="210" x2="318.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="349.8" y1="210" x2="380.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="318.78" y="265" text-anchor="middle">J</text>
+  <line x1="318.78" y1="280" x2="318.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="318.78" y="335" text-anchor="middle">w4</text>
+  <text x="380.82" y="265" text-anchor="middle">K</text>
+  <line x1="380.82" y1="280" x2="380.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="380.82" y="335" text-anchor="middle">L</text>
+  <line x1="380.82" y1="350" x2="380.82" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="380.82" y="405" text-anchor="middle">w5</text>
+  <text x="504.9" y="125" text-anchor="middle">M</text>
+  <line x1="504.9" y1="140" x2="442.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="504.9" y1="140" x2="535.92" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="442.86" y="195" text-anchor="middle">N</text>
+  <line x1="442.86" y1="210" x2="442.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="442.86" y="265" text-anchor="middle">w6</text>
+  <text x="535.92" y="195" text-anchor="middle">O</text>
+  <line x1="535.92" y1="210" x2="504.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.92" y1="210" x2="566.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="504.9" y="265" text-anchor="middle">P</text>
+  <line x1="504.9" y1="280" x2="504.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="504.9" y="335" text-anchor="middle">w7</text>
+  <text x="566.94" y="265" text-anchor="middle">Q</text>
+  <line x1="566.94" y1="280" x2="566.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="566.94" y="335" text-anchor="middle">R</text>
+  <line x1="566.94" y1="350" x2="566.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="566.94" y="405" text-anchor="middle">w8</text>
+  <text x="628.98" y="125" text-anchor="middle">S</text>
+  <line x1="628.98" y1="140" x2="628.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="628.98" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex10">10</a>)</dt><dd></dd>
+</dl>
+<tt>E&nbsp;$..&nbsp;__&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
+  <text x="330" y="55" text-anchor="middle">A</text>
+  <line x1="330" y1="70" x2="205.92" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="330" y1="70" x2="504.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="330" y1="70" x2="628.98" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="205.92" y="125" text-anchor="middle">B</text>
+  <line x1="205.92" y1="140" x2="143.88" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="205.92" y1="140" x2="349.8" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="143.88" y="195" text-anchor="middle">C</text>
+  <line x1="143.88" y1="210" x2="112.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="143.88" y1="210" x2="256.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="112.86" y="265" text-anchor="middle">D</text>
+  <line x1="112.86" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="112.86" y1="280" x2="108.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="112.86" y1="280" x2="186.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="34.98" y="335" text-anchor="middle">__E</text>
+  <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="34.98" y="405" text-anchor="middle">w0</text>
+  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="108.9" y="335" text-anchor="middle">___F</text>
+  <line x1="108.9" y1="350" x2="108.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="108.9" y="405" text-anchor="middle">w1</text>
+  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="186.78" y="335" text-anchor="middle">___G</text>
+  <line x1="186.78" y1="350" x2="186.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="186.78" y="405" text-anchor="middle">w2</text>
+  <text x="256.74" y="265" text-anchor="middle">H</text>
+  <line x1="256.74" y1="280" x2="256.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="256.74" y="335" text-anchor="middle">w3</text>
+  <text x="349.8" y="195" text-anchor="middle">I</text>
+  <line x1="349.8" y1="210" x2="318.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="349.8" y1="210" x2="380.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="318.78" y="265" text-anchor="middle">J</text>
+  <line x1="318.78" y1="280" x2="318.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="318.78" y="335" text-anchor="middle">w4</text>
+  <text x="380.82" y="265" text-anchor="middle">K</text>
+  <line x1="380.82" y1="280" x2="380.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="380.82" y="335" text-anchor="middle">L</text>
+  <line x1="380.82" y1="350" x2="380.82" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="380.82" y="405" text-anchor="middle">w5</text>
+  <text x="504.9" y="125" text-anchor="middle">M</text>
+  <line x1="504.9" y1="140" x2="442.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="504.9" y1="140" x2="535.92" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="442.86" y="195" text-anchor="middle">N</text>
+  <line x1="442.86" y1="210" x2="442.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="442.86" y="265" text-anchor="middle">w6</text>
+  <text x="535.92" y="195" text-anchor="middle">O</text>
+  <line x1="535.92" y1="210" x2="504.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.92" y1="210" x2="566.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="504.9" y="265" text-anchor="middle">P</text>
+  <line x1="504.9" y1="280" x2="504.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="504.9" y="335" text-anchor="middle">w7</text>
+  <text x="566.94" y="265" text-anchor="middle">Q</text>
+  <line x1="566.94" y1="280" x2="566.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="566.94" y="335" text-anchor="middle">R</text>
+  <line x1="566.94" y1="350" x2="566.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="566.94" y="405" text-anchor="middle">w8</text>
+  <text x="628.98" y="125" text-anchor="middle">S</text>
+  <line x1="628.98" y1="140" x2="628.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="628.98" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex11">11</a>)</dt><dd></dd>
+</dl>
+<tt>E&nbsp;$.&nbsp;__&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
+  <text x="322.08" y="55" text-anchor="middle">A</text>
+  <line x1="322.08" y1="70" x2="198" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="489.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="322.08" y1="70" x2="613.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="198" y="125" text-anchor="middle">B</text>
+  <line x1="198" y1="140" x2="135.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="198" y1="140" x2="333.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="135.96" y="195" text-anchor="middle">C</text>
+  <line x1="135.96" y1="210" x2="104.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="135.96" y1="210" x2="240.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="104.94" y="265" text-anchor="middle">D</text>
+  <line x1="104.94" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="104.94" y1="280" x2="108.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="104.94" y1="280" x2="178.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="34.98" y="335" text-anchor="middle">__E</text>
+  <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="34.98" y="405" text-anchor="middle">w0</text>
+  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="108.9" y="335" text-anchor="middle">___F</text>
+  <line x1="108.9" y1="350" x2="108.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="108.9" y="405" text-anchor="middle">w1</text>
+  <text x="178.86" y="335" text-anchor="middle">G</text>
+  <line x1="178.86" y1="350" x2="178.86" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="178.86" y="405" text-anchor="middle">w2</text>
+  <text x="240.9" y="265" text-anchor="middle">H</text>
+  <line x1="240.9" y1="280" x2="240.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="240.9" y="335" text-anchor="middle">w3</text>
+  <text x="333.96" y="195" text-anchor="middle">I</text>
+  <line x1="333.96" y1="210" x2="302.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="333.96" y1="210" x2="364.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="302.94" y="265" text-anchor="middle">J</text>
+  <line x1="302.94" y1="280" x2="302.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="302.94" y="335" text-anchor="middle">w4</text>
+  <text x="364.98" y="265" text-anchor="middle">K</text>
+  <line x1="364.98" y1="280" x2="364.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="364.98" y="335" text-anchor="middle">L</text>
+  <line x1="364.98" y1="350" x2="364.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="364.98" y="405" text-anchor="middle">w5</text>
+  <text x="489.06" y="125" text-anchor="middle">M</text>
+  <line x1="489.06" y1="140" x2="427.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="489.06" y1="140" x2="520.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="427.02" y="195" text-anchor="middle">N</text>
+  <line x1="427.02" y1="210" x2="427.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="427.02" y="265" text-anchor="middle">w6</text>
+  <text x="520.08" y="195" text-anchor="middle">O</text>
+  <line x1="520.08" y1="210" x2="489.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="520.08" y1="210" x2="551.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="265" text-anchor="middle">P</text>
+  <line x1="489.06" y1="280" x2="489.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="489.06" y="335" text-anchor="middle">w7</text>
+  <text x="551.1" y="265" text-anchor="middle">Q</text>
+  <line x1="551.1" y1="280" x2="551.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="335" text-anchor="middle">R</text>
+  <line x1="551.1" y1="350" x2="551.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="551.1" y="405" text-anchor="middle">w8</text>
+  <text x="613.14" y="125" text-anchor="middle">S</text>
+  <line x1="613.14" y1="140" x2="613.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="613.14" y="195" text-anchor="middle">w9</text>
+</svg>
+
+<h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;The <tt>i</tt>-th child relationships</h3>
+
+<p align="justify">To specify the exact child position which a node must occupy, use the <tt>i</tt>-th child relationships defined in (<a href="#ex12">12</a>):</p>
+
+<dl>
+  <dt>(<a name="ex12">12</a>)</dt><dd></dd>
+</dl>
+<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&lt;1)</tt><br>
+<tt>A&nbsp;&gt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&gt;1)</tt><br>
+<tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&lt;-1)</tt><br>
+<tt>A&nbsp;&gt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&gt;-1)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In these relationships, <tt>i</tt> represents a number indicating which child slot is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex13">13</a>) finds <tt>NP</tt> nodes where the second child is a <tt>PP</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex13">13</a>)</dt><dd></dd>
+</dl>
+<tt>NP&nbsp;&lt;2&nbsp;PP</tt><br>
+
+<p align="justify">Pattern (<a href="#ex14">14</a>) finds <tt>NP</tt> nodes where the last child is a <tt>PP</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex14">14</a>)</dt><dd></dd>
+</dl>
+<tt>NP&nbsp;&lt;-1&nbsp;PP</tt><br>
+
+<p align="justify">Pattern (<a href="#ex15">15</a>) finds <tt>NP</tt> nodes which have less than three children. That is, every <tt>NP</tt> which has three or more children will have <i>something</i> as its third child to make matching with (<a href="#ex15">15</a>) fail.</p>
+
+<dl>
+  <dt>(<a name="ex15">15</a>)</dt><dd></dd>
+</dl>
+<tt>NP&nbsp;!&lt;3&nbsp;__</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either two or three children you would use pattern (<a href="#ex16">16</a>):</p>
+
+<dl>
+  <dt>(<a name="ex16">16</a>)</dt><dd></dd>
+</dl>
+<tt>NP&nbsp;&lt;2&nbsp;__&nbsp;!&lt;4&nbsp;__</tt><br>
+
+<h3><a name="sec17">17</a>&nbsp;&nbsp;&nbsp;Other relationships</h3>
+
+<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex1">1</a>) and (<a href="#ex12">12</a>), are given in (<a href="#ex17">17</a>):</p>
+
+<dl>
+  <dt>(<a name="ex17">17</a>)</dt><dd></dd>
+</dl>
+<tt>A&nbsp;==&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;and&nbsp;B&nbsp;are&nbsp;the&nbsp;same&nbsp;node</tt><br>
+<tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
+<tt>A&nbsp;&lt;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
+<tt>A&nbsp;&gt;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
+<tt>A&nbsp;&gt;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;1&nbsp;B)</tt><br>
+<tt>A&nbsp;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;1&nbsp;B)</tt><br>
+<tt>A&nbsp;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-1&nbsp;B)</tt><br>
+<tt>A&nbsp;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-1&nbsp;B)</tt><br>
+<tt>A&nbsp;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;A</tt><br>
+<tt>A&nbsp;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
+<tt>A&nbsp;&gt;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
+
+<h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;Boolean expressions for building complex patterns</h2>
+
+<p align="justify">Complex Tregex patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (<tt>&</tt>). Thus, patterns (<a href="#ex18">18</a>) and (<a href="#ex19">19</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
+
+<dl>
+  <dt>(<a name="ex18">18</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+
+<dl>
+  <dt>(<a name="ex19">19</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+
+<p align="justify">The second relationship <tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt> refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex20">20</a>).</p>
+
+<dl>
+  <dt>(<a name="ex20">20</a>)</dt><dd></dd>
+</dl>
+<tt>(&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+
+<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex21">21</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex21">21</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (<tt>|</tt>) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex22">22</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
+
+<dl>
+  <dt>(<a name="ex22">22</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+
+<p align="justify">The (typically implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex23">23</a>) will find an <tt>IP</tt> node that has <tt>VB</tt> and <tt>VB2</tt> children or that has <tt>NP-PRD</tt> and <tt>AX</tt> children.</p>
+
+<dl>
+  <dt>(<a name="ex23">23</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;VB&nbsp;&lt;&nbsp;VB2&nbsp;|&nbsp;&lt;&nbsp;NP-PRD&nbsp;&lt;&nbsp;AX</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex24">24</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that preceeds a subject sister or follows an <tt>ADVP</tt> sister.</p>
+
+<dl>
+  <dt>(<a name="ex24">24</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;VB&nbsp;|&nbsp;&lt;&nbsp;NP-PRD&nbsp;]&nbsp;[&nbsp;$..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;$,,&nbsp;ADVP&nbsp;]</tt><br>
+
+<p align="justify">Because a square bracketed expression itself acts as a complex relationship connecting to a node, an open square bracket must immediately precede a relationship or another open square bracket that itself starts a complex relationship.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Any relationship, including a square bracketed one, can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>). Thus, pattern (<a href="#ex25">25</a>) will find <tt>IP</tt> nodes that do not simultaneously have <tt>NP</tt> and <tt>PP</tt> children.</p>
+
+<dl>
+  <dt>(<a name="ex25">25</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;!&nbsp;[&nbsp;&lt;&nbsp;&sol;^NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;]</tt><br>
+
+<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Labeled nodes and back links</h2>
+
+<p align="justify">Like TGrep2, Tregex allows for a node to be given a unique label and then referred to elsewhere by that label. If a node name is followed by an equal sign (<tt>=</tt>) and a label, the label will be assigned to the node. If the node name only consists of an equal sign and a label, it serves as a back link that refers to the node that has been assigned to that name elsewhere in the pattern. In deviance to TGrep2, it is only possible to express patterns in which the labeled node comes prior in the connected structure of the pattern that leads to a back link.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we wanted to find a clause node, <tt>&sol;^IP&#92;b&sol;</tt>, that dominates a clausal complement, <tt>&sol;THT&sol;</tt>, and a <tt>&sol;^PP&#92;b&sol;</tt>, such that the <tt>&sol;THT&sol;</tt> precedes the <tt>&sol;^PP&#92;b&sol;</tt>. This requires stating relationships between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;THT&sol;</tt>, between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>, and between the <tt>&sol;THT&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>. With access to labels, the query can be written as (<a href="#ex26">26</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26">26</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;=foo&nbsp;&lt;&lt;&nbsp;(&sol;THT&sol;&nbsp;..&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=foo))</tt><br>
+
+<p align="justify">The <tt>&sol;^IP&sol;=foo</tt> matches any tree node whose name begins with <tt>IP</tt>. Furthermore, when a matching tree node is found, it is given the label <tt>foo</tt>. Later, <tt>&sol;^PP&#92;b&sol; &gt;&gt; =foo</tt> indicates that the <tt>PP</tt> must be dominated by that very same node, not just any <tt>IP</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (<tt>&lt;&lt; (&sol;OB1&sol; &lt; &sol;&#92;*T&#92;*&sol;)</tt>). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario with a back link, resulting in (<a href="#ex27">27</a>).</p>
+
+<dl>
+  <dt>(<a name="ex27">27</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;REL&sol;=p&nbsp;&lt;&lt;&nbsp;(&sol;OB1&sol;&nbsp;&lt;&nbsp;&sol;&#92;*T&#92;*&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;REL&sol;&nbsp;&gt;&gt;&nbsp;=p))</tt><br>
+
+<p align="justify">The added back link statement (<tt>!&gt;&gt; (&sol;REL&sol; &gt;&gt; =p)</tt>) requires there to be no intervening relative clause (<tt>&sol;REL&sol;</tt>) between the object trace and the relative clause that the pattern serves to find.</p>
+
+<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;Variable groups</h2>
+
+<p align="justify">If you write a node description using a regular expression, you can assign its matching groups, established with round brackets internal to the regular expression, to variable names. The syntax is:</p>
+
+<dl>
+  <dt>(<a name="ex28">28</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;regular-expression&sol;#group-number%variable-name</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If more than one node has a group assigned to the same variable name, then matching will only occur when all such groups capture the same string. For example, pattern (<a href="#ex29">29</a>) will find identical adjacent terminal nodes (reduplicated words).</p>
+
+<dl>
+  <dt>(<a name="ex29">29</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^(.+)$&sol;#1%word&nbsp;!&lt;&nbsp;__&nbsp;.&nbsp;(&sol;^(.+)$&sol;#1%word&nbsp;!&lt;&nbsp;__)</tt><br>
+
+<p align="justify">Matched nodes have to be terminal because of the <tt>!&lt; __</tt> condition that states how there can be no children, and adjacent because of <tt>.</tt>. With <tt>#1</tt>, <tt>word</tt> takes its value to be the first group in the regular expression, which is the word that needs to have occurred twice in a row.</p>
+
+<h2><a name="sec7">7</a>&nbsp;&nbsp;&nbsp;Segmented patterns</h2>
+
+<p align="justify">Similar to TGrep2, Tregex provides a way to split patterns into multiple segments, which are separated by colons (<tt>:</tt>). Segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex30">30</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex30">30</a>)</dt><dd></dd>
+</dl>
+<tt>NP=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;CP-THT</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex31">31</a>) is matched by pattern (<a href="#ex32">32</a>) without segments as well as pattern (<a href="#ex33">33</a>) with segments.</p>
+
+<dl>
+  <dt>(<a name="ex31">31</a>)</dt><dd></dd>
+</dl>
+
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="161.7" height="304.5" viewBox="-16.5 17.5 204.6 395">
+  <text x="85.8" y="55" text-anchor="middle">PP</text>
+  <line x1="85.8" y1="70" x2="85.8" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <text x="85.8" y="125" text-anchor="middle">__NP</text>
+  <line x1="85.8" y1="140" x2="38.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="85.8" y1="140" x2="124.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="38.94" y="195" text-anchor="middle">N</text>
+  <line x1="38.94" y1="210" x2="38.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="38.94" y="265" text-anchor="middle">idea</text>
+  <text x="124.74" y="195" text-anchor="middle">CP-THT</text>
+  <line x1="124.74" y1="210" x2="124.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="124.74" y="265" text-anchor="middle">C</text>
+  <line x1="124.74" y1="280" x2="124.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="124.74" y="335" text-anchor="middle">that</text>
+</svg>
+
+<dl>
+  <dt>(<a name="ex32">32</a>)</dt><dd></dd>
+</dl>
+<tt>NP&nbsp;&lt;&nbsp;(N&nbsp;&lt;&nbsp;idea)&nbsp;&lt;&nbsp;(CP-THT&nbsp;&lt;&nbsp;(C&nbsp;&lt;&nbsp;that))&nbsp;&gt;&nbsp;PP</tt><br>
+
+<dl>
+  <dt>(<a name="ex33">33</a>)</dt><dd></dd>
+</dl>
+<tt>NP=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;N=n)&nbsp;:&nbsp;(=n&nbsp;&lt;&nbsp;idea)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;CP-THT=y)&nbsp;:&nbsp;(=y&nbsp;&lt;&nbsp;C=c)&nbsp;:&nbsp;(=c&nbsp;&lt;&nbsp;that)&nbsp;:&nbsp;(=x&nbsp;&gt;&nbsp;PP)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Segments can make patterns easier to read and debug. Segments can also assist with pattern reuse. Patterns can frequently be mostly the same while differing in only one region. For such cases, the region that changes can be placed in its own segment, so that full patterns are built when a unique segment is appended to a common base, or vice versa.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Unlike with TGrep2, segments need not be related. Thus pattern (<a href="#ex34">34</a>) finds trees with an <tt>IP-ADV</tt> and <tt>IP-SUB</tt>, without other requirements for how these nodes relate to one another.</p>
+
+<dl>
+  <dt>(<a name="ex34">34</a>)</dt><dd></dd>
+</dl>
+<tt>IP-ADV&nbsp;:&nbsp;IP-SUB</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="#ex35">35</a>) will match both an extraposed element and its site of interpretation, wheresoever these nodes happen to be in the tree, using variable groups (see section <a href="#sec6">6</a>) assigned to the same variable to ensure there is a shared index when nodes are matched.</p>
+
+<dl>
+  <dt>(<a name="ex35">35</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^.+-(.*)$&sol;#1%index&nbsp;:&nbsp;&sol;^&#92;*ICH&#92;*-(.*)$&sol;#1%index</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that the colon has a low precedence, so that (<a href="#ex36">36</a>) matches trees with an <tt>IP-SUB</tt> that does not immediately dominate a <tt>VBP</tt> and an <tt>IP-ADV</tt> that does immediately dominate a <tt>VBP</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex36">36</a>)</dt><dd></dd>
+</dl>
+<tt>IP-ADV&nbsp;:&nbsp;(IP-SUB&nbsp;!&lt;&nbsp;VBP)&nbsp;&lt;&nbsp;VBP</tt><br>
+
+<br>
+<br>
+<br>
+<h2><a name="references">References</a></h2>
+
+<p><a name="Levy-and-Andrew-2006">Levy, Roger and Galen Andrew. 2006.</a> Tregex and Tsurgeon: tools for querying and manipulating tree data structure. In <i>5th International conference on Language Resources and Evaluation</i>.</p>
+<p><a name="Pito-1994">Pito, Richard. 1994.</a> tgrepdoc&ndash;documentation for tgrep. University of Pennsylvania.</p>
+<p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15.</p>
+
+<br/>
+<br/>
+
+</body>
+</html>

@@ -1,0 +1,1575 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset=utf-8>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="Content-Style" content="text/css">
+  <title>The Calculation of Treebank Semantics</title>
+  <style>
+body {
+        background-color: #FFFFFF;
+        color: #111111;
+        margin: 15px auto;
+        padding: 0 10px;
+}
+@media (min-width: 800px) {
+        body {
+                max-width: 85%;
+        }
+}
+  </style>
+</head>
+<body>
+<br>
+<center><h1>The Calculation of Treebank Semantics</h1></center>
+<center><h2>Alastair Butler</h2></center>
+<center><h3>Hirosaki University</h3></center>
+
+<br>
+<center><h3>Abstract</h3></center>
+<p align="justify">
+Treebank Semantics is an implemented grammar system that converts syntactic analysis into the structures of a formal language which is then processed against a locally constrained global calculation. Outputs of the calculation are logic based meaning representations. The calculation makes reference to a changing information state that manages the availability of collected discourse referents over a discourse. This information state holds content to resolve aspects of expression interpretation, including antecedent accessibility for pronouns, and most pervasively, valency for predicates. This paper describes the approach in detail using definitions that are executable code for Prolog systems.
+</p>
+<br>
+<br>
+
+<br>
+<h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;The Approach</h2>
+
+<p align="justify">The approach starts with syntactically analysed input realised as &lsquo;normalised input&rsquo;. Reaching normalised input can in principle be carried out for any language starting from data in any syntactic annotation format, provided there is enough information about word class, constituency, argumenthood, modification, and anaphoric relations to discharge the requirements of lexical elements and reflect the roles of functional elements.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having normalised input, the idea of the approach is that sentence and discourse meaning is in the structure of the input, and that we can reach, by undertaking transformations between representations that capture the structure, alternative instantiations of the structure that can be more explicit articulations of meaning components and their comprising dependencies.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The normalised input will be transformed into expressions of a logical language, comprised of: closure operators, discourse referents, predicate relations, and logical connectives. A logical expression is reached by undertaking a recursive calculation that receives input coded as a Prolog term. We will refer to this recursive calculation as the &lsquo;semantic calculation&rsquo;.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The semantic calculation makes two passes over the input. The first pass collects &lsquo;discourse referents&rsquo;. Discourse referents are destined to act as either logical variables or constants of an overall resulting logical expression. As a logical variable, a discourse referent is bound by an operation of quantifier closure. Operations of closure are themselves either reflexes of quantification instructions from the input, or arise because there is discourse closure.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;During the second pass over the input, the discourse referents collected from the first pass are released as content for argument slots of predicates that populate the resulting logical expression. The exact makeup of argument slots (valencies) for a given predicate can be left unspecified by the input. At the point in the calculation when the predicate is reached, the availability of discourse referents is established. The predicate's sensitivity to what is available as a potential binding determines the arguments for the predicate.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the logical expression derived from a given sentence or discourse annotation corresponds to the original interpretation, then this is one kind of confirmation that the structure assigned is correct. You can see how the generation of a well-formed (and accurate) logical expression can actually be a driving principle for the creation of the initial input.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the sketched setup comes an emergence of a notion of &lsquo;grammar&rsquo; as a guidance for ensuring discourse referents are accessible when they need to be and inaccessible when they should not be available. It then becomes possible for the semantic calculation as guidance system to determine how a word or construction in a certain environment will behave. But also a word or construction might have its properties sufficiently specified so as to place very clear demands on the state of the environment in which it is able to occur. Grammaticality effects arise with the possibility of a clash between the discourse referents given by the state of the calculation, and the discourse referents that need to be present and absent from the calculation state to meet the requirements for the expression that is under calculation.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Exactly how discourse referents are released gives the kernel of the approach. Over spans of discourse, this amounts to an implementation of &lsquo;accessibility&rsquo; from Dynamic Semantics. This implementation generalises the approach taken by the system of Predicate Logic with Anaphora (PLA; Dekker 2002, 2012), with an updated version of the formal language of Scope Control Theory (SCT; Butler 2007, 2010, 2015) as an intermediate component.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Besides PLA and SCT, there are many other ways to achieve the relevant notion of accessibility, as found in the diverse range of systems that fall under the Dynamic Semantics umbrella, including: Discourse Representation Theory (DRT; Kamp and Reyle 1993), File Change Semantics (FCS; Heim 1982), Dynamic Predicate Logic (DPL; Groenendijk and Stokhof 1991), the DRT formulation in Zeevat (1989), Sequence Semantics (Vermeulen 1993), Compositional DRT (Muskens 1996), Incremental Dynamics (van-Eijck 2001), the translation system from DPL to a static first order language in Cresswell (2002), the DRT formulation with lambdas in Bos (2005), and Dependent Type Semantics (DTS; Yana, Mineshima and Bekki 2019).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The standout virtue of the current approach over its alternatives is its nature of self-regulation that enables the system to calculate results from a minimum of explicit lexical input. This holds not only at the level of discourse accessibility but also feeds through to controlling the (un)availability of bindings for expression internal layers. The ability to handle subordinating dependencies involving pronouns in a manner that is uniform to the treatment of coordinating dependencies is also a notable extension over typical capabilities of systems of Dynamic Semantics.</p>
+
+<h3><a name="sec1.1">1.1</a>&nbsp;&nbsp;&nbsp;Overview</h3>
+
+<p align="justify">Section <a href="#sec2">2</a> introduces Prolog terms that offer a level of syntactic annotation where language particulars are regularised to provide a common interface to enable further processing. This includes information about &lsquo;fresh&rsquo; and &lsquo;local&rsquo; parameters and integration of &lsquo;discourse referents&rsquo; into the resulting structures. Once reached, <tt>&lt;normalised_expr&gt;</tt> terms are themselves processed to create expressions of the Scope Control Theory (SCT) language (<tt>&lt;sct_expr&gt;</tt> terms) introduced in section <a href="#sec3">3</a>. Prolog statements that assist reaching <tt>&lt;sct_expr&gt;</tt> terms from <tt>&lt;normalised_expr&gt;</tt> terms are detailed in section <a href="#sec4">4</a>. The transformation routine from <tt>&lt;normalised_expr&gt;</tt> terms to <tt>&lt;sct_expr&gt;</tt> terms is presented in section <a href="#sec5">5</a>. The <tt>&lt;sct_expr&gt;</tt> language has a reduced inventory of Prolog structures on which the semantic calculation mechanism described in section <a href="#sec6">6</a> will directly operate. The semantic calculation transforms expressions into a discourse representation language (<tt>&lt;drs_expr&gt;</tt> terms). During this calculation, information about the allocation of accessible discourse referents is established. Such output analysis makes explicit connective, predicate, argument, and operator-binding information.</p>
+
+<h3><a name="sec1.2">1.2</a>&nbsp;&nbsp;&nbsp;About the Prolog definitions</h3>
+
+<p align="justify">This section contains background for reading the definitions that are executable code for Prolog systems. The single data type of Prolog is the term. Terms are either: atoms, numbers, variables, or compound terms (structures).</p>
+
+<h4><a name="sec1.2.1">1.2.1</a>&nbsp;&nbsp;&nbsp;Atoms</h4>
+
+<p align="justify">An atom is a general-purpose name with no inherent meaning. Atoms are usually bare words (character sequences) written with no special syntax. However, if spaces or certain other special characters (e.g.&nbsp;punctuation characters) are contained, then the atom must be surrounded by single quotes. Atoms beginning with a capital letter must also be quoted, to distinguish them from variables. The empty list, written <tt>[]</tt>, is also an atom. Other examples of atoms include: <tt>foo</tt>, <tt>'Bar'</tt>, and <tt>'foo bar'</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom&sol;1</tt> tests whether its argument is an atom. For example:</p>
+
+<dl>
+  <dt>(<a name="ex1">1</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;atom(foo).</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+
+<p align="justify"><tt>atom_codes&sol;2</tt> performs a conversion between an atom and its character list representation. For example:</p>
+
+<dl>
+  <dt>(<a name="ex2">2</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;atom_codes(foo,&nbsp;L).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;[102,111,111];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+<tt>|&nbsp;?-&nbsp;atom_codes(A,&nbsp;[102,111,111]).</tt><br>
+<tt></tt><br>
+<tt>A&nbsp;=&nbsp;foo;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify"><tt>atom_concat&sol;3</tt> allows concatenation and splitting of atoms. For example:</p>
+
+<dl>
+  <dt>(<a name="ex3">3</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;atom_concat(foo,&nbsp;bar,&nbsp;A).</tt><br>
+<tt></tt><br>
+<tt>A&nbsp;=&nbsp;foobar;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify"><tt>sub_atom&sol;5</tt> allows for the enumeration of sub-atoms with their position and length. For example:</p>
+
+<dl>
+  <dt>(<a name="ex4">4</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;sub_atom('darg1',&nbsp;Before,&nbsp;Length,&nbsp;After,&nbsp;'arg1').</tt><br>
+<tt></tt><br>
+<tt>Before&nbsp;=&nbsp;1</tt><br>
+<tt>Length&nbsp;=&nbsp;4</tt><br>
+<tt>After&nbsp;=&nbsp;0;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify"><tt>Before</tt> is the number of characters <i>before</i> the sub-atom, <tt>Length</tt> is the number of characters that make up the sub-atom, and <tt>After</tt> is the number of characters that come <i>after</i> the sub-atom. In <tt>find_with_sub_atom&sol;4</tt> of (<a href="#ex5">5</a>), a successful call of <tt>sub_atom&sol;5</tt> provides the basis of a filter that retains atoms of an input list because they contain a given sub-atom.</p>
+
+<dl>
+  <dt>(<a name="ex5">5</a>)</dt><dd></dd>
+</dl>
+<tt>find_with_sub_atom(&nbsp;_,&nbsp;[],&nbsp;L,&nbsp;L&nbsp;).</tt><br>
+<tt>find_with_sub_atom(&nbsp;A,&nbsp;[H|T0],&nbsp;L,&nbsp;[H|T]&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;sub_atom(&nbsp;H,&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;A&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;!,</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom(&nbsp;A,&nbsp;T0,&nbsp;L,&nbsp;T&nbsp;).</tt><br>
+<tt>find_with_sub_atom(&nbsp;A,&nbsp;[_|T0],&nbsp;L,&nbsp;T&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom(&nbsp;A,&nbsp;T0,&nbsp;L,&nbsp;T&nbsp;).</tt><br>
+
+<h4><a name="sec1.2.2">1.2.2</a>&nbsp;&nbsp;&nbsp;Numbers</h4>
+
+<p align="justify">Numbers can be integers or real numbers. The predefined infix operator <tt>is&sol;2</tt> unifies the first argument to the calculated number of the second argument. For example:</p>
+
+<dl>
+  <dt>(<a name="ex6">6</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;X&nbsp;is&nbsp;2&nbsp;+&nbsp;1.</tt><br>
+<tt></tt><br>
+<tt>X&nbsp;=&nbsp;3;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec1.2.3">1.2.3</a>&nbsp;&nbsp;&nbsp;Variables</h4>
+
+<p align="justify">Variables are denoted by a string consisting of letters, numbers and underscore characters, and beginning with an upper-case letter or underscore. Variables closely resemble variables in logic in that they are placeholders for arbitrary terms. A variable can become instantiated (bound to equal a specific term) via unification. A single underscore (<tt>_</tt>) denotes an anonymous variable and means &lsquo;any term&rsquo;. Unlike other variables, the underscore does not represent the same value everywhere it occurs within a predicate definition.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>var&sol;1</tt> tests whether its argument is a variable. For example:</p>
+
+<dl>
+  <dt>(<a name="ex7">7</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;var(X).</tt><br>
+<tt></tt><br>
+<tt>X&nbsp;=&nbsp;_h328;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec1.2.4">1.2.4</a>&nbsp;&nbsp;&nbsp;Compound terms</h4>
+
+<p align="justify">A compound term is composed of an atom called a &lsquo;functor&rsquo; and a number of &lsquo;arguments&rsquo;, which are again terms. Compound terms are ordinarily written as a functor followed by a comma-separated list of argument terms, which is contained in parentheses. The number of arguments is called the term's arity. The notation <tt>f&sol;n</tt> is used to denote a term with functor <tt>f</tt> and arity <tt>n</tt>. Examples of compound terms are: <tt>t('arg0')</tt> and <tt>pred('', [])</tt>. An atom can be regarded as a compound term with arity zero.</p>
+
+<h4><a name="sec1.2.5">1.2.5</a>&nbsp;&nbsp;&nbsp;Term equivalence</h4>
+
+<p align="justify">Now we have some idea about what terms are, we can consider ways to relate terms. <tt>'=='&sol;2</tt> is a predefined infix operator that tests whether its arguments are equivalent terms. For example:</p>
+
+<dl>
+  <dt>(<a name="ex8">8</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;x&nbsp;==&nbsp;x.</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+<tt>|&nbsp;?-&nbsp;X&nbsp;==&nbsp;x.</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+<tt>|&nbsp;?-&nbsp;X&nbsp;=&nbsp;x,&nbsp;X&nbsp;==&nbsp;x.</tt><br>
+<tt></tt><br>
+<tt>X&nbsp;=&nbsp;x;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">Notably, the latter equivalence test succeeds because of the prior instantiation of the variable <tt>X</tt> to the atom <tt>x</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>'&#92;=='&sol;2</tt> is a predefined infix operator that tests whether its arguments are different terms.</p>
+
+<h4><a name="sec1.2.6">1.2.6</a>&nbsp;&nbsp;&nbsp;Lists</h4>
+
+<p align="justify">Lists are a special case of compound terms. Constructors for lists are the atom <tt>[]</tt> (empty list) and the functor <tt>'.'&sol;2</tt>, where the first argument is a term and the second argument a list. A list of <tt>N</tt> elements is the term <tt>.(a1, .( ... .(aN, []) ... ))</tt>, which may also be written with square bracket notation: <tt>[a1, ..., aN]</tt>. List construction is also possible with a concatenation function &lsquo;<tt>[_|_]&sol;2</tt>&rsquo;: <tt>[a1, ..., aN|t]</tt> is the term <tt>.(a1, .( ... .(aN, t)))</tt>. With the concatenation function, a list can be processed by processing the first element(s), and then the rest of the list, in a recursive manner.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog definitions in this paper will make use of the following list manipulation predicates:</p>
+<ul>
+<li><tt>append(?List1, ?List2, ?List3)</tt> succeeds if <tt>List3</tt> is the result of appending <tt>List2</tt> to <tt>List1</tt>.</li>
+<li><tt>intersection(+List1, +List2, ?Common)</tt> succeeds if <tt>Common</tt> unifies with the list which contains the common elements of <tt>List1</tt> and <tt>List2</tt>.</li>
+<li><tt>memberchk(+Term, ?List)</tt> succeeds if <tt>Term</tt> is a member of the list <tt>List</tt>.</li>
+<li><tt>subtract(+List1, +List2, ?Remainder)</tt> succeeds if <tt>Remainder</tt> is the list which contains those elements of <tt>List1</tt> which are not in <tt>List2</tt>.</li>
+<li><tt>union(+List1, +List2, ?Union)</tt> succeeds if <tt>Union</tt> is the list which contains the union of elements in <tt>List1</tt> and those in <tt>List2</tt>.</li>
+<li><tt>replace(+List1, +Element, ?List2)</tt> is used to create <tt>List2</tt> that contains as many instances of <tt>Element</tt> as there are elements in <tt>List1</tt>.</li>
+</ul>
+
+<h4><a name="sec1.2.7">1.2.7</a>&nbsp;&nbsp;&nbsp;Incomplete lists and difference lists</h4>
+
+<p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="#ex9">9</a>) is such a structure.</p>
+
+<dl>
+  <dt>(<a name="ex9">9</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;[a,b,c|_h383];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated, as (<a href="#ex10">10</a>) illustrates.</p>
+
+<dl>
+  <dt>(<a name="ex10">10</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[1,2,3|T],&nbsp;T&nbsp;=&nbsp;[4,5|U].</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;[1,2,3,4,5|_h463]</tt><br>
+<tt>T&nbsp;=&nbsp;[4,5|_h463]</tt><br>
+<tt>U&nbsp;=&nbsp;_h463;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A notable use for incomplete lists is as the first component of a difference list. With <tt>X</tt> as the end variable of an incomplete list, a <i>difference list</i> is a construct of the form <tt>[a1, ..., aN|X]-X</tt> that represents the list <tt>[a1, ..., aN]</tt>. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="#ex10">10</a>) without needing to keep track of the end variables. Consider two difference lists <tt>[a1, ..., aN|X]-X</tt> and <tt>[b1, ..., bM|Y]-Y</tt>. Then their concatenation is the difference list <tt>[a1, ..., aN,b1, ..., bM|Y]-Y</tt>. This concatenation is achieved, e.g., with the single clause program of (<a href="#ex11">11</a>).</p>
+
+<dl>
+  <dt>(<a name="ex11">11</a>)</dt><dd></dd>
+</dl>
+<tt>concat(X-Y,&nbsp;Y-Z,&nbsp;X-Z).</tt><br>
+
+<p align="justify">With (<a href="#ex11">11</a>), the query of (<a href="#ex12">12</a>) can be made:</p>
+
+<dl>
+  <dt>(<a name="ex12">12</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;concat([a,b|X]-X,&nbsp;[c,d|Y]-Y,&nbsp;U).</tt><br>
+<tt></tt><br>
+<tt>X&nbsp;=&nbsp;[c,d|_h443]</tt><br>
+<tt>Y&nbsp;=&nbsp;_h443</tt><br>
+<tt>U&nbsp;=&nbsp;[a,b,c,d|_h443]&nbsp;-&nbsp;_h443;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">Here, <tt>U</tt> is instantiated to the difference list representing the list <tt>[a,b,c,d]</tt>. Instantiating the &ldquo;output&rdquo; argument to <tt>V-[]</tt> obtains the outcome list directly through <tt>V</tt>:</p>
+
+<dl>
+  <dt>(<a name="ex13">13</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;concat([a,b|X]-X,&nbsp;[c,d|Y]-Y,&nbsp;V-[]).</tt><br>
+<tt></tt><br>
+<tt>X&nbsp;=&nbsp;[c,d]</tt><br>
+<tt>Y&nbsp;=&nbsp;[]</tt><br>
+<tt>V&nbsp;=&nbsp;[a,b,c,d];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec1.2.8">1.2.8</a>&nbsp;&nbsp;&nbsp;More manipulations of incomplete lists</h4>
+
+<p align="justify">Incomplete lists can be traversed in the same way as complete lists, using the <tt>[H|T]</tt> pattern. However, should the end be reached, there is a free variable that will unify with anything, and so, to avoid undesired unifications, it is essential to first test for whether the end variable is reached, e.g., with: <tt>some_predicate(L, ...) :- var(L), ...</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To calculate the length of an incomplete list, we can traverse the input list element by element, incrementing a count as we go, and return the count when the end is found.</p>
+
+<dl>
+  <dt>(<a name="ex14">14</a>)</dt><dd></dd>
+</dl>
+<tt>length_il(List,&nbsp;Length)&nbsp;:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;use&nbsp;auxiliary&nbsp;predicate&nbsp;...</tt><br>
+<tt>&nbsp;&nbsp;length_il_acc(List,&nbsp;0,&nbsp;Length).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;...&nbsp;with&nbsp;count&nbsp;initialised&nbsp;to&nbsp;zero</tt><br>
+<tt></tt><br>
+<tt>length_il_acc(L,&nbsp;N0,&nbsp;N)&nbsp;:-&nbsp;var(L),&nbsp;!,&nbsp;N&nbsp;=&nbsp;N0.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;reached&nbsp;end,&nbsp;stop</tt><br>
+<tt>length_il_acc([_|L],&nbsp;N,&nbsp;Length)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;N1&nbsp;is&nbsp;N+1,</tt><br>
+<tt>&nbsp;&nbsp;length_il_acc(L,&nbsp;N1,&nbsp;Length).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex15">15</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;length_il([a,b,c|_],&nbsp;N).</tt><br>
+<tt></tt><br>
+<tt>N&nbsp;=&nbsp;3;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A notable manipulation concerns gaining access to the last element of an incomplete list, which is the element that is just prior to the end variable for the incomplete list. This will be accomplished with <tt>last_il(Input, Output, Last)</tt>, where <tt>Input</tt> is an incomplete list, <tt>Output</tt> is identical to <tt>Input</tt>, only with the last element removed, and <tt>Last</tt> is the last element of <tt>Input</tt> that is removed to create <tt>Output</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex16">16</a>)</dt><dd></dd>
+</dl>
+<tt>last_il([X|Xs],&nbsp;Ys,&nbsp;Z)&nbsp;:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;use&nbsp;auxiliary&nbsp;predicate&nbsp;...</tt><br>
+<tt>&nbsp;&nbsp;last_il_lag(Xs,&nbsp;Ys,&nbsp;X,&nbsp;Z).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;...&nbsp;which&nbsp;lags&nbsp;behind&nbsp;by&nbsp;one&nbsp;item</tt><br>
+<tt></tt><br>
+<tt>last_il_lag(X0,&nbsp;X,&nbsp;Z0,&nbsp;Z)&nbsp;:-&nbsp;var(X0),&nbsp;!,&nbsp;X&nbsp;=&nbsp;X0,&nbsp;Z&nbsp;=&nbsp;Z0.&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;reached&nbsp;end,&nbsp;stop</tt><br>
+<tt>last_il_lag([X1|Xs],&nbsp;[X0|Ys],&nbsp;X0,&nbsp;Z)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;last_il_lag(Xs,&nbsp;Ys,&nbsp;X1,&nbsp;Z).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;lag&nbsp;behind&nbsp;by&nbsp;one</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex17">17</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;last_il([a,b,c|T],&nbsp;L,&nbsp;X).</tt><br>
+<tt></tt><br>
+<tt>T&nbsp;=&nbsp;_h377</tt><br>
+<tt>L&nbsp;=&nbsp;[a,b|_h377]</tt><br>
+<tt>X&nbsp;=&nbsp;c;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen with (<a href="#ex10">10</a>) above (also (<a href="#ex12">12</a>) and (<a href="#ex13">13</a>) with difference lists), incomplete lists can be concatenated through instantiations of end variables. In section <a href="#sec6.4">6.4</a> we require the ability to concatenate incomplete list content without any instantiation of end variables. This will be accomplished with <tt>append_il&sol;3</tt> of (<a href="#ex18">18</a>). Notice how the stopping condition is the first clause, which corresponds to reaching the end of the input list. The second clause has the form of the standard Prolog library <tt>append&sol;3</tt> definition.</p>
+
+<dl>
+  <dt>(<a name="ex18">18</a>)</dt><dd></dd>
+</dl>
+<tt>append_il(L,&nbsp;Z0,&nbsp;Z)&nbsp;:-&nbsp;var(L),&nbsp;!,&nbsp;Z&nbsp;=&nbsp;Z0.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;reached&nbsp;end,&nbsp;stop</tt><br>
+<tt>append_il([H|T],&nbsp;Z0,&nbsp;[H|Z])&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;append_il(T,&nbsp;Z0,&nbsp;Z).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex19">19</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;append_il([1,2,3|T],&nbsp;[4,5|U],&nbsp;L).</tt><br>
+<tt></tt><br>
+<tt>T&nbsp;=&nbsp;_h377</tt><br>
+<tt>U&nbsp;=&nbsp;_h439</tt><br>
+<tt>L&nbsp;=&nbsp;[1,2,3,4,5|_h439];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">Notably, the output shows <tt>T</tt> and <tt>U</tt> retain their state of not being further instantiated.</p>
+
+<br>
+<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;Starting with Prolog terms</h2>
+
+<p align="justify">Initial realisation of normalised input will give a Prolog term (<tt>&lt;normalised_expr&gt;</tt>) with the syntax of (<a href="#ex20">20</a>).</p>
+
+<dl>
+  <dt>(<a name="ex20">20</a>)</dt><dd></dd>
+</dl>
+<tt>&lt;normalised_expr&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sct_structure_mapping&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;fresh(&nbsp;&lt;fresh_list&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;local(&nbsp;&lt;local_list&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;closure(&nbsp;&lt;quantifier_operator&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;pred(&nbsp;&lt;relation_atom&gt;,&nbsp;&lt;normalised_expr_list&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;some(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;discourse_referent&gt;,&nbsp;&lt;normalised_expr&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;local_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;someClassic_rest(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;discourse_referent&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;normalised_expr&gt;,&nbsp;&lt;local_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;someClassic(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;discourse_referent&gt;,&nbsp;&lt;local_atom&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;someFact(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;relation_atom&gt;,&nbsp;&lt;discourse_referent&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;normalised_expr&gt;,&nbsp;&lt;local_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;pick(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;sort_list&gt;,&nbsp;&lt;selection_atom&gt;,&nbsp;&lt;local_atom&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;pick_more(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;sort_list&gt;,&nbsp;&lt;selection_atom&gt;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;local_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;embed(&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;control(&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;control2(&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;connect(&nbsp;&lt;relation_atom&gt;,&nbsp;&lt;normalised_expr_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;sct_structure_mapping&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t(&nbsp;&lt;grammar_atom&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;at(&nbsp;&lt;normalised_expr&gt;,&nbsp;&lt;role_atom&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;mov(&nbsp;&lt;grammar_atom&gt;,&nbsp;&lt;grammar_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;namely(&nbsp;&lt;discourse_referent&gt;,&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;bodyClimb(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;normalised_expr&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;fresh_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;fresh_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;local_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;local_atom&gt;,&nbsp;&lt;local_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;sort_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;sort_atom&gt;,&nbsp;&lt;sort_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;grammar_atom&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fresh_atom&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&lt;local_atom&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&lt;context_atom&gt;</tt><br>
+<tt></tt><br>
+<tt>&lt;discourse_referent&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x(&nbsp;&lt;sort_atom&gt;,&nbsp;&lt;integer&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;c(&nbsp;&lt;sort_atom&gt;,&nbsp;&lt;constant_atom&gt;&nbsp;)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;These prolog terms are either direct structural mappings to the SCT language of section <a href="#sec3">3</a> (<tt>t&sol;1</tt>, <tt>at&sol;2</tt>, <tt>mov&sol;3</tt>, <tt>namely&sol;3</tt>, and <tt>bodyClimb&sol;2</tt>), or &lsquo;higher level&rsquo; structures to realise:</p>
+<ul>
+<li>settings for &lsquo;fresh&rsquo; and &lsquo;local&rsquo; parameters: <tt>fresh&sol;2</tt> and <tt>local&sol;2</tt>;</li>
+<li>quantificational closure with <tt>closure&sol;2</tt>;</li>
+<li>predicate structures with <tt>pred&sol;2</tt>;</li>
+<li>argument forming structures: <tt>some&sol;5</tt>, <tt>someClassic_rest&sol;5</tt>, <tt>someClassic&sol;4</tt>, <tt>someFact&sol;6</tt>;</li>
+<li>pronominal links: <tt>pick&sol;5</tt> and <tt>pick_more&sol;5</tt>;</li>
+<li>structures to enable subordination: <tt>embed&sol;1</tt>, <tt>control&sol;1</tt>, and <tt>control2&sol;1</tt>; and</li>
+<li>structures to connect expression content: <tt>connect&sol;3</tt>.</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Discourse referents can be either variables (<tt>x&sol;2</tt>) or constants (<tt>c&sol;2</tt>). A variable has an atom parameter and an integer parameter. The atom is a &lsquo;sort&rsquo; specification, while the integer identifies the variable. For example, <tt>x('ENTITY',1)</tt> is the entity variable &lsquo;1&rsquo;, while <tt>x('EVENT',3)</tt> is the event variable &lsquo;3&rsquo;. A constant has two atom parameters: The first specifies a sort, while the second identifies the constant. Thus <tt>c('PERSON','john')</tt> denotes the person &lsquo;John&rsquo;.</p>
+
+<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Grammatical roles</h3>
+
+<p align="justify">A Prolog atom that is part of a <tt>&lt;normalised_expr&gt;</tt> has a grammatical role (i.e., is a <tt>&lt;grammar_atom&gt;</tt>) when it is either:</p>
+<ul>
+<li>a <tt>&lt;fresh_atom&gt;</tt>,</li>
+<li>a <tt>&lt;local_atom&gt;</tt>, or</li>
+<li>a <tt>&lt;context_atom&gt;</tt>.</li>
+</ul>
+
+<p align="justify">The significance of these roles will emerge when we transform to <tt>&lt;sct_expr&gt;</tt> terms, and still more when we undertake semantic calculations. Briefly:</p>
+<ul>
+<li>Having <tt>&lt;fresh_atom&gt;</tt> terms can ensure that a <tt>&lt;discourse_referent&gt;</tt> when first integrated into the assignment of the semantic calculation is discourse fresh.</li>
+<li>With <tt>&lt;local_atom&gt;</tt> management, the same grammatical resources can be used all over again with the start of each new locality. This need not preclude the option of certain assignments of <tt>&lt;discourse_referent&gt;</tt> terms being carried over from one locality to another, e.g., as will happen with <tt>control&sol;1</tt> (see section <a href="#sec5.7">5.7</a>).</li>
+<li>Having <tt>&lt;context_atom&gt;</tt> terms gives access to <tt>&lt;discourse_referent&gt;</tt> terms that were once but can no longer be accessed locally.</li>
+</ul>
+
+<p align="justify">What is essential is to keep atoms with differing roles distinct. Separation is achieved by listing <tt>&lt;fresh_atom&gt;</tt> terms with <tt>fresh&sol;2</tt>, and <tt>&lt;local_atom&gt;</tt> terms with <tt>local&sol;2</tt>. Any atom not listed by the commanding instances of <tt>fresh&sol;2</tt> and <tt>local&sol;2</tt> might be used as a <tt>&lt;context_atom&gt;</tt>. For a full discourse, there is at least one declaration of <tt>&lt;fresh_atom&gt;</tt> terms with <tt>fresh&sol;2</tt> typically occuring as the topmost structure of the discourse encoding.</p>
+
+<br>
+<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Intermediate language</h2>
+
+<p align="justify">The Prolog terms of section <a href="#sec2">2</a> are easily reached as conversions from input trees, but are not sufficiently fine grained to feed the semantic calculation, and so are transformed into an intermediate language, which is a revision of the Scope Control Theory (SCT) language of Butler (2015). An intermediate language expression is an <tt>&lt;sct_expr&gt;</tt>, where:</p>
+
+<dl>
+  <dt>(<a name="ex21">21</a>)</dt><dd></dd>
+</dl>
+<tt>&lt;sct_expr&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;drs_structure_mapping&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;namely(&nbsp;&lt;discourse_referent&gt;,&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&lt;sct_terminal&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;at(&nbsp;&lt;sct_expr&gt;,&nbsp;&lt;role_atom&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;rel(&nbsp;&lt;fresh_list&gt;,&nbsp;&lt;context_list&gt;,&nbsp;&lt;relation_atom&gt;,&nbsp;&lt;sct_expr_list&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;ifThere(&nbsp;&lt;grammar_atom&gt;,&nbsp;&lt;sct_expr&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;mov(&nbsp;&lt;grammar_atom&gt;,&nbsp;&lt;grammar_atom&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;clean(&nbsp;&lt;integer&gt;,&nbsp;&lt;local_list&gt;,&nbsp;&lt;context_atom&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;pick(&nbsp;&lt;selection_atom&gt;,&nbsp;&lt;sct_terminal&gt;,&nbsp;&lt;sources_list&gt;,&nbsp;&lt;sort_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;drs_structure_mapping&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;head(&nbsp;&lt;quantifier_operator&gt;,&nbsp;&lt;fresh_list&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;body(&nbsp;&lt;fresh_list&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;headClimb(&nbsp;&lt;discourse_referent&gt;,&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;bodyClimb(&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;sct_expr&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;sct_terminal&gt;&nbsp;::=&nbsp;t(&nbsp;&lt;grammar_atom&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;sct_expr_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;sct_expr&gt;,&nbsp;&lt;sct_expr_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;context_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;context_atom&gt;,&nbsp;&lt;context_list&gt;&nbsp;)</tt><br>
+<tt></tt><br>
+<tt>&lt;sources_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;local_atom&gt;,&nbsp;&lt;sources_list&gt;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&nbsp;&lt;context_atom&gt;,&nbsp;&lt;sources_list&gt;&nbsp;)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With semantic calculations, these language primitives assemble content for output expressions of a discourse representation language (<tt>&lt;drs_expr&gt;</tt> terms; see section <a href="#sec6.3">6.3</a>), while possibly altering the content of an information state. The information state both (i) feeds its content to the output expression, and (ii) influences the direction taken to build the output expression (see section <a href="#sec6.2">6.2</a>). The following provides an informal overview of what the various primitives contribute:</p>
+<ul>
+<li>The <tt>&lt;drs_structure_mapping&gt;</tt> functors of <tt>head&sol;3</tt>, <tt>body&sol;2</tt>, <tt>headClimb&sol;3</tt>, and <tt>bodyClimb&sol;2</tt> are parallel to identically named structures of the <tt>&lt;drs_expr&gt;</tt> language of section <a href="#sec6.3">6.3</a>. They constitute instructions for Discourse Representation Structure (DRS) construction.</li>
+<li><tt>namely&sol;3</tt> adds its <tt>&lt;discourse_referent&gt;</tt> to the information state as part of the assignment made to its <tt>&lt;fresh_atom&gt;</tt>.</li>
+<li>An <tt>&lt;sct_terminal&gt;</tt> with <tt>t&sol;1</tt> structure returns the <tt>&lt;discourse_referent&gt;</tt> that is the head value assigned by the information state to its <tt>&lt;grammar_atom&gt;</tt>.</li>
+<li><tt>at&sol;2</tt> encodes <tt>&lt;role_atom&gt;</tt> information for its <tt>&lt;sct_expr&gt;</tt> argument.</li>
+<li><tt>rel&sol;4</tt> assembles predicate relations, and (dynamic) connective relations.</li>
+<li><tt>ifThere&sol;3</tt> guides the evaluation to different choice points, based on whether the assignment to <tt>&lt;grammar_atom&gt;</tt> is contentful (i.e., not empty).</li>
+<li><tt>mov&sol;3</tt> is an operation to transfer the assignment of a <tt>&lt;discourse_referent&gt;</tt>, e.g., for the creation of a local binding.</li>
+<li><tt>clean&sol;4</tt> relocates assigned <tt>&lt;discourse_referent&gt;</tt> terms, e.g., to enable subordination.</li>
+<li><tt>pick&sol;4</tt> is an operation to (partially) resolve anaphoric dependencies by selecting accessible antecedents with matching sort information.</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The significance of these SCT functors will become apparent when they are used in instantiations of <tt>&lt;sct_expr&gt;</tt> terms, the first of which are introduced in section <a href="#sec4">4</a>.</p>
+
+<br>
+<h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;Basic grammar statements</h2>
+
+<p align="justify">This section defines Prolog statements to assist <tt>&lt;sct_expr&gt;</tt> construction in section <a href="#sec5">5</a>.</p>
+
+<h3><a name="sec4.1">4.1</a>&nbsp;&nbsp;&nbsp;Building predicates</h3>
+
+<p align="justify">First, consider <tt>build_args(L1, L2)</tt>, where <tt>L1</tt> is a list of atoms, and <tt>L2</tt> is the same list as <tt>L1</tt>, only with the atoms converted into <tt>&lt;sct_expr&gt;</tt> terms, with each atom from <tt>L1</tt> functioning as: (i) the <tt>&lt;grammar_atom&gt;</tt> of an <tt>&lt;sct_terminal&gt;</tt> and, (ii) the <tt>&lt;role_atom&gt;</tt> of an <tt>at&sol;2</tt> structure with the term embedded.</p>
+
+<dl>
+  <dt>(<a name="ex22">22</a>)</dt><dd></dd>
+</dl>
+<tt>build_args(&nbsp;[],&nbsp;[]&nbsp;).</tt><br>
+<tt>build_args(&nbsp;[A0|As0],&nbsp;[at(&nbsp;t(&nbsp;A0&nbsp;),&nbsp;A0&nbsp;)|As]&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;build_args(&nbsp;As0,&nbsp;As&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex23">23</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;build_args([a,&nbsp;b,&nbsp;c],&nbsp;L).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;[at(t(a),a),at(t(b),b),at(t(c),c)];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider <tt>build_predicate&sol;4</tt> as a means to create predicates from SCT primitive <tt>rel&sol;4</tt> together with the range of potential arguments for the predicate (via <tt>build_args&sol;2</tt>), and the selectional criteria for choosing between the produced arguments (via <tt>ifThere&sol;2</tt> for the semantic calculation to check the status of assigned content).</p>
+
+<dl>
+  <dt>(<a name="ex24">24</a>)</dt><dd></dd>
+</dl>
+<tt>build_predicate(&nbsp;[],&nbsp;L,&nbsp;S,&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;S,&nbsp;Args&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;build_args(&nbsp;L,&nbsp;Args&nbsp;).</tt><br>
+<tt>build_predicate(&nbsp;[H|T],&nbsp;L,&nbsp;S,&nbsp;ifThere(&nbsp;H,&nbsp;PredA,&nbsp;PredB&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;build_predicate(&nbsp;T,&nbsp;[H|L],&nbsp;S,&nbsp;PredA&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;build_predicate(&nbsp;T,&nbsp;L,&nbsp;S,&nbsp;PredB&nbsp;).</tt><br>
+
+<p align="justify">For example, (<a href="#ex25">25</a>) illustrates <tt>[b, c]</tt> as a candidate list for the construction of arguments for a <tt>'foo'</tt> predicate that will also have a required <tt>'a'</tt> argument:</p>
+
+<dl>
+  <dt>(<a name="ex25">25</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;build_predicate([b,&nbsp;c],&nbsp;[a],&nbsp;foo,&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>P&nbsp;=</tt><br>
+<tt>ifThere(&nbsp;b,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ifThere(&nbsp;c,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;foo,&nbsp;[at(t(c),c),at(t(b),b),at(t(a),a)]&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;foo,&nbsp;[at(t(b),b),at(t(a),a)]&nbsp;)),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ifThere(&nbsp;c,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;foo,&nbsp;[at(t(c),c),at(t(a),a)]&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;foo,&nbsp;[at(t(a),a)]&nbsp;)));</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">The instantiation of <tt>P</tt> gives two layers of <tt>ifThere&sol;3</tt> structures that are tests to choose between four different potential realisations of the <tt>foo</tt> predicate, each with a different valency that either includes or excludes arguments constructed from <tt>'b'</tt> and <tt>'c'</tt>. Note that all of the possible valency options of (<a href="#ex25">25</a>) have at least an argument constructed from <tt>'a'</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The appeal of <tt>build_predicate&sol;4</tt> is that there need be nothing in a predicate specification per se to determine what its arguments are going to be. Instead, there is the creation of all potential argument options based on the candidate list, leaving it to the semantic calculation to make a final selection from the valency options on the basis of which arguments have assigned content.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With such an outlook there is no need for reference to a dictionary or lexicon to retrieve valence information for predicates. On the other hand, given an external resource, there is the prospect of grammaticality effects emerging when what is predicted by the resource differs from what is available from the assignment state during the runtime of a semantic calculation.</p>
+
+<h3><a name="sec4.2">4.2</a>&nbsp;&nbsp;&nbsp;Enabling subordination</h3>
+
+<p align="justify">Natural languages work by repeatedly (re-)using the same grammatical resources. For example, with each new clause of a sentence and in the absence of control, there is the presence of a new subject. With the semantic calculation, a subject occurrence adds a <tt>&lt;discourse_referent&gt;</tt> to the difference list assigned to the <tt>&lt;local_atom&gt;</tt> <tt>'arg0'</tt>. Because clauses of a sentence can be embedded inside clauses, there needs to be a separation of the content assigned to <tt>'arg0'</tt> for a higher clause from the content assigned to <tt>'arg0'</tt> in a lower clause. Such separation will be accomplished with <tt>make_subord&sol;6</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex26">26</a>)</dt><dd></dd>
+</dl>
+<tt>make_subord(&nbsp;N,&nbsp;D,&nbsp;Ls,&nbsp;Keep,&nbsp;E,&nbsp;clean(&nbsp;N,&nbsp;Remove,&nbsp;D,&nbsp;E&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;subtract(&nbsp;Ls,&nbsp;Keep,&nbsp;Remove&nbsp;).</tt><br>
+
+<p align="justify">This creates a <tt>clean&sol;4</tt> structure that takes integer <tt>N</tt>, <tt>&lt;local_list&gt;</tt> <tt>Remove</tt> (formed from the <tt>&lt;local_list&gt;</tt> <tt>Ls</tt> with any elements also contained in <tt>Keep</tt> subtracted by <tt>subtract&sol;3</tt>; see section <a href="#sec1.2.6">1.2.6</a>), the <tt>&lt;context_atom&gt;</tt> <tt>D</tt>, and <tt>&lt;sct_expr&gt;</tt> <tt>E</tt>. At the runtime of a semantic calculation, this will send difference list content assigned to the atoms of <tt>Remove</tt> to the difference list that is assigned to <tt>D</tt>, such that the difference lists that remain assigned to the atoms of <tt>Remove</tt> will have a resulting length of <tt>N</tt> when evaluation continues with <tt>E</tt>. When <tt>N</tt> is 0, each atom of <tt>Remove</tt> will be assigned the empty difference list going into <tt>E</tt>.</p>
+
+<br>
+<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Transformations</h2>
+
+<p align="justify">This section provides the transformation for reaching SCT structures from the Prolog terms of section <a href="#sec2">2</a>. Transformation takes place against an environment that holds information about the available <tt>&lt;grammar_atom&gt;</tt> terms. First, let's introduce a routine to transform a list of expressions:</p>
+
+<dl>
+  <dt>(<a name="ex27">27</a>)</dt><dd></dd>
+</dl>
+<tt>transform_list(&nbsp;_,&nbsp;[],&nbsp;[]&nbsp;).</tt><br>
+<tt>transform_list(&nbsp;Env,&nbsp;[Norm_expr|In],&nbsp;[Sct_expr|Out]&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;Env,&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;transform_list(&nbsp;Env,&nbsp;In,&nbsp;Out&nbsp;).</tt><br>
+
+<p align="justify">The simplest transformations are direct mappings onto SCT structures, that make no use of the environment:</p>
+
+<dl>
+  <dt>(<a name="ex28">28</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;_,&nbsp;t(&nbsp;X&nbsp;),&nbsp;t(&nbsp;X&nbsp;)&nbsp;).</tt><br>
+<tt>transform(&nbsp;Env,&nbsp;at(&nbsp;Norm_expr,&nbsp;S&nbsp;),&nbsp;at(&nbsp;Sct_expr,&nbsp;S&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;Env,&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+<tt>transform(&nbsp;Env,&nbsp;mov(&nbsp;X,&nbsp;Y,&nbsp;Norm_expr&nbsp;),&nbsp;mov(&nbsp;X,&nbsp;Y,&nbsp;Sct_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;Env,&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+<tt>transform(&nbsp;Env,&nbsp;namely(&nbsp;DRef,&nbsp;X,&nbsp;Norm_expr&nbsp;),&nbsp;namely(&nbsp;DRef,&nbsp;X,&nbsp;Sct_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;Env,&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+<tt>transform(&nbsp;Env,&nbsp;bodyClimb(&nbsp;V,&nbsp;Norm_expr&nbsp;),&nbsp;bodyClimb(&nbsp;V,&nbsp;Sct_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;Env,&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<p align="justify">In the coming subsections, we work through the other structures of section <a href="#sec2">2</a>.</p>
+
+<h3><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;Settings for &lsquo;fresh&rsquo; and &lsquo;local&rsquo; parameters</h3>
+
+<p align="justify">As mentioned already, transformation takes place against an environment that holds information about the available <tt>&lt;grammar_atom&gt;</tt> terms. This has the form <tt>env(Fs, Ds, D, Ls)</tt>, with <tt>D</tt> as the (never altered) <tt>&lt;context_atom&gt;</tt>. The other parameters are (re-)set by <tt>fresh&sol;2</tt> and <tt>local&sol;2</tt> structures. Thus, <tt>fresh&sol;2</tt> changes <tt>Fs</tt> (<tt>&lt;fresh_list&gt;</tt>) and <tt>Ds</tt> (<tt>&lt;context_list&gt;</tt>), with <tt>Ds</tt> a list constructed with <tt>replace&sol;3</tt> to consist of <tt>D</tt> instances with the length of the new <tt>Fs</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex29">29</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;_,&nbsp;_,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;fresh(&nbsp;Fs,&nbsp;Norm_expr&nbsp;),&nbsp;Sct_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;replace(&nbsp;Fs,&nbsp;D,&nbsp;Ds&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<p align="justify"><tt>local&sol;2</tt> changes the <tt>Ls</tt> (<tt>&lt;local_list&gt;</tt>) parameter:</p>
+
+<dl>
+  <dt>(<a name="ex30">30</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;_&nbsp;),&nbsp;local(&nbsp;Ls,&nbsp;Norm_expr&nbsp;),&nbsp;Sct_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<h3><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;Closure</h3>
+
+<p align="justify">Closure makes use of <tt>&lt;fresh_atom&gt;</tt> terms via the <tt>Fs</tt> parameter of the <tt>env&sol;4</tt> environment to assemble <tt>head&sol;3</tt> and <tt>body&sol;2</tt> <tt>&lt;sct_expr&gt;</tt> content.</p>
+
+<dl>
+  <dt>(<a name="ex31">31</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closure(&nbsp;Oper,&nbsp;Norm_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;head(&nbsp;Oper,&nbsp;Fs,&nbsp;body(&nbsp;Fs,&nbsp;Sct_expr&nbsp;)&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<h3><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;Predicates</h3>
+
+<p align="justify">Predicates are provided by (<a href="#ex32">32</a>). This transforms <tt>pred&sol;2</tt> to a predicate encoding via <tt>build_predicate&sol;4</tt> (see section <a href="#sec4.1">4.1</a>) with minimally arguments for the contents of <tt>Args</tt>. The full range of valence possibilities are assembled from the content of <tt>Usable</tt>. <tt>Usable</tt> is the content of <tt>Ls</tt> (the <tt>&lt;local_atom&gt;</tt> terms of the environment) with any <tt>Args</tt> overlap subtracted.</p>
+
+<dl>
+  <dt>(<a name="ex32">32</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;_Fs,&nbsp;_Ds,&nbsp;_D,&nbsp;Ls&nbsp;),&nbsp;pred(&nbsp;S,&nbsp;Args&nbsp;),&nbsp;P&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;subtract(&nbsp;Ls,&nbsp;Args,&nbsp;Usable&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;build_predicate(&nbsp;Usable,&nbsp;Args,&nbsp;S,&nbsp;P&nbsp;).</tt><br>
+
+<h3><a name="sec5.4">5.4</a>&nbsp;&nbsp;&nbsp;Argument forming structures</h3>
+
+<p align="justify">This subsection discusses argument forming structures: <tt>some&sol;5</tt>, <tt>someClassic_rest&sol;5</tt>, <tt>someClassic&sol;4</tt>, and <tt>someFact&sol;6</tt>.</p>
+
+<h4><a name="sec5.4.1">5.4.1</a>&nbsp;&nbsp;&nbsp;Noun phrases with restrictions</h4>
+
+<p align="justify">A basic noun phrase is realised with <tt>some(V, DRef, Norm_exprR, X, Norm_exprNS)</tt>. After transformation, there is <tt>namely&sol;3</tt> to introduce <tt>&lt;discourse_referent&gt;</tt> <tt>DRef</tt> for a <tt>&lt;fresh_atom&gt;</tt> <tt>V</tt> binding, which shifts to a <tt>&lt;local_atom&gt;</tt> <tt>X</tt> binding for the nuclear scope <tt>E0</tt> (i.e., the rest of the containing clause or phrase), together with a further shift to the <tt>&lt;local_atom&gt;</tt> <tt>'h'</tt> for the restriction material <tt>Norm_exprR</tt>. This latter shift to <tt>'h'</tt> is accompanied by a call to <tt>make_subord&sol;6</tt> of section <a href="#sec4.2">4.2</a> which removes to the discourse context <tt>D</tt> any local binding from the containing clause or phrase that is not <tt>'h'</tt>. Also, to ensure the restriction material accompanies the quantification introduction of <tt>DRef</tt>, <tt>bodyClimb&sol;2</tt> surrounds the content transformed from <tt>Norm_exprR</tt> and shares the same <tt>&lt;fresh_atom&gt;</tt> <tt>V</tt> by which the new argument binding is introduced.</p>
+
+<dl>
+  <dt>(<a name="ex33">33</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;some(&nbsp;V,&nbsp;DRef,&nbsp;Norm_exprR,&nbsp;X,&nbsp;Norm_exprNS&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namely(&nbsp;DRef,&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov(&nbsp;V,&nbsp;X,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;Fs,&nbsp;Ds,&nbsp;'',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;bodyClimb(&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov(&nbsp;X,&nbsp;'h',&nbsp;Sct_exprR&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;Sct_exprNS]&nbsp;)&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprR,&nbsp;Sct_exprR0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprNS,&nbsp;Sct_exprNS&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;D,&nbsp;Ls,&nbsp;['h'],&nbsp;clean(&nbsp;1,&nbsp;['h'],&nbsp;D,&nbsp;Sct_exprR0&nbsp;),&nbsp;Sct_exprR&nbsp;).</tt><br>
+
+<h4><a name="sec5.4.2">5.4.2</a>&nbsp;&nbsp;&nbsp;Classic arguments</h4>
+
+<p align="justify"><tt>someClassic_rest&sol;5</tt> offers a variant of <tt>some&sol;5</tt> with no <tt>namely&sol;3</tt>. Instead, SCT primitive <tt>headClimb&sol;3</tt> is used to introduce <tt>&lt;discourse_referent&gt;</tt> <tt>DRef</tt>. While <tt>DRef</tt> receives closure (and thereby its semantic scope) from the commanding closure of <tt>&lt;fresh_atom&gt;</tt> <tt>V</tt>, it will not exhibit dynamic scope. That is, its binding scope will be over the content of the restriction (<tt>Norm_exprR</tt>) and the nuclear scope (<tt>Norm_exprNS</tt>), but not beyond.</p>
+
+<dl>
+  <dt>(<a name="ex34">34</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;someClassic_rest(&nbsp;V,&nbsp;DRef,&nbsp;Norm_exprR,&nbsp;X,&nbsp;Norm_exprNS&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headClimb(&nbsp;DRef,&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov(&nbsp;V,&nbsp;X,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;Fs,&nbsp;Ds,&nbsp;'',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;bodyClimb(&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov(&nbsp;X,&nbsp;'h',&nbsp;Sct_exprR&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;Sct_exprNS]&nbsp;)&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprR,&nbsp;Sct_exprR0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprNS,&nbsp;Sct_exprNS&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;D,&nbsp;Ls,&nbsp;['h'],&nbsp;clean(&nbsp;1,&nbsp;['h'],&nbsp;D,&nbsp;Sct_exprR0&nbsp;),&nbsp;Sct_exprR&nbsp;).</tt><br>
+
+<p align="justify">As with <tt>some&sol;5</tt>, open local bindings other than <tt>'h'</tt> shift to the discourse context <tt>D</tt> via <tt>make_subord&sol;6</tt> before content from the restriction <tt>Norm_exprR</tt> is reached. Also, the restriction content is surrounded by <tt>bodyClimb&sol;2</tt> with <tt>V</tt> for placement in the semantic representation resulting from semantic calculation.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>someClassic&sol;4</tt> offers a version of <tt>someClassic_rest&sol;5</tt> with no restriction.</p>
+
+<dl>
+  <dt>(<a name="ex35">35</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;someClassic(&nbsp;V,&nbsp;DRef,&nbsp;X,&nbsp;Norm_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headClimb(&nbsp;DRef,&nbsp;V,&nbsp;mov(&nbsp;V,&nbsp;X,&nbsp;Sct_expr&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<h4><a name="sec5.4.3">5.4.3</a>&nbsp;&nbsp;&nbsp;Propositional arguments</h4>
+
+<p align="justify"><tt>someFact&sol;6</tt> shares the property with <tt>someClassic_rest&sol;5</tt> of having <tt>headClimb&sol;3</tt> to introduce its <tt>DRef</tt> (<tt>&lt;discourse_referent&gt;</tt>), but differs in its treatment of the restriction, <tt>Norm_exprR</tt>, which is used to form an embedding (with <tt>'emb'</tt> role) to a predicate with <tt>&lt;relation_atom&gt;</tt> <tt>S</tt>. The opened <tt>X</tt> binding for the nuclear scope <tt>E0</tt> binds a term argument of the <tt>S</tt> predicate with <tt>'h'</tt> role but shifts to a <tt>''</tt> (empty atom) binding before the content of the restriction <tt>Norm_exprR</tt> occurs. This removes the <tt>X</tt> binding from having any further binding role inside <tt>Norm_exprR</tt>. In further contrast to the restrictions of <tt>some&sol;5</tt> and <tt>someClassic_rest&sol;5</tt>, there are no alterations to the local bindings the restriction <tt>Norm_exprR</tt> inherits from the containing clause or phrase.</p>
+
+<dl>
+  <dt>(<a name="ex36">36</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;someFact(&nbsp;V,&nbsp;S,&nbsp;DRef,&nbsp;Norm_exprR,&nbsp;X,&nbsp;Norm_exprNS&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headClimb(&nbsp;DRef,&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mov(&nbsp;V,&nbsp;X,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;Fs,&nbsp;Ds,&nbsp;'',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;bodyClimb(&nbsp;V,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;S,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[at(&nbsp;t(&nbsp;X&nbsp;),&nbsp;'h'&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at(&nbsp;mov(&nbsp;X,'',Sct_exprR&nbsp;),&nbsp;'emb'&nbsp;)&nbsp;]&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;Sct_exprNS]&nbsp;)&nbsp;)&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprR,&nbsp;Sct_exprR&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_exprNS,&nbsp;Sct_exprNS&nbsp;).</tt><br>
+
+<h3><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;Pronouns</h3>
+
+<p align="justify">The contribution of a non-reflexive pronoun is realised with <tt>pick&sol;5</tt> of (<a href="#ex37">37</a>), while reflexive pronoun contribution is realised with <tt>pick_more&sol;5</tt> of (<a href="#ex38">38</a>). The contribution of these operations is not to introduce an argument value, but rather to link an already introduced local binding to some other value of the context. Consequently they occur in combination with an argument forming operation, typically with placement directly under a <tt>someClassic&sol;4</tt> action that opens a local binding. In cases where there is content for a restriction, such as from parenthetical content, then these pronominal actions occur in the nuclear scope part of a <tt>someClassic_rest&sol;5</tt> action.</p>
+
+<dl>
+  <dt>(<a name="ex37">37</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick(&nbsp;V,&nbsp;Sorts,&nbsp;S,&nbsp;X,&nbsp;Norm_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;'&',&nbsp;[bodyClimb(&nbsp;V,&nbsp;pick(&nbsp;S,&nbsp;t(&nbsp;X&nbsp;),&nbsp;[D],&nbsp;Sorts&nbsp;)),&nbsp;Sct_expr]&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<dl>
+  <dt>(<a name="ex38">38</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick_more(&nbsp;V,&nbsp;Sorts,&nbsp;S,&nbsp;X,&nbsp;Norm_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;[],&nbsp;[],&nbsp;'&',&nbsp;[bodyClimb(&nbsp;V,&nbsp;pick(&nbsp;S,&nbsp;t(&nbsp;X&nbsp;),&nbsp;Sources,&nbsp;Sorts&nbsp;)),&nbsp;Sct_expr]&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;subtract(&nbsp;[D|Ls],&nbsp;[X],&nbsp;Sources&nbsp;).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A pronoun is resolved by receiving as its <tt>S</tt> antecedent a discourse referent that shares sort information with the <tt>&lt;sort_list&gt;</tt> <tt>Sorts</tt>. Candidates for antecedents are gathered with the SCT primitive <tt>pick&sol;4</tt>, with <tt>Sources</tt> determined on the basis of the called action: With <tt>pick&sol;5</tt> (from a non-reflexive pronoun), candidates are elements of the difference list assigned to the <tt>&lt;context_atom&gt;</tt> <tt>D</tt>; With <tt>pick_more&sol;5</tt> (from a reflexive pronoun) candidates are both elements of the difference list assigned to the <tt>&lt;context_atom&gt;</tt> <tt>D</tt> and elements of the difference lists assigned to the <tt>&lt;local_atom&gt;</tt> terms of <tt>Ls</tt> minus <tt>X</tt>, the binding from the pronoun itself.</p>
+
+<h3><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;Embedding</h3>
+
+<p align="justify"><tt>embed&sol;1</tt> protects an embedding from local (<tt>Ls</tt>) bindings that would otherwise be inherited from the outside environment.</p>
+
+<dl>
+  <dt>(<a name="ex39">39</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;embed(&nbsp;Norm_expr&nbsp;),&nbsp;Sct_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;D,&nbsp;Ls,&nbsp;[],&nbsp;Sct_expr0,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<h3><a name="sec5.7">5.7</a>&nbsp;&nbsp;&nbsp;Control</h3>
+
+<p align="justify">Having <tt>embed&sol;1</tt> removes all inherited local (<tt>Ls</tt>) bindings. But binding inheritance may be desirable. In particular, as obligatory dependencies, control dependencies are best captured through the preservation of a local binding of the embedding environment into the embedding. However, such preservation might include a shift to a different local binding name, and this is accomplished with <tt>control&sol;1</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex40">40</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;control(&nbsp;Norm_expr&nbsp;),&nbsp;Sct_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom('arg2',&nbsp;Ls,&nbsp;[],&nbsp;C1),</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom('obu',&nbsp;Ls,&nbsp;C1,&nbsp;C2),</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom('arg1',&nbsp;Ls,&nbsp;C2,&nbsp;C3),</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom('arg0',&nbsp;Ls,&nbsp;C3,&nbsp;C4),</tt><br>
+<tt>&nbsp;&nbsp;intersection(&nbsp;['h'],&nbsp;Ls,&nbsp;C5),</tt><br>
+<tt>&nbsp;&nbsp;append(C5,&nbsp;C4,&nbsp;Candidates),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;D,&nbsp;Ls,&nbsp;Candidates,&nbsp;clean(&nbsp;1,&nbsp;['arg0'],&nbsp;D,&nbsp;Sct_expr0&nbsp;),&nbsp;Sct_expr1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;'arg0',&nbsp;Candidates,&nbsp;[],&nbsp;Sct_expr1,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<p align="justify">The transformation of <tt>control&sol;1</tt> leads to three steps.</p>
+<ul>
+<li>First, all difference list elements assigned to binding names with <tt>'arg0'</tt> as a sub atom, then <tt>'arg1'</tt> as a sub atom, then <tt>'obu'</tt> as a sub atom, then <tt>'arg2'</tt> as a sub atom shift to the <tt>'arg0'</tt> binding.</li>
+<li>Second, there is removal (to <tt>D</tt>) with <tt>make_subord</tt> of any difference list elements assigned to names of the <tt>Ls</tt> parameter except <tt>'arg0'</tt> and any other candidate for being the controller.</li>
+<li>Third, if <tt>'arg0'</tt> is non-empty there is removal to <tt>D</tt> of all assigned values except the frontmost value.</li>
+</ul>
+
+<p align="justify">These three steps have the effect that, with <tt>control&sol;1</tt>, there is one binding that can be preserved from the embedding clause into the embedding, with the ordering of preference in (<a href="#ex41">41</a>), with <tt>'arg2'</tt> most preferred:</p>
+
+<dl>
+  <dt>(<a name="ex41">41</a>)</dt><dd></dd>
+</dl>
+<tt>'arg2'&nbsp;&gt;&nbsp;'obu'&nbsp;&gt;&nbsp;'arg1'&nbsp;&gt;&nbsp;'arg0'</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In deviation to <tt>control&sol;1</tt>, <tt>control2&sol;1</tt> establishes its control relation by altering the first step, so that only difference list elements assigned to binding names with <tt>'arg0'</tt> as a sub atom shift to the <tt>'arg0'</tt> binding. With this change, it can only be the binding of a name with <tt>'arg0'</tt> as a sub atom that is maintained into the embedding.</p>
+
+<dl>
+  <dt>(<a name="ex42">42</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;control2(&nbsp;Norm_expr&nbsp;),&nbsp;Sct_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expr,&nbsp;Sct_expr0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;find_with_sub_atom('arg0',&nbsp;Ls,&nbsp;[],&nbsp;Candidates),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;D,&nbsp;Ls,&nbsp;Candidates,&nbsp;clean(&nbsp;1,&nbsp;['arg0'],&nbsp;D,&nbsp;Sct_expr0&nbsp;),&nbsp;Sct_expr1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;make_subord(&nbsp;0,&nbsp;'arg0',&nbsp;Candidates,&nbsp;[],&nbsp;Sct_expr1,&nbsp;Sct_expr&nbsp;).</tt><br>
+
+<h3><a name="sec5.8">5.8</a>&nbsp;&nbsp;&nbsp;Coordination</h3>
+
+<p align="justify"><tt>connect&sol;2</tt> integrates the conjuncts of a list under a single <tt>rel&sol;4</tt> structure, with the appropriate relation name supplied through the <tt>S</tt> parameter.</p>
+
+<dl>
+  <dt>(<a name="ex43">43</a>)</dt><dd></dd>
+</dl>
+<tt>transform(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connect(&nbsp;S,&nbsp;Norm_expressions&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel(&nbsp;Fs,&nbsp;Ds,&nbsp;S,&nbsp;Sct_expressions&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;transform_list(&nbsp;env(&nbsp;Fs,&nbsp;Ds,&nbsp;D,&nbsp;Ls&nbsp;),&nbsp;Norm_expressions,&nbsp;Sct_expressions&nbsp;).</tt><br>
+
+<p align="justify">What is most notable about relations constructed with <tt>connect&sol;2</tt> is that they are made sensitive to the <tt>Fs</tt> parameter, which is used to list the available fresh binding names. This triggers &lsquo;dynamic&rsquo; behaviour, with management during evaluation leading to calls of <tt>allocate&sol;6</tt>; see section <a href="#sec6.2.5">6.2.5</a>. The <tt>allocate&sol;6</tt> calls make discourse referents accessible for the conjuncts of the <tt>Es</tt> list, either as never before used values, or as values of the discourse context.</p>
+
+<br>
+<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;The calculation</h2>
+
+<p align="justify">We now move on to a discussion of how <tt>&lt;sct_expr&gt;</tt> terms can be used as input for a calculation that returns a discourse representation language expression. Discourse representation language expressions (<tt>&lt;drs_expr&gt;</tt> terms) include quantificational closures, discourse referents, and relations (both as predicate conditions and connectives). In addition, there are markers to carry information on where discourse referents and conditions are interpreted.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This section is organised as follows. Section <a href="#sec6.1">6.1</a> presents a procedure for collecting the <tt>&lt;discourse_referent&gt;</tt> terms of an <tt>&lt;sct_expr&gt;</tt>. Section <a href="#sec6.2">6.2</a> introduces a storage mechanism for holding <tt>&lt;discourse_referent&gt;</tt> terms. Section <a href="#sec6.3">6.3</a> presents the language of <tt>&lt;drs_expr&gt;</tt> terms. Section <a href="#sec6.4">6.4</a> gives the calculation from <tt>&lt;sct_expr&gt;</tt> terms to <tt>&lt;drs_expr&gt;</tt> terms. Finally, section <a href="#sec6.5">6.5</a> considers an example.</p>
+
+<h3><a name="sec6.1">6.1</a>&nbsp;&nbsp;&nbsp;Collecting <tt>&lt;discourse_referent&gt;</tt> terms</h3>
+
+<p align="justify">A key contribution of <tt>head&sol;3</tt> and <tt>namely&sol;3</tt> is their use in determining the distributions of <tt>&lt;discourse_referent&gt;</tt> terms. The effects of this contribution are made with <tt>discourse_refs(X, E, Ds)</tt> of (<a href="#ex44">44</a>). This is true when <tt>X</tt> is a <tt>&lt;fresh_name&gt;</tt>, <tt>E</tt> is an <tt>&lt;sct_expr&gt;</tt>, and <tt>Ds</tt> is a difference list with <tt>&lt;discourse_referent&gt;</tt> terms obtained from <tt>E</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex44">44</a>)</dt><dd></dd>
+</dl>
+<tt>discourse_refs_from_list(&nbsp;_,&nbsp;[],&nbsp;D-D&nbsp;).</tt><br>
+<tt>discourse_refs_from_list(&nbsp;X,&nbsp;[E|T],&nbsp;D-D0&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;D1-D0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs_from_list(&nbsp;X,&nbsp;T,&nbsp;D-D1&nbsp;).</tt><br>
+<tt></tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;head(&nbsp;_,&nbsp;Vs,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;memberchk(&nbsp;X,&nbsp;Vs&nbsp;)&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Ds&nbsp;=&nbsp;D-D</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;body(&nbsp;_,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;headClimb(&nbsp;_,&nbsp;_,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;bodyClimb(&nbsp;_,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;namely(&nbsp;DRef,&nbsp;Y,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;X&nbsp;==&nbsp;Y&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;D-D0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Ds&nbsp;=&nbsp;[DRef|D]-D0</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;_,&nbsp;t(&nbsp;_&nbsp;),&nbsp;D-D&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;at(&nbsp;E,&nbsp;_&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;rel(&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;Es&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs_from_list(&nbsp;X,&nbsp;Es,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;ifThere(&nbsp;_,&nbsp;E1,&nbsp;E2&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E1,&nbsp;Ds&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E2,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;mov(&nbsp;_,&nbsp;_,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;X,&nbsp;clean(&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;E&nbsp;),&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;E,&nbsp;Ds&nbsp;).</tt><br>
+<tt>discourse_refs(&nbsp;_,&nbsp;pick(&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;_&nbsp;),&nbsp;D-D&nbsp;).</tt><br>
+
+<p align="justify">The definition of <tt>discourse_refs&sol;3</tt> has patterns (including wildcards &lsquo;<tt>_</tt>&rsquo;) to match the functors that make up the <tt>&lt;sct_expr&gt;</tt> language. Most functors contribute only the collections from the expressions over which they scope. For <tt>rel&sol;4</tt>, this includes collecting from a contained list of <tt>&lt;sct_expr&gt;</tt> terms, via <tt>discourse_refs_from_list&sol;3</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The real action with <tt>discourse_refs&sol;3</tt> happens when either <tt>namely&sol;3</tt> or <tt>head&sol;3</tt> is reached. With <tt>namely&sol;3</tt> if there is a match of <tt>&lt;fresh_atom&gt;</tt> terms then the <tt>&lt;discourse_referent&gt;</tt> carried by <tt>namely&sol;3</tt> is entered into the overall difference list, else collection continues with no addition. With <tt>head&sol;3</tt> if the <tt>&lt;fresh_atom&gt;</tt> of the collection happens to be a member of the list that instantiates the <tt>Vs</tt> parameter of <tt>head&sol;3</tt> then the empty list is returned as the collection result (potentially hiding <tt>&lt;discourse_referent&gt;</tt> terms), else the collection for the embedded <tt>&lt;sct_expr&gt;</tt> is returned.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of executing <tt>discourse_refs&sol;3</tt>, consider (<a href="#ex45">45</a>):</p>
+
+<dl>
+  <dt>(<a name="ex45">45</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;discourse_refs(foo,&nbsp;namely(x(bar,1),&nbsp;foo,&nbsp;namely(x(bar,2),&nbsp;foo,&nbsp;t(foo))),&nbsp;Ds).</tt><br>
+<tt></tt><br>
+<tt>Ds&nbsp;=&nbsp;[x(bar,1),x(bar,2)|_h625]&nbsp;-&nbsp;_h625;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">That is, a difference list is returned containing the <tt>&lt;discourse_referent&gt;</tt> terms carried by the <tt>namely&sol;3</tt> instances.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When <tt>head&sol;3</tt> and <tt>namely&sol;3</tt> share the same <tt>&lt;fresh_atom&gt;</tt>, <tt>head&sol;3</tt> serves to hide the presence of <tt>namely&sol;3</tt>, as the return of the empty difference list in (<a href="#ex46">46</a>) shows.</p>
+
+<dl>
+  <dt>(<a name="ex46">46</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;discourse_refs(&nbsp;foo,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;head(&nbsp;exists,&nbsp;[foo],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namely(&nbsp;x(bar,&nbsp;1),&nbsp;foo,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;namely(x(bar,&nbsp;2),&nbsp;foo,&nbsp;t(foo)))),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ds).</tt><br>
+<tt></tt><br>
+<tt>Ds&nbsp;=&nbsp;_h699&nbsp;-&nbsp;_h699;</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h3><a name="sec6.2">6.2</a>&nbsp;&nbsp;&nbsp;Storing <tt>&lt;discourse_referent&gt;</tt> terms</h3>
+
+<p align="justify">This section introduces a storage mechanism capable of keeping track of the status of <tt>&lt;discourse_referent&gt;</tt> terms. This consists of an assignment that assigns with <tt>map&sol;2</tt> a (possibly empty) difference list of <tt>&lt;discourse_referent&gt;</tt> terms to each <tt>&lt;grammar_atom&gt;</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex47">47</a>)</dt><dd></dd>
+</dl>
+<tt>assignment_update(&nbsp;X,&nbsp;Ds,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;Assn&nbsp;=&nbsp;[map(&nbsp;X,&nbsp;Ds&nbsp;)|Assn0].</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;First, <tt>val(Assn, X, Ds)</tt> succeeds when <tt>Ds</tt> is the (possibly empty) difference list assigned by <tt>Assn</tt> to <tt>X</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex48">48</a>)</dt><dd></dd>
+</dl>
+<tt>val(&nbsp;Assn,&nbsp;X,&nbsp;Ds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;memberchk(&nbsp;map(&nbsp;X,&nbsp;Ds0&nbsp;),&nbsp;Assn&nbsp;)&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Ds&nbsp;=&nbsp;Ds0</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Ds&nbsp;=&nbsp;D-D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;otherwise&nbsp;return&nbsp;the&nbsp;empty&nbsp;difference&nbsp;list</tt><br>
+<tt>&nbsp;&nbsp;).</tt><br>
+
+<p align="justify">By contrast, <tt>contentful_val(Assn, X, Ds)</tt> succeeds only if <tt>Ds</tt> is a non-empty difference list assigned by <tt>Assn</tt> to <tt>X</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex49">49</a>)</dt><dd></dd>
+</dl>
+<tt>contentful_val(&nbsp;Assn,&nbsp;X,&nbsp;D-D0&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;memberchk(&nbsp;map(&nbsp;X,&nbsp;D-D0&nbsp;),&nbsp;Assn&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;D&nbsp;&#92;==&nbsp;D0.</tt><br>
+
+<p align="justify">Note that with <tt>val&sol;3</tt> of (<a href="#ex48">48</a>), <tt>Assn</tt> as the empty list (<tt>[]</tt>) is sufficient for stating the empty assignment, with all <tt>X</tt> instantiations assigned the empty difference list.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now we have the ability to access assigned content, we next introduce methods: <tt>push&sol;4</tt>, <tt>pop&sol;3</tt>, <tt>shift&sol;4</tt>, <tt>shift_last&sol;4</tt>, <tt>allocate&sol;6</tt>, and <tt>dispose&sol;5</tt>. These methods will govern the introduction, release and subsequent accessibility of assigned content.</p>
+
+<h4><a name="sec6.2.1">6.2.1</a>&nbsp;&nbsp;&nbsp;<tt>push&sol;4</tt></h4>
+
+<p align="justify">Defined in (<a href="#ex50">50</a>), <tt>push&sol;4</tt> succeeds when <tt>Assn</tt> is a variant of assignment <tt>Assn0</tt> differing only in that there is a new difference list assigned with <tt>map&sol;2</tt> to <tt>X</tt> (via <tt>assignment_update&sol;4</tt> of (<a href="#ex47">47</a>)) that is the concatenation <tt>New-Old</tt> of the content of the difference list <tt>New-D</tt> and the difference list <tt>D-Old</tt>, where the latter was assigned to <tt>X</tt> by <tt>Assn0</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex50">50</a>)</dt><dd></dd>
+</dl>
+<tt>push(&nbsp;New-D,&nbsp;X,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;val(&nbsp;Assn0,&nbsp;X,&nbsp;D-Old&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;X,&nbsp;New-Old,&nbsp;Assn0,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex51">51</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;push([x(bar,2)|D]-D,&nbsp;foo,&nbsp;[map(foo,&nbsp;[x(bar,1)|L]-L)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>D&nbsp;=&nbsp;[x(bar,1)|_h534]</tt><br>
+<tt>L&nbsp;=&nbsp;_h534</tt><br>
+<tt>P&nbsp;=&nbsp;[map(foo,[x(bar,2),x(bar,1)|_h534]&nbsp;-&nbsp;_h534),map(foo,[x(bar,1)|_h534]&nbsp;-&nbsp;_h534)];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec6.2.2">6.2.2</a>&nbsp;&nbsp;&nbsp;<tt>pop&sol;3</tt></h4>
+
+<p align="justify">Defined in (<a href="#ex52">52</a>), <tt>pop&sol;3</tt> succeeds when <tt>Assn</tt> is the same as <tt>Assn0</tt> except with the first element of the difference list assigned to <tt>X</tt> removed.</p>
+
+<dl>
+  <dt>(<a name="ex52">52</a>)</dt><dd></dd>
+</dl>
+<tt>pop(&nbsp;X,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;contentful_val(&nbsp;Assn0,&nbsp;X,&nbsp;[_|D]-D0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;X,&nbsp;D-D0,&nbsp;Assn0,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex53">53</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;pop(foo,&nbsp;[map(foo,&nbsp;[x(bar,2),x(bar,1)|L]-L)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;_h482</tt><br>
+<tt>P&nbsp;=&nbsp;[map(foo,[x(bar,1)|_h482]&nbsp;-&nbsp;_h482),map(foo,[x(bar,2),x(bar,1)|_h482]&nbsp;-&nbsp;_h482)];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec6.2.3">6.2.3</a>&nbsp;&nbsp;&nbsp;<tt>shift&sol;4</tt></h4>
+
+<p align="justify">Defined in (<a href="#ex54">54</a>), <tt>shift&sol;4</tt> succeeds when <tt>Assn</tt> is the same as <tt>Assn0</tt> except with the first difference list element assigned to <tt>X</tt> removed and made the first element of the difference list assigned to <tt>Y</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex54">54</a>)</dt><dd></dd>
+</dl>
+<tt>shift(&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;contentful_val(&nbsp;Assn0,&nbsp;X,&nbsp;[DRef|DX]-DX0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;X,&nbsp;DX-DX0,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;val(&nbsp;Assn0,&nbsp;Y,&nbsp;DY-DY0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;Y,&nbsp;[DRef|DY]-DY0,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex55">55</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;shift(foo,&nbsp;baz,&nbsp;[map(foo,&nbsp;[x(bar,2),x(bar,1)|L]-L)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;_h496</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(baz,[x(bar,2)|_h662]&nbsp;-&nbsp;_h662),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,1)|_h496]&nbsp;-&nbsp;_h496),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2),x(bar,1)|_h496]&nbsp;-&nbsp;_h496)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec6.2.4">6.2.4</a>&nbsp;&nbsp;&nbsp;<tt>shift_last&sol;4</tt></h4>
+
+<p align="justify">Defined in (<a href="#ex56">56</a>), <tt>shift_last&sol;4</tt> succeeds when <tt>Assn</tt> is the same as <tt>Assn0</tt> except with the last difference list element, <tt>DRef</tt> (found via <tt>last_il&sol;3</tt>, see section <a href="#sec1.2.7">1.2.7</a>), assigned to <tt>X</tt> removed (to leave <tt>DX-DX0</tt> as the assigned value) and made the first element of the difference list assigned to <tt>Y</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex56">56</a>)</dt><dd></dd>
+</dl>
+<tt>shift_last(&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;contentful_val(&nbsp;Assn0,&nbsp;X,&nbsp;DX1-DX0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;last_il(&nbsp;DX1,&nbsp;DX,&nbsp;DRef&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;X,&nbsp;DX-DX0,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;val(&nbsp;Assn0,&nbsp;Y,&nbsp;DY-DY0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;assignment_update(&nbsp;Y,&nbsp;[DRef|DY]-DY0,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex57">57</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;shift_last(foo,&nbsp;baz,&nbsp;[map(foo,&nbsp;[x(bar,2),x(bar,1)|L]-L)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;_h496</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(baz,[x(bar,1)|_h662]&nbsp;-&nbsp;_h662),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2)|_h496]&nbsp;-&nbsp;_h496),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2),x(bar,1)|_h496]&nbsp;-&nbsp;_h496)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<h4><a name="sec6.2.5">6.2.5</a>&nbsp;&nbsp;&nbsp;<tt>allocate&sol;6</tt> with expression integrity</h4>
+
+<p align="justify">The required manipulation for moving through the expressions of a discourse from left to right will be automated by <tt>allocate&sol;6</tt>. Atom <tt>X</tt> is a <tt>&lt;fresh_atom&gt;</tt> when <tt>namely(X, _, _)</tt> occurs within an <tt>&lt;sct_expr&gt;</tt>. A <tt>&lt;fresh_atom&gt;</tt> serves as a source of <tt>&lt;discourse_referent&gt;</tt> terms that have not been previously accessed. Taking discourse to be a collection of ordered <tt>&lt;sct_expr&gt;</tt> terms (<tt>Es</tt>), and supposing <tt>X</tt> is a <tt>&lt;fresh_atom&gt;</tt> in <tt>Es</tt>, then, at the moment of interpreting the entire discourse <tt>Es</tt>, the assignment state will be assigning a difference list to <tt>X</tt> that contains all <tt>&lt;discourse_referent&gt;</tt> terms required for all the separate expressions of <tt>Es</tt>. We can think of such an assigned difference list as being formed so that <tt>&lt;discourse_referent&gt;</tt> terms needing to appear for the first expression of <tt>Es</tt> (that is, the start of the discourse) will appear last in the assigned difference list. Working through the remaining expressions of <tt>Es</tt> then amounts to opening up more of the difference list content assigned to <tt>X</tt> in end-to-front direction, until all <tt>&lt;discourse_referent&gt;</tt> terms are revealed with the last expression of <tt>Es</tt>, so that, with completion of the discourse, all <tt>&lt;discourse_referent&gt;</tt> terms assigned <tt>X</tt> will have been accessed. One more thing that <tt>allocate&sol;6</tt> does is move the <tt>&lt;discourse_referent&gt;</tt> terms that were accessed by prior expressions to a different <tt>&lt;grammar_atom&gt;</tt> serving as a <tt>&lt;context_atom&gt;</tt>. The different uses of <tt>&lt;grammar_atom&gt;</tt> terms are set out in section <a href="#sec2.1">2.1</a>. Bearing these matters in mind will help in understanding how <tt>allocate&sol;6</tt> is defined.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;First, consider <tt>pf_split(N, List, Past, Future)</tt> of (<a href="#ex58">58</a>). This succeeds when <tt>Past</tt> is the first <tt>N</tt>-1 elements of <tt>List</tt> and <tt>Future</tt> is the elements of <tt>List</tt> from <tt>N</tt>+1 to the last element.</p>
+
+<dl>
+  <dt>(<a name="ex58">58</a>)</dt><dd></dd>
+</dl>
+<tt>pf_split(&nbsp;1,&nbsp;[_|T],&nbsp;[],&nbsp;T&nbsp;)&nbsp;:-&nbsp;!.</tt><br>
+<tt>pf_split(&nbsp;N,&nbsp;[H|T],&nbsp;[H|Past],&nbsp;Future&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;M&nbsp;is&nbsp;N&nbsp;-&nbsp;1,</tt><br>
+<tt>&nbsp;&nbsp;pf_split(&nbsp;M,&nbsp;T,&nbsp;Past,&nbsp;Future&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex59">59</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;pf_split(3,&nbsp;[a,b,c,d,e],&nbsp;Past,&nbsp;Future).</tt><br>
+<tt></tt><br>
+<tt>Past&nbsp;=&nbsp;[a,b]</tt><br>
+<tt>Future&nbsp;=&nbsp;[d,e];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>do_pop(List, X, In, Out)</tt> changes the assignment from <tt>In</tt> to <tt>Out</tt> by performing the <tt>pop&sol;3</tt> operation of (<a href="#ex52">52</a>) on the different list assigned <tt>X</tt> as many times as there are elements in <tt>List</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex60">60</a>)</dt><dd></dd>
+</dl>
+<tt>do_pop(&nbsp;[],&nbsp;_,&nbsp;Assn,&nbsp;Assn&nbsp;).</tt><br>
+<tt>do_pop(&nbsp;[_|T],&nbsp;X,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;pop(&nbsp;X,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;do_pop(&nbsp;T,&nbsp;X,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>do_shift_last(List, X, Y, In, Out)</tt> changes the assignment from <tt>In</tt> to <tt>Out</tt> by performing the <tt>shift_last&sol;4</tt> operation of (<a href="#ex56">56</a>) on the difference lists assigned to <tt>X</tt> and <tt>Y</tt> as many times as there are elements in <tt>List</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex61">61</a>)</dt><dd></dd>
+</dl>
+<tt>do_shift_last(&nbsp;[],&nbsp;_,&nbsp;_,&nbsp;Assn,&nbsp;Assn&nbsp;).</tt><br>
+<tt>do_shift_last(&nbsp;[_|T],&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;shift_last(&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;do_shift_last(&nbsp;T,&nbsp;X,&nbsp;Y,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider <tt>allocate(N, Xs, Ys, Es, Assn0, Assn)</tt>, as defined in (<a href="#ex62">62</a>). With <tt>Xs</tt> and <tt>Ys</tt> empty, <tt>Assn</tt> and <tt>Assn0</tt> are the same assignment. Otherwise there is recursion to work through the list content of <tt>Xs</tt> and <tt>Ys</tt>. Each cycle of recursion succeeds when, relative to integer <tt>N</tt> and list <tt>Es</tt> of <tt>&lt;sct_expr&gt;</tt> terms, assignment <tt>Assn</tt> differs from <tt>Assn0</tt> in regards to the content assigned to the head <tt>X</tt> of <tt>Xs</tt> and the head <tt>Y</tt> of <tt>Ys</tt>. More specifically, <tt>N</tt> is used to split <tt>Es</tt> into a list of future expressions (<tt>Future</tt>) and past expressions (<tt>Past</tt>), from which lists of <tt>&lt;discourse_referent&gt;</tt> terms for <tt>X</tt> are extracted (via <tt>discourse_refs&sol;3</tt>) for the future (<tt>Future_DRefs</tt>) and past (<tt>Past_DRefs</tt>) relative to <tt>N</tt>. The <tt>Future_DRefs</tt> are then removed (via <tt>pop&sol;3</tt>) from the assignment to <tt>X</tt>, while the <tt>Past_DRefs</tt> are relocated (via <tt>shift_last&sol;4</tt>) to <tt>Y</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex62">62</a>)</dt><dd></dd>
+</dl>
+<tt>allocate(&nbsp;_,&nbsp;[],&nbsp;[],&nbsp;_,&nbsp;Assn,&nbsp;Assn&nbsp;).</tt><br>
+<tt>allocate(&nbsp;N,&nbsp;[X|FNs],&nbsp;[Y|CNs],&nbsp;Es,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;pf_split(&nbsp;N,&nbsp;Es,&nbsp;Past,&nbsp;Future&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;%&nbsp;the&nbsp;future</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs_from_list(&nbsp;X,&nbsp;Future,&nbsp;FutureDRefs-[]&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;%&nbsp;the&nbsp;past</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs_from_list(&nbsp;X,&nbsp;Past,&nbsp;PastDRefs-[]&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;%&nbsp;remove&nbsp;the&nbsp;future</tt><br>
+<tt>&nbsp;&nbsp;do_pop(&nbsp;FutureDRefs,&nbsp;X,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;%&nbsp;contextualise&nbsp;the&nbsp;past</tt><br>
+<tt>&nbsp;&nbsp;do_shift_last(&nbsp;PastDRefs,&nbsp;X,&nbsp;Y,&nbsp;Assn1,&nbsp;Assn2&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;%&nbsp;move&nbsp;to&nbsp;next&nbsp;allocate&nbsp;changes</tt><br>
+<tt>&nbsp;&nbsp;allocate(&nbsp;N,&nbsp;FNs,&nbsp;CNs,&nbsp;Es,&nbsp;Assn2,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To see consequences of <tt>allocate&sol;6</tt>, consider (<a href="#ex63">63</a>)&ndash;(<a href="#ex65">65</a>).</p>
+
+<dl>
+  <dt>(<a name="ex63">63</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;allocate(&nbsp;1,&nbsp;[foo],&nbsp;[baz],&nbsp;[t(baz),&nbsp;namely(x(bar,2),&nbsp;foo,&nbsp;t(foo)),&nbsp;t(baz)],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[map(baz,&nbsp;[x(bar,1)|L1]-L1),&nbsp;map(foo,&nbsp;[x(bar,2)|L2]-L2)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L1&nbsp;=&nbsp;_h692</tt><br>
+<tt>L2&nbsp;=&nbsp;_h828</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(foo,_h828&nbsp;-&nbsp;_h828),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(baz,[x(bar,1)|_h692]&nbsp;-&nbsp;_h692),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2)|_h828]&nbsp;-&nbsp;_h828)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<dl>
+  <dt>(<a name="ex64">64</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;allocate(&nbsp;2,&nbsp;[foo],&nbsp;[baz],&nbsp;[t(baz),&nbsp;namely(x(bar,2),&nbsp;foo,&nbsp;t(foo)),&nbsp;t(baz)],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[map(baz,&nbsp;[x(bar,1)|L1]-L1),&nbsp;map(foo,&nbsp;[x(bar,2)|L2]-L2)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L1&nbsp;=&nbsp;_h692</tt><br>
+<tt>L2&nbsp;=&nbsp;_h828</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(baz,[x(bar,1)|_h692]&nbsp;-&nbsp;_h692),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2)|_h828]&nbsp;-&nbsp;_h828)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<dl>
+  <dt>(<a name="ex65">65</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;allocate(&nbsp;3,&nbsp;[foo],&nbsp;[baz],&nbsp;[t(baz),&nbsp;namely(x(bar,2),&nbsp;foo,&nbsp;t(foo)),&nbsp;t(baz)],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[map(baz,&nbsp;[x(bar,1)|L1]-L1),&nbsp;map(foo,&nbsp;[x(bar,2)|L2]-L2)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L1&nbsp;=&nbsp;_h692</tt><br>
+<tt>L2&nbsp;=&nbsp;_h828</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(baz,[x(bar,2),x(bar,1)|_h692]&nbsp;-&nbsp;_h692),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,_h828&nbsp;-&nbsp;_h828),map(baz,[x(bar,1)|_h6_h692),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,[x(bar,2)|_h828]&nbsp;-&nbsp;_h828)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">This reveals how what is assigned as difference list content can be discarded altogther, as is the case for <tt>x(bar,2)</tt> when <tt>N</tt> is <tt>1</tt> in (<a href="#ex63">63</a>). And if assigned content remains, then it is either: (i) present to support occurrences of <tt>namely&sol;3</tt>, as is the case with <tt>x(bar,2)</tt> remaining assigned to <tt>foo</tt> when <tt>N</tt> is <tt>2</tt> in (<a href="#ex64">64</a>), or (ii) serving as content that will have been relocated as seen when <tt>N</tt> is <tt>3</tt> in (<a href="#ex65">65</a>) with <tt>x(bar,2)</tt> assigned as part of a difference list for <tt>baz</tt> while the difference list for <tt>foo</tt> is empty.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When <tt>allocate&sol;6</tt> is called it ensures the appropriate assignment of <tt>&lt;discourse_referent&gt;</tt> terms to <tt>&lt;grammar_atom&gt;</tt> terms in an expression. The calculation is global over the full discourse, amounting to a check on the operation of the calculation and on the well-formedness of the discourse data, simultaneously.</p>
+
+<h4><a name="sec6.2.6">6.2.6</a>&nbsp;&nbsp;&nbsp;<tt>dispose&sol;5</tt></h4>
+
+<p align="justify">Defined in (<a href="#ex67">67</a>) with iterations of <tt>shift_last&sol;4</tt>, <tt>dispose(N, Xs, Y, Assn0, Assn)</tt> returns <tt>Assn</tt> as output which is the same as the input assignment <tt>Assn0</tt>, with the exception that the <tt>&lt;discourse_referent&gt;</tt> terms contained in the difference lists assigned by <tt>Assn0</tt> to the <tt>&lt;grammar_atom&gt;</tt> terms of <tt>Xs</tt> will have become <tt>&lt;discourse_referent&gt;</tt> terms of the difference list assigned to the <tt>Y</tt> <tt>&lt;grammar_atom&gt;</tt> when the source difference lists have a length longer than <tt>N</tt>. The contribution of <tt>length_il&sol;2</tt> is discussed in section <a href="#sec1.2.7">1.2.7</a>.</p>
+
+<dl>
+  <dt>(<a name="ex66">66</a>)</dt><dd></dd>
+</dl>
+<tt>n_shift_last(&nbsp;N,&nbsp;_,&nbsp;_,&nbsp;Assn,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;N&nbsp;=&lt;&nbsp;0.</tt><br>
+<tt>n_shift_last(&nbsp;N,&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;N&nbsp;&gt;&nbsp;0,</tt><br>
+<tt>&nbsp;&nbsp;shift_last(&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;C&nbsp;is&nbsp;N&nbsp;-&nbsp;1,</tt><br>
+<tt>&nbsp;&nbsp;n_shift_last(&nbsp;C,&nbsp;X,&nbsp;Y,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<dl>
+  <dt>(<a name="ex67">67</a>)</dt><dd></dd>
+</dl>
+<tt>dispose(&nbsp;_,&nbsp;[],&nbsp;_,&nbsp;Assn,&nbsp;Assn&nbsp;).</tt><br>
+<tt>dispose(&nbsp;N,&nbsp;[X|T],&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;val(&nbsp;Assn0,&nbsp;X,&nbsp;D-_&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;length_il(&nbsp;D,&nbsp;M&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;C&nbsp;is&nbsp;M&nbsp;-&nbsp;N,</tt><br>
+<tt>&nbsp;&nbsp;n_shift_last(&nbsp;C,&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;dispose(&nbsp;N,&nbsp;T,&nbsp;Y,&nbsp;Assn1,&nbsp;Assn&nbsp;).</tt><br>
+
+<p align="justify">For example:</p>
+
+<dl>
+  <dt>(<a name="ex68">68</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;dispose(0,&nbsp;[foo],&nbsp;baz,&nbsp;[map(foo,&nbsp;[x(bar,2),x(bar,1)|L]-L)],&nbsp;P).</tt><br>
+<tt></tt><br>
+<tt>L&nbsp;=&nbsp;_h524</tt><br>
+<tt>P&nbsp;=&nbsp;[&nbsp;map(baz,[x(bar,2),x(bar,1)|_h701]&nbsp;-&nbsp;_h701),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(foo,_h524&nbsp;-&nbsp;_h524),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(baz,[x(bar,1)|_h7[x(bar,2),x(bar,1)|_h524]&nbsp;-&nbsp;_h524)];</tt><br>
+<tt></tt><br>
+<tt>no</tt><br>
+
+<p align="justify">When <tt>N</tt> is <tt>0</tt>, all <tt>&lt;discourse_referent&gt;</tt> terms of the difference list assigned to <tt>foo</tt> are relocated to <tt>baz</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like <tt>allocate&sol;6</tt>, <tt>dispose&sol;5</tt> will be utilised to move <tt>&lt;discourse_referent&gt;</tt> terms from one <tt>&lt;grammar_atom&gt;</tt> to a different <tt>&lt;grammar_atom&gt;</tt> serving as a discourse context. A key difference is that while with <tt>allocate&sol;6</tt> such moves will occur as we proceed through discourse (that is, through &lsquo;coordinate structure&rsquo; with linked units of equal status), with <tt>dispose&sol;5</tt> the moves are to be triggered as we enter &lsquo;subordinate structure&rsquo; (notably, clauses which are grammatically subordinate because they are part of another clause).</p>
+
+<h3><a name="sec6.3">6.3</a>&nbsp;&nbsp;&nbsp;The discourse representation language</h3>
+
+<p align="justify">This section presents the discourse representation language that is the target language of the semantic calculation. This includes <tt>&lt;discourse_referent&gt;</tt> terms as terminal elements. For complex expressions, there are structures to distinguish relations (<tt>rel&sol;2</tt>) and markers of argument roles (<tt>at&sol;2</tt>). Finally, there are structures to manipulate where discourse referents and their conditions are interpreted (<tt>head&sol;4</tt>, <tt>body&sol;2</tt>, <tt>headClimb&sol;3</tt>, and <tt>bodyClimb&sol;2</tt>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A discourse representation language expression is a <tt>&lt;drs_expr&gt;</tt>, where:</p>
+
+<dl>
+  <dt>(<a name="ex69">69</a>)</dt><dd></dd>
+</dl>
+<tt>&lt;drs_expr&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;discourse_referent&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;rel(&lt;relation_atom&gt;,&nbsp;&lt;drs_expr_list&gt;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;at(&lt;drs_expr&gt;,&nbsp;&lt;role_atom&gt;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;head(&lt;quantifier_operator&gt;,&nbsp;&lt;fresh_list&gt;,&nbsp;&lt;bound_list&gt;,&nbsp;&lt;drs_expr&gt;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;body(&lt;fresh_list&gt;,&nbsp;&lt;drs_expr&gt;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;headClimb(&lt;discourse_referent&gt;,&nbsp;&lt;fresh_atom&gt;,&nbsp;&lt;drs_expr&gt;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;bodyClimb(&lt;fresh_atom&gt;,&nbsp;&lt;drs_expr&gt;)</tt><br>
+<tt></tt><br>
+<tt>&lt;drs_expr_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&lt;drs_expr&gt;,&nbsp;&lt;drs_expr_list&gt;)</tt><br>
+<tt></tt><br>
+<tt>&lt;bound_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(x(&lt;sort_atom&gt;,&nbsp;&lt;integer&gt;),&nbsp;&lt;bound_list&gt;)</tt><br>
+<tt></tt><br>
+<tt>&lt;fresh_list&gt;&nbsp;::=</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;.(&lt;fresh_atom&gt;,&nbsp;&lt;fresh_list&gt;)</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>&lt;discourse_referent&gt;</tt> terms are introduced in (<a href="#ex20">20</a>) of section <a href="#sec2">2</a>. <tt>&lt;bound_list&gt;</tt> terms are lists of discourse referents that are constructed with <tt>x&sol;2</tt> (that is, those discourse referents that are variables).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Relations (<tt>rel&sol;2</tt>) comprise predications, adverbial modifications, and higher order connectives, such as negation and conjunction. The atom parameter of <tt>rel&sol;2</tt> identifies the predicate, modifier, connective, etc.&nbsp;in question, while the second parameter is either a list of the arguments built on <tt>at&sol;2</tt> structures (of a predicate or modifier), or a list of <tt>&lt;drs_expr&gt;</tt> terms (of a connective).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Argument role markers (<tt>at&sol;2</tt>) have a <tt>&lt;drs_expr&gt;</tt> parameter (typically built on <tt>&lt;discourse_referent&gt;</tt> terms) and an atom parameter which specifies the argument role relative to the containing relation.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remaining functors carry information about the placement of expression material:</p>
+<ul>
+<li><tt>head&sol;4</tt> has an atom parameter to specify quantification (e.g.&nbsp;<tt>'exists'</tt>), an atom list parameter to specify indexing with the potential for collecting <tt>&lt;discourse_referent&gt;</tt> terms appearing inside coindexed <tt>headClimb&sol;3</tt>, a list parameter for <tt>&lt;discourse_referent&gt;</tt> terms that the quantification serves to bind, and a parameter for a <tt>&lt;drs_expr&gt;</tt>, which is typically filled by a <tt>body&sol;2</tt> term. In other words, <tt>head&sol;4</tt> brings about a quantificational closure that is indexed to collect <tt>x&sol;2</tt> <tt>&lt;discourse_referent&gt;</tt> terms.</li>
+<li>The functor <tt>body&sol;2</tt> has an atom list parameter to specify indexing with the potential for collecting conditions appearing inside coindexed <tt>bodyClimb&sol;2</tt>. The second parameter of <tt>body&sol;2</tt> takes a <tt>&lt;drs_expr&gt;</tt>, which is typically filled by a <tt>rel&sol;2</tt> term that is a collection point for coindexed <tt>headClimb&sol;3</tt> content.</li>
+<li>Indexed <tt>headClimb&sol;3</tt> marks <tt>x&sol;2</tt> <tt>&lt;discourse_referent&gt;</tt> terms that await integration into the containing expression at higher coindexed instances of <tt>head&sol;4</tt>.</li>
+<li>Indexed <tt>bodyClimb&sol;2</tt> marks conditions, that await integration into the containing expression at higher coindexed instances of <tt>body&sol;2</tt>.</li>
+</ul>
+
+<p align="justify">In this regard, <tt>head&sol;4</tt> acts like the top box of a Discourse Representation Structure (DRS; Kamp and Reyle 1993), while <tt>body&sol;2</tt> acts as the bottom box.</p>
+
+<h3><a name="sec6.4">6.4</a>&nbsp;&nbsp;&nbsp;From <tt>&lt;sct_expr&gt;</tt> terms to <tt>&lt;drs_expr&gt;</tt> terms</h3>
+
+<p align="justify">This section brings together everything seen thus far with <tt>calculate&sol;3</tt> which transforms <tt>&lt;sct_expr&gt;</tt> terms into <tt>&lt;drs_expr&gt;</tt> terms. Defined in (<a href="#ex72">72</a>), <tt>calculate(Assn, Sct_expr, Drs_expr)</tt> has <tt>Assn</tt> for an assignment function, <tt>Sct_expr</tt> to take the input <tt>&lt;sct_expr&gt;</tt>, while <tt>Drs_expr</tt> is the output discourse representation language expression. <tt>Assn</tt> assigns difference lists of <tt>&lt;discourse_referent&gt;</tt> terms to the <tt>&lt;grammar_atom&gt;</tt> terms contained in <tt>Sct_expr</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>calculate&sol;3</tt> contains calls to the assignment actions of section <a href="#sec6.2">6.2</a>: <tt>push&sol;4</tt> (<a href="#ex50">50</a>), <tt>shift&sol;4</tt> (<a href="#ex54">54</a>), <tt>allocate&sol;6</tt> (<a href="#ex62">62</a>), and <tt>dispose&sol;5</tt> (<a href="#ex67">67</a>). When encountering occurrences of <tt>head&sol;3</tt>, <tt>calculate&sol;3</tt> calls the operation of <tt>discourse_refs&sol;3</tt> (<a href="#ex44">44</a>). This gathers the <tt>&lt;discourse_referent&gt;</tt> terms made available by <tt>namely&sol;3</tt> for inclusion into the assignment. Thereafter the assigned content is distributed to parts of the input <tt>&lt;sct_expr&gt;</tt> with recursive calls of <tt>calculate&sol;3</tt>. Such recursive calls of <tt>calculate&sol;3</tt> may be invoked by a match of <tt>rel&sol;4</tt> that through applications of <tt>allocate&sol;6</tt> can reposition or remove assigned content based on collections from <tt>namely&sol;3</tt>. Note how <tt>discourse_refs&sol;3</tt> performs two functions: Firstly, with <tt>head&sol;3</tt>, it collects the <tt>&lt;discourse_referent&gt;</tt> terms of <tt>namely&sol;3</tt> instances for inclusion into the assignment, and secondly, with <tt>rel&sol;4</tt>, it is used in calls of <tt>allocate&sol;6</tt> to ensure that already collected <tt>&lt;discourse_referent&gt;</tt> terms that are parts of assigned difference lists are correctly accessible from the inherited assignment state.</p>
+
+<dl>
+  <dt>(<a name="ex70">70</a>)</dt><dd></dd>
+</dl>
+<tt>change_assignment(&nbsp;[],&nbsp;_,&nbsp;Assn,&nbsp;Assn,&nbsp;Bds,&nbsp;Bds&nbsp;).</tt><br>
+<tt>change_assignment(&nbsp;[X|T],&nbsp;Sct_expr,&nbsp;Assn0,&nbsp;Assn,&nbsp;Bds0,&nbsp;Bds&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;discourse_refs(&nbsp;X,&nbsp;Sct_expr,&nbsp;D-D0&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;push(&nbsp;D-D0,&nbsp;X,&nbsp;Assn0,&nbsp;Assn1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;binding_filter(&nbsp;D,&nbsp;Bds0,&nbsp;Bds1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;change_assignment(&nbsp;T,&nbsp;Sct_expr,&nbsp;Assn1,&nbsp;Assn,&nbsp;Bds1,&nbsp;Bds&nbsp;).</tt><br>
+
+<dl>
+  <dt>(<a name="ex71">71</a>)</dt><dd></dd>
+</dl>
+<tt>calculate_list(&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;_,&nbsp;[],&nbsp;[]&nbsp;).</tt><br>
+<tt>calculate_list(&nbsp;Assn0,&nbsp;N,&nbsp;Xs,&nbsp;Ys,&nbsp;Sct_expressions,&nbsp;[Sct_expr|In],&nbsp;[Drs_expr|Out]&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;I&nbsp;is&nbsp;N&nbsp;+&nbsp;1,</tt><br>
+<tt>&nbsp;&nbsp;allocate(&nbsp;I,&nbsp;Xs,&nbsp;Ys,&nbsp;Sct_expressions,&nbsp;Assn0,&nbsp;Assn&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate_list(&nbsp;Assn0,&nbsp;I,&nbsp;Xs,&nbsp;Ys,&nbsp;Sct_expressions,&nbsp;In,&nbsp;Out&nbsp;).</tt><br>
+
+<dl>
+  <dt>(<a name="ex72">72</a>)</dt><dd></dd>
+</dl>
+<tt>calculate(&nbsp;Assn0,&nbsp;head(&nbsp;Oper,&nbsp;Vs,&nbsp;Sct_expr&nbsp;),&nbsp;head(&nbsp;Oper,&nbsp;Vs,&nbsp;Bds,&nbsp;Drs_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;change_assignment(&nbsp;Vs,&nbsp;Sct_expr,&nbsp;Assn0,&nbsp;Assn,&nbsp;[],&nbsp;Bds&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;body(&nbsp;Vs,&nbsp;Sct_expr&nbsp;),&nbsp;body(&nbsp;Vs,&nbsp;Drs_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn0,&nbsp;headClimb(&nbsp;DRef,&nbsp;X,&nbsp;Sct_expr&nbsp;),&nbsp;headClimb(&nbsp;DRef,&nbsp;X,&nbsp;Drs_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;push(&nbsp;[DRef|R]-R,&nbsp;X,&nbsp;Assn0,&nbsp;Assn&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;bodyClimb(&nbsp;X,&nbsp;Sct_expr&nbsp;),&nbsp;bodyClimb(&nbsp;X,&nbsp;Drs_expr&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;namely(&nbsp;_,&nbsp;_,&nbsp;Sct_expr&nbsp;),&nbsp;Drs_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;t(&nbsp;X&nbsp;),&nbsp;DRef&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;memberchk(&nbsp;map(&nbsp;X,&nbsp;[DRef|_]-_&nbsp;),&nbsp;Assn&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;at(&nbsp;Sct_expr,&nbsp;S&nbsp;),&nbsp;at(&nbsp;Drs_expr,&nbsp;S&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;rel(&nbsp;Xs,&nbsp;Ys,&nbsp;S,&nbsp;Sct_expressions&nbsp;),&nbsp;rel(&nbsp;S,&nbsp;Drs_expressions&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate_list(&nbsp;Assn,&nbsp;0,&nbsp;Xs,&nbsp;Ys,&nbsp;Sct_expressions,&nbsp;Sct_expressions,&nbsp;Drs_expressions&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;ifThere(&nbsp;X,&nbsp;Sct_expr1,&nbsp;Sct_expr2&nbsp;),&nbsp;Drs_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;contentful_val(&nbsp;Assn,&nbsp;X,&nbsp;_&nbsp;)&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr1,&nbsp;Drs_expr&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr2,&nbsp;Drs_expr&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn0,&nbsp;mov(&nbsp;X,&nbsp;Y,&nbsp;Sct_expr&nbsp;),&nbsp;Drs_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;shift(&nbsp;X,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn0,&nbsp;clean(&nbsp;N,&nbsp;Xs,&nbsp;Y,&nbsp;Sct_expr&nbsp;),&nbsp;Drs_expr&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;dispose(&nbsp;N,&nbsp;Xs,&nbsp;Y,&nbsp;Assn0,&nbsp;Assn&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;Drs_expr&nbsp;).</tt><br>
+<tt>calculate(&nbsp;Assn,&nbsp;pick(&nbsp;S,&nbsp;Sct_expr,&nbsp;Sources,&nbsp;Sorts&nbsp;),&nbsp;rel(&nbsp;S,&nbsp;[DRef|Resolved]&nbsp;)&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;calculate(&nbsp;Assn,&nbsp;Sct_expr,&nbsp;DRef&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;collect_context(&nbsp;Sources,&nbsp;Assn,&nbsp;[],&nbsp;Context&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;antecedents(&nbsp;Sorts,&nbsp;Context,&nbsp;Resolved-[]&nbsp;).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following details the consequences of all the functors with regard to direct changes made to the assignment, and content added to the returned discourse representation language expression:</p>
+<ul>
+<li><tt>head(Oper, Vs, Sct_expr)</tt> adds (with <tt>push&sol;4</tt> of (<a href="#ex50">50</a>)) the difference list <tt>D-D0</tt> created by <tt>discourse_refs(X, Sct_expr, D-D0)</tt> to the difference list assigned to <tt>X</tt> for each <tt>&lt;fresh_atom&gt;</tt> <tt>X</tt> in the list <tt>Vs</tt> and returns a <tt>head&sol;4</tt> structure for <tt>Oper</tt> to bind as variables the newly introduced <tt>x&sol;2</tt> <tt>&lt;discourse_referent&gt;</tt> terms from <tt>D-D0</tt> and scope over the calculation of <tt>Sct_expr</tt> against the adjusted assignment. The returned <tt>head&sol;4</tt> is also given the <tt>Vs</tt> list to create instructions for subsequent post-processing to capture the <tt>&lt;discourse_referent&gt;</tt> terms carried by instances of <tt>headClimb&sol;3</tt> that have an index that is in the <tt>Vs</tt> list. Note that <tt>binding_filter&sol;3</tt> of (<a href="#ex73">73</a>) is used to retain only those discourse referents from the partial list <tt>D</tt> (of <tt>D-D0</tt>) that correspond to variables (that is, match <tt>x&sol;2</tt>) as the discourse referents that are bound by <tt>Oper</tt> of the returned <tt>head&sol;4</tt>.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex73">73</a>)</dt><dd></dd>
+</dl>
+<tt>binding_filter(&nbsp;L,&nbsp;Z0,&nbsp;Z&nbsp;)&nbsp;:-&nbsp;var(&nbsp;L&nbsp;),&nbsp;!,&nbsp;Z&nbsp;=&nbsp;Z0.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;reached&nbsp;end,&nbsp;stop</tt><br>
+<tt>binding_filter(&nbsp;[X|L],&nbsp;Z0,&nbsp;Z&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;X&nbsp;=&nbsp;x(&nbsp;_,&nbsp;_&nbsp;)&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Z1&nbsp;=&nbsp;[X|Z0]</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Z1&nbsp;=&nbsp;Z0</tt><br>
+<tt>&nbsp;&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;binding_filter(&nbsp;L,&nbsp;Z1,&nbsp;Z&nbsp;).</tt><br>
+<ul>
+<li><tt>body(Vs, Sct_expr)</tt> returns a <tt>body&sol;2</tt> structure to realise an instruction for the placement of expression content within a <tt>bodyClimb&sol;2</tt> that has an index that is in the <tt>Vs</tt> list.</li>
+<li><tt>headClimb(DRef, X, Sct_expr)</tt> provides a means to add <tt>DRef</tt> to the difference list assigned to <tt>X</tt>. A binding so introduced can only have consequences for the calculation of <tt>Sct_expr</tt>, and yet might, with further post-processing of the returned discourse representation language expression, receive a wider scope positioning, because the returned expression has <tt>headClimb&sol;3</tt> to realise an instruction for relocating the <tt>DRef</tt> content to a higher <tt>head&sol;4</tt> that shares <tt>X</tt> as an index.</li>
+<li><tt>bodyClimb(X, Sct_expr)</tt> returns a <tt>bodyClimb&sol;2</tt> structure to offer an instruction for relocating its expression content to a higher instance of <tt>body&sol;2</tt> that shares the <tt>X</tt> index.</li>
+<li><tt>namely&sol;3</tt> has no impact once reached during a calculation, other than returning the calculation of the embedded expression. Rather its presence has consequences when <tt>discourse_refs&sol;3</tt> is invoked, either directly by <tt>head&sol;3</tt>, or indirectly by <tt>rel&sol;4</tt> via the <tt>allocate&sol;6</tt> operation.</li>
+<li><tt>t(X)</tt> returns the head <tt>&lt;discourse_referent&gt;</tt> of the difference list assigned to <tt>X</tt>.</li>
+<li><tt>at(Sct_expr, S)</tt> returns a role value <tt>at&sol;2</tt> structure taking the calculation of <tt>Sct_expr</tt> as expression content, and the argument role <tt>S</tt>. <tt>at&sol;2</tt> structures can occur at any level of structure. This flexibility assists capturing all types of arguments, including clausal embeddings.</li>
+<li><tt>rel(Xs, Ys, S, Sct_expressions)</tt> returns a relation <tt>S</tt> that has the calculation of the <tt>N</tt>-th expression of <tt>Sct_expressions</tt> as the <tt>N</tt>-th argument. With calculation of the entire relation against assignment <tt>Assn0</tt>, the <tt>N</tt>-th expression of <tt>Sct_expressions</tt> is evaluated against the possibly different <tt>Assn</tt> of <tt>allocate(N, Xs, Ys, Sct_expressions, Assn0, Assn)</tt>. For example, a member of <tt>Sct_expressions</tt> for <tt>rel(['.e'], ['*'], _, _)</tt> that contains support for an <tt>'.e'</tt> binding with <tt>namely(_, '.e', _)</tt>, in addition to ensuring that a non-empty difference list is assigned to <tt>'.e'</tt> when it is encountered by the calculation, brings about the effect of transferring the supported binding to a <tt>'*'</tt> binding for subsequent members of <tt>Sct_expressions</tt>. But the reverse is impossible: an <tt>'.e'</tt> binding supported by a subsequent member of <tt>Sct_expressions</tt> is made totally absent from the bindings available for prior members of <tt>Sct_expressions</tt>.</li>
+<li><tt>ifThere(X, Sct_expr1, Sct_expr2)</tt> tests whether <tt>X</tt> is assigned a non-empty (contentful) difference list such that the calculation continues with <tt>Sct_expr1</tt> when the test is true, while otherwise continuing with <tt>Sct_expr2</tt>.</li>
+<li><tt>mov(X, Y, Sct_expr)</tt> returns the calculation of <tt>Sct_expr</tt> against an assignment state where what had been the first element of the difference list assigned to <tt>X</tt> is repositioned to be the first element of the difference list assigned to <tt>Y</tt>.</li>
+<li><tt>clean(N, Xs, Y, Sct_expr)</tt> modifies the assignment with <tt>dispose&sol;5</tt>, and returns the calculation of <tt>Sct_expr</tt> against the altered assignment.</li>
+<li><tt>pick(S, Sct_expr, Sources, Sorts)</tt> provides a way for an expression <tt>Sct_expr</tt> to be related by <tt>S</tt> to <tt>&lt;discourse_referent&gt;</tt> terms of the difference lists assigned to the <tt>&lt;grammar_atom&gt;</tt> terms of <tt>Sources</tt> that are filtered to match with <tt>Sorts</tt>. Overall this leads to the calculation of a <tt>rel(S, DRefs)</tt> structure that indicates the need for an <tt>S</tt> choice to equate the first <tt>&lt;discourse_referent&gt;</tt> of the list <tt>DRefs</tt> with a following <tt>&lt;discourse_referent&gt;</tt>, where all the following <tt>&lt;discourse_referent&gt;</tt> terms are the possible accessible antecedents.</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pronouns can offer information to limit possible antecedents. Possible antecedents are first obtained from the assignment state with <tt>collect_context&sol;4</tt>. Defined in (<a href="#ex75">75</a>), <tt>antecedents(Sorts, Context, Rs)</tt> subsequently picks out with the difference list <tt>Rs</tt> the discourse referents from list <tt>Context</tt> that have sort information present in the list <tt>Sorts</tt>.</p>
+
+<dl>
+  <dt>(<a name="ex74">74</a>)</dt><dd></dd>
+</dl>
+<tt>collect_context(&nbsp;[],&nbsp;_,&nbsp;Context,&nbsp;Context&nbsp;).</tt><br>
+<tt>collect_context(&nbsp;[X|Sources],&nbsp;Assn,&nbsp;Context0,&nbsp;Context&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;val(&nbsp;Assn,&nbsp;X,&nbsp;D-_&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;append_il(&nbsp;D,&nbsp;Context0,&nbsp;Context1&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;collect_context(&nbsp;Sources,&nbsp;Assn,&nbsp;Context1,&nbsp;Context&nbsp;).</tt><br>
+
+<dl>
+  <dt>(<a name="ex75">75</a>)</dt><dd></dd>
+</dl>
+<tt>antecedents(&nbsp;_,&nbsp;[],&nbsp;R-R&nbsp;).</tt><br>
+<tt>antecedents(&nbsp;Sorts,&nbsp;[x(&nbsp;S,&nbsp;I&nbsp;)|Context],&nbsp;[x(&nbsp;S,&nbsp;I&nbsp;)|R]-R0&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;memberchk(&nbsp;S,&nbsp;Sorts&nbsp;),&nbsp;!,</tt><br>
+<tt>&nbsp;&nbsp;antecedents(&nbsp;Sorts,&nbsp;Context,&nbsp;R-R0&nbsp;).</tt><br>
+<tt>antecedents(&nbsp;Sorts,&nbsp;[c(&nbsp;S,&nbsp;C&nbsp;)|Context],&nbsp;[c(&nbsp;S,&nbsp;C&nbsp;)|R]-R0&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;memberchk(&nbsp;S,&nbsp;Sorts&nbsp;),&nbsp;!,</tt><br>
+<tt>&nbsp;&nbsp;antecedents(&nbsp;Sorts,&nbsp;Context,&nbsp;R-R0&nbsp;).</tt><br>
+<tt>antecedents(&nbsp;Sorts,&nbsp;[_|Context],&nbsp;R-R0&nbsp;)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;antecedents(&nbsp;Sorts,&nbsp;Context,&nbsp;R-R0&nbsp;).</tt><br>
+
+<h3><a name="sec6.5">6.5</a>&nbsp;&nbsp;&nbsp;An example</h3>
+
+<p align="justify">For a demonstration, consider (<a href="#ex76">76</a>).</p>
+
+<dl>
+  <dt>(<a name="ex76">76</a>)</dt><dd>A cat entered. It purred.</dd>
+</dl>
+
+<p align="justify">The Prolog term (<a href="#ex77">77</a>) is a rendering of (<a href="#ex76">76</a>) as a <tt>&lt;normalised_expr&gt;</tt>. This includes an instance of discourse closure as the top level <tt>fresh&sol;2</tt> structure to state sources for fresh bindings that is placed above an instance of <tt>closure&sol;2</tt> with <tt>'exists'</tt> quantification. The presence of <tt>'.e'</tt> with <tt>fresh&sol;2</tt> is needed for two reasons. First, there is the contained <tt>some&sol;5</tt> from <i>A cat</i> that has <tt>'.e'</tt> as the value for its <tt>&lt;fresh_atom&gt;</tt> parameter to introduce the discourse referent <tt>x('ANIMAL',2)</tt>. Second, there is the contained <tt>someClassic&sol;5</tt> with <tt>pick&sol;5</tt> from <i>It</i>, where <tt>'.e'</tt> is the <tt>&lt;fresh_atom&gt;</tt> parameter value to introduce the referent <tt>x('ANIMAL',4)</tt> that lacks discourse scope but can be resolved to an accessible discourse referent of the discourse context that shares the <tt>'ANIMAL'</tt> sort information. The presence of <tt>'.event'</tt> with <tt>fresh&sol;2</tt> is motivated by the contained instances of <tt>namely&sol;3</tt> contributed by the verbs <i>entered</i> and <i>purred</i> that have <tt>'.event'</tt> as the value for their <tt>&lt;fresh_atom&gt;</tt> parameter to introduce the discourse referents <tt>x('EVENT',1)</tt> and <tt>x('EVENT',3)</tt>, respectively. The representation of (<a href="#ex77">77</a>) keeps the contributions of the two separate sentences of (<a href="#ex76">76</a>) distinct as conjuncts of a <tt>connect&sol;2</tt> structure with <tt>'&'</tt>, the default connective for discourse. Each sentence contributes a single clause that introduces its own syntactic locality with <tt>local&sol;2</tt>. Both of these clause instances of <tt>local&sol;2</tt> allow support for only an <tt>'arg0'</tt> argument. The contribution of the first sentence also creates a distinct locality with another embedded instance of <tt>local&sol;2</tt> from <i>A cat</i> to capture the content of the noun phrase restriction that allows support for only a nominal head <tt>'h'</tt> internally to the restriction.</p>
+
+<dl>
+  <dt>(<a name="ex77">77</a>)</dt><dd></dd>
+</dl>
+<tt>fresh(&nbsp;.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,closure(&nbsp;'exists'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,connect(&nbsp;'&'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;local(&nbsp;.(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,some(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,local(&nbsp;.(&nbsp;'h'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,pred(&nbsp;'cat'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'h'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,namely(&nbsp;x('EVENT',1)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,pred(&nbsp;'entered'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;local(&nbsp;.(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,someClassic(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,x('ANIMAL',4)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,pick(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'ANIMAL'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'equals__It'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,namely(&nbsp;x('EVENT',3)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,pred(&nbsp;'purred'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))</tt><br>
+
+<p align="justify">With transformation to an <tt>&lt;sct_expr&gt;</tt>, (<a href="#ex77">77</a>) becomes (<a href="#ex78">78</a>). This maintains the overall structure seen with (<a href="#ex77">77</a>), only with the higher level operations of the <tt>&lt;normalised_expr&gt;</tt> language replaced by the more articulated operations of the <tt>&lt;sct_expr&gt;</tt> language.</p>
+
+<dl>
+  <dt>(<a name="ex78">78</a>)</dt><dd></dd>
+</dl>
+<tt>head(&nbsp;'exists'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,body(&nbsp;.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'&'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;namely(&nbsp;x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,mov(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,''</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;bodyClimb(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,mov(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'h'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,clean(&nbsp;0</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,clean(&nbsp;1</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'h'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'cat'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;t(&nbsp;'h')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'h')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;namely(&nbsp;x('EVENT',1)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'entered'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;t(&nbsp;'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;t(&nbsp;'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;headClimb(&nbsp;x('ANIMAL',4)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,mov(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'&'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;bodyClimb(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,pick(&nbsp;'equals__It'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,t(&nbsp;'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'*'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'ANIMAL'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;namely(&nbsp;x('EVENT',3)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'purred'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;t(&nbsp;'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;t(&nbsp;'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))</tt><br>
+
+<p align="justify">With calculation to a <tt>&lt;drs_expr&gt;</tt>, (<a href="#ex78">78</a>) becomes (<a href="#ex79">79</a>). This reveals the reallocation of content to form the binding operations of a resolved discourse representation.</p>
+
+<dl>
+  <dt>(<a name="ex79">79</a>)</dt><dd></dd>
+</dl>
+<tt>head(&nbsp;'exists'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;x('EVENT',1)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;x('EVENT',3)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,body(&nbsp;.(&nbsp;'.event'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;'&'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;rel(&nbsp;''</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;bodyClimb(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;'cat'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'h')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;rel(&nbsp;'entered'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;x('EVENT',1)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;headClimb(&nbsp;x('ANIMAL',4)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;'&'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;bodyClimb(&nbsp;'.e'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,rel(&nbsp;'equals__It'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;x('ANIMAL',4)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;x('ANIMAL',2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;rel(&nbsp;'purred'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;x('EVENT',3)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'.event')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,.(&nbsp;at(&nbsp;x('ANIMAL',4)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'arg0')</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,[])))))</tt><br>
+
+<p align="justify">As a final step, not discusssed elsewhere in this paper, we can pretty print the content of (<a href="#ex79">79</a>) as the expression (<a href="#ex80">80</a>) following TPTP syntax (Sutcliffe 2009).</p>
+
+<dl>
+  <dt>(<a name="ex80">80</a>)</dt><dd></dd>
+</dl>
+<tt>fof(id_33_samples_BUFFALO_id_34_samples_BUFFALO,axiom,</tt><br>
+<tt>&nbsp;&nbsp;?&nbsp;[ANIMALX4,ANIMALX2,EVENTX1,EVENTX3]:</tt><br>
+<tt>&nbsp;&nbsp;(</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;ANIMALX4&nbsp;=&nbsp;ANIMALX2&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&amp;&nbsp;isA(ANIMALX2,cat)</tt><br>
+<tt>&nbsp;&nbsp;&</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;isA(EVENTX1,entered)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&nbsp;arg0(EVENTX1)&nbsp;=&nbsp;ANIMALX2&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&amp;&nbsp;(&nbsp;isA(EVENTX3,purred)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&nbsp;arg0(EVENTX3)&nbsp;=&nbsp;ANIMALX4&nbsp;)&nbsp;)&nbsp;)</tt><br>
+<tt>).</tt><br>
+
+<br>
+<br>
+<br>
+<h2><a name="references">References</a></h2>
+
+<p><a name="Bos-2005">Bos, Johan. 2005.</a> Towards wide-coverage semantic interpretation. In <i>Proceedings of Sixth International Workshop on Computational   Semantics (IWCS-6)</i>, pages 42&ndash;53.</p>
+<p><a name="Butler-2007">Butler, Alastair. 2007.</a> Scope control and grammatical dependencies. <i>Journal of Logic, Language and Information</i> 16:241&ndash;264.</p>
+<p><a name="Butler-2010tsogd">Butler, Alastair. 2010.</a> <i>The Semantics of Grammatical Dependencies</i>, vol. 23 of Current Research in the Semantics/Pragmatics Interface. Bingley: Emerald.</p>
+<p><a name="Butler-2015">Butler, Alastair. 2015.</a> <i>Linguistic Expressions and Semantic Processing: A Practical   Approach</i>. Heidelberg: Springer-Verlag.</p>
+<p><a name="Cresswell-2002">Cresswell, M. J. 2002.</a> Static semantics for dynamic discourse. <i>Linguistics and Philosophy</i> 25:545&ndash;571.</p>
+<p><a name="Dekker-2002">Dekker, Paul. 2002.</a> Meaning and use of indefinite expressions. <i>Journal of Logic, Language and Information</i> 11:141&ndash;194.</p>
+<p><a name="Dekker-2012">Dekker, Paul. 2012.</a> <i>Dynamic Semantics</i>, vol. 91 of <i>Studies in Linguistics and   Philosophy</i>. Dordrecht: Springer Verlag.</p>
+<p><a name="van-Eijck-2001">Eijck, Jan van. 2001.</a> Incremental dynamics. <i>Journal of Logic, Language and Information</i> 10:319&ndash;351.</p>
+<p><a name="Groenendijk-and-Stokhof-1991">Groenendijk, Jeroen and Martin Stokhof. 1991.</a> Dynamic Predicate Logic. <i>Linguistics and Philosophy</i> 14(1):39&ndash;100.</p>
+<p><a name="Heim-1982">Heim, Irene. 1982.</a> <i>The Semantics of Definite and Indefinite Noun Phrases</i>. Ph.D. thesis, University of Massachusetts, Amherst.</p>
+<p><a name="Kamp-and-Reyle-1993">Kamp, Hans and Uwe Reyle. 1993.</a> <i>From Discourse to Logic: Introduction to Model-theoretic   Semantics of Natural Language, Formal Logic and Discourse Representation   Theory</i>. Dordrecht: Kluwer.</p>
+<p><a name="Muskens-1996">Muskens, Reinhard. 1996.</a> Combining montague semantics and discourse representation. <i>Linguistics and Philosophy</i> 19:143&ndash;186.</p>
+<p><a name="Sutcliffe-2009">Sutcliffe, Geoff. 2009.</a> The TPTP Problem Library and Associated Infrastructure: The FOF and   CNF Parts, v3.5.0. <i>Journal of Automated Reasoning</i> 43(4):337&ndash;362.</p>
+<p><a name="Vermeulen-1993">Vermeulen, C. F. M. 1993.</a> Sequence semantics for dynamic predicate logic. <i>Journal of Logic, Language and Information</i> 2:217&ndash;254.</p>
+<p><a name="Yana-comma-Mineshima-and-Bekki-2019">Yana, Yukiko, Koji Mineshima, and Daisuke Bekki. 2019.</a> Variable handling and compositionality: Comparing DRT and DTS. <i>Journal of Logic, Language and Information</i> 28:261&ndash;285.</p>
+<p><a name="Zeevat-1989">Zeevat, Henk. 1989.</a> A compositional approach to discourse representation theory. <i>Linguistics and Philosophy</i> 12:95&ndash;131.</p>
+
+<br/>
+<br/>
+
+</body>
+</html>
