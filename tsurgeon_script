@@ -66,8 +66,8 @@ done
 # script starts here #
 ######################
 
-INPUT=${TMP:-"/tmp"}/output_in$$
-MODIFIED_SCRIPT=${TMP:-"/tmp"}/output_ms$$
+INPUT="${TMP:-/tmp}/output_in$$"
+MODIFIED_SCRIPT="${TMP:-/tmp}/output_ms$$"
 
 # collect and comment script content
 cat ${SCRIPT} | m4 | awk '
