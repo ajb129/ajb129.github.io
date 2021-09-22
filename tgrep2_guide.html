@@ -68,7 +68,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;[PCV]P&sol;</tt><br>
 
-<p align="justify">The matching of (<a href="#ex1">1</a>) involves a square bracket (<tt>[</tt>, <tt>]</tt>) expression which matches any one of the single characters that are contained within the square brackets. A square bracket expression can also be used to specify a range of characters, thus <tt>[0-9]</tt> matches any single digit character. If the first character of a square bracket expression is the caret symbol (<tt>^</tt>) then the whole expression is used to match a single character that is not contained within the square brackets, so <tt>[^0-9]</tt> matches any single non digit character.</p>
+<p align="justify">The matching of (<a href="#ex1">1</a>) involves a bracket expression which matches any one of the single characters that are contained within square brackets (<tt>[</tt>, <tt>]</tt>). A bracket expression can also be used to specify a range of characters, thus <tt>[0-9]</tt> matches any single digit character. If the first character of a bracket expression is the caret symbol (<tt>^</tt>) then the whole expression is used to match a single character that is not contained within the square brackets, so <tt>[^0-9]</tt> matches any single non digit character.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The caret symbol (<tt>^</tt>) is also used to anchor the regular expression to the beginning of a matched node. So, (<a href="#ex2">2</a>) will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>.</p>
 
@@ -1008,7 +1008,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">Because a square bracketed expression itself acts as a complex relationship connecting to a node, an open square bracket must immediately precede a relationship or another open square bracket that itself starts a complex relationship.</p>
+<p align="justify">Because an expression with square brackets itself acts as a complex relationship connecting to a node, an open square bracket must immediately precede a relationship or another open square bracket that itself starts a complex relationship.</p>
 
 <h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Labeled nodes and back links</h2>
 
