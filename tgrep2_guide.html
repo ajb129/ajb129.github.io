@@ -55,7 +55,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <li>A wildcard, specified by two underscores (<tt>__</tt>), matches any node.</li>
 <li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
 <li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
-<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
+<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content. Regular expressions for TGrep2 are what Unix calls extended regular expressions.</li>
 <li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
 </ul>
 
