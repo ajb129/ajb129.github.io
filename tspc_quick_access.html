@@ -20,10 +20,16 @@ body {
   </style>
 </head>
 <body>
+
+<br>
+<br>
 <br>
 <center><h1>TSPC quick access interface</h1></center>
 <center><h2>Alastair Butler</h2></center>
 <center><h3>Hirosaki University</h3></center>
+
+<br>
+<br>
 
 <br>
 <h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
@@ -61,7 +67,7 @@ body {
 
 <h3><a name="sec1.3">1.3</a>&nbsp;&nbsp;&nbsp;The underlying data format</h3>
 
-<p align="justify">To understand the functionality of the interface, particularly the options for search, it is helpful to know about the underlying data format used by the TSPC. Each corpus file is a text file containing instances of parse analysis separated by blank lines. Each analysis instance begins with a line that presents the overall word yield for the analysis. This yield is presented between opening and closing brackets with the form: &lsquo;<tt>=N(" &rsquo; and &lsquo; ")</tt>&rsquo;. Following this opening line comes the parse analysis itself, with each word of the analysis placed at the end of its own line and accompanied by lemma information between curly braces with an initial semi-colon (&lsquo;<tt>;&lcub;</tt>&rsquo;, &lsquo;<tt>&rcub;</tt>&rsquo;). Furthermore, each analysis line presents the path information from the root layer of the parse through to the word layer. The last line of a parse analysis instance is the ID node for the instance.</p>
+<p align="justify">To understand the functionality of the interface, particularly the options for search, it is helpful to know about the underlying data format used by the TSPC. Each corpus file is a text file containing instances of parse analysis separated by blank lines. Each analysis instance begins with a line that presents the overall word yield for the analysis. This yield is presented between opening and closing brackets with the form: &lsquo;<tt>=N(" </tt>&rsquo; and &lsquo;<tt> ")</tt>&rsquo;. Following this opening line comes the parse analysis itself, with each word of the analysis placed at the end of its own line and accompanied by lemma information between curly braces with an initial semi-colon (&lsquo;<tt>;&lcub;</tt>&rsquo;, &lsquo;<tt>&rcub;</tt>&rsquo;). Furthermore, each analysis line presents the path information from the root layer of the parse through to the word layer. The last line of a parse analysis instance is the ID node for the instance.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As examples, (<a href="#ex1">1</a>) shows the two opening instances of parse analysis from the file <tt>texts_Planetoid.txt</tt>:</p>
 
@@ -205,7 +211,7 @@ body {
 
 <p><a name="fig2">Figure 2: Example Tree page</a></p>
 
-<img src="tspc_quick_access_tree.png" alt="Tree page" height="275">
+<img src="https://ajb129.github.io/tspc_quick_access_tree.png" alt="Tree page" height="275">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This analysis demonstrates some key aspects of the annotation scheme:</p>
 <ul>
@@ -222,21 +228,21 @@ body {
 
 <p><a name="fig3">Figure 3: Example Word page</a></p>
 
-<img src="tspc_quick_access_word.png" alt="Word page" height="350">
+<img src="https://ajb129.github.io/tspc_quick_access_word.png" alt="Word page" height="350">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As Figure 3 shows, word analysis is presented in a tabled format with three main columns for words. The first column is for a word as it occurs in the source sentence(s). The second column presents the word class of the word from the first column. If the word is a verb associated with a grammar pattern, then this pattern information is also presented and highlighted with yellow. The third column presents information about the word of the first column with minimally a word lemma. If the word is a lexical word then it is also given sense definitions from a dictionary database. Moreover, if the word is a verb then the grammar pattern information is used to highlight with yellow compatible sense definitions, and leave other sense definitions shaded grey. Sense definitions with grammar codes are sourced from Cowie (1989). If the word is a verb without a grammar pattern, then all the cells containing sense numbers for the associated sense definitions are coloured red.</p>
 
 <h3><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;Graph page</h3>
 
-<p align="justify">The Graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2020). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The Graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2021). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex6">6</a>).</p>
 
 <p><a name="fig4">Figure 4: Example Graph page</a></p>
 
-<img src="tspc_quick_access_graph.png" alt="Graph page" height="200">
+<img src="https://ajb129.github.io/tspc_quick_access_graph.png" alt="Graph page" height="200">
 
-<p align="justify">In a graph, word content for source sentences is found outside of square brackets (&lsquo;[&rsquo;, &lsquo;]&rsquo;) and is always accompanied by (i) content between curly braces (&lsquo;&lcub;&rsquo;, &lsquo;&rcub;&rsquo;) to say the word class (and, when appropriate, grammar code) of the word, and (ii) numbering to say the word position within the source sentence(s).</p>
+<p align="justify">In a graph, word content for source sentences is found outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;) and is always accompanied by (i) content between curly braces (&lsquo;<tt>&lcub;</tt>&rsquo;, &lsquo;<tt>&rcub;</tt>&rsquo;) to say the word class (and, when appropriate, grammar code) of the word, and (ii) numbering to say the word position within the source sentence(s).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is at least one number per word, but there may be a second number separated by an underscore character (&lsquo;&lowbar;&rsquo;). The second number (if present) says which source sentence the word belongs to. The first number says the position of the word within its source sentence. If there is no second number, then the graph has only one source sentence.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is at least one number per word, but there may be a second number separated by an underscore character (&lsquo;<tt>&lowbar;</tt>&rsquo;). The second number (if present) says which source sentence the word belongs to. The first number says the position of the word within its source sentence. If there is no second number, then the graph has only one source sentence.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content tells us about how words function, e.g., <tt>[ARG0]</tt>=logical subject, <tt>[DIR]</tt>=direction role.</p>
 
