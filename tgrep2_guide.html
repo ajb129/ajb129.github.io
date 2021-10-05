@@ -52,13 +52,13 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <li>A wildcard, specified by two underscores (<tt>__</tt>), matches any node.</li>
 <li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
 <li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
-<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content. Regular expressions for TGrep2 are what Unix calls extended regular expressions.</li>
+<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content. Regular expressions for TGrep2 are what Unix calls <i>extended regular expressions</i>.</li>
 <li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
 </ul>
 
-<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;TGrep2 regular expressions</h3>
+<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Specifying nodes with TGrep2 regular expressions</h3>
 
-<p align="justify">Specified as a string, a regular expression matches a node if there is a part of the node that is matched. For example, (<a href="#ex1">1</a>) matches <tt>PP</tt>, <tt>CP-THT</tt>, <tt>ADVP</tt>, etc.</p>
+<p align="justify">Specified as a string following the syntax of section <a href="#sec2.2">2.2</a> below, a regular expression matches a node if there is a part of the node that is matched. For example, (<a href="#ex1">1</a>) matches <tt>PP</tt>, <tt>CP-THT</tt>, <tt>ADVP</tt>, etc.</p>
 
 <dl>
   <dt>(<a name="ex1">1</a>)</dt><dd></dd>
@@ -123,14 +123,50 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;^NP(.&#92;{.+)?$&sol;</tt><br>
 
-<p align="justify">Regular expression (<a href="#ex9">9</a>) starts with a caret symbol to anchor the regular expression to the beginning of a matched node with following <tt>NP</tt> content that is followed by one or zero instances of a capturing group. The capturing group involves a match for any single character signalled by the dot symbol (<tt>.</tt>) followed by  the slash symbol (<tt>&#92;</tt>) which acts to remove the otherwise special meaning of the following left brace symbol (<tt>{</tt>) (so that the symbol combination <tt>&#92;{</tt> matches the literal character <tt>{</tt>) which is then followed by one or more characters, with the use of the plus symbol (<tt>+</tt>) to indicate one or more instances of the preceding element which is the dot symbol (<tt>.</tt>) that matches any character; <tt>.+</tt> is identical to <tt>..*</tt> where the star symbol (<tt>*</tt>) says to match zero or more instances of the preceding element.</p>
+<p align="justify">Regular expression (<a href="#ex9">9</a>) starts with a caret symbol to anchor the regular expression to the beginning of a matched node with following <tt>NP</tt> content that is followed by one or zero instances of a capturing group. The capturing group involves a match for any single character signalled by the dot symbol (<tt>.</tt>) followed by  the slash symbol (<tt>&#92;</tt>) which acts to remove the otherwise special meaning of the following left brace symbol (<tt>{</tt>) (so that the symbol combination <tt>&#92;{</tt> matches the literal character <tt>{</tt>) which is then followed by one or more characters, with the use of the plus symbol (<tt>+</tt>) to indicate one or more instances of the preceding element which is the dot symbol (<tt>.</tt>) that matches any character.</p>
 
-<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Relationships between nodes</h2>
+<h3><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Regular expression syntax</h3>
 
-<p align="justify">Relationships define connections between nodes. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships are given in (<a href="#ex10">10</a>).</p>
+<p align="justify">This section describes the regular expression syntax used by TGrep2. The delimiter character (<tt>&sol;</tt>) bounds a regular expression for matching nodes. The syntax for a regular expression <tt>e0</tt> is given in (<a href="#ex10">10</a>):</p>
 
 <dl>
   <dt>(<a name="ex10">10</a>)</dt><dd></dd>
+</dl>
+<tt>&nbsp;&nbsp;e3:&nbsp;&nbsp;literal&nbsp;|&nbsp;charclass&nbsp;|&nbsp;&lsquo;.&rsquo;&nbsp;|&nbsp;&lsquo;^&rsquo;&nbsp;|&nbsp;&lsquo;$&rsquo;&nbsp;|&nbsp;&lsquo;(&rsquo;&nbsp;e0&nbsp;&lsquo;)&rsquo;</tt><br>
+<tt></tt><br>
+<tt>&nbsp;&nbsp;e2:&nbsp;&nbsp;e3</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;e2&nbsp;REP</tt><br>
+<tt></tt><br>
+<tt>&nbsp;&nbsp;REP:&nbsp;&lsquo;*&rsquo;&nbsp;|&nbsp;&lsquo;+&rsquo;&nbsp;|&nbsp;&lsquo;?&rsquo;&nbsp;|&nbsp;&lsquo;{n}&rsquo;&nbsp;|&nbsp;&lsquo;{n,}&rsquo;&nbsp;|&nbsp;&lsquo;{n,m}&rsquo;</tt><br>
+<tt></tt><br>
+<tt>&nbsp;&nbsp;e1:&nbsp;&nbsp;e2</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;e1&nbsp;e2</tt><br>
+<tt></tt><br>
+<tt>&nbsp;&nbsp;e0:&nbsp;&nbsp;e1</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;e0&nbsp;&lsquo;|&rsquo;&nbsp;e1</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>literal</tt> is any non-metacharacter, or a metacharacter (one of <tt>.*+?[](){}|&#92;^&dollar;</tt>), or the delimiter (<tt>&sol;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or <tt>&#92;b</tt> (marking a &ldquo;word&rdquo; boundary, i.e., a maximal string of alphanumeric characters, including the underscore (<tt>_</tt>)).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>charclass</tt> is a nonempty string <tt>s</tt> bracketed <tt>[s]</tt> (or <tt>[^s]</tt>); it matches any character in (or not in) <tt>s</tt>. A substring <tt>a-b</tt>, with <tt>a</tt> and <tt>b</tt> in ascending order, stands for the inclusive range of characters between <tt>a</tt> and <tt>b</tt>. In <tt>s</tt>, the metacharacters &lsquo;<tt>-</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;, an initial &lsquo;<tt>^</tt>&rsquo;, and the regular expression delimiter must be preceded by a &lsquo;<tt>&#92;</tt>&rsquo;; other metacharacters have no special meaning and may appear unescaped.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A &lsquo;<tt>.</tt>&rsquo; matches any character.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A &lsquo;<tt>^</tt>&rsquo; matches the beginning of a node; &lsquo;<tt>&dollar;</tt>&rsquo; matches the end of the node.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>REP</tt> operators match zero or more instances (<tt>*</tt>), one or more instances (<tt>+</tt>), zero or one instances (<tt>?</tt>), exactly <i>n</i> instances (<tt>{n}</tt>), at least <i>n</i> instances (<tt>{n,}</tt>), at least <i>n</i> and at most <i>m</i> instances (<tt>{n,m}</tt>), respectively of the preceding regular expression <tt>e2</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A concatenated regular expression, <tt>e1e2</tt>, matches a match to <tt>e1</tt> followed by a match to <tt>e2</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An alternative regular expression, <tt>e0|e1</tt>, matches either a match to <tt>e0</tt> or a match to <tt>e1</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A match to any part of a regular expression extends as far as possible without preventing a match to the remainder of the regular expression.</p>
+
+<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Relationships between nodes</h2>
+
+<p align="justify">Relationships define connections between nodes. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships are given in (<a href="#ex11">11</a>).</p>
+
+<dl>
+  <dt>(<a name="ex11">11</a>)</dt><dd></dd>
 </dl>
 <tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
 <tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;a&nbsp;descendant&nbsp;of)&nbsp;B</tt><br>
@@ -148,10 +184,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 
 <p align="justify">Any relationship can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the relationships of (<a href="#ex10">10</a>) as forward and backward links:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the relationships of (<a href="#ex11">11</a>) as forward and backward links:</p>
 
 <dl>
-  <dt>(<a name="ex11">11</a>)</dt><dd></dd>
+  <dt>(<a name="ex12">12</a>)</dt><dd></dd>
 </dl>
 <tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
 <tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
@@ -227,7 +263,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex12">12</a>)</dt><dd></dd>
+  <dt>(<a name="ex13">13</a>)</dt><dd></dd>
 </dl>
 <tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
 <tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
@@ -298,7 +334,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex13">13</a>)</dt><dd></dd>
+  <dt>(<a name="ex14">14</a>)</dt><dd></dd>
 </dl>
 <tt>C&nbsp;&lt;&nbsp;__&nbsp;(immediately&nbsp;dominates,&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
 <tt>__&nbsp;&gt;&nbsp;C&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
@@ -367,7 +403,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex14">14</a>)</dt><dd></dd>
+  <dt>(<a name="ex15">15</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;..&nbsp;__&nbsp;(preceeds)</tt><br>
 <tt>__&nbsp;,,&nbsp;I&nbsp;(follows)</tt><br>
@@ -445,7 +481,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex15">15</a>)</dt><dd></dd>
+  <dt>(<a name="ex16">16</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;,,&nbsp;__&nbsp;(follows)</tt><br>
 <tt>__&nbsp;..&nbsp;I&nbsp;(preceeds)</tt><br>
@@ -522,7 +558,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex16">16</a>)</dt><dd></dd>
+  <dt>(<a name="ex17">17</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;.&nbsp;__&nbsp;(immediately&nbsp;preceeds)</tt><br>
 <tt>__&nbsp;,&nbsp;I&nbsp;(immediately&nbsp;follows)</tt><br>
@@ -592,7 +628,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex17">17</a>)</dt><dd></dd>
+  <dt>(<a name="ex18">18</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;,&nbsp;__&nbsp;(immediately&nbsp;follows)</tt><br>
 <tt>__&nbsp;.&nbsp;I&nbsp;(immediately&nbsp;preceeds)</tt><br>
@@ -662,7 +698,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex18">18</a>)</dt><dd></dd>
+  <dt>(<a name="ex19">19</a>)</dt><dd></dd>
 </dl>
 <tt>F&nbsp;$&nbsp;__&nbsp;(sister)</tt><br>
 <tt>__&nbsp;$&nbsp;F&nbsp;(sister)</tt><br>
@@ -731,7 +767,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex19">19</a>)</dt><dd></dd>
+  <dt>(<a name="ex20">20</a>)</dt><dd></dd>
 </dl>
 <tt>E&nbsp;$..&nbsp;__&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
 <tt>__&nbsp;$,,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
@@ -800,7 +836,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex20">20</a>)</dt><dd></dd>
+  <dt>(<a name="ex21">21</a>)</dt><dd></dd>
 </dl>
 <tt>E&nbsp;$.&nbsp;__&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
 <tt>__&nbsp;$,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
@@ -869,20 +905,20 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 
 <h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;The <tt>i</tt>-th child relationships</h3>
 
-<p align="justify">To specify the exact child position which a node must occupy, use the <tt>i</tt>-th child relationships defined in (<a href="#ex21">21</a>):</p>
+<p align="justify">To specify the exact child position which a node must occupy, use the <tt>i</tt>-th child relationships defined in (<a href="#ex22">22</a>):</p>
 
 <dl>
-  <dt>(<a name="ex21">21</a>)</dt><dd></dd>
+  <dt>(<a name="ex22">22</a>)</dt><dd></dd>
 </dl>
 <tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&lt;1)</tt><br>
 <tt>A&nbsp;&gt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&gt;1)</tt><br>
 <tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&lt;-1)</tt><br>
 <tt>A&nbsp;&gt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&gt;-1)</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In these relationships, <tt>i</tt> represents a number indicating which child slot is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex22">22</a>) finds <tt>NP</tt> nodes where the sixth child is a <tt>PP</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In these relationships, <tt>i</tt> represents a number indicating which child slot is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex23">23</a>) finds <tt>NP</tt> nodes where the sixth child is a <tt>PP</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex22">22</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;6&nbsp;&sol;&#94;PP&#92;b&sol;</tt><br></dd>
+  <dt>(<a name="ex23">23</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;6&nbsp;&sol;&#94;PP&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -893,10 +929,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">Pattern (<a href="#ex23">23</a>) finds <tt>NP</tt> nodes where the last child is an <tt>ADVP</tt>.</p>
+<p align="justify">Pattern (<a href="#ex24">24</a>) finds <tt>NP</tt> nodes where the last child is an <tt>ADVP</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex23">23</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;ADVP&#92;b&sol;</tt><br></dd>
+  <dt>(<a name="ex24">24</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;ADVP&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -907,10 +943,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and a negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either eight or nine children you would use pattern (<a href="#ex24">24</a>):</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and a negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either eight or nine children you would use pattern (<a href="#ex25">25</a>):</p>
 
 <dl>
-  <dt>(<a name="ex24">24</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;8&nbsp;&lowbar;&lowbar;&nbsp;!&lt;10&nbsp;&lowbar;&lowbar;</tt><br></dd>
+  <dt>(<a name="ex25">25</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;8&nbsp;&lowbar;&lowbar;&nbsp;!&lt;10&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -921,12 +957,12 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<h3><a name="sec25">25</a>&nbsp;&nbsp;&nbsp;Other relationships</h3>
+<h3><a name="sec26">26</a>&nbsp;&nbsp;&nbsp;Other relationships</h3>
 
-<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex10">10</a>) and (<a href="#ex21">21</a>), are given in (<a href="#ex25">25</a>):</p>
+<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex11">11</a>) and (<a href="#ex22">22</a>), are given in (<a href="#ex26">26</a>):</p>
 
 <dl>
-  <dt>(<a name="ex25">25</a>)</dt><dd></dd>
+  <dt>(<a name="ex26">26</a>)</dt><dd></dd>
 </dl>
 <tt>A&nbsp;==&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;and&nbsp;B&nbsp;are&nbsp;the&nbsp;same&nbsp;node</tt><br>
 <tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
@@ -944,43 +980,43 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 
 <h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;Boolean expressions for building complex patterns</h2>
 
-<p align="justify">Complex TGrep2 patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (<tt>&</tt>). Thus, patterns (<a href="#ex26">26</a>) and (<a href="#ex27">27</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
-
-<dl>
-  <dt>(<a name="ex26">26</a>)</dt><dd></dd>
-</dl>
-<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<p align="justify">Complex TGrep2 patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (<tt>&</tt>). Thus, patterns (<a href="#ex27">27</a>) and (<a href="#ex28">28</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
 
 <dl>
   <dt>(<a name="ex27">27</a>)</dt><dd></dd>
 </dl>
-<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
-
-<p align="justify">The second relationship <tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt> refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex28">28</a>).</p>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
 <dl>
   <dt>(<a name="ex28">28</a>)</dt><dd></dd>
 </dl>
-<tt>(&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
-<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex29">29</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
+<p align="justify">The second relationship <tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt> refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex29">29</a>).</p>
 
 <dl>
   <dt>(<a name="ex29">29</a>)</dt><dd></dd>
 </dl>
-<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
+<tt>(&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (<tt>|</tt>) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex30">30</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
+<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex30">30</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
 
 <dl>
   <dt>(<a name="ex30">30</a>)</dt><dd></dd>
 </dl>
-<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
 
-<p align="justify">The (typically implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex31">31</a>) will find an infinitive clause node (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an infinitive verb child (<tt>&sol;^VB&#92;b&sol;</tt>) and an indirect object child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or that has an infinitive <i>be</i> child (<tt>&sol;^BE&#92;b&sol;</tt>) and a predicative noun phrase child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (<tt>|</tt>) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex31">31</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
 
 <dl>
-  <dt>(<a name="ex31">31</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;VB&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;</tt><br></dd>
+  <dt>(<a name="ex31">31</a>)</dt><dd></dd>
+</dl>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+
+<p align="justify">The (typically implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex32">32</a>) will find an infinitive clause node (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an infinitive verb child (<tt>&sol;^VB&#92;b&sol;</tt>) and an indirect object child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or that has an infinitive <i>be</i> child (<tt>&sol;^BE&#92;b&sol;</tt>) and a predicative noun phrase child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>).</p>
+
+<dl>
+  <dt>(<a name="ex32">32</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;VB&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -991,10 +1027,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex32">32</a>) finds an infinitive clause (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an infinitive verb child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or a noun phrase predicative child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>), and that preceeds a noun phrase subject sister (<tt>&sol;^NP-SBJ&#92;b&sol;</tt>) or follows an adverb phrase <tt>&sol;ADVP&#92;b&sol;</tt> sister.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex33">33</a>) finds an infinitive clause (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an infinitive verb child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or a noun phrase predicative child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>), and that preceeds a noun phrase subject sister (<tt>&sol;^NP-SBJ&#92;b&sol;</tt>) or follows an adverb phrase <tt>&sol;ADVP&#92;b&sol;</tt> sister.</p>
 
 <dl>
-  <dt>(<a name="ex32">32</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;&nbsp;]&nbsp;[&nbsp;&#x24;..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;&#x24;,,&nbsp;&sol;&#94;ADVP&#92;b&sol;&nbsp;]</tt><br></dd>
+  <dt>(<a name="ex33">33</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;&nbsp;]&nbsp;[&nbsp;&#x24;..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;&#x24;,,&nbsp;&sol;&#94;ADVP&#92;b&sol;&nbsp;]</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -1011,10 +1047,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 
 <p align="justify">TGrep2 allows for a node to be given a unique label and then referred to elsewhere by that label. If a node name is followed by an equal sign (<tt>=</tt>) and a label, the label will be assigned to the node. If the node name only consists of an equal sign and a label, it serves as a back link that refers to the node that has been assigned to that name elsewhere in the pattern.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we want to find sentences with present tense verbs in a matrix clause that select an object <i>that</i> clause. With access to labels and back links, we can do this with the pattern of (<a href="#ex33">33</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we want to find sentences with present tense verbs in a matrix clause that select an object <i>that</i> clause. With access to labels and back links, we can do this with the pattern of (<a href="#ex34">34</a>).</p>
 
 <dl>
-  <dt>(<a name="ex33">33</a>)</dt><dd><tt>&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br></dd>
+  <dt>(<a name="ex34">34</a>)</dt><dd><tt>&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -1025,12 +1061,12 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">Pattern (<a href="#ex33">33</a>) works by stating that the node named <tt>mid</tt> is directly above the object <i>that</i> clause and this should also be an ancestor to the present tense verb without there being an intervening clause or <tt>FS</tt> node. Finally, it is also required that the common ancestor named <tt>mid</tt> is either itself the matrix clause or is itself not a clause node and has no intermediate clause node between it and the matrix clause.</p>
+<p align="justify">Pattern (<a href="#ex34">34</a>) works by stating that the node named <tt>mid</tt> is directly above the object <i>that</i> clause and this should also be an ancestor to the present tense verb without there being an intervening clause or <tt>FS</tt> node. Finally, it is also required that the common ancestor named <tt>mid</tt> is either itself the matrix clause or is itself not a clause node and has no intermediate clause node between it and the matrix clause.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (<tt>&lt;&lt; (&sol;OB1&sol; &lt; &sol;&#92;*T&#92;*&sol;)</tt>). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario of picking an incorrect relative clause node for the trace with a back link, resulting in (<a href="#ex34">34</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (<tt>&lt;&lt; (&sol;OB1&sol; &lt; &sol;&#92;*T&#92;*&sol;)</tt>). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario of picking an incorrect relative clause node for the trace with a back link, resulting in (<a href="#ex35">35</a>).</p>
 
 <dl>
-  <dt>(<a name="ex34">34</a>)</dt><dd><tt>&sol;REL&sol;=p&nbsp;&lt;&lt;&nbsp;(&sol;OB1&sol;&nbsp;&lt;&nbsp;&sol;&#92;*T&#92;*&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;REL&sol;&nbsp;&gt;&gt;&nbsp;=p))</tt><br></dd>
+  <dt>(<a name="ex35">35</a>)</dt><dd><tt>&sol;REL&sol;=p&nbsp;&lt;&lt;&nbsp;(&sol;OB1&sol;&nbsp;&lt;&nbsp;&sol;&#92;*T&#92;*&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;REL&sol;&nbsp;&gt;&gt;&nbsp;=p))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -1045,10 +1081,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 
 <h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;Segmented patterns</h2>
 
-<p align="justify">TGrep2 provides a way to split patterns into multiple segments, which are separated by colons (<tt>:</tt>). All segments need to be related. For example, segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex35">35</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
+<p align="justify">TGrep2 provides a way to split patterns into multiple segments, which are separated by colons (<tt>:</tt>). All segments need to be related. For example, segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex36">36</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex35">35</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;</tt><br></dd>
+  <dt>(<a name="ex36">36</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -1059,10 +1095,10 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex36">36</a>) is matched by pattern (<a href="#ex37">37</a>) without segments as well as pattern (<a href="#ex38">38</a>) with segments.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex37">37</a>) is matched by pattern (<a href="#ex38">38</a>) without segments as well as pattern (<a href="#ex39">39</a>) with segments.</p>
 
 <dl>
-  <dt>(<a name="ex36">36</a>)</dt><dd></dd>
+  <dt>(<a name="ex37">37</a>)</dt><dd></dd>
 </dl>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="143.88" height="304.5" viewBox="-16.5 17.5 180.84 395">
@@ -1081,7 +1117,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </svg>
 
 <dl>
-  <dt>(<a name="ex37">37</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;that)))</tt><br></dd>
+  <dt>(<a name="ex38">38</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;that)))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
@@ -1093,7 +1129,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </form>
 
 <dl>
-  <dt>(<a name="ex38">38</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;=n)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;=y)&nbsp;:</tt><br> <tt>(=y&nbsp;&lt;&nbsp;&sol;&#94;IP-SUB&#92;b&sol;=i)&nbsp;:&nbsp;(=i&nbsp;&lt;&nbsp;&sol;&#94;C&#92;b&sol;=c)&nbsp;:&nbsp;(=c&nbsp;&lt;&nbsp;that)</tt><br></dd>
+  <dt>(<a name="ex39">39</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;=n)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;=y)&nbsp;:</tt><br> <tt>(=y&nbsp;&lt;&nbsp;&sol;&#94;IP-SUB&#92;b&sol;=i)&nbsp;:&nbsp;(=i&nbsp;&lt;&nbsp;&sol;&#94;C&#92;b&sol;=c)&nbsp;:&nbsp;(=c&nbsp;&lt;&nbsp;that)</tt><br></dd>
 </dl>
 
 <form target="_blank" action="http://npcmj.ninjal.ac.jp/dev/cgi-bin/tspc_tgrep2.sh" method="post">
