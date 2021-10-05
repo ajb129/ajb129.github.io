@@ -65,7 +65,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;[PCV]P&sol;</tt><br>
 
-<p align="justify">The matching of (<a href="#ex1">1</a>) involves a bracket expression which matches any one of the single characters that are contained within square brackets (<tt>[</tt>, <tt>]</tt>). A bracket expression can also be used to specify a range of characters, thus <tt>[0-9]</tt> matches any single digit character. If the first character of a bracket expression is the caret symbol (<tt>^</tt>) then the whole expression is used to match a single character that is not contained within the square brackets, so <tt>[^0-9]</tt> matches any single non digit character.</p>
+<p align="justify">The matching of (<a href="#ex1">1</a>) involves a character class expression which matches any one of the single characters that are contained within square brackets (<tt>[</tt>, <tt>]</tt>). A character class expression can also be used to specify a range of characters, thus <tt>[0-9]</tt> matches any single digit character. If the first character of a bracket expression is the caret symbol (<tt>^</tt>) then the whole expression is used to match a single character that is not contained within the square brackets, so <tt>[^0-9]</tt> matches any single non digit character.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A different use of the caret symbol (<tt>^</tt>) is to anchor the regular expression to the beginning of a matched node. So, (<a href="#ex2">2</a>) will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>.</p>
 
@@ -145,7 +145,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <tt>&nbsp;&nbsp;e0:&nbsp;&nbsp;e1</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;e0&nbsp;&lsquo;|&rsquo;&nbsp;e1</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>literal</tt> is any non-metacharacter, or a metacharacter (one of <tt>.*+?[](){}|&#92;^&dollar;</tt>), or the delimiter (<tt>&sol;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or <tt>&#92;b</tt> (marking a &ldquo;word&rdquo; boundary, i.e., a maximal string of alphanumeric characters, including the underscore (<tt>_</tt>)).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>literal</tt> is any non-metacharacter, or a metacharacter (one of <tt>.*+?[](){}|&#92;^&dollar;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or the delimiter (<tt>&sol;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or <tt>&#92;b</tt> (marking a &ldquo;word&rdquo; boundary, i.e., a maximal string of alphanumeric characters, including the underscore (<tt>_</tt>)).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>charclass</tt> is a nonempty string <tt>s</tt> bracketed <tt>[s]</tt> (or <tt>[^s]</tt>); it matches any character in (or not in) <tt>s</tt>. A substring <tt>a-b</tt>, with <tt>a</tt> and <tt>b</tt> in ascending order, stands for the inclusive range of characters between <tt>a</tt> and <tt>b</tt>. In <tt>s</tt>, the metacharacters &lsquo;<tt>-</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;, an initial &lsquo;<tt>^</tt>&rsquo;, and the regular expression delimiter must be preceded by a &lsquo;<tt>&#92;</tt>&rsquo;; other metacharacters have no special meaning and may appear unescaped.</p>
 
