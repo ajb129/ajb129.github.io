@@ -116,14 +116,14 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;^NP$&sol;</tt><br>
 
-<p align="justify">Unfortunately, the semi-colon symbol (<tt>;</tt>) cannot be used within TGrep2 node regular expressions. A regular expression that meets the need of matching all bare noun phrases is (<a href="#ex9">9</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A regular expression that meets the need of matching all bare noun phrases is (<a href="#ex9">9</a>).</p>
 
 <dl>
   <dt>(<a name="ex9">9</a>)</dt><dd></dd>
 </dl>
-<tt>&sol;^NP(.&#92;{.+)?$&sol;</tt><br>
+<tt>&sol;^NP(;.+)?$&sol;</tt><br>
 
-<p align="justify">Regular expression (<a href="#ex9">9</a>) starts with a caret symbol to anchor the regular expression to the beginning of a matched node with following <tt>NP</tt> content that is followed by one or zero instances of a capturing group. The capturing group involves a match for any single character signalled by the dot symbol (<tt>.</tt>) followed by  the slash symbol (<tt>&#92;</tt>) which acts to remove the otherwise special meaning of the following left brace symbol (<tt>{</tt>) (so that the symbol combination <tt>&#92;{</tt> matches the literal character <tt>{</tt>) which is then followed by one or more characters, with the use of the plus symbol (<tt>+</tt>) to indicate one or more instances of the preceding element which is the dot symbol (<tt>.</tt>) that matches any character.</p>
+<p align="justify">Regular expression (<a href="#ex9">9</a>) starts with a caret symbol to anchor the regular expression to the beginning of a matched node with following <tt>NP</tt> content that is followed by one or zero instances of a capturing group. The capturing group involves a match for a semi-colon (<tt>;</tt>) followed by one or more characters, with the use of the plus symbol (<tt>+</tt>) to indicate one or more instances of the preceding element which is the dot symbol (<tt>.</tt>) that matches any character.</p>
 
 <h3><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Regular expression syntax</h3>
 
@@ -189,8 +189,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex12">12</a>)</dt><dd></dd>
 </dl>
-<tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+<tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -265,8 +265,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex13">13</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;(is&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
-<tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+<tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+<tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="504.24" height="357" viewBox="-16.5 17.5 661.32 465">
   <rect x="299.16" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
@@ -336,8 +336,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex14">14</a>)</dt><dd></dd>
 </dl>
-<tt>C&nbsp;&lt;&nbsp;__&nbsp;(immediately&nbsp;dominates,&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&nbsp;C&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by,&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
+<tt>C&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;dominates&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="510.18" height="357" viewBox="-16.5 17.5 669.24 465">
   <text x="318.12" y="55" text-anchor="middle">A</text>
@@ -405,8 +405,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex15">15</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;..&nbsp;__&nbsp;(preceeds)</tt><br>
-<tt>__&nbsp;,,&nbsp;I&nbsp;(follows)</tt><br>
+<tt>I&nbsp;..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preceeds)</tt><br>
+<tt>__&nbsp;,,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -483,8 +483,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex16">16</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;,,&nbsp;__&nbsp;(follows)</tt><br>
-<tt>__&nbsp;..&nbsp;I&nbsp;(preceeds)</tt><br>
+<tt>I&nbsp;,,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
+<tt>__&nbsp;..&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preceeds)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -560,8 +560,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex17">17</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;.&nbsp;__&nbsp;(immediately&nbsp;preceeds)</tt><br>
-<tt>__&nbsp;,&nbsp;I&nbsp;(immediately&nbsp;follows)</tt><br>
+<tt>I&nbsp;.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;preceeds)</tt><br>
+<tt>__&nbsp;,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -630,8 +630,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex18">18</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;,&nbsp;__&nbsp;(immediately&nbsp;follows)</tt><br>
-<tt>__&nbsp;.&nbsp;I&nbsp;(immediately&nbsp;preceeds)</tt><br>
+<tt>I&nbsp;,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
+<tt>__&nbsp;.&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;preceeds)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -700,8 +700,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex19">19</a>)</dt><dd></dd>
 </dl>
-<tt>F&nbsp;$&nbsp;__&nbsp;(sister)</tt><br>
-<tt>__&nbsp;$&nbsp;F&nbsp;(sister)</tt><br>
+<tt>F&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
+<tt>__&nbsp;$&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
   <text x="330" y="55" text-anchor="middle">A</text>
@@ -769,8 +769,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex20">20</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;$..&nbsp;__&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
+<tt>E&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
   <text x="330" y="55" text-anchor="middle">A</text>
@@ -838,8 +838,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex21">21</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;$.&nbsp;__&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,&nbsp;E&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
+<tt>E&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
