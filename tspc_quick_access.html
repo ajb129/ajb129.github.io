@@ -45,26 +45,28 @@ body {
 <p align="justify">The interface provides a &lsquo;live&rsquo; view of the corpus as it is being built. Indeed, the principle reason for the development of this interface has been to provide quick and simple access to visualisations of the corpus analysis as it is worked on. The interface also has a secondary role of offering a useful way to explore the parsed data, with its querying functions being useful for linguistic research and English grammar teaching purposes.</p>
 
 <br>
-<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;Interface map</h2>
+<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;The corpus overview page and interface map</h2>
 
-<p align="justify">The Corpus overview page is the default entry point to the interface and is also reached by clicking the &lsquo;Corpus overview&rsquo; link of any of the other pages. Other possible navigations through the  interface are illustrated in Figure 1. Notably, the search pages and context page are intermediate steps for reaching a Tree page. From a Tree page, you can toggle between the other visualisation pages, or visit&sol;return to the Context page.</p>
+<p align="justify">The corpus overview page is the default entry point to the interface and is also reached by clicking the &lsquo;Corpus overview&rsquo; link of any of the other pages. Other possible navigations through the  interface are illustrated in Figure 1. Notably, the search pages and context page are intermediate steps for reaching a tree page. From a tree page, you can toggle between the other visualisation pages, or visit&sol;return to the context page.</p>
 
 <p><a name="fig1">Figure 1: Map of the interface</a></p>
 
 <img src="https://ajb129.github.io/tspc_quick_access_map.png" alt="Map of the interface" height="400">
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The corpus overview page contains links for reaching the Grep and TGrep2 pages. There is also an ID field box with the functionality described in section <a href="#sec3">3</a> below. Finally, there is grouped listing of all the corpus files, with each listed item serving as a clickable link to a context page for the corresponding file. If the ID text box field has content, then the listing of files will be restricted to those files with names that contain the given content, ignoring case distinctions. If there is no match for the content of the ID text box, then the overview page is left with no listed files.</p>
+
 <br>
 <h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Accessing content by providing ID information</h2>
 
-<p align="justify">The Corpus overview page, Context page, and visualisation pages all contain an ID text field box. When the Corpus overview page is open, the ID box is blank by default. With the Context page, the ID box contains the name of the shown file. With a visualisation page, the ID box contains the full ID name of the shown parse analysis.</p>
+<p align="justify">The corpus overview page, context page, and visualisation pages all contain an ID text field box. When the corpus overview page is open, the ID box is blank by default. With the context page, the ID box contains the name of the shown file. With a visualisation page, the ID box contains the full ID name of the shown parse analysis.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A full ID name for a given instance of parse analysis takes the form of a number followed by an underscore character (&lsquo;_&rsquo;) and then the name of the file that contains the parse analysis.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You are free to edit the content of the ID box, and then by pressing the <tt>[ENTER]</tt> key, you will jump to the corresponding page for the edited ID information. Note:</p>
 <ul>
-<li>If you edit the ID box to give the full ID name for an instance of parse analysis, then a visualisation for the analysis is reached. If you do this from an already open visualisation page, then the mode of visualisation (Tree, Word, or Graph) will be maintained for the reached analysis, but if you do this from the Corpus overview page or Context page, then you will jump to a Tree view page for the referenced analysis.</li>
-<li>If you edit the ID box to give a file name, then the Context page for the file is reached.</li>
-<li>If you edit the ID box to give an ID that is not recognised as either a full ID name for analysis or the name of a file in the corpus, then the Corpus overview page is entered with a display of all the file names that contain the given ID string, ignoring case distinctions.</li>
+<li>If you edit the ID box to give the full ID name for an instance of parse analysis, then a visualisation for the analysis is reached. If you do this from an already open visualisation page, then the mode of visualisation (Tree, Word, or Graph) will be maintained for the reached analysis, but if you do this from the corpus overview page or context page, then you will jump to a Tree view page for the referenced analysis.</li>
+<li>If you edit the ID box to give a file name, then the context page for the file is reached.</li>
+<li>If you edit the ID box to give an ID that is not recognised as either a full ID name for analysis or the name of a file in the corpus, then the corpus overview page is entered with a display of all the file names that contain the given ID string, ignoring case distinctions.</li>
 </ul>
 
 <br>
@@ -131,25 +133,20 @@ body {
 <p align="justify">Note that this conversion removes lemma content, and so lemmas cannot be queried from the TGrep2 page. Also, &lsquo;<tt>;&#64;n</tt>&rsquo; markings of nodes are removed, since nodes appear only once within the bracketed structure and so are always distinct.</p>
 
 <br>
-<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Corpus overview page</h2>
+<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Context page</h2>
 
-<p align="justify">The Corpus overview page contains links for reaching the Grep and TGrep2 pages. There is also an ID field box with the functionality already described in section <a href="#sec3">3</a>. Finally, there is grouped listing of all the corpus files, with each listed item serving as a clickable link to a context page for the corresponding file. If the ID text box field has content, then the listing of files will be restricted to those files with names that contain the given content, ignoring case distinctions. If there is no match for the content of the ID text box, then the overview page is left with no listed files.</p>
-
-<br>
-<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;Context page</h2>
-
-<p align="justify">The Context page gives a link for reaching the Corpus overview page, followed by an ID field box that will contain the name of the file that is being shown. This ID field box has the functionality already described in section <a href="#sec3">3</a>. The remainder of the page consists of a table with two columns. The first column provides numbers for file content that has been given parse analysis. Each number forms a link for opening the instance of parse analysis in a Tree page. The second column contains the yield content for the referenced analysis, which is typically the content of a single sentence from the file.</p>
+<p align="justify">The context page gives a link for reaching the corpus overview page, followed by an ID field box that will contain the name of the file that is being shown. This ID field box has the functionality already described in section <a href="#sec3">3</a>. The remainder of the page consists of a table with two columns. The first column provides numbers for file content that has been given parse analysis. Each number forms a link for opening the instance of parse analysis in a tree page. The second column contains the yield content for the referenced analysis, extracted as the line content from the source data between &lsquo;<tt>=N(" </tt>&rsquo; and its closing &lsquo;<tt> ")</tt>&rsquo;, which is typically the content of a single sentence.</p>
 
 <br>
-<h2><a name="sec7">7</a>&nbsp;&nbsp;&nbsp;Search pages</h2>
+<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;Search pages</h2>
 
-<p align="justify">The interface provides two different methods for searching the corpus: the Grep page (section <a href="#sec7.1">7.1</a>); and the TGrep2 page (section <a href="#sec7.2">7.2</a>).</p>
+<p align="justify">The interface provides two different methods for searching the corpus: the Grep page (section <a href="#sec6.1">6.1</a>); and the TGrep2 page (section <a href="#sec6.2">6.2</a>).</p>
 
-<h3><a name="sec7.1">7.1</a>&nbsp;&nbsp;&nbsp;Grep page</h3>
+<h3><a name="sec6.1">6.1</a>&nbsp;&nbsp;&nbsp;Grep page</h3>
 
-<p align="justify">The Grep page gives a link for returning to the Corpus overview page, and a text field box for entering a grep search pattern. A search is made after a search pattern is entered into the text field box and the <tt>[ENTER]</tt> key is pressed.</p>
+<p align="justify">The Grep page gives a link for returning to the corpus overview page, and a text field box for entering a grep search pattern. A search is made after a search pattern is entered into the text field box and the <tt>[ENTER]</tt> key is pressed.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search is made using the <tt>grep</tt> command under a recursive call (<tt>grep -nr</tt>) in a directory that contains the corpus data in the native corpus format described in section <a href="#sec4">4</a>, and illustrated with (<a href="#ex1">1</a>). Aside from making changes to the search pattern, there is no other way to restrict the searched data.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search is made using the <tt>grep</tt> command (Magloire et al. 2021) under a recursive call (<tt>grep -nr</tt>) in a directory that contains the corpus data in the native corpus format described in section <a href="#sec4">4</a>, and illustrated with (<a href="#ex1">1</a>). Aside from making changes to the search pattern, there is no other way to restrict the searched data.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find words that have the lemma <small style="font-size: 75%">SMILE</small>, use the search pattern (<a href="#ex3">3</a>).</p>
 
@@ -174,47 +171,59 @@ body {
 
 <p align="justify">Note that the double quotes character (<tt>&quot;</tt>) cannot be used in grep search patterns made with the interface. In the patterns of (<a href="#ex4">4</a>) and (<a href="#ex5">5</a>), mention of double quote characters is avoided with use of the dot (&lsquo;<tt>.</tt>&rsquo;) character, which matches any single character.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results are displayed in a tabled format with two columns. The first column contains the full content of the matched line from the corpus, and the second column contains information about the line number followed by an underscore character (&lsquo;_&rsquo;) and then the file name for the reported content. This line number and file name serve as a link to a Tree page for the overall linked instance of parse analysis.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;After making a search, a count of the number of matched results is given at the top of a returned results page. This is followed by a display of the results in a tabled format with two columns. The first column consists of possibly coloured cells that contain the full content of a matched line from the corpus data, and the second column contains information about the line number followed by an underscore character (&lsquo;_&rsquo;) and then the file name for the reported content. This line number and file name serve as a link to a tree page for the overall linked instance of parse analysis.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note, when there are search results, a link is provided at the bottom of the page for opening in a Tree page a display of all the returned results as trees.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The colouring of cells in the first column depends on the cell content as follows:</p>
+<ul>
+<li>Verbs with grammatical codes are coloured LemonChiffon.</li>
+<li>Full verbs without grammatical codes are coloured PeachPuff.</li>
+<li><small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small>, and <small style="font-size: 75%">BE</small> verbs are coloured Tan.</li>
+<li>Other lexical words are coloured PaleGreen.</li>
+<li>Other items that lack a word lemma, e.g.&nbsp;punctuation, are coloured Thistle.</li>
+<li>Yield lines, that is, lines starting with &lsquo;<tt>=N(" </tt>&rsquo;, have no added colour.</li>
+</ul>
 
-<h3><a name="sec7.2">7.2</a>&nbsp;&nbsp;&nbsp;TGrep2 page</h3>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Up to 2500 consecutive search results are returned following corpus order, that is, with matches taken from files following an alphabetical sort of the corpus filenames. Quite where in the corpus order the batch of 2500 consecutive search results comes from is established through a random selection. If there are more than 2500 results, you can see a different batch of 2500 results by re-running the search.</p>
 
-<p align="justify">The TGrep2 page gives a link for returning to the Corpus overview page, and a text field box for entering a TGrep2 search pattern. A search is made after a search pattern is entered into the text field box and the <tt>[ENTER]</tt> key is pressed.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there are less than 100 search results, a link is provided at the bottom of the page for opening in a tree page a display of all the returned results as trees.</p>
+
+<h3><a name="sec6.2">6.2</a>&nbsp;&nbsp;&nbsp;TGrep2 page</h3>
+
+<p align="justify">The TGrep2 page gives a link for returning to the corpus overview page, and a text field box for entering a TGrep2 search pattern. A search is made after a search pattern is entered into the text field box and the <tt>[ENTER]</tt> key is pressed.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search is made using the <tt>tgrep2</tt> command (Rohde 2005) over all the corpus data in a binary database built from data that was first converted into the bracketed format described in section <a href="#sec4">4</a>, and illustrated with (<a href="#ex2">2</a>). Aside from making changes to the search pattern, there is no other way to restrict the searched data.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results are displayed as trees, with content that matches the master node of the search pattern highlighted. The ID node of a shown tree works as a link for accessing the same tree in a Tree view page. Up to fifty trees are shown in random order. If there are more than fifty results, you can see different trees by re-running the search. The results page also gives information about the number of hits found, and the number of files that contain hits.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Because what is searched has to first be compiled from the source data, if the source data of the corpus is being altered, then it is possible for the compiled data to fall behind the state of the source data. There is then a chance that this might lead to a mismatch between what is seen from the search and what is subsequently seen from following the Tree page links of the search, since all other parts of the interface work by directly accessing the (possibly changing) source data in the native format illustrated above with (<a href="#ex1">1</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Because what is searched has to first be compiled from the source data, if the source data of the corpus is being altered, then it is possible for the compiled data to fall behind the state of the source data. There is then a chance that this might lead to a mismatch between what is seen from the search and what is subsequently seen from following the tree page links of the search, since all other parts of the interface work by directly accessing the (possibly changing) source data in the native format illustrated above with (<a href="#ex1">1</a>).</p>
 
 <br>
-<h2><a name="sec8">8</a>&nbsp;&nbsp;&nbsp;Visualisation pages</h2>
+<h2><a name="sec7">7</a>&nbsp;&nbsp;&nbsp;Visualisation pages</h2>
 
-<p align="justify">The interface provides three different modes for visualising consequences of parse analysis: the Tree page (section <a href="#sec8.1">8.1</a>); the Word page (section <a href="#sec8.2">8.2</a>); and the Graph page (section <a href="#sec8.3">8.3</a>). These pages all have an ID text field box that will contain the full name(s) for the analysis being shown. The content of the ID box can be edited, as described in section <a href="#sec3">3</a>.</p>
+<p align="justify">The interface provides three different modes for visualising consequences of parse analysis: the tree page (section <a href="#sec7.1">7.1</a>); the word page (section <a href="#sec7.2">7.2</a>); and the graph page (section <a href="#sec7.3">7.3</a>). These pages all have an ID text field box that will contain the full name(s) for the analysis being shown. The content of the ID box can be edited, as described in section <a href="#sec3">3</a>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;At the top of each page, in addition to the ID box, there is also:</p>
 <ul>
-<li>a &lsquo;Context&rsquo; link for (returning to) the Context page of the file that contains the analysis,</li>
-<li>a &lsquo;Tree&rsquo; link for toggling to the Tree page for the analysis being shown (This is bold and not a link when the page is already a Tree page.),</li>
-<li>a &lsquo;Word&rsquo; link for toggling to the Word page for the analysis being shown (This is bold and not a link when the page is already a Word page.),</li>
-<li>a &lsquo;Graph&rsquo; link for toggling to the Graph page for the analysis being shown (This is bold and not a link when the page is already a Graph page.),</li>
+<li>a &lsquo;Context&rsquo; link for (returning to) the context page of the file that contains the analysis,</li>
+<li>a &lsquo;Tree&rsquo; link for toggling to the tree page for the analysis being shown (This is bold and not a link when the page is already a tree page.),</li>
+<li>a &lsquo;Word&rsquo; link for toggling to the word page for the analysis being shown (This is bold and not a link when the page is already a word page.),</li>
+<li>a &lsquo;Graph&rsquo; link for toggling to the graph page for the analysis being shown (This is bold and not a link when the page is already a graph page.),</li>
 <li>a &lsquo;Previous&rsquo; link for jumping to a page for the immediately preceeding analysis instance, keeping to the same mode of visualisation (If there is no preceeding instance, then &lsquo;Previous&rsquo; is presented with a line through it.),</li>
 <li>a &lsquo;Next&rsquo; link for jumping to a page for the immediately following analysis instance, keeping to the same mode of visualisation (If there is no following instance, then &lsquo;Next&rsquo; takes you to a page with no visualisation.), and</li>
-<li>a &lsquo;Corpus overview&rsquo; link for going to the Corpus overview page.</li>
+<li>a &lsquo;Corpus overview&rsquo; link for going to the corpus overview page.</li>
 </ul>
 
-<h3><a name="sec8.1">8.1</a>&nbsp;&nbsp;&nbsp;Tree page</h3>
+<h3><a name="sec7.1">7.1</a>&nbsp;&nbsp;&nbsp;Tree page</h3>
 
-<p align="justify">The Tree page shows a tree visualisation of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then a tree for each ID is shown. The ID node of a shown tree works as a link for opening the same tree in a new Tree view page. Figure 2 illustrates the tree page with parse analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The tree page shows a tree visualisation of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then a tree for each ID is shown. The ID node of a shown tree works as a link for opening the same tree in a new Tree view page. Figure 2 illustrates the tree page with parse analysis for (<a href="#ex6">6</a>).</p>
 
 <dl>
   <dt>(<a name="ex6">6</a>)</dt><dd>Peter scuttered underneath the bushes.</dd>
 </dl>
 
-<p><a name="fig2">Figure 2: Example Tree page</a></p>
+<p><a name="fig2">Figure 2: Example tree page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_tree.png" alt="Tree page" height="275">
+<img src="https://ajb129.github.io/tspc_quick_access_tree.png" alt="Example tree page" height="275">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This analysis demonstrates some key aspects of the annotation scheme:</p>
 <ul>
@@ -225,23 +234,23 @@ body {
 <li>verbs have grammar pattern information (<tt>;~Ipr</tt>=selection of clause structure where there is an intransitive verb and post-verbal selected preposition phrase).</li>
 </ul>
 
-<h3><a name="sec8.2">8.2</a>&nbsp;&nbsp;&nbsp;Word page</h3>
+<h3><a name="sec7.2">7.2</a>&nbsp;&nbsp;&nbsp;Word page</h3>
 
-<p align="justify">The Word page shows the word analysis of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then word analysis for each ID is shown. Figure 3 illustrates the word page with word analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The word page shows the word analysis of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then word analysis for each ID is shown. Figure 3 illustrates the word page with word analysis for (<a href="#ex6">6</a>).</p>
 
-<p><a name="fig3">Figure 3: Example Word page</a></p>
+<p><a name="fig3">Figure 3: Example word page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_word.png" alt="Word page" height="350">
+<img src="https://ajb129.github.io/tspc_quick_access_word.png" alt="Example word page" height="350">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As Figure 3 shows, word analysis is presented in a tabled format with three main columns for words. The first column is for a word as it occurs in the source sentence(s). The second column presents the word class of the word from the first column. If the word is a verb associated with a grammar pattern, then this pattern information is also presented and highlighted with yellow. The third column presents information about the word of the first column with minimally a word lemma. If the word is a lexical word then it is also given sense definitions from a dictionary database. Moreover, if the word is a verb then the grammar pattern information is used to highlight with yellow compatible sense definitions, and leave other sense definitions shaded grey. Sense definitions with grammar codes are sourced from Cowie (1989). If the word is a verb without a grammar pattern, then all the cells containing sense numbers for the associated sense definitions are coloured red.</p>
 
-<h3><a name="sec8.3">8.3</a>&nbsp;&nbsp;&nbsp;Graph page</h3>
+<h3><a name="sec7.3">7.3</a>&nbsp;&nbsp;&nbsp;Graph page</h3>
 
-<p align="justify">The Graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2021). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2021). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex6">6</a>).</p>
 
-<p><a name="fig4">Figure 4: Example Graph page</a></p>
+<p><a name="fig4">Figure 4: Example graph page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_graph.png" alt="Graph page" height="200">
+<img src="https://ajb129.github.io/tspc_quick_access_graph.png" alt="Example graph page" height="200">
 
 <p align="justify">In a graph, word content for source sentences is found outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;) and is always accompanied by (i) content between curly braces (&lsquo;<tt>&lcub;</tt>&rsquo;, &lsquo;<tt>&rcub;</tt>&rsquo;) to say the word class (and, when appropriate, grammar code) of the word, and (ii) numbering to say the word position within the source sentence(s).</p>
 
@@ -251,11 +260,17 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Word content and&sol;or square bracket content can provide the content for a graph node. Word content and&sol;or square bracket content can also provide the label for a directed arrow that connects graph nodes. An arrow connects content from one node &mdash; the master node (often a predicate word) to another node &mdash; the dependent node. It is most typical for square bracket content to be part of the label for a directed arrow.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most words from source sentences have a presence within the corresponding graph, however some words make a contribution that has to be seen in terms of consequences for graph nodes and their dependencies. Such missing words include words that are used to make reference to what is talked about, with node presence capturing the reference contribution. These words can be either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most words from source sentences have a presence within the corresponding graph, however some words make a contribution that has to be seen in terms of consequences for graph nodes and their dependencies. Missing words include words that are used to make reference to what is talked about, with node presence capturing the reference contribution. These words can be either:</p>
 <ul>
 <li><i>indefinites</i> (e.g., <i>a</i>, <i>an</i>, <i>some</i>) used to introduce new items for discussion (discourse referents),</li>
 <li><i>definites</i> (e.g., <i>the</i>, <i>these</i>, <i>this</i>) used for a familiar or unique referent of the discourse, or</li>
 <li><i>sentence</i>&sol;<i>discourse bound</i> pronouns (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) that are links to already established referents.</li>
+</ul>
+
+<p align="justify">Other words with no presence in graphs are:</p>
+<ul>
+<li><i>relative pronouns</i> used at the start of a relative clause, e.g., <i>who</i>, <i>which</i>, <i>that</i> (<i>the girl <u>who</u> smiled</i>, <i>the house <u>which&sol;that</u> Jack built</i>), and</li>
+<li><i>complementizer</i> <i>that</i> used at the start of an embedded clause (<i>I think <u>that</u> she smiled</i>, <i>the claim <u>that</u> Jack built a house</i>).</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for word content to involve the &lsquo;#&rsquo; symbol. This marks a word absence due to phrase head or verb elision in the source sentence. For example, consider (<a href="#ex7">7</a>).</p>
@@ -277,10 +292,13 @@ body {
 <br>
 <h2><a name="references">References</a></h2>
 
-<p><a name="Butler-2021ts">Butler, Alastair. 2021.</a> Meaning representations from treebanks. The Treebank Semantics Web Site.
-Available at: <a href="http://www.compling.jp/ajb129/ts.html">http://www.compling.jp/ajb129/ts.html</a>.</p>
+<p><a name="Butler-2021ts">Butler, Alastair. 2021.</a> Meaning representations from treebanks. The Treebank Semantics Web Site. Available at: <a href="http://www.compling.jp/ajb129/ts.html">http://www.compling.jp/ajb129/ts.html</a>.</p>
+
 <p><a name="Cowie-1989">Cowie, A P. 1989.</a> <i>Oxford Advanced Learner's Dictionary, Fourth Edition</i>. Oxford: Oxford University Press.</p>
-<p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15.</p>
+
+<p><a name="Magloire-et-al-2021">Magloire, Alain et al. 2021.</a> GNU Grep: Print lines that match patterns, version 3.7. Free Software Foundation.</p>
+
+<p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15. Available at: <a href="https://github.com/andreasvc/tgrep2">https://github.com/andreasvc/tgrep2</a></p>
 
 <br/>
 <br/>
