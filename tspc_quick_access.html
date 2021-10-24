@@ -51,7 +51,7 @@ body {
 
 <p><a name="fig1">Figure 1: Map of the interface</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_map.png" alt="Map of the interface" height="400">
+<img src="https://ajb129.github.io/tspc_quick_access_map.png" alt="Map of the interface" height="480">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The corpus overview page contains links for reaching the Grep and TGrep2 pages. There is also an ID field box with the functionality described in section <a href="#sec3">3</a> below. Finally, there is grouped listing of all the corpus files, with each listed item serving as a clickable link to a context page for the corresponding file. If the ID text box field has content, then the listing of files will be restricted to those files with names that contain the given content, ignoring case distinctions. If there is no match for the content of the ID text box, then the overview page is left with no listed files.</p>
 
@@ -175,11 +175,11 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The colouring of cells in the first column depends on the cell content as follows:</p>
 <ul>
-<li>Verbs with grammatical codes are coloured LemonChiffon.</li>
-<li>Full verbs without grammatical codes are coloured PeachPuff.</li>
-<li><small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small>, and <small style="font-size: 75%">BE</small> verbs are coloured Tan.</li>
-<li>Other lexical words are coloured PaleGreen.</li>
-<li>Other items that lack a word lemma, e.g.&nbsp;punctuation, are coloured Thistle.</li>
+<li>Verbs with grammatical codes are coloured <font style="background-color: #FFFACD;">LemonChiffon</font>.</li>
+<li>Full verbs without grammatical codes are coloured <font style="background-color: #FFDAB9;">PeachPuff</font>.</li>
+<li><small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small>, and <small style="font-size: 75%">BE</small> verbs are coloured <font style="background-color: #D2B48C;">Tan</font>.</li>
+<li>Other words with a word lemma are coloured <font style="background-color: #98FB98;">PaleGreen</font>.</li>
+<li>Other items that lack a word lemma (e.g.&nbsp;punctuation) are coloured <font style="background-color: #D8BFD8;">Thistle</font>.</li>
 <li>Yield lines, that is, lines starting with &lsquo;<tt>=N(" </tt>&rsquo;, have no added colour.</li>
 </ul>
 
@@ -192,6 +192,19 @@ body {
 <p align="justify">The TGrep2 page gives a link for returning to the corpus overview page, and a text field box for entering a TGrep2 search pattern. A search is made after a search pattern is entered into the text field box and the <tt>[ENTER]</tt> key is pressed.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search is made using the <tt>tgrep2</tt> command (Rohde 2005) over all the corpus data in a binary database built from data that was first converted into the bracketed format described in section <a href="#sec4">4</a>, and illustrated with (<a href="#ex2">2</a>). Aside from making changes to the search pattern, there is no other way to restrict the searched data.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;TGrep2 queries are expressed as patterns that consist of extended regular expressions to match tree nodes, and a simple syntax for expressing structural relationships between matched nodes. Also, nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels. As an example, consider pattern (<a href="#ex6">6</a>) which finds free relatives.</p>
+
+<dl>
+  <dt>(<a name="ex6">6</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;:&nbsp;(&sol;&#94;IP-REL&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(RPRO|RD|RADV)&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
+</dl>
+
+<form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP\b/ >> =i)))"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">The tree relation &lsquo;<tt>&lt;:</tt>&rsquo; of (<a href="#ex6">6</a>) states that a matched <tt>IP-REL</tt> node is the only daughter of a matched <tt>NP</tt> node. The <tt>NP</tt> node is the master node found by the overall pattern, and so a free relative. The other conditions of the pattern concern the need for the matched <tt>IP-REL</tt> node to contain a relative word without there being a distinct intervening <tt>IP</tt> layer.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results are displayed as trees, with content that matches the master node of the search pattern highlighted. The ID node of a shown tree works as a link for accessing the same tree in a Tree view page. Up to fifty trees are shown in random order. If there are more than fifty results, you can see different trees by re-running the search. The results page also gives information about the number of hits found, and the number of files that contain hits.</p>
 
@@ -215,15 +228,15 @@ body {
 
 <h3><a name="sec7.1">7.1</a>&nbsp;&nbsp;&nbsp;Tree page</h3>
 
-<p align="justify">The tree page shows a tree visualisation of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then a tree for each ID is shown. The ID node of a shown tree works as a link for opening the same tree in a new Tree view page. Figure 2 illustrates the tree page with parse analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The tree page shows a tree visualisation of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then a tree for each ID is shown. The ID node of a shown tree works as a link for opening the same tree in a new Tree view page. Figure 2 illustrates the tree page with parse analysis for (<a href="#ex7">7</a>).</p>
 
 <dl>
-  <dt>(<a name="ex6">6</a>)</dt><dd>Peter scuttered underneath the bushes.</dd>
+  <dt>(<a name="ex7">7</a>)</dt><dd>Peter scuttered underneath the bushes.</dd>
 </dl>
 
 <p><a name="fig2">Figure 2: Example tree page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_tree.png" alt="Example tree page" height="275">
+<img src="https://ajb129.github.io/tspc_quick_access_tree.png" alt="Example tree page" height="350">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This analysis demonstrates some key aspects of the annotation scheme:</p>
 <ul>
@@ -236,21 +249,21 @@ body {
 
 <h3><a name="sec7.2">7.2</a>&nbsp;&nbsp;&nbsp;Word page</h3>
 
-<p align="justify">The word page shows the word analysis of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then word analysis for each ID is shown. Figure 3 illustrates the word page with word analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The word page shows the word analysis of an instance of parse analysis. If multiple parse analysis IDs appear in the ID text field box, then word analysis for each ID is shown. Figure 3 illustrates the word page with word analysis for (<a href="#ex7">7</a>).</p>
 
 <p><a name="fig3">Figure 3: Example word page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_word.png" alt="Example word page" height="350">
+<img src="https://ajb129.github.io/tspc_quick_access_word.png" alt="Example word page" height="400">
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As Figure 3 shows, word analysis is presented in a tabled format with three main columns for words. The first column is for a word as it occurs in the source sentence(s). The second column presents the word class of the word from the first column. If the word is a verb associated with a grammar pattern, then this pattern information is also presented and highlighted with yellow. The third column presents information about the word of the first column with minimally a word lemma. If the word is a lexical word then it is also given sense definitions from a dictionary database. Moreover, if the word is a verb then the grammar pattern information is used to highlight with yellow compatible sense definitions, and leave other sense definitions shaded grey. Sense definitions with grammar codes are sourced from Cowie (1989). If the word is a verb without a grammar pattern, then all the cells containing sense numbers for the associated sense definitions are coloured red.</p>
 
 <h3><a name="sec7.3">7.3</a>&nbsp;&nbsp;&nbsp;Graph page</h3>
 
-<p align="justify">The graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2021). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex6">6</a>).</p>
+<p align="justify">The graph page shows a graph visualisation of an instance of parse analysis produced by the Treebank Semantics evaluation system (Butler 2021). If multiple parse analysis IDs appear in the ID text field box, then a single graph is calculated from all the parse analysis of the given IDs. Figure 3 illustrates the graph page with graph analysis for (<a href="#ex7">7</a>).</p>
 
 <p><a name="fig4">Figure 4: Example graph page</a></p>
 
-<img src="https://ajb129.github.io/tspc_quick_access_graph.png" alt="Example graph page" height="200">
+<img src="https://ajb129.github.io/tspc_quick_access_graph.png" alt="Example graph page" height="280">
 
 <p align="justify">In a graph, word content for source sentences is found outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;) and is always accompanied by (i) content between curly braces (&lsquo;<tt>&lcub;</tt>&rsquo;, &lsquo;<tt>&rcub;</tt>&rsquo;) to say the word class (and, when appropriate, grammar code) of the word, and (ii) numbering to say the word position within the source sentence(s).</p>
 
@@ -267,23 +280,23 @@ body {
 <li><i>sentence</i>&sol;<i>discourse bound</i> pronouns (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) that are links to already established referents.</li>
 </ul>
 
-<p align="justify">Other words with no presence in graphs are:</p>
+<p align="justify">Other words with no graph presence are:</p>
 <ul>
 <li><i>relative pronouns</i> used at the start of a relative clause, e.g., <i>who</i>, <i>which</i>, <i>that</i> (<i>the girl <u>who</u> smiled</i>, <i>the house <u>which&sol;that</u> Jack built</i>), and</li>
 <li><i>complementizer</i> <i>that</i> used at the start of an embedded clause (<i>I think <u>that</u> she smiled</i>, <i>the claim <u>that</u> Jack built a house</i>).</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for word content to involve the &lsquo;#&rsquo; symbol. This marks a word absence due to phrase head or verb elision in the source sentence. For example, consider (<a href="#ex7">7</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for word content to involve the &lsquo;#&rsquo; symbol. This marks a word absence due to phrase head or verb elision in the source sentence. For example, consider (<a href="#ex8">8</a>).</p>
 
 <dl>
-  <dt>(<a name="ex7">7</a>)</dt><dd>He lost one of his shoes among the cabbages, and the other shoe amongst the potatoes.</dd>
+  <dt>(<a name="ex8">8</a>)</dt><dd>He lost one of his shoes among the cabbages, and the other shoe amongst the potatoes.</dd>
 </dl>
 
-<p align="justify">Figure <a href="#fig5">5</a> shows the graph that is generated from a parse of (<a href="#ex7">7</a>) by the interface.</p>
+<p align="justify">Figure <a href="#fig5">5</a> shows the graph that is generated from a parse of (<a href="#ex8">8</a>) by the interface.</p>
 
 <p><a name="fig5">Figure 5: Graph for (5), an example with elision</a></p>
 
-<img src="https://ajb129.github.io/puzzles4.png" alt="Graph for (5), a example with elision" height="400">
+<img src="https://ajb129.github.io/puzzles4.png" alt="Graph for (5), a example with elision" height="480">
 
 <p align="justify">The graph of Figure <a href="#fig5">5</a> has two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from the word <i>and</i> occuring topmost in the graph. However, while the first verb is overtly realised with the word <i>lost</i>, the content of the second verb is shown as an instance of &lsquo;#&rsquo; to indicate the licensed absence of a verb (a lost <i>lost</i>!). There is one further instance of &lsquo;#&rsquo; in the graph: This occurs with <tt>[num]</tt> (numeral modifier) and <tt>[loc]among</tt> (locational <i>among</i>) links, to indicate a nominal head absence.</p>
 
@@ -292,13 +305,13 @@ body {
 <br>
 <h2><a name="references">References</a></h2>
 
-<p><a name="Butler-2021ts">Butler, Alastair. 2021.</a> Meaning representations from treebanks. The Treebank Semantics Web Site. Available at: <a href="http://www.compling.jp/ajb129/ts.html">http://www.compling.jp/ajb129/ts.html</a>.</p>
+<p><a name="Butler-2021ts">Butler, Alastair. 2021.</a> Meaning representations from treebanks. The Treebank Semantics Web Site. Available at: <tt><a href="http://www.compling.jp/ajb129/ts.html">http://www.compling.jp/ajb129/ts.html</a></tt>.</p>
 
 <p><a name="Cowie-1989">Cowie, A P. 1989.</a> <i>Oxford Advanced Learner's Dictionary, Fourth Edition</i>. Oxford: Oxford University Press.</p>
 
 <p><a name="Magloire-et-al-2021">Magloire, Alain et al. 2021.</a> GNU Grep: Print lines that match patterns, version 3.7. Free Software Foundation.</p>
 
-<p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15. Available at: <a href="https://github.com/andreasvc/tgrep2">https://github.com/andreasvc/tgrep2</a></p>
+<p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15. Available at: <tt><a href="https://github.com/andreasvc/tgrep2">https://github.com/andreasvc/tgrep2</a></tt>.</p>
 
 <br/>
 <br/>
