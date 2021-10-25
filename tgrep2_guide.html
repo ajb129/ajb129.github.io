@@ -922,9 +922,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/ <6 /^PP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -936,9 +933,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/ <-1 /^ADVP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -950,9 +944,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/ <8 __ !<10 __"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1020,9 +1011,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^IP-INF\b/ < /^VB\b/ < /^NP-OB2\b/ | < /^BE\b/ < /^NP-PRD2\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1034,9 +1022,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^IP-INF\b/ [ < /^NP-OB2\b/ | < /^NP-PRD2\b/ ] [ $.. /SBJ/ | $,, /^ADVP\b/ ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1054,9 +1039,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="__=mid < /CP-THT-OB1/ << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^IP\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1070,9 +1052,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/REL/=p << (/OB1/ < /\*T\*/ !>> (/REL/ >> =p))"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1088,9 +1067,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/=x : =x < /^CP-THT\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1121,9 +1097,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/ < /^N\b/ < (/^CP-THT\b/ < (/^IP-SUB\b/ < (/^C\b/ < that)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
@@ -1133,9 +1106,6 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="DB" value="texts"/>
-  <input type="hidden" name="ACT" value="tregex"/>
-  <input type="hidden" name="MODE" value="default"/>
   <input type="hidden" name="search" value="/^NP\b/=x : (=x < /^N\b/=n) : (=x < /^CP-THT\b/=y) : (=y < /^IP-SUB\b/=i) : (=i < /^C\b/=c) : (=c < that)"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>

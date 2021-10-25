@@ -42,7 +42,7 @@ body {
 <dt>(iv)</dt><dd>seeing visualisations of the parse analysis from three different perspectives: Tree, Word, and Graph.</dd>
 </dl>
 
-<p align="justify">The interface provides a &lsquo;live&rsquo; view of the corpus as it is being built. Indeed, the principle reason for the development of this interface has been to provide quick and simple access to visualisations of the corpus analysis as it is worked on. The interface also has a secondary role of offering a useful way to explore the parsed data, with its querying functions being useful for linguistic research and English grammar teaching purposes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The interface provides a &lsquo;live&rsquo; view of the corpus as it is being built. Indeed, the principle reason for the development of this interface has been to provide quick and simple access to visualisations of the corpus analysis as it is worked on. The interface also has a secondary role of offering an active way to explore the parsed data, with its querying functions being useful for linguistic research and English grammar teaching purposes.</p>
 
 <br>
 <h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;The corpus overview page and interface map</h2>
@@ -53,7 +53,7 @@ body {
 
 <img src="https://ajb129.github.io/tspc_quick_access_map.png" alt="Map of the interface" height="440">
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The corpus overview page contains links for reaching the Grep and TGrep2 pages. There is also an ID field box with the functionality described in section <a href="#sec3">3</a> below. Finally, there is grouped listing of all the corpus files, with each listed item serving as a clickable link to a context page for the corresponding file. If the ID text box field has content, then the listing of files will be restricted to those files with names that contain the given content, ignoring case distinctions. If there is no match for the content of the ID text box, then the overview page is left with no listed files.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The corpus overview page contains links for reaching the Grep and TGrep2 pages. There is also an ID field box with the functionality described in section <a href="#sec3">3</a> below. Finally, there is grouped listing of all the corpus files, with each listed item serving as a clickable link to a context page for the corresponding file. If the ID text box field has content, then the listing of files will be restricted to those files with names that contain the given content, ignoring case distinctions. With the corpus consisting of over four hundred files, this provides a useful way to zoom in on file collections, especially as related files have related names. If there is no match for the content of the ID text box, then the overview page is left with no listed files.</p>
 
 <br>
 <h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Accessing content by providing ID information</h2>
@@ -171,7 +171,7 @@ body {
 
 <p align="justify">Note that the double quotes character (<tt>&quot;</tt>) cannot be used in grep search patterns made with the interface. In the patterns of (<a href="#ex4">4</a>) and (<a href="#ex5">5</a>), mention of double quote characters is avoided with use of the dot (&lsquo;<tt>.</tt>&rsquo;) character, which matches any single character.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to searching for word lemmas, grep search is particular useful for being able to search through the yield lines of the annotation. Any search that involves a space character will automatically be restricted to finding its matches from yield lines.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to searching for word lemmas, the Grep search page is particularly useful for searching through the yield lines of the annotation. Any search that involves a space character will automatically be restricted to finding its matches from yield lines.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;After making a search, a count of the number of matched results is given at the top of a returned results page. This is followed by a display of the results in a tabled format with two columns. The first column consists of possibly coloured cells that contain the full content of a matched line from the corpus data, and the second column contains information about the line number followed by an underscore character (&lsquo;_&rsquo;) and then the file name for the reported content. This line number and file name serve as a link to a tree page for the overall linked instance of parse analysis.</p>
 
@@ -185,7 +185,7 @@ body {
 <li>Yield lines, that is, lines starting with &lsquo;<tt>=N(" </tt>&rsquo;, have no added colour.</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Up to 2500 consecutive search results are returned following corpus order, that is, with matches taken from files following an alphabetical sort of the corpus filenames. That returned results are consecutive is important because this allows for the potential of contextual information being seen across returned lines. Quite where in the corpus order the batch of 2500 consecutive search results comes from is established through a random selection. If there are more than 2500 results, you can see a different batch of 2500 results by re-running the search.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Up to 2500 consecutive search results are returned following corpus order, that is, with matches taken from files following an alphabetical sort of the corpus filenames. That returned results are consecutive is important because this allows for the potential of contextual information being seen across returned lines. Quite where in the corpus order the consecutive search results come from is established through a random selection. If there are more than 2500 results, you can see a different batch of 2500 results by re-running the search.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there are less than 100 search results, a link is provided at the bottom of the page for opening in a tree page a display of all the returned results as trees.</p>
 
@@ -203,10 +203,10 @@ body {
 
 <form target="_blank" action="http://160.16.203.55/dev/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP\b/ >> =i)))"/>
-  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">The tree relation &lsquo;<tt>&lt;:</tt>&rsquo; of (<a href="#ex6">6</a>) states that a matched <tt>IP-REL</tt> node is the only daughter of a matched <tt>NP</tt> node. The <tt>NP</tt> node is the master node found by the overall pattern, and so a free relative. The other conditions of the pattern concern the need for the matched <tt>IP-REL</tt> node to contain a relative word without there being a distinct intervening <tt>IP</tt> layer.</p>
+<p align="justify">The tree relation &lsquo;<tt>&lt;:</tt>&rsquo; of (<a href="#ex6">6</a>) states that a matched <tt>IP-REL</tt> node is the only daughter of a matched <tt>NP</tt> node. The <tt>NP</tt> node is the master node found by the overall pattern. Brackets ensure that other conditions of the pattern concern the need for the matched <tt>IP-REL</tt> node to contain a relative word (that is, a word tagged as either <tt>RPRO</tt>, <tt>RD</tt>, or <tt>RADV</tt>) without there being a distinct intervening <tt>IP</tt> layer.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results are displayed as trees, with content that matches the master node of the search pattern highlighted. The ID node of a shown tree works as a link for accessing the same tree in a Tree view page. Up to fifty trees are shown in random order. If there are more than fifty results, you can see different trees by re-running the search. The results page also gives information about the number of hits found, and the number of files that contain hits.</p>
 
