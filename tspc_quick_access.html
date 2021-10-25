@@ -171,6 +171,8 @@ body {
 
 <p align="justify">Note that the double quotes character (<tt>&quot;</tt>) cannot be used in grep search patterns made with the interface. In the patterns of (<a href="#ex4">4</a>) and (<a href="#ex5">5</a>), mention of double quote characters is avoided with use of the dot (&lsquo;<tt>.</tt>&rsquo;) character, which matches any single character.</p>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to searching for word lemmas, grep search is particular useful for being able to search through the yield lines of the annotation. Any search that involves a space character will automatically be restricted to finding its matches from yield lines.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;After making a search, a count of the number of matched results is given at the top of a returned results page. This is followed by a display of the results in a tabled format with two columns. The first column consists of possibly coloured cells that contain the full content of a matched line from the corpus data, and the second column contains information about the line number followed by an underscore character (&lsquo;_&rsquo;) and then the file name for the reported content. This line number and file name serve as a link to a tree page for the overall linked instance of parse analysis.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The colouring of cells in the first column depends on the cell content as follows:</p>
@@ -183,7 +185,7 @@ body {
 <li>Yield lines, that is, lines starting with &lsquo;<tt>=N(" </tt>&rsquo;, have no added colour.</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Up to 2500 consecutive search results are returned following corpus order, that is, with matches taken from files following an alphabetical sort of the corpus filenames. Quite where in the corpus order the batch of 2500 consecutive search results comes from is established through a random selection. If there are more than 2500 results, you can see a different batch of 2500 results by re-running the search.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Up to 2500 consecutive search results are returned following corpus order, that is, with matches taken from files following an alphabetical sort of the corpus filenames. That returned results are consecutive is important because this allows for the potential of contextual information being seen across returned lines. Quite where in the corpus order the batch of 2500 consecutive search results comes from is established through a random selection. If there are more than 2500 results, you can see a different batch of 2500 results by re-running the search.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there are less than 100 search results, a link is provided at the bottom of the page for opening in a tree page a display of all the returned results as trees.</p>
 
@@ -275,15 +277,17 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most words from source sentences have a presence within the corresponding graph, however some words make a contribution that has to be seen in terms of consequences for graph nodes and their dependencies. Missing words include words that are used to make reference to what is talked about, with node presence capturing the reference contribution. These words can be either:</p>
 <ul>
-<li><i>indefinites</i> (e.g., <i>a</i>, <i>an</i>, <i>some</i>) used to introduce new items for discussion (discourse referents),</li>
-<li><i>definites</i> (e.g., <i>the</i>, <i>these</i>, <i>this</i>) used for a familiar or unique referent of the discourse, or</li>
-<li><i>sentence</i>&sol;<i>discourse bound</i> pronouns (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) that are links to already established referents.</li>
+<li><b><i>indefinites</i></b> (e.g., <i>a</i>, <i>an</i>, <i>some</i>) used to introduce new items for discussion (discourse referents),</li>
+<li><b><i>definites</i></b> (e.g., <i>the</i>, <i>these</i>, <i>this</i>) used for a familiar or unique referent of the discourse, or</li>
+<li><b><i>sentence</i></b>&sol;<b><i>discourse bound pronouns</i></b> (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) that are links to already established referents.</li>
 </ul>
 
-<p align="justify">Other words with no graph presence are:</p>
+<p align="justify">Note that unbound pronouns do have graph presence.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Other words with no graph presence are:</p>
 <ul>
-<li><i>relative pronouns</i> used at the start of a relative clause, e.g., <i>who</i>, <i>which</i>, <i>that</i> (<i>the girl <u>who</u> smiled</i>, <i>the house <u>which&sol;that</u> Jack built</i>), and</li>
-<li><i>complementizer</i> <i>that</i> used at the start of an embedded clause (<i>I think <u>that</u> she smiled</i>, <i>the claim <u>that</u> Jack built a house</i>).</li>
+<li><b><i>relative pronouns</i></b> used at the start of a relative clause, e.g., <i>who</i>, <i>which</i>, <i>that</i> (<i>the girl <u>who</u> smiled</i>, <i>the house <u>which&sol;that</u> Jack built</i>), and</li>
+<li>the <b><i>complementizer</i></b> <i>that</i> used at the start of an embedded clause (<i>I think <u>that</u> she smiled</i>, <i>the claim <u>that</u> Jack built a house</i>).</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for word content to involve the &lsquo;#&rsquo; symbol. This marks a word absence due to phrase head or verb elision in the source sentence. For example, consider (<a href="#ex8">8</a>).</p>
@@ -298,7 +302,7 @@ body {
 
 <img src="https://ajb129.github.io/puzzles4.png" alt="Graph for (5), a example with elision" height="450">
 
-<p align="justify">The graph of Figure <a href="#fig5">5</a> has two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from the word <i>and</i> occuring topmost in the graph. However, while the first verb is overtly realised with the word <i>lost</i>, the content of the second verb is shown as an instance of &lsquo;#&rsquo; to indicate the licensed absence of a verb (a lost <i>lost</i>!). There is one further instance of &lsquo;#&rsquo; in the graph: This occurs with <tt>[num]</tt> (numeral modifier) and <tt>[loc]among</tt> (locational <i>among</i>) links, to indicate a nominal head absence.</p>
+<p align="justify">The graph of Figure <a href="#fig5">5</a> has two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from the word <i>and</i> occuring topmost in the graph. However, while the first verb is overtly realised with the word <i>lost</i>, the content of the second verb is shown as an instance of &lsquo;#&rsquo; to indicate the licensed absence of a verb (a lost <i>lost</i>!). There is one further instance of &lsquo;#&rsquo; in the graph occurring with the links of <tt>[num]</tt> (numeral modifier) and <tt>[loc]among</tt> (locational <i>among</i>) to indicate a nominal head absence.</p>
 
 <br>
 <br>
