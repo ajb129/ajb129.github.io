@@ -52,7 +52,7 @@ body {
 <br>
 <h2><a name="sec1.1">1.1</a>&nbsp;&nbsp;&nbsp;Encircling layers</h2>
 
-<p align="justify">An English sentence is like an onion with encircling layers around internal elements, as pictured in Figure <a href="#fig1.1">1.1</a>.</p>
+<p align="justify">An utterance of English is like an onion with encircling layers around internal elements, as pictured in Figure <a href="#fig1.1">1.1</a>.</p>
 
 <p><a name="fig1.1">Figure 1.1: Layers around an innermost element</a></p>
 
@@ -252,50 +252,50 @@ body {
 
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira, and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write a set of phrase structure rules and get an executable Prolog program.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>), and this will require tabling to avoid infinite loops with rule evaluation. Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. As the remainder of this chapter, section <a href="#sec1.4">1.4</a> introduces rules for sentence layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceeding chapters by integrating clause subordination.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. As the remainder of this chapter, section <a href="#sec1.4">1.4</a> introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceeding chapters by integrating clause subordination.</p>
 
 <br>
-<h2><a name="sec1.4">1.4</a>&nbsp;&nbsp;&nbsp;Sentence layers</h2>
+<h2><a name="sec1.4">1.4</a>&nbsp;&nbsp;&nbsp;Utterance layers</h2>
 
-<p align="justify">The sentence layer is the topmost structural layer of an utterance. The Prolog code of (<a href="#ex1.4">1.4</a>) defines this layer with a series of phrase structure rules, each of which imposes its own conditions on what needs to be present to say there is content for a sentence layer.</p>
+<p align="justify">The utterance layer is the topmost structural layer of an utterance. The Prolog code of (<a href="#ex1.4">1.4</a>) defines this layer with a series of phrase structure rules, each of which imposes its own conditions on what needs to be present to say there is content for an utterance layer.</p>
 
 <dl>
   <dt>(<a name="ex1.4">1.4</a>)</dt><dd></dd>
 </dl>
-<tt>sentence(Id,n(Id,IP,none))&nbsp;--&gt;</tt><br>
+<tt>utterance(Id,n(Id,IP,none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(IPl-L1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-MAT'|IPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>sentence(Id,n(Id,'CP-QUE'(IP,PU),none))&nbsp;--&gt;</tt><br>
+<tt>utterance(Id,n(Id,'CP-QUE'(IP,PU),none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(IPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;punc(final_question,[PU]-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-SUB'|IPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>sentence(Id,n(Id,IP,none))&nbsp;--&gt;</tt><br>
+<tt>utterance(Id,n(Id,IP,none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(IPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IML'|IPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>sentence(Id,n(Id,'FRAG'(ADJP),none))&nbsp;--&gt;</tt><br>
+<tt>utterance(Id,n(Id,'FRAG'(ADJP),none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase([ADJP]-[]).</tt><br>
-<tt>sentence(Id,n(Id,'FRAG'(Phrase),none))&nbsp;--&gt;</tt><br>
+<tt>utterance(Id,n(Id,'FRAG'(Phrase),none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverbial_phrase([Phrase]-[]).</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="#ex1.4">1.4</a>) will create a structure with <tt>IP-MAT</tt> as the topmost node, given that the content to be parsed involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="#sec4.3">4.3</a> below), and where the last list item is an instance of final punctuation (see section <a href="#sec2.14">2.14</a> below).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Prolog, lists are written with square bracket notation: <tt>[a1, ..., aN]</tt>, where <tt>a1</tt> through to <tt>aN</tt> are the list items.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), a series of Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>tphrase</tt> to question whether the established parse list has content to satisfy the <tt>sentence</tt> rules of (<a href="#ex1.4">1.4</a>). If <tt>tphrase</tt> succeeds then a parse result with <tt>ex1</tt> as its ID will be the content of <tt>_X</tt>. The third call of <tt>pp_ptree</tt> pretty prints the <tt>_X</tt> content as bracketed tree output.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), a series of Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>tphrase</tt> to question whether the established parse list has content to satisfy the <tt>utterance</tt> rules of (<a href="#ex1.4">1.4</a>). If <tt>tphrase</tt> succeeds then a parse result with <tt>ex1</tt> as its ID will be the content of <tt>_X</tt>. The third call of <tt>pp_ptree</tt> pretty prints the <tt>_X</tt> content as bracketed tree output.</p>
 
 <dl>
   <dt>(<a name="ex1.5">1.5</a>)</dt><dd></dd>
 </dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'VBP'(smiles),'PU'('.')]),&nbsp;tphrase(sentence(ex1,_X)),&nbsp;pp_ptree(_X).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'VBP'(smiles),'PU'('.')]),&nbsp;tphrase(utterance(ex1,_X)),&nbsp;pp_ptree(_X).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;smiles)</tt><br>
@@ -311,7 +311,7 @@ body {
 <dl>
   <dt>(<a name="ex1.6">1.6</a>)</dt><dd></dd>
 </dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'VBP'(smiles)]),&nbsp;tphrase(sentence(ex2,_X)),&nbsp;pp_ptree(_X).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'VBP'(smiles)]),&nbsp;tphrase(utterance(ex2,_X)),&nbsp;pp_ptree(_X).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IML&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;smiles))</tt><br>
@@ -321,12 +321,12 @@ body {
 
 <p align="justify">The pretty print from (<a href="#ex1.6">1.6</a>) shows the return of a structure with <tt>IML</tt> (intermediate clause layer) as the topmost node: The first rule of (<a href="#ex1.4">1.4</a>) will have failed, but the third rule succeeds. These rules are very similar: Both call the <tt>clause_top_layer</tt> phrase structure rules, but the third rule sends all of the parse list content to its <tt>clause_top_layer</tt> call, and so lacks the requirement for the last item of the parse list to be sentence final punctuation.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a further example of checking if there is parse list content for a sentence layer, consider (<a href="#ex1.7">1.7</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a further example of checking if there is parse list content for an utterance layer, consider (<a href="#ex1.7">1.7</a>).</p>
 
 <dl>
   <dt>(<a name="ex1.7">1.7</a>)</dt><dd></dd>
 </dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string(['NS'('boys')]),&nbsp;tphrase(sentence(ex3,_X)),&nbsp;pp_ptree(_X).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['NS'('boys')]),&nbsp;tphrase(utterance(ex3,_X)),&nbsp;pp_ptree(_X).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(FRAG&nbsp;(NP&nbsp;(N&nbsp;boys)))</tt><br>
 <tt>&nbsp;&nbsp;(ID&nbsp;ex3))</tt><br>
@@ -335,7 +335,7 @@ body {
 
 <p align="justify">The pretty print from (<a href="#ex1.7">1.7</a>) shows the return of a structure with <tt>FRAG</tt> (sentence fragment) as the topmost node. This will have been achieved with the fourth rule of (<a href="#ex1.4">1.4</a>), which expects the parse list to provide content for the success of one of the <tt>adverbial_phrase</tt> rules of section <a href="#sec5.5">5.5</a> below.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To sum up, this section has shown how to query whether a parse list contains content for an English utterance. With success, returned structure tells us about the kind of utterance: declarative matrix sentence (<tt>IP-MAT</tt>), interrogative sentence (<tt>CP-QUE</tt>), intermediate clause (<tt>IML</tt>), or sentence fragment (<tt>FRAG</tt>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To sum up, this section has shown how to query whether a parse list contains content for an English utterance. With success, returned structure tells us about the kind of utterance: declarative matrix sentence (<tt>IP-MAT</tt>), interrogative sentence (<tt>CP-QUE</tt>), intermediate clause utterance (<tt>IML</tt>), or sentence fragment (<tt>FRAG</tt>).</p>
 
 <br>
 <br>
@@ -346,7 +346,7 @@ body {
 <br>
 <h2><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter catalogs all the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular WORD CLASS. As seen in the queries of section <a href="#sec1.4">1.4</a>, a word is an item in a parse list <b>together with</b> information about its word class. The work of this chapter is to establish the initial parse consequence for a particular word&sol;class pair from a parse list.</p>
+<p align="justify">This chapter catalogs all the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular WORD CLASS. As seen in the queries of section sectionref:[__sentence__], a word is an item in a parse list <b>together with</b> information about its word class. The work of this chapter is to establish the initial parse consequence for a particular word&sol;class pair from a parse list.</p>
 
 <br>
 <h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Nouns</h2>
