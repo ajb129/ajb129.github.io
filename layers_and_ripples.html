@@ -254,7 +254,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. As the remainder of this chapter, section <a href="#sec1.4">1.4</a> introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceeding chapters by integrating clause subordination.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. The remainder of this chapter, section <a href="#sec1.4">1.4</a>, introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceeding chapters by integrating clause subordination.</p>
 
 <br>
 <h2><a name="sec1.4">1.4</a>&nbsp;&nbsp;&nbsp;Utterance layers</h2>
@@ -353,7 +353,7 @@ body {
 
 <p align="justify">We start off with the <tt>noun</tt> rules of (<a href="#ex2.1">2.1</a>) for establishing the contribution of the general noun words of Table <a href="#table2.1">2.1</a>.</p>
 
-<p><a name="table2.1">Table 2.1: General noun words</a></p>
+<p><a name="table2.1">Table 2.1: Tags for general noun words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>NS</tt></td><td>Plural common noun (e.g.&nbsp;<tt>children</tt>, <tt>revelations</tt>, <tt>times</tt>, <tt>wishes</tt>)</td></tr>
@@ -395,7 +395,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="#table2.2">2.2</a> that can only act as noun phrase heads, and so we need to distinguish this kind of word at the rule level, which we do with the <tt>noun_head</tt> rules of (<a href="#ex2.4">2.4</a>).</p>
 
-<p><a name="table2.2">Table 2.2: Words that need to be noun phrase heads</a></p>
+<p><a name="table2.2">Table 2.2: Tags for words that need to be noun phrase heads</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>Q;~_nphd_</tt></td><td>Indefinite pronoun with quantification, which can be a compound (e.g.&nbsp;<tt>everybody</tt>, <tt>nothing</tt>), or a word which often occurs with the preposition <tt>of</tt> (e.g.&nbsp;<tt>much</tt>, <tt>many</tt>, <tt>a_lot</tt>)</td></tr>
@@ -409,7 +409,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the words of Table <a href="#table2.3">2.3</a> that essentially contribute a full noun phrase by themselves, that is, words that are noun phrase heads that don't take modifiers. To distinguish this type of word, there are the <tt>noun_head_full</tt> rules of (<a href="#ex2.5">2.5</a>).</p>
 
-<p><a name="table2.3">Table 2.3: Words that need to be noun phrase heads without modifiers</a></p>
+<p><a name="table2.3">Table 2.3: Tags for words that need to be noun phrase heads without modifiers</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>PNX</tt></td><td>Reflexive pronoun (e.g.&nbsp;<tt>myself</tt>, <tt>yourself</tt>, <tt>itself</tt>, <tt>ourselves</tt>), or reciprocal pronoun (e.g.&nbsp;<tt>each&lowbar;other</tt>)</td></tr>
@@ -467,7 +467,7 @@ body {
 
 <p align="justify">The determiners of Table <a href="#table2.4">2.4</a> are words with support from (<a href="#ex2.7">2.7</a>) that can only serve as noun head modifiers. Outside of coordination, there can be at most one occurrence of such a word per noun phrase instance.</p>
 
-<p><a name="table2.4">Table 2.4: Determiner words</a></p>
+<p><a name="table2.4">Table 2.4: Tags for determiner words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>D</tt></td><td>Determiner, which includes articles (e.g.&nbsp;<tt>a</tt>, <tt>the</tt>) and demonstratives (e.g.&nbsp;<tt>this</tt>, <tt>that</tt>)</td></tr>
@@ -490,7 +490,7 @@ body {
 
 <p align="justify">A genitive noun phrase which itself acts as the modifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="#table2.5">2.5</a>. Phrase structure integration support is given in (<a href="#ex2.8">2.8</a>) and (<a href="#ex2.9">2.9</a>).</p>
 
-<p><a name="table2.5">Table 2.5: Genitive markers</a></p>
+<p><a name="table2.5">Table 2.5: Tags for genitive markers</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>GENM</tt></td><td>The genitive marker <tt>&lt;apos&gt;s</tt> or <tt>&lt;apos&gt;</tt></td></tr>
@@ -515,7 +515,7 @@ body {
 
 <p align="justify">Table <a href="#table2.6">2.6</a> sets out the range of support for different kinds of adjectives, with rule integration support given in (<a href="#ex2.10">2.10</a>).</p>
 
-<p><a name="table2.6">Table 2.6: Adjective words</a></p>
+<p><a name="table2.6">Table 2.6: Tags for adjective words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>ADJ</tt></td><td>General adjective: an adjective not subclassified as <tt>ADJR</tt> or <tt>ADJS</tt> (e.g.&nbsp;<tt>old</tt>, <tt>good</tt>, <tt>male</tt>)</td></tr>
@@ -536,7 +536,7 @@ body {
 
 <p align="justify">Table <a href="#table2.7">2.7</a> sets out the range of support for different kinds of adverbs, with rule integration support given in (<a href="#ex2.11">2.11</a>).</p>
 
-<p><a name="table2.7">Table 2.7: Adverb words</a></p>
+<p><a name="table2.7">Table 2.7: Tags for adverb words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>ADV</tt></td><td>General adverb: an adverb not subclassified as <tt>ADVR</tt>, <tt>ADVS</tt>, <tt>RADV</tt>, or <tt>WADV</tt> (e.g.&nbsp;<tt>often</tt>, <tt>well</tt>, <tt>really</tt>).</td></tr>
@@ -563,7 +563,7 @@ body {
 
 <p align="justify">Table <a href="#table2.8">2.8</a> sets out the range of support for different kinds of full verbs, with rule integration support given in (<a href="#ex2.12">2.12</a>).</p>
 
-<p><a name="table2.8">Table 2.8: Full verb words</a></p>
+<p><a name="table2.8">Table 2.8: Tags for full verb words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>VBP</tt></td><td>The present tense form of lexical verbs (e.g.&nbsp;<tt>forgets</tt>, <tt>sends</tt>, <tt>lives</tt>, <tt>returns</tt>, <tt>forget</tt>, <tt>send</tt>, <tt>live</tt>, <tt>return</tt>)</td></tr>
@@ -590,7 +590,7 @@ body {
 
 <p align="justify">Table <a href="#table2.9">2.9</a> sets out the range of support for the different forms of <small style="font-size: 75%">DO</small>, with rule integration support given in two ways: There is (<a href="#ex2.13">2.13</a>) to capture main verb uses of <small style="font-size: 75%">DO</small>, and there is (<a href="#ex2.14">2.14</a>) to capture <small style="font-size: 75%">DO</small> as an auxiliary verb for the do support construction.</p>
 
-<p><a name="table2.9">Table 2.9: <small style="font-size: 75%">DO</small> words</a></p>
+<p><a name="table2.9">Table 2.9: Tags for <small style="font-size: 75%">DO</small></a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>DOP</tt></td><td>The present tense forms of the verb <small style="font-size: 75%">DO</small>: <tt>do</tt>, <tt>does</tt>, <tt>&lt;apos&gt;s</tt></td></tr>
@@ -623,7 +623,7 @@ body {
 
 <p align="justify">Table <a href="#table2.10">2.10</a> sets out the range of support for the different forms of <small style="font-size: 75%">HAVE</small>, with rule integration support given in (<a href="#ex2.15">2.15</a>).</p>
 
-<p><a name="table2.10">Table 2.10: <small style="font-size: 75%">HAVE</small> words</a></p>
+<p><a name="table2.10">Table 2.10: Tags for <small style="font-size: 75%">HAVE</small></a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>HVP</tt></td><td>The present tense forms of the verb <small style="font-size: 75%">HAVE</small>: <tt>have</tt>, <tt>&lt;apos&gt;ve</tt>, <tt>has</tt>, <tt>&lt;apos&gt;s</tt></td></tr>
@@ -646,7 +646,7 @@ body {
 
 <p align="justify">Table <a href="#table2.11">2.11</a> sets out the range of support for the different forms of <small style="font-size: 75%">BE</small>, with rule integration support given in (<a href="#ex2.16">2.16</a>).</p>
 
-<p><a name="table2.11">Table 2.11: <small style="font-size: 75%">BE</small> words</a></p>
+<p><a name="table2.11">Table 2.11: Tags for <small style="font-size: 75%">BE</small></a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>BEP</tt></td><td>The present tense forms of the verb <small style="font-size: 75%">BE</small>: i.e.&nbsp;<tt>is</tt>, <tt>am</tt>, <tt>are</tt>, <tt>&lt;apos&gt;m</tt>, <tt>&lt;apos&gt;re</tt>, and <tt>&lt;apos&gt;s</tt></td></tr>
@@ -667,14 +667,16 @@ body {
 <br>
 <h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;Modal verbs</h2>
 
-<p align="justify">Table <a href="#table2.12">2.12</a> sets out the range of support for modal verb words, with rule integration support given in (<a href="#ex2.17">2.17</a>).</p>
+<p align="justify">Modal verbs are tagged as in Table <a href="#table2.12">2.12</a>.</p>
 
-<p><a name="table2.12">Table 2.12: Modal verb words</a></p>
+<p><a name="table2.12">Table 2.12: Tags for modal verbs</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>MD</tt></td><td>Modal auxiliary verb (e.g.&nbsp;<tt>will</tt>, <tt>would</tt>, <tt>can</tt>, <tt>could</tt>, <tt>&lt;apos&gt;ll</tt>, <tt>&lt;apos&gt;d</tt>)</td></tr>
 <tr><td><tt>MD;~cat</tt></td><td>Modal catenative (<tt>ought</tt>, <tt>used</tt>)</td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule integration support for modal verbs is given in (<a href="#ex2.17">2.17</a>).</p>
+
 <dl>
   <dt>(<a name="ex2.17">2.17</a>)</dt><dd></dd>
 </dl>
@@ -684,13 +686,17 @@ body {
 <br>
 <h2><a name="sec2.12">2.12</a>&nbsp;&nbsp;&nbsp;Other clause level words</h2>
 
-<p><a name="table2.13">Table 2.13: Other clause level words</a></p>
+<p align="justify">Besides verbs, other clause level components are words with the tags of Table <a href="#table2.13">2.13</a>.</p>
+
+<p><a name="table2.13">Table 2.13: Tags for other clause level words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e.&nbsp;<tt>there</tt> occurring in the <i>there is ...</i> or <i>there are ...</i> construction</td></tr>
 <tr><td><tt>NEG</tt></td><td>The negative particle <tt>not</tt> or <tt>n&lt;apos&gt;t</tt></td></tr>
 <tr><td><tt>TO</tt></td><td>Infinitive marker <tt>to</tt></td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of words with the tags of Table <a href="#table2.13">2.13</a> is give in (<a href="#ex2.18">2.18</a>).</p>
+
 <dl>
   <dt>(<a name="ex2.18">2.18</a>)</dt><dd></dd>
 </dl>
@@ -701,7 +707,9 @@ body {
 <br>
 <h2><a name="sec2.13">2.13</a>&nbsp;&nbsp;&nbsp;Connective words</h2>
 
-<p><a name="table2.14">Table 2.14: Connective words</a></p>
+<p align="justify">So far we have considered words that serve as components of either phrases or clauses. There is a further class of words with the tags of Table <a href="#table2.14">2.14</a> that serve as the means to connect phrases and clauses.</p>
+
+<p><a name="table2.14">Table 2.14: Tags for connective words</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>CONJ</tt></td><td>Coordinating conjunction (e.g.&nbsp;<tt>and</tt>, <tt>or</tt>, <tt>but</tt>)</td></tr>
@@ -710,6 +718,8 @@ body {
 <tr><td><tt>P-CONN</tt></td><td>Subordinating conjunction (e.g.&nbsp;<tt>although</tt>, <tt>when</tt>)</td></tr>
 <tr><td><tt>P-ROLE</tt></td><td>Role preposition (e.g.&nbsp;<tt>in</tt>, <tt>of</tt>, <tt>under</tt>)</td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of connective words is give in (<a href="#ex2.19">2.19</a>).</p>
+
 <dl>
   <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
 </dl>
@@ -722,11 +732,17 @@ body {
 <br>
 <h2><a name="sec2.14">2.14</a>&nbsp;&nbsp;&nbsp;Punctuation</h2>
 
-<p><a name="table2.15">Table 2.15: Punctuation</a></p>
+<p align="justify">Punctuation points (&lsquo;?&rsquo; &lsquo;.&rsquo; &lsquo;;&rsquo; etc.) are treated as words for the purposes of word tagging with the tag of Table <a href="#table2.15">2.15</a>.</p>
+
+<p><a name="table2.15">Table 2.15: Tag for punctuation</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>PU</tt></td><td>Punctuation (e.g.&nbsp;<tt>?</tt>, <tt>.</tt>, <tt>;</tt>)</td></tr>
 </table>
+<p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation is placed as high as possible. For example, a full stop that ends a sentence is treated as the last constituent of the highest clause layer (<tt>IP</tt>&sol;<tt>CP</tt>&sol;<tt>FRAG</tt>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of punctuation is give in (<a href="#ex2.20">2.20</a>).</p>
+
 <dl>
   <dt>(<a name="ex2.20">2.20</a>)</dt><dd></dd>
 </dl>
@@ -746,12 +762,18 @@ body {
 <br>
 <h2><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter considers phrase layers. These are intermediate levels of organisation between a word and the clause. Each phrase is made up of a HEAD word and any DEPENDENTs. The head word is the word that the phrase is required to have in order to exist, and may be the only element of the phrase. A phrase is named after the word class of the head word. We will distinguish four main types of phrases: noun phrases with noun word heads (section <a href="#sec3.2">3.2</a>), adverb phrases with abverb word heads (section <a href="#sec3.3">3.3</a>), adjective phrases with adjective word heads (section <a href="#sec3.4">3.4</a>), and preposition phrases with preposition word heads (section <a href="#sec3.5">3.5</a>).</p>
+<p align="justify">This chapter considers phrase layers. These are intermediate levels of organisation between a word and the clause. Each phrase is made up of a HEAD word and any DEPENDENTs. The head word is the word that the phrase is required to have in order to exist, and may be the only element of the phrase. A phrase is named after the word class of the head word. There are four main phrase types:</p>
+<ul>
+<li>noun phrases with a noun head word (section <a href="#sec3.2">3.2</a>),</li>
+<li>adverb phrases with an abverb head word (section <a href="#sec3.3">3.3</a>),</li>
+<li>adjective phrases with an adjective head word (section <a href="#sec3.4">3.4</a>), and</li>
+<li>preposition phrases with a preposition head word (section <a href="#sec3.5">3.5</a>).</li>
+</ul>
 
 <br>
-<h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;Noun phrase</h2>
+<h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;Noun phrases</h2>
 
-<p align="justify">This section considers noun phrases. A bare noun phrase is created with (<a href="#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content (<tt>NPl</tt>). There is a check (<tt>NPl &#92;= ['PU'(_)|_]</tt>) to ensure that the list content doesn't have punctuation as its first element. Operation (<tt>NP =.. ['NP'|NPl]</tt>) turns the list elements into arguments for a prolog structure with principal functor <tt>'NP'</tt> which is added to the difference list layer outside the noun phrase.</p>
+<p align="justify">This section considers noun phrases. A bare noun phrase is created with (<a href="#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content (<tt>NPl</tt>). There is a check (<tt>NPl &#92;= ['PU'(_)|_]</tt>) to ensure that collected content doesn't have punctuation as its first element. Operation (<tt>NP =.. ['NP'|NPl]</tt>) turns the collected elements into daughter elements for a tree structure represented with a prolog structure that has principal functor <tt>'NP'</tt>. This assembled structure is added to a difference list that is collection point for subsequent content outside the noun phrase.</p>
 
 <dl>
   <dt>(<a name="ex3.1">3.1</a>)</dt><dd></dd>
@@ -763,13 +785,13 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of <tt>noun_phrase_top</tt>, (<a href="#ex3.2">3.2</a>), concerns a difference list (captured with <tt>L</tt>) that gathers content from either a call of <tt>noun_phrase_top_layer</tt>, or a call of <tt>noun_head_full</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of <tt>noun_phrase_top</tt>, (<a href="#ex3.2">3.2</a>), concerns a difference list (captured with <tt>L</tt>) that gathers content from either a call of <tt>noun_phrase_initial_layer</tt>, or a call of <tt>noun_head_full</tt>.</p>
 
 <dl>
   <dt>(<a name="ex3.2">3.2</a>)</dt><dd></dd>
 </dl>
 <tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L).</tt><br>
 <tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_head_full(L).</tt><br>
 
@@ -813,57 +835,59 @@ body {
 </tr>
 </table>
 
-<h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;Noun phrase top layers</h3>
+<h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
 
-<p align="justify">With (<a href="#ex3.3">3.3</a>) we have seen that the simplest form for a noun phrase is to consist of a single word that contributes content for <tt>noun_head_full</tt>. In this section we delve deeper into possible noun phrase structures by considering what a call of <tt>noun_phrase_top_layer</tt>, (<a href="#ex3.6">3.6</a>), may return.</p>
+<p align="justify">With (<a href="#ex3.3">3.3</a>) we have seen that the simplest form for a noun phrase is to consist of a single word that contributes content for <tt>noun_head_full</tt>. In this section we delve slightly deeper into possible noun phrase structures by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="#ex3.6">3.6</a>) may return.</p>
 
 <dl>
   <dt>(<a name="ex3.5">3.5</a>)</dt><dd></dd>
 </dl>
-<tt>noun_phrase_top_sequence_layer([PU,'CONJP'(CONJ,NP)|L]-L)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_top_tail_layer([PU,'CONJP'(CONJ,NP)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase([NP]-[]).</tt><br>
-<tt>noun_phrase_top_sequence_layer(['CONJP'(CONJ,NP)|L]-L)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_top_tail_layer(['CONJP'(CONJ,NP)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase([NP]-[]).</tt><br>
-<tt>noun_phrase_top_sequence_layer([PU,'CONJP'(NP)|L]-L0)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_top_tail_layer([PU,'CONJP'(NP)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase([NP]-[]),</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_sequence_layer(L-L0).</tt><br>
-<tt>noun_phrase_top_sequence_layer(['CONJP'(CONJ,NP)|L]-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_top_tail_layer(L-L0).</tt><br>
+<tt>noun_phrase_top_tail_layer(['CONJP'(CONJ,NP)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase([NP]-[]),</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_sequence_layer(L-L0).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_top_tail_layer(L-L0).</tt><br>
 
 <dl>
   <dt>(<a name="ex3.6">3.6</a>)</dt><dd></dd>
 </dl>
-<tt>noun_phrase_top_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_initial_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;determiner_phrase_layer(L-L1),</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L1-L0).</tt><br>
-<tt>noun_phrase_top_layer(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1-L0).</tt><br>
+<tt>noun_phrase_initial_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_head(L).</tt><br>
-<tt>noun_phrase_top_layer(L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L).</tt><br>
-<tt>noun_phrase_top_layer([NML|L]-L)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_initial_layer(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L).</tt><br>
+<tt>noun_phrase_initial_layer([NML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase([NP]-[]),</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_sequence_layer(L1-[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_top_tail_layer(L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NML&nbsp;=..&nbsp;['NML',NP|L1]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>noun_phrase_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L-L1),</tt><br>
+<tt>noun_phrase_initial_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause(L1-L0).</tt><br>
-<tt>noun_phrase_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L-L1),</tt><br>
+<tt>noun_phrase_initial_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase(L1-L0).</tt><br>
-<tt>noun_phrase_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L-L1),</tt><br>
+<tt>noun_phrase_initial_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L1-L0).</tt><br>
-<tt>noun_phrase_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L-L1),</tt><br>
+<tt>noun_phrase_initial_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;embedded_clause(L1-L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Entering a call of <tt>noun_phrase_initial_layer</tt> opens the possibility of having coordinate structures at the top level of the noun phrase. This is illustrated with (<a href="#ex3.7">3.7</a>), which leads to output of a noun phrase that immediately contains an <tt>NML</tt> (nominal intermediate level) layer as its only daughter element. The <tt>NML</tt> itself is comprised of three conjuncts, each of which contains an element with full noun phrase structure.</p>
 
 <dl>
   <dt>(<a name="ex3.7">3.7</a>)</dt><dd></dd>
@@ -879,6 +903,8 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
+<p align="justify">Calls made to reach the output of (<a href="#ex3.7">3.7</a>) are pictured in (<a href="#ex3.8">3.8</a>). Notably, following on from the first call to <tt>noun_phrase</tt>, there are three further embedded calls to <tt>noun_phrase</tt>, each for one of the three conjuncts. Also note how the coordination arises from the creation of a sequence of calls to <tt>noun_phrase_top_tail_layer</tt>. This gives a call structure that branches to the right, while leading to the return of conjuncts that are all placed under the same <tt>NML</tt> of the output tree structure.</p>
+
 <dl>
   <dt>(<a name="ex3.8">3.8</a>)</dt><dd></dd>
 </dl>
@@ -892,7 +918,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -920,7 +946,7 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="3" style="text-align: center; vertical-align: middle;">noun_phrase_top_sequence_layer</td></tr>
+            <tr><td colspan="3" style="text-align: center; vertical-align: middle;">noun_phrase_top_tail_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -958,7 +984,7 @@ body {
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="3" style="text-align: center; vertical-align: middle;">noun_phrase_top_sequence_layer</td></tr>
+                <tr><td colspan="3" style="text-align: center; vertical-align: middle;">noun_phrase_top_tail_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -1019,51 +1045,55 @@ body {
 </tr>
 </table>
 
-<h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;Noun phrase NML layers</h3>
+<h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
+
+<p align="justify">In addition to allowing for coordination at the highest levels of noun phrase structure, a call of <tt>noun_phrase_initial_layer</tt> is also preparation for delving deeper into noun phase structure, in particular, by allowing for subsequent calls to the <tt>internal_np_higher_layer</tt> rules of (<a href="#ex3.9">3.9</a>) that lead through to calls of the <tt>internal_np_lower_layer</tt> rules of (<a href="#ex3.10">3.10</a>).</p>
 
 <dl>
   <dt>(<a name="ex3.9">3.9</a>)</dt><dd></dd>
 </dl>
-<tt>nml_top_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>internal_np_higher_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase(L-L1),</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L1-L0).</tt><br>
-<tt>nml_top_layer([IP|L]-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1-L0).</tt><br>
+<tt>internal_np_higher_layer([IP|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;participle_clause(IP),</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L-L0).</tt><br>
-<tt>nml_top_layer(L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_lower_layer(L).</tt><br>
-<tt>nml_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L-L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L-L0).</tt><br>
+<tt>internal_np_higher_layer(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L).</tt><br>
+<tt>internal_np_higher_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase(L1-L0).</tt><br>
-<tt>nml_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L-L1),</tt><br>
+<tt>internal_np_higher_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause(L1-L0).</tt><br>
-<tt>nml_top_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L-L1),</tt><br>
+<tt>internal_np_higher_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;embedded_clause(L1-L0).</tt><br>
-<tt>nml_top_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>internal_np_higher_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L1-L0).</tt><br>
-<tt>nml_top_layer(L-[More|L0])&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(L-L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1-L0).</tt><br>
+<tt>internal_np_higher_layer(L-[More|L0])&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,L1-[More|L0]).</tt><br>
 
 <dl>
   <dt>(<a name="ex3.10">3.10</a>)</dt><dd></dd>
 </dl>
-<tt>nml_lower_layer(L)&nbsp;--&gt;</tt><br>
+<tt>internal_np_lower_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun(L).</tt><br>
-<tt>nml_lower_layer(L-L0)&nbsp;--&gt;</tt><br>
+<tt>internal_np_lower_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun(L-L1),</tt><br>
-<tt>&nbsp;&nbsp;nml_lower_layer(L1-L0).</tt><br>
-<tt>nml_lower_layer(['NML'('NML'(NP1,'CONJP'(CONJ,NP2)))|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(NPl1-[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L1-L0).</tt><br>
+<tt>internal_np_lower_layer(['NML'('NML'(NP1,'CONJP'(CONJ,NP2)))|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NPl1-[]),</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
-<tt>&nbsp;&nbsp;nml_top_layer(NPl2-[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NPl2-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NP1&nbsp;=..&nbsp;['NP'|NPl1],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NP2&nbsp;=..&nbsp;['NP'|NPl2]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex3.11">3.11</a>) we can see a demonstration of how a parse list containing only a single general noun word gives content for the creation of a resulting noun phrase.</p>
 
 <dl>
   <dt>(<a name="ex3.11">3.11</a>)</dt><dd></dd>
@@ -1073,6 +1103,8 @@ body {
 <tt>(NP&nbsp;(NS&nbsp;boys))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
+
+<p align="justify">Calls to achieve the output of (<a href="#ex3.11">3.11</a>) are pictured in (<a href="#ex3.12">3.12</a>), amounting to the full range of internal structuring for a noun phrase before the <tt>noun</tt> call is reached.</p>
 
 <dl>
   <dt>(<a name="ex3.12">3.12</a>)</dt><dd></dd>
@@ -1087,15 +1119,15 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -1122,7 +1154,9 @@ body {
 </tr>
 </table>
 
-<h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;Determiner phrase layer</h3>
+<h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;Determiner phrase layers</h3>
+
+<p align="justify">The internal structuring of (<a href="#ex3.12">3.12</a>) allows for more elements to be placed around the noun phrase head word. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="#ex3.6">3.6</a>) allows for placement of a determiner phrase before the noun phrase head word. A determiner phrase is created with <tt>determiner_phrase_layer</tt> calls of (<a href="#ex3.13">3.13</a>). The simplest form is to find content that satisfies a <tt>det</tt> call.</p>
 
 <dl>
   <dt>(<a name="ex3.13">3.13</a>)</dt><dd></dd>
@@ -1141,6 +1175,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP-GENV'|NPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The parse list of (<a href="#ex3.14">3.14</a>) contains a determiner word, followed by a general noun word that can serve as a noun phrase head, followed by a coordination word, and ending with a second general noun word that can also serve as a noun phrase head. As (<a href="#ex3.14">3.14</a>) shows, this leads to coordination, with each general noun word occupying its own conjunct internal to the noun phrase structure. What is still more interesting is the location of the determiner word, because the results reveal two alternative placements.</p>
+
 <dl>
   <dt>(<a name="ex3.14">3.14</a>)</dt><dd></dd>
 </dl>
@@ -1158,6 +1194,8 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can see why these two different placements for the determiner arise by considering the call structures involved in creating the results. Thus, the first result of (<a href="#ex3.14">3.14</a>) is created from the call structure of (<a href="#ex3.15">3.15</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from within the first conjunct. The first conjunct is itself introduced by an earlier call of <tt>noun_phrase_initial_layer</tt>.</p>
+
 <dl>
   <dt>(<a name="ex3.15">3.15</a>)</dt><dd></dd>
 </dl>
@@ -1171,7 +1209,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -1183,7 +1221,7 @@ body {
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
@@ -1204,11 +1242,11 @@ body {
                      </td>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
@@ -1237,7 +1275,7 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_sequence_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_tail_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -1259,15 +1297,15 @@ body {
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -1306,6 +1344,8 @@ body {
 </tr>
 </table>
 
+<p align="justify">In contrast, the second result of (<a href="#ex3.14">3.14</a>) is created from the call structure of (<a href="#ex3.16">3.16</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
+
 <dl>
   <dt>(<a name="ex3.16">3.16</a>)</dt><dd></dd>
 </dl>
@@ -1319,7 +1359,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -1340,19 +1380,19 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="3" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                <tr><td colspan="3" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -1382,11 +1422,11 @@ body {
                  </td>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -1419,6 +1459,8 @@ body {
 </tr>
 </table>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="#ex3.17">3.17</a>), with its parse list that contains a second determiner word that follows the conjunct word. The result shows only one resulting structure.</p>
+
 <dl>
   <dt>(<a name="ex3.17">3.17</a>)</dt><dd></dd>
 </dl>
@@ -1431,6 +1473,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;girl)))))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
+
+<p align="justify">Calls made to reach the single output of (<a href="#ex3.17">3.17</a>) are pictured in (<a href="#ex3.18">3.18</a>). Notably, the conjuncts are introduced by calls of <tt>noun_phrase_initial_layer</tt> and <tt>noun_phrase_top_tail_layer</tt>, as was the case with (<a href="#ex3.15">3.15</a>). This results in structure for the second conjunct that is sufficiently high in the hierarchy of noun phrase structure to allow for the integration of determiners with <tt>noun_phrase_initial_layer</tt> calls. By contrast, if the call structure of (<a href="#ex3.16">3.16</a>) had been followed, then <tt>internal_np_higher_layer</tt> calls are reached from where there is no way to integrate the determiner for the second conjunct, causing the evaluation to fail.</p>
 
 <dl>
   <dt>(<a name="ex3.18">3.18</a>)</dt><dd></dd>
@@ -1445,7 +1489,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -1457,7 +1501,7 @@ body {
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
@@ -1478,11 +1522,11 @@ body {
                      </td>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
@@ -1511,7 +1555,7 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_sequence_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_tail_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -1533,7 +1577,7 @@ body {
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -1554,11 +1598,11 @@ body {
                          </td>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -1597,7 +1641,9 @@ body {
 </tr>
 </table>
 
-<h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;Genitive noun phrase layer</h3>
+<h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
+
+<p align="justify">A determiner phrase layer can lead to its own internal noun phrase structure when the <tt>noun_phrase_genm_layer</tt> rules of (<a href="#ex3.19">3.19</a>) are called.</p>
 
 <dl>
   <dt>(<a name="ex3.19">3.19</a>)</dt><dd></dd>
@@ -1605,7 +1651,7 @@ body {
 <tt>noun_phrase_genm_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;pronoun_genm(L).</tt><br>
 <tt>noun_phrase_genm_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_top_layer(L-L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;genm(L1-L0).</tt><br>
 <tt>noun_phrase_genm_layer(['NML'(NP1,'CONJP'(CONJ,NP2))|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase_genm_layer(NPl1-[]),</tt><br>
@@ -1638,7 +1684,7 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
@@ -1650,15 +1696,15 @@ body {
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -1672,7 +1718,7 @@ body {
                          </td>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
@@ -1714,11 +1760,11 @@ body {
      </td>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -1732,7 +1778,7 @@ body {
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -1826,11 +1872,11 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -1913,11 +1959,11 @@ body {
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
@@ -1984,11 +2030,11 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -2071,11 +2117,11 @@ body {
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
@@ -2130,7 +2176,7 @@ body {
 </table>
 
 <br>
-<h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;Adjective phrase</h2>
+<h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
 
 <dl>
   <dt>(<a name="ex3.27">3.27</a>)</dt><dd></dd>
@@ -2193,7 +2239,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -2214,7 +2260,7 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -2273,7 +2319,7 @@ body {
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -2301,11 +2347,11 @@ body {
                  </td>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -2460,7 +2506,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -2481,19 +2527,19 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -2539,7 +2585,7 @@ body {
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
-                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                     <tr>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
@@ -2560,7 +2606,7 @@ body {
                                      </td>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
@@ -2588,11 +2634,11 @@ body {
                                          </td>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
-                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                                 <tr>
                                                  <td>
                                                    <table cellpadding="5px" style="border:2px solid;">
@@ -2659,7 +2705,7 @@ body {
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -2680,15 +2726,15 @@ body {
                                  </td>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
-                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                     <tr>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
-                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
@@ -2731,7 +2777,7 @@ body {
                                                         <tr>
                                                          <td>
                                                            <table cellpadding="5px" style="border:2px solid;">
-                                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                                             <tr>
                                                              <td>
                                                                <table cellpadding="5px" style="border:2px solid;">
@@ -2752,7 +2798,7 @@ body {
                                                              </td>
                                                              <td>
                                                                <table cellpadding="5px" style="border:2px solid;">
-                                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                                                 <tr>
                                                                  <td>
                                                                    <table cellpadding="5px" style="border:2px solid;">
@@ -2780,11 +2826,11 @@ body {
                                                                  </td>
                                                                  <td>
                                                                    <table cellpadding="5px" style="border:2px solid;">
-                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                                                     <tr>
                                                                      <td>
                                                                        <table cellpadding="5px" style="border:2px solid;">
-                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                                                         <tr>
                                                                          <td>
                                                                            <table cellpadding="5px" style="border:2px solid;">
@@ -2866,15 +2912,15 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -2895,11 +2941,11 @@ body {
                  </td>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
@@ -2948,7 +2994,7 @@ body {
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -2969,7 +3015,7 @@ body {
                                  </td>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
-                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                     <tr>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
@@ -2997,11 +3043,11 @@ body {
                                      </td>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
-                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
@@ -3068,11 +3114,11 @@ body {
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -3093,11 +3139,11 @@ body {
                                  </td>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
-                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                     <tr>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
@@ -3146,7 +3192,7 @@ body {
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_top_layer</td></tr>
+                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                                 <tr>
                                                  <td>
                                                    <table cellpadding="5px" style="border:2px solid;">
@@ -3167,7 +3213,7 @@ body {
                                                  </td>
                                                  <td>
                                                    <table cellpadding="5px" style="border:2px solid;">
-                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                                     <tr>
                                                      <td>
                                                        <table cellpadding="5px" style="border:2px solid;">
@@ -3195,11 +3241,11 @@ body {
                                                      </td>
                                                      <td>
                                                        <table cellpadding="5px" style="border:2px solid;">
-                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_top_layer</td></tr>
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
                                                         <tr>
                                                          <td>
                                                            <table cellpadding="5px" style="border:2px solid;">
-                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">nml_lower_layer</td></tr>
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                                             <tr>
                                                              <td>
                                                                <table cellpadding="5px" style="border:2px solid;">
