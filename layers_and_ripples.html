@@ -349,7 +349,7 @@ body {
 <p align="justify">This chapter catalogs all the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular WORD CLASS. As seen in the queries of section <a href="#sec1.4">1.4</a>, a word is an item in a parse list <b>together with</b> information about its word class. The work of this chapter is to establish the initial parse consequence for a particular word&sol;class pair from a parse list.</p>
 
 <br>
-<h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Nouns</h2>
+<h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Noun words</h2>
 
 <p align="justify">We start off with the <tt>noun</tt> rules of (<a href="#ex2.1">2.1</a>) for establishing the contribution of the general noun words of Table <a href="#table2.1">2.1</a>.</p>
 
@@ -511,7 +511,7 @@ body {
 <tt>pronoun_genm(['WPRO;~genm'(Word)|L]-L)&nbsp;--&gt;&nbsp;['WPRO;~genm'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;Adjectives</h2>
+<h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;Adjective words</h2>
 
 <p align="justify">Table <a href="#table2.6">2.6</a> sets out the range of support for different kinds of adjectives, with rule integration support given in (<a href="#ex2.10">2.10</a>).</p>
 
@@ -532,7 +532,7 @@ body {
 <tt>adj(catenative,['ADJ;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJ;~cat'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;Adverbs</h2>
+<h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;Adverb words</h2>
 
 <p align="justify">Table <a href="#table2.7">2.7</a> sets out the range of support for different kinds of adverbs, with rule integration support given in (<a href="#ex2.11">2.11</a>).</p>
 
@@ -559,7 +559,7 @@ body {
 <tt>adv(catenative,['ADV;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADV;~cat'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;Full verbs</h2>
+<h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;Full verb words</h2>
 
 <p align="justify">Table <a href="#table2.8">2.8</a> sets out the range of support for different kinds of full verbs, with rule integration support given in (<a href="#ex2.12">2.12</a>).</p>
 
@@ -619,7 +619,7 @@ body {
 <tt>do_support(['DOP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DOP'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;HAVE</h2>
+<h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;HAVE words</h2>
 
 <p align="justify">Table <a href="#table2.10">2.10</a> sets out the range of support for the different forms of <small style="font-size: 75%">HAVE</small>, with rule integration support given in (<a href="#ex2.15">2.15</a>).</p>
 
@@ -642,7 +642,7 @@ body {
 <tt>have(en_participle,['HVN'(Word)|L]-L)&nbsp;--&gt;&nbsp;['HVN'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.10">2.10</a>&nbsp;&nbsp;&nbsp;BE</h2>
+<h2><a name="sec2.10">2.10</a>&nbsp;&nbsp;&nbsp;BE words</h2>
 
 <p align="justify">Table <a href="#table2.11">2.11</a> sets out the range of support for the different forms of <small style="font-size: 75%">BE</small>, with rule integration support given in (<a href="#ex2.16">2.16</a>).</p>
 
@@ -665,7 +665,7 @@ body {
 <tt>be(en_participle,['BEN'(Word)|L]-L)&nbsp;--&gt;&nbsp;['BEN'(Word)].</tt><br>
 
 <br>
-<h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;Modal verbs</h2>
+<h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;Modal verb words</h2>
 
 <p align="justify">Modal verbs are tagged as in Table <a href="#table2.12">2.12</a>.</p>
 
@@ -795,7 +795,7 @@ body {
 <tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_head_full(L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex3.3">3.3</a>) we query if <tt>'PRO'('him')</tt> is enough to create a noun phrase.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Query (<a href="#ex3.3">3.3</a>) asks if <tt>'PRO'('him')</tt> provides content to project structure for a noun phrase.</p>
 
 <dl>
   <dt>(<a name="ex3.3">3.3</a>)</dt><dd></dd>
@@ -806,7 +806,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">To reach its affirmative response, query (<a href="#ex3.3">3.3</a>) completes the calls of (<a href="#ex3.4">3.4</a>).</p>
+<p align="justify">The affirmative response of (<a href="#ex3.3">3.3</a>) is achieved with the calls of (<a href="#ex3.4">3.4</a>).</p>
 
 <dl>
   <dt>(<a name="ex3.4">3.4</a>)</dt><dd></dd>
@@ -837,7 +837,7 @@ body {
 
 <h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
 
-<p align="justify">With (<a href="#ex3.3">3.3</a>) we have seen that the simplest form for a noun phrase is to consist of a single word that contributes content for <tt>noun_head_full</tt>. In this section we delve slightly deeper into possible noun phrase structures by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="#ex3.6">3.6</a>) may return.</p>
+<p align="justify">With (<a href="#ex3.3">3.3</a>) we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="#ex3.6">3.6</a>) may return.</p>
 
 <dl>
   <dt>(<a name="ex3.5">3.5</a>)</dt><dd></dd>
@@ -887,7 +887,7 @@ body {
 <tt>&nbsp;&nbsp;noun_phrase_initial_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;embedded_clause(L1-L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Entering a call of <tt>noun_phrase_initial_layer</tt> opens the possibility of having coordinate structures at the top level of the noun phrase. This is illustrated with (<a href="#ex3.7">3.7</a>), which leads to output of a noun phrase that immediately contains an <tt>NML</tt> (nominal intermediate level) layer as its only daughter element. The <tt>NML</tt> itself is comprised of three conjuncts, each of which contains an element with full noun phrase structure.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Among other things, entering a call of <tt>noun_phrase_initial_layer</tt> opens the possibility of having coordinate structures at the top level of the noun phrase. This is illustrated with (<a href="#ex3.7">3.7</a>), which leads to output of a noun phrase that immediately contains an <tt>NML</tt> (nominal intermediate level) phrasal projection as its only daughter element. The <tt>NML</tt> itself is comprised of three conjuncts, each of which contains an element with full noun phrase structure.</p>
 
 <dl>
   <dt>(<a name="ex3.7">3.7</a>)</dt><dd></dd>
@@ -903,7 +903,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls made to reach the output of (<a href="#ex3.7">3.7</a>) are pictured in (<a href="#ex3.8">3.8</a>). Notably, following on from the first call to <tt>noun_phrase</tt>, there are three further embedded calls to <tt>noun_phrase</tt>, each for one of the three conjuncts. Also note how the coordination arises from the creation of a sequence of calls to <tt>noun_phrase_top_tail_layer</tt> of (<a href="#ex3.5">3.5</a>). This gives a call structure that branches to the right, while leading to the return of conjuncts that are all placed under the same <tt>NML</tt> of the output tree structure.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls made to reach the output of (<a href="#ex3.7">3.7</a>) are pictured in (<a href="#ex3.8">3.8</a>). Notably, following on from the first call to <tt>noun_phrase</tt>, there are three further embedded calls to <tt>noun_phrase</tt>, each for one of the three conjuncts. Also note how the coordination arises from the creation of a sequence of calls to <tt>noun_phrase_top_tail_layer</tt> of (<a href="#ex3.5">3.5</a>). This gives a call structure that branches to the right, while leading to the return of conjuncts that are all placed under the same <tt>NML</tt> of the output tree structure.</p>
 
 <dl>
   <dt>(<a name="ex3.8">3.8</a>)</dt><dd></dd>
@@ -1104,7 +1104,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to achieve the output of (<a href="#ex3.11">3.11</a>) are pictured in (<a href="#ex3.12">3.12</a>), amounting to the full range of internal structuring for a noun phrase before the <tt>noun</tt> call is reached.</p>
+<p align="justify">Calls to achieve the output of (<a href="#ex3.11">3.11</a>) are pictured in (<a href="#ex3.12">3.12</a>), amounting to the full range of internal structuring for a noun phrase needing to have been accessed before the <tt>noun</tt> call is reached.</p>
 
 <dl>
   <dt>(<a name="ex3.12">3.12</a>)</dt><dd></dd>
@@ -1344,7 +1344,7 @@ body {
 </tr>
 </table>
 
-<p align="justify">In contrast, the second result of (<a href="#ex3.14">3.14</a>) is created from the call structure of (<a href="#ex3.16">3.16</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In contrast, the second result of (<a href="#ex3.14">3.14</a>) is created from the call structure of (<a href="#ex3.16">3.16</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
 
 <dl>
   <dt>(<a name="ex3.16">3.16</a>)</dt><dd></dd>
