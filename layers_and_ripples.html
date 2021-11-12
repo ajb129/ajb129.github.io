@@ -252,7 +252,7 @@ body {
 
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira, and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write a set of phrase structure rules and get an executable Prolog program.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has already been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. The remainder of this chapter, section <a href="#sec1.4">1.4</a>, introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceeding chapters by integrating clause subordination.</p>
 
@@ -427,7 +427,7 @@ body {
 <tt>noun_head_full(['WPRO'(Word)|L]-L)&nbsp;--&gt;&nbsp;['WPRO'(Word)].</tt><br>
 <tt>noun_head_full(['NP-GENV'('PRO;~ppge'(Word))|L]-L)&nbsp;--&gt;&nbsp;['PRO;~ppge'(Word)].</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The last rule of (<a href="#ex2.5">2.5</a>) captures the possibility of an independent genitive, where a projected <tt>NP-GENV</tt> is the only element of its containing <tt>NP</tt>, as demonstrated in (__tspc_468_christine_T13__).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The last rule of (<a href="#ex2.5">2.5</a>) captures the possibility of an independent genitive, where an <tt>NP-GENV</tt> projected by <tt>PRO;~ppge</tt> is the only element of its containing <tt>NP</tt>, as demonstrated in (<a href="#ex2.6">2.6</a>).</p>
 
 <dl>
   <dt>(<a name="ex2.6">2.6</a>)</dt><dd></dd>
@@ -452,7 +452,8 @@ body {
   <rect x="207.42" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
   <text x="222.42" y="195" text-anchor="middle">__NP-GENV</text>
   <line x1="222.42" y1="210" x2="222.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="222.42" y="265" text-anchor="middle">PRO</text>
+  <rect x="207.42" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <text x="222.42" y="265" text-anchor="middle">___PRO</text>
   <line x1="222.42" y1="280" x2="222.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="222.42" y="335" text-anchor="middle">theirs</text>
   <text x="339.9" y="125" text-anchor="middle">ADVP-MOD</text>
@@ -465,7 +466,7 @@ body {
 <br>
 <h2><a name="sec2.3">2.3</a>&nbsp;&nbsp;&nbsp;Determiner words</h2>
 
-<p align="justify">The determiners of Table <a href="#table2.4">2.4</a> are words with support from (<a href="#ex2.7">2.7</a>) that can only serve as noun head modifiers. Outside of coordination, there can be at most one occurrence of such a word per noun phrase instance.</p>
+<p align="justify">The determiners of Table <a href="#table2.4">2.4</a> are words with support from the <tt>det</tt> rules of (<a href="#ex2.7">2.7</a>) that can only serve as noun head modifiers. Outside of coordination, there can be at most one occurrence of such a word per noun phrase instance.</p>
 
 <p><a name="table2.4">Table 2.4: Tags for determiner words</a></p>
 
@@ -488,7 +489,7 @@ body {
 <br>
 <h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;Genitive markers</h2>
 
-<p align="justify">A genitive noun phrase which itself acts as the modifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="#table2.5">2.5</a>. Phrase structure integration support is given in (<a href="#ex2.8">2.8</a>) and (<a href="#ex2.9">2.9</a>).</p>
+<p align="justify">A genitive noun phrase which itself acts as the modifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="#table2.5">2.5</a>. Phrase structure integration support is given by <tt>genm</tt> of (<a href="#ex2.8">2.8</a>) and <tt>pronoun_genm</tt> of (<a href="#ex2.9">2.9</a>).</p>
 
 <p><a name="table2.5">Table 2.5: Tags for genitive markers</a></p>
 
@@ -513,7 +514,7 @@ body {
 <br>
 <h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;Adjective words</h2>
 
-<p align="justify">Table <a href="#table2.6">2.6</a> sets out the range of support for different kinds of adjectives, with rule integration support given in (<a href="#ex2.10">2.10</a>).</p>
+<p align="justify">Table <a href="#table2.6">2.6</a> sets out the range of support for different kinds of adjectives, with integration support given by the <tt>adj</tt> and <tt>adj_catenative</tt> rules of (<a href="#ex2.10">2.10</a>).</p>
 
 <p><a name="table2.6">Table 2.6: Tags for adjective words</a></p>
 
@@ -529,12 +530,12 @@ body {
 <tt>adj(['ADJ'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJ'(Word)].</tt><br>
 <tt>adj(['ADJR'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJR'(Word)].</tt><br>
 <tt>adj(['ADJS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJS'(Word)].</tt><br>
-<tt>adj(catenative,['ADJ;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJ;~cat'(Word)].</tt><br>
+<tt>adj_catenative(['ADJ;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADJ;~cat'(Word)].</tt><br>
 
 <br>
 <h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;Adverb words</h2>
 
-<p align="justify">Table <a href="#table2.7">2.7</a> sets out the range of support for different kinds of adverbs, with rule integration support given in (<a href="#ex2.11">2.11</a>).</p>
+<p align="justify">Table <a href="#table2.7">2.7</a> sets out the range of support for different kinds of adverbs, with integration support given by the <tt>adv</tt> and <tt>adv_catenative</tt> rules of (<a href="#ex2.11">2.11</a>).</p>
 
 <p><a name="table2.7">Table 2.7: Tags for adverb words</a></p>
 
@@ -556,12 +557,12 @@ body {
 <tt>adv(['RADV'(Word)|L]-L)&nbsp;--&gt;&nbsp;['RADV'(Word)].</tt><br>
 <tt>adv(['WADV'(Word)|L]-L)&nbsp;--&gt;&nbsp;['WADV'(Word)].</tt><br>
 <tt>adv(['RP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['RP'(Word)].</tt><br>
-<tt>adv(catenative,['ADV;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADV;~cat'(Word)].</tt><br>
+<tt>adv_catenative(['ADV;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['ADV;~cat'(Word)].</tt><br>
 
 <br>
 <h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;Full verb words</h2>
 
-<p align="justify">Table <a href="#table2.8">2.8</a> sets out the range of support for different kinds of full verbs, with rule integration support given in (<a href="#ex2.12">2.12</a>).</p>
+<p align="justify">Table <a href="#table2.8">2.8</a> sets out the range of support for different kinds of full verbs.</p>
 
 <p><a name="table2.8">Table 2.8: Tags for full verb words</a></p>
 
@@ -574,6 +575,8 @@ body {
 <tr><td><tt>VAG;~cat</tt></td><td>present participle (<i>-ing</i>) catenative (e.g.&nbsp;<tt>going</tt> in <i>be going to</i>)</td></tr>
 <tr><td><tt>VVN;~cat</tt></td><td>past participle (<i>-en</i>) catenative (e.g.&nbsp;<tt>bound</tt> in <i>be bound to</i>)</td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>verb</tt> and <tt>verb_catenative</tt> rules of (<a href="#ex2.12">2.12</a>) give support for the integration of the full verb words of Table <a href="#table2.8">2.8</a>, with an initial parameter to distinguish types of full verbs: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+
 <dl>
   <dt>(<a name="ex2.12">2.12</a>)</dt><dd></dd>
 </dl>
@@ -582,13 +585,13 @@ body {
 <tt>verb(infinitive,['VB'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VB'(Word)].</tt><br>
 <tt>verb(ing_participle,['VAG'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VAG'(Word)].</tt><br>
 <tt>verb(en_participle,['VVN'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VVN'(Word)].</tt><br>
-<tt>verb(catenative,ing_participle,['VAG;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VAG;~cat'(Word)].</tt><br>
-<tt>verb(catenative,en_participle,['VVN;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VVN;~cat'(Word)].</tt><br>
+<tt>verb_catenative(ing_participle,['VAG;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VAG;~cat'(Word)].</tt><br>
+<tt>verb_catenative(en_participle,['VVN;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VVN;~cat'(Word)].</tt><br>
 
 <br>
 <h2><a name="sec2.8">2.8</a>&nbsp;&nbsp;&nbsp;DO words</h2>
 
-<p align="justify">Table <a href="#table2.9">2.9</a> sets out the range of support for the different forms of <small style="font-size: 75%">DO</small>, with rule integration support given in two ways: There is (<a href="#ex2.13">2.13</a>) to capture main verb uses of <small style="font-size: 75%">DO</small>, and there is (<a href="#ex2.14">2.14</a>) to capture <small style="font-size: 75%">DO</small> as an auxiliary verb for the do support construction.</p>
+<p align="justify">Table <a href="#table2.9">2.9</a> sets out the range of support for the different forms of <small style="font-size: 75%">DO</small>.</p>
 
 <p><a name="table2.9">Table 2.9: Tags for <small style="font-size: 75%">DO</small></a></p>
 
@@ -599,7 +602,7 @@ body {
 <tr><td><tt>DAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">DO</small>: <tt>doing</tt></td></tr>
 <tr><td><tt>DON</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">DO</small>: <tt>done</tt></td></tr>
 </table>
-<p align="justify"><small style="font-size: 75%">DO</small> as main verb:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule integration support is given in two ways: There are the <tt>verb</tt> rules of (<a href="#ex2.13">2.13</a>) to capture main verb uses of <small style="font-size: 75%">DO</small>, with an initial parameter to distinguish types of <small style="font-size: 75%">DO</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>; and there are the <tt>do_support</tt> rules of (<a href="#ex2.14">2.14</a>) to capture <small style="font-size: 75%">DO</small> as a finite auxiliary verb for the <i>do</i> support construction.</p>
 
 <dl>
   <dt>(<a name="ex2.13">2.13</a>)</dt><dd></dd>
@@ -610,8 +613,6 @@ body {
 <tt>verb(ing_participle,['DAG'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DAG'(Word)].</tt><br>
 <tt>verb(en_participle,['DON'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DON'(Word)].</tt><br>
 
-<p align="justify"><small style="font-size: 75%">DO</small> as an operator verb:</p>
-
 <dl>
   <dt>(<a name="ex2.14">2.14</a>)</dt><dd></dd>
 </dl>
@@ -621,7 +622,7 @@ body {
 <br>
 <h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;HAVE words</h2>
 
-<p align="justify">Table <a href="#table2.10">2.10</a> sets out the range of support for the different forms of <small style="font-size: 75%">HAVE</small>, with rule integration support given in (<a href="#ex2.15">2.15</a>).</p>
+<p align="justify">Table <a href="#table2.10">2.10</a> sets out the range of support for the different forms of <small style="font-size: 75%">HAVE</small>.</p>
 
 <p><a name="table2.10">Table 2.10: Tags for <small style="font-size: 75%">HAVE</small></a></p>
 
@@ -632,6 +633,8 @@ body {
 <tr><td><tt>HAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">HAVE</small>: <tt>having</tt></td></tr>
 <tr><td><tt>HVN</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">HAVE</small>: <tt>had</tt></td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>have</tt> rules of (<a href="#ex2.15">2.15</a>) give support for the integration of the <small style="font-size: 75%">HAVE</small> words of Table <a href="#table2.10">2.10</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">HAVE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+
 <dl>
   <dt>(<a name="ex2.15">2.15</a>)</dt><dd></dd>
 </dl>
@@ -644,7 +647,7 @@ body {
 <br>
 <h2><a name="sec2.10">2.10</a>&nbsp;&nbsp;&nbsp;BE words</h2>
 
-<p align="justify">Table <a href="#table2.11">2.11</a> sets out the range of support for the different forms of <small style="font-size: 75%">BE</small>, with rule integration support given in (<a href="#ex2.16">2.16</a>).</p>
+<p align="justify">Table <a href="#table2.11">2.11</a> sets out the range of support for the different forms of <small style="font-size: 75%">BE</small>.</p>
 
 <p><a name="table2.11">Table 2.11: Tags for <small style="font-size: 75%">BE</small></a></p>
 
@@ -655,6 +658,8 @@ body {
 <tr><td><tt>BAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">BE</small>: <tt>being</tt></td></tr>
 <tr><td><tt>BEN</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">BE</small>: <tt>been</tt></td></tr>
 </table>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>be</tt> rules of (<a href="#ex2.16">2.16</a>) give support for the integration of the <small style="font-size: 75%">BE</small> words of Table <a href="#table2.11">2.11</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">BE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+
 <dl>
   <dt>(<a name="ex2.16">2.16</a>)</dt><dd></dd>
 </dl>
@@ -675,13 +680,13 @@ body {
 <tr><td><tt>MD</tt></td><td>Modal auxiliary verb (e.g.&nbsp;<tt>will</tt>, <tt>would</tt>, <tt>can</tt>, <tt>could</tt>, <tt>&lt;apos&gt;ll</tt>, <tt>&lt;apos&gt;d</tt>)</td></tr>
 <tr><td><tt>MD;~cat</tt></td><td>Modal catenative (<tt>ought</tt>, <tt>used</tt>)</td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule integration support for modal verbs is given in (<a href="#ex2.17">2.17</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>modal</tt> and <tt>modal_catenative</tt> rules of (<a href="#ex2.17">2.17</a>) support the integration of the modal verbs of Table <a href="#table2.12">2.12</a>.</p>
 
 <dl>
   <dt>(<a name="ex2.17">2.17</a>)</dt><dd></dd>
 </dl>
 <tt>modal(['MD'(Word)|L]-L)&nbsp;--&gt;&nbsp;['MD'(Word)].</tt><br>
-<tt>modal(catenative,['MD;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['MD;~cat'(Word)].</tt><br>
+<tt>modal_catenative(['MD;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['MD;~cat'(Word)].</tt><br>
 
 <br>
 <h2><a name="sec2.12">2.12</a>&nbsp;&nbsp;&nbsp;Other clause level words</h2>
@@ -695,7 +700,7 @@ body {
 <tr><td><tt>NEG</tt></td><td>The negative particle <tt>not</tt> or <tt>n&lt;apos&gt;t</tt></td></tr>
 <tr><td><tt>TO</tt></td><td>Infinitive marker <tt>to</tt></td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of words with the tags of Table <a href="#table2.13">2.13</a> is give in (<a href="#ex2.18">2.18</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>there</tt>, <tt>neg</tt>, and <tt>to</tt> rules of (<a href="#ex2.18">2.18</a>) support the integration of the words of Table <a href="#table2.13">2.13</a>.</p>
 
 <dl>
   <dt>(<a name="ex2.18">2.18</a>)</dt><dd></dd>
@@ -718,7 +723,7 @@ body {
 <tr><td><tt>P-CONN</tt></td><td>Subordinating conjunction (e.g.&nbsp;<tt>although</tt>, <tt>when</tt>)</td></tr>
 <tr><td><tt>P-ROLE</tt></td><td>Role preposition (e.g.&nbsp;<tt>in</tt>, <tt>of</tt>, <tt>under</tt>)</td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of connective words is give in (<a href="#ex2.19">2.19</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>conj</tt>, <tt>comp</tt>, <tt>conn</tt>, and <tt>role</tt> rules of (<a href="#ex2.19">2.19</a>) support the integration of the different connective words of Table <a href="#table2.14">2.14</a>.</p>
 
 <dl>
   <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
@@ -741,7 +746,7 @@ body {
 </table>
 <p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation is placed as high as possible. For example, a full stop that ends a sentence is treated as the last constituent of the highest clause layer (<tt>IP</tt>&sol;<tt>CP</tt>&sol;<tt>FRAG</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule support for the integration of punctuation is give in (<a href="#ex2.20">2.20</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="#ex2.20">2.20</a>) give support for the integration of punctuation, with an initial parameter to distinguish types of punctuation: <tt>final_question</tt>, <tt>final</tt>, and <tt>non_final</tt>.</p>
 
 <dl>
   <dt>(<a name="ex2.20">2.20</a>)</dt><dd></dd>
@@ -1829,7 +1834,7 @@ body {
 <tt>adverb_phrase_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adv(L).</tt><br>
 <tt>adverb_phrase_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adv(catenative,L-[IP|L0]),</tt><br>
+<tt>&nbsp;&nbsp;adv_catenative(L-[IP|L0]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(filled_subject,to_infinitive,IPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IPl&nbsp;&#92;=&nbsp;['PU'(_)|_],</tt><br>
@@ -2201,7 +2206,7 @@ body {
 <tt>adjective_phrase_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adj(L).</tt><br>
 <tt>adjective_phrase_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adj(catenative,L-[IP|L0]),</tt><br>
+<tt>&nbsp;&nbsp;adj_catenative(L-[IP|L0]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(filled_subject,to_infinitive,IPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IPl&nbsp;&#92;=&nbsp;['PU'(_)|_],</tt><br>
@@ -3458,7 +3463,7 @@ body {
 <tt>&nbsp;&nbsp;verb_phrase_lower_layer(Sbj_type,Infl,Voice,L-L1),</tt><br>
 <tt>&nbsp;&nbsp;embedded_clause(L1-L0).</tt><br>
 <tt>verb_phrase_lower_layer(Sbj_type,Infl,active,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb(catenative,Infl,L-[IP|L0]),</tt><br>
+<tt>&nbsp;&nbsp;verb_catenative(Infl,L-[IP|L0]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(Sbj_type,to_infinitive,IPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IPl&nbsp;&#92;=&nbsp;['PU'(_)|_],</tt><br>
@@ -3751,9 +3756,9 @@ body {
   <dt>(<a name="ex4.12">4.12</a>)</dt><dd></dd>
 </dl>
 <tt>operator_cat_layer(L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;modal(catenative,L).</tt><br>
+<tt>&nbsp;&nbsp;modal_catenative(L).</tt><br>
 <tt>operator_cat_layer(L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;modal(catenative,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;modal_catenative(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;neg(L1-L0).</tt><br>
 
 <dl>
