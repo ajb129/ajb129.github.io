@@ -35,7 +35,7 @@ body {
 <dt>3.</dt><dd>To learn how to structure content for: (i) complex sentences, which are sentences with multiple clauses; and (ii) sentences occurring with other sentences.</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Each puzzle takes the form of a graph of words with labelled arrows that connect the graph nodes. The labelled arrows are clues for building either a single complete sentence of English or several complete sentences of English. To solve a puzzle, you have to turn the graph of words with clues into sentences, called &lsquo;solution sentences&rsquo;. You can check your success by seeing if your solution sentences match the suggested answer solution sentences.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Each puzzle takes the form of a graph of words with labelled arrows that connect the graph nodes. The labelled arrows are clues for building either a single complete sentence of English or several complete sentences of English. To solve a puzzle, you have to turn the graph of words with clues into sentences, called &lsquo;solution sentences&rsquo;. You can check your success by seeing if your solution sentence(s) match the suggested answer solution sentence(s).</p>
 
 <br>
 <h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;How to read a puzzle graph</h2>
@@ -44,15 +44,15 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is at least one number inside round brackets per word, but there may be a second number separated by an underscore character (&lsquo;<tt>&lowbar;</tt>&rsquo;). The second number (if present) says which solution sentence the word belongs to. The first number says the position of the word within its solution sentence. If there is no second number, then only one solution sentence is expected.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content tells us about how words function, that is, what words <i>do</i> in their sentences. These are the clues that help to say where words should go to form solution sentences.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content tells us about how words function, that is, what words <i>do</i> in their sentences. These are important clues that help to say where words should go to form solution sentences.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Word content and&sol;or square bracket content can provide the content for a graph node.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Word content and&sol;or square bracket content can also provide the label for a directed arrow that connects graph nodes. An arrow connects content from one node (the master node) to another node (the dependent node). It is typically square bracket content that is used to label a directed arrow.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content should not be included in your completed solution sentences. In contrast, all word content should be included in your completed solution sentences. You will never need to modify the forms of words, so words should be entered into solution sentences as you find them. That is, puzzles concern only deciding on the placement into solution sentences of the words you find in the graphs.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content should not be included in your completed solution sentence(s). In contrast, all word content should be included in your completed solution sentence(s). You will never need to modify the forms of words, so a word should be entered into its solution sentences as you find it. That is, puzzles concern only deciding on the placement into solution sentences of the words you find in the graphs.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most of the words you need for the solution sentences of a puzzle are found inside its puzzle graph, but sometimes you will need to add additional &lsquo;special&rsquo; words. Some of the special words will turn out to be the words of English that are used to make reference to what is talked about. These words can be either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most of the words you need for the solution sentence(s) of a puzzle are found inside its graph, but sometimes you will need to add additional &lsquo;special&rsquo; words. Some of the special words will turn out to be words of English that are used to make reference to what is talked about. These words can be either:</p>
 <ul>
 <li><b><i>indefinites</i></b> (e.g., <i>a</i>, <i>an</i>, <i>some</i>) used to introduce new items for discussion (discourse referents),</li>
 <li><b><i>definites</i></b> (e.g., <i>the</i>, <i>these</i>, <i>this</i>) used for a familiar or unique referent of the discourse, or</li>
@@ -78,7 +78,7 @@ body {
 
 <p align="justify">To form a solution sentence you can start by looking into a puzzle graph for an arrow that includes <tt>[arg0]</tt> in its label. The master node for such an arrow will be the main verb of a clause, possibly with other supporting words, while the dependent node will be the head word corresponding to the subject, that is, the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the main verb.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider Figure <a href="#fig1">1</a>. This gives the puzzle graph for a single clause. By finding <tt>[arg0]</tt>, we can identify <i>were</i> as the main verb with supporting <i>there</i>. We can also identify <i>Rabbits</i> as the &lsquo;be-er&rsquo; (subject) of the main verb.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider figure <a href="#fig1">1</a>. This gives the puzzle graph for a single clause. By finding <tt>[arg0]</tt>, we can identify <tt>were(6)</tt> as the main verb with supporting <tt>there(5)</tt>. We can also identify <tt>Rabbits(9)</tt> as the &lsquo;be-er&rsquo; (subject) of the main verb.</p>
 
 <p><a name="fig1">Figure 1: Puzzle graph for a single clause</a></p>
 
@@ -90,47 +90,47 @@ body {
   <dt>(<a name="ex1">1</a>)</dt><dd>there were Rabbits</dd>
 </dl>
 
-<p align="justify">With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete solution sentence for Figure <a href="#fig1">1</a>, since there are words that have yet to be used. Two of these words come at the ends of arrows that have <i>Rabbits</i> as their master node. These words act to modify <i>Rabbits</i>. Specifically, there is a numeral modifier to tell us about the number of rabbits (<i>four</i>), and there is an attributive modifier to tell us about the size of the rabbits (<i>little</i>). In English, a numeral modifier should preceed an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
+<p align="justify">With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete solution sentence for figure <a href="#fig1">1</a>, since there are words that have yet to be used. Two of these words come at the ends of arrows that have <tt>Rabbits(9)</tt> as their master node. These words act to modify <tt>Rabbits(9)</tt>. Specifically, there is a numeral modifier to tell us about the number of rabbits (<tt>four(7)</tt>), and there is an attributive modifier to tell us about the size of the rabbits (<tt>little(8)</tt>). In English, a numeral modifier should preceed an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
 
 <dl>
   <dt>(<a name="ex2">2</a>)</dt><dd>there were four little Rabbits</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#fig1">1</a> also contains content for a temporal modifier with an arrow labelled &lsquo;<tt>[modifier]</tt> <tt>[tmp]</tt>&rsquo; that has the main verb as its master node and that points to the adverb <i>Once</i>. This adverb has itself a modifier labelled with the preposition word <i>upon</i> and with <i>time</i> as the dependent word. After connecting these words, we end up with the solution sentence of (<a href="#ex3">3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#fig1">1</a> also contains content for a temporal modifier with an arrow labelled &lsquo;<tt>[modifier][tmp]</tt>&rsquo; that has the main verb as its master node and that points to the adverb <tt>Once(1)</tt>. This adverb has itself a modifier labelled with the preposition word <tt>upon(2)</tt> and with <tt>time(4)</tt> as the dependent word. After connecting these words, we end up with the solution sentence of (<a href="#ex3">3</a>).</p>
 
 <dl>
   <dt>(<a name="ex3">3</a>)</dt><dd>Once upon a time there were four little Rabbits</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that (<a href="#ex3">3</a>) includes <i>a</i> as the third word, and yet this word is not part of Figure <a href="#fig1">1</a>. This is an example of a &lsquo;special&rsquo; word that, as already noted, we might sometimes need to add in addition to the words from the puzzle graph. We can gain confirmation that this extra word insertion is needed from observing that the resulting solution sentence now has words with positions that follow the word numbering of Figure <a href="#fig1">1</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that (<a href="#ex3">3</a>) includes <i>a</i> as the third word, and yet this word is not part of figure <a href="#fig1">1</a>. This is an example of a &lsquo;special&rsquo; word that, as already noted in section <a href="#sec2">2</a>, we might sometimes need to add in addition to the words from the puzzle graph. We can gain confirmation that this extra word insertion is needed from observing that the resulting solution sentence now has words with positions that follow the word numbering of figure <a href="#fig1">1</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider Figure <a href="#fig2">2</a>, which also has content for a single clause sentence.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider figure <a href="#fig2">2</a>, which also has content for a single clause sentence.</p>
 
 <p><a name="fig2">Figure 2: Puzzle graph for another single clause</a></p>
 
 <img src="puzzles2.png" alt="Puzzle graph for another single clause" height="230">
 
-<p align="justify">Searching for <tt>[arg0]</tt>, we find that <i>were</i> is once again the main verb of the clause, only now without <i>there</i>. With no <i>there</i>, a clause with <i>were</i> as the main verb will typically need the &lsquo;be-er&rsquo; (subject) to occur before <i>were</i>. The &lsquo;be-er&rsquo; is <i>names</i>, which itself has an arrow labelled <tt>[genv]</tt> (genitive), which takes us to the genitive pronoun <i>their</i>. By connecting these words, we arrive at (<a href="#ex4">4</a>).</p>
+<p align="justify">Searching for <tt>[arg0]</tt>, we find that <i>were</i> is once again the main verb of the clause, now as <tt>were(3)</tt> and without <i>there</i>. With no <i>there</i>, a clause with <i>were</i> as the main verb will typically need the &lsquo;be-er&rsquo; (subject) to occur before <i>were</i>. The &lsquo;be-er&rsquo; is <tt>names(2)</tt>, which itself has an arrow labelled <tt>[genv]</tt> (genitive), which takes us to the genitive pronoun <tt>their(1)</tt>. By connecting these words, we arrive at (<a href="#ex4">4</a>).</p>
 
 <dl>
   <dt>(<a name="ex4">4</a>)</dt><dd>their names were</dd>
 </dl>
 
-<p align="justify">Unlike (<a href="#ex1">1</a>) and (<a href="#ex2">2</a>), (<a href="#ex4">4</a>) is not yet a full sentence of English: We still need to provide content for what the names were. The content is found by following the arrow labelled <tt>[prd2]</tt> (subject predicative), which takes us to an instance of <i>and</i>, which in turn takes us to four conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all of this into content for a sentence of English gets us to the solution sentence (<a href="#ex5">5</a>).</p>
+<p align="justify">Unlike (<a href="#ex1">1</a>) and (<a href="#ex2">2</a>), (<a href="#ex4">4</a>) is not yet a full sentence of English: We still need to provide content for &lsquo;<i><b>what</b> their names were</i>&rsquo;. The content is found by following the arrow labelled <tt>[prd2]</tt> (subject predicative), which takes us to <tt>and(7)</tt>, which in turn takes us to four conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all of this into content for a sentence of English gets us to the solution sentence (<a href="#ex5">5</a>).</p>
 
 <dl>
   <dt>(<a name="ex5">5</a>)</dt><dd>their names were Flopsy, Mopsy, Cotton-tail, and Peter</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig3">3</a>.</p>
 
-<p><a name="fig3">Figure 3: Puzzle graph combining Figures 1 and 2</a></p>
+<p><a name="fig3">Figure 3: Puzzle graph combining figures 1 and 2</a></p>
 
-<img src="puzzles3.png" alt="Puzzle graph combining Figures 1 and 2" height="380">
+<img src="puzzles3.png" alt="Puzzle graph combining figures 1 and 2" height="380">
 
-<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <i>and</i>. Nodes corresponding to the main verb nodes of the two earlier graphs form the dependent nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a solution sentence that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex5">5</a>).</p>
+<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and(10)</tt>. Nodes corresponding to the main verb nodes of the two earlier graphs form the dependent nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a solution sentence that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex5">5</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow <tt>[genv]</tt> of Figure <a href="#fig3">3</a> does not have a node with content <i>their</i> as its dependent like in Figure <a href="#fig2">2</a>, but rather takes as its dependent what corresponds to the <i>Rabbits</i> node from Figure <a href="#fig1">1</a>. We can interpret this <tt>[genv]</tt> arrow connection as having a &lsquo;special&rsquo; instance of <i>their</i> as the arrow's dependent. That is, the word <i>their</i> is absent from the puzzle graph because it's presence is captured as a direct arrow connection (referential link) to the <i>Rabbits</i> node that occurs in the puzzle graph for independent reasons. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex5">5</a>)&rsquo; &mdash; namely (<a href="#ex6">6</a>) &mdash; to be the overall solution sentence for the puzzle graph of Figure <a href="#fig3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow <tt>[genv]</tt> of figure <a href="#fig3">3</a> does not have a node with content <i>their</i> as its dependent like in figure <a href="#fig2">2</a>, but rather takes as its dependent <tt>Rabbits(9)</tt>, which corresponds to the <tt>Rabbits(9)</tt> of figure <a href="#fig1">1</a>. We can interpret this <tt>[genv]</tt> arrow connection as having a &lsquo;special&rsquo; instance of <i>their</i> as the arrow's dependent. That is, the word <i>their</i> is absent from the puzzle graph because it's presence is captured as a direct arrow connection (referential link) to <tt>Rabbits(9)</tt>, which occurs in the puzzle graph for independent reasons. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex5">5</a>)&rsquo; &mdash; namely (<a href="#ex6">6</a>) &mdash; to be the overall solution sentence for the puzzle graph of figure <a href="#fig3">3</a>.</p>
 
 <dl>
   <dt>(<a name="ex6">6</a>)</dt><dd>Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.</dd>
@@ -138,13 +138,13 @@ body {
 
 <h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;An example with &lsquo;#&rsquo;</h3>
 
-<p align="justify">Figure <a href="#fig4">4</a> has a similar structure to Figure <a href="#fig3">3</a>, in the sense that there are two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from the word <i>and</i> occuring topmost in the graph. However, while the first verb is overtly realised with the word <i>lost</i>, the content of the second verb is shown as an instance of &lsquo;#&rsquo; to indicate the licensed absence of a verb (a lost <i>lost</i>!) from the solution sentence. There is one further instance of &lsquo;#&rsquo; in the graph to indicate a nominal head absence that has <tt>[num]</tt> (numeral modifier) and &lsquo;<tt>of</tt>&rsquo; (role preposition) links.</p>
+<p align="justify">Figure <a href="#fig4">4</a> has a similar structure to figure <a href="#fig3">3</a>, in the sense that there are two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from the word <i>and</i> occuring topmost in the graph (as <tt>and(11)</tt>). However, while the first verb is overtly realised with <tt>lost(2)</tt>, the content of the second verb is shown as <tt>#(12)</tt> to indicate the licensed absence of a verb (a lost <i>lost</i>!) from the solution sentence. One further instance of &lsquo;#&rsquo; occurs in the graph (namely, as <tt>#(4)</tt>) to indicate a nominal head absence that has <tt>[num]</tt> (numeral modifier) and &lsquo;<tt>of</tt>&rsquo; (role preposition) links.</p>
 
 <p><a name="fig4">Figure 4: Puzzle graph with &lsquo;#&rsquo;</a></p>
 
 <img src="puzzles4.png" alt="Puzzle graph content with elision" height="380">
 
-<p align="justify">Following all the links of Figure <a href="#fig4">4</a> and including the &lsquo;#&rsquo; instances, we can arrive at solution sentence (<a href="#ex7">7</a>).</p>
+<p align="justify">Following all the links of figure <a href="#fig4">4</a> and including the &lsquo;#&rsquo; instances, we can arrive at solution sentence (<a href="#ex7">7</a>).</p>
 
 <dl>
   <dt>(<a name="ex7">7</a>)</dt><dd>He lost one # of his shoes among the cabbages, and # the other shoe amongst the potatoes.</dd>
@@ -152,147 +152,147 @@ body {
 
 <h3><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;A complex puzzle</h3>
 
-<p align="justify">This section demonstrates how you can approach a complex puzzle. We will break this into stages, first building content for simpler graphs, which then combine to give larger graphs, and so ultimately lead to the final graph for reaching the overall solution sentence.</p>
+<p align="justify">This section demonstrates how to approach a complex puzzle. We will break this into stages, first building content for simpler graphs, which then combine to give larger graphs, and so ultimately lead to the final graph for reaching the overall solution sentence.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To start, consider Figure 5.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To start, consider figure 5.</p>
 
 <p><a name="fig5">Figure 5: Puzzle graph for a single clause</a></p>
 
 <img src="puzzles5.png" alt="Puzzle graph for a single clause" height="220">
 
-<p align="justify">By finding <tt>[arg0]</tt>, we can identify <i>was</i> as the main verb, and <i>Mr.&nbsp;McGregor</i> as the &lsquo;be-er&rsquo; (subject). One other arrow extends from <i>was</i> to <i>and</i> and this is labelled with the preposition word <i>on</i> and functional information <tt>[loc]</tt> (location). In turn, <i>and</i> takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <i>hands</i> and <tt>[conj2]</tt> leading to <i>knees</i>. One more connection, labelled <tt>[genv]</tt> (genitive&sol;possessive), originates from <i>and</i> and leads to <i>Mr.&nbsp;McGregor</i> to capture the information that the <i>hands</i> and <i>knees</i> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive&sol;possessive connection, we can reach (<a href="#ex8">8</a>) as the solution sentence.</p>
+<p align="justify">By finding <tt>[arg0]</tt>, we can identify <tt>was(3)</tt> as the main verb, and <tt>Mr.(1)_McGregor(2)</tt> as the &lsquo;be-er&rsquo; (subject). One other arrow extends from <tt>was(3)</tt> to <tt>and(7)</tt> and this is labelled with the preposition word <tt>on(4)</tt> and functional information <tt>[loc]</tt> (location). In turn, <tt>and(7)</tt> takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <tt>hands(6)</tt> and <tt>[conj2]</tt> leading to <tt>knees(8)</tt>. One more connection, labelled <tt>[genv]</tt> (genitive&sol;possessive), originates from <tt>and(7)</tt> and leads to <tt>Mr.(1)_McGregor(2)</tt> to capture the information that <tt>hands(6)</tt> and <tt>knees(8)</tt> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive&sol;possessive connection, we can reach (<a href="#ex8">8</a>) as the solution sentence.</p>
 
 <dl>
   <dt>(<a name="ex8">8</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig6">6</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig6">6</a>.</p>
 
 <p><a name="fig6">Figure 6: Puzzle content for a clause with a participle</a></p>
 
 <img src="puzzles6.png" alt="Puzzle graph for a clause with a participle" height="290">
 
-<p align="justify">By finding <tt>[arg0]</tt>, we can identify the phrasal verb <i>planting out</i> as the main verb, and <i>Mr.&nbsp;McGregor</i> as the &lsquo;do-er&rsquo; (subject). One other arrow extends from <i>planting out</i>. Labelled <tt>[arg1]</tt> (object), this second arrow extends to <i>cabbages</i> as the content of &lsquo;<b><i>what</i></b> <i>Mr.&nbsp;McGregor was planting out</i>&rsquo;. In turn, <i>cabbages</i> leads via an <tt>[attribute]</tt> labelled arrow to <i>young</i>. There is one remaining connection of Figure <a href="#fig6">6</a> to consider: the <tt>[seq]</tt> (verb sequence) labelled arrow connecting <i>was</i> to <i>planting out</i> gives the verb sequence <i>was planting out</i>. By following all these connections of words from the graph, we reach the solution sentence (<a href="#ex9">9</a>).</p>
+<p align="justify">By finding <tt>[arg0]</tt>, we can identify the phrasal verb <tt>planting(4)_out(5)</tt> as the main verb, and <tt>Mr.(1)_McGregor(2)</tt> as the &lsquo;do-er&rsquo; (subject). The <tt>[seq]</tt> (verb sequence) labelled arrow connecting <tt>was(3)</tt> to <tt>planting(4)_out(5)</tt> gives the verb sequence <i>was planting out</i>. A further arrow labelled <tt>[arg1]</tt> (object) extends from <tt>planting(4)_out(5)</tt> to <tt>cabbages(7)</tt> as the content of &lsquo;<b><i>what</i></b> <i>Mr.&nbsp;McGregor was planting out</i>&rsquo;. In turn, <tt>cabbages(7)</tt> leads via an <tt>[attribute]</tt> labelled arrow to <tt>young(6)</tt>. By following all these connections of words from the graph, we reach the solution sentence (<a href="#ex9">9</a>).</p>
 
 <dl>
   <dt>(<a name="ex9">9</a>)</dt><dd>Mr.&nbsp;McGregor was planting out young cabbages</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig7">7</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig7">7</a>.</p>
 
-<p><a name="fig7">Figure 7: Puzzle graph combining Figures 5 and 6</a></p>
+<p><a name="fig7">Figure 7: Puzzle graph combining figures 5 and 6</a></p>
 
-<img src="puzzles7.png" alt="Puzzle graph combining Figures 5 and 6" height="310">
+<img src="puzzles7.png" alt="Puzzle graph combining figures 5 and 6" height="310">
 
-<p align="justify">Figure <a href="#fig7">7</a> results from combining Figures <a href="#fig5">5</a> and <a href="#fig6">6</a>, with the exception that the <tt>[seq]</tt> (sequence verb) labelled connection of Figure <a href="#fig6">6</a> is replaced by a <tt>[cnt]</tt> (continuative) labelled connection. As a consequence of this change, <i>planting out</i> can no longer be the main verb of the main clause of a solution sentence, but instead will need to form the main verb of a subordinate participle clause that adds to the information about the &lsquo;be-er&rsquo; (subject) of the main clause. A solution sentence that meets this criteria is (<a href="#ex10">10</a>).</p>
+<p align="justify">Figure <a href="#fig7">7</a> results from combining figures <a href="#fig5">5</a> and <a href="#fig6">6</a>, with the exception that the <tt>[seq]</tt> (sequence verb) labelled connection of figure <a href="#fig6">6</a> is replaced by a <tt>[cnt]</tt> (continuative) labelled connection. As a consequence of this change, <i>planting out</i> can no longer be the main verb of the main clause of a solution sentence, but instead will need to form the main verb of a subordinate participle clause that adds to the information about the &lsquo;be-er&rsquo; (subject) of the main clause. A solution sentence that meets this criteria is (<a href="#ex10">10</a>).</p>
 
 <dl>
   <dt>(<a name="ex10">10</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig8">8</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig8">8</a>.</p>
 
 <p><a name="fig8">Figure 8: Puzzle graph for a single clause</a></p>
 
 <img src="puzzles8.png" alt="Puzzle graph for a single clause" height="140">
 
-<p align="justify">Looking at <i>jumped</i>, this is linked to <i>he</i> with an <tt>[arg0]</tt> arrow, and to <i>up</i> with a <tt>[modifier][dir]</tt> (directional modifier) arrow. Therefore, we can identify <i>jumped</i> as the main verb, <i>he</i> as the &lsquo;do-er&rsquo; (subject), and <i>up</i> as an adverbial modifier, to derive the simple sentence of (<a href="#ex11">11</a>).</p>
+<p align="justify">Looking at <tt>jumped(2)</tt>, this is linked to <tt>he(1)</tt> with an <tt>[arg0]</tt> arrow, and to <tt>up(3)</tt> with a <tt>[modifier][dir]</tt> (directional modifier) arrow. Therefore, we can identify <i>jumped</i> as the main verb, <i>he</i> as the &lsquo;do-er&rsquo; (subject), and <i>up</i> as an adverbial modifier, to derive the simple sentence of (<a href="#ex11">11</a>).</p>
 
 <dl>
   <dt>(<a name="ex11">11</a>)</dt><dd>he jumped up</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig9">9</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig9">9</a>.</p>
 
 <p><a name="fig9">Figure 9: Puzzle graph for another single clause</a></p>
 
 <img src="puzzles9.png" alt="Puzzle graph for another single clause" height="140">
 
-<p align="justify">Looking at <i>ran</i>, this is linked to <i>he</i> with an <tt>[arg0]</tt> arrow. Also, <i>ran</i> is linked to <i>Peter</i> with an arrow that contains the preposition word <i>after</i> and the function information <tt>[dir]</tt> (direction). With these words and connections we can derive the solution sentence (<a href="#ex12">12</a>).</p>
+<p align="justify">Looking at <tt>ran(2)</tt>, this is linked to <tt>he(1)</tt> with an <tt>[arg0]</tt> arrow. Also, <tt>ran(2)</tt> is linked to <tt>Peter(4)</tt> with an arrow that contains the preposition word <tt>after(3)</tt> and the function information <tt>[dir]</tt> (direction). With these words and connections, we can derive the solution sentence (<a href="#ex12">12</a>).</p>
 
 <dl>
   <dt>(<a name="ex12">12</a>)</dt><dd>he ran after Peter</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig10">10</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig10">10</a>.</p>
 
-<p><a name="fig10">Figure 10: Puzzle graph combining Figures 8 and 9</a></p>
+<p><a name="fig10">Figure 10: Puzzle graph combining figures 8 and 9</a></p>
 
-<img src="puzzles10.png" alt="Puzzle graph combining Figures 8 and 9" height="220">
+<img src="puzzles10.png" alt="Puzzle graph combining figures 8 and 9" height="220">
 
-<p align="justify">This combines Figures <a href="#fig8">8</a> and <a href="#fig9">9</a>, with <i>and</i> to connect <i>jumped</i> and <i>ran</i>. Note how the single <i>he</i> connects as the &lsquo;do-er&rsquo; (subject) to both verbs. A solution sentence is (<a href="#ex13">13</a>).</p>
+<p align="justify">This combines figures <a href="#fig8">8</a> and <a href="#fig9">9</a>, with <tt>and(4)</tt> to connect <tt>jumped(2)</tt> and <tt>ran(5)</tt>. Note how the single <tt>he(1)</tt> connects as the &lsquo;do-er&rsquo; (subject) to both verbs. A solution sentence is (<a href="#ex13">13</a>).</p>
 
 <dl>
   <dt>(<a name="ex13">13</a>)</dt><dd>he jumped up and ran after Peter</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig11">11</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig11">11</a>.</p>
 
 <p><a name="fig11">Figure 11: Puzzle graph for a clause with a participle</a></p>
 
 <img src="puzzles11.png" alt="Puzzle graph for a clause with a participle" height="220">
 
-<p align="justify">We can see <i>waving</i> is connected to <i>he</i> by an <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrow, and to <i>rake</i> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (object) arrow. Also an arrow labelled <tt>[seq]</tt> (verb sequence; also seen above with Figure <a href="#fig6">6</a>) connects <i>was</i> to <i>waving</i>. A solution sentence is (<a href="#ex14">14</a>).</p>
+<p align="justify">We can see <tt>waving(3)</tt> is connected to <tt>he(1)</tt> by an <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrow, and to <tt>rake(5)</tt> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (object) arrow. Also an arrow labelled <tt>[seq]</tt> (verb sequence; also seen above with figure <a href="#fig6">6</a>) connects <tt>was(2)</tt> to <tt>waving(3)</tt>. A solution sentence is (<a href="#ex14">14</a>).</p>
 
 <dl>
   <dt>(<a name="ex14">14</a>)</dt><dd>he was waving a rake</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig12">12</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig12">12</a>.</p>
 
 <p><a name="fig12">Figure 12: Puzzle graph for an imperative clause</a></p>
 
 <img src="puzzles12.png" alt="Puzzle graph for an imperative clause" height="140">
 
-<p align="justify">The <tt>[clausetype]</tt> arrow that extends from <i>Stop</i> tells us that <i>Stop</i> is the verb of the clause. This connects to <tt>[imp]</tt> to tell us that the clause is an imperative. Typically, an imperative is an order or instruction for an unmentioned &lsquo;do-er&rsquo; to do something, but also the &lsquo;do-er&rsquo; can be addressed with a <tt>[voc]</tt> (vocative) connection. A vocative &mdash; Figure <a href="#fig12">12</a> has the word <i>thief</i> &mdash; can occur either at the front or end of an imperative, making (<a href="#ex15">15</a>) a possible solution sentence.</p>
+<p align="justify">The <tt>[clausetype]</tt> arrow that extends from <tt>Stop(1)</tt> tells us that <i>Stop</i> is the verb of the clause. This connects to <tt>[imp]</tt> to tell us that the clause is an imperative. Typically, an imperative is an order or instruction for an unmentioned &lsquo;do-er&rsquo; to do something, but also the &lsquo;do-er&rsquo; can be addressed with a <tt>[voc]</tt> (vocative) connection. A vocative &mdash; figure <a href="#fig12">12</a> has <tt>thief(2)</tt> &mdash; can occur either at the front or end of an imperative, making (<a href="#ex15">15</a>) a possible solution sentence.</p>
 
 <dl>
   <dt>(<a name="ex15">15</a>)</dt><dd>Stop thief!</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig13">13</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig13">13</a>.</p>
 
-<p><a name="fig13">Figure 13: Puzzle graph for a clause with an embedding with the content of Figure 12</a></p>
+<p><a name="fig13">Figure 13: Puzzle graph for a clause with an embedding with the content of figure 12</a></p>
 
-<img src="puzzles13.png" alt="Puzzle graph for a clause with an embedding with the content of Figure 12" height="320">
+<img src="puzzles13.png" alt="Puzzle graph for a clause with an embedding with the content of figure 12" height="320">
 
-<p align="justify">This is the puzzle graph for a clause with an embedding with the content of Figure <a href="#fig12">12</a>. This embedding is connected by an <tt>[arg1]</tt> (object) arrow to the verb <i>calling out</i>, and so provides the content of &lsquo;<b><i>what</i></b> <i>was called out</i>&rsquo;. Also, <i>calling out</i> links to <i>he</i> with an <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrow, so this will need to be the main verb of the overall sentence. Also an arrow labelled <tt>[seq]</tt> connects <i>was</i> to <i>calling out</i>. A solution sentence is (<a href="#ex16">16</a>).</p>
+<p align="justify">This is the puzzle graph for a clause with an embedding with the content of figure <a href="#fig12">12</a>. This embedding is connected by an <tt>[arg1]</tt> (object) arrow to the phrasal verb <tt>calling(3)_out(4)</tt>, and so provides the content of &lsquo;<b><i>what</i></b> <i>was called out</i>&rsquo;. Also, <tt>calling(3)_out(4)</tt> links to <tt>he(1)</tt> with an <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrow, so this will need to be the main verb of the overall sentence. Also an arrow labelled <tt>[seq]</tt> connects <tt>was(2)</tt> to <tt>calling(3)_out(4)</tt>. A solution sentence is (<a href="#ex16">16</a>).</p>
 
 <dl>
   <dt>(<a name="ex16">16</a>)</dt><dd>he was calling out, &lsquo;Stop thief!&rsquo;</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig14">14</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig14">14</a>.</p>
 
-<p><a name="fig14">Figure 14: Puzzle graph combining Figures 11 and 13</a></p>
+<p><a name="fig14">Figure 14: Puzzle graph combining figures 11 and 13</a></p>
 
-<img src="puzzles14.png" alt="Puzzle graph combining Figures 11 and 13" height="400">
+<img src="puzzles14.png" alt="Puzzle graph combining figures 11 and 13" height="400">
 
-<p align="justify">Figure <a href="#fig14">14</a> results from combining Figure <a href="#fig11">11</a> and <a href="#fig13">13</a>. Here, <i>and</i> connects <i>waving</i> and <i>calling out</i>, both of which are participle verbs. In turn, an arrow labelled <tt>[seq]</tt> connects <i>was</i> to <i>and</i> and it is this connection that creates the verb sequencing that supports the participle forms of the verbs. A solution sentence is (<a href="#ex17">17</a>).</p>
+<p align="justify">Figure <a href="#fig14">14</a> results from combining figure <a href="#fig11">11</a> and <a href="#fig13">13</a>. Here, <tt>and(6)</tt> has conjuncts <tt>waving(3)</tt> and <tt>calling(7) out(8)</tt>, both of which are participle verbs. In turn, an arrow labelled <tt>[seq]</tt> connects <tt>was(2)</tt> to <tt>and(6)</tt> and it is this connection that creates the verb sequencing that supports the participle forms of the two conjoined verbs. A solution sentence is (<a href="#ex17">17</a>).</p>
 
 <dl>
   <dt>(<a name="ex17">17</a>)</dt><dd>he was waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider Figure <a href="#fig15">15</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig15">15</a>.</p>
 
-<p><a name="fig15">Figure 15: Puzzle graph combining Figures 10 and 14</a></p>
+<p><a name="fig15">Figure 15: Puzzle graph combining figures 10 and 14</a></p>
 
-<img src="puzzles15.png" alt="Puzzle graph combining Figures 10 and 14" height="480">
+<img src="puzzles15.png" alt="Puzzle graph combining figures 10 and 14" height="480">
 
-<p align="justify">Figure <a href="#fig15">15</a> results from combining Figures <a href="#fig10">10</a> and <a href="#fig14">14</a>, with the exception that the <tt>[seq]</tt> (sequence verb) labelled connection of Figure <a href="#fig14">14</a> is replaced by a <tt>[cnt]</tt> (continuative) labelled connection, much like we saw happen with Figure <a href="#fig7">7</a>. As a consequence of this change, <i>waving</i> and <i>calling out</i> can no longer be the conjoined main verbs of the main clause of a solution sentence, but instead will need to form the conjoined main verbs of a subordinate participle clause that adds to the information about the &lsquo;do-er&rsquo; (subject) of the main clause. Note how the verbs <i>jumped</i>, <i>ran</i>, <i>waving</i>, and <i>calling out</i> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrows that connect to the same instance of <i>he</i>. A solution sentence is (<a href="#ex18">18</a>).</p>
+<p align="justify">Figure <a href="#fig15">15</a> results from combining figures <a href="#fig10">10</a> and <a href="#fig14">14</a>, with the exception that the <tt>[seq]</tt> (sequence verb) labelled connection of figure <a href="#fig14">14</a> is replaced by a <tt>[cnt]</tt> (continuative) labelled connection, much like we saw happen with figure <a href="#fig7">7</a>. As a consequence of this change, <i>waving</i> and <i>calling out</i> can no longer be the conjoined main verbs of the main clause of a solution sentence, but instead will need to form the conjoined main verbs of a subordinate participle clause that adds to the information about the &lsquo;do-er&rsquo; (subject) of the main clause. Note how the verbs <tt>jumped(2)</tt>, <tt>ran(5)</tt>, <tt>waving(8)</tt>, and <tt>calling(12)_out(13)</tt> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrows that connect to the same <tt>he(1)</tt>. A solution sentence is (<a href="#ex18">18</a>).</p>
 
 <dl>
   <dt>(<a name="ex18">18</a>)</dt><dd>he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We are finally in a position to consider the overall puzzle graph of Figure <a href="#fig16">16</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We are finally in a position to consider the overall puzzle graph of figure <a href="#fig16">16</a>.</p>
 
-<p><a name="fig16">Figure 16: Puzzle graph combining Figures 7 and 15</a></p>
+<p><a name="fig16">Figure 16: Puzzle graph combining figures 7 and 15</a></p>
 
-<img src="puzzles16.png" alt="Puzzle graph combining Figures 7 and 15" height="600">
+<img src="puzzles16.png" alt="Puzzle graph combining figures 7 and 15" height="600">
 
-<p align="justify">This combines Figures <a href="#fig7">7</a> and <a href="#fig15">15</a>, with <i>but</i> connecting <i>was</i> from Figure <a href="#fig7">7</a> and the topmost <i>and</i> from Figure <a href="#fig15">15</a>. Note how the verbs <i>was</i>, <i>planting out</i>, <i>jumped</i>, <i>ran</i>, <i>waving</i>, and <i>calling out</i> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (subject) arrows that connect to the same instance of <i>Mr McGregor</i>. An overall solution sentence for Figure <a href="#fig16">16</a> is (<a href="#ex19">19</a>).</p>
+<p align="justify">This combines figures <a href="#fig7">7</a> and <a href="#fig15">15</a>, with <tt>but(13)</tt> connecting to <tt>was(3)</tt> (corresponding to <tt>was(3)</tt> of figure <a href="#fig7">7</a>) and <tt>and(17)</tt> (corresponding to <tt>and(4)</tt> of figure <a href="#fig15">15</a>). Note how the verbs <tt>was(3)</tt>, <tt>planting(9)_out(10)</tt>, <tt>jumped(15)</tt>, <tt>ran(18)</tt>, <tt>waving(21)</tt>, and <tt>calling(25)_out(26)</tt> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (subject) arrows that connect to the same instance of <tt>Mr.(1)_McGregor(2)</tt>. An overall solution sentence for figure <a href="#fig16">16</a> is (<a href="#ex19">19</a>).</p>
 
 <dl>
   <dt>(<a name="ex19">19</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>

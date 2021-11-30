@@ -449,10 +449,10 @@ body {
   <text x="128.7" y="195" text-anchor="middle">’s</text>
   <text x="222.42" y="125" text-anchor="middle">NP-PRD2</text>
   <line x1="222.42" y1="140" x2="222.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="207.42" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="207.42" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: fuchsia; stroke-width: 5;"/>
   <text x="222.42" y="195" text-anchor="middle">__NP-GENV</text>
   <line x1="222.42" y1="210" x2="222.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="207.42" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="207.42" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: lime; stroke-width: 5;"/>
   <text x="222.42" y="265" text-anchor="middle">___PRO</text>
   <line x1="222.42" y1="280" x2="222.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="222.42" y="335" text-anchor="middle">theirs</text>
@@ -575,7 +575,7 @@ body {
 <tr><td><tt>VAG;~cat</tt></td><td>present participle (<i>-ing</i>) catenative (e.g.&nbsp;<tt>going</tt> in <i>be going to</i>)</td></tr>
 <tr><td><tt>VVN;~cat</tt></td><td>past participle (<i>-en</i>) catenative (e.g.&nbsp;<tt>bound</tt> in <i>be bound to</i>)</td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>verb</tt> and <tt>verb_catenative</tt> rules of (<a href="#ex2.12">2.12</a>) give support for the integration of the full verb words of Table <a href="#table2.8">2.8</a>, with an initial parameter to distinguish types of full verbs: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>verb</tt> rules of (<a href="#ex2.12">2.12</a>) and <tt>verb_catenative</tt> rules of (<a href="#ex2.13">2.13</a>) give support for the integration of the full verb words of Table <a href="#table2.8">2.8</a>, with an initial parameter to distinguish types of full verbs: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
 
 <dl>
   <dt>(<a name="ex2.12">2.12</a>)</dt><dd></dd>
@@ -585,6 +585,13 @@ body {
 <tt>verb(infinitive,['VB'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VB'(Word)].</tt><br>
 <tt>verb(ing_participle,['VAG'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VAG'(Word)].</tt><br>
 <tt>verb(en_participle,['VVN'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VVN'(Word)].</tt><br>
+
+<dl>
+  <dt>(<a name="ex2.13">2.13</a>)</dt><dd></dd>
+</dl>
+<tt>verb_catenative(finite,['VBP;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VBP;~cat'(Word)].</tt><br>
+<tt>verb_catenative(finite,['VBD;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VBD;~cat'(Word)].</tt><br>
+<tt>verb_catenative(infinitive,['VB;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VB;~cat'(Word)].</tt><br>
 <tt>verb_catenative(ing_participle,['VAG;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VAG;~cat'(Word)].</tt><br>
 <tt>verb_catenative(en_participle,['VVN;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['VVN;~cat'(Word)].</tt><br>
 
@@ -602,10 +609,10 @@ body {
 <tr><td><tt>DAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">DO</small>: <tt>doing</tt></td></tr>
 <tr><td><tt>DON</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">DO</small>: <tt>done</tt></td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule integration support is given in two ways: There are the <tt>verb</tt> rules of (<a href="#ex2.13">2.13</a>) to capture main verb uses of <small style="font-size: 75%">DO</small>, with an initial parameter to distinguish types of <small style="font-size: 75%">DO</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>; and there are the <tt>do_support</tt> rules of (<a href="#ex2.14">2.14</a>) to capture <small style="font-size: 75%">DO</small> as a finite auxiliary verb for the <i>do</i> support construction.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule integration support is given in two ways: There are the <tt>verb</tt> rules of (<a href="#ex2.14">2.14</a>) to capture main verb uses of <small style="font-size: 75%">DO</small>, with an initial parameter to distinguish types of <small style="font-size: 75%">DO</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>; and there are the <tt>do_support</tt> rules of (<a href="#ex2.15">2.15</a>) to capture <small style="font-size: 75%">DO</small> as a finite auxiliary verb for the <i>do</i> support construction.</p>
 
 <dl>
-  <dt>(<a name="ex2.13">2.13</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.14">2.14</a>)</dt><dd></dd>
 </dl>
 <tt>verb(finite,['DOP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DOP'(Word)].</tt><br>
 <tt>verb(finite,['DOD'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DOD'(Word)].</tt><br>
@@ -614,7 +621,7 @@ body {
 <tt>verb(en_participle,['DON'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DON'(Word)].</tt><br>
 
 <dl>
-  <dt>(<a name="ex2.14">2.14</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.15">2.15</a>)</dt><dd></dd>
 </dl>
 <tt>do_support(['DOD'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DOD'(Word)].</tt><br>
 <tt>do_support(['DOP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['DOP'(Word)].</tt><br>
@@ -633,10 +640,10 @@ body {
 <tr><td><tt>HAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">HAVE</small>: <tt>having</tt></td></tr>
 <tr><td><tt>HVN</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">HAVE</small>: <tt>had</tt></td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>have</tt> rules of (<a href="#ex2.15">2.15</a>) give support for the integration of the <small style="font-size: 75%">HAVE</small> words of Table <a href="#table2.10">2.10</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">HAVE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>have</tt> rules of (<a href="#ex2.16">2.16</a>) give support for the integration of the <small style="font-size: 75%">HAVE</small> words of Table <a href="#table2.10">2.10</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">HAVE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex2.15">2.15</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.16">2.16</a>)</dt><dd></dd>
 </dl>
 <tt>have(finite,['HVD'(Word)|L]-L)&nbsp;--&gt;&nbsp;['HVD'(Word)].</tt><br>
 <tt>have(finite,['HVP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['HVP'(Word)].</tt><br>
@@ -658,10 +665,10 @@ body {
 <tr><td><tt>BAG</tt></td><td>The present participle (<i>-ing</i>) form of the verb <small style="font-size: 75%">BE</small>: <tt>being</tt></td></tr>
 <tr><td><tt>BEN</tt></td><td>The past participle (<i>-en</i>) form of the verb <small style="font-size: 75%">BE</small>: <tt>been</tt></td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>be</tt> rules of (<a href="#ex2.16">2.16</a>) give support for the integration of the <small style="font-size: 75%">BE</small> words of Table <a href="#table2.11">2.11</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">BE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>be</tt> rules of (<a href="#ex2.17">2.17</a>) give support for the integration of the <small style="font-size: 75%">BE</small> words of Table <a href="#table2.11">2.11</a>, with an initial parameter to distinguish types of <small style="font-size: 75%">BE</small>: <tt>finite</tt>, <tt>infinitive</tt>, <tt>ing_participle</tt>, and <tt>en_participle</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex2.16">2.16</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.17">2.17</a>)</dt><dd></dd>
 </dl>
 <tt>be(finite,['BEP'(Word)|L]-L)&nbsp;--&gt;&nbsp;['BEP'(Word)].</tt><br>
 <tt>be(finite,['BED'(Word)|L]-L)&nbsp;--&gt;&nbsp;['BED'(Word)].</tt><br>
@@ -680,10 +687,10 @@ body {
 <tr><td><tt>MD</tt></td><td>Modal auxiliary verb (e.g.&nbsp;<tt>will</tt>, <tt>would</tt>, <tt>can</tt>, <tt>could</tt>, <tt>&lt;apos&gt;ll</tt>, <tt>&lt;apos&gt;d</tt>)</td></tr>
 <tr><td><tt>MD;~cat</tt></td><td>Modal catenative (<tt>ought</tt>, <tt>used</tt>)</td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>modal</tt> and <tt>modal_catenative</tt> rules of (<a href="#ex2.17">2.17</a>) support the integration of the modal verbs of Table <a href="#table2.12">2.12</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>modal</tt> and <tt>modal_catenative</tt> rules of (<a href="#ex2.18">2.18</a>) support the integration of the modal verbs of Table <a href="#table2.12">2.12</a>.</p>
 
 <dl>
-  <dt>(<a name="ex2.17">2.17</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.18">2.18</a>)</dt><dd></dd>
 </dl>
 <tt>modal(['MD'(Word)|L]-L)&nbsp;--&gt;&nbsp;['MD'(Word)].</tt><br>
 <tt>modal_catenative(['MD;~cat'(Word)|L]-L)&nbsp;--&gt;&nbsp;['MD;~cat'(Word)].</tt><br>
@@ -700,10 +707,10 @@ body {
 <tr><td><tt>NEG</tt></td><td>The negative particle <tt>not</tt> or <tt>n&lt;apos&gt;t</tt></td></tr>
 <tr><td><tt>TO</tt></td><td>Infinitive marker <tt>to</tt></td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>there</tt>, <tt>neg</tt>, and <tt>to</tt> rules of (<a href="#ex2.18">2.18</a>) support the integration of the words of Table <a href="#table2.13">2.13</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>there</tt>, <tt>neg</tt>, and <tt>to</tt> rules of (<a href="#ex2.19">2.19</a>) support the integration of the words of Table <a href="#table2.13">2.13</a>.</p>
 
 <dl>
-  <dt>(<a name="ex2.18">2.18</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
 </dl>
 <tt>there(['EX'(Word)|L]-L)&nbsp;--&gt;&nbsp;['EX'(Word)].</tt><br>
 <tt>neg(['NEG'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NEG'(Word)].</tt><br>
@@ -723,10 +730,10 @@ body {
 <tr><td><tt>P-CONN</tt></td><td>Subordinating conjunction (e.g.&nbsp;<tt>although</tt>, <tt>when</tt>)</td></tr>
 <tr><td><tt>P-ROLE</tt></td><td>Role preposition (e.g.&nbsp;<tt>in</tt>, <tt>of</tt>, <tt>under</tt>)</td></tr>
 </table>
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>conj</tt>, <tt>comp</tt>, <tt>conn</tt>, and <tt>role</tt> rules of (<a href="#ex2.19">2.19</a>) support the integration of the different connective words of Table <a href="#table2.14">2.14</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>conj</tt>, <tt>comp</tt>, <tt>conn</tt>, and <tt>role</tt> rules of (<a href="#ex2.20">2.20</a>) support the integration of the different connective words of Table <a href="#table2.14">2.14</a>.</p>
 
 <dl>
-  <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.20">2.20</a>)</dt><dd></dd>
 </dl>
 <tt>conj('CONJ'(Word))&nbsp;--&gt;&nbsp;['CONJ'(Word)].</tt><br>
 <tt>comp(['C'(Word)|L]-L)&nbsp;--&gt;&nbsp;['C'(Word)].</tt><br>
@@ -746,10 +753,10 @@ body {
 </table>
 <p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation is placed as high as possible. For example, a full stop that ends a sentence is treated as the last constituent of the highest clause layer (<tt>IP</tt>&sol;<tt>CP</tt>&sol;<tt>FRAG</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="#ex2.20">2.20</a>) give support for the integration of punctuation, with an initial parameter to distinguish types of punctuation: <tt>final_question</tt>, <tt>final</tt>, and <tt>non_final</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="#ex2.21">2.21</a>) give support for the integration of punctuation, with an initial parameter to distinguish types of punctuation: <tt>final_question</tt>, <tt>final</tt>, and <tt>non_final</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex2.20">2.20</a>)</dt><dd></dd>
+  <dt>(<a name="ex2.21">2.21</a>)</dt><dd></dd>
 </dl>
 <tt>punc(final_question,['PU'('?')|L]-L)&nbsp;--&gt;&nbsp;['PU'('?')].</tt><br>
 <tt>punc(final,['PU'('.')|L]-L)&nbsp;--&gt;&nbsp;['PU'('.')].</tt><br>
