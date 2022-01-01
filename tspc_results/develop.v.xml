@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="lexUnit.xsl"?>
-<lexUnit status="FN1_Sent" POS="v" name="develop" ID="4966" frame="Target" frameID="0" totalAnnotated="1" xsi:schemaLocation="../schema/lexUnit.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<lexUnit status="FN1_Sent" POS="v" name="develop" ID="1000" frame="Unk" frameID="0000" totalAnnotated="2" xsi:schemaLocation="../schema/lexUnit.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
     <frame>
       <FE fgColor="000000" bgColor="FF69B4" type="arg0" abbrev="arg0" name="arg0"/>
@@ -11,17 +11,18 @@
   <definition>develop.v</definition>
   <lexeme POS="v" name="develop"/>
   <valences>
+    <FERealization total="2">
+      <FE name="arg1"/>
+      <pattern total="2">
+        <valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/>
+        <annoSet ID="4966"/>
+        <annoSet ID="5275"/>
+      </pattern>
+    </FERealization>
     <FERealization total="1">
       <FE name="arg0"/>
       <pattern total="1">
         <valenceUnit GF="Obj" PT="NP-DOB1" FE="arg0"/>
-        <annoSet ID="4966"/>
-      </pattern>
-    </FERealization>
-    <FERealization total="1">
-      <FE name="arg1"/>
-      <pattern total="1">
-        <valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/>
         <annoSet ID="4966"/>
       </pattern>
     </FERealization>
@@ -33,13 +34,16 @@
       </pattern>
     </FERealization>
     <FEGroupRealization total="1">
-      <FE name="arg0"/>
       <FE name="arg1"/>
-      <FE name="modifier_mnr4"/>
       <pattern total="1">
-        <valenceUnit GF="Obj" PT="NP-DOB1" FE="arg0"/>
         <valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/>
-        <valenceUnit GF="Dep" PT="ADVP-MNR" FE="modifier_mnr4"/>
+        <annoSet ID="5275"/>
+      </pattern>
+    </FEGroupRealization>
+    <FEGroupRealization total="1">
+      <FE name="arg0"/><FE name="arg1"/><FE name="modifier_mnr4"/>
+      <pattern total="1">
+        <valenceUnit GF="Obj" PT="NP-DOB1" FE="arg0"/><valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/><valenceUnit GF="Dep" PT="ADVP-MNR" FE="modifier_mnr4"/>
         <annoSet ID="4966"/>
       </pattern>
     </FEGroupRealization>
@@ -73,34 +77,6 @@
       </annotationSet>
     </sentence>
   </subCorpus>
-</lexUnit>
-
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<?xml-stylesheet type="text/xsl" href="lexUnit.xsl"?>
-<lexUnit status="FN1_Sent" POS="v" name="develop" ID="5275" frame="Target" frameID="0" totalAnnotated="1" xsi:schemaLocation="../schema/lexUnit.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <header>
-    <frame>
-      <FE fgColor="000000" bgColor="D8BFD8" type="arg1" abbrev="arg1" name="arg1"/>
-    </frame>
-  </header>
-  <definition>develop.v</definition>
-  <lexeme POS="v" name="develop"/>
-  <valences>
-    <FERealization total="1">
-      <FE name="arg1"/>
-      <pattern total="1">
-        <valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/>
-        <annoSet ID="5275"/>
-      </pattern>
-    </FERealization>
-    <FEGroupRealization total="1">
-      <FE name="arg1"/>
-      <pattern total="1">
-        <valenceUnit GF="Obj" PT="NP-OB1" FE="arg1"/>
-        <annoSet ID="5275"/>
-      </pattern>
-    </FEGroupRealization>
-  </valences>
   <subCorpus name="75_bnc_B41">
     <sentence sentNo="1" aPos="0" ID="75_bnc_B41">
       <text>Bottom in developing our managers .</text>
