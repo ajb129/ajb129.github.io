@@ -181,7 +181,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
 <li>A pattern can be built from simple character strings separated by pipes (&lsquo;<tt>|</tt>&rsquo;) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
 <li>A regular expression, indicated by surrounding slashes (&lsquo;<tt>&sol;</tt>&rsquo;), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
-<li>If a simple character string or regular expression begins with &lsquo;<tt>!</tt>&rsquo;, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;P&dollar;&sol;</tt> will match any node that does not end with <tt>P</tt>.</li>
+<li>If a simple character string or regular expression begins with &lsquo;<tt>!</tt>&rsquo;, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
 </ul>
 
 <h4><a name="sec4.1.1">4.1.1</a>&nbsp;&nbsp;&nbsp;Tregex regular expressions</h4>
@@ -306,7 +306,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
   <dt>(<a name="ex18">18</a>)</dt><dd><tt>&sol;^IP&#92;b&sol; &lt; VB &lt; VB2 | &lt; NP-PRD &lt; AX</tt></dd>
 </dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (&lsquo;<tt>[]</tt>&rsquo;) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex19">19</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that preceeds a subject sister or follows an <tt>ADVP</tt> sister.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (&lsquo;<tt>[]</tt>&rsquo;) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex19">19</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that precedes a subject sister or follows an <tt>ADVP</tt> sister.</p>
 
 <dl>
   <dt>(<a name="ex19">19</a>)</dt><dd><tt>&sol;^IP&#92;b&sol; [ &lt; VB | &lt; NP-PRD ] [ &dollar;..&nbsp;&sol;SBJ&sol; | &dollar;,,&nbsp;ADVP ]</tt></dd>
@@ -375,7 +375,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="161.7" height="304.5" viewBox="-16.5 17.5 204.6 395">
   <text x="85.8" y="55" text-anchor="middle">PP</text>
   <line x1="85.8" y1="70" x2="85.8" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="85.8" y="125" text-anchor="middle">__NP</text>
   <line x1="85.8" y1="140" x2="38.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="85.8" y1="140" x2="124.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
@@ -578,7 +578,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <h4>Example 7</h4>
 
-<p align="justify">The following pattern will look for a non-terminal node that contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; without containing &lsquo;<tt>&rcub;</tt>&rsquo; and that should be preceeded by a non-empty substring whose content is captured by the variable group name <tt>main</tt> and that is followed by a possibly empty substring whose content is captured by the variable group name <tt>rest</tt>. There follows an action that changes the label of the found node so that only the content of <tt>main</tt> and <tt>rest</tt> remain. Note that &lsquo;<tt>^.*&dollar;</tt>&rsquo; of the <tt>relabel</tt> action is necessary to make sure the regex pattern only matches and replaces once on the entire node label.</p>
+<p align="justify">The following pattern will look for a non-terminal node that contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; without containing &lsquo;<tt>&rcub;</tt>&rsquo; and that should be preceded by a non-empty substring whose content is captured by the variable group name <tt>main</tt> and that is followed by a possibly empty substring whose content is captured by the variable group name <tt>rest</tt>. There follows an action that changes the label of the found node so that only the content of <tt>main</tt> and <tt>rest</tt> remain. Note that &lsquo;<tt>^.*&dollar;</tt>&rsquo; of the <tt>relabel</tt> action is necessary to make sure the regex pattern only matches and replaces once on the entire node label.</p>
 
 <hr/>
 <tt>&nbsp;&nbsp;&sol;^(.+);&#92;{[^}]+&#92;}(.*)$&sol;#1&#92;%main#2&#92;%rest=x&nbsp;&lt;&nbsp;__</tt><br>
@@ -916,7 +916,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <h4>Example 17</h4>
 
-<p align="justify">The following pattern contains two pattern segments (see section <a href="#sec4.6">4.6</a>). The first pattern segment matches a node (identified as &lsquo;<tt>x</tt>&rsquo;) that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and that is referenced with the variable group name <tt>index</tt>, (ii) doesn't dominate a <tt>PRO</tt> node, (iii) is contained within a node (identified as &lsquo;<tt>y</tt>&rsquo;) that has <tt>CND</tt> as a substring (a constituent layer that will be the antecedent of a conditional), and (iv) has a leftmost terminal descendant (identified as &lsquo;<tt>a</tt>&rsquo;) that doesn't end within an index string. The second pattern segment matches a node that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and is the same string referenced with the variable group name <tt>index</tt> of the first pattern segment, (ii) dominates a <tt>PRO</tt> node, (iii) preceedes the node referenced as &lsquo;<tt>x</tt>&rsquo; by the first pattern segment, (iv) is not contained within the node referenced as &lsquo;<tt>y</tt>&rsquo; by the first pattern segment, and (v) has a leftmost terminal descendant (identified as &lsquo;<tt>b</tt>&rsquo;) that doesn't end within an index string. When the overall pattern is satisfied an action is triggered to coindex the nodes identified with &lsquo;<tt>a</tt>&rsquo; and &lsquo;<tt>b</tt>&rsquo;.</p>
+<p align="justify">The following pattern contains two pattern segments (see section <a href="#sec4.6">4.6</a>). The first pattern segment matches a node (identified as &lsquo;<tt>x</tt>&rsquo;) that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and that is referenced with the variable group name <tt>index</tt>, (ii) doesn't dominate a <tt>PRO</tt> node, (iii) is contained within a node (identified as &lsquo;<tt>y</tt>&rsquo;) that has <tt>CND</tt> as a substring (a constituent layer that will be the antecedent of a conditional), and (iv) has a leftmost terminal descendant (identified as &lsquo;<tt>a</tt>&rsquo;) that doesn't end within an index string. The second pattern segment matches a node that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and is the same string referenced with the variable group name <tt>index</tt> of the first pattern segment, (ii) dominates a <tt>PRO</tt> node, (iii) precedes the node referenced as &lsquo;<tt>x</tt>&rsquo; by the first pattern segment, (iv) is not contained within the node referenced as &lsquo;<tt>y</tt>&rsquo; by the first pattern segment, and (v) has a leftmost terminal descendant (identified as &lsquo;<tt>b</tt>&rsquo;) that doesn't end within an index string. When the overall pattern is satisfied an action is triggered to coindex the nodes identified with &lsquo;<tt>a</tt>&rsquo; and &lsquo;<tt>b</tt>&rsquo;.</p>
 
 <hr/>
 <tt>&nbsp;&nbsp;&sol;;(&#92;{[^}]+&#92;})&sol;#1&#92;%index=x&nbsp;!&lt;&nbsp;&sol;^PRO&#92;b&sol;&nbsp;&gt;&gt;&nbsp;&sol;&#92;bCND&#92;b&sol;=y&nbsp;&lt;&lt;,&nbsp;(!&sol;-&#92;p{Digit}+$&sol;=a&nbsp;!&lt;&nbsp;__)&nbsp;:</tt><br>
@@ -1159,7 +1159,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <br>
 <h2><a name="references">References</a></h2>
 
-<p><a name="Levy-and-Andrew-2006">Levy, Roger and Galen Andrew. 2006.</a> Tregex and Tsurgeon: tools for querying and manipulating tree data   structure. In <i>5th International conference on Language Resources and   Evaluation</i>.</p>
+<p><a name="Levy-and-Andrew-2006">Levy, Roger and Galen Andrew. 2006.</a> Tregex and Tsurgeon: tools for querying and manipulating tree data structure. In <i>5th International conference on Language Resources and Evaluation</i>.</p>
 <p><a name="Pito-1994">Pito, Richard. 1994.</a> tgrepdoc&ndash;documentation for tgrep. University of Pennsylvania.</p>
 <p><a name="Rohde-2005">Rohde, Douglas. 2005.</a> TGrep2 User Manual version 1.15.</p>
 

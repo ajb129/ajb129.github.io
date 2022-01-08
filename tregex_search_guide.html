@@ -36,9 +36,9 @@ This guide provides an introduction to the Tregex query language. The content wi
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Tregex query language closely resembles the query languages of TGrep by Richard Pito (Pito 1994) and TGrep2 by Douglas Rohde (Rohde 2005). TGrep was the original tree-matching program that came with the Penn Treebank. TGrep2 is a reimplementation that also added extensions, available at <tt><a href="https:&sol;&sol;github.com&sol;andreasvc&sol;tgrep2">https:&sol;&sol;github.com&sol;andreasvc&sol;tgrep2</a></tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Following TGrep and TGrep2, Tregex queries are expressed as patterns that consist of expressions to match nodes and relationships defining links or negated links to other nodes. Nodes of searched trees are matched either with simple character strings, or OR'd character strings, or regular expressions (see section <a href="#sec2">2</a>). Possible relationships are illustrated and detailed in section <a href="#sec3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Following TGrep and TGrep2, Tregex queries are expressed as patterns that consist of expressions to match nodes and relationships defining links or negated links to other nodes. Nodes of searched trees are matched either with simple character strings, or OR'd character strings, or regular expressions (see section <a href="#sec2">2</a>). Possible node relationships are illustrated and detailed in section <a href="#sec3">3</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A complex node expression consists of a node expression followed by Boolean expressions of relationships, as explained in Section <a href="#sec4">4</a>. Also, nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (see section <a href="#sec5">5</a>). If you write a node description using a regular expression, you can assign its matching groups to variable names (see section <a href="#sec6">6</a>). Finally, patterns can be broken into multiple segments (see section <a href="#sec7">7</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A complex node expression consists of a node expression followed by Boolean expressions of relationships to other nodes, as explained in Section <a href="#sec4">4</a>. Also, nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (see section <a href="#sec5">5</a>). If you write a node description using a regular expression, you can assign its matching groups to variable names (see section <a href="#sec6">6</a>). Finally, patterns can be broken into multiple segments (see section <a href="#sec7">7</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Typically, spaces are optional in patterns. But for readability, it is usually best to place spaces between relationships, node expressions, and other operators.</p>
 
@@ -50,7 +50,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 <li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
 <li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
 <li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
-<li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;P&dollar;&sol;</tt> will match any node that does not end with <tt>P</tt>.</li>
+<li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
 </ul>
 
 <h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Tregex regular expressions</h3>
@@ -84,7 +84,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 <tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
 <tt>A&nbsp;$,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the above relationships as forward and backward links:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the relationships of (<a href="#ex1">1</a>) as forward and backward links:</p>
 
 <dl>
   <dt>(<a name="ex2">2</a>)</dt><dd></dd>
@@ -100,34 +100,34 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="233.64" y="125" text-anchor="middle">B</text>
   <line x1="233.64" y1="140" x2="171.6" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="233.64" y1="140" x2="405.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="171.6" y="195" text-anchor="middle">__C</text>
   <line x1="171.6" y1="210" x2="128.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="171.6" y1="210" x2="300.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="265" text-anchor="middle">___D</text>
   <line x1="128.7" y1="280" x2="42.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="128.7" y1="280" x2="128.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="128.7" y1="280" x2="214.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="42.9" y="335" text-anchor="middle">___E</text>
   <line x1="42.9" y1="350" x2="42.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="42.9" y="405" text-anchor="middle">___w0</text>
-  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="335" text-anchor="middle">___F</text>
   <line x1="128.7" y1="350" x2="128.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="405" text-anchor="middle">___w1</text>
-  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="214.5" y="335" text-anchor="middle">___G</text>
   <line x1="214.5" y1="350" x2="214.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="214.5" y="405" text-anchor="middle">___w2</text>
-  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="300.3" y="265" text-anchor="middle">___H</text>
   <line x1="300.3" y1="280" x2="300.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="300.3" y="335" text-anchor="middle">___w3</text>
   <text x="405.24" y="195" text-anchor="middle">I</text>
   <line x1="405.24" y1="210" x2="374.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -169,25 +169,25 @@ This guide provides an introduction to the Tregex query language. The content wi
 <tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;(dominates,&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="504.24" height="357" viewBox="-16.5 17.5 661.32 465">
-  <rect x="299.16" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="299.16" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="314.16" y="55" text-anchor="middle">___A</text>
   <line x1="314.16" y1="70" x2="190.08" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <line x1="314.16" y1="70" x2="473.22" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <line x1="314.16" y1="70" x2="597.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="175.08" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="175.08" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="190.08" y="125" text-anchor="middle">___B</text>
   <line x1="190.08" y1="140" x2="128.04" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="190.08" y1="140" x2="318.12" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="113.04" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.04" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.04" y="195" text-anchor="middle">___C</text>
   <line x1="128.04" y1="210" x2="97.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="128.04" y1="210" x2="225.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="82.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="82.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="97.02" y="265" text-anchor="middle">___D</text>
   <line x1="97.02" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="97.02" y1="280" x2="100.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="97.02" y1="280" x2="163.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="34.98" y="335" text-anchor="middle">__E</text>
   <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="34.98" y="405" text-anchor="middle">w0</text>
@@ -247,11 +247,11 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="194.04" y="125" text-anchor="middle">B</text>
   <line x1="194.04" y1="140" x2="132" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="194.04" y1="140" x2="326.04" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="117" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="117" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="132" y="195" text-anchor="middle">__C</text>
   <line x1="132" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="132" y1="210" x2="225.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="78.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="78.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="93.06" y="265" text-anchor="middle">___D</text>
   <line x1="93.06" y1="280" x2="31.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="93.06" y1="280" x2="93.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
@@ -265,7 +265,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="155.1" y="335" text-anchor="middle">G</text>
   <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="155.1" y="405" text-anchor="middle">w2</text>
-  <rect x="210.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="210.06" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="225.06" y="265" text-anchor="middle">___H</text>
   <line x1="225.06" y1="280" x2="225.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="225.06" y="335" text-anchor="middle">w3</text>
@@ -305,7 +305,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 <dl>
   <dt>(<a name="ex5">5</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;..&nbsp;__&nbsp;(preceeds)</tt><br>
+<tt>I&nbsp;..&nbsp;__&nbsp;(precedes)</tt><br>
 <tt>__&nbsp;,,&nbsp;I&nbsp;(follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
@@ -335,7 +335,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="217.14" y="265" text-anchor="middle">H</text>
   <line x1="217.14" y1="280" x2="217.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="217.14" y="335" text-anchor="middle">w3</text>
-  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="310.2" y="195" text-anchor="middle">__I</text>
   <line x1="310.2" y1="210" x2="279.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="310.2" y1="210" x2="341.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -347,36 +347,36 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="341.22" y="335" text-anchor="middle">L</text>
   <line x1="341.22" y1="350" x2="341.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="341.22" y="405" text-anchor="middle">w5</text>
-  <rect x="485.94" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="485.94" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="500.94" y="125" text-anchor="middle">___M</text>
   <line x1="500.94" y1="140" x2="415.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="500.94" y1="140" x2="543.84" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="415.14" y="195" text-anchor="middle">___N</text>
   <line x1="415.14" y1="210" x2="415.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="415.14" y="265" text-anchor="middle">___w6</text>
-  <rect x="528.84" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="528.84" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="543.84" y="195" text-anchor="middle">___O</text>
   <line x1="543.84" y1="210" x2="500.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="543.84" y1="210" x2="586.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="485.94" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="485.94" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="500.94" y="265" text-anchor="middle">___P</text>
   <line x1="500.94" y1="280" x2="500.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="485.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="485.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="500.94" y="335" text-anchor="middle">___w7</text>
-  <rect x="571.74" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="571.74" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="586.74" y="265" text-anchor="middle">___Q</text>
   <line x1="586.74" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="571.74" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="571.74" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="586.74" y="335" text-anchor="middle">___R</text>
   <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="571.74" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="571.74" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="586.74" y="405" text-anchor="middle">___w8</text>
-  <rect x="657.54" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="657.54" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="672.54" y="125" text-anchor="middle">___S</text>
   <line x1="672.54" y1="140" x2="672.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="657.54" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="657.54" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="672.54" y="195" text-anchor="middle">___w9</text>
 </svg>
 
@@ -384,7 +384,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <dt>(<a name="ex6">6</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;,,&nbsp;__&nbsp;(follows)</tt><br>
-<tt>__&nbsp;..&nbsp;I&nbsp;(preceeds)</tt><br>
+<tt>__&nbsp;..&nbsp;I&nbsp;(precedes)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -394,36 +394,36 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="233.64" y="125" text-anchor="middle">B</text>
   <line x1="233.64" y1="140" x2="171.6" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="233.64" y1="140" x2="405.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="156.6" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="171.6" y="195" text-anchor="middle">___C</text>
   <line x1="171.6" y1="210" x2="128.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="171.6" y1="210" x2="300.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="265" text-anchor="middle">___D</text>
   <line x1="128.7" y1="280" x2="42.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="128.7" y1="280" x2="128.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="128.7" y1="280" x2="214.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="27.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="42.9" y="335" text-anchor="middle">___E</text>
   <line x1="42.9" y1="350" x2="42.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="27.9" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="42.9" y="405" text-anchor="middle">___w0</text>
-  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="335" text-anchor="middle">___F</text>
   <line x1="128.7" y1="350" x2="128.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="113.7" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="128.7" y="405" text-anchor="middle">___w1</text>
-  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="199.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="214.5" y="335" text-anchor="middle">___G</text>
   <line x1="214.5" y1="350" x2="214.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="199.5" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="214.5" y="405" text-anchor="middle">___w2</text>
-  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="285.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="300.3" y="265" text-anchor="middle">___H</text>
   <line x1="300.3" y1="280" x2="300.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="285.3" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="300.3" y="335" text-anchor="middle">___w3</text>
-  <rect x="390.24" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="390.24" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="405.24" y="195" text-anchor="middle">__I</text>
   <line x1="405.24" y1="210" x2="374.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="405.24" y1="210" x2="436.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -460,7 +460,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 <dl>
   <dt>(<a name="ex7">7</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;.&nbsp;__&nbsp;(immediately&nbsp;preceeds)</tt><br>
+<tt>I&nbsp;.&nbsp;__&nbsp;(immediately&nbsp;precedes)</tt><br>
 <tt>__&nbsp;,&nbsp;I&nbsp;(immediately&nbsp;follows)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
@@ -490,7 +490,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="217.14" y="265" text-anchor="middle">H</text>
   <line x1="217.14" y1="280" x2="217.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="217.14" y="335" text-anchor="middle">w3</text>
-  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="295.2" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="310.2" y="195" text-anchor="middle">__I</text>
   <line x1="310.2" y1="210" x2="279.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="310.2" y1="210" x2="341.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -502,14 +502,14 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="341.22" y="335" text-anchor="middle">L</text>
   <line x1="341.22" y1="350" x2="341.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="341.22" y="405" text-anchor="middle">w5</text>
-  <rect x="462.18" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="462.18" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="477.18" y="125" text-anchor="middle">___M</text>
   <line x1="477.18" y1="140" x2="415.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="477.18" y1="140" x2="520.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="400.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="415.14" y="195" text-anchor="middle">___N</text>
   <line x1="415.14" y1="210" x2="415.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="400.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="415.14" y="265" text-anchor="middle">___w6</text>
   <text x="520.08" y="195" text-anchor="middle">O</text>
   <line x1="520.08" y1="210" x2="489.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -531,7 +531,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <dt>(<a name="ex8">8</a>)</dt><dd></dd>
 </dl>
 <tt>I&nbsp;,&nbsp;__&nbsp;(immediately&nbsp;follows)</tt><br>
-<tt>__&nbsp;.&nbsp;I&nbsp;(immediately&nbsp;preceeds)</tt><br>
+<tt>__&nbsp;.&nbsp;I&nbsp;(immediately&nbsp;precedes)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -541,7 +541,7 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="198" y="125" text-anchor="middle">B</text>
   <line x1="198" y1="140" x2="135.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="198" y1="140" x2="333.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="120.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="120.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="135.96" y="195" text-anchor="middle">___C</text>
   <line x1="135.96" y1="210" x2="93.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="135.96" y1="210" x2="229.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -558,12 +558,12 @@ This guide provides an introduction to the Tregex query language. The content wi
   <text x="155.1" y="335" text-anchor="middle">G</text>
   <line x1="155.1" y1="350" x2="155.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="155.1" y="405" text-anchor="middle">w2</text>
-  <rect x="214.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="214.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="229.02" y="265" text-anchor="middle">___H</text>
   <line x1="229.02" y1="280" x2="229.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="214.02" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="214.02" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="229.02" y="335" text-anchor="middle">___w3</text>
-  <rect x="318.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="318.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="333.96" y="195" text-anchor="middle">__I</text>
   <line x1="333.96" y1="210" x2="302.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="333.96" y1="210" x2="364.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -618,15 +618,15 @@ This guide provides an introduction to the Tregex query language. The content wi
   <line x1="112.86" y1="280" x2="38.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="112.86" y1="280" x2="112.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="112.86" y1="280" x2="186.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="23.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="23.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="38.94" y="335" text-anchor="middle">___E</text>
   <line x1="38.94" y1="350" x2="38.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="38.94" y="405" text-anchor="middle">w0</text>
-  <rect x="97.86" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="97.86" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="112.86" y="335" text-anchor="middle">__F</text>
   <line x1="112.86" y1="350" x2="112.86" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="112.86" y="405" text-anchor="middle">w1</text>
-  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="186.78" y="335" text-anchor="middle">___G</text>
   <line x1="186.78" y1="350" x2="186.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="186.78" y="405" text-anchor="middle">w2</text>
@@ -687,15 +687,15 @@ This guide provides an introduction to the Tregex query language. The content wi
   <line x1="112.86" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="112.86" y1="280" x2="108.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="112.86" y1="280" x2="186.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="34.98" y="335" text-anchor="middle">__E</text>
   <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="34.98" y="405" text-anchor="middle">w0</text>
-  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="108.9" y="335" text-anchor="middle">___F</text>
   <line x1="108.9" y1="350" x2="108.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="108.9" y="405" text-anchor="middle">w1</text>
-  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="171.78" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="186.78" y="335" text-anchor="middle">___G</text>
   <line x1="186.78" y1="350" x2="186.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="186.78" y="405" text-anchor="middle">w2</text>
@@ -756,11 +756,11 @@ This guide provides an introduction to the Tregex query language. The content wi
   <line x1="104.94" y1="280" x2="34.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="104.94" y1="280" x2="108.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <line x1="104.94" y1="280" x2="178.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="19.98" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="34.98" y="335" text-anchor="middle">__E</text>
   <line x1="34.98" y1="350" x2="34.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="34.98" y="405" text-anchor="middle">w0</text>
-  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: pink; stroke-width: 10;"/>
+  <rect x="93.9" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="108.9" y="335" text-anchor="middle">___F</text>
   <line x1="108.9" y1="350" x2="108.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="108.9" y="405" text-anchor="middle">w1</text>
@@ -906,7 +906,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 </dl>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;VB&nbsp;&lt;&nbsp;VB2&nbsp;|&nbsp;&lt;&nbsp;NP-PRD&nbsp;&lt;&nbsp;AX</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex24">24</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that preceeds a subject sister or follows an <tt>ADVP</tt> sister.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex24">24</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that precedes a subject sister or follows an <tt>ADVP</tt> sister.</p>
 
 <dl>
   <dt>(<a name="ex24">24</a>)</dt><dd></dd>
@@ -980,7 +980,7 @@ This guide provides an introduction to the Tregex query language. The content wi
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="161.7" height="304.5" viewBox="-16.5 17.5 204.6 395">
   <text x="85.8" y="55" text-anchor="middle">PP</text>
   <line x1="85.8" y1="70" x2="85.8" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: yellow; stroke-width: 10;"/>
+  <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
   <text x="85.8" y="125" text-anchor="middle">__NP</text>
   <line x1="85.8" y1="140" x2="38.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="85.8" y1="140" x2="124.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
