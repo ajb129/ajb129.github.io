@@ -358,16 +358,12 @@ body {
 <table border="1" cellpadding="10px">
 <tr><td><tt>NS</tt></td><td>Plural common noun (e.g.&nbsp;<tt>children</tt>, <tt>revelations</tt>, <tt>times</tt>, <tt>wishes</tt>)</td></tr>
 <tr><td><tt>N</tt></td><td>Common noun not subclassified as <tt>NS</tt>, that is, either singular (e.g.&nbsp;<tt>child</tt>, <tt>revelation</tt>, <tt>time</tt>, <tt>wish</tt>), or neutral for number (e.g.&nbsp;<tt>committee</tt>, <tt>fish</tt>, <tt>information</tt>)</td></tr>
-<tr><td><tt>NPRS</tt></td><td>Plural proper noun (e.g.&nbsp;<tt>Heathers</tt>, <tt>Koreas</tt>)</td></tr>
-<tr><td><tt>NPR</tt></td><td>Proper noun not subclassified as <tt>NPRS</tt>, that is either singular (e.g.&nbsp;<tt>Heather</tt>, <tt>Tokyo</tt>), or neutral for number (e.g.&nbsp;<tt>Andes</tt>, <tt>IBM</tt>)</td></tr>
 </table>
 <dl>
   <dt>(<a name="ex2.1">2.1</a>)</dt><dd></dd>
 </dl>
 <tt>noun(['NS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NS'(Word)].</tt><br>
 <tt>noun(['N'(Word)|L]-L)&nbsp;--&gt;&nbsp;['N'(Word)].</tt><br>
-<tt>noun(['NPRS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPRS'(Word)].</tt><br>
-<tt>noun(['NPR'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPR'(Word)].</tt><br>
 
 <p align="justify">In (<a href="#ex2.2">2.2</a>), we ask for the consequences of a parse list containing the word&sol;class pair <tt>'NS'('boys')</tt>.</p>
 
@@ -393,17 +389,21 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When we connect the word rules of (<a href="#ex2.1">2.1</a>) to rules for the internal content of noun phrases in section <a href="#sec3.2">3.2</a>, we will find that they contribute nouns which can have a role within the noun phrase of being either: (i) the head for the noun phrase, or (ii) a noun modifier of the noun phrase head.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="#table2.2">2.2</a> that can only act as noun phrase heads, and so we need to distinguish this kind of word at the rule level, which we do with the <tt>noun_head</tt> rules of (<a href="#ex2.4">2.4</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="#table2.2">2.2</a> that only act as noun phrase heads, and so we need to distinguish this kind of word at the rule level, which we do with the <tt>noun_head</tt> rules of (<a href="#ex2.4">2.4</a>).</p>
 
 <p><a name="table2.2">Table 2.2: Tags for words that need to be noun phrase heads</a></p>
 
 <table border="1" cellpadding="10px">
+<tr><td><tt>NPRS</tt></td><td>Plural proper noun (e.g.&nbsp;<tt>Heathers</tt>, <tt>Koreas</tt>)</td></tr>
+<tr><td><tt>NPR</tt></td><td>Proper noun not subclassified as <tt>NPRS</tt>, that is either singular (e.g.&nbsp;<tt>Heather</tt>, <tt>Tokyo</tt>), or neutral for number (e.g.&nbsp;<tt>Andes</tt>, <tt>IBM</tt>)</td></tr>
 <tr><td><tt>Q;~_nphd_</tt></td><td>Indefinite pronoun with quantification, which can be a compound (e.g.&nbsp;<tt>everybody</tt>, <tt>nothing</tt>), or a word which often occurs with the preposition <tt>of</tt> (e.g.&nbsp;<tt>much</tt>, <tt>many</tt>, <tt>a_lot</tt>)</td></tr>
 <tr><td><tt>D;~_nphd_</tt></td><td>Indefinite pronoun not subclassified as <tt>Q</tt> (e.g.&nbsp;<tt>someone</tt>, <tt>anything</tt>, <tt>another</tt>), and demonstrative pronoun (e.g.&nbsp;<tt>this</tt>, <tt>that</tt>, <tt>these</tt>, <tt>those</tt>)</td></tr>
 </table>
 <dl>
   <dt>(<a name="ex2.4">2.4</a>)</dt><dd></dd>
 </dl>
+<tt>noun_head(['NPRS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPRS'(Word)].</tt><br>
+<tt>noun_head(['NPR'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPR'(Word)].</tt><br>
 <tt>noun_head(['D;~_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['D;~_nphd_'(Word)].</tt><br>
 <tt>noun_head(['Q;~_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['Q;~_nphd_'(Word)].</tt><br>
 
@@ -427,40 +427,40 @@ body {
 <tt>noun_head_full(['WPRO'(Word)|L]-L)&nbsp;--&gt;&nbsp;['WPRO'(Word)].</tt><br>
 <tt>noun_head_full(['NP-GENV'('PRO;~ppge'(Word))|L]-L)&nbsp;--&gt;&nbsp;['PRO;~ppge'(Word)].</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The last rule of (<a href="#ex2.5">2.5</a>) captures the possibility of an independent genitive, where an <tt>NP-GENV</tt> projected by <tt>PRO;~ppge</tt> is the only element of its containing <tt>NP</tt>, as demonstrated in (<a href="#ex2.6">2.6</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The last rule of (<a href="#ex2.5">2.5</a>) captures the possibility of an independent genitive, where an <tt>NP-GENV</tt> projected by <tt>PRO;~ppge</tt> is the only element of its containing <tt>NP</tt>, as seen in the tree structure of (<a href="#ex2.6">2.6</a>).</p>
 
 <dl>
   <dt>(<a name="ex2.6">2.6</a>)</dt><dd></dd>
 </dl>
 
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="331.98" height="304.5" viewBox="-16.5 17.5 431.64 395">
-  <text x="199.32" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="199.32" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="199.32" y1="70" x2="128.7" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="199.32" y1="70" x2="222.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="199.32" y1="70" x2="339.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="355.74" height="304.5" viewBox="-16.5 17.5 463.32 395">
+  <text x="215.16" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="215.16" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="215.16" y1="70" x2="144.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="215.16" y1="70" x2="254.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="215.16" y1="70" x2="371.58" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="125" text-anchor="middle">NP-SBJ</text>
   <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="195" text-anchor="middle">PRO</text>
   <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="265" text-anchor="middle">it</text>
-  <text x="128.7" y="125" text-anchor="middle">BEP</text>
-  <line x1="128.7" y1="140" x2="128.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="128.7" y="195" text-anchor="middle">’s</text>
-  <text x="222.42" y="125" text-anchor="middle">NP-PRD2</text>
-  <line x1="222.42" y1="140" x2="222.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="207.42" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: fuchsia; stroke-width: 5;"/>
-  <text x="222.42" y="195" text-anchor="middle">__NP-GENV</text>
-  <line x1="222.42" y1="210" x2="222.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="207.42" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: lime; stroke-width: 5;"/>
-  <text x="222.42" y="265" text-anchor="middle">___PRO</text>
-  <line x1="222.42" y1="280" x2="222.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="222.42" y="335" text-anchor="middle">theirs</text>
-  <text x="339.9" y="125" text-anchor="middle">ADVP-MOD</text>
-  <line x1="339.9" y1="140" x2="339.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="339.9" y="195" text-anchor="middle">ADV</text>
-  <line x1="339.9" y1="210" x2="339.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="339.9" y="265" text-anchor="middle">all_right</text>
+  <text x="144.54" y="125" text-anchor="middle">BEP;~Ln</text>
+  <line x1="144.54" y1="140" x2="144.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="144.54" y="195" text-anchor="middle">’s</text>
+  <text x="254.1" y="125" text-anchor="middle">NP-PRD2</text>
+  <line x1="254.1" y1="140" x2="254.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="239.1" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="254.1" y="195" text-anchor="middle">__NP-GENV</text>
+  <line x1="254.1" y1="210" x2="254.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="239.1" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="254.1" y="265" text-anchor="middle">___PRO</text>
+  <line x1="254.1" y1="280" x2="254.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="254.1" y="335" text-anchor="middle">theirs</text>
+  <text x="371.58" y="125" text-anchor="middle">ADVP-MOD</text>
+  <line x1="371.58" y1="140" x2="371.58" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="371.58" y="195" text-anchor="middle">ADV</text>
+  <line x1="371.58" y1="210" x2="371.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="371.58" y="265" text-anchor="middle">all_right</text>
 </svg>
 
 <br>
@@ -3420,13 +3420,13 @@ body {
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(Sbj_type,Infl,L1-L0).</tt><br>
 <tt>verb_phrase_top_layer(Sbj_type,Infl,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;be_progressive_aspect(Infl,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq(Sbj_type,ing_participle,L1-L0).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat(Sbj_type,ing_participle,L1-L0).</tt><br>
 <tt>verb_phrase_top_layer(Sbj_type,infinitive,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_perfect_aspect(infinitive,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq(Sbj_type,en_participle,L1-L0).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat(Sbj_type,en_participle,L1-L0).</tt><br>
 <tt>verb_phrase_top_layer(filled_subject,Infl,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;be_passive(Infl,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq_passive(filled_subject,L1-L0).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat_passive(filled_subject,L1-L0).</tt><br>
 <tt>verb_phrase_top_layer(Sbj_type,Infl,['IML'(IML1,'CONJP'(CONJ,IML2))|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(Sbj_type,Infl,VPl1-[]),</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -3901,7 +3901,7 @@ body {
 <tt>have_finite_complement(Sbj_type,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_complement(Sbj_type,L).</tt><br>
 <tt>have_finite_complement(Sbj_type,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq(Sbj_type,en_participle,L).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat(Sbj_type,en_participle,L).</tt><br>
 
 <dl>
   <dt>(<a name="ex4.17">4.17</a>)</dt><dd></dd>
@@ -4186,10 +4186,10 @@ body {
 <dl>
   <dt>(<a name="ex4.22">4.22</a>)</dt><dd></dd>
 </dl>
-<tt>ip_ppl_seq(Sbj_type,Infl,[IML|L]-L)&nbsp;--&gt;</tt><br>
+<tt>ip_ppl_cat(Sbj_type,Infl,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(Sbj_type,Infl,VPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IP-PPL-SEQ'|VPl]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IP-PPL-CAT'|VPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
@@ -4199,7 +4199,7 @@ body {
 <tt></tt><br>
 <tt>(IML&nbsp;(HVP&nbsp;Has)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(VVN&nbsp;smiled)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VVN&nbsp;smiled)))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
 
@@ -4257,7 +4257,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq <b>filled_subject</b> <b>en_participle</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat <b>filled_subject</b> <b>en_participle</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -4310,9 +4310,9 @@ body {
 <tt>be_finite_complement(Sbj_type,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;be_complement(Sbj_type,L).</tt><br>
 <tt>be_finite_complement(Sbj_type,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq(Sbj_type,ing_participle,L).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat(Sbj_type,ing_participle,L).</tt><br>
 <tt>be_finite_complement(Sbj_type,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq_passive(Sbj_type,L).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat_passive(Sbj_type,L).</tt><br>
 
 <dl>
   <dt>(<a name="ex4.27">4.27</a>)</dt><dd></dd>
@@ -4713,7 +4713,7 @@ body {
 <tt></tt><br>
 <tt>(IML&nbsp;(BEP&nbsp;Is)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(VAG&nbsp;smiling)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG&nbsp;smiling)))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
 
@@ -4771,7 +4771,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq <b>filled_subject</b> <b>ing_participle</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat <b>filled_subject</b> <b>ing_participle</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -4812,10 +4812,10 @@ body {
 <dl>
   <dt>(<a name="ex4.36">4.36</a>)</dt><dd></dd>
 </dl>
-<tt>ip_ppl_seq_passive(Sbj_type,[IML|L]-L)&nbsp;--&gt;</tt><br>
+<tt>ip_ppl_cat_passive(Sbj_type,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_lower_layer(Sbj_type,en_participle,passive,VPl-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IP-PPL-SEQ','NP-LGS'('*')|VPl]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IP-PPL-CAT','NP-LGS'('*')|VPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
@@ -4825,7 +4825,7 @@ body {
 <tt></tt><br>
 <tt>(IML&nbsp;(BED&nbsp;Was)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN&nbsp;scolded)))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
@@ -4884,7 +4884,7 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq_passive <b>filled_subject</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat_passive <b>filled_subject</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -5275,9 +5275,9 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ship))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;may)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HV&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(BEN&nbsp;been)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(BAG&nbsp;being)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-SEQ&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BAG&nbsp;being)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN&nbsp;sunk)))))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
@@ -5388,7 +5388,7 @@ body {
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq <b>filled_subject</b> <b>en_participle</b></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat <b>filled_subject</b> <b>en_participle</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -5413,7 +5413,7 @@ body {
                  </td>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq <b>filled_subject</b> <b>ing_participle</b></td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat <b>filled_subject</b> <b>ing_participle</b></td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
@@ -5438,7 +5438,7 @@ body {
                          </td>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_seq_passive <b>filled_subject</b></td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_cat_passive <b>filled_subject</b></td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
@@ -5553,7 +5553,7 @@ body {
 </dl>
 <tt>participle_clause_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_perfect_aspect(ing_participle,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_seq(filled_subject,en_participle,L1-L0).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_cat(filled_subject,en_participle,L1-L0).</tt><br>
 <tt>participle_clause_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_top_layer(filled_subject,ing_participle,L).</tt><br>
 <tt>participle_clause_layer(L)&nbsp;--&gt;</tt><br>
