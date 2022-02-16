@@ -589,7 +589,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 							ind = sc_name // .indexOf("-");
 							// cuts off the material before the first "-" in the sc name: not always desirable
 							sc_name = sc_name.substring(ind+1, sc_name.length);
-							finalStr[0] += "<li><a target=\"_blank\" href=\"http://160.16.203.55/dev/cgi-bin/tspc.sh?tree="+sc_name+"\">"+sc_name+"</a>";
+							finalStr[0] += "<li><a target=\"_blank\" href=\"https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree="+sc_name+"\">"+sc_name+"</a>";
                             finalStr[1] += "<li>"+sc_name;
 						}
 

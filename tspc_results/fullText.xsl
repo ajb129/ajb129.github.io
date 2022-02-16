@@ -854,7 +854,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
     noColorSent = finalStr[1];
 
     // before the sentence, insert the [X] link
-    pretext = "(<a target=\"_blank\" href=\"http://160.16.203.55/dev/cgi-bin/tspc.sh?tree=" + nameId + "\">" + nameId + "</a>) [<a href='javascript:removeSent(" + sentId + ")'>X</a>] ";
+    pretext = "(<a target=\"_blank\" href=\"https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=" + nameId + "\">" + nameId + "</a>) [<a href='javascript:removeSent(" + sentId + ")'>X</a>] ";
 
     // load the constructed text into two divs, one with color
     // and one with just mark up
