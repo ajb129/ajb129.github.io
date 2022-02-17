@@ -77,7 +77,7 @@ that connect these two resources.
   <dt>(<a name="ex14.1">14.1</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;NEG</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;SBJ&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;PRN)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. NEG $.. /SBJ/ >> (/^IP-SUB/ > (/^CP-QUE/ !> PRN) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -96,7 +96,7 @@ that connect these two resources.
   <dt>(<a name="ex14.2">14.2</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;NEG=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;SBJ&sol;&nbsp;&#x24;,,&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;PRN)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. NEG=neg $.. (/SBJ/ $,, =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> PRN) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -107,7 +107,7 @@ that connect these two resources.
   <dt>(<a name="ex14.3">14.3</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;NEG=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;SBJ&sol;&nbsp;&#x24;..&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;PRN)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. NEG=neg $.. (/SBJ/ $.. =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> PRN) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -234,7 +234,7 @@ that connect these two resources.
   <dt>(<a name="ex14.6">14.6</a>)</dt><dd><tt>&sol;&#94;PRN&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP-MAT&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;NP-SBJ&sol;))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^PRN/ > /^IP-MAT/ < (/^CP-QUE/ < (/^IP-SUB/ <-1 /^NP-SBJ/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -343,7 +343,7 @@ I_mean , Sirena last night was a marvel ,<font style="background-color: Wheat;">
   <dt>(<a name="ex14.8">14.8</a>)</dt><dd><tt>&sol;&#94;PRN&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;REACT&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP&#92;b&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^PRN\b/ < /^REACT\b/ > /^IP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -360,7 +360,7 @@ I_mean , Sirena last night was a marvel ,<font style="background-color: Wheat;">
   <dt>(<a name="ex15.1">15.1</a>)</dt><dd><tt>&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^CP-THT\b/ < (__ < __)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -371,7 +371,7 @@ I_mean , Sirena last night was a marvel ,<font style="background-color: Wheat;">
   <dt>(<a name="ex15.2">15.2</a>)</dt><dd><tt>&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^C\b/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -497,7 +497,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.4">15.4</a>)</dt><dd><tt>&sol;&#94;CP-THT&sol;&nbsp;&lt;&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^CP-THT/ < (__ < __) !<< (/^C\b/ < __)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -511,7 +511,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.5">15.5</a>)</dt><dd><tt>&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="__=mid < /CP-THT-OB1/ << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -523,7 +523,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.6">15.6</a>)</dt><dd><tt>&sol;&#94;VBP&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVP|BEP|DOP|VBP)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-SEQ/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -535,7 +535,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.7">15.7</a>)</dt><dd><tt>&sol;&#94;VBP&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVD|BED|DOD|VBD)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-SEQ/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -547,7 +547,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.8">15.8</a>)</dt><dd><tt>&sol;&#94;VBP&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;BEP&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&lt;&nbsp;&sol;&#94;VAG&#92;b&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^BEP\b/ $ (/^IP-PPL-SEQ/ < /^VAG\b/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -561,7 +561,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.9">15.9</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -573,7 +573,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.10">15.10</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVD|BED|DOD|VBD)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-SEQ/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -585,7 +585,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.11">15.11</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVP|BEP|DOP|VBP)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-SEQ/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -597,7 +597,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.12">15.12</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;HVD&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;&#94;VVN&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;&nbsp;(&sol;&#94;BEN&#92;b&sol;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&lt;&nbsp;&sol;&#94;VAG&#92;b&sol;))&nbsp;])</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^HVD\b/ $ (/^IP-PPL-SEQ/ [ < /^VVN\b/ | < (/^BEN\b/ $ (/^IP-PPL-SEQ/ < /^VAG\b/)) ]) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -609,7 +609,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.13">15.13</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(MD)&#92;b&sol;&nbsp;&lt;&nbsp;would&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(MD)\b/ < would !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -618,7 +618,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.14">15.14</a>)</dt><dd><tt>&sol;&#94;VBD&#92;b&sol;=verb</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=verb))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;BED&#92;b&sol;&nbsp;.&nbsp;(going&nbsp;.&nbsp;to)&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i))))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^BED\b/ . (going . to) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -632,7 +632,7 @@ The high quality of the seam on Milos ensured<font style="background-color: Whea
   <dt>(<a name="ex15.15">15.15</a>)</dt><dd><tt>&sol;&#94;(ADJ|ADJR|ADJS)&#92;b&sol;&nbsp;&#x24;&nbsp;CP-THT</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^(ADJ|ADJR|ADJS)\b/ $ CP-THT"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -710,7 +710,7 @@ Pamela was<font style="background-color: Wheat;"> glad</font> Jim was nowhere ne
   <dt>(<a name="ex15.17">15.17</a>)</dt><dd><tt>&sol;&#94;(N|NS)&#92;b&sol;&nbsp;&#x24;&nbsp;CP-THT</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^(N|NS)\b/ $ CP-THT"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -817,7 +817,7 @@ The data is arranged in such a<font style="background-color: Wheat;"> way</font>
   <dt>(<a name="ex15.19">15.19</a>)</dt><dd><tt>&sol;PSBJ&sol;&nbsp;&#x24;&nbsp;&sol;PRD2&sol;&nbsp;&#x24;&nbsp;&sol;CP-THT-NSBJ&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/PSBJ/ $ /PRD2/ $ /CP-THT-NSBJ/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -944,7 +944,7 @@ The data is arranged in such a<font style="background-color: Wheat;"> way</font>
   <dt>(<a name="ex16.1">16.1</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;:&nbsp;(&sol;&#94;IP-REL&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(RPRO|RD|RADV)&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1031,7 +1031,7 @@ The data is arranged in such a<font style="background-color: Wheat;"> way</font>
   <dt>(<a name="ex16.3">16.3</a>)</dt><dd><tt>&sol;&#94;CP-QUE-&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^CP-QUE-/ < (/^IP/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1141,7 +1141,7 @@ We want you to Know<font style="background-color: Wheat;"> why your support of G
   <dt>(<a name="ex16.5">16.5</a>)</dt><dd><tt>&sol;&#94;CP-QUE&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^CP-QUE\b/ > /^PP\b/ < (/^IP\b/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1277,7 +1277,7 @@ Could you give me some suggestions for<font style="background-color: Wheat;"> wh
   <dt>(<a name="ex16.7">16.7</a>)</dt><dd><tt>&sol;&#94;CP-QUE&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-INF&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^CP-QUE\b/ > /^PP\b/ < (/^IP-INF/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1291,7 +1291,7 @@ Could you give me some suggestions for<font style="background-color: Wheat;"> wh
   <dt>(<a name="ex16.8">16.8</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1302,7 +1302,7 @@ Could you give me some suggestions for<font style="background-color: Wheat;"> wh
   <dt>(<a name="ex16.9">16.9</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;&nbsp;&lt;&nbsp;If|if</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ < If|if"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1423,7 +1423,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex16.11">16.11</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;&nbsp;&lt;&nbsp;Whether|whether</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ < Whether|whether"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1532,7 +1532,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex16.13">16.13</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IML&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CONJP&#92;b&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ > (/^IML/ $ /^CONJP\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1543,7 +1543,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex16.14">16.14</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;[&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&gt;&nbsp;(&sol;&#94;IML&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IML&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;))))&nbsp;]</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ [ > (/^IP\b/ > (/^CP-QUE\b/ > /^PP\b/)) | > (/^IML/ > (/^IML/ > (/^IP\b/ > (/^CP-QUE\b/ > /^PP\b/)))) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1554,7 +1554,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex16.15">16.15</a>)</dt><dd><tt>&sol;&#94;WQ&#92;b&sol;&nbsp;[&nbsp;&gt;&nbsp;&sol;&#94;IP-INF&#92;b&sol;&nbsp;|&nbsp;&gt;&nbsp;(&sol;&#94;IML&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IML&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-INF&#92;b&sol;)))&nbsp;]</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^WQ\b/ [ > /^IP-INF\b/ | > (/^IML/ > (/^IML/ > (/^IP-INF\b/))) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1574,7 +1574,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex17.1">17.1</a>)</dt><dd><tt>&sol;&#94;IP-MAT&sol;&nbsp;&#x24;,&nbsp;PUQ</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-MAT/ $, PUQ"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1699,7 +1699,7 @@ Excuse_me_. I was wondering<font style="background-color: Wheat;"> ___if</font> 
   <dt>(<a name="ex17.3">17.3</a>)</dt><dd><tt>&sol;&#94;multi-sentence&sol;&nbsp;&#x24;,&nbsp;PUQ</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^multi-sentence/ $, PUQ"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1836,7 +1836,7 @@ He said now , “<font style="background-color: Wheat;"> I ’ve got the perfect
   <dt>(<a name="ex17.5">17.5</a>)</dt><dd><tt>PRN&nbsp;&lt;&nbsp;&sol;&#94;IP-MAT&sol;&nbsp;&gt;&nbsp;&sol;&#94;(IP|IML)&sol;&nbsp;&#x24;&nbsp;PUQ</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="PRN < /^IP-MAT/ > /^(IP|IML)/ $ PUQ"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1990,7 +1990,7 @@ He said now , “<font style="background-color: Wheat;"> I ’ve got the perfect
   <dt>(<a name="ex17.7">17.7</a>)</dt><dd><tt>&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#94;(say|said)&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^V/ < /^(say|said)/ $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2116,7 +2116,7 @@ They<font style="background-color: Wheat;"> ___say</font> the company has produc
   <dt>(<a name="ex19.1">19.1</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;&sol;&#94;IP-PPL&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > /^IP-PPL/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2373,7 +2373,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.4">19.4</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;BEP)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ $ BEP)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2385,7 +2385,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.5">19.5</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;HVP))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ > (/^IP-PPL-SEQ/ $ HVP))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2397,7 +2397,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.6">19.6</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;BEP))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ > (/^IP-PPL-SEQ/ $ BEP))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2409,7 +2409,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.7">19.7</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;BED)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ $ BED)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2421,7 +2421,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.8">19.8</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;HVD))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ > (/^IP-PPL-SEQ/ $ HVD))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2433,7 +2433,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.9">19.9</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;BED))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-SEQ/ > (/^IP-PPL-SEQ/ $ BED))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2450,7 +2450,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.10">19.10</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&#x24;&nbsp;&sol;&#94;NP-OB1&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ $ /^NP-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2462,7 +2462,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex19.11">19.11</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&#x24;&nbsp;(&sol;OBU&sol;&nbsp;&lt;&nbsp;(&sol;&#94;P-ROLE&sol;&nbsp;&lt;&nbsp;to))&nbsp;!&#x24;&nbsp;&sol;PRD&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ $ (/OBU/ < (/^P-ROLE/ < to)) !$ /PRD/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2482,7 +2482,7 @@ He was followed in 336 b.c.<font style="background-color: Wheat;"> by his son Al
   <dt>(<a name="ex20.1">20.1</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-INF&sol;&nbsp;&#x24;&nbsp;(&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#94;go&sol;)))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-SEQ/ > (/^IP-INF/ $ (/^V/ < /^go/)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2634,7 +2634,7 @@ The book or one of the short stories you have studied is ___going to be<font sty
   <dt>(<a name="ex20.3">20.3</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;&sol;&#94;MD&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-SEQ/ $ /^MD/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2793,7 +2793,7 @@ Pupils should be<font style="background-color: Wheat;"></font> expected to read 
   <dt>(<a name="ex20.5">20.5</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&#x24;&nbsp;(&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#94;(get|got)&sol;))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-SEQ/ $ (/^V/ < /^(get|got)/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2877,7 +2877,7 @@ Or rather , we ___get<font style="background-color: Wheat;"></font> educated out
   <dt>(<a name="ex20.7">20.7</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL&sol;&nbsp;[&nbsp;==&nbsp;&sol;PPL&#x24;&sol;&nbsp;|&nbsp;==&nbsp;&sol;-SBJ&sol;&nbsp;|&nbsp;==&nbsp;&sol;-OB&sol;&nbsp;]))</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-SEQ/ > (/^IP-PPL/ [ == /PPL$/ | == /-SBJ/ | == /-OB/ ]))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3009,7 +3009,7 @@ The hedgehog , and its ancestor , narrowly missed being<font style="background-c
   <dt>(<a name="ex20.9">20.9</a>)</dt><dd><tt>&sol;LGS&sol;&nbsp;&gt;&nbsp;(&sol;&#94;IP-PPL-SEQ&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP-INF&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-SEQ/ > /^IP-INF/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3109,7 +3109,7 @@ The hedgehog , and its ancestor , narrowly missed being<font style="background-c
   <dt>(<a name="ex21.1">21.1</a>)</dt><dd><tt>&sol;SBJ&sol;&nbsp;&lt;&nbsp;RPRO</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/SBJ/ < RPRO"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3125,7 +3125,7 @@ The hedgehog , and its ancestor , narrowly missed being<font style="background-c
   <dt>(<a name="ex21.2">21.2</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;RPRO&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;!&#x24;,&nbsp;PU&nbsp;&#x24;&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < RPRO !>> (/^IP-REL/ >> =rel)) !$, PU $ __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3274,7 +3274,7 @@ This is a watch that creates a lifestyle for modern individuals<font style="back
   <dt>(<a name="ex21.4">21.4</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;RPRO&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;&#x24;,&nbsp;PU</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < RPRO !>> (/^IP-REL/ >> =rel)) $, PU"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3394,7 +3394,7 @@ Everyone turned to stare at her , except the boy ,<font style="background-color:
   <dt>(<a name="ex21.6">21.6</a>)</dt><dd><tt>&sol;SBJ&sol;&nbsp;&lt;&nbsp;(NP-GENV&nbsp;&lt;&nbsp;RPRO)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/SBJ/ < (NP-GENV < RPRO)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3535,7 +3535,7 @@ There was an influx of young professionals<font style="background-color: Wheat;"
   <dt>(<a name="ex22.6">22.6</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/REL/ << (/SBJ/ < /^\*ICH\*/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3731,7 +3731,7 @@ Behaviour<font style="background-color: Wheat;"> that historically , we would ha
   <dt>(<a name="ex22.1">22.1</a>)</dt><dd><tt>&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;RPRO&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/OB/ [ < RPRO | < /^\*T\*/ ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3753,7 +3753,7 @@ Behaviour<font style="background-color: Wheat;"> that historically , we would ha
   <dt>(<a name="ex22.2">22.2</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel</tt><br> <tt>&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;RPRO&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,&nbsp;PU</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < RPRO | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) !$, PU $ __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3832,7 +3832,7 @@ Every movement<font style="background-color: Wheat;"> she made</font> seemed unn
   <dt>(<a name="ex22.4">22.4</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;RPRO&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;&#x24;,&nbsp;PU</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < RPRO | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) $, PU"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3913,7 +3913,7 @@ elastic bands ,<font style="background-color: Wheat;"> which postmen discard whe
   <dt>(<a name="ex22.6">22.6</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/REL/ << (/OB/ < /^\*ICH\*/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3990,7 +3990,7 @@ the beast<font style="background-color: Wheat;"> that I thought I loved</font>
   <dt>(<a name="ex22.8">22.8</a>)</dt><dd><tt>NP&nbsp;[&nbsp;&lt;&nbsp;RPRO&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="NP [ < RPRO | < /^\*T\*/ ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4131,7 +4131,7 @@ I always crack the mirrors I look in<font style="background-color: Wheat;"></fon
   <dt>(<a name="ex22.11">22.11</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(NP&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/REL/ << (NP < /^\*ICH\*/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4241,7 +4241,7 @@ a club book<font style="background-color: Wheat;"> which we put our password and
   <dt>(<a name="ex23.1">23.1</a>)</dt><dd><tt>&sol;&#94;RADV&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^RADV/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4256,7 +4256,7 @@ a club book<font style="background-color: Wheat;"> which we put our password and
   <dt>(<a name="ex23.2">23.2</a>)</dt><dd><tt>&sol;&#94;RADV&sol;&nbsp;&lt;&nbsp;&sol;&#94;where&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^RADV/ < /^where/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4397,7 +4397,7 @@ we could do somethin fine out there , maybe find a place<font style="background-
   <dt>(<a name="ex23.4">23.4</a>)</dt><dd><tt>&sol;&#94;RADV&sol;&nbsp;&lt;&nbsp;&sol;&#94;when&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^RADV/ < /^when/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4536,7 +4536,7 @@ Last year ,<font style="background-color: Wheat;"> ___when</font> he worked out 
   <dt>(<a name="ex23.6">23.6</a>)</dt><dd><tt>&sol;&#94;NP-TMP&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^NP-TMP/ < /^\*T\*/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4628,7 +4628,7 @@ you were n’t like that last time<font style="background-color: Wheat;"></font>
   <dt>(<a name="ex23.8">23.8</a>)</dt><dd><tt>&sol;&#94;IP-PPL&sol;&nbsp;&gt;&nbsp;&sol;&#94;(NP|NML)&#92;b&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NML)\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4642,7 +4642,7 @@ you were n’t like that last time<font style="background-color: Wheat;"></font>
   <dt>(<a name="ex23.9">23.9</a>)</dt><dd><tt>&sol;&#94;IP-PPL&sol;&nbsp;&gt;&nbsp;&sol;&#94;(NP|NML)&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;VAG&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NML)\b/ < /^VAG/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4727,7 +4727,7 @@ he looked like a cow<font style="background-color: Wheat;"> chewing a piece of g
   <dt>(<a name="ex23.11">23.11</a>)</dt><dd><tt>&sol;&#94;IP-PPL&sol;&nbsp;&gt;&nbsp;&sol;&#94;(NP|NML)&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;VVN&sol;&nbsp;&lt;&nbsp;&sol;LGS&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NML)\b/ < /^VVN/ < /LGS/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4840,7 +4840,7 @@ The site where this was is a little seaside town<font style="background-color: W
   <dt>(<a name="ex24.1">24.1</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4854,7 +4854,7 @@ The site where this was is a little seaside town<font style="background-color: W
   <dt>(<a name="ex24.2">24.2</a>)</dt><dd><tt>&sol;CND&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4965,7 +4965,7 @@ But<font style="background-color: Wheat;"> if you ask about their education</fon
   <dt>(<a name="ex24.4">24.4</a>)</dt><dd><tt>&sol;SCON&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;P-CONN&sol;&nbsp;&lt;&nbsp;&sol;&#94;when&sol;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/SCON/ < (/^P-CONN/ < /^when/) < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5053,7 +5053,7 @@ you ’re very unpleasant<font style="background-color: Wheat;"> ___when you ’
   <dt>(<a name="ex24.6">24.6</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))&nbsp;&#x24;&nbsp;(MD&nbsp;&lt;&nbsp;&sol;&#94;w&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)) $ (MD < /^w/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5158,7 +5158,7 @@ you ’re very unpleasant<font style="background-color: Wheat;"> ___when you ’
   <dt>(<a name="ex24.8">24.8</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))&nbsp;&#x24;&nbsp;MD</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)) $ MD"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5271,7 +5271,7 @@ you ’re very unpleasant<font style="background-color: Wheat;"> ___when you ’
   <dt>(<a name="ex24.10">24.10</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))&nbsp;&gt;&nbsp;&sol;IMP&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /SEQ/)) > /IMP/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5367,7 +5367,7 @@ you ’re very unpleasant<font style="background-color: Wheat;"> ___when you ’
   <dt>(<a name="ex25.1">25.1</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BED|HVD|DOD|VBD)&sol;&nbsp;!&#x24;&nbsp;&sol;SEQ&sol;))&nbsp;&#x24;&nbsp;MD</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BED|HVD|DOD|VBD)/ !$ /SEQ/)) $ MD"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5468,7 +5468,7 @@ I wonder if it would be good<font style="background-color: Wheat;"> if you took 
   <dt>(<a name="ex25.3">25.3</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;BED&sol;&nbsp;&#x24;&nbsp;(&sol;SEQ&sol;&nbsp;&lt;&nbsp;&sol;&#94;(VAG|BAG)&sol;)))&nbsp;&#x24;&nbsp;MD</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^BED/ $ (/SEQ/ < /^(VAG|BAG)/))) $ MD"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5576,7 +5576,7 @@ I wonder if it would be good<font style="background-color: Wheat;"> if you took 
   <dt>(<a name="ex25.5">25.5</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;HVD&sol;&nbsp;&#x24;&nbsp;&sol;SEQ&sol;))&nbsp;&#x24;&nbsp;MD&nbsp;&#x24;&nbsp;HV&nbsp;&#x24;&nbsp;&sol;SEQ&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^HVD/ $ /SEQ/)) $ MD $ HV $ /SEQ/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5677,7 +5677,7 @@ I wonder if it would be good<font style="background-color: Wheat;"> if you took 
   <dt>(<a name="ex25.7">25.7</a>)</dt><dd><tt>&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#94;wish&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^V/ < /^wish/ $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5781,7 +5781,7 @@ She<font style="background-color: Wheat;"> ___wished</font> that she could talk 
   <dt>(<a name="ex26.1">26.1</a>)</dt><dd><tt>CONJP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5792,7 +5792,7 @@ She<font style="background-color: Wheat;"> ___wished</font> that she could talk 
   <dt>(<a name="ex26.2">26.2</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;NP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < NP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5913,7 +5913,7 @@ The prize includes flights ,<font style="background-color: Wheat;"> accommodatio
   <dt>(<a name="ex26.4">26.4</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;IML</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < IML"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6030,7 +6030,7 @@ She went over_to her , and<font style="background-color: Wheat;"> ___she said , 
   <dt>(<a name="ex26.6">26.6</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;ADJP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < ADJP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6103,7 +6103,7 @@ He ’s plump ,<font style="background-color: Wheat;"> but not fat</font> .
   <dt>(<a name="ex26.8">26.8</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;ADVP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < ADVP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6252,7 +6252,7 @@ Through reading in particular , pupils have a chance to develop culturally ,<fon
   <dt>(<a name="ex26.10">26.10</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;PP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < PP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6346,7 +6346,7 @@ English has a pre-eminent place in education<font style="background-color: Wheat
   <dt>(<a name="ex26.12">26.12</a>)</dt><dd><tt>CONJ&nbsp;&#x24;..&nbsp;CONJP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJ $.. CONJP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6432,7 +6432,7 @@ There were no tracks of<font style="background-color: Wheat;"> either</font> hoo
   <dt>(<a name="ex26.14">26.14</a>)</dt><dd><tt>(IML&nbsp;&lt;&nbsp;CONJP)&nbsp;&gt;:&nbsp;&sol;&#94;IP-MAT&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="(IML < CONJP) >: /^IP-MAT/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6578,7 +6578,7 @@ There were no tracks of<font style="background-color: Wheat;"> either</font> hoo
   <dt>(<a name="ex26.16">26.16</a>)</dt><dd><tt>IML&nbsp;&lt;&nbsp;(IML&nbsp;&lt;&nbsp;&sol;SBJ&sol;)&nbsp;&lt;&nbsp;CONJP</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="IML < (IML < /SBJ/) < CONJP"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6707,7 +6707,7 @@ In the summer holidays<font style="background-color: Wheat;"> I stayed at my cou
   <dt>(<a name="ex26.18">26.18</a>)</dt><dd><tt>(IML&nbsp;&lt;&nbsp;CONJP)&nbsp;&#x24;&nbsp;&sol;SBJ&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="(IML < CONJP) $ /SBJ/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6841,7 +6841,7 @@ We<font style="background-color: Wheat;"> went home by the Manx Maid and got bac
   <dt>(<a name="ex26.20">26.20</a>)</dt><dd><tt>CONJ&nbsp;&gt;&nbsp;&sol;&#94;IP-MAT&sol;</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJ > /^IP-MAT/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6913,7 +6913,7 @@ We<font style="background-color: Wheat;"> went home by the Manx Maid and got bac
   <dt>(<a name="ex26.22">26.22</a>)</dt><dd><tt>&sol;&#94;ADVP-CNT&sol;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;&nbsp;&gt;:&nbsp;CONJP)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="/^ADVP-CNT/ > (__ >: CONJP)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -7016,7 +7016,7 @@ It ’s dangerous ,<font style="background-color: Wheat;"> so</font> you should 
   <dt>(<a name="ex26.24">26.24</a>)</dt><dd><tt>CONJP&nbsp;&lt;&nbsp;(IML&nbsp;!&lt;&nbsp;IML&nbsp;!&lt;&nbsp;&sol;SEQ&sol;&nbsp;!&lt;&nbsp;&sol;&#94;(H|B|D|V)&sol;)</tt><br></dd>
 </dl>
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post"><input type="hidden" name="KIND" value="graphical"/>
   <input type="hidden" name="search" value="CONJP < (IML !< IML !< /SEQ/ !< /^(H|B|D|V)/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
