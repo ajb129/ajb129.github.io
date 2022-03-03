@@ -7006,12 +7006,12 @@ We <font style="background-color: Wheat;">went home by the Manx Maid and got bac
 <p align="justify">In addition to the coordinating conjunction words <i>and</i>, <i>but</i>, and <i>or</i>, it also possible to connect clauses with adverbs such as <i>so</i> and <i>yet</i>. We can find such adverb use with pattern (<a href="#ex26.22">26.22</a>).</p>
 
 <dl>
-  <dt>(<a name="ex26.22">26.22</a>)</dt><dd><tt>&sol;&#94;ADVP-CNT&sol;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;&nbsp;&gt;:&nbsp;&sol;&#94;CONJP&#92;b&sol;)</tt><br></dd>
+  <dt>(<a name="ex26.22">26.22</a>)</dt><dd><tt>&sol;&#94;ADVP-CNT&sol;&nbsp;&gt;&nbsp;&sol;&#94;CONJP&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^ADVP-CNT/ > (__ >: /^CONJP\b/)"/>
+  <input type="hidden" name="search" value="/^ADVP-CNT/ > /^CONJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -7054,20 +7054,19 @@ It ’s dangerous , <font style="background-color: Wheat;">so</font> you should 
   <text x="343.86" y="265" text-anchor="middle">,</text>
   <rect x="691.86" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="706.86" y="195" text-anchor="middle">CONJP</text>
-  <line x1="706.86" y1="210" x2="706.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="691.86" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="706.86" y="265" text-anchor="middle">IML</text>
-  <line x1="706.86" y1="280" x2="437.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="280" x2="547.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="280" x2="640.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="280" x2="726.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="280" x2="902.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="422.58" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="437.58" y="335" text-anchor="middle">ADVP-CNT</text>
+  <line x1="706.86" y1="210" x2="437.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="706.86" y1="210" x2="769.56" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="422.58" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="437.58" y="265" text-anchor="middle">ADVP-CNT</text>
+  <line x1="437.58" y1="280" x2="437.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="437.58" y="335" text-anchor="middle">ADV</text>
   <line x1="437.58" y1="350" x2="437.58" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="437.58" y="405" text-anchor="middle">ADV</text>
-  <line x1="437.58" y1="420" x2="437.58" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="437.58" y="475" text-anchor="middle">so</text>
+  <text x="437.58" y="405" text-anchor="middle">so</text>
+  <text x="769.56" y="265" text-anchor="middle">IML</text>
+  <line x1="769.56" y1="280" x2="547.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="769.56" y1="280" x2="640.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="769.56" y1="280" x2="726.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="769.56" y1="280" x2="902.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="547.14" y="335" text-anchor="middle">NP-SBJ</text>
   <line x1="547.14" y1="350" x2="547.14" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="547.14" y="405" text-anchor="middle">PRO</text>
@@ -7100,7 +7099,7 @@ It ’s dangerous , <font style="background-color: Wheat;">so</font> you should 
 </svg>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=76_samples_purple_intermediate@16,14,15" target="_blank">76_samples_purple_intermediate@16,14,15</a>]</small>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=76_samples_purple_intermediate@15,14" target="_blank">76_samples_purple_intermediate@15,14</a>]</small>
 
 <br>
 <h2><a name="sec26.4">26.4</a>&nbsp;&nbsp;&nbsp;Reducing clause content with coordination</h2>
