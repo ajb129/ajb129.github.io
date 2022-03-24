@@ -4,7 +4,7 @@
   <meta charset=utf-8>
   <meta name="robots" content="noindex,nofollow">
   <meta name="Content-Style" content="text/css">
-  <title>TGrep2 Search Guide</title>
+  <title>TGrep2検索ガイド</title>
   <style>
 body {
         background-color: #FFFFFF;
@@ -24,78 +24,79 @@ a:hover {
 </head>
 <body>
 <br>
-<center><h1>TGrep2 Search Guide</h1></center>
+<center><h1>TGrep2検索ガイド</h1></center>
 
 <br>
+<center><h3>Abstract</h3></center>
 <p align="justify">
-TGrep2 is a tool for searching syntax trees. This guide provides an introduction to the TGrep2 query language. This guide sources explanatory detail from the manual that accompanies TGrep2.
+TGrep2は統語ツリーを検索するためのツールである。 このガイドでは、TGrep2クエリの基本的な作り方を示す。 以下の記述は、TGrep2に付属するマニュアルに基づいている。
 </p>
 <br>
 <br>
 
-<h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
+<h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;はじめに</h2>
 
-<p align="justify">TGrep2 by Douglas Rohde (Rohde 2005) is a tool for searching syntax trees. This guide provides an introduction to the query language that TGrep2 uses when searching data.</p>
+<p align="justify">TGrep2はDouglas Rohge（Rohge 2005）によって開発された、統語ツリーを検索するためのツールである。 このガイドでは、データを検索するために用いるTgrep2クエリの基本的な作り方を示す。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The TGrep2 query language closely resembles the query languages of TGrep by Richard Pito (Pito 1994). TGrep was the original tree-matching program that came with the Penn Treebank. TGrep2 is a reimplementation that also adds language extensions.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Tgrep2クエリの作り方は、Richard Pito（Pito 1994）によるTGrepクエリの作り方と非常によく似ている。 TGrepはPenn Treebankに付属するオリジナルのツリー検索プログラムである。 Tgrep2はその再実装版であり、拡張機能が追加されている。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;TGrep2 queries are expressed as patterns that consist of expressions to match nodes and relationships defining links or negated links to other nodes. Nodes of searched trees are matched either with simple character strings, or OR'd character strings, or regular expressions (see section <a href="#sec2">2</a>). Possible node relationships are illustrated and detailed in section <a href="#sec3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;TGrep2クエリのパターンは、ノードの表現、および、あるノードが他のノードに対してもつ関係の表現（否定的な関係を含む）から成る。 検索されるツリーのノードは、単純な文字列または単純な文字列の選言的なリスト、正規表現（第 <a href="#sec2">2</a> 節を参照）のいずれにもマッチする。 あるノードが他のノードに対してもつ関係の表現については、第 <a href="#sec3">3</a>節を参照。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A complex node expression consists of a node expression followed by Boolean expressions of relationships to other nodes, as explained in Section <a href="#sec4">4</a>. Also, nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (see section <a href="#sec5">5</a>). Finally, patterns can be broken into multiple segments (see section <a href="#sec6">6</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;複雑なクエリは、ノード表現の後に他のノードに対する関係のブール表現を置くよって作られる（第 <a href="#sec4">4</a>節を参照）。 また、ノードをラベル付けし、そのラベルをパターンの中で参照することができる（第 <a href="#sec5">5</a>節を参照）。 さらに、パターンはいくつかの部分に分けることができる（第 <a href="#sec4">4</a>節を参照）。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Typically, spaces are optional in patterns. But for readability, it is usually best to place spaces between relationships, node expressions, and other operators.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;パターン中の空白（半角スペース）は任意である。 ただし通常は、可読性を保つためにノード表現、関係表現、その他の演算子の間に空白を置く方がよい。</p>
 
-<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;Specifying nodes in a TGrep2 pattern</h2>
+<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;TGrep2パターンにおけるノードの指定</h2>
 
-<p align="justify">Single tree nodes are matched in TGrep2 as follows:</p>
+<p align="justify">ツリー中のノードとのマッチは、次のように行われる：</p>
 <ul>
-<li>A wildcard, specified by two underscores (<tt>__</tt>), matches any node.</li>
-<li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
-<li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
-<li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content. Regular expressions for TGrep2 are what Unix calls <i>extended regular expressions</i>.</li>
-<li>If a simple character string or regular expression begins with <tt>!</tt>, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
+<li>2つのアンダースコア（<tt>__</tt>）はワイルドカードであり、任意のノードにマッチする。</li>
+<li><tt>IP-ADV</tt>、 <tt>NP</tt>、 <tt>ADV</TT>、 <tt>Taro</tt>、 等の単純な文字列は、ノードとの完全一致に用いられる。</li>
+<li>単純な文字列をパイプ（<tt>|</tt>）で区切ってリスト化したパターンは、リストの構成要素のいずれかがノードに完全一致することを表す。 例えば、 <tt>NP|PP</tt>は、 <tt>NP</tt>または<tt>PP</tt>に完全一致する。</li>
+<li>正規表現は <tt>&sol;^NP&#92;b&sol;</tt>のようにスラッシュで囲む。 これにより完全一致ではないノードとのマッチを表現することができる。 TGrep2の正規表現は、Unixにおける「拡張正規表現（extended regular expressions）」と呼ばれるものに相当する。</li>
+<li>単純な文字列または正規表現の前に<tt>!</tt>を置くと、補集合の意味、 つまり、「マッチする」が「マッチしない」になる。 例えば、<tt>!VB</tt>は、<tt>VB</tt>でないすべてのノードにマッチし、 <tt>!&sol;^I&sol;</tt>は、<tt>I</tt>で始まらないすべてのノードにマッチする。</li>
 </ul>
 
-<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Specifying nodes with TGrep2 regular expressions</h3>
+<h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;TGrep2の正規表現によるノードの指定</h3>
 
-<p align="justify">Specified as a string following the syntax of section <a href="#sec2.2">2.2</a> below, a regular expression matches a node if there is a part of the node that is matched. For example, (<a href="#ex1">1</a>) matches <tt>PP</tt>, <tt>CP-THT</tt>, <tt>ADVP</tt>, etc.</p>
+<p align="justify">正規表現は、ノードの一部とマッチする（正規表現の文法は、<a href="#sec2.2">2.2</a>節を参照）。 例えば、 (<a href="#ex1">1</a>) は、<tt>PP</tt>、<tt>CP-THT</tt>、<tt>ADVP</tt>等とマッチする。</p>
 
 <dl>
   <dt>(<a name="ex1">1</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;[PCV]P&sol;</tt><br>
 
-<p align="justify">The matching of (<a href="#ex1">1</a>) involves a character class expression which matches any one of the single characters that are contained within square brackets (<tt>[</tt>, <tt>]</tt>). A character class expression can also be used to specify a range of characters, thus <tt>[0-9]</tt> matches any single digit character. If the first character of a bracket expression is the caret symbol (<tt>^</tt>) then the whole expression is used to match a single character that is not contained within the square brackets, so <tt>[^0-9]</tt> matches any single non digit character.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#ex1">1</a>)の中のブラケット（<tt>[</tt>, <tt>]</tt>）で囲まれた部分は、そのうちのいずれか1文字という文字クラスの表現である。 文字クラスの表現は文字範囲の指定に使うこともできる。 つまり、<tt>[0-9]</tt>は任意のアラビア数字1文字にマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A different use of the caret symbol (<tt>^</tt>) is to anchor the regular expression to the beginning of a matched node. So, (<a href="#ex2">2</a>) will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;キャレット（<tt>^</tt>）は、正規表現がノードの先頭であることを表す。 よって、(<a href="#ex2">2</a>)は<tt>ADVP</tt>にはマッチしないが、<tt>PP</tt>と<tt>CP-THT</tt>にはマッチする。</p>
 
 <dl>
   <dt>(<a name="ex2">2</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^[PCV]P&sol;</tt><br>
 
-<p align="justify">A dollar sign (<tt>&dollar;</tt>) as the last character will anchor the regular expression to the end of a matched node. For example, (<a href="#ex3">3</a>) will not match <tt>NP-PRD2</tt> but will match <tt>NP-PRD</tt>.</p>
+<p align="justify">ドル記号（<tt>&dollar;</tt>）は、正規表現がノードの末尾であることを表す。 例えば、 (<a href="#ex3">3</a>)は<tt>NP-PRD2</tt>にはマッチしないが、<tt>NP-PRD</tt>にはマッチする。</p>
 
 <dl>
   <dt>(<a name="ex3">3</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;PRD$&sol;</tt><br>
 
-<p align="justify">Use of both the caret and dollar-sign in (<a href="#ex4">4</a>) constrains the match to only <tt>NP</tt> and <tt>PP</tt>.</p>
+<p align="justify">(<a href="#ex4">4</a>)のようにキャレットとドル記号の両方を使うと、<tt>NP</tt>と<tt>PP</tt>だけにマッチすることになる。</p>
 
 <dl>
   <dt>(<a name="ex4">4</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^[NP]P$&sol;</tt><br>
 
-<p align="justify">A regular expression can also be constrained with <tt>&#92;b</tt> to mark a word boundary. Thus, (<a href="#ex5">5</a>) will match <tt>NP</tt> and <tt>NP-PRD</tt> but will not match <tt>NPR</tt>.</p>
+<p align="justify">正規表現における<tt>&#92;b</tt>は、境界文字を表す。 つまり、 (<a href="#ex5">5</a>)は<tt>NP</TT>と<tt>NP-PRD</tt>にマッチするが、<tt>NPR</tt>にはマッチしない。</p>
 
 <dl>
   <dt>(<a name="ex5">5</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^NP&#92;b&sol;</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Regular expressions are case sensitive and so (<a href="#ex6">6</a>) and (<a href="#ex7">7</a>) match different nodes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現は大文字と小文字を区別する。よって、(<a href="#ex6">6</a>)と(<a href="#ex7">7</a>)は異なるノードにマッチする。</p>
 
 <dl>
   <dt>(<a name="ex6">6</a>)</dt><dd></dd>
@@ -107,27 +108,27 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;^the$&sol;</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Round brackets (<tt>(</tt>, <tt>)</tt>) are used to mark a subexpression called a block or capturing group. Such grouping is useful for isolating an expression component to then have operations imposed on it. For example, the question mark symbol (<tt>?</tt>) says to match the preceding element one or zero times. With <tt>(-TMP)?</tt> it is all of <tt>-TMP</tt> that is the preceding element. Within a capturing group the pipe symbol (<tt>|</tt>) can be used to separate subexpressions with the meaning to match either the first or the second expression. For example, <tt>-(TMP|MNR)</tt> is used to match nodes that contain either <tt>-TMP</tt> or <tt>-MNR</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;丸括弧（<tt>(</tt>, <tt>)</tt>）は、ブロック或いはキャプチャリンググループと呼ばれる部分式を作る。 このようなグルーピングは、正規表現の構成要素を分離し、また、それに対する操作を実行するために使うことができる。 例えば、 クエスチョンマーク（<tt>?</tt>）は、通常は直前の文字が0個か1個の場合にマッチするが、 <tt>(-TMP)?</tt>では、<tt>-TMP</tt>全体が直前の要素として扱われる。 キャプチャリンググループの中では、パイプ（<tt>|</tt>）によって要素をリスト化することができる。 例えば、 <tt>-(TMP|MNR)</tt>は、<tt>-TMP</tt>または<tt>-MNR</tt>を含むノードにマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note, you need to be particularly careful when writing node matching regular expressions that end with dollar signs. This is because you are forced to predict what the end content of a node could be. For example, suppose you wished for a node pattern that would match all bare noun phrases, that is, all noun phrase nodes that lack functional extensions. In addition to matching nodes that are simply <tt>NP</tt>, you will also want to match nodes like <tt>NP;{BOY}</tt>. However, you will not want to match either <tt>NP-SBJ</tt> or <tt>NP-SBJ;{BOY}</tt>, since these have subject (<tt>-SBJ</tt>) functional marking. A search with (<a href="#ex8">8</a>) would fail to match <tt>NP;{BOY}</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現によるノードの記述において留意しなければならないのは、ドル記号である。 ドル記号はノードの末尾を表すため、ノードの末尾とはどのようなものかを事前に知っておく必要がある。 例えば、裸の名詞句、つまり、機能的な拡張タグを持たない名詞句のノードにマッチするパターンを書こうとする場合を想定すると、 単純な<tt>NP</tt>に加えて、<tt>NP;{BOY}</tt>のようなノードにもマッチさせたいが、 主語（<tt>-SBJ</tt>）という機能をもつ<tt>NP-SBJ</tt>あるいは<tt>NP-SBJ;{BOY}</tt>のようなノードにはマッチさせたくないということになる。 (<a href="#ex8">8</a>)は、<tt>NP;{BOY}</tt>とはマッチしない。</p>
 
 <dl>
   <dt>(<a name="ex8">8</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^NP$&sol;</tt><br>
 
-<p align="justify">A regular expression that meets the need of matching all bare noun phrases is (<a href="#ex9">9</a>).</p>
+<p align="justify">裸の名詞句にマッチさせるための正規表現は、(<a href="#ex9">9</a>)である。</p>
 
 <dl>
   <dt>(<a name="ex9">9</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^NP(;.+)?$&sol;</tt><br>
 
-<p align="justify">Regular expression (<a href="#ex9">9</a>) starts with a caret symbol to anchor the regular expression to the beginning of a matched node with following <tt>NP</tt> content that is followed by one or zero instances of a capturing group. The capturing group involves a match for a semi-colon (<tt>;</tt>) followed by one or more characters, with the use of the plus symbol (<tt>+</tt>) to indicate one or more instances of the preceding element which is the dot symbol (<tt>.</tt>) that matches any character.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#ex9">9</a>)のようなキャレットで始まる正規表現は、NPで始まり、グループ化された文字列が0個または1個続くようなノードにマッチする。 ここでグループ化されているのは、セミコロン（<tt>;</tt>）に任意の文字が1個以上続くという文字列である（ドット記号（<tt>.</tt>）は任意の文字を、プラス記号（<tt>+</tt>）は直前の文字が1個以上であることを表す）。</p>
 
-<h3><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Regular expression syntax</h3>
+<h3><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;正規表現の文法</h3>
 
-<p align="justify">This section describes the regular expression syntax used by TGrep2. The delimiter character (<tt>&sol;</tt>) bounds a regular expression for matching nodes. The syntax for a regular expression <tt>e0</tt> is given in (<a href="#ex10">10</a>):</p>
+<p align="justify">このセクションでは、TGrep2の正規表現の文法について記述する。 区切り文字（<tt>&sol;</tt>）は、ノードにマッチする正規表現を囲むために使われる。 正規表現 <tt>e0</tt> の文法は (<a href="#ex10">10</a>) のように示すことができる。</p>
 
 <dl>
   <dt>(<a name="ex10">10</a>)</dt><dd></dd>
@@ -145,52 +146,52 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <tt>&nbsp;&nbsp;e0:&nbsp;&nbsp;e1</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;e0&nbsp;&lsquo;|&rsquo;&nbsp;e1</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>literal</tt> is any non-metacharacter, or a metacharacter (one of <tt>.*+?[](){}|&#92;^&dollar;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or the delimiter (<tt>&sol;</tt>) preceded by &lsquo;<tt>&#92;</tt>&rsquo;, or <tt>&#92;b</tt> (marking a &ldquo;word&rdquo; boundary, i.e., a maximal string of alphanumeric characters, including the underscore (<tt>_</tt>)).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;リテラル（<tt>literal</tt>）とは、非メタ文字（正規表現において特別な意味を与えられていない文字）、 メタ文字（<tt>.*+?[](){}|&#92;^&dollar;</tt>）の前に&lsquo;<tt>&#92;</tt>&rsquo;を付けたもの、 区切り文字（<tt>&sol;</tt>）の前に&lsquo;<tt>&#92;</tt>&rsquo;を付けたもの、 または、<tt>&#92;b</tt>（「語境界」を表す）のこと、 すなわち、アンダースコア（<tt>_</tt>）を含む英数字による文字列のことである。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>charclass</tt> is a nonempty string <tt>s</tt> bracketed <tt>[s]</tt> (or <tt>[^s]</tt>); it matches any character in (or not in) <tt>s</tt>. A substring <tt>a-b</tt>, with <tt>a</tt> and <tt>b</tt> in ascending order, stands for the inclusive range of characters between <tt>a</tt> and <tt>b</tt>. In <tt>s</tt>, the metacharacters &lsquo;<tt>-</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;, an initial &lsquo;<tt>^</tt>&rsquo;, and the regular expression delimiter must be preceded by a &lsquo;<tt>&#92;</tt>&rsquo;; other metacharacters have no special meaning and may appear unescaped.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;文字クラス（<tt>charclass</tt>）とは、空白を除く文字（<tt>s</tt>）がブラケットで囲まれた<tt>[s]</tt>（あるいは<tt>[^s]</tt>）のことである。 これは、<tt>s</tt>の中の（あるいは<tt>s</tt>に入らない）任意の1文字にマッチする。 部分文字列<tt>a-b</tt>は、<tt>a</tt>から<tt>b</tt>までの範囲の1文字のことである。 <tt>s</tt>では、メタ文字&lsquo;<tt>-</tt>&rsquo;、&lsquo;<tt>]</tt>&rsquo;、先頭の&lsquo;<tt>^</tt>&rsquo;、そして正規表現の区切り文字の前には、&lsquo;<tt>&#92;</tt>&rsquo;を付けなければならない。 その他のメタ文字は s では特別な意味を持たないので、&lsquo;<tt>&#92;</tt>&rsquo;を付けなくてもよい。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A &lsquo;<tt>.</tt>&rsquo; matches any character.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&lsquo;<tt>.</tt>&rsquo;は任意の1文字にマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A &lsquo;<tt>^</tt>&rsquo; matches the beginning of a node; &lsquo;<tt>&dollar;</tt>&rsquo; matches the end of the node.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&lsquo;<tt>^</tt>&rsquo;はノードの先頭にマッチする。 &lsquo;<tt>&dollar;</tt>&rsquo;はノードの末尾にマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>REP</tt> operators match zero or more instances (<tt>*</tt>), one or more instances (<tt>+</tt>), zero or one instances (<tt>?</tt>), exactly <i>n</i> instances (<tt>{n}</tt>), at least <i>n</i> instances (<tt>{n,}</tt>), at least <i>n</i> and at most <i>m</i> instances (<tt>{n,m}</tt>), respectively of the preceding regular expression <tt>e2</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>REP</tt>とは、直前の正規表現<tt>e2</tt>の繰り返しである。 0回以上（<tt>*</tt>）、 1回以上の例（<tt>+</tt>）、 0回または1回（<tt>?</tt>）、 <i>n</i>回（tt&gt;{n}</tt>）、 <i>n</i>回以上（<tt>{n,}</tt>）、 <i>n</i>回以上<i>m</i>回以下（<tt>{n,m}</tt>）がある。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A concatenated regular expression, <tt>e1e2</tt>, matches a match to <tt>e1</tt> followed by a match to <tt>e2</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現の連結<tt>e1e2</tt>は、<tt>e2</tt>に先行する<tt>e1</tt>にマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An alternative regular expression, <tt>e0|e1</tt>, matches either a match to <tt>e0</tt> or a match to <tt>e1</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現の選言<tt>e0|e1</tt>は、<tt>e0</tt>または<tt>e1</tt>のいずれかにマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A match to any part of a regular expression extends as far as possible without preventing a match to the remainder of the regular expression.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現の一部とのマッチは、同じ正規表現の他の部分がマッチを阻害しない限り続く。</p>
 
-<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Relationships between nodes</h2>
+<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;ノード間の関係</h2>
 
-<p align="justify">Relationships define connections between nodes. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships are given in (<a href="#ex11">11</a>).</p>
+<p align="justify">関係表現によって、ノード間の繋がり方を指定することができる。 関係表現における関係演算子は完全に対になっており、それによって複雑な関係表現の作成に（<a href="#sec4">4</a>節を参照）、 柔軟に対応することができる。 代表的なものを (<a href="#ex11">11</a>) に示す。</p>
 
 <dl>
   <dt>(<a name="ex11">11</a>)</dt><dd></dd>
 </dl>
-<tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
-<tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;a&nbsp;descendant&nbsp;of)&nbsp;B</tt><br>
-<tt>A&nbsp;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;dominates&nbsp;(is&nbsp;the&nbsp;parent&nbsp;of)&nbsp;B</tt><br>
-<tt>A&nbsp;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;the&nbsp;child&nbsp;of)&nbsp;B</tt><br>
-<tt>A&nbsp;..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;follows&nbsp;B</tt><br>
-<tt>A&nbsp;.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
-<tt>A&nbsp;$&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;not&nbsp;equal&nbsp;to&nbsp;B</tt><br>
-<tt>A&nbsp;$..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;$,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;follows&nbsp;B</tt><br>
-<tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;$,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の先祖である（A&nbsp;は&nbsp;B&nbsp;を支配する）</tt><br>
+<tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の子孫である（A&nbsp;は&nbsp;B&nbsp;に支配される）</tt><br>
+<tt>A&nbsp;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の直接の先祖（親）である（A&nbsp;は&nbsp;B&nbsp;を直接支配する）</tt><br>
+<tt>A&nbsp;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の直接の子孫（子）である（A&nbsp;は&nbsp;B&nbsp;に直接支配される）</tt><br>
+<tt>A&nbsp;..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;に先行する</tt><br>
+<tt>A&nbsp;,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;に後続する</tt><br>
+<tt>A&nbsp;.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の直前に置かれる</tt><br>
+<tt>A&nbsp;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の直後に置かれる</tt><br>
+<tt>A&nbsp;$&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の姉妹である</tt><br>
+<tt>A&nbsp;$..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の姉妹で先行する</tt><br>
+<tt>A&nbsp;$,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の姉妹で後続する</tt><br>
+<tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の隣接する姉妹で先行する</tt><br>
+<tt>A&nbsp;$,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の隣接する姉妹で後続する</tt><br>
 
-<p align="justify">Any relationship can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>).</p>
+<p align="justify">どのような関係演算子も、直前にエクスクラメーション（<tt>!</tt>）を付けて否定することができる。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The following presents pictures grouping the relationships of (<a href="#ex11">11</a>) as forward and backward links:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;以下に、(<a href="#ex11">11</a>)に挙げた関係表現の順行・逆行の対を図示する。</p>
 
 <dl>
   <dt>(<a name="ex12">12</a>)</dt><dd></dd>
 </dl>
-<tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+<tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(支配する&nbsp;&sol;&nbsp;先祖である)</tt><br>
+<tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(支配される&nbsp;&sol;&nbsp;子孫である)</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -265,8 +266,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex13">13</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
-<tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+<tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（支配される&nbsp;&sol;&nbsp;子孫である）</tt><br>
+<tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（支配する&nbsp;&sol;&nbsp;先祖である）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="504.24" height="357" viewBox="-16.5 17.5 661.32 465">
   <rect x="299.16" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
@@ -336,8 +337,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex14">14</a>)</dt><dd></dd>
 </dl>
-<tt>C&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;dominates&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
+<tt>C&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直接支配する&nbsp;&sol;&nbsp;親である）</tt><br>
+<tt>__&nbsp;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直接支配される&nbsp;&sol;&nbsp;子である）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="510.18" height="357" viewBox="-16.5 17.5 669.24 465">
   <text x="318.12" y="55" text-anchor="middle">A</text>
@@ -405,8 +406,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex15">15</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
-<tt>__&nbsp;,,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
+<tt>I&nbsp;..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（先行する）</tt><br>
+<tt>__&nbsp;,,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（後続する）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -483,8 +484,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex16">16</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;,,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
-<tt>__&nbsp;..&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
+<tt>I&nbsp;,,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（後続する）</tt><br>
+<tt>__&nbsp;..&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（先行する）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="569.58" height="357" viewBox="-16.5 17.5 748.44 465">
   <text x="357.72" y="55" text-anchor="middle">A</text>
@@ -560,8 +561,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex17">17</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
-<tt>__&nbsp;,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
+<tt>I&nbsp;.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直前に置かれる）</tt><br>
+<tt>__&nbsp;,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直後に置かれる）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -630,8 +631,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex18">18</a>)</dt><dd></dd>
 </dl>
-<tt>I&nbsp;,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
-<tt>__&nbsp;.&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
+<tt>I&nbsp;,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直後に置かれる）</tt><br>
+<tt>__&nbsp;.&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直前に置かれる）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -700,8 +701,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex19">19</a>)</dt><dd></dd>
 </dl>
-<tt>F&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
-<tt>__&nbsp;$&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
+<tt>F&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（姉妹である）</tt><br>
+<tt>__&nbsp;$&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（姉妹である）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
   <text x="330" y="55" text-anchor="middle">A</text>
@@ -769,8 +770,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex20">20</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
+<tt>E&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（先行する姉妹である）</tt><br>
+<tt>__&nbsp;$,,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（後続する姉妹である）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="528" height="357" viewBox="-16.5 17.5 693 465">
   <text x="330" y="55" text-anchor="middle">A</text>
@@ -838,8 +839,8 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 <dl>
   <dt>(<a name="ex21">21</a>)</dt><dd></dd>
 </dl>
-<tt>E&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
+<tt>E&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直前の姉妹である）</tt><br>
+<tt>__&nbsp;$,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（直後の姉妹である）</tt><br>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="516.12" height="357" viewBox="-16.5 17.5 677.16 465">
   <text x="322.08" y="55" text-anchor="middle">A</text>
@@ -903,19 +904,19 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <text x="613.14" y="195" text-anchor="middle">w9</text>
 </svg>
 
-<h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;The <tt>i</tt>-th child relationships</h3>
+<h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;<tt>i</tt>番目の子という関係表現</h3>
 
-<p align="justify">To specify the exact child position which a node must occupy, use the <tt>i</tt>-th child relationships defined in (<a href="#ex22">22</a>):</p>
+<p align="justify">子であるノードの正確な位置を指定するには、<tt>i</tt>番目の子という関係表現を使う：</p>
 
 <dl>
   <dt>(<a name="ex22">22</a>)</dt><dd></dd>
 </dl>
-<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&lt;1)</tt><br>
-<tt>A&nbsp;&gt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;first&nbsp;child&nbsp;is&nbsp;&gt;1)</tt><br>
-<tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&lt;-1)</tt><br>
-<tt>A&nbsp;&gt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;B&nbsp;(i&nbsp;&gt;&nbsp;0)&nbsp;(the&nbsp;last&nbsp;child&nbsp;is&nbsp;&gt;-1)</tt><br>
+<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の&nbsp;i番目（i&nbsp;&gt;&nbsp;0）の子である</tt><br>
+<tt>A&nbsp;&gt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の&nbsp;i番目（i&nbsp;&gt;&nbsp;0）の子である</tt><br>
+<tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の、後ろから数えて&nbsp;i番目の子である</tt><br>
+<tt>A&nbsp;&gt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の、後ろから数えて&nbsp;i番目の子である</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In these relationships, <tt>i</tt> represents a number indicating which child slot is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex23">23</a>) finds <tt>NP</tt> nodes where the sixth child is a <tt>PP</tt>. Click the [Try] button underneath the example to see results from The Treebank Semantics Parsed Corpus (TSPC).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;これらの関係表現では、 <tt>i</tt>は、問題となる子の位置を示す数であり、 正の数は左から、負の数は右から数えた数である。 例えば、 (<a href="#ex23">23</a>)は、左から数えて6番目の子が<tt>PP</tt>である<tt>NP</tt>にマッチする。 [Try]ボタンをクリックすると、The Treebank Semantics Parsed Corpus (TSPC) での検索結果が表示される。</p>
 
 <dl>
   <dt>(<a name="ex23">23</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;6&nbsp;&sol;&#94;PP&#92;b&sol;</tt><br></dd>
@@ -926,7 +927,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">Pattern (<a href="#ex24">24</a>) finds <tt>NP</tt> nodes where the last child is an <tt>ADVP</tt>.</p>
+<p align="justify">(<a href="#ex24">24</a>)のパターンは末尾（右から数えて1番目）の子が<tt>ADVP</tt>である<tt>NP</tt>を検索する。</p>
 
 <dl>
   <dt>(<a name="ex24">24</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;ADVP&#92;b&sol;</tt><br></dd>
@@ -937,7 +938,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and a negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either eight or nine children you would use pattern (<a href="#ex25">25</a>):</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;特定の数の子をもつノードを指定する場合にも、<tt>i</tt>番目の子という関係表現を使うことができる。 例えば、 (<a href="#ex25">25</a>)のパターンは、8個あるいは9個の子を支配する<tt>NP</tt>を検索する。</p>
 
 <dl>
   <dt>(<a name="ex25">25</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;8&nbsp;&lowbar;&lowbar;&nbsp;!&lt;10&nbsp;&lowbar;&lowbar;</tt><br></dd>
@@ -948,30 +949,30 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<h3><a name="sec26">26</a>&nbsp;&nbsp;&nbsp;Other relationships</h3>
+<h3><a name="sec26">26</a>&nbsp;&nbsp;&nbsp;その他の関係表現</h3>
 
-<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex11">11</a>) and (<a href="#ex22">22</a>), are given in (<a href="#ex26">26</a>):</p>
+<p align="justify">関係表現には、 (<a href="#ex11">11</a>)と(<a href="#ex22">22</a>)に示したものに加えて、 (<a href="#ex26">26</a>)のようなものがある。</p>
 
 <dl>
   <dt>(<a name="ex26">26</a>)</dt><dd></dd>
 </dl>
-<tt>A&nbsp;==&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;and&nbsp;B&nbsp;are&nbsp;the&nbsp;same&nbsp;node</tt><br>
-<tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
-<tt>A&nbsp;&lt;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
-<tt>A&nbsp;&gt;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
-<tt>A&nbsp;&gt;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
-<tt>A&nbsp;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;1&nbsp;B)</tt><br>
-<tt>A&nbsp;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;1&nbsp;B)</tt><br>
-<tt>A&nbsp;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-1&nbsp;B)</tt><br>
-<tt>A&nbsp;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-1&nbsp;B)</tt><br>
-<tt>A&nbsp;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;A</tt><br>
-<tt>A&nbsp;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;B</tt><br>
-<tt>A&nbsp;&lt;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
-<tt>A&nbsp;&gt;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
+<tt>A&nbsp;==&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;と同一のノードである</tt><br>
+<tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の左端の子孫である</tt><br>
+<tt>A&nbsp;&lt;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の右端の子孫である</tt><br>
+<tt>A&nbsp;&gt;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の左端の子孫である</tt><br>
+<tt>A&nbsp;&gt;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の右端の子孫である</tt><br>
+<tt>A&nbsp;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の最初の子である</tt><br>
+<tt>A&nbsp;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の最初の子である</tt><br>
+<tt>A&nbsp;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の最後の子である</tt><br>
+<tt>A&nbsp;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の最後の子である</tt><br>
+<tt>A&nbsp;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;は&nbsp;A&nbsp;の唯一の子である</tt><br>
+<tt>A&nbsp;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;の唯一の子である</tt><br>
+<tt>A&nbsp;&lt;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;を枝分かれの無い枝のみによって支配する</tt><br>
+<tt>A&nbsp;&gt;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;は&nbsp;B&nbsp;に枝分かれの無い枝のみによって支配される</tt><br>
 
-<h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;Boolean expressions for building complex patterns</h2>
+<h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;複雑なクエリを作るためのブール表現</h2>
 
-<p align="justify">Complex TGrep2 patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (<tt>&</tt>). Thus, patterns (<a href="#ex27">27</a>) and (<a href="#ex28">28</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
+<p align="justify">複雑なクエリはノード間の関係をブール表現によって特定化することで作られる。 2つの関係表現の間にブール表現がない場合、それらは <i>and</i> の関係にあると解釈される。 <i>and</i> を明示するにはアンド（<tt>&</tt>）を使う。 すなわち、 (<a href="#ex27">27</a>)のパターンと(<a href="#ex28">28</a>)のパターンは、いずれも<tt>PP</tt>を直接支配し、かつ、<tt>IP</tt>を支配する<tt>IP</tt>とマッチする。</p>
 
 <dl>
   <dt>(<a name="ex27">27</a>)</dt><dd></dd>
@@ -983,28 +984,28 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
 </dl>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
-<p align="justify">The second relationship <tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt> refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex29">29</a>).</p>
+<p align="justify">2つ目の関係表現<tt>&lt;&lt; &sol;~IP&#92;b&sol;</tt>は、<tt>PP</tt>ではなく、先頭の<tt>IP</tt>との関係を示している。 これは、(<a href="#ex29">29</a>)と等価である。</p>
 
 <dl>
   <dt>(<a name="ex29">29</a>)</dt><dd></dd>
 </dl>
 <tt>(&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
-<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex30">30</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
+<p align="justify">関係表現を伴うノードをグループ化するために括弧を使うことができる。 よって、(<a href="#ex30">30</a>) は<tt>PP</tt>を直接支配し、 さらに<tt>IP</tt>を支配する<tt>IP</tt>とマッチする。</p>
 
 <dl>
   <dt>(<a name="ex30">30</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (<tt>|</tt>) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex31">31</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;パイプ（<tt>|</tt>）を2つの関係表現の間に置くと選言、つまり、 そのうちの1つだけを満たせばよいということを表す。 (<a href="#ex31">31</a>)のパターンは、<tt>PP</tt>を直接支配するか、または、<tt>IP</tt>を支配する<tt>IP</tt>を検索する：</p>
 
 <dl>
   <dt>(<a name="ex31">31</a>)</dt><dd></dd>
 </dl>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 
-<p align="justify">The (typically implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex32">32</a>) will find an infinitive clause node (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an infinitive verb child (<tt>&sol;^VB&#92;b&sol;</tt>) and an indirect object child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or that has an infinitive <i>be</i> child (<tt>&sol;^BE&#92;b&sol;</tt>) and a predicative noun phrase child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>).</p>
+<p align="justify"><i>and</i>（通常は明示しないのであるが）による束縛は、<i>or</i>よりも強力である。 (<a href="#ex32">32</a>)のパターンは、動詞（<tt>&sol;^VB&#92;b&sol;</tt>）と間接目的語（<tt>&sol;~NP-OB2&#92;b&sol;</tt>）を子とする不定詞節（<tt>&sol;^IP-INF&#92;b&sol;</tt>）、または、be動詞（<tt>&sol;~BE&#92;b&sol;</tt>）と述語名詞句（<tt>&sol;~NP-PRD2&#92;b&sol;</tt>）を子とする不定詞節（<tt>&sol;^IP-INF&#92;b&sol;</tt>）を検索する。</p>
 
 <dl>
   <dt>(<a name="ex32">32</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;VB&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;</tt><br></dd>
@@ -1015,7 +1016,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex33">33</a>) finds an infinitive clause (<tt>&sol;^IP-INF&#92;b&sol;</tt>) that has an indirect object child (<tt>&sol;^NP-OB2&#92;b&sol;</tt>) or a noun phrase predicative child (<tt>&sol;^NP-PRD2&#92;b&sol;</tt>), and that precedes a noun phrase subject sister (<tt>&sol;^NP-SBJ&#92;b&sol;</tt>) or follows an adverb phrase <tt>&sol;ADVP&#92;b&sol;</tt> sister.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;より複雑なクエリを作るには、ブラケット（<tt>[]</tt>）による関係表現のグループ化を使うことができる。 例えば、 (<a href="#ex33">33</a>)のパターンは、 間接目的語（<tt>&sol;^NP-OB2&#92;b&sol;</tt>）または述語名詞句（<tt>&sol;^NP-PRD2&#92;b&sol;</tt>）を子とし、 かつ、主語名詞句（<tt>&sol;^NP-SBJ&#92;b&sol;</tt>）の先行する姉妹であるか、または、副詞句（<tt>&sol;ADVP&#92;b&sol;</tt>）の後続する姉妹である不定詞節を検索する。</p>
 
 <dl>
   <dt>(<a name="ex33">33</a>)</dt><dd><tt>&sol;&#94;IP-INF&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;NP-OB2&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;NP-PRD2&#92;b&sol;&nbsp;]&nbsp;[&nbsp;&#x24;..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;&#x24;,,&nbsp;&sol;&#94;ADVP&#92;b&sol;&nbsp;]</tt><br></dd>
@@ -1026,13 +1027,13 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">An expression with square brackets itself acts as a complex relationship that connects back to a node. An open square bracket must be followed by either (i) the specification of a relationship (which can involve a disjunction of relationship specifications) or (ii) another open square bracket that itself starts the specification of a complex relationship.</p>
+<p align="justify">ブラケットを伴う表現はそれ自身がノードに対する複雑な関係表現である。 開きブラケットの後には、（i）関係表現の指定（関係表現を選言として指定できる）、 （ii）開き括弧で囲んだ複雑な関係表現、のいずれかが続かなくてはならない。</p>
 
-<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;Labeled nodes and back links</h2>
+<h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;ラベル付けされたノードと被リンク</h2>
 
-<p align="justify">TGrep2 allows for a node to be given a unique label and then referred to elsewhere by that label. If a node name is followed by an equal sign (<tt>=</tt>) and a label, the label will be assigned to the node. If the node name only consists of an equal sign and a label, it serves as a back link that refers to the node that has been assigned to that name elsewhere in the pattern.</p>
+<p align="justify">TGrep2では、あるノードに一意のラベルを付け、そのラベルを使うことで他の場所でノードを参照することができる。 ノードの後にイコール（<tt>=</tt>）とラベルを続けると、ノードにそのラベルが割り当てられる。 ノードの名前がイコールとラベルのみから成る場合、それはそのラベルが割り当てられているノードを参照する被リンクとして機能する。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we want to find sentences with present tense verbs in a matrix clause that select an object <i>that</i> clause. With access to labels and back links, we can do this with the pattern of (<a href="#ex34">34</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;被リンクを使えば、リンク構造における循環のパターンを作ることができる。 例えば、 <i>that</i>節を目的語とする現在時制の動詞をもつ文を検索したい場合、 ラベルと被リンクを含む、(<a href="#ex34">34</a>)のパターンを使うことができる。</p>
 
 <dl>
   <dt>(<a name="ex34">34</a>)</dt><dd><tt>&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br></dd>
@@ -1043,9 +1044,9 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">Pattern (<a href="#ex34">34</a>) works by stating that the node named <tt>mid</tt> is directly above the object <i>that</i> clause and this should also be an ancestor to the present tense verb without there being an intervening clause or <tt>FS</tt> node. Finally, it is also required that the common ancestor named <tt>mid</tt> is either itself the matrix clause or is itself not a clause node and has no intermediate clause node between it and the matrix clause.</p>
+<p align="justify">(<a href="#ex34">34</a>)は、<tt>mid</tt>とラベル付けされたノードが、<i>that</i>節目的語を直接支配し、 かつ、現在時制の動詞の祖先であるということ（ただし、ラベル付けされたノードと現在時制動詞の間に節（<tt>IP</tt>）や言い間違い（<tt>FS</tt>が介在することはない）、 さらに、<tt>mid</tt>と名付けられた祖先は主節（<tt>IP-MAT</tt>）であるか、あるいは、それ自身と主節の間に他の節が介在しない節であるということを表している。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (<tt>&lt;&lt; (&sol;OB1&sol; &lt; &sol;&#92;*T&#92;*&sol;)</tt>). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario of picking an incorrect relative clause node for the trace with a back link, resulting in (<a href="#ex35">35</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;被リンクの便利な使い方のもうひとつの例として、目的語をトレースとする関係節を検索するタスクを考えてみよう。 目的語のトレースは関係節の内部で深く埋め込まれる可能性があり、それは支配関係（<tt>&lt;&lt; (&sol;OB1&sol; &lt; &sol;&#92;*T&#92;*&sol;)</tt>）によって表すことができる。 しかし、さらなる条件がなければ、これは目的語のトレースをもたない関係節の中に、目的語のトレースをもつ関係節が含まれているような例にもマッチしてしまう。 このような望まない例を避けるために、被リンクを使った条件を追加したのが(<a href="#ex35">35</a>)である。</p>
 
 <dl>
   <dt>(<a name="ex35">35</a>)</dt><dd><tt>&sol;REL&sol;=p&nbsp;&lt;&lt;&nbsp;(&sol;OB1&sol;&nbsp;&lt;&nbsp;&sol;&#92;*T&#92;*&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;REL&sol;&nbsp;&gt;&gt;&nbsp;=p))</tt><br></dd>
@@ -1056,11 +1057,11 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">The added back link statement (<tt>!&gt;&gt; (&sol;REL&sol; &gt;&gt; =p)</tt>) requires there to be no intervening relative clause (<tt>&sol;REL&sol;</tt>) between the object trace and the relative clause that the pattern serves to find.</p>
+<p align="justify">追加された被リンク（<tt>!&gt;&gt; (&sol;REL&sol; &gt;&gt; =p)</tt>）は、目的語のトレースと関係節の間に他の関係節（<tt>&sol;REL&sol;</tt>）が介在しないということを表す。</p>
 
-<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;Segmented patterns</h2>
+<h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;パターンの分割</h2>
 
-<p align="justify">TGrep2 provides a way to split patterns into multiple segments, which are separated by colons (<tt>:</tt>). All segments need to be related. For example, segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex36">36</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
+<p align="justify">TGrep2では、パターンをコロン（<tt>:</tt>）で区切ることで複数の部分に分割することができる。 このとき、それぞれの部分が関連している必要がある。 例えば、 (<a href="#ex36">36</a>)のパターンにおける、2つ目の部分は、直前の部分におけるラベル付きのノードの参照で始まっているが、これは、<tt>NP</tt>が<tt>CP-THT</tt>を直接支配するツリーを検索する。</p>
 
 <dl>
   <dt>(<a name="ex36">36</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;</tt><br></dd>
@@ -1071,7 +1072,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex37">37</a>) is matched by pattern (<a href="#ex38">38</a>) without segments as well as pattern (<a href="#ex39">39</a>) with segments.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;ノードへのラベル付けを使うことにより、関係表現を埋め込まなければならないパターンを置き換えることができる。 例えば、 (<a href="#ex37">37</a>)のようなツリーの断片へのマッチには、分割なしの(<a href="#ex39">39</a>)のパターンによっても、分割ありの(<a href="#ex38">38</a>)のパターンも使うことができる。</p>
 
 <dl>
   <dt>(<a name="ex37">37</a>)</dt><dd></dd>
@@ -1110,7 +1111,7 @@ TGrep2 is a tool for searching syntax trees. This guide provides an introduction
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Segments can make patterns easier to read and debug. Segments can also assist with pattern reuse. Patterns can frequently be mostly the same while differing in only one region. For such cases, the region that changes can be placed in its own segment, so that full patterns are built when a unique segment is appended to a common base, or vice versa.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;分割を使うことで、より読みやすく、修正しやすいパターンを作ることが可能になる。 また、分割はパターンを再利用するためにも有効である。 パターンというのは、しばしば他のパターンと一部だけ違っていてあとは同じということが多い。 そのような場合には、変更する部分にそれ用の分割を置き、一回きりの分割を共通する土台に付け加えることで、パターン全体を作成することができる。</p>
 
 <br>
 <br>
