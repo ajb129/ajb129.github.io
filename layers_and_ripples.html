@@ -80,6 +80,8 @@ body {
 <dt>(ii)</dt><dd>placing everything back together again.</dd>
 </dl>
 
+<p align="justify">An innermost element is either the head word of a phrase layer or the verb of a clause layer. While placing things back together again, we can add labels called annotations to keep track of what was uncovered when we pealed back the layers. Subsequently, these labels act as handles for accessing the structural analysis revealed by parsing. For the purpose of recording parse analysis, this book adopts the annotation scheme of the Treebank Semantics Parsed Corpus (TSPC; Butler 2022). The TSPC is a corpus of English for general use with hand worked analysis for approaching half-a-million words.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Furthering the onion analogy, the kind of layering seen in Figure <a href="#fig1.2">1.2</a> occurs when there is coordination, with each conjunct having to conform to whatever is possible at the same particular layer.</p>
 
 <p><a name="fig1.2">Figure 1.2: Parallel layers</a></p>
@@ -268,8 +270,6 @@ body {
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write a set of phrase structure rules and get an executable Prolog program.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has already been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022).</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The steps of parsing that involve placing back together dismantled parts allow adding trails of instructions known as annotations. Once assembled, annotations act as records of the analysis parsing revealed. For the purpose of recording parse analysis, this book adopts the annotation scheme of the Treebank Semantics Parsed Corpus (TSPC; Butler 2022). The TSPC is a corpus of English for general use with hand worked analysis for approaching half-a-million words.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. The remainder of this chapter, section <a href="#sec1.4">1.4</a>, introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceding chapters by integrating clause subordination.</p>
 
