@@ -395,7 +395,7 @@ body {
 <tt>noun(['NS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NS'(Word)].</tt><br>
 <tt>noun(['N'(Word)|L]-L)&nbsp;--&gt;&nbsp;['N'(Word)].</tt><br>
 
-<p align="justify">In (<a href="#ex2.2">2.2</a>), we ask whether a parse list containing the word&sol;class pair <tt>'NS'('boys')</tt> contains <tt>noun</tt> content.</p>
+<p align="justify">In (<a href="#ex2.2">2.2</a>), we ask whether a parse list containing the class&sol;word pair <tt>'NS'('boys')</tt> contains <tt>noun</tt> content.</p>
 
 <dl>
   <dt>(<a name="ex2.2">2.2</a>)</dt><dd></dd>
@@ -533,7 +533,7 @@ body {
 <table border="1" cellpadding="10px">
 <tr><td><tt>PRO;_clf_</tt></td><td>Cleft <tt>it</tt> co-occurring with a cleft clause (<tt>IP-CLF</tt>)</td></tr>
 <tr><td><tt>PRO;_pvl_</tt></td><td>Provisional <tt>it</tt> co-occurring with a notional subject (<tt>-NSBJ</tt>)</td></tr>
-<tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e.&nbsp;<i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>-ESBJ</tt>)</td></tr>
+<tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e.&nbsp;<i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
 </table>
 <br>
 
@@ -742,7 +742,7 @@ body {
 
 <p align="justify">In addition to taking a filled subject, a linking verb requires a phrase with subject predicative function as its complement. This subject predicative can be either an adjective phrase or a noun phrase. This leads to the <tt>verb_complement</tt> rules of:</p>
 <ul>
-<li>(<a href="#ex2.17">2.17</a>) when the verb code is <tt>;~La</tt> and the subject predicative is an adjective phrase</li>
+<li>(<a href="#ex2.17">2.17</a>) when the verb code is <tt>;~La</tt> and the subject predicative is an adjective phrase (<tt>ADJP-PRD2</tt>)</li>
 </ul>
 
 <dl>
@@ -751,7 +751,7 @@ body {
 <tt>verb_complement(_Tag,';~La',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD2',L).</tt><br>
 <ul>
-<li>(<a href="#ex2.18">2.18</a>) when the verb code is <tt>;~Ln</tt> and the subject predicative is a noun phrase</li>
+<li>(<a href="#ex2.18">2.18</a>) when the verb code is <tt>;~Ln</tt> and the subject predicative is a noun phrase (<tt>NP-PRD2</tt>)</li>
 </ul>
 
 <dl>
@@ -831,7 +831,7 @@ body {
 <tt>verb_complement(_Tag,';~I',[],filled_subject,active,L-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.24">2.24</a>) with code <tt>;~Ip</tt> there is selection of an adverbial particle and so the parse list should have content for an adverb phrase</li>
+<li>for (<a href="#ex2.24">2.24</a>) with code <tt>;~Ip</tt> there is selection of an adverbial particle and so the parse list should have content for an adverb phrase (<tt>ADVP</tt>)</li>
 </ul>
 
 <dl>
@@ -840,7 +840,7 @@ body {
 <tt>verb_complement(_Tag,';~Ip',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.25">2.25</a>) with code <tt>;~Ipr</tt> there is selection of a preposition phrase which can occur (i) with the parse list (the first rule), (ii) as an <tt>ICH</tt> link to a displaced noun phrase together with a preposition in the parse list to take the displaced noun phrase as its complement (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced preposition phrase together with an empty parse list (the third rule)</li>
+<li>for (<a href="#ex2.25">2.25</a>) with code <tt>;~Ipr</tt> there is selection of a preposition phrase (<tt>PP</tt>) which can occur (i) with the parse list (the first rule), (ii) as an <tt>ICH</tt> link to a displaced noun phrase together with a preposition in the parse list to take the displaced noun phrase as its complement (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced preposition phrase together with an empty parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -853,20 +853,20 @@ body {
 <tt>verb_complement(_Tag,';~Ipr',[pp(ICH)],filled_subject,active,['PP'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.26">2.26</a>) with code <tt>;~It</tt> there is selection of a <i>to</i>-infinitive clause from the parse list</li>
+<li>for (<a href="#ex2.26">2.26</a>) with code <tt>;~It</tt> there is selection of a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) from the parse list</li>
 </ul>
 
 <dl>
   <dt>(<a name="ex2.26">2.26</a>)</dt><dd></dd>
 </dl>
 <tt>verb_complement(_Tag,';~It',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_to_inf('-OB1',Displaced,_Sbj_type,L).</tt><br>
+<tt>&nbsp;&nbsp;ip_to_inf('',Displaced,_Sbj_type,L).</tt><br>
 
 <h4><a name="sec2.8.2.3">2.8.2.3</a>&nbsp;&nbsp;&nbsp;Mono-transitive verbs</h4>
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.27">2.27</a>)&ndash;(<a href="#ex2.36">2.36</a>) establish complements for mono-transitive verbs:</p>
 <ul>
-<li>for (<a href="#ex2.27">2.27</a>) with code <tt>;~Tn</tt> and active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) which can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there are no selected complement elements and so the parse list should be empty (the third rule)</li>
+<li>for (<a href="#ex2.27">2.27</a>) with code <tt>;~Tn</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) which can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there are no selected complement elements and so the parse list should be empty (the third rule)</li>
 </ul>
 
 <dl>
@@ -879,7 +879,7 @@ body {
 <tt>verb_complement(_Tag,';~Tn',[],filled_subject,passive,L-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.28">2.28</a>) with code <tt>;~Tn.p</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and an adverbial particle; while the adverbial particle has to come from an adverb phrase of the parse list, the object noun phrase can occur (i) with the parse list before the adverb phrase (the first rule), (ii) with the parse list after the adverb phrase (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced noun phrase (the third rule); with passive voice there should only be the adverbial particle as content for an adverb phrase of the parse list (the fourth rule)</li>
+<li>for (<a href="#ex2.28">2.28</a>) with code <tt>;~Tn.p</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP</tt>); while the adverbial particle has to come from an adverb phrase of the parse list, the object noun phrase can occur (i) with the parse list before the adverb phrase (the first rule), (ii) with the parse list after the adverb phrase (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced noun phrase (the third rule); with passive voice there should only be the adverbial particle as content for an adverb phrase of the parse list (the fourth rule)</li>
 </ul>
 
 <dl>
@@ -896,7 +896,7 @@ body {
 <tt>verb_complement(_Tag,';~Tn.p',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.29">2.29</a>) with code <tt>;~Tn.pr</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and a preposition phrase; the object noun phrase can occur (i) with the parse list before the preposition phrase (the first and second rules) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the third rule); the first and second rules differ in how the complement of the preposition phrase is derived: from the prase list (the first rule) or from an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the preposition phrase from the parse list (the fourth rule)</li>
+<li>for (<a href="#ex2.29">2.29</a>) with code <tt>;~Tn.pr</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase (<tt>PP</tt>); the object noun phrase can occur (i) with the parse list before the preposition phrase (the first and second rules) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the third rule); the first and second rules differ in how the complement of the preposition phrase is derived: from the prase list (the first rule) or from an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the preposition phrase from the parse list (the fourth rule)</li>
 </ul>
 
 <dl>
@@ -913,7 +913,7 @@ body {
 <tt>verb_complement(_Tag,';~Tn.pr',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('',L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.30">2.30</a>) with code <tt>;~Tf</tt> there is selection of a <i>that</i>-clause with object function (<tt>-OB1</tt>) from the parse list</li>
+<li>for (<a href="#ex2.30">2.30</a>) with code <tt>;~Tf</tt> there is selection of a <i>that</i>-clause with object function (<tt>CP-THT-OB1</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -922,7 +922,7 @@ body {
 <tt>verb_complement(_Tag,';~Tf',Displaced,filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-OB1',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.31">2.31</a>) with code <tt>;~Tw</tt> there is selection of an embedded question clause with object function (<tt>-OB1</tt>) from the parse list</li>
+<li>for (<a href="#ex2.31">2.31</a>) with code <tt>;~Tw</tt> there is selection of an embedded question clause with object function (<tt>CP-QUE-OB1</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -931,7 +931,7 @@ body {
 <tt>verb_complement(_Tag,';~Tw',Displaced,filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_que('-OB1',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.32">2.32</a>) with code <tt>;~Tt</tt> there is selection of a <i>to</i>-infinitive clause with object function (<tt>-OB1</tt>) from the parse list</li>
+<li>for (<a href="#ex2.32">2.32</a>) with code <tt>;~Tt</tt> there is selection of a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -940,7 +940,7 @@ body {
 <tt>verb_complement(_Tag,';~Tt',Displaced,filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-OB1',Displaced,_Sbj_type,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.33">2.33</a>) with code <tt>;~Tnt</tt> and with active voice there is selection of a noun phrase with derived object function (<tt>-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>-OB1</tt>); while the <i>to</i>-infinitive clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the <i>to</i>-infinitive clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the <i>to</i>-infinitive clause from the parse list (the third rule); note that <tt>ip_to_inf</tt> in the rules of (<a href="#ex2.33">2.33</a>) takes the <tt>filled_subject</tt> parameter value and so there can be no introduction of a <i>for</i> introduced subject internal to the <i>to</i>-infinitive clause thereby ensuring that there can be no disruption of control inheritance from the derived object (&sol;subject when passive)</li>
+<li>for (<a href="#ex2.33">2.33</a>) with code <tt>;~Tnt</tt> and with active voice there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>); while the <i>to</i>-infinitive clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the <i>to</i>-infinitive clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the <i>to</i>-infinitive clause from the parse list (the third rule); note that <tt>ip_to_inf</tt> in the rules of (<a href="#ex2.33">2.33</a>) takes the <tt>filled_subject</tt> parameter value and so there can be no introduction of a <i>for</i> introduced subject internal to the <i>to</i>-infinitive clause thereby ensuring that there can be no disruption of control inheritance from the derived object (&sol;subject when passive)</li>
 </ul>
 
 <dl>
@@ -954,7 +954,7 @@ body {
 <tt>verb_complement(_Tag,';~Tnt',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-OB1',[],filled_subject,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.34">2.34</a>) with code <tt>;~Tni</tt> there is selection of a noun phrase with derived object function (<tt>-DOB1</tt>) and a bare infinitive clause with object function (<tt>-OB1</tt>); while the bare infinitive clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the bare infinitive clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>for (<a href="#ex2.34">2.34</a>) with code <tt>;~Tni</tt> there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a bare infinitive clause with object function (<tt>IP-INF-OB1</tt>); while the bare infinitive clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the bare infinitive clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
 </ul>
 
 <dl>
@@ -972,7 +972,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-INF-OB1'|VPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <ul>
-<li>for (<a href="#ex2.35">2.35</a>) with code <tt>;~Tg</tt> there is selection of a present participle (<i>-ing</i>) clause with object function (<tt>-OB1</tt>) from the parse list</li>
+<li>for (<a href="#ex2.35">2.35</a>) with code <tt>;~Tg</tt> there is selection of a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -981,7 +981,7 @@ body {
 <tt>verb_complement(_Tag,';~Tg',Displaced,filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl('-OB1',Displaced,filled_subject,ing_participle,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.36">2.36</a>) with code <tt>;~Tng</tt> and with active voice there is selection of a noun phrase with derived object function (<tt>-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>-OB1</tt>); while the present participle (<i>-ing</i>) clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the present participle (<i>-ing</i>) clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the present participle (<i>-ing</i>) clause from the parse list (the third rule)</li>
+<li>for (<a href="#ex2.36">2.36</a>) with code <tt>;~Tng</tt> and with active voice there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>); while the present participle (<i>-ing</i>) clause has to come from the parse list, the derived object noun phrase can occur (i) with the parse list before the present participle (<i>-ing</i>) clause (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule); with passive voice there should only be the present participle (<i>-ing</i>) clause from the parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -999,7 +999,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.37">2.37</a>)&ndash;(<a href="#ex2.41">2.41</a>) establish complements for ditransitive verbs:</p>
 <ul>
-<li>for (<a href="#ex2.37">2.37</a>) with code <tt>;~Dn.n</tt> and with active voice there is selection of a noun phrase with direct object function (<tt>-OB1</tt>) and a noun phrase with indirect object function (<tt>-OB2</tt>); with the first rule both objects are taken from the parse list, the indirect object occurring first; with the second rule the indirect object occurs with the parsed list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with the third rule the direct object occurs with the parsed list while the indirect object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only a direct object which can occur with the parse list (the fourth rule) or as an <tt>ICH</tt> link to a displaced noun phrase (the fifth rule)</li>
+<li>for (<a href="#ex2.37">2.37</a>) with code <tt>;~Dn.n</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>); with the first rule both objects are taken from the parse list, the indirect object occurring first; with the second rule the indirect object occurs with the parsed list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with the third rule the direct object occurs with the parsed list while the indirect object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only a direct object which can occur with the parse list (the fourth rule) or as an <tt>ICH</tt> link to a displaced noun phrase (the fifth rule)</li>
 </ul>
 
 <dl>
@@ -1017,7 +1017,7 @@ body {
 <tt>verb_complement(_Tag,';~Dn.n',[np(ICH)],filled_subject,passive,['NP-OB1'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and with active voice there is selection of a noun phrase with direct object function (<tt>-OB1</tt>) and a preposition phrase with underspecified object function (<tt>-OBU</tt>); with the first rule both objects are taken from the parse list, the direct object noun phrase occurring first; with the second rule the underspecified object preposition phrase occurs with the parsed list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the underspecified object preposition phrase from the parse list (the third rule)</li>
+<li>for (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and with active voice there is selection of a noun phrase with direct object function (<tt>NP-OB1</tt>) and a preposition phrase with underspecified object function (<tt>PP-OBU</tt>); with the first rule both objects are taken from the parse list, the direct object noun phrase occurring first; with the second rule the underspecified object preposition phrase occurs with the parsed list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the underspecified object preposition phrase from the parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -1031,7 +1031,7 @@ body {
 <tt>verb_complement(_Tag,';~Dn.pr',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OBU',L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.39">2.39</a>) with code <tt>;~Dn.f</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object <i>that</i>-clause from the parse list (the second rule)</li>
+<li>for (<a href="#ex2.39">2.39</a>) with code <tt>;~Dn.f</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object <i>that</i>-clause from the parse list (the second rule)</li>
 </ul>
 
 <dl>
@@ -1043,7 +1043,7 @@ body {
 <tt>verb_complement(_Tag,';~Dn.f',Displaced,filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-OB1',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.40">2.40</a>) with code <tt>;~Dn.w</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>-OB2</tt>) and an embedded question clause with direct object function (<tt>-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object embedded question clause from the parse list (the second rule)</li>
+<li>for (<a href="#ex2.40">2.40</a>) with code <tt>;~Dn.w</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object embedded question clause from the parse list (the second rule)</li>
 </ul>
 
 <dl>
@@ -1055,7 +1055,7 @@ body {
 <tt>verb_complement(_Tag,';~Dn.w',Displaced,filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_que('-OB1',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.41">2.41</a>) with code <tt>;~Dn.t</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object <i>to</i>-infinitive clause from the parse list (the second rule)</li>
+<li>for (<a href="#ex2.41">2.41</a>) with code <tt>;~Dn.t</tt> and with active voice there is selection of a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>) both of which are from the parse list, the indirect object noun phrase occurring first (the first rule); with passive voice there is only the direct object <i>to</i>-infinitive clause from the parse list (the second rule)</li>
 </ul>
 
 <dl>
@@ -1071,7 +1071,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.42">2.42</a>)&ndash;(<a href="#ex2.46">2.46</a>) establish complements for complex-transitive verbs:</p>
 <ul>
-<li>for (<a href="#ex2.42">2.42</a>) with code <tt>;~Cn.a</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and an adjective phrase with object predicative function (<tt>-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative adjective phrase from the parse list (the third rule)</li>
+<li>for (<a href="#ex2.42">2.42</a>) with code <tt>;~Cn.a</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative adjective phrase from the parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -1085,7 +1085,7 @@ body {
 <tt>verb_complement(_Tag,';~Cn.a',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.43">2.43</a>) with code <tt>;~Cn.n</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and a noun phrase with object predicative function (<tt>-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative noun phrase from the parse list (the third rule)</li>
+<li>for (<a href="#ex2.43">2.43</a>) with code <tt>;~Cn.n</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative noun phrase from the parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -1099,7 +1099,7 @@ body {
 <tt>verb_complement(_Tag,';~Cn.n',[],filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-PRD',L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.44">2.44</a>) with code <tt>;~Cn.t</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative <i>to</i>-infinitive clause from the parse list (the third rule)</li>
+<li>for (<a href="#ex2.44">2.44</a>) with code <tt>;~Cn.t</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>); with the first rule both object and predicative are taken from the parse list, the object occurring first; with the second rule the predicative occurs with the parsed list while the object occurs as an <tt>ICH</tt> link to a displaced noun phrase; with passive voice there is only the predicative <i>to</i>-infinitive clause from the parse list (the third rule)</li>
 </ul>
 
 <dl>
@@ -1113,7 +1113,7 @@ body {
 <tt>verb_complement(_Tag,';~Cn.t',Displaced,filled_subject,passive,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-PRD',Displaced,filled_subject,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.45">2.45</a>) with code <tt>;~Cn.i</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and a bare infinitive clause with object predicative function (<tt>-PRD</tt>), both of which are taken from the parse list, the object occurring first</li>
+<li>for (<a href="#ex2.45">2.45</a>) with code <tt>;~Cn.i</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a bare infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>), both of which are taken from the parse list, the object occurring first</li>
 </ul>
 
 <dl>
@@ -1126,7 +1126,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-INF-PRD'|VPl]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <ul>
-<li>for (<a href="#ex2.46">2.46</a>) with code <tt>;~Cn.g</tt> and with active voice there is selection of a noun phrase with object function (<tt>-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>-PRD</tt>), both of which are taken from the parse list, the object occurring first (the first rule); with passive voice there is only the present participle (<i>-ing</i>) clause from the parse list (the second rule)</li>
+<li>for (<a href="#ex2.46">2.46</a>) with code <tt>;~Cn.g</tt> and with active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>), both of which are taken from the parse list, the object occurring first (the first rule); with passive voice there is only the present participle (<i>-ing</i>) clause from the parse list (the second rule)</li>
 </ul>
 
 <dl>
@@ -1142,7 +1142,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.47">2.47</a>)&ndash;(<a href="#ex2.49">2.49</a>) establish complements for catenative verbs:</p>
 <ul>
-<li>for (<a href="#ex2.47">2.47</a>) with code <tt>;~cat_Vt</tt> there is selection of a <i>to</i>-infinitive clause with catenative complement function (<tt>-CAT</tt>) from the parse list</li>
+<li>for (<a href="#ex2.47">2.47</a>) with code <tt>;~cat_Vt</tt> there is selection of a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1151,7 +1151,7 @@ body {
 <tt>verb_complement(_Tag,';~cat_Vt',Displaced,Sbj_type,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-CAT',Displaced,Sbj_type,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.48">2.48</a>) with code <tt>;~cat_Vg</tt> there is selection of a present participle (<i>-ing</i>) clause with catenative complement function (<tt>-CAT</tt>) from the parse list</li>
+<li>for (<a href="#ex2.48">2.48</a>) with code <tt>;~cat_Vg</tt> there is selection of a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1160,7 +1160,7 @@ body {
 <tt>verb_complement(_Tag,';~cat_Vg',Displaced,Sbj_type,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl('-CAT',Displaced,Sbj_type,ing_participle,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.49">2.49</a>) with code <tt>;~cat_Ve</tt> there is selection of a past participle (<i>-en</i>) clause with catenative complement function (<tt>-CAT</tt>) from the parse list</li>
+<li>for (<a href="#ex2.49">2.49</a>) with code <tt>;~cat_Ve</tt> there is selection of a past participle (<i>-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1181,7 +1181,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.50">2.50</a>)&ndash;(<a href="#ex2.55">2.55</a>) establish complements for existential verbs:</p>
 <ul>
-<li>for (<a href="#ex2.50">2.50</a>) with code <tt>;~ex_V</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) which can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>for (<a href="#ex2.50">2.50</a>) with code <tt>;~ex_V</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) which can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
 </ul>
 
 <dl>
@@ -1192,7 +1192,7 @@ body {
 <tt>verb_complement(_Tag,';~ex_V',[np(ICH)],there,active,['NP-ESBJ'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.51">2.51</a>) with code <tt>;~ex_Vp</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) and an adverbial particle; while the adverbial particle has to come from an adverb phrase of the parse list, the noun phrase can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>for (<a href="#ex2.51">2.51</a>) with code <tt>;~ex_Vp</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP</tt>); while the adverbial particle has to come from an adverb phrase of the parse list, the noun phrase can occur (i) with the parse list (the first rule) or (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
 </ul>
 
 <dl>
@@ -1204,7 +1204,7 @@ body {
 <tt>verb_complement(_Tag,';~ex_Vp',[np(ICH)],there,active,['NP-ESBJ'(ICH)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L-L0).</tt><br>
 <ul>
-<li>for (<a href="#ex2.52">2.52</a>) with code <tt>;~ex_Vpr</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) and a preposition phrase; the noun phrase can occur (i) with the parse list before the preposition phrase (the first rule), (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second and fourth rules), or (iii) as all the content of the parse list (the third rule); the preposition phrase can occur (i) with the parse list after the noun phrase (the first rule), (ii) as all the content of the parse list (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced preposition phrase (the third and fourth rules)</li>
+<li>for (<a href="#ex2.52">2.52</a>) with code <tt>;~ex_Vpr</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a preposition phrase (<tt>PP</tt>); the noun phrase can occur (i) with the parse list before the preposition phrase (the first rule), (ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second and fourth rules), or (iii) as all the content of the parse list (the third rule); the preposition phrase can occur (i) with the parse list after the noun phrase (the first rule), (ii) as all the content of the parse list (the second rule), or (iii) as an <tt>ICH</tt> link to a displaced preposition phrase (the third and fourth rules)</li>
 </ul>
 
 <dl>
@@ -1220,7 +1220,7 @@ body {
 <tt>verb_complement(_Tag,';~ex_Vpr',[np(ICH2),pp(ICH1)],there,active,['NP-ESBJ'(ICH2),'PP'(ICH1)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 <ul>
-<li>for (<a href="#ex2.53">2.53</a>) with code <tt>;~ex_cat_Vt</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
+<li>for (<a href="#ex2.53">2.53</a>) with code <tt>;~ex_cat_Vt</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
 </ul>
 
 <dl>
@@ -1230,7 +1230,7 @@ body {
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',L-L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-CAT',Displaced,filled_subject,L1-L0).</tt><br>
 <ul>
-<li>for (<a href="#ex2.54">2.54</a>) with code <tt>;~ex_cat_Vg</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
+<li>for (<a href="#ex2.54">2.54</a>) with code <tt>;~ex_cat_Vg</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
 </ul>
 
 <dl>
@@ -1240,7 +1240,7 @@ body {
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',L-L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl('-CAT',Displaced,filled_subject,ing_participle,L1-L0).</tt><br>
 <ul>
-<li>for (<a href="#ex2.55">2.55</a>) with code <tt>;~ex_cat_Ve</tt> there is selection of a noun phrase with existential subject function (<tt>-ESBJ</tt>) and a past participle (<i>-en</i>) clause with catenative complement function (<tt>-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
+<li>for (<a href="#ex2.55">2.55</a>) with code <tt>;~ex_cat_Ve</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a passive participle (<i>-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>), both of which are from the parse list, the noun phrase occurring first</li>
 </ul>
 
 <dl>
@@ -1254,7 +1254,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rules of (<a href="#ex2.56">2.56</a>)&ndash;(<a href="#ex2.59">2.59</a>) establish complements for equative verbs:</p>
 <ul>
-<li>for (<a href="#ex2.56">2.56</a>) with code <tt>;~equ_Vf</tt> there is selection of a <i>that</i>-clause with subject predicative function (<tt>-PRD2</tt>) from the parse list</li>
+<li>for (<a href="#ex2.56">2.56</a>) with code <tt>;~equ_Vf</tt> there is selection of a <i>that</i>-clause with subject predicative function (<tt>CP-THT-PRD2</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1263,7 +1263,7 @@ body {
 <tt>verb_complement(_Tag,';~equ_Vf',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-PRD2',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.57">2.57</a>) with code <tt>;~equ_Vw</tt> there is selection of an embedded question clause with subject predicative function (<tt>-PRD2</tt>) from the parse list</li>
+<li>for (<a href="#ex2.57">2.57</a>) with code <tt>;~equ_Vw</tt> there is selection of an embedded question clause with subject predicative function (<tt>CP-QUE-PRD2</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1272,7 +1272,7 @@ body {
 <tt>verb_complement(_Tag,';~equ_Vw',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_que('-PRD2',Displaced,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.58">2.58</a>) with code <tt>;~equ_Vt</tt> there is selection of a <i>to</i>-infinitive clause with subject predicative function (<tt>-PRD2</tt>) from the parse list</li>
+<li>for (<a href="#ex2.58">2.58</a>) with code <tt>;~equ_Vt</tt> there is selection of a <i>to</i>-infinitive clause with subject predicative function (<tt>IP-INF-PRD2</tt>) from the parse list</li>
 </ul>
 
 <dl>
@@ -1281,7 +1281,7 @@ body {
 <tt>verb_complement(_Tag,';~equ_Vt',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-PRD2',[],_Sbj_type,L).</tt><br>
 <ul>
-<li>for (<a href="#ex2.59">2.59</a>) with code <tt>;~equ_Vg</tt> there is selection of a present participle (<i>-ing</i>) clause with subject predicative function (<tt>-PRD2</tt>) from the parse list</li>
+<li>for (<a href="#ex2.59">2.59</a>) with code <tt>;~equ_Vg</tt> there is selection of a present participle (<i>-ing</i>) clause with subject predicative function (<tt>IP-PPL-PRD2</tt>) from the parse list</li>
 </ul>
 
 <dl>
