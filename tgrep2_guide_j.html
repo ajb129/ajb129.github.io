@@ -50,7 +50,7 @@ TGrep2は統語ツリーを検索するためのツールである。 このガ�
 <p align="justify">ツリー中のノードとのマッチは、次のように行われる：</p>
 <ul>
 <li>2つのアンダースコア（<tt>__</tt>）はワイルドカードであり、任意のノードにマッチする。</li>
-<li><tt>IP-ADV</tt>、 <tt>NP</tt>、 <tt>ADV</TT>、 <tt>Taro</tt>、 等の単純な文字列は、ノードとの完全一致に用いられる。</li>
+<li><tt>IP-ADV</tt>、 <tt>NP</tt>、 <tt>ADV</tt>、 <tt>Taro</tt>、 等の単純な文字列は、ノードとの完全一致に用いられる。</li>
 <li>単純な文字列をパイプ（<tt>|</tt>）で区切ってリスト化したパターンは、リストの構成要素のいずれかがノードに完全一致することを表す。 例えば、 <tt>NP|PP</tt>は、 <tt>NP</tt>または<tt>PP</tt>に完全一致する。</li>
 <li>正規表現は <tt>&sol;^NP&#92;b&sol;</tt>のようにスラッシュで囲む。 これにより完全一致ではないノードとのマッチを表現することができる。 TGrep2の正規表現は、Unixにおける「拡張正規表現（extended regular expressions）」と呼ばれるものに相当する。</li>
 <li>単純な文字列または正規表現の前に<tt>!</tt>を置くと、補集合の意味、 つまり、「マッチする」が「マッチしない」になる。 例えば、<tt>!VB</tt>は、<tt>VB</tt>でないすべてのノードにマッチし、 <tt>!&sol;^I&sol;</tt>は、<tt>I</tt>で始まらないすべてのノードにマッチする。</li>
@@ -88,7 +88,7 @@ TGrep2は統語ツリーを検索するためのツールである。 このガ�
 </dl>
 <tt>&sol;^[NP]P$&sol;</tt><br>
 
-<p align="justify">正規表現における<tt>&#92;b</tt>は、境界文字を表す。 つまり、 (<a href="#ex5">5</a>)は<tt>NP</TT>と<tt>NP-PRD</tt>にマッチするが、<tt>NPR</tt>にはマッチしない。</p>
+<p align="justify">正規表現における<tt>&#92;b</tt>は、境界文字を表す。 つまり、 (<a href="#ex5">5</a>)は<tt>NP</tt>と<tt>NP-PRD</tt>にマッチするが、<tt>NPR</tt>にはマッチしない。</p>
 
 <dl>
   <dt>(<a name="ex5">5</a>)</dt><dd></dd>
@@ -153,7 +153,7 @@ TGrep2は統語ツリーを検索するためのツールである。 このガ�
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&lsquo;<tt>^</tt>&rsquo;はノードの先頭にマッチする。 &lsquo;<tt>&dollar;</tt>&rsquo;はノードの末尾にマッチする。</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>REP</tt>とは、直前の正規表現<tt>e2</tt>の繰り返しである。 0回以上（<tt>*</tt>）、 1回以上の例（<tt>+</tt>）、 0回または1回（<tt>?</tt>）、 <i>n</i>回（tt&gt;{n}</tt>）、 <i>n</i>回以上（<tt>{n,}</tt>）、 <i>n</i>回以上<i>m</i>回以下（<tt>{n,m}</tt>）がある。</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>REP</tt>とは、直前の正規表現<tt>e2</tt>の繰り返しである。 0回以上（<tt>*</tt>）、 1回以上の例（<tt>+</tt>）、 0回または1回（<tt>?</tt>）、 <i>n</i>回（<tt>{n}</tt>）、 <i>n</i>回以上（<tt>{n,}</tt>）、 <i>n</i>回以上<i>m</i>回以下（<tt>{n,m}</tt>）がある。</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;正規表現の連結<tt>e1e2</tt>は、<tt>e2</tt>に先行する<tt>e1</tt>にマッチする。</p>
 
