@@ -1093,20 +1093,20 @@ TGrep2は統語ツリーを検索するためのツールである。 このガ�
 </svg>
 
 <dl>
-  <dt>(<a name="ex38">38</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;that)))</tt><br></dd>
+  <dt>(<a name="ex38">38</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;&sol;that&sol;)))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="search" value="/^NP\b/ < /^N\b/ < (/^CP-THT\b/ < (/^IP-SUB\b/ < (/^C\b/ < that)))"/>
+  <input type="hidden" name="search" value="/^NP\b/ < /^N\b/ < (/^CP-THT\b/ < (/^IP-SUB\b/ < (/^C\b/ < /that/)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
 <dl>
-  <dt>(<a name="ex39">39</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;=n)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;=y)&nbsp;:</tt><br> <tt>(=y&nbsp;&lt;&nbsp;&sol;&#94;IP-SUB&#92;b&sol;=i)&nbsp;:&nbsp;(=i&nbsp;&lt;&nbsp;&sol;&#94;C&#92;b&sol;=c)&nbsp;:&nbsp;(=c&nbsp;&lt;&nbsp;that)</tt><br></dd>
+  <dt>(<a name="ex39">39</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;N&#92;b&sol;=n)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;&sol;&#94;CP-THT&#92;b&sol;=y)&nbsp;:</tt><br> <tt>(=y&nbsp;&lt;&nbsp;&sol;&#94;IP-SUB&#92;b&sol;=i)&nbsp;:&nbsp;(=i&nbsp;&lt;&nbsp;&sol;&#94;C&#92;b&sol;=c)&nbsp;:&nbsp;(=c&nbsp;&lt;&nbsp;&sol;that&sol;)</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="search" value="/^NP\b/=x : (=x < /^N\b/=n) : (=x < /^CP-THT\b/=y) : (=y < /^IP-SUB\b/=i) : (=i < /^C\b/=c) : (=c < that)"/>
+  <input type="hidden" name="search" value="/^NP\b/=x : (=x < /^N\b/=n) : (=x < /^CP-THT\b/=y) : (=y < /^IP-SUB\b/=i) : (=i < /^C\b/=c) : (=c < /that/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Try</button>
 </form>
 
