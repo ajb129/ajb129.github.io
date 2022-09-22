@@ -1028,7 +1028,9 @@
 </form>
 
 
-<h2>The overlap between adjectives and the past participle form of verbs</h2>
+<h2>The overlap between the past participle form of verbs and adjectives</h2>
+
+<p align="justify">A case where <i>broken</i> is unambiguously a verb with past participle form:</p>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1037,6 +1039,8 @@
 </form>
 
 
+<p align="justify">A case where <i>worried</i> is unambiguously an adjective:</p>
+
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
@@ -1044,16 +1048,18 @@
 </form>
 
 
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
-  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
-  <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="They_PRO were_BED;~La married_ADJ ._PU"/>
-</form>
+<p align="justify">A case where <i>married</i> is ambiguous: It could be a verb with past participle form, or it could be an adjective.</p>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
   <input type="text" name="DATA" size="110" spellcheck="false" value="They_PRO were_BED;~cat_Ve married_VVN;~Tn ._PU"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They_PRO were_BED;~La married_ADJ ._PU"/>
 </form>
 
 
@@ -1129,21 +1135,6 @@
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
   <input type="text" name="DATA" size="110" spellcheck="false" value="There_EX might_MD have_HV;~cat_Ve been_BEN;~ex_V a_D tiger_N being_BAG;~cat_Ve caught_VVN;~Tn ._PU"/>
-</form>
-
-
-<h2>Examples with provisional <i>it</i></h2>
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
-  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
-  <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="It_PRO;_pvl_ is_BED;~I raining_VAG;~I ._PU"/>
-</form>
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
-  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
-  <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="It_PRO;_pvl_ is_BED;~La likely_ADJ to_TO rain_VB;~I ._PU"/>
 </form>
 
 
