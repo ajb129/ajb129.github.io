@@ -77,13 +77,15 @@ body {
 
 <p align="justify">The action of PARSING amounts to:</p>
 <ul>
-<li>pealing back layers to reach internal elements, and then</li>
-<li>placing everything back together again.</li>
+<li>pealing back layers to reach internal elements</li>
+<li>placing everything back together again</li>
 </ul>
 
 <p align="justify">An innermost element is either the head word of a phrase layer or the verb of a clause layer.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;While placing things back together again, we can add labels called annotations to keep track of what was uncovered when we pealed back the layers. Subsequently, these labels act as handles for accessing the structural analysis revealed by parsing. The structural analysis and labelling of this book follows the annotation scheme of the Treebank Semantics Parsed Corpus (TSPC; Butler 2022). The TSPC is a corpus of English for general use with hand worked tree analysis for approaching half-a-million words.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;While placing things back together again, we can add labels called annotations to keep track of what was uncovered when we pealed back the layers. Subsequently, these labels act as handles for accessing the structural analysis revealed by parsing.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The structural analysis and labelling of this book follows the annotation scheme of the Treebank Semantics Parsed Corpus (TSPC; Butler 2022). The TSPC is a corpus of English for general use with hand worked tree analysis for approaching half-a-million words.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Furthering the onion analogy, the kind of layering seen in Figure <a href="#fig1.2">1.2</a> occurs when there is coordination, with each conjunct having to conform to whatever is possible at the same particular layer.</p>
 
@@ -6806,7 +6808,7 @@ body {
 
 <p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb that is marked with an existential verb code by setting the <tt>Sbj_type</tt> parameter of the clause to have <tt>there</tt> as its value. The existential verb licensed by this <tt>Sbj_type</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt>, or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt>, or <tt>;~ex_cat_Ve</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;ex_V</tt>, consider (<a href="#ex4.42">4.42</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="#ex4.42">4.42</a>).</p>
 
 <dl>
   <dt>(<a name="ex4.42">4.42</a>)</dt><dd></dd>
@@ -7224,7 +7226,7 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there</tt> value to having a <tt>filled_subject</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="#ex4.46">4.46</a>), with its existential verb that has code <tt>;ex_cat_Vg</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there</tt> value to having a <tt>filled_subject</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="#ex4.46">4.46</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
 
 <dl>
   <dt>(<a name="ex4.46">4.46</a>)</dt><dd></dd>
