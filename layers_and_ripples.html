@@ -2458,7 +2458,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NML&nbsp;=..&nbsp;['NML',NP|L1]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that conjunction is possible at the top level of genitive noun phrase structure. This is captured by <tt>determiner_layer</tt> having a recursive rule for picking up conjuncts, with conjuncts subsequent to the first gathered by calls to <tt>noun_phrase_genm_tail</tt> of (<a href="#ex3.21">3.21</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that conjunction is possible at the top level of genitive noun phrase structure. This is captured by <tt>determiner_layer</tt> having a recursive rule for picking up conjuncts, with conjuncts after the first gathered by calls to <tt>noun_phrase_genm_tail</tt> of (<a href="#ex3.21">3.21</a>).</p>
 
 <dl>
   <dt>(<a name="ex3.21">3.21</a>)</dt><dd></dd>
@@ -2624,10 +2624,13 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;ADVP&nbsp;=..&nbsp;['ADVP'|ADVPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="#ex3.25">3.25</a>) can be recursive allowing the parse to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.25">3.25</a>) establish the head word as a word found with calls of either <tt>adv</tt> (the first rule) or <tt>adv_catenative</tt> (the second rule). See section <a href="#sec2.6">2.6</a> for the <tt>adv</tt> and <tt>adv_catenative</tt> word rules. Finding the head word with <tt>adv_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="#ex3.25">3.25</a>) can also be recursive allowing the parse to either:</p>
 <ul>
-<li>pick up pre-head modifier adverb phrases</li>
-<li>start a conjunction structure where all conjuncts are added with <tt>adverb_phrase</tt> with conjuncts subsequent to the first gathered by calls to <tt>adverb_phrase_tail</tt> of (<a href="#ex3.26">3.26</a>)</li>
+<li>(the thrid rule) pick up pre-head modifier adverb phrases</li>
+<li>(the fourth rule) pick up post-head modifier preposition phrases</li>
+<li>(the fifth rule) start a conjunction structure where all conjuncts are added with <tt>adverb_phrase</tt> with conjuncts after the first gathered by calls to <tt>adverb_phrase_tail</tt> of (<a href="#ex3.26">3.26</a>)</li>
 </ul>
 
 <dl>
@@ -2662,8 +2665,6 @@ body {
 <tt>&nbsp;&nbsp;adverb_phrase([ADVP]-[]),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase_tail(L-L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.25">3.25</a>) establish the head word as a word found with calls of either <tt>adv</tt> or <tt>adv_catenative</tt>, both from section <a href="#sec2.6">2.6</a>. Finding the head word with <tt>adv_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
-
 <br>
 <h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
 
@@ -2679,11 +2680,13 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;ADJP&nbsp;=..&nbsp;[Label|ADJPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="#ex3.28">3.28</a>) can be recursive allowing the parse to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.28">3.28</a>) establish the head word as a word found with calls of either <tt>adj</tt> (the first rule) or <tt>adj_catenative</tt> (the second rule). See section <a href="#sec2.7">2.7</a> for the <tt>adj</tt> and <tt>adj_catenative</tt> word rules. Finding the head word with <tt>adj_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="#ex3.28">3.28</a>) can also be recursive allowing the parse to either:</p>
 <ul>
-<li>pick up pre-head modifier adverb phrases</li>
-<li>pick up post-head modifier preposition phrases</li>
-<li>start a conjunction structure where all conjuncts are added with <tt>adjective_phrase</tt> with conjuncts subsequent to the first gathered by calls to <tt>adjective_phrase_tail</tt> of (<a href="#ex3.29">3.29</a>)</li>
+<li>(the third rule) pick up pre-head modifier adverb phrases</li>
+<li>(the fourth rule) pick up post-head modifier preposition phrases</li>
+<li>(the fifth rule) start a conjunction structure where all conjuncts are added with <tt>adjective_phrase</tt> with conjuncts after the first gathered by calls to <tt>adjective_phrase_tail</tt> of (<a href="#ex3.29">3.29</a>)</li>
 </dl>
 
 <dl>
@@ -2717,8 +2720,6 @@ body {
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('',[ADJP]-[]),</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase_tail(L-L0).</tt><br>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.28">3.28</a>) establish the head word as a word found with calls of either <tt>adj</tt> or <tt>adj_catenative</tt>, both from section <a href="#sec2.7">2.7</a>. Finding the head word with <tt>adj_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with adjective phrases, consider (<a href="#ex3.30">3.30</a>). The parse list gives overall content for a noun phrase, while containing two adjective word instances: <tt>'ADJ'('important')</tt> and <tt>'ADJ'('difficult')</tt>. Each adjective word will require its own adjective phrase projection, which is seen in the result of (<a href="#ex3.30">3.30</a>) with its two adjective phrase structures, the first of which has an adverb structure as an internal modifier projected by the adverb word <tt>'ADV'('especially')</tt>.</p>
 
@@ -2953,7 +2954,7 @@ body {
 <tt>&nbsp;&nbsp;role(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',L1-L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. This is captured by <tt>preposition_phrase</tt> of (<a href="#ex3.32">3.32</a>) having a recursive rule for picking up conjuncts, with conjuncts subsequent to the first gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="#ex3.34">3.34</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. This is captured by <tt>preposition_phrase</tt> of (<a href="#ex3.32">3.32</a>) having a recursive rule for picking up conjuncts, with conjuncts after the first gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="#ex3.34">3.34</a>).</p>
 
 <dl>
   <dt>(<a name="ex3.34">3.34</a>)</dt><dd></dd>
@@ -2966,7 +2967,7 @@ body {
 <tt>&nbsp;&nbsp;preposition_phrase('',[PP]-[]),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase_tail(L-L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with preposition phrases, consider (<a href="#ex3.35">3.35</a>). The parse list gives overall content for a noun phrase, while containing three preposition word instances: <tt>'P-ROLE'('of')</tt>, <tt>'P-ROLE'('from')</tt>, and another <tt>'P-ROLE'('of')</tt>. Each preposition word will introduce a preposition phrase, so we should expect parse results with three contained preposition phrases. We can see there are five distinct structures returned in the results of (<a href="#ex3.35">3.35</a>). Of these, it is only the third structure where all attachments are semantically valid.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with preposition phrases, consider (<a href="#ex3.35">3.35</a>). The parse list gives overall content for a noun phrase, while containing three preposition word instances: <tt>'P-ROLE'('of')</tt>, <tt>'P-ROLE'('from')</tt>, and another <tt>'P-ROLE'('of')</tt>. Each preposition word will introduce a preposition phrase, so we should expect parse results with three contained preposition phrases.</p>
 
 <dl>
   <dt>(<a name="ex3.35">3.35</a>)</dt><dd></dd>
@@ -3047,7 +3048,9 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Example (<a href="#ex3.35">3.35</a>) is revealing of attachment ambiguity. There is further parsing variation in regards to how the parsing rules are applied. For example, there are different ways to derive the valid third structure of (<a href="#ex3.35">3.35</a>), e.g., from the call structure of (<a href="#ex3.36">3.36</a>) or the call structure of (<a href="#ex3.37">3.37</a>).</p>
+<p align="justify">We can see that attachment ambiguity leads to five distinct structures returned in the results of (<a href="#ex3.35">3.35</a>). Of these, it is only the third structure where all attachments are found to make semantic sense, but the rules we have are not sensitive to this.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the attachment ambiguity revealed in the results of (<a href="#ex3.35">3.35</a>), there is further parsing variation unseen in the results in regards to how the parsing rules are applied. For example, there are different ways to derive the semantically valid third structure of (<a href="#ex3.35">3.35</a>), e.g., from the call structure of (<a href="#ex3.36">3.36</a>) or the call structure of (<a href="#ex3.37">3.37</a>).</p>
 
 <dl>
   <dt>(<a name="ex3.36">3.36</a>)</dt><dd></dd>
@@ -4019,7 +4022,7 @@ body {
 <ul>
 <li>clause initial or clause final adverbials (the fifth and sixth rules)</li>
 <li>clause initial noun phrases or preposition phrases that are displaced items (the seventh and eighth rules)</li>
-<li>conjuncts of coordinate structure, with conjuncts subsequent to the first gathered by calls to <tt>clause_top_tail</tt> of (<a href="#ex4.2">4.2</a>) (the nineth rules)</li>
+<li>conjuncts of coordinate structure, with conjuncts after the first gathered by calls to <tt>clause_top_tail</tt> of (<a href="#ex4.2">4.2</a>) (the nineth rules)</li>
 </ul>
 
 <p align="justify">Adverbials for (iii) are picked up with <tt>adverbial</tt> calls (from section <a href="#sec5.5">5.5</a>) that find either adverb phrases or the subordinate component of subordinate conjunctions. Displaced noun phrases and preposition phrases picked up with (iv) receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item for a <tt>verb_complement</tt> call from section <a href="#sec2.8.2">2.8.2</a>.</p>
@@ -4107,7 +4110,7 @@ body {
 <ul>
 <li>(the second rule) pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="#sec3.3">3.3</a>)</li>
 <li>(the third rule) pick up clause final adverbials with a call to <tt>adverbial</tt> (from section <a href="#sec5.5">5.5</a>)</li>
-<li>(the fourth rule) start a conjunction structure with conjuncts subsequent to the first gathered by calls to <tt>verb_phrase_tail</tt> of (<a href="#ex4.4">4.4</a>)</li>
+<li>(the fourth rule) start a conjunction structure with conjuncts after the first gathered by calls to <tt>verb_phrase_tail</tt> of (<a href="#ex4.4">4.4</a>)</li>
 </ul>
 
 <dl>
@@ -5288,7 +5291,7 @@ body {
 <ul>
 <li>(the second rule) pick up an initial instance of a connective particle (which is always <tt>for</tt>) followed by content for a noun phrase that is given subject function; note that this rule can only occur when the <tt>Sbj_type</tt> parameter is unifiable to the <tt>unfilled_subject</tt> value, and that the value passed on for the <tt>Sbj_type</tt> parameter is <tt>filled_subject</tt></li>
 <li>(the third rule) pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="#sec3.3">3.3</a>)</li>
-<li>(the fourth rule) start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with conjuncts subsequent to the first gathered by calls to <tt>to_inf_tail</tt> of (<a href="#ex4.23">4.23</a>)</li>
+<li>(the fourth rule) start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with conjuncts after the first gathered by calls to <tt>to_inf_tail</tt> of (<a href="#ex4.23">4.23</a>)</li>
 </ul>
 
 <dl>
@@ -6025,7 +6028,7 @@ body {
 
 <p align="justify">So far we have only been able to integrate a call of either <tt>operator_layer</tt> (from section <a href="#sec4.3.1">4.3.1</a>) or <tt>finite_have_be_or_mod_cat_layer</tt> (from section <a href="#sec4.3.2">4.3.2</a>) with matrix interrogatives, but the contributions of these layers can also occur with statement word ordering. Statement word order necessitates integration after the clause subject will have been picked up from the parse list with <tt>subject</tt> of section <a href="#sec2.5">2.5</a>. This alternative word ordering is accomplished by a non-recursive call of <tt>clause_top_layer</tt> (the second rule of (<a href="#ex4.1">4.1</a>)) that first finds the subject and then goes on to call <tt>clause_middle_layer</tt> of (<a href="#ex4.34">4.34</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the non-recursive rules of (<a href="#ex4.34">4.34</a>) that will integrate either <tt>operator_layer</tt> or <tt>finite_have_be_or_mod_cat_layer</tt>, there are also recursive rules allowing initial adverb phrases (the third rule) and coordination at this middle clause level (the fourth rule) with conjuncts subsequent to the first gathered with recursive calls to <tt>clause_middle_tail</tt> of (<a href="#ex4.35">4.35</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the non-recursive rules of (<a href="#ex4.34">4.34</a>) that will integrate either <tt>operator_layer</tt> or <tt>finite_have_be_or_mod_cat_layer</tt>, there are also recursive rules allowing initial adverb phrases (the third rule) and coordination at this middle clause level (the fourth rule) with conjuncts after the first gathered with recursive calls to <tt>clause_middle_tail</tt> of (<a href="#ex4.35">4.35</a>).</p>
 
 <dl>
   <dt>(<a name="ex4.34">4.34</a>)</dt><dd></dd>
