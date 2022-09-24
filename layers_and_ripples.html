@@ -35,7 +35,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Once a word occurs, ripple effects start that connect following words to form an utterance. Ripple effects place constraints on what following words might be and how they can be used. We can model ripple effects by supposing that words appear under layers that build up a connected tree structure for all the content of a single sentence. Parsing language is the activity of identifying layers of structure while obeying the consequences of ripple effects.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The book provides Definite Clause Grammar (DCG) definitions that are executable code for the XSB Tabling Prolog system. These definitions create an automatic parsing system with a wide coverage of English. The system gives feedback about the acceptability and also use of the English that we try to parse.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The book provides Definite Clause Grammar (DCG) definitions that are executable code for the XSB Tabling Prolog system. These definitions create an automatic parsing system with a wide coverage of contemporary English. The system gives feedback about the acceptability and also use of the English that we try to parse.</p>
 
 <br>
 <h3><a name="toc">Table of contents</a></h3>
@@ -45,6 +45,7 @@ body {
 <li><a href="#ch3">Chapter 3</a> Phrase layers</li>
 <li><a href="#ch4">Chapter 4</a> Clause layers</li>
 <li><a href="#ch5">Chapter 5</a> Clause subordination</li>
+<li><a href="#ch6">Chapter 6</a> Closing remarks</li>
 <li><a href="#references">References</a></li>
 <li><a href="landr_examples.html" target=\"_blank\">Example sentences</a></li>
 <li><a href="https://github.com/ajb129/layers_and_ripples" target=\"_blank\">Download the Prolog code</a></li>
@@ -379,7 +380,9 @@ body {
 <br>
 <h2><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter catalogs all of the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular WORD CLASS. Also some words, notably verbs, take a grammatical code that is additional to their word class information. As seen in the queries of section <a href="#sec1.4">1.4</a>, we capture the parse consequences for a word by having it as an item in a parse list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)&sol;word pairing in a parse list.</p>
+<p align="justify">This chapter catalogs all of the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular WORD CLASS. Also some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="#sec1.4">1.4</a>, we capture the parse consequences for a word by having it as an item in a parse list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)&sol;word pairing in a parse list.</p>
 
 <br>
 <h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;Noun words</h2>
@@ -847,9 +850,9 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.25">2.25</a>) with code <tt>;~Ipr</tt> there is selection of content for a preposition phrase (<tt>PP</tt>) which can occur:</p>
 <ul>
-<li>as content from the parse list (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase together with a preposition in the parse list to take the displaced noun phrase as its complement (the second rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced preposition phrase together with an empty parse list (the third rule).</li>
+<li>(the first rule) as content from the parse list</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase together with a preposition in the parse list to take the displaced noun phrase as its complement</li>
+<li>(the third rule) as an <tt>ICH</tt> link to a displaced preposition phrase together with an empty parse list</li>
 </ul>
 
 <dl>
@@ -877,8 +880,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.27">2.27</a>) with code <tt>;~Tn</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) which can occur:</p>
 <ul>
-<li>as content from the parse list (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) as content from the parse list</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.27">2.27</a>) with code <tt>;~Tn</tt> and passive voice there are no selected complement elements and so the parse list should be empty (the third rule).</p>
@@ -896,9 +899,9 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.28">2.28</a>) with code <tt>;~Tn.p</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP</tt>). While the adverbial particle has to come from an adverb phrase of the parse list, the object noun phrase can occur:</p>
 <dl>
-<li>as content from the parse list that is before the content for the adverb phrase (the first rule)</li>
-<li>as content from the parse list that is after the content for the adverb phrase (the second rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the third rule)</li>
+<li>(the first rule) as content from the parse list that is before the content for the adverb phrase</li>
+<li>(the second rule) as content from the parse list that is after the content for the adverb phrase</li>
+<li>(the third rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.28">2.28</a>) with code <tt>;~Tn.p</tt> and passive voice there should only be the adverbial particle as content for an adverb phrase of the parse list (the fourth rule).</p>
@@ -920,8 +923,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.29">2.29</a>) with code <tt>;~Tn.pr</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase (<tt>PP</tt>). The object noun phrase can occur:</p>
 <ul>
-<li>as content from the parse list that is before the content for the preposition phrase (the first and second rules)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the third rule)</li>
+<li>(the first and second rules) as content from the parse list that is before the content for the preposition phrase</li>
+<li>(the third rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <p align="justify">The first and second rules differ in how the complement of the preposition phrase is derived: from the prase list (the first rule) or from an <tt>ICH</tt> link to a displaced noun phrase (the second rule).</p>
@@ -969,8 +972,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.33">2.33</a>) with code <tt>;~Tnt</tt> and active voice there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>). While content for the <i>to</i>-infinitive clause has to come from the parse list, the derived object noun phrase can occur:</p>
 <ul>
-<li>as content from the parse list before the content of the <i>to</i>-infinitive clause (the first rule)</li>
-<li>(ii) as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) as content from the parse list before the content of the <i>to</i>-infinitive clause</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.33">2.33</a>) with code <tt>;~Tnt</tt> and passive voice there should only be the content for the <i>to</i>-infinitive clause from the parse list (the third rule).</p>
@@ -991,8 +994,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.34">2.34</a>) with code <tt>;~Tni</tt> there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a bare infinitive clause with object function (<tt>IP-INF-OB1</tt>). While the content for the bare infinitive clause has to come from the parse list, the derived object noun phrase can occur:</p>
 <ul>
-<li>as content from the parse list that is before the content for the bare infinitive clause (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) as content from the parse list that is before the content for the bare infinitive clause</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <dl>
@@ -1021,8 +1024,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.36">2.36</a>) with code <tt>;~Tng</tt> and active voice there is selection of a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). While the content for the present participle (<i>-ing</i>) clause has to come from the parse list, the derived object noun phrase can occur:</p>
 <ul>
-<li>as content from the parse list that is before the content for the present participle (<i>-ing</i>) clause (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) as content from the parse list that is before the content for the present participle (<i>-ing</i>) clause</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.36">2.36</a>) with code <tt>;~Tng</tt> and passive voice there should only be the present participle (<i>-ing</i>) clause from the parse list (the third rule).</p>
@@ -1261,8 +1264,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.50">2.50</a>) with code <tt>;~ex_V</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) which can occur:</p>
 <ul>
-<li>with the parse list (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) with the parse list</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <dl>
@@ -1275,8 +1278,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.51">2.51</a>) with code <tt>;~ex_Vp</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP</tt>); while the adverbial particle has to come from an adverb phrase of the parse list, the noun phrase can occur:</p>
 <ul>
-<li>with the parse list (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second rule)</li>
+<li>(the first rule) with the parse list</li>
+<li>(the second rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
 <dl>
@@ -1290,16 +1293,16 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.52">2.52</a>) with code <tt>;~ex_Vpr</tt> there is selection of a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a preposition phrase (<tt>PP</tt>). The noun phrase can occur:</p>
 <ul>
-<li>with the parse list before the preposition phrase (the first rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced noun phrase (the second and fourth rules)</li>
-<li>as all the content of the parse list (the third rule)</li>
+<li>(the first rule) with the parse list before the preposition phrase</li>
+<li>(the second and fourth rules) as an <tt>ICH</tt> link to a displaced noun phrase</li>
+<li>(the third rule) as all the content of the parse list</li>
 </ul>
 
 <p align="justify">The preposition phrase can occur:</p>
 <ul>
-<li>with the parse list after the noun phrase (the first rule)</li>
-<li>as all the content of the parse list (the second rule)</li>
-<li>as an <tt>ICH</tt> link to a displaced preposition phrase (the third and fourth rules)</li>
+<li>(the first rule) with the parse list after the noun phrase</li>
+<li>(the second rule) as all the content of the parse list</li>
+<li>(the third and fourth rules) as an <tt>ICH</tt> link to a displaced preposition phrase</li>
 </ul>
 
 <dl>
@@ -1462,7 +1465,12 @@ body {
 
 <p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation is placed as high as possible. For example, a full stop that ends a sentence is treated as the last constituent of the highest clause layer (<tt>IP</tt>&sol;<tt>CP</tt>&sol;<tt>FRAG</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="#ex2.63">2.63</a>) give support for the integration of punctuation, with an initial parameter to distinguish types: <tt>final_question</tt>, <tt>final</tt>, and <tt>non_final</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="#ex2.63">2.63</a>) give support for the integration of punctuation, with an initial parameter to distinguish types:</p>
+<ul>
+<li><tt>final_question</tt></li>
+<li><tt>final</tt></li>
+<li><tt>non_final</tt></li>
+</ul>
 
 <dl>
   <dt>(<a name="ex2.63">2.63</a>)</dt><dd></dd>
@@ -1796,10 +1804,10 @@ body {
 <tt>&nbsp;&nbsp;noun(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_layer(L1-L0).</tt><br>
 <tt>internal_np_lower_layer([NML|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL-[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_tail(L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NML&nbsp;=..&nbsp;['NML',NP|L1]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
@@ -1808,16 +1816,16 @@ body {
 </dl>
 <tt>internal_np_lower_tail(['CONJP'(CONJ,NP)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
-<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL1]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>internal_np_lower_tail([PU,'CONJP'(NP)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
-<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NPL-[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_tail(L-L0),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL1]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;['NP'|NPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex3.12">3.12</a>) we can see a demonstration of how a parse list containing only a single general noun word gives content for the creation of a resulting noun phrase.</p>
@@ -2687,7 +2695,7 @@ body {
 <li>(the third rule) pick up pre-head modifier adverb phrases</li>
 <li>(the fourth rule) pick up post-head modifier preposition phrases</li>
 <li>(the fifth rule) start a conjunction structure where all conjuncts are added with <tt>adjective_phrase</tt> with conjuncts after the first gathered by calls to <tt>adjective_phrase_tail</tt> of (<a href="#ex3.29">3.29</a>)</li>
-</dl>
+</ul>
 
 <dl>
   <dt>(<a name="ex3.28">3.28</a>)</dt><dd></dd>
@@ -4012,23 +4020,37 @@ body {
 <br>
 <h2><a name="sec4.2">4.2</a>&nbsp;&nbsp;&nbsp;Basic clause structure</h2>
 
-<p align="justify">The top of a clause is established with the <tt>clause_top_layer</tt> rules of (<a href="#ex4.1">4.1</a>). Non-recursive rules of (<a href="#ex4.1">4.1</a>) all involve the introduction of the clause subject, each by a call to <tt>subject</tt> (from section <a href="#sec2.5">2.5</a>). These non-recursive rules vary on where the subject occurs in the parse list, that is, either:</p>
+<p align="justify">The top of a clause is established with the <tt>clause_top_layer</tt> rules of (<a href="#ex4.2">4.2</a>). Non-recursive rules of (<a href="#ex4.2">4.2</a>) all involve the introduction of the clause subject, each by a call to <tt>subject</tt> (from section <a href="#sec2.5">2.5</a>). These non-recursive rules vary on where the subject occurs in the parse list, that is, either:</p>
 <ul>
-<li>as an initial portion of the parse list, which leaves the clause <tt>Type</tt> parameter unspecified (the first and second rules)</li>
-<li>as a portion of the parse list that occurs immediately after the components of an <tt>operator_layer</tt> or <tt>finite_have_be_or_mod_cat_layer</tt> (see section <a href="#sec4.3">4.3</a>), which requires the clause <tt>Type</tt> parameter set as <tt>matrix_interrogative</tt> (the third and fourth rules)</li>
+<li>(the first and second rules) as an initial portion of the parse list, which leaves the clause <tt>Type</tt> parameter unspecified</li>
+<li>(the third and fourth rules) as a portion of the parse list that occurs immediately after the components of an <tt>operator_layer</tt> or <tt>have_be_or_mod_cat_finite_layer</tt> (see section <a href="#sec4.3">4.3</a>), which requires the clause <tt>Type</tt> parameter set as <tt>matrix_interrogative</tt></li>
 </ul>
 
 <p align="justify">There are also recursive rules to enable:</p>
 <ul>
-<li>clause initial or clause final adverbials (the fifth and sixth rules)</li>
-<li>clause initial noun phrases or preposition phrases that are displaced items (the seventh and eighth rules)</li>
-<li>conjuncts of coordinate structure, with conjuncts after the first gathered by calls to <tt>clause_top_tail</tt> of (<a href="#ex4.2">4.2</a>) (the nineth rules)</li>
+<li>(the fifth rule) clause initial adverbials, possibly followed by punctuation</li>
+<li>(the sixth rule) clause final adverbials, possibly preceded by punctuation</li>
+<li>(the seventh rule) clause initial noun phrases that are displaced items, possibly followed by punctuation</li>
+<li>(the eighth rule) clause initial preposition phrases that are displaced items, possibly followed by punctuation</li>
+<li>(the nineth rule) conjuncts of coordinate structure, with conjuncts after the first gathered by calls to <tt>clause_top_tail</tt> of (<a href="#ex4.3">4.3</a>)</li>
 </ul>
 
-<p align="justify">Adverbials for (iii) are picked up with <tt>adverbial</tt> calls (from section <a href="#sec5.5">5.5</a>) that find either adverb phrases or the subordinate component of subordinate conjunctions. Displaced noun phrases and preposition phrases picked up with (iv) receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item for a <tt>verb_complement</tt> call from section <a href="#sec2.8.2">2.8.2</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The optional punctuation that occurs with the fifth to eighth rules is achieved with (<a href="#ex4.1">4.1</a>).</p>
 
 <dl>
   <dt>(<a name="ex4.1">4.1</a>)</dt><dd></dd>
+</dl>
+<tt>optional_non_final_punc(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,L).</tt><br>
+<tt>optional_non_final_punc(L-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[].</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Adverbials for the fifth and sixth rules are picked up with <tt>adverbial</tt> calls (from section <a href="#sec5.5">5.5</a>) that find either adverb phrases or the subordinate component of subordinate conjunctions.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Displaced noun phrases and preposition phrases for the seventh and eighth rules receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item for a <tt>verb_complement</tt> call from section <a href="#sec2.8.2">2.8.2</a>.</p>
+
+<dl>
+  <dt>(<a name="ex4.2">4.2</a>)</dt><dd></dd>
 </dl>
 <tt>clause_top_layer(_Type,Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;subject(Sbj_type,L-L1),</tt><br>
@@ -4041,28 +4063,32 @@ body {
 <tt>&nbsp;&nbsp;subject(Sbj_type,L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,Sbj_type,infinitive,active,L1-L0).</tt><br>
 <tt>clause_top_layer(matrix_interrogative,Displaced,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;finite_have_be_or_mod_cat_layer(Tag,Code,L-L2),</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_mod_cat_finite_layer(Tag,Code,L-L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(Sbj_type,L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complement(Tag,Code,Displaced,Sbj_type,active,L1-L0).</tt><br>
 <tt>clause_top_layer(Type,Displaced,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverbial(L-L1),</tt><br>
+<tt>&nbsp;&nbsp;adverbial(L-L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_non_final_punc(L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,L1-L0).</tt><br>
 <tt>clause_top_layer(Type,Displaced,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,L-L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_non_final_punc(L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;adverbial(L1-L0).</tt><br>
 <tt>clause_top_layer(Type,Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase(Index,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase(Index,L-L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_non_final_punc(L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,[np(ICH)|Displaced],L1-L0).</tt><br>
 <tt>clause_top_layer(Type,Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;preposition_phrase(Index,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase(Index,L-L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_non_final_punc(L2-L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,[pp(ICH)|Displaced],L1-L0).</tt><br>
 <tt>clause_top_layer(Type,Displaced,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,IMLL1-[]),</tt><br>
@@ -4073,7 +4099,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex4.2">4.2</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.3">4.3</a>)</dt><dd></dd>
 </dl>
 <tt>clause_top_tail(Type,Displaced,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -4089,7 +4115,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IMLL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of <tt>clause_top_tail</tt> calls <tt>verb_phrase_layer</tt> of (<a href="#ex4.3">4.3</a>). This subsequent rule layer is needed to ensure there is a place for introducing inflection and voice information before the verb and its complements are encountered with a non-recursive call to <tt>verb_with_complement</tt> (from section <a href="#sec2.8">2.8</a>). For example, the first rule of <tt>clause_top_tail</tt> gives the default values of <tt>finite</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of <tt>clause_top_tail</tt> calls <tt>verb_phrase_layer</tt> of (<a href="#ex4.4">4.4</a>). This subsequent rule layer is needed to ensure there is a place for introducing inflection and voice information before the verb and its complements are encountered with a non-recursive call to <tt>verb_with_complement</tt> (from section <a href="#sec2.8">2.8</a>). For example, the first rule of <tt>clause_top_tail</tt> gives the default values of <tt>finite</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The full range of options for the <tt>Infl</tt> parameter are:</p>
 <ul>
@@ -4110,11 +4136,11 @@ body {
 <ul>
 <li>(the second rule) pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="#sec3.3">3.3</a>)</li>
 <li>(the third rule) pick up clause final adverbials with a call to <tt>adverbial</tt> (from section <a href="#sec5.5">5.5</a>)</li>
-<li>(the fourth rule) start a conjunction structure with conjuncts after the first gathered by calls to <tt>verb_phrase_tail</tt> of (<a href="#ex4.4">4.4</a>)</li>
+<li>(the fourth rule) start a conjunction structure with conjuncts after the first gathered by calls to <tt>verb_phrase_tail</tt> of (<a href="#ex4.5">4.5</a>)</li>
 </ul>
 
 <dl>
-  <dt>(<a name="ex4.3">4.3</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.4">4.4</a>)</dt><dd></dd>
 </dl>
 <tt>verb_phrase_layer(Displaced,Sbj_type,Infl,Voice,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_with_complement(Displaced,Sbj_type,Infl,Voice,L).</tt><br>
@@ -4133,7 +4159,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex4.4">4.4</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.5">4.5</a>)</dt><dd></dd>
 </dl>
 <tt>verb_phrase_tail(Displaced,Sbj_type,Infl,Voice,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -4149,10 +4175,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IMLL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex4.5">4.5</a>) we can see a demonstration of how a parse list can contain content for the creation of a top layer for a resulting clause, which is placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex4.6">4.6</a>) we can see a demonstration of how a parse list can contain content for the creation of a top layer for a resulting clause, which is placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
 
 <dl>
-  <dt>(<a name="ex4.5">4.5</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.6">4.6</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['N'('Cheese'),'N'('pizza'),'VBP;~I'('smells')]),</tt><br>
 <tt>parse(clause_top_layer(statement,[])).</tt><br>
@@ -4163,10 +4189,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">The result returned in (<a href="#ex4.5">4.5</a>) shows how <tt>Cheese</tt> has to be parsed as a nominal modifier of <tt>pizza</tt> so that there will be only the one noun phrase for the verb, which as an intransitive verb (<tt>;~I</tt>) selects a subject and no other arguments. Calls to reach the output of (<a href="#ex4.5">4.5</a>) follow (<a href="#ex4.6">4.6</a>). Notably, <tt>verb_complement</tt> succeeds because it receives the empty parse list.</p>
+<p align="justify">The result returned in (<a href="#ex4.6">4.6</a>) shows how <tt>Cheese</tt> has to be parsed as a nominal modifier of <tt>pizza</tt> so that there will be only the one noun phrase for the verb, which as an intransitive verb (<tt>;~I</tt>) selects a subject and no other arguments. Calls to reach the output of (<a href="#ex4.6">4.6</a>) follow (<a href="#ex4.7">4.7</a>). Notably, <tt>verb_complement</tt> succeeds because it receives the empty parse list.</p>
 
 <dl>
-  <dt>(<a name="ex4.6">4.6</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.7">4.7</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -4297,10 +4323,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="#ex4.7">4.7</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="#ex4.8">4.8</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.7">4.7</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.8">4.8</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['N'('Cheese'),'N'('pizza'),'VBP;~Tn'('needs')]),</tt><br>
 <tt>parse(clause_top_layer(statement,[])).</tt><br>
@@ -4312,10 +4338,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">The result returned in (<a href="#ex4.7">4.7</a>) shows how <tt>Cheese</tt> has to be parsed as a noun phrase that is distinct from the noun phrase of <tt>pizza</tt>. This gives two noun phrases for the verb, which as a mono-transitive verb (<tt>;~Tn</tt>) selects both subject and object arguments. Application of a recursive rule of <tt>clause_top_layer</tt> allows the first noun phrase to be treated as a displaced noun phrase. Then, with a non-recursive call of <tt>clause_top_layer</tt>, the second noun phrase can be parsed as the subject noun phrase for the clause. When the complements of the verb are determined with <tt>verb_with_complement</tt>, the displaced noun phrase inherited by the calculation as <tt>np('*ICH*-236')</tt> gets to be interpreted as the object noun phrase, visible in the resulting tree of (<a href="#ex4.7">4.7</a>) as the node <tt>*ICH*-236</tt> which receives object function information (<tt>NP-OB1</tt>) and is coindexed with the noun phrase structure that contains <tt>Cheese</tt>. Calls to reach the output of (<a href="#ex4.7">4.7</a>) follow (<a href="#ex4.8">4.8</a>).</p>
+<p align="justify">The result returned in (<a href="#ex4.8">4.8</a>) shows how <tt>Cheese</tt> has to be parsed as a noun phrase that is distinct from the noun phrase of <tt>pizza</tt>. This gives two noun phrases for the verb, which as a mono-transitive verb (<tt>;~Tn</tt>) selects both subject and object arguments. Application of a recursive rule of <tt>clause_top_layer</tt> allows the first noun phrase to be treated as a displaced noun phrase. Then, with a non-recursive call of <tt>clause_top_layer</tt>, the second noun phrase can be parsed as the subject noun phrase for the clause. When the complements of the verb are determined with <tt>verb_with_complement</tt>, the displaced noun phrase inherited by the calculation as <tt>np('*ICH*-236')</tt> gets to be interpreted as the object noun phrase, visible in the resulting tree of (<a href="#ex4.8">4.8</a>) as the node <tt>*ICH*-236</tt> which receives object function information (<tt>NP-OB1</tt>) and is coindexed with the noun phrase structure that contains <tt>Cheese</tt>. Calls to reach the output of (<a href="#ex4.8">4.8</a>) follow (<a href="#ex4.9">4.9</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.8">4.8</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.9">4.9</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(noun_phrase__-236</tt><br>
@@ -4325,6 +4351,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N__Cheese))))))</tt><br>
+<tt>&nbsp;(optional_non_final_punc&nbsp;[])</tt><br>
 <tt>&nbsp;(clause_top_layer__[np__*ICH*-236]</tt><br>
 <tt>&nbsp;&nbsp;(subject__filled_subject</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-SBJ</tt><br>
@@ -4343,7 +4370,7 @@ body {
 
 <p>
 <table cellpadding="5px" style="border:2px solid;">
-<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>statement</b></td></tr>
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>statement</b></td></tr>
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
@@ -4392,7 +4419,17 @@ body {
  </td>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>statement</b> <b>[np('*ICH*-236')]</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_non_final_punc</td></tr>
+    <tr>
+     <td>
+        &nbsp;
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>[np('*ICH*-236')]</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
@@ -4447,38 +4484,38 @@ body {
        </table>
      </td>
      <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+        <tr>
+         <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>VBP</b> <b>;~Tn</b></td></tr>
                 <tr>
                  <td>
-                   <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>VBP</b> <b>;~Tn</b></td></tr>
-                    <tr>
-                     <td>
-                        <tt>'VBP;~Tn'('needs')</tt>
-                     </td>
-                    </tr>
-                   </table>
+                    <tt>'VBP;~Tn'('needs')</tt>
                  </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>VBP</b> <b>;~Tn</b> <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>active</b></td></tr>
+                <tr>
                  <td>
-                   <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>VBP</b> <b>;~Tn</b> <b>[np('*ICH*-236')]</b> <b>filled_subject</b> <b>active</b></td></tr>
-                    <tr>
-                     <td>
-                        &nbsp;
-                     </td>
-                    </tr>
-                   </table>
+                    &nbsp;
                  </td>
                 </tr>
                </table>
              </td>
             </tr>
            </table>
+         </td>
+        </tr>
+       </table>
      </td>
     </tr>
    </table>
@@ -4491,7 +4528,7 @@ body {
 
 <p align="justify">A matrix interrogative is formed by having an initial clause component that is either:</p>
 <dl>
-<dt>(i)</dt><dd>a modal, or a finite <small style="font-size: 75%">DO</small></dd>
+<dt>(i)</dt><dd>a modal or a finite <small style="font-size: 75%">DO</small></dd>
 <dt>(ii)</dt><dd>a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small>, or a modal catenative</dd>
 <dt>(iii)</dt><dd>a noun phrase that includes an initial word tagged <tt>WPRO</tt>, <tt>WPRO;_genm_</tt>, or <tt>WD</tt></dd>
 <dt>(iv)</dt><dd>an adverb phrase with an initial <tt>WADV</tt> word</dd>
@@ -4503,10 +4540,10 @@ body {
 
 <h3><a name="sec4.3.1">4.3.1</a>&nbsp;&nbsp;&nbsp;Clause operator layer</h3>
 
-<p align="justify">Having the two <tt>operator_layer</tt> rules of (<a href="#ex4.9">4.9</a>) leads to an optional presence for negation, picked up with <tt>neg</tt> of the second rule matching contracted negation <i>n't</i>.</p>
+<p align="justify">Having the two <tt>operator_layer</tt> rules of (<a href="#ex4.10">4.10</a>) leads to an optional presence for negation, picked up with <tt>neg</tt> of the second rule matching contracted negation <i>n't</i>.</p>
 
 <dl>
-  <dt>(<a name="ex4.9">4.9</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.10">4.10</a>)</dt><dd></dd>
 </dl>
 <tt>operator_layer(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;operator_inside(L).</tt><br>
@@ -4514,10 +4551,10 @@ body {
 <tt>&nbsp;&nbsp;operator_inside(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;neg(L1-L0).</tt><br>
 
-<p align="justify">Both rules of (<a href="#ex4.9">4.9</a>) call <tt>operator_inside</tt> of (<a href="#ex4.10">4.10</a>) for the inclusion of either a modal word (the first rule) or a finite <small style="font-size: 75%">DO</small> (the second rule).</p>
+<p align="justify">Both rules of (<a href="#ex4.10">4.10</a>) call <tt>operator_inside</tt> of (<a href="#ex4.11">4.11</a>) for the inclusion of either a modal word (the first rule) or a finite <small style="font-size: 75%">DO</small> (the second rule).</p>
 
 <dl>
-  <dt>(<a name="ex4.10">4.10</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.11">4.11</a>)</dt><dd></dd>
 </dl>
 <tt>operator_inside(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;modal(L).</tt><br>
@@ -4527,10 +4564,10 @@ body {
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,'',L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes&sol;no question that needs an <tt>operator_layer</tt> call to parse a modal with negation, consider (<a href="#ex4.11">4.11</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes&sol;no question that needs an <tt>operator_layer</tt> call to parse a modal with negation, consider (<a href="#ex4.12">4.12</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.11">4.11</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.12">4.12</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['MD'('Might'),'NEG'('n&lt;apos&gt;t'),'N'('cheese'),</tt><br>
 <tt>'N'('pizza'),'VB;~I'('smell')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -4543,10 +4580,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.11">4.11</a>) follow (<a href="#ex4.12">4.12</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.12">4.12</a>) follow (<a href="#ex4.13">4.13</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.12">4.12</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.13">4.13</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
 <tt>&nbsp;(operator_layer</tt><br>
@@ -4717,10 +4754,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs an <tt>operator_layer</tt> call to parse a finite <small style="font-size: 75%">DO</small>, consider (<a href="#ex4.13">4.13</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs an <tt>operator_layer</tt> call to parse a finite <small style="font-size: 75%">DO</small>, consider (<a href="#ex4.14">4.14</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.13">4.13</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.14">4.14</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['WPRO'('What'),'DOP'('does'),'N'('pizza'),</tt><br>
 <tt>'VB;~Tn'('need')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -4733,10 +4770,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.13">4.13</a>) follow (<a href="#ex4.14">4.14</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.14">4.14</a>) follow (<a href="#ex4.15">4.15</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.14">4.14</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.15">4.15</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
 <tt>&nbsp;(noun_phrase__-94</tt><br>
@@ -4911,43 +4948,43 @@ body {
 </tr>
 </table>
 
-<h3><a name="sec4.3.2">4.3.2</a>&nbsp;&nbsp;&nbsp;Finite HAVE or finite BE or modal catenative layer</h3>
+<h3><a name="sec4.3.2">4.3.2</a>&nbsp;&nbsp;&nbsp;HAVE, BE or modal catenative finite layers</h3>
 
-<p align="justify">Having the two <tt>finite_have_be_or_mod_cat_layer</tt> rules of (<a href="#ex4.15">4.15</a>) leads to an optional presence for negation, picked up with <tt>neg</tt> of the second rule matching contracted negation <i>n't</i>.</p>
-
-<dl>
-  <dt>(<a name="ex4.15">4.15</a>)</dt><dd></dd>
-</dl>
-<tt>finite_have_be_or_mod_cat_layer(Tag,Code,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;finite_have_be_or_mod_cat_inside(Tag,Code,L).</tt><br>
-<tt>finite_have_be_or_mod_cat_layer(Tag,Code,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;finite_have_be_or_mod_cat_inside(Tag,Code,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;neg(L1-L0).</tt><br>
-
-<p align="justify">Both rules of (<a href="#ex4.15">4.15</a>) call <tt>finite_have_be_or_mod_cat_inside</tt> of (<a href="#ex4.16">4.16</a>) for the inclusion of either a finite <small style="font-size: 75%">HAVE</small> word (the first rule), a finite <small style="font-size: 75%">BE</small> word (the second rule), or a modal catenative word (the third rule).</p>
+<p align="justify">Having the two <tt>have_be_or_mod_cat_finite_layer</tt> rules of (<a href="#ex4.16">4.16</a>) leads to an optional presence for negation, picked up with <tt>neg</tt> of the second rule matching contracted negation <i>n't</i>.</p>
 
 <dl>
   <dt>(<a name="ex4.16">4.16</a>)</dt><dd></dd>
 </dl>
-<tt>finite_have_be_or_mod_cat_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
+<tt>have_be_or_mod_cat_finite_layer(Tag,Code,L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_mod_cat_finite_inside(Tag,Code,L).</tt><br>
+<tt>have_be_or_mod_cat_finite_layer(Tag,Code,L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_mod_cat_finite_inside(Tag,Code,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;neg(L1-L0).</tt><br>
+
+<p align="justify">Both rules of (<a href="#ex4.16">4.16</a>) call <tt>have_be_or_mod_cat_finite_inside</tt> of (<a href="#ex4.17">4.17</a>) for the inclusion of either a finite <small style="font-size: 75%">HAVE</small> word (the first rule), a finite <small style="font-size: 75%">BE</small> word (the second rule), or a modal catenative word (the third rule).</p>
+
+<dl>
+  <dt>(<a name="ex4.17">4.17</a>)</dt><dd></dd>
+</dl>
+<tt>have_be_or_mod_cat_finite_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['HVP','HVD']),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('H',Code)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,Code,L).</tt><br>
-<tt>finite_have_be_or_mod_cat_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
+<tt>have_be_or_mod_cat_finite_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['BEP','BED']),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('B',Code)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,Code,L).</tt><br>
-<tt>finite_have_be_or_mod_cat_inside('MD',';~cat_Vt',L)&nbsp;--&gt;</tt><br>
+<tt>have_be_or_mod_cat_finite_inside('MD',';~cat_Vt',L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;modal_catenative(L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes&sol;no question that needs a <tt>finite_have_be_or_mod_cat_layer</tt> call to parse a finite <small style="font-size: 75%">HAVE</small>, consider (<a href="#ex4.17">4.17</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes&sol;no question that needs a <tt>have_be_or_mod_cat_finite_layer</tt> call to parse a finite <small style="font-size: 75%">HAVE</small>, consider (<a href="#ex4.18">4.18</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.17">4.17</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.18">4.18</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['HVP;~Tn'('Has'),'PRO'('he'),'D'('a'),'N'('fever')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -4959,14 +4996,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.17">4.17</a>) follow (<a href="#ex4.18">4.18</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.18">4.18</a>) follow (<a href="#ex4.19">4.19</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.18">4.18</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.19">4.19</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__HVP__;~Tn</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__HVP__;~Tn</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__HVP__;~Tn</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__HVP__;~Tn</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__HVP__;~Tn</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;HVP;~Tn__Has)))</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -4992,11 +5029,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>HVP</b> <b>;~Tn</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>HVP</b> <b>;~Tn</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>HVP</b> <b>;~Tn</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>HVP</b> <b>;~Tn</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -5117,10 +5154,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs a <tt>finite_have_be_or_mod_cat_layer</tt> call to parse a finite <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.19">4.19</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs a <tt>have_be_or_mod_cat_finite_layer</tt> call to parse a finite <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.20">4.20</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.19">4.19</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.20">4.20</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['WPRO'('What'),'BEP;~Ln'('is'),'PRO'('he')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -5132,10 +5169,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.19">4.19</a>) follow (<a href="#ex4.20">4.20</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.20">4.20</a>) follow (<a href="#ex4.21">4.21</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.20">4.20</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.21">4.21</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
 <tt>&nbsp;(noun_phrase__-138</tt><br>
@@ -5143,8 +5180,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;(noun_head_full</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;WPRO__What)))</tt><br>
 <tt>&nbsp;(clause_top_layer__[np__*ICH*-138]</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_layer__BEP__;~Ln</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BEP__;~Ln</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__BEP__;~Ln</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BEP__;~Ln</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb__BEP__;~Ln</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEP;~Ln__is)))</tt><br>
 <tt>&nbsp;&nbsp;(subject__filled_subject</tt><br>
@@ -5189,11 +5226,11 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BEP</b> <b>;~Ln</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BEP</b> <b>;~Ln</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BEP</b> <b>;~Ln</b></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BEP</b> <b>;~Ln</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -5275,10 +5312,10 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Vt</tt> involves selection of a <i>to</i>-infinitive clause as its complement.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_to_inf</tt> rule of (<a href="#ex4.21">4.21</a>) will find content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_layer</tt> of (<a href="#ex4.22">4.22</a>) for overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>EXT</tt> parameter.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_to_inf</tt> rule of (<a href="#ex4.22">4.22</a>) will find content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_layer</tt> of (<a href="#ex4.23">4.23</a>) for overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>EXT</tt> parameter.</p>
 
 <dl>
-  <dt>(<a name="ex4.21">4.21</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.22">4.22</a>)</dt><dd></dd>
 </dl>
 <tt>ip_to_inf(Ext,Displaced,Sbj_type,[IP|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,Sbj_type,VPL-[]),</tt><br>
@@ -5287,15 +5324,15 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;[Label|VPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">The first rule for <tt>to_inf_layer</tt> of (<a href="#ex4.22">4.22</a>) is non-recursive and picks up from the parse list an initial <tt>to</tt> word (see section <a href="#sec2.10">2.10</a>) to then call <tt>verb_phrase_layer</tt> with the clause in a state of being <tt>infinitive</tt> and <tt>active</tt>. The other rules of <tt>to_inf_layer</tt> are recursive, so the parse will:</p>
+<p align="justify">The first rule for <tt>to_inf_layer</tt> of (<a href="#ex4.23">4.23</a>) is non-recursive and picks up from the parse list an initial <tt>to</tt> word (see section <a href="#sec2.10">2.10</a>) to then call <tt>verb_phrase_layer</tt> with the clause in a state of being <tt>infinitive</tt> and <tt>active</tt>. The other rules of <tt>to_inf_layer</tt> are recursive, so the parse will:</p>
 <ul>
 <li>(the second rule) pick up an initial instance of a connective particle (which is always <tt>for</tt>) followed by content for a noun phrase that is given subject function; note that this rule can only occur when the <tt>Sbj_type</tt> parameter is unifiable to the <tt>unfilled_subject</tt> value, and that the value passed on for the <tt>Sbj_type</tt> parameter is <tt>filled_subject</tt></li>
 <li>(the third rule) pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="#sec3.3">3.3</a>)</li>
-<li>(the fourth rule) start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with conjuncts after the first gathered by calls to <tt>to_inf_tail</tt> of (<a href="#ex4.23">4.23</a>)</li>
+<li>(the fourth rule) start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with conjuncts after the first gathered by calls to <tt>to_inf_tail</tt> of (<a href="#ex4.24">4.24</a>)</li>
 </ul>
 
 <dl>
-  <dt>(<a name="ex4.22">4.22</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.23">4.23</a>)</dt><dd></dd>
 </dl>
 <tt>to_inf_layer(Displaced,Sbj_type,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to(L-L1),</tt><br>
@@ -5316,7 +5353,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex4.23">4.23</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.24">4.24</a>)</dt><dd></dd>
 </dl>
 <tt>to_inf_tail(Displaced,Sbj_type,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -5332,10 +5369,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IMLL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a <i>to</i>-infinitive clause as the complement of a modal catenative, consider (<a href="#ex4.24">4.24</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a <i>to</i>-infinitive clause as the complement of a modal catenative, consider (<a href="#ex4.25">4.25</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.24">4.24</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.25">4.25</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['MD;~cat_Vt'('Ought'),'NEG'('n&lt;apos&gt;t'),'PRO'('he'),</tt><br>
 <tt>'TO'('to'),'VB;~Ip'('stand'),'ADV'('up')]),</tt><br>
@@ -5350,14 +5387,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.24">4.24</a>) follow (<a href="#ex4.25">4.25</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.25">4.25</a>) follow (<a href="#ex4.26">4.26</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.25">4.25</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.26">4.26</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__MD__;~cat_Vt</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__MD__;~cat_Vt</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(modal_catenative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;MD;~cat_Vt__Ought))</tt><br>
 <tt>&nbsp;&nbsp;(neg</tt><br>
@@ -5388,11 +5425,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -5544,10 +5581,10 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Ve</tt> involves selection of a past participle (<i>-en</i>) clause as its complement when the word class tag is for a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt>, or <tt>HVN</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A participle clause is found with <tt>ip_ppl</tt> of (<a href="#ex4.26">4.26</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. To find a past participle (<i>-en</i>) clause, the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A participle clause is found with <tt>ip_ppl</tt> of (<a href="#ex4.27">4.27</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. To find a past participle (<i>-en</i>) clause, the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex4.26">4.26</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.27">4.27</a>)</dt><dd></dd>
 </dl>
 <tt>ip_ppl(Ext,Displaced,Sbj_type,Infl,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,Sbj_type,Infl,active,VPL-[]),</tt><br>
@@ -5556,10 +5593,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;[Label|VPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">HAVE</small>, consider (<a href="#ex4.27">4.27</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">HAVE</small>, consider (<a href="#ex4.28">4.28</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.27">4.27</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.28">4.28</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['HVP;~cat_Ve'('Has'),'PRO'('he'),'VVN;~I'('smiled')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -5570,14 +5607,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.27">4.27</a>) follow (<a href="#ex4.28">4.28</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.28">4.28</a>) follow (<a href="#ex4.29">4.29</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.28">4.28</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.29">4.29</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__HVP__;~cat_Ve</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__HVP__;~cat_Ve</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__HVP__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__HVP__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__HVP__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;HVP;~cat_Ve__Has)))</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -5600,11 +5637,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>HVP</b> <b>;~cat_Ve</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>HVP</b> <b>;~cat_Ve</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>HVP</b> <b>;~cat_Ve</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>HVP</b> <b>;~cat_Ve</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -5708,12 +5745,12 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Vg</tt> involves selection of a present participle (<i>-ing</i>) clause as its complement.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find a present participle (<i>-ing</i>) clause, the <tt>Infl</tt> parameter for a call to <tt>ip_ppl</tt> of (<a href="#ex4.26">4.26</a>) is set to the value of <tt>ing_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find a present participle (<i>-ing</i>) clause, the <tt>Infl</tt> parameter for a call to <tt>ip_ppl</tt> of (<a href="#ex4.27">4.27</a>) is set to the value of <tt>ing_participle</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a present participle (<i>-ing</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.29">4.29</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a present participle (<i>-ing</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.30">4.30</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.29">4.29</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.30">4.30</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['BEP;~cat_Vg'('Is'),'PRO'('he'),'VAG;~I'('smiling')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -5724,14 +5761,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.29">4.29</a>) follow (<a href="#ex4.30">4.30</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.30">4.30</a>) follow (<a href="#ex4.31">4.31</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.30">4.30</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.31">4.31</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__BEP__;~cat_Vg</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BEP__;~cat_Vg</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__BEP__;~cat_Vg</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BEP__;~cat_Vg</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__BEP__;~cat_Vg</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;BEP;~cat_Vg__Is)))</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -5754,11 +5791,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BEP</b> <b>;~cat_Vg</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BEP</b> <b>;~cat_Vg</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BEP</b> <b>;~cat_Vg</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BEP</b> <b>;~cat_Vg</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -5862,10 +5899,10 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Ve</tt> involves selection of a passive participle (<i>-en</i>) clause as its complement when the word class tag is not a form of <small style="font-size: 75%">HAVE</small>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle (<i>-en</i>) clause is found with <tt>ip_ppl_passive</tt> of (<a href="#ex4.31">4.31</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>en_participle</tt> and <tt>passive</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle (<i>-en</i>) clause is found with <tt>ip_ppl_passive</tt> of (<a href="#ex4.32">4.32</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>en_participle</tt> and <tt>passive</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex4.31">4.31</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.32">4.32</a>)</dt><dd></dd>
 </dl>
 <tt>ip_ppl_passive(Ext,Displaced,Sbj_type,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,Sbj_type,en_participle,passive,VPL-[]),</tt><br>
@@ -5874,10 +5911,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;[Label,'NP-LGS'('*')|VPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a passive participle (<i>-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.32">4.32</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a passive participle (<i>-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="#ex4.33">4.33</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.32">4.32</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.33">4.33</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['BED;~cat_Ve'('Was'),'PRO'('he'),'VVN;~Tn'('scolded')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -5889,14 +5926,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.32">4.32</a>) follow (<a href="#ex4.33">4.33</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.33">4.33</a>) follow (<a href="#ex4.34">4.34</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.33">4.33</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.34">4.34</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__BED__;~cat_Ve</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BED__;~cat_Ve</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__BED__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BED__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__BED__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;BED;~cat_Ve__Was)))</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -5919,11 +5956,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BED</b> <b>;~cat_Ve</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BED</b> <b>;~cat_Ve</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BED</b> <b>;~cat_Ve</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BED</b> <b>;~cat_Ve</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -6026,18 +6063,18 @@ body {
 <br>
 <h2><a name="sec4.5">4.5</a>&nbsp;&nbsp;&nbsp;Clause middle layers</h2>
 
-<p align="justify">So far we have only been able to integrate a call of either <tt>operator_layer</tt> (from section <a href="#sec4.3.1">4.3.1</a>) or <tt>finite_have_be_or_mod_cat_layer</tt> (from section <a href="#sec4.3.2">4.3.2</a>) with matrix interrogatives, but the contributions of these layers can also occur with statement word ordering. Statement word order necessitates integration after the clause subject will have been picked up from the parse list with <tt>subject</tt> of section <a href="#sec2.5">2.5</a>. This alternative word ordering is accomplished by a non-recursive call of <tt>clause_top_layer</tt> (the second rule of (<a href="#ex4.1">4.1</a>)) that first finds the subject and then goes on to call <tt>clause_middle_layer</tt> of (<a href="#ex4.34">4.34</a>).</p>
+<p align="justify">So far we have only been able to integrate a call of either <tt>operator_layer</tt> (from section <a href="#sec4.3.1">4.3.1</a>) or <tt>have_be_or_mod_cat_finite_layer</tt> (from section <a href="#sec4.3.2">4.3.2</a>) with matrix interrogatives, but the contributions of these layers can also occur with statement word ordering. Statement word order necessitates integration after the clause subject will have been picked up from the parse list with <tt>subject</tt> of section <a href="#sec2.5">2.5</a>. This alternative word ordering is accomplished by a non-recursive call of <tt>clause_top_layer</tt> (the second rule of (<a href="#ex4.2">4.2</a>)) that first finds the subject and then goes on to call <tt>clause_middle_layer</tt> of (<a href="#ex4.35">4.35</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the non-recursive rules of (<a href="#ex4.34">4.34</a>) that will integrate either <tt>operator_layer</tt> or <tt>finite_have_be_or_mod_cat_layer</tt>, there are also recursive rules allowing initial adverb phrases (the third rule) and coordination at this middle clause level (the fourth rule) with conjuncts after the first gathered with recursive calls to <tt>clause_middle_tail</tt> of (<a href="#ex4.35">4.35</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the non-recursive rules of (<a href="#ex4.35">4.35</a>) that will integrate either <tt>operator_layer</tt> or <tt>have_be_or_mod_cat_finite_layer</tt>, there are also recursive rules allowing initial adverb phrases (the third rule) and coordination at this middle clause level (the fourth rule) with conjuncts after the first gathered with recursive calls to <tt>clause_middle_tail</tt> of (<a href="#ex4.36">4.36</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.34">4.34</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.35">4.35</a>)</dt><dd></dd>
 </dl>
 <tt>clause_middle_layer(Displaced,Sbj_type,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;operator_layer(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,Sbj_type,infinitive,active,L1-L0).</tt><br>
 <tt>clause_middle_layer(Displaced,Sbj_type,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;finite_have_be_or_mod_cat_layer(Tag,Code,L-L1),</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_mod_cat_finite_layer(Tag,Code,L-L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complement(Tag,Code,Displaced,Sbj_type,active,L1-L0).</tt><br>
 <tt>clause_middle_layer(Displaced,Sbj_type,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L-L1),</tt><br>
@@ -6051,7 +6088,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex4.35">4.35</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.36">4.36</a>)</dt><dd></dd>
 </dl>
 <tt>clause_middle_tail(Displaced,Sbj_type,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -6067,10 +6104,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IMLL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of <i>didn't</i> occurring with statement word order, consider (<a href="#ex4.36">4.36</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of <i>didn't</i> occurring with statement word order, consider (<a href="#ex4.37">4.37</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.36">4.36</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.37">4.37</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'DOD'('did'),'NEG'('n&lt;apos&gt;t'),</tt><br>
 <tt>'VB;~Ip'('stand'),'ADV'('up')]),&nbsp;parse(clause_top_layer(statement,[])).</tt><br>
@@ -6083,10 +6120,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.36">4.36</a>) follow (<a href="#ex4.37">4.37</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.37">4.37</a>) follow (<a href="#ex4.38">4.38</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.37">4.37</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.38">4.38</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -6245,10 +6282,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with catenative modal <i>ought</i> occurring with statement word order, consider (<a href="#ex4.38">4.38</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with catenative modal <i>ought</i> occurring with statement word order, consider (<a href="#ex4.39">4.39</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.38">4.38</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.39">4.39</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('he'),'ADV'('really'),'MD;~cat_Vt'('ought'),</tt><br>
 <tt>'TO'('to'),'VB;~Ip'('stand'),'ADV'('up')]),&nbsp;parse(clause_top_layer(statement,[])).</tt><br>
@@ -6262,10 +6299,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.38">4.38</a>) follow (<a href="#ex4.39">4.39</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.39">4.39</a>) follow (<a href="#ex4.40">4.40</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.39">4.39</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.40">4.40</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -6279,8 +6316,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(adv</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ADV__really)))</tt><br>
 <tt>&nbsp;&nbsp;(clause_middle_layer__filled_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_layer__MD__;~cat_Vt</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__MD__;~cat_Vt</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(modal_catenative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MD;~cat_Vt__ought)))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb_complement__MD__;~cat_Vt__filled_subject__active</tt><br>
@@ -6367,11 +6404,11 @@ body {
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -6484,10 +6521,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with modal <i>may</i> occurring with statement word order in a clause that also has catenative <i>have</i> followed by catenative <i>been</i> followed by catenative <i>being</i>, consider (<a href="#ex4.40">4.40</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with modal <i>may</i> occurring with statement word order in a clause that also has catenative <i>have</i> followed by catenative <i>been</i> followed by catenative <i>being</i>, consider (<a href="#ex4.41">4.41</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.40">4.40</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.41">4.41</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('A'),'N'('ship'),'MD'('may'),'HV;~cat_Ve'('have'),</tt><br>
 <tt>'BEN;~cat_Vg'('been'),'BAG;~cat_Ve'('being'),'VVN;~Tn'('sunk')]),</tt><br>
@@ -6504,10 +6541,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.40">4.40</a>) follow (<a href="#ex4.41">4.41</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.41">4.41</a>) follow (<a href="#ex4.42">4.42</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.41">4.41</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.42">4.42</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(subject__filled_subject</tt><br>
@@ -6811,10 +6848,10 @@ body {
 
 <p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb that is marked with an existential verb code by setting the <tt>Sbj_type</tt> parameter of the clause to have <tt>there</tt> as its value. The existential verb licensed by this <tt>Sbj_type</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt>, or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt>, or <tt>;~ex_cat_Ve</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="#ex4.42">4.42</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="#ex4.43">4.43</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.42">4.42</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.43">4.43</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['BEP;~ex_V'('Is'),'EX'('there'),'D'('a'),'N'('doctor')]),</tt><br>
 <tt>parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
@@ -6826,14 +6863,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.42">4.42</a>) follow (<a href="#ex4.43">4.43</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.43">4.43</a>) follow (<a href="#ex4.44">4.44</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.43">4.43</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.44">4.44</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__BEP__;~ex_V</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BEP__;~ex_V</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__BEP__;~ex_V</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BEP__;~ex_V</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__BEP__;~ex_V</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;BEP;~ex_V__Is)))</tt><br>
 <tt>&nbsp;(subject__there</tt><br>
@@ -6856,11 +6893,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BEP</b> <b>;~ex_V</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BEP</b> <b>;~ex_V</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BEP</b> <b>;~ex_V</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BEP</b> <b>;~ex_V</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -6960,10 +6997,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the <tt>Sbj_type</tt> parameter of the clause to the <tt>there</tt> value and the occurrence of the existential verb that needs this parameter setting, provided this happens in the same clause and the <tt>there</tt> setting of the <tt>Sbj_type</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="#ex4.44">4.44</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the <tt>Sbj_type</tt> parameter of the clause to the <tt>there</tt> value and the occurrence of the existential verb that needs this parameter setting, provided this happens in the same clause and the <tt>there</tt> setting of the <tt>Sbj_type</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="#ex4.45">4.45</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.44">4.44</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.45">4.45</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['EX'('there'),'MD;~cat_Vt'('ought'),'TO'('to'),</tt><br>
 <tt>'HV;~cat_Ve'('have'),'BEN;~ex_V'('been'),'D'('a'),'N'('doctor')]),</tt><br>
@@ -6979,17 +7016,17 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.44">4.44</a>) follow (<a href="#ex4.45">4.45</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.45">4.45</a>) follow (<a href="#ex4.46">4.46</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.45">4.45</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.46">4.46</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__statement</tt><br>
 <tt>&nbsp;(subject__there</tt><br>
 <tt>&nbsp;&nbsp;EX__there)</tt><br>
 <tt>&nbsp;(clause_middle_layer__there</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_layer__MD__;~cat_Vt</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__MD__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__MD__;~cat_Vt</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(modal_catenative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MD;~cat_Vt__ought)))</tt><br>
 <tt>&nbsp;&nbsp;(verb_complement__MD__;~cat_Vt__there__active</tt><br>
@@ -7039,11 +7076,11 @@ body {
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>MD</b> <b>;~cat_Vt</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>MD</b> <b>;~cat_Vt</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -7229,10 +7266,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there</tt> value to having a <tt>filled_subject</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="#ex4.46">4.46</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there</tt> value to having a <tt>filled_subject</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="#ex4.47">4.47</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
 
 <dl>
-  <dt>(<a name="ex4.46">4.46</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.47">4.47</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['BEP;~ex_cat_Vg'('Is'),'EX'('there'),'Q;_nphd_'(</tt><br>
 <tt>'nobody_else'),'VAG;~I'('coming')]),</tt><br>
@@ -7245,14 +7282,14 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex4.46">4.46</a>) follow (<a href="#ex4.47">4.47</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex4.47">4.47</a>) follow (<a href="#ex4.48">4.48</a>).</p>
 
 <dl>
-  <dt>(<a name="ex4.47">4.47</a>)</dt><dd></dd>
+  <dt>(<a name="ex4.48">4.48</a>)</dt><dd></dd>
 </dl>
 <tt>(clause_top_layer__matrix_interrogative</tt><br>
-<tt>&nbsp;(finite_have_be_or_mod_cat_layer__BEP__;~ex_cat_Vg</tt><br>
-<tt>&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BEP__;~ex_cat_Vg</tt><br>
+<tt>&nbsp;(have_be_or_mod_cat_finite_layer__BEP__;~ex_cat_Vg</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BEP__;~ex_cat_Vg</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb__BEP__;~ex_cat_Vg</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;BEP;~ex_cat_Vg__Is)))</tt><br>
 <tt>&nbsp;(subject__there</tt><br>
@@ -7277,11 +7314,11 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BEP</b> <b>;~ex_cat_Vg</b></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BEP</b> <b>;~ex_cat_Vg</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BEP</b> <b>;~ex_cat_Vg</b></td></tr>
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BEP</b> <b>;~ex_cat_Vg</b></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
@@ -7409,7 +7446,11 @@ body {
 <br>
 <h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;CP-THT (that clause)</h2>
 
-<p align="justify">A <i>that</i>-clause is an embedded clause with a finite verb. This may have the complementizer <i>that</i> (tagged <tt>C</tt>) as the clause initial word. A <i>that</i> clause constructed with the first <tt>cp_that</tt> rule of (<a href="#ex5.1">5.1</a>) has a maximal constituent with the <tt>CP-THT</tt> tag that contains as the only element a finite clause layer (<tt>IP-SUB</tt>), which in turn contains all the clause content gathered with a <tt>clause_that_layer</tt> rule of (<a href="#ex5.3">5.3</a>), including any clause initial complementizer. The <tt>CP-THT</tt> tag can take function information as a tag extension provided with the <tt>Ext</tt> parameter of <tt>cp_that</tt>. If there is any conjunction at the highest level of a <i>that</i> clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>IML</tt> (clause intermediate) layer constructed with the second <tt>cp_that</tt> rule of (<a href="#ex5.1">5.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="#ex5.2">5.2</a>), which through additional calls of <tt>clause_that_layer</tt> picks up from the parse list subsequent content for conjuncts.</p>
+<p align="justify">A <i>that</i>-clause is an embedded clause with a finite verb. This may have the complementizer <i>that</i> (tagged <tt>C</tt>) as the clause initial word. A <i>that</i> clause has a maximal constituent with the <tt>CP-THT</tt> tag that can take function information as a tag extension provided with the <tt>Ext</tt> parameter of the <tt>cp_that</tt> rules of (<a href="#ex5.1">5.1</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="#ex5.1">5.1</a>) will construct a <tt>CP-THT</tt> that has as its only element a finite clause layer (<tt>IP-SUB</tt>), which in turn contains all the clause content gathered with a <tt>clause_that_layer</tt> rule of (<a href="#ex5.3">5.3</a>), including any clause initial complementizer.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i> clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>IML</tt> (clause intermediate) layer constructed with the second rule of (<a href="#ex5.1">5.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="#ex5.2">5.2</a>), which through additional calls of <tt>clause_that_layer</tt> picks up from the parse list the content for conjuncts that occur after the first conjunct.</p>
 
 <dl>
   <dt>(<a name="ex5.1">5.1</a>)</dt><dd></dd>
@@ -7422,12 +7463,12 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,IP]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_that(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_that_layer(Displaced,IPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_that_layer(Displaced,IMLL1-[]),</tt><br>
 <tt>&nbsp;&nbsp;cp_that_tail(Displaced,L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-THT',Ext,Label),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IP1&nbsp;=..&nbsp;['IML'|IPL1],</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IP1|L1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML1&nbsp;=..&nbsp;['IML'|IMLL1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IML1|L1],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,'IP-SUB'(IML)]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
@@ -7533,7 +7574,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ADV__early))))))))))))))</tt><br>
-<tt>&nbsp;(punc</tt><br>
+<tt>&nbsp;(punc__final</tt><br>
 <tt>&nbsp;&nbsp;?))</tt><br>
 
 <p>
@@ -7766,7 +7807,7 @@ body {
  </td>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc</td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>final</b></td></tr>
     <tr>
      <td>
         <tt>'PU'('?')</tt>
@@ -7795,10 +7836,18 @@ body {
 
 <p align="justify">The internal clause will be missing a selected item when a constituent question of case (ii).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The maximal constituent of an embedded question clause has the <tt>CP-QUE</tt> tag, together with any extension from the <tt>EXT</tt> parameter taken by <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>). Calls of <tt>cp_que</tt> can involve:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The maximal constituent of an embedded question clause has the <tt>CP-QUE</tt> tag, together with any extension from the <tt>EXT</tt> parameter taken by <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>) can involve a subsequent call of <tt>clause_que_finite_top_layer</tt> to gather under an immediately embedded <tt>IP-SUB</tt> projection the content of either:</p>
 <ul>
-<li>a call of <tt>clause_que_finite_top_layer</tt> to gather under an immediately embedded <tt>IP-SUB</tt> projection the content of either (i) a finite clause with statement word order (the first rule) or (ii) the first conjunct of a conjunction of statement-word-order finite clauses with a recursive call to <tt>cp_que_finite_tail</tt> to pick up subsequent conjuncts (the second rule)</li>
-<li>a call of <tt>clause_que_to_infinitive_top_layer</tt> to gather under an immediately embedded <tt>IP-INF</tt> projection the content of either (i) a <i>to</i>-infinitive clause (the third rule) or (ii) the first conjunct of a conjunction of <i>to</i>-infinitive clauses with a recursive call to <tt>cp_que_to_infinitive_tail</tt> to pick up subsequent conjuncts (the fourth rule)</li>
+<li>(the first rule) a finite clause with statement word order</li>
+<li>(the second rule) the first conjunct of a conjunction of statement-word-order finite clauses with a recursive call to <tt>cp_que_finite_tail</tt> to pick up subsequent conjuncts</li>
+</ul>
+
+<p align="justify">A call of <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>) can also involve a subsequent call of <tt>clause_que_to_infinitive_top_layer</tt> to gather under an immediately embedded <tt>IP-INF</tt> projection the content of either:</p>
+<ul>
+<li>(the third rule) a <i>to</i>-infinitive clause</li>
+<li>(the fourth rule) the first conjunct of a conjunction of <i>to</i>-infinitive clauses with a recursive call to <tt>cp_que_to_infinitive_tail</tt> to pick up subsequent conjuncts</li>
 </ul>
 
 <dl>
@@ -7812,12 +7861,12 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,IP]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_que(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_que_finite_top_layer(Displaced,IPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_finite_top_layer(Displaced,IMLL1-[]),</tt><br>
 <tt>&nbsp;&nbsp;cp_que_finite_tail(Displaced,L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IP1&nbsp;=..&nbsp;['IML'|IPL1],</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IP1|L1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML1&nbsp;=..&nbsp;['IML'|IMLL1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IML1|L1],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,'IP-SUB'(IML)]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_que(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
@@ -7828,12 +7877,12 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,IP]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_que(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IPL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IMLL1-[]),</tt><br>
 <tt>&nbsp;&nbsp;cp_que_to_infinitive_tail(Displaced,L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IP1&nbsp;=..&nbsp;['IML'|IPL1],</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IP1|L1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML1&nbsp;=..&nbsp;['IML'|IMLL1],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML',IML1|L1],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,'IP-INF'(IML)]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
@@ -7983,7 +8032,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ADV__early))))))))))))))</tt><br>
-<tt>&nbsp;(punc</tt><br>
+<tt>&nbsp;(punc__final</tt><br>
 <tt>&nbsp;&nbsp;PU__?))</tt><br>
 
 <p>
@@ -8247,7 +8296,7 @@ body {
  </td>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc</td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>final</b></td></tr>
     <tr>
      <td>
         <tt>'PU'('?')</tt>
@@ -8317,10 +8366,10 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A notional subject is found with a call to <tt>notional_subject</tt> of (<a href="#ex5.15">5.15</a>), which will be a clause with an <tt>-NSBJ</tt> extension that is either:</p>
 <ul>
-<li>a <i>that</i>-clause (<tt>CP-THT-NSBJ</tt>) (the first rule)</li>
-<li>an embedded question clause (<tt>CP-QUE-NSBJ</tt>) (the second rule)</li>
-<li>a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) (which may or may not have a <i>for</i> introduced internal subject) (the third rule)</li>
-<li>a present participle (<i>-ing</i>) clause (<tt>IP-PPL-NSBJ</tt>) (the fourth rule)</li>
+<li>(the first rule) a <i>that</i>-clause (<tt>CP-THT-NSBJ</tt>)</li>
+<li>(the second rule) an embedded question clause (<tt>CP-QUE-NSBJ</tt>)</li>
+<li>(the third rule) a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>), which may or may not have a <i>for</i> introduced internal subject</li>
+<li>(the fourth rule) a present participle (<i>-ing</i>) clause (<tt>IP-PPL-NSBJ</tt>)</li>
 </ul>
 
 <dl>
@@ -8367,8 +8416,8 @@ body {
 <tt>&nbsp;&nbsp;(subject__provisional</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;PRO;_pvl___it)</tt><br>
 <tt>&nbsp;&nbsp;(clause_middle_layer__provisional</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_layer__BED__;~La</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BED__;~La</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__BED__;~La</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BED__;~La</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__BED__;~La</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BED;~La__is)))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(verb_complement__BED__;~La__provisional__active</tt><br>
@@ -8401,7 +8450,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VB;~I__come)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complement__VB__;~I__filled_subject__active</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))))))</tt><br>
-<tt>&nbsp;(punc</tt><br>
+<tt>&nbsp;(punc__final</tt><br>
 <tt>&nbsp;&nbsp;PU__.))</tt><br>
 
 <p>
@@ -8428,11 +8477,11 @@ body {
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BED</b> <b>;~La</b></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BED</b> <b>;~La</b></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BED</b> <b>;~La</b></td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BED</b> <b>;~La</b></td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -8640,7 +8689,7 @@ body {
  </td>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc</td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>final</b></td></tr>
     <tr>
      <td>
         <tt>'PU'('.')</tt>
@@ -8666,9 +8715,9 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A limitation with <tt>scon_clause</tt> of (<a href="#ex5.20">5.20</a>) is that there are only rules for cases where an explicit subordinate conjunction word (<tt>P-CONN</tt>) is present, that is, a word found with <tt>conn</tt> from section <a href="#sec2.11">2.11</a>. The rules of (<a href="#ex5.20">5.20</a>) differ in regards to the type of the subordinate clause contained, that is, either:</p>
 <ul>
-<li>a finite clause (<tt>IP-ADV</tt>) (the first rule)</li>
-<li>a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) (the second rule)</li>
-<li>a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) (the third rule)</li>
+<li>(the first rule) a finite clause (<tt>IP-ADV</tt>)</li>
+<li>(the second rule) a <i>to</i>-infinitive clause (<tt>IP-INF</tt>)</li>
+<li>(the third rule) a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>)</li>
 </ul>
 
 <p align="justify">The fourth rule of (<a href="#ex5.20">5.20</a>) allows for coordination at the topmost level of a subordinate conjunction, with subsequent recursive calls to <tt>scon_clause_tail</tt> of (<a href="#ex5.21">5.21</a>) for collecting subsequent conjuncts.</p>
@@ -8707,10 +8756,10 @@ body {
 </dl>
 <tt>scon_clause_tail(['CONJP'(CONJ,PP_SCON)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
-<tt>&nbsp;&nbsp;scon_clause('',[PP_SCON]-[]).</tt><br>
+<tt>&nbsp;&nbsp;scon_clause([PP_SCON]-[]).</tt><br>
 <tt>scon_clause_tail([PU,'CONJP'(PP_SCON)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
-<tt>&nbsp;&nbsp;scon_clause('',[PP_SCON]-[]),</tt><br>
+<tt>&nbsp;&nbsp;scon_clause([PP_SCON]-[]),</tt><br>
 <tt>&nbsp;&nbsp;scon_clause_tail(L-L0).</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a finite adverbial clause (<tt>IP-ADV</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>because</i>, consider (<a href="#ex5.22">5.22</a>).</p>
@@ -8720,23 +8769,8 @@ body {
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('It'),'MD'('must'),'HV;~cat_Ve'('&lt;apos&gt;ve'),</tt><br>
 <tt>'BEN;~Ln'('been'),'D;_nphd_'('something'),'P-ROLE'('like'),'D;_nphd_'('that'),</tt><br>
-<tt>'P-CONN'('because'),'PRO'('I'),'VBD;~Tn'('heard'),'Q'('every'),'N'('word'),</tt><br>
-<tt>'PU'('.')]),&nbsp;parse(utterance('ex5.22')).</tt><br>
-<tt></tt><br>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;must)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HV;~cat_Ve&nbsp;&lt;apos&gt;ve)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~Ln&nbsp;been)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD2&nbsp;(D;_nphd_&nbsp;something)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;like)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D;_nphd_&nbsp;that))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;because)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Tn&nbsp;heard)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(Q&nbsp;every)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;word)))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;ex5.22))</tt><br>
+<tt>'PU'(','),'P-CONN'('because'),'PRO'('I'),'VBD;~Tn'('heard'),'Q'('every'),</tt><br>
+<tt>'N'('word'),'PU'('.')]),&nbsp;parse(utterance('ex5.22')).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;must)</tt><br>
@@ -8745,6 +8779,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD2&nbsp;(D;_nphd_&nbsp;something)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;like)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D;_nphd_&nbsp;that)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;because)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Tn&nbsp;heard)</tt><br>
@@ -8755,7 +8790,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">The results of (<a href="#ex5.22">5.22</a>) give two possible tree structures that differ in regards to the location of attachment for the subordinate conjunction grouping (<tt>PP-SCON</tt>) which contains the subordinate conjunction word (<tt>P-CONN</tt>) <i>because</i> and a finite adverbial clause (<tt>IP-ADV</tt>). Calls to reach the second result of (<a href="#ex5.22">5.22</a>) follow (<a href="#ex5.23">5.23</a>).</p>
+<p align="justify">Calls to reach the result of (<a href="#ex5.22">5.22</a>) follow (<a href="#ex5.23">5.23</a>).</p>
 
 <dl>
   <dt>(<a name="ex5.23">5.23</a>)</dt><dd></dd>
@@ -8776,7 +8811,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__infinitive__active</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_with_complement__filled_subject__infinitive__active</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__HV__;~cat_Ve</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HV;~cat_Ve__have)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HV;~cat_Ve__&lt;apos&gt;ve)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complement__HV__;~cat_Ve__filled_subject__active</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ip_ppl__-CAT__filled_subject__en_participle</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__en_participle__active</tt><br>
@@ -8799,6 +8834,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D;_nphd___that))))))))))))))))))</tt><br>
+<tt>&nbsp;&nbsp;(optional_non_final_punc</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(punc__non_final&nbsp;,))</tt><br>
 <tt>&nbsp;&nbsp;(adverbial</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(scon_clause</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(conn</tt><br>
@@ -8824,7 +8861,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N__word)))))))))))))</tt><br>
-<tt>&nbsp;(punc</tt><br>
+<tt>&nbsp;(punc__final</tt><br>
 <tt>&nbsp;&nbsp;PU__.))</tt><br>
 
 <p>
@@ -8833,7 +8870,7 @@ body {
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>statement</b></td></tr>
+    <tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>statement</b></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
@@ -8899,124 +8936,118 @@ body {
                </table>
              </td>
              <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive</b> <b>active</b></td></tr>
+                <tr>
+                 <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive</b> <b>active</b></td></tr>
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>infinitive</b> <b>active</b></td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>infinitive</b> <b>active</b></td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>HV</b> <b>;~cat_Ve</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>'HV;~cat_Ve'('&lt;apos&gt;ve')</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>HV</b> <b>;~cat_Ve</b> <b>filled_subject</b> <b>active</b></td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>HV</b> <b>;~cat_Ve</b></td></tr>
-                            <tr>
-                             <td>
-                                <tt>'HV;~cat_Ve'('&lt;apos&gt;ve')</tt>
-                             </td>
-                            </tr>
-                           </table>
-                         </td>
-                         <td>
-                           <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>HV</b> <b>;~cat_Ve</b> <b>filled_subject</b> <b>active</b></td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl <b>-CAT</b> <b>filled_subject</b> <b>en_participle</b></td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl <b>-CAT</b> <b>filled_subject</b> <b>en_participle</b></td></tr>
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>en_participle</b> <b>active</b></td></tr>
                                 <tr>
                                  <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>en_participle</b> <b>active</b></td></tr>
+                                    <tr>
+                                     <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>en_participle</b> <b>active</b></td></tr>
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>BEN</b> <b>;~Ln</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>'BEN;~Ln'('been')</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>BEN</b> <b>;~Ln</b> <b>filled_subject</b> <b>active</b></td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
-                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>en_participle</b> <b>active</b></td></tr>
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-PRD2</b></td></tr>
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>BEN</b> <b>;~Ln</b></td></tr>
-                                                <tr>
-                                                 <td>
-                                                    <tt>'BEN;~Ln'('been')</tt>
-                                                 </td>
-                                                </tr>
-                                               </table>
-                                             </td>
-                                             <td>
-                                               <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>BEN</b> <b>;~Ln</b> <b>filled_subject</b> <b>active</b></td></tr>
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
                                                 <tr>
                                                  <td>
                                                    <table cellpadding="5px" style="border:2px solid;">
-                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-PRD2</b></td></tr>
+                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                                     <tr>
                                                      <td>
                                                        <table cellpadding="5px" style="border:2px solid;">
-                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                                         <tr>
                                                          <td>
                                                            <table cellpadding="5px" style="border:2px solid;">
-                                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
+                                                            <tr>
+                                                             <td>
+                                                                <tt>'D;_nphd_'('something')</tt>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase</td></tr>
+                                                        <tr>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer</td></tr>
                                                             <tr>
                                                              <td>
                                                                <table cellpadding="5px" style="border:2px solid;">
-                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
                                                                 <tr>
                                                                  <td>
-                                                                   <table cellpadding="5px" style="border:2px solid;">
-                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
-                                                                    <tr>
-                                                                     <td>
-                                                                        <tt>'D;_nphd_'('something')</tt>
-                                                                     </td>
-                                                                    </tr>
-                                                                   </table>
+                                                                    <tt>'P-ROLE'('like')</tt>
                                                                  </td>
                                                                 </tr>
                                                                </table>
                                                              </td>
                                                              <td>
                                                                <table cellpadding="5px" style="border:2px solid;">
-                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase</td></tr>
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase</td></tr>
                                                                 <tr>
                                                                  <td>
                                                                    <table cellpadding="5px" style="border:2px solid;">
-                                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer</td></tr>
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
                                                                     <tr>
                                                                      <td>
                                                                        <table cellpadding="5px" style="border:2px solid;">
-                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
-                                                                        <tr>
-                                                                         <td>
-                                                                            <tt>'P-ROLE'('like')</tt>
-                                                                         </td>
-                                                                        </tr>
-                                                                       </table>
-                                                                     </td>
-                                                                     <td>
-                                                                       <table cellpadding="5px" style="border:2px solid;">
-                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase</td></tr>
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                                                         <tr>
                                                                          <td>
                                                                            <table cellpadding="5px" style="border:2px solid;">
-                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
                                                                             <tr>
                                                                              <td>
-                                                                               <table cellpadding="5px" style="border:2px solid;">
-                                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
-                                                                                <tr>
-                                                                                 <td>
-                                                                                   <table cellpadding="5px" style="border:2px solid;">
-                                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
-                                                                                    <tr>
-                                                                                     <td>
-                                                                                        <tt>'D;_nphd_'('that')</tt>
-                                                                                     </td>
-                                                                                    </tr>
-                                                                                   </table>
-                                                                                 </td>
-                                                                                </tr>
-                                                                               </table>
+                                                                                <tt>'D;_nphd_'('that')</tt>
                                                                              </td>
                                                                             </tr>
                                                                            </table>
@@ -9047,6 +9078,9 @@ body {
                                          </td>
                                         </tr>
                                        </table>
+                                     </td>
+                                    </tr>
+                                   </table>
                                  </td>
                                 </tr>
                                </table>
@@ -9059,6 +9093,26 @@ body {
                      </td>
                     </tr>
                    </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_non_final_punc</td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>non_final</b></td></tr>
+            <tr>
+             <td>
+                <tt>'PU'(',')</tt>
              </td>
             </tr>
            </table>
@@ -9120,73 +9174,70 @@ body {
                    </table>
                  </td>
                  <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+                    <tr>
+                     <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_with_complement <b>filled_subject</b> <b>finite</b> <b>active</b></td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>VBD</b> <b>;~Tn</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>'VBD;~Tn'('heard')</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>VBD</b> <b>;~Tn</b> <b>filled_subject</b> <b>active</b></td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>VBD</b> <b>;~Tn</b></td></tr>
-                                <tr>
-                                 <td>
-                                    <tt>'VBD;~Tn'('heard')</tt>
-                                 </td>
-                                </tr>
-                               </table>
-                             </td>
-                             <td>
-                               <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complement <b>VBD</b> <b>;~Tn</b> <b>filled_subject</b> <b>active</b></td></tr>
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-OB1</b></td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
-                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-OB1</b></td></tr>
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
                                     <tr>
                                      <td>
                                        <table cellpadding="5px" style="border:2px solid;">
-                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top</td></tr>
+                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
                                         <tr>
                                          <td>
                                            <table cellpadding="5px" style="border:2px solid;">
-                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer</td></tr>
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer</td></tr>
                                             <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer</td></tr>
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det</td></tr>
                                                 <tr>
                                                  <td>
-                                                   <table cellpadding="5px" style="border:2px solid;">
-                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det</td></tr>
-                                                    <tr>
-                                                     <td>
-                                                        <tt>'Q'('every')</tt>
-                                                     </td>
-                                                    </tr>
-                                                   </table>
+                                                    <tt>'Q'('every')</tt>
                                                  </td>
                                                 </tr>
                                                </table>
                                              </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                            <tr>
                                              <td>
                                                <table cellpadding="5px" style="border:2px solid;">
-                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
                                                 <tr>
                                                  <td>
                                                    <table cellpadding="5px" style="border:2px solid;">
-                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
                                                     <tr>
                                                      <td>
-                                                       <table cellpadding="5px" style="border:2px solid;">
-                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
-                                                        <tr>
-                                                         <td>
-                                                            <tt>'N'('word')</tt>
-                                                         </td>
-                                                        </tr>
-                                                       </table>
+                                                        <tt>'N'('word')</tt>
                                                      </td>
                                                     </tr>
                                                    </table>
@@ -9211,6 +9262,9 @@ body {
                          </td>
                         </tr>
                        </table>
+                     </td>
+                    </tr>
+                   </table>
                  </td>
                 </tr>
                </table>
@@ -9226,10 +9280,10 @@ body {
  </td>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc</td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>final</b></td></tr>
     <tr>
      <td>
-        .
+        <tt>'PU'('.')</tt>
      </td>
     </tr>
    </table>
@@ -9306,13 +9360,14 @@ body {
   <dt>(<a name="ex5.25">5.25</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string(['P-CONN'('Without'),'BAG;~cat_Ve'('being'),'VVN;~Tn'(</tt><br>
-<tt>'told'),'D'('the'),'N'('chauffeur'),'VBD;~Ip'('drove'),'ADV'('away'),'PU'('.')]),</tt><br>
-<tt>parse(utterance('ex5.25')).</tt><br>
+<tt>'told'),'PU'(','),'D'('the'),'N'('chauffeur'),'VBD;~Ip'('drove'),'ADV'('away'),</tt><br>
+<tt>'PU'('.')]),&nbsp;parse(utterance('ex5.25')).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;Without)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL&nbsp;(BAG;~cat_Ve&nbsp;being)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;told))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;chauffeur))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ip&nbsp;drove)</tt><br>
@@ -9995,8 +10050,8 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPRO__which))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(relative_clause_inside__[np__*ICH*-209]</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(clause_middle_layer__filled_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_layer__BED__;~cat_Ve</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(finite_have_be_or_mod_cat_inside__BED__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__BED__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BED__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__BED__;~cat_Ve</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BED;~cat_Ve__was)))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complement__BED__;~cat_Ve__filled_subject__active</tt><br>
@@ -10109,11 +10164,11 @@ body {
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_layer <b>BED</b> <b>;~cat_Ve</b></td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_layer <b>BED</b> <b>;~cat_Ve</b></td></tr>
                             <tr>
                              <td>
                                <table cellpadding="5px" style="border:2px solid;">
-                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">finite_have_be_or_mod_cat_inside <b>BED</b> <b>;~cat_Ve</b></td></tr>
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">have_be_or_mod_cat_finite_inside <b>BED</b> <b>;~cat_Ve</b></td></tr>
                                 <tr>
                                  <td>
                                    <table cellpadding="5px" style="border:2px solid;">
@@ -10902,6 +10957,35 @@ body {
 <tt>&nbsp;&nbsp;(ID&nbsp;ex5.42))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
+
+<br>
+<br>
+<br>
+<br>
+<h1><a name="ch6">Chapter 6</a><br>Closing remarks</h1>
+
+<p align="justify">We have now reached the end of the presentation of Definite Clause Grammar (DCG) definitions in this book. When taken together, they provide a system for parsing contemporary English with a wide coverage. However, in order for the phrase structure rules to be kept straightforward and in order to restrict the amount of structural ambiguity encountered with results, limits were placed on the coverage attempted. Here, we note some of the limitations.</p>
+<ul>
+<li>There is no support for parentheticals.</li>
+<li>There is no support for elision or gapping.</li>
+<li>There is no extrapositioning (e.g., rightward relative clause displacement, right node raising, heavy NP shift).</li>
+<li>Clause level noun phrases and preposition phrases are always selected items. That is, they never have adverbial functions additional to what the main predicate selects as its complements.</li>
+<li>There is no logical subject by-phrase with passives.</li>
+<li>A subordinate conjunction word (<tt>P-CONN</tt>) must be present in the parse list for subordinating conjunction to occur.</li>
+<li>More generally, phrase heads need to always be overtly represented in the parse list. Note that representation as a zero head is possible, e.g., <tt>'P-CONN'('*')</tt>.</li>
+<li>Coordination always has an overt conjunction (<tt>CONJ</tt>) word with the last conjunct and comma punctuation (<tt>PU</tt>) before all conjuncts that follow the first conjunct except the last.</li>
+<li>There is no support for <tt>CP-THT</tt> as the complement of nouns or adjectives.</li>
+<li>There is no support for pied-piping with relative clauses or cleft clauses.</li>
+<li>There is no support for relative clauses where the relativised element is an adverb or determiner or genitive pronoun.</li>
+<li>There is no support for empty operator relative clauses.</li>
+<li>There is no support for clause adjoined relative clauses.</li>
+<li>Clause subjects can only occur as notional subjects introduced by provisional subject <i>it</i>.</li>
+<li>There is no support for notional direct objects that occur in clauses with a provisional direct object <i>it</i>.</li>
+<li>There is no support for derived subjects.</li>
+<li>The is no support for embedded multi-sentences.</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The support for punctuation is limited. Commas have to occur between conjuncts, except between the penultimate and last conjunct which must have a represented conjunction word (<tt>CONJ</tt>) instead. Commas can be used optionally after adverbials with a clause initial placement or before adverbials with a clause final placement when attached at the highest layer of clause structure. A full stop as punctuation with a final position is required for a declarative and imperative sentence. A question mark as punctuation with a final position is required for an interrogative sentence. Notably, there is no support for punctuation internal to phrase layers. Also, there is no support for semi-colon or exclamation mark punctuation.</p>
 
 <br>
 <br>
