@@ -421,9 +421,9 @@ body {
 <li>a noun modifier of the noun phrase head</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="#table2.2">2.2</a> that only act as noun phrase heads, and so we need to distinguish this kind of word at the rule level, which we do with the <tt>noun_head</tt> rules of (<a href="#ex2.3">2.3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="#table2.2">2.2</a> that are noun phrase head words that cannot have premodifiers. We need to distinguish this kind of word at the rule level, which we do with the <tt>noun_head</tt> rules of (<a href="#ex2.3">2.3</a>).</p>
 
-<p><a name="table2.2">Table 2.2: Tags for words that need to be noun phrase heads</a></p>
+<p><a name="table2.2">Table 2.2: Tags for noun phrase head words that cannot have premodifiers</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>NPRS</tt></td><td>Plural proper noun (e.g.&nbsp;<tt>Heathers</tt>, <tt>Koreas</tt>)</td></tr>
@@ -441,9 +441,9 @@ body {
 <tt>noun_head(['D;_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['D;_nphd_'(Word)].</tt><br>
 <tt>noun_head(['Q;_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['Q;_nphd_'(Word)].</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the words of Table <a href="#table2.3">2.3</a> that essentially contribute a full noun phrase by themselves, that is, words that are noun phrase heads that don't take modifiers. To distinguish these words there are the <tt>noun_head_full</tt> rules of (<a href="#ex2.4">2.4</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the words of Table <a href="#table2.3">2.3</a> that essentially contribute a full noun phrase by themselves, that is, noun phrase head words that cannot have modifiers. To distinguish these words there are the <tt>noun_head_full</tt> rules of (<a href="#ex2.4">2.4</a>).</p>
 
-<p><a name="table2.3">Table 2.3: Tags for words that need to be noun phrase heads without modifiers</a></p>
+<p><a name="table2.3">Table 2.3: Tags for noun phrase head words that cannot have modifiers</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td><tt>PNX</tt></td><td>Reflexive pronoun (e.g.&nbsp;<tt>myself</tt>, <tt>yourself</tt>, <tt>itself</tt>, <tt>ourselves</tt>), or reciprocal pronoun (e.g.&nbsp;<tt>each&lowbar;other</tt>)</td></tr>
@@ -516,7 +516,7 @@ body {
 <table border="1" cellpadding="10px">
 <tr><td><tt>GENM</tt></td><td>The genitive marker <tt>&lt;apos&gt;s</tt> or <tt>&lt;apos&gt;</tt></td></tr>
 <tr><td><tt>PRO;_genm_</tt></td><td>Possessive pronoun, pre-nominal (<tt>my</tt>, <tt>your</tt>, <tt>our</tt>)</td></tr>
-<tr><td><tt>WPRO;_genm_</tt></td><td>Relative pronoun, genitive (<tt>whose</tt>)</td></tr>
+<tr><td><tt>WPRO;_genm_</tt></td><td>Wh-genitive pronoun (<tt>whose</tt>)</td></tr>
 </table>
 <br>
 
