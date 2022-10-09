@@ -71,47 +71,49 @@ that connect these two resources.
 <br>
 <h2><a name="sec14.1">14.1</a>&nbsp;&nbsp;&nbsp;Negative questions</h2>
 
-<p align="justify">To find negative questions, you can use pattern (<a href="#ex14.1">14.1</a>):</p>
+<p align="justify">To find negative questions formed as matrix interrogative clauses with no Wh- word, you can use pattern (<a href="#ex14.1">14.1</a>).</p>
 
 <dl>
-  <dt>(<a name="ex14.1">14.1</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;SBJ&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
+  <dt>(<a name="ex14.1">14.1</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#92;bSBJ&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. /^NEG/ $.. /SBJ/ >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
+  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/ $.. /\bSBJ/ >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">An auxiliary verb is either:</p>
+<p align="justify">With an initial placement inside a matix clause, an interrogative marking word can be:</p>
+<ul>
+<li>a modal word (<tt>MD</tt>)</li>
+<li>a finite form of <small style="font-size: 75%">HAVE</small> (<tt>HVD|HVP</tt>)</li>
+<li>a finite form of <small style="font-size: 75%">BE</small> (<tt>BED|BEP</tt>)</li>
+<li>a finite form of <small style="font-size: 75%">DO</small> (<tt>DOD|DOP</tt>)</li>
+</ul>
+
+<p align="justify">Pattern (<a href="#ex14.1">14.1</a>) says to find an interrogative marking word that is a preceding sister (<tt>&dollar;..</tt>) of both a marker of negation (<tt>NEG</tt>) and a subject (<tt>&sol;&#92;bSBJ&sol;</tt>). The order between the marker of negation and the subject is unspecified. Additional constraints say that the interrogative marking word should have no other intervening clause layer (<tt>IP</tt>) between it and an <tt>IP-SUB</tt> that is dominated by a <tt>CP-QUE</tt> not dominated by <tt>PRN</tt>. Also, the interrogative marking word should not have a prior sister (<tt>&dollar;,,</tt>) that contains a Wh- word (<tt>&sol;^W&sol; &lt; __</tt>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can specify the order between negation and the subject, so that (<a href="#ex14.2">14.2</a>) finds negative questions where the subject needs to be a following sister (<tt>&dollar;,,</tt>) of the occurrence of negation.</p>
+
 <dl>
-<dt>(i)</dt><dd>a modal (<tt>MD</tt>), or</dd>
-<dt>(ii)</dt><dd>a finite form of <small style="font-size: 75%">HAVE</small> (<tt>HVD|HVP</tt>), <small style="font-size: 75%">BE</small> (<tt>BED|BEP</tt>), or <small style="font-size: 75%">DO</small> (<tt>DOD|DOP</tt>).</dd>
-</dl>
-
-<p align="justify">Pattern (<a href="#ex14.1">14.1</a>) says to find an auxiliary verb that is a preceding sister of (<tt>&dollar;..</tt>) both a negation (<tt>NEG</tt>) and a subject (<tt>&sol;SBJ&sol;</tt>). Additional constraints say that the auxiliary should have no other intervening clause layer (<tt>IP</tt>) between it and an <tt>IP-SUB</tt> that is dominated by a <tt>CP-QUE</tt> not dominated by <tt>PRN</tt>. Also, the auxiliary should not be following on from a sister (<tt>&dollar;,,</tt>) that contains a WH word (<tt>&sol;^W&sol; &lt; __</tt>). The order between negation and the subject is left unspecified.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can specify the order between negation and the subject, so that (<a href="#ex14.2">14.2</a>) finds negative questions where the subject needs to be a following sister of (<tt>&dollar;,,</tt>) the occurrence of negation.</p>
-
-<dl>
-  <dt>(<a name="ex14.2">14.2</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;SBJ&sol;&nbsp;&#x24;,,&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
+  <dt>(<a name="ex14.2">14.2</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;&#92;bSBJ&sol;&nbsp;&#x24;,,&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. /^NEG/=neg $.. (/SBJ/ $,, =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
+  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/=neg $.. (/\bSBJ/ $,, =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">By contrast, (<a href="#ex14.3">14.3</a>) finds negative questions where the subject needs to be a preceding sister of (<tt>&dollar;..</tt>) the occurrence of negation.</p>
+<p align="justify">By contrast, (<a href="#ex14.3">14.3</a>) finds negative questions where the subject needs to be a preceding sister (<tt>&dollar;..</tt>) of the occurrence of negation.</p>
 
 <dl>
-  <dt>(<a name="ex14.3">14.3</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=aux</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;SBJ&sol;&nbsp;&#x24;..&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=aux))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
+  <dt>(<a name="ex14.3">14.3</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;&#92;bSBJ&sol;&nbsp;&#x24;..&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=aux $.. /^NEG/=neg $.. (/SBJ/ $.. =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =aux)) !$,, (__ << (/^W/ < __))"/>
+  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/=neg $.. (/\bSBJ/ $.. =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -223,9 +225,10 @@ that connect these two resources.
 
 <h3>Things to do:</h3>
 <dl>
-<dt>1.</dt><dd>Observe how pattern (<a href="#ex14.2">14.2</a>) will typically find examples of negative questions with contracted <i>n't</i>.</dd>
-<dt>2.</dt><dd>Observe how pattern (<a href="#ex14.3">14.3</a>) will find examples of negative questions with <i>not</i>.</dd>
+<dt>1.</dt><dd>Considering patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>), which pattern finds examples of negative questions with contracted <i>n't</i>?</dd>
+<dt>2.</dt><dd>Considering patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>), which pattern finds examples of negative questions with <i>not</i>?</dd>
 <dt>3.</dt><dd>See the difference in the number of hits returned by patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>). Which pattern is more common?</dd>
+<dt>4.</dt><dd>What is the most commonly used interrogative marking word that occurs with negation? What about without negation?</dd>
 </dl>
 
 <br>
@@ -334,7 +337,7 @@ I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;"
 
 <h3>Things to do:</h3>
 <dl>
-<dt>1.</dt><dd>Observe in the hits returned by pattern (<a href="#ex14.6">14.6</a>) how the subject internal to the tag question (e.g., the subject highlighted in (<a href="#ex14.7">14.7</a>)) is a pronoun that has a form that will happen to match the subject of the matrix clause. Is this always the case?</dd>
+<dt>1.</dt><dd>Observe in the hits returned by pattern (<a href="#ex14.6">14.6</a>) how the subject internal to the tag question (e.g., the subject highlighted in (<a href="#ex14.7">14.7</a>)) is a pronoun with a form that will match the subject of the matrix clause. Is this always the case?</dd>
 <dt>2.</dt><dd>Also observe in the hits returned by pattern (<a href="#ex14.6">14.6</a>) how the presence or absence of negation in the tag question can alternate with the absence or presence of negation in the matrix clause. Can you find cases where such alternation doesn't occur?</dd>
 </dl>
 
@@ -957,21 +960,23 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
 <br>
 <h2><a name="sec16.1">16.1</a>&nbsp;&nbsp;&nbsp;Free relatives</h2>
 
-<p align="justify">Free relatives (also known as headless relative clauses) are clauses with <i>wh</i>- words that have the same distribution as complete noun phrases (so they can act as subjects, direct objects, complements of preposition phrases, etc.).</p>
+<p align="justify">A free relatives (also known as a headless relative clause) has an initial <i>wh</i>- word with the role of being a relative word within a relative clause that is all the content for the free relative. Free relatives have the same distribution as complete noun phrases, that is, they can act as subjects, direct objects, complements of preposition phrases, etc.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can find all of the free relatives with pattern (<a href="#ex16.1">16.1</a>). Notably, (<a href="#ex16.1">16.1</a>) has tree relation &lsquo;<tt>&lt;:</tt>&rsquo; to state that the IP-REL node is the only daughter of a found NP node that is a free relative. The other conditions of the pattern concern the need for the free relative itself to contain a <i>wh</i>- (relative) word without there being a distinct intervening IP layer.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can find free relatives with pattern (<a href="#ex16.1">16.1</a>).</p>
 
 <dl>
-  <dt>(<a name="ex16.1">16.1</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;:&nbsp;(&sol;&#94;IP-REL&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(RPRO|RD|RADV)&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
+  <dt>(<a name="ex16.1">16.1</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;&lt;:&nbsp;(&sol;&#94;IP-REL&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(RPRO|RD|RADV)&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP\b/ >> =i)))"/>
+  <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP-REL\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">For example, (<a href="#ex16.2">16.2</a>) is found with pattern (<a href="#ex16.1">16.1</a>).</p>
+<p align="justify">Pattern (<a href="#ex16.1">16.1</a>) has tree relation &lsquo;<tt>&lt;:</tt>&rsquo; to state that a matched <tt>IP-REL</tt> node is the only daughter of a matched <tt>NP</tt> node that is the master node for the overall pattern, that is, the uppermost part of the matched free relative. Brackets ensure that other conditions of the pattern concern the need for the matched <tt>IP-REL</tt> node to contain a relative word (that is, a word tagged as either <tt>RPRO</tt>, <tt>RD</tt>, or <tt>RADV</tt>) without there being a distinct intervening <tt>IP-REL</tt> layer. The condition for no distinct intervening <tt>IP-REL</tt> layer involves a link (<tt>=i</tt>) back to the node that will have been matched as the relative clause part of the free relative (<tt>&sol;^IP-REL&sol;=i</tt>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, (<a href="#ex16.2">16.2</a>) is found with pattern (<a href="#ex16.1">16.1</a>).</p>
 
 <dl>
   <dt>(<a name="ex16.2">16.2</a>)</dt><dd></dd>
@@ -1070,13 +1075,13 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
 <p align="justify">
 We want you to Know <font style="background-color: Wheat;">why your support of Goodwill is so important</font> .
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1034.88" height="514.5" viewBox="-16.5 17.5 1368.84 675">
-  <text x="667.92" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="667.92" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="667.92" y1="70" x2="148.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="667.92" y1="70" x2="254.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="667.92" y1="70" x2="789.36" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="667.92" y1="70" x2="1304.82" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1141.8" height="514.5" viewBox="-16.5 17.5 1511.4 675">
+  <text x="739.2" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="739.2" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="739.2" y1="70" x2="148.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="739.2" y1="70" x2="289.74" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="739.2" y1="70" x2="896.28" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="739.2" y1="70" x2="1447.38" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="125" text-anchor="middle">NP-SBJ</text>
   <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="195" text-anchor="middle">PRO</text>
@@ -1085,76 +1090,76 @@ We want you to Know <font style="background-color: Wheat;">why your support of G
   <text x="148.5" y="125" text-anchor="middle">VBP;~Tnt</text>
   <line x1="148.5" y1="140" x2="148.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="148.5" y="195" text-anchor="middle">want</text>
-  <text x="254.1" y="125" text-anchor="middle">NP-DOB1</text>
-  <line x1="254.1" y1="140" x2="254.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="254.1" y="195" text-anchor="middle">PRO</text>
-  <line x1="254.1" y1="210" x2="254.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="254.1" y="265" text-anchor="middle">you</text>
-  <text x="789.36" y="125" text-anchor="middle">IP-INF-OB1</text>
-  <line x1="789.36" y1="140" x2="335.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="789.36" y1="140" x2="413.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="789.36" y1="140" x2="867.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="335.94" y="195" text-anchor="middle">TO</text>
-  <line x1="335.94" y1="210" x2="335.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="335.94" y="265" text-anchor="middle">to</text>
-  <text x="413.82" y="195" text-anchor="middle">VB;~Tw</text>
-  <line x1="413.82" y1="210" x2="413.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="413.82" y="265" text-anchor="middle">Know</text>
-  <rect x="852.24" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="867.24" y="195" text-anchor="middle">CP-QUE-OB1</text>
-  <line x1="867.24" y1="210" x2="867.24" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="852.24" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="867.24" y="265" text-anchor="middle">IP-SUB</text>
-  <line x1="867.24" y1="280" x2="515.46" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="867.24" y1="280" x2="773.52" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="867.24" y1="280" x2="1027.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="867.24" y1="280" x2="1176.12" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="515.46" y="335" text-anchor="middle">ADVP-CNT</text>
-  <line x1="515.46" y1="350" x2="515.46" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="500.46" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="515.46" y="405" text-anchor="middle">WADV</text>
-  <line x1="515.46" y1="420" x2="515.46" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="515.46" y="475" text-anchor="middle">why</text>
-  <text x="773.52" y="335" text-anchor="middle">NP-SBJ</text>
-  <line x1="773.52" y1="350" x2="621.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="773.52" y1="350" x2="722.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="773.52" y1="350" x2="875.16" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="621.06" y="405" text-anchor="middle">NP-GENV</text>
-  <line x1="621.06" y1="420" x2="621.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="621.06" y="475" text-anchor="middle">PRO</text>
-  <line x1="621.06" y1="490" x2="621.06" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="621.06" y="545" text-anchor="middle">your</text>
-  <text x="722.7" y="405" text-anchor="middle">N</text>
-  <line x1="722.7" y1="420" x2="722.7" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="722.7" y="475" text-anchor="middle">support</text>
-  <text x="875.16" y="405" text-anchor="middle">PP</text>
-  <line x1="875.16" y1="420" x2="820.38" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="875.16" y1="420" x2="922.02" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="820.38" y="475" text-anchor="middle">P-ROLE</text>
-  <line x1="820.38" y1="490" x2="820.38" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="820.38" y="545" text-anchor="middle">of</text>
-  <text x="922.02" y="475" text-anchor="middle">NP</text>
-  <line x1="922.02" y1="490" x2="922.02" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="922.02" y="545" text-anchor="middle">NPR</text>
-  <line x1="922.02" y1="560" x2="922.02" y2="590" style="stroke:#000000;stroke-width:2;"/>
-  <text x="922.02" y="615" text-anchor="middle">Goodwill</text>
-  <text x="1027.62" y="335" text-anchor="middle">BEP;~La</text>
-  <line x1="1027.62" y1="350" x2="1027.62" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1027.62" y="405" text-anchor="middle">is</text>
-  <text x="1176.12" y="335" text-anchor="middle">ADJP-PRD2</text>
-  <line x1="1176.12" y1="350" x2="1117.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1176.12" y1="350" x2="1215.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1117.38" y="405" text-anchor="middle">ADVP</text>
-  <line x1="1117.38" y1="420" x2="1117.38" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1117.38" y="475" text-anchor="middle">ADV</text>
-  <line x1="1117.38" y1="490" x2="1117.38" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1117.38" y="545" text-anchor="middle">so</text>
-  <text x="1215.06" y="405" text-anchor="middle">ADJ</text>
-  <line x1="1215.06" y1="420" x2="1215.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1215.06" y="475" text-anchor="middle">important</text>
-  <text x="1304.82" y="125" text-anchor="middle">PU</text>
-  <line x1="1304.82" y1="140" x2="1304.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1304.82" y="195" text-anchor="middle">.</text>
+  <text x="289.74" y="125" text-anchor="middle">NP-DOB1;{READER}</text>
+  <line x1="289.74" y1="140" x2="289.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="289.74" y="195" text-anchor="middle">PRO</text>
+  <line x1="289.74" y1="210" x2="289.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="289.74" y="265" text-anchor="middle">you</text>
+  <text x="896.28" y="125" text-anchor="middle">IP-INF-OB1</text>
+  <line x1="896.28" y1="140" x2="407.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="896.28" y1="140" x2="485.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="896.28" y1="140" x2="974.16" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="407.22" y="195" text-anchor="middle">TO</text>
+  <line x1="407.22" y1="210" x2="407.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="407.22" y="265" text-anchor="middle">to</text>
+  <text x="485.1" y="195" text-anchor="middle">VB;~Tw</text>
+  <line x1="485.1" y1="210" x2="485.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="485.1" y="265" text-anchor="middle">Know</text>
+  <rect x="959.16" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="974.16" y="195" text-anchor="middle">CP-QUE-OB1</text>
+  <line x1="974.16" y1="210" x2="974.16" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="959.16" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="974.16" y="265" text-anchor="middle">IP-SUB</text>
+  <line x1="974.16" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="974.16" y1="280" x2="880.44" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="974.16" y1="280" x2="1170.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="974.16" y1="280" x2="1318.68" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="586.74" y="335" text-anchor="middle">ADVP-CNT</text>
+  <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="571.74" y="385" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="586.74" y="405" text-anchor="middle">WADV</text>
+  <line x1="586.74" y1="420" x2="586.74" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="586.74" y="475" text-anchor="middle">why</text>
+  <text x="880.44" y="335" text-anchor="middle">NP-SBJ</text>
+  <line x1="880.44" y1="350" x2="727.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="880.44" y1="350" x2="865.26" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="880.44" y1="350" x2="1017.72" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="727.98" y="405" text-anchor="middle">NP-GENV;{READER}</text>
+  <line x1="727.98" y1="420" x2="727.98" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="727.98" y="475" text-anchor="middle">PRO</text>
+  <line x1="727.98" y1="490" x2="727.98" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="727.98" y="545" text-anchor="middle">your</text>
+  <text x="865.26" y="405" text-anchor="middle">N</text>
+  <line x1="865.26" y1="420" x2="865.26" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="865.26" y="475" text-anchor="middle">support</text>
+  <text x="1017.72" y="405" text-anchor="middle">PP</text>
+  <line x1="1017.72" y1="420" x2="962.94" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1017.72" y1="420" x2="1064.58" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="962.94" y="475" text-anchor="middle">P-ROLE</text>
+  <line x1="962.94" y1="490" x2="962.94" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="962.94" y="545" text-anchor="middle">of</text>
+  <text x="1064.58" y="475" text-anchor="middle">NP</text>
+  <line x1="1064.58" y1="490" x2="1064.58" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1064.58" y="545" text-anchor="middle">NPR</text>
+  <line x1="1064.58" y1="560" x2="1064.58" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1064.58" y="615" text-anchor="middle">Goodwill</text>
+  <text x="1170.18" y="335" text-anchor="middle">BEP;~La</text>
+  <line x1="1170.18" y1="350" x2="1170.18" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1170.18" y="405" text-anchor="middle">is</text>
+  <text x="1318.68" y="335" text-anchor="middle">ADJP-PRD2</text>
+  <line x1="1318.68" y1="350" x2="1259.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1318.68" y1="350" x2="1357.62" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1259.94" y="405" text-anchor="middle">ADVP</text>
+  <line x1="1259.94" y1="420" x2="1259.94" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1259.94" y="475" text-anchor="middle">ADV</text>
+  <line x1="1259.94" y1="490" x2="1259.94" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1259.94" y="545" text-anchor="middle">so</text>
+  <text x="1357.62" y="405" text-anchor="middle">ADJ</text>
+  <line x1="1357.62" y1="420" x2="1357.62" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1357.62" y="475" text-anchor="middle">important</text>
+  <text x="1447.38" y="125" text-anchor="middle">PU</text>
+  <line x1="1447.38" y1="140" x2="1447.38" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1447.38" y="195" text-anchor="middle">.</text>
 </svg>
 
 <br/>
@@ -2027,16 +2032,16 @@ He said now , “ <font style="background-color: Wheat;">I ’ve got the perfect
 <p align="justify">Indirect speech is the content of a <i>that</i> clause (with optional <i>that</i> word) that is selected by a reporting verb. Pattern (<a href="#ex17.7">17.7</a>) will find instances of indirect speech where the reporting verb is <small style="font-size: 75%">SAY</small>.</p>
 
 <dl>
-  <dt>(<a name="ex17.7">17.7</a>)</dt><dd><tt>&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#94;(say|said)&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
+  <dt>(<a name="ex17.7">17.7</a>)</dt><dd><tt>&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#92;{say&#92;}&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^V/ < /^(say|said)/ $ /^CP-THT-OB1/"/>
+  <input type="hidden" name="search" value="/^V/ < /\{say\}/ $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">Note how the regular expression <tt>&sol;&caret;(say|said)&sol;</tt> of (<a href="#ex17.7">17.7</a>) will match the different forms of <small style="font-size: 75%">SAY</small>: <i>say</i>, <i>says</i>, <i>saying</i>, and <i>said</i>.</p>
+<p align="justify">Note how the regular expression <tt>&sol;&lcub;say&rcub;&sol;</tt> of (<a href="#ex17.7">17.7</a>) will match the different forms of <small style="font-size: 75%">SAY</small>: <i>say</i>, <i>says</i>, <i>saying</i>, and <i>said</i>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, (<a href="#ex17.8">17.8</a>) is found with (<a href="#ex17.7">17.7</a>).</p>
 
