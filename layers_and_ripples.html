@@ -319,11 +319,11 @@ body {
 <tt>utterance(Id,n(Id,'FRAG'(Phrase),none))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverbial([Phrase]-[]).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="#ex1.4">1.4</a>) will create a structure with <tt>IP-MAT</tt> (declarative matrix clause) as the topmost node. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, (<a href="#ex1.4">1.4</a>) needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="#sec4.2">4.2</a>), and where the last list item is an instance of final punctuation (see section <a href="#sec2.12">2.12</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="#ex1.4">1.4</a>) will create a structure with <tt>IP-MAT</tt> (declarative matrix clause) as the topmost node. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, the first rule of (<a href="#ex1.4">1.4</a>) needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="#sec4.2">4.2</a>), and where the last list item is an instance of final punctuation (see section <a href="#sec2.12">2.12</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Prolog, lists are written with square bracket notation: <tt>[a1, ..., aN]</tt>, where <tt>a1</tt> through to <tt>aN</tt> are the list items.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>parse</tt> to question whether the established parse list has content to satisfy the <tt>utterance</tt> rules of (<a href="#ex1.4">1.4</a>). If <tt>parse</tt> succeeds then parse results are pretty printed as bracketed tree output.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>parse</tt> to question whether the established parse list has content to satisfy an <tt>utterance</tt> rule of (<a href="#ex1.4">1.4</a>). If <tt>parse</tt> succeeds then parse results are pretty printed as bracketed tree output.</p>
 
 <dl>
   <dt>(<a name="ex1.5">1.5</a>)</dt><dd></dd>
@@ -478,7 +478,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, for use within a relative clause, there is the <tt>relative_noun_head_full</tt> rule of (<a href="#ex2.6">2.6</a>), which distinguishes pronouns that serve as a relative pronoun, as need when parsing relative clauses in section <a href="#sec5.6">5.6</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, for use within a relative clause, there is the <tt>relative_noun_head_full</tt> rule of (<a href="#ex2.6">2.6</a>), which distinguishes pronouns that serve as a relative pronoun, as needed when parsing relative clauses in section <a href="#sec5.6">5.6</a>.</p>
 
 <dl>
   <dt>(<a name="ex2.6">2.6</a>)</dt><dd></dd>
@@ -488,7 +488,7 @@ body {
 <br>
 <h2><a name="sec2.3">2.3</a>&nbsp;&nbsp;&nbsp;Determiner words</h2>
 
-<p align="justify">The determiners of Table <a href="#table2.4">2.4</a> are words with support from the <tt>det</tt> rules of (<a href="#ex2.7">2.7</a>) that can only serve as noun head modifiers. Outside of coordination, there can be at most one occurrence of such a word per noun phrase instance.</p>
+<p align="justify">The determiners of Table <a href="#table2.4">2.4</a> are words with support from the <tt>det</tt> rules of (<a href="#ex2.7">2.7</a>) that can only serve as noun head premodifiers. Outside of coordination, there can be at most one occurrence of such a word per noun phrase instance.</p>
 
 <p><a name="table2.4">Table 2.4: Tags for determiner words</a></p>
 
@@ -509,7 +509,7 @@ body {
 <br>
 <h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;Genitive markers</h2>
 
-<p align="justify">A genitive noun phrase which itself acts as the modifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="#table2.5">2.5</a>. Phrase structure integration support is given by <tt>genm</tt> of (<a href="#ex2.8">2.8</a>) and <tt>pronoun_genm</tt> of (<a href="#ex2.9">2.9</a>).</p>
+<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="#table2.5">2.5</a>. Phrase structure integration support is given by <tt>genm</tt> of (<a href="#ex2.8">2.8</a>) and <tt>pronoun_genm</tt> of (<a href="#ex2.9">2.9</a>).</p>
 
 <p><a name="table2.5">Table 2.5: Tags for genitive markers</a></p>
 
@@ -534,26 +534,26 @@ body {
 <br>
 <h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
 
-<p align="justify">A subject is always required in a basic clause, and will be captured in a parse with the rules of (<a href="#ex2.10">2.10</a>). The subject is typically a noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. The rules of (<a href="#ex2.10">2.10</a>) also allow for the subject to be a formal word from Table <a href="#table2.6">2.6</a> that will indicate the occurrence elsewhere in the clause of either a cleft clause (see section <a href="#sec5.7">5.7</a>), a notional subject (see section <a href="#sec5.4">5.4</a>), or an existential subject (see section <a href="#sec4.6">4.6</a>).</p>
+<p align="justify">A subject is always required in a basic clause, and will be captured in a parse with the rules of (<a href="#ex2.10">2.10</a>). The subject is typically a noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. The rules of (<a href="#ex2.10">2.10</a>) also allow for the subject to be a formal word from Table <a href="#table2.6">2.6</a> that will indicate the occurrence elsewhere in the clause of either an existential subject (see section <a href="#sec4.6">4.6</a>), a notional subject (see section <a href="#sec5.4">5.4</a>), or a cleft clause (see section <a href="#sec5.7">5.7</a>).</p>
 
 <p><a name="table2.6">Table 2.6: Tags for subject indicating words</a></p>
 
 <table border="1" cellpadding="10px">
-<tr><td><tt>PRO;_clf_</tt></td><td>Cleft <tt>it</tt> co-occurring with a cleft clause (<tt>IP-CLF</tt>)</td></tr>
-<tr><td><tt>PRO;_pvl_</tt></td><td>Provisional <tt>it</tt> co-occurring with a notional subject (<tt>-NSBJ</tt>)</td></tr>
 <tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e.&nbsp;<i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
+<tr><td><tt>PRO;_pvl_</tt></td><td>Provisional <tt>it</tt> co-occurring with a notional subject (<tt>-NSBJ</tt>)</td></tr>
+<tr><td><tt>PRO;_clf_</tt></td><td>Cleft <tt>it</tt> co-occurring with a cleft clause (<tt>IP-CLF</tt>)</td></tr>
 </table>
 <br>
 
 <dl>
   <dt>(<a name="ex2.10">2.10</a>)</dt><dd></dd>
 </dl>
-<tt>subject(cleft,['NP-PSBJ'('PRO;_clf_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;['PRO;_clf_'(Word)].</tt><br>
-<tt>subject(provisional,['NP-PSBJ'('PRO;_pvl_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;['PRO;_pvl_'(Word)].</tt><br>
 <tt>subject(there,['EX'(Word)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;['EX'(Word)].</tt><br>
+<tt>subject(provisional,['NP-PSBJ'('PRO;_pvl_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;['PRO;_pvl_'(Word)].</tt><br>
+<tt>subject(cleft,['NP-PSBJ'('PRO;_clf_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;['PRO;_clf_'(Word)].</tt><br>
 <tt>subject(filled_subject,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',L).</tt><br>
 
@@ -1500,7 +1500,7 @@ body {
 <br>
 <h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;Noun phrases</h2>
 
-<p align="justify">This section considers noun phrases. A noun phrase is created with (<a href="#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content (<tt>NPL</tt>). Operation <tt>NP =.. [Label|NPL]</tt> turns the collected elements of list <tt>NPL</tt> into daughter elements for a tree structure represented with a Prolog structure that has principal functor <tt>Label</tt>, consisting  of <tt>'NP'</tt> together with any extension from the <tt>Ext</tt> parameter. This assembled structure is added to a difference list that is a collection point for content outside the noun phrase.</p>
+<p align="justify">This section considers noun phrases. A noun phrase is created with (<a href="#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content (<tt>NPL</tt>). Operation <tt>NP =.. [Label|NPL]</tt> turns the collected elements of list <tt>NPL</tt> into daughter elements for a tree structure represented with a Prolog structure that has principal functor <tt>Label</tt>, consisting  of <tt>'NP'</tt> together with any extension from the <tt>Ext</tt> parameter. This assembled structure is added to content collected from outside the noun phrase.</p>
 
 <dl>
   <dt>(<a name="ex3.1">3.1</a>)</dt><dd></dd>
@@ -1512,15 +1512,19 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;NP&nbsp;=..&nbsp;[Label|NPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of the <tt>noun_phrase_top</tt> rule (<a href="#ex3.2">3.2</a>) concerns a difference list (captured with <tt>L</tt>) that gathers content from either a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="#sec3.2.1">3.2.1</a> below), or a call of <tt>noun_head_full</tt> (from section <a href="#sec2.2">2.2</a>) which identifies words that essentially contribute a full noun phrase by themselves.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of the <tt>noun_phrase_top</tt> rule (<a href="#ex3.2">3.2</a>) concerns gathering content from either:</p>
+<ul>
+<li>a call of <tt>noun_head_full</tt> (from section <a href="#sec2.2">2.2</a>) which will identify a word that essentially contributes a full noun phrase by itself (the first rule)</li>
+<li>a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="#sec3.2.1">3.2.1</a> below) (the second rule)</li>
+</ul>
 
 <dl>
   <dt>(<a name="ex3.2">3.2</a>)</dt><dd></dd>
 </dl>
 <tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L).</tt><br>
-<tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_head_full(L).</tt><br>
+<tt>noun_phrase_top(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(L).</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Query (<a href="#ex3.3">3.3</a>) asks if <tt>'PRO'('him')</tt> provides content to project structure for a noun phrase.</p>
 
@@ -2635,7 +2639,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.25">3.25</a>) establish the head word as a word found with calls of either <tt>adv</tt> (the first rule) or <tt>adv_catenative</tt> (the second rule). See section <a href="#sec2.6">2.6</a> for the <tt>adv</tt> and <tt>adv_catenative</tt> word rules. Finding the head word with <tt>adv_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="#ex3.25">3.25</a>) can also be recursive allowing the parse to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="#ex3.25">3.25</a>) can also be recursive, allowing the parse to either:</p>
 <ul>
 <li>(the thrid rule) pick up pre-head modifier adverb phrases</li>
 <li>(the fourth rule) pick up post-head modifier preposition phrases</li>
@@ -2691,7 +2695,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="#ex3.28">3.28</a>) establish the head word as a word found with calls of either <tt>adj</tt> (the first rule) or <tt>adj_catenative</tt> (the second rule). See section <a href="#sec2.7">2.7</a> for the <tt>adj</tt> and <tt>adj_catenative</tt> word rules. Finding the head word with <tt>adj_catenative</tt> brings the additional need for parse list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="#sec4.4.1">4.4.1</a>), with parameters stating no inheritance of displaced content (<tt>[]</tt>) and a <tt>filled_subject</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="#ex3.28">3.28</a>) can also be recursive allowing the parse to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="#ex3.28">3.28</a>) can also be recursive, allowing the parse to either:</p>
 <ul>
 <li>(the third rule) pick up pre-head modifier adverb phrases</li>
 <li>(the fourth rule) pick up post-head modifier preposition phrases</li>
@@ -4133,7 +4137,7 @@ body {
 <li><tt>passive</tt></li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>verb_phrase_layer</tt> can also be recursive allowing the parse to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>verb_phrase_layer</tt> can also be recursive, allowing the parse to either:</p>
 <ul>
 <li>(the second rule) pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="#sec3.3">3.3</a>)</li>
 <li>(the third rule) pick up clause final adverbials with a call to <tt>adverbial</tt> (from section <a href="#sec5.5">5.5</a>)</li>
