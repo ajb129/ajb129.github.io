@@ -275,7 +275,7 @@ body {
 <br>
 <h2><a name="sec1.3">1.3</a>&nbsp;&nbsp;&nbsp;Orientation</h2>
 
-<p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write a set of phrase structure rules and get an executable Prolog program.</p>
+<p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write phrase structure rules and get an executable Prolog program.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has already been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
