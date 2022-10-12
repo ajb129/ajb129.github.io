@@ -636,7 +636,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_tag(Infl,Tag_list),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,Tag_list),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;sub_atom(Tag,0,1,_,C),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code(C,Code)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code(C,Infl,Code)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,Code,L-L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complement(Tag,Code,Displaced,Sbj_type,Voice,L1-L0).</tt><br>
@@ -721,9 +721,14 @@ body {
 <dl>
   <dt>(<a name="ex2.16">2.16</a>)</dt><dd></dd>
 </dl>
-<tt>verb_code('H',Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Code,[';~Tn',';~cat_Vt',';~cat_Ve']).</tt><br>
-<tt>verb_code('B',Code)&nbsp;:-</tt><br>
+<tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;(</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Infl,[imperative,en_participle])&nbsp;-&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Code,[';~Tn',';~cat_Vt'])</tt><br>
+<tt>&nbsp;&nbsp;;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Code,[';~Tn',';~cat_Vt',';~cat_Ve'])</tt><br>
+<tt>&nbsp;&nbsp;).</tt><br>
+<tt>verb_code('B',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',</tt><br>
@@ -732,9 +737,9 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cleft_Vn'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
-<tt>verb_code('D',Code)&nbsp;:-</tt><br>
+<tt>verb_code('D',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~I',';~Tn']).</tt><br>
-<tt>verb_code('V',Code)&nbsp;:-</tt><br>
+<tt>verb_code('V',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',';~It',</tt><br>
@@ -4974,13 +4979,13 @@ body {
 <tt>have_be_or_mod_cat_finite_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['HVP','HVD']),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('H',Code)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('H',finite,Code)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,Code,L).</tt><br>
 <tt>have_be_or_mod_cat_finite_inside(Tag,Code,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['BEP','BED']),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('B',Code)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('B',finite,Code)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb(Tag,Code,L).</tt><br>
 <tt>have_be_or_mod_cat_finite_inside('MD',';~cat_Vt',L)&nbsp;--&gt;</tt><br>
