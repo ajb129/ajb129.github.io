@@ -323,7 +323,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Prolog, lists are written with square bracket notation: <tt>[a1, ..., aN]</tt>, where <tt>a1</tt> through to <tt>aN</tt> are the list items.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>parse</tt> to question whether the established parse list has content to satisfy an <tt>utterance</tt> rule of (<a href="#ex1.4">1.4</a>). If <tt>parse</tt> succeeds then parse results are pretty printed as bracketed tree output.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="#ex1.5">1.5</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to establish a list of items to parse. Let's call this the <b>parse list</b>. The second call has <tt>parse</tt> to question whether the established parse list has content to satisfy an <tt>utterance</tt> rule of (<a href="#ex1.4">1.4</a>) with <tt>'ex1.5'</tt> to match <tt>Id</tt> of the rules of (<a href="#ex1.4">1.4</a>), while the second parameter for accumulating overall parse information is kept hidden internally to the <tt>parse</tt> call. If <tt>parse</tt> succeeds then all parse results are pretty printed as bracketed tree output.</p>
 
 <dl>
   <dt>(<a name="ex1.5">1.5</a>)</dt><dd></dd>
@@ -1079,13 +1079,13 @@ body {
 <tt>['NP-OB1'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and active voice there is selection of a noun phrase with direct object function (<tt>NP-OB1</tt>) and a preposition phrase with underspecified object function (<tt>PP-OBU</tt>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and active voice there is selection of a noun phrase with direct object function (<tt>NP-OB1</tt>) and a preposition phrase with unspecified object function (<tt>PP-OBU</tt>).</p>
 <ul>
 <li>with the first rule content for both objects is taken from the parse list, the direct object noun phrase occurring first</li>
-<li>with the second rule the underspecified object preposition phrase occurs as content from the parse list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase</li>
+<li>with the second rule the unspecified object preposition phrase occurs as content from the parse list while the direct object occurs as an <tt>ICH</tt> link to a displaced noun phrase</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and passive voice there is only the underspecified object preposition phrase occurring as content from the parse list (the third rule).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.38">2.38</a>) with code <tt>;~Dn.pr</tt> and passive voice there is only the unspecified object preposition phrase occurring as content from the parse list (the third rule).</p>
 
 <dl>
   <dt>(<a name="ex2.38">2.38</a>)</dt><dd></dd>
@@ -8713,13 +8713,15 @@ body {
 <br>
 <h2><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;Subordinate conjunction</h2>
 
-<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens when the containing clause is being parsed with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="#sec4.2">4.2</a>) that call <tt>adverbial</tt> in (<a href="#ex5.19">5.19</a>), which for the purpose of detecting the subordinate clause of a subordinate conjunction calls <tt>scon_clause</tt> of (<a href="#ex5.20">5.20</a>) below.</p>
+<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where preposition phrases with an adverbial function role and adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens when the containing clause is being parsed with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="#sec4.2">4.2</a>) that call <tt>adverbial</tt> in (<a href="#ex5.19">5.19</a>), which for the purpose of detecting the subordinate clause of a subordinate conjunction calls <tt>scon_clause</tt> of (<a href="#ex5.20">5.20</a>) below.</p>
 
 <dl>
   <dt>(<a name="ex5.19">5.19</a>)</dt><dd></dd>
 </dl>
 <tt>adverbial(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L).</tt><br>
+<tt>adverbial(L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('-ADV',L).</tt><br>
 <tt>adverbial(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;scon_clause(L).</tt><br>
 
