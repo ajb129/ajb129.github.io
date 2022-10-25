@@ -7463,7 +7463,7 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a subordinate clause has a subject role within the containing clause, it will often occur as a notional subject extraposed to the right edge of the containing clause and in co-occurrence with a provisional subject <i>it</i> of the containing clause. Section <a href="#sec5.4">5.4</a> notes how parsing can capture the ripple effect connecting the provisional subject <i>it</i> and the extraposed notional subject.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A clause can also be the subordinate component of a subordinate conjunction, which is covered in section <a href="#sec5.5">5.5</a>. Section <a href="#sec5.6">5.6</a> includes the possibility of having a participle (<i>-ing</i>) clause as the required complement of a preposition to give a preposition phrase. In section <a href="#sec5.7">5.7</a>, subordination is also seen to occur with relative clauses, where a clause possibly with an initial relative pronoun and with an absence elsewhere of a selected clause item acts as a modifier. Section <a href="#sec5.8">5.8</a> adds support for cleft constructions.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A clause can also be the subordinate component of a subordinate conjunction, which is covered in section <a href="#sec5.5">5.5</a>. Section <a href="#sec5.6">5.6</a> includes the possibility of having a participle clause as the required complement of a preposition to give a preposition phrase. In section <a href="#sec5.7">5.7</a>, subordination is also seen to occur with relative clauses, where a clause possibly with an initial relative pronoun and with an absence elsewhere of a selected clause item acts as a modifier. Section <a href="#sec5.8">5.8</a> adds support for cleft constructions.</p>
 
 <br>
 <h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;CP-THT (that clause)</h2>
@@ -8733,11 +8733,11 @@ body {
 <tt>adverbial(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;scon_clause(L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A limitation with <tt>scon_clause</tt> of (<a href="#ex5.20">5.20</a>) is that there are only rules for cases where an explicit subordinate conjunction word (<tt>P-CONN</tt>) is present, that is, a word found with <tt>conn</tt> from section <a href="#sec2.11">2.11</a>. The rules of (<a href="#ex5.20">5.20</a>) differ in regards to the type of the subordinate clause contained, that is, either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A limitation with <tt>scon_clause</tt> of (<a href="#ex5.20">5.20</a>) is that there are only rules for cases where an explicit subordinate conjunction word (<tt>P-CONN</tt>) occurs, that is, a word found with <tt>conn</tt> from section <a href="#sec2.11">2.11</a>. The rules of (<a href="#ex5.20">5.20</a>) differ in regards to the type of the subordinate clause contained, that is, either:</p>
 <ul>
 <li>(the first rule) a finite clause (<tt>IP-ADV</tt>)</li>
 <li>(the second rule) a <i>to</i>-infinitive clause (<tt>IP-INF</tt>)</li>
-<li>(the third rule) a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>)</li>
+<li>(the third rule) a participle clause (<tt>IP-PPL</tt>)</li>
 </ul>
 
 <p align="justify">The fourth rule of (<a href="#ex5.20">5.20</a>) allows for coordination at the topmost level of a subordinate conjunction, with subsequent recursive calls to <tt>scon_clause_tail</tt> of (<a href="#ex5.21">5.21</a>) for collecting subsequent conjuncts.</p>
@@ -9170,11 +9170,9 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<h3><a name="sec5.5.2">5.5.2</a>&nbsp;&nbsp;&nbsp;Subordinate conjunction with participle (-ing) clauses</h3>
+<h3><a name="sec5.5.2">5.5.2</a>&nbsp;&nbsp;&nbsp;Subordinate conjunction with participle clauses</h3>
 
-<p align="justify">The option of subordinate conjunction with participle (<i>-ing</i>) clauses creates the opportunity for more structure to be part of the participle clause than is possible with the participle clause forming rule of <tt>ip_ppl</tt> from section <a href="#sec4.27">4.27</a>. The <tt>ip_ppl</tt> rule is called to create the complement of catenative verbs (<tt>IP-PPL-CAT</tt>) and options for notional subjects (<tt>IP-PPL-NSBJ</tt>) and objects (<tt>IP-PPL-OB1</tt>).</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The extra possibilities for participle clauses is created with <tt>ip_ppl_adverbial</tt> of (<a href="#ex5.25">5.25</a>), which calls the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="#ex5.26">5.26</a>) with an unset <tt>Sbj_type</tt> parameter.</p>
+<p align="justify">The option of subordinate conjunction with participle clauses creates the opportunity for more structure to be part of the participle clause than is possible with the <tt>ip_ppl</tt> rule from section <a href="#sec4.27">4.27</a>, which creates the complements of catenative verbs (<tt>IP-PPL-CAT</tt>) and options for notional subjects (<tt>IP-PPL-NSBJ</tt>) and objects (<tt>IP-PPL-OB1</tt>). The relevant extra possibilities are created with <tt>ip_ppl_adverbial</tt> of (<a href="#ex5.25">5.25</a>), which calls the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="#ex5.26">5.26</a>) with an unset <tt>Sbj_type</tt> parameter.</p>
 
 <dl>
   <dt>(<a name="ex5.25">5.25</a>)</dt><dd></dd>
@@ -9185,19 +9183,23 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-PPL'|IPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">Notably, <tt>ip_ppl_adverbial_layer</tt> of (<a href="#ex5.26">5.26</a>) adds the possibility (the third rule) of a subject being included into the participle clause should the <tt>Sbj_type</tt> parameter be initially set to <tt>unfilled_subject</tt>. The other notable extra comes from the possibility (the first rule) of having <i>having</i> as a catenative verb that selects a past participle (<i>-en</i>) clause as its complement, which is not something that can be done otherwise.</p>
+<p align="justify">The <tt>ip_ppl_adverbial_layer</tt> of (<a href="#ex5.26">5.26</a>) adds the possibility (the first rule) of a subject being included into the participle clause should the <tt>Sbj_type</tt> parameter be initially set to <tt>unfilled_subject</tt>. Another notable extra comes from the possibility (the second rule) of having <i>having</i> as a catenative verb that selects a past participle (<i>-en</i>) clause as its complement, which is not something that can be done otherwise. Also, in addition to the participle clause being a typical present participle clause (the third rule), it is also possible for the participle clause to be a past participle (<i>-en</i>) clause (the fourth rule), or a passive participle (<i>-en</i>) clause (the fifth rule), and for all these options to enter into coordination with one another (the sixth rule).</p>
 
 <dl>
   <dt>(<a name="ex5.26">5.26</a>)</dt><dd></dd>
 </dl>
+<tt>ip_ppl_adverbial_layer(unfilled_subject,L-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',L-L1),</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,L1-L0).</tt><br>
 <tt>ip_ppl_adverbial_layer(filled_subject,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb('HAG',';~cat_Ve',L-L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl('-CAT',[],filled_subject,en_participle,L1-L0).</tt><br>
 <tt>ip_ppl_adverbial_layer(filled_subject,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_subject,ing_participle,active,L).</tt><br>
-<tt>ip_ppl_adverbial_layer(unfilled_subject,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-SBJ',L-L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,L1-L0).</tt><br>
+<tt>ip_ppl_adverbial_layer(filled_subject,L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer([],filled_subject,en_participle,active,L).</tt><br>
+<tt>ip_ppl_adverbial_layer(filled_subject,['NP-LGS'('*')|L]-L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer([],filled_subject,en_participle,passive,L-L0).</tt><br>
 <tt>ip_ppl_adverbial_layer(Sbj_type,[IML|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(Sbj_type,IMLL1-[]),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_tail(Sbj_type,L1-[]),</tt><br>
@@ -9269,25 +9271,71 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<br>
-<h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;Participle (-ing) clauses as preposition complements</h2>
-
-<p align="justify">Section <a href="#sec5.5.2">5.5.2</a> has shown how a participle (<i>-ing</i>) clause can be added to a containing clause with subordinate conjunction. It is also possible for participle (<i>-ing</i>) clauses to be introduced as the required complement of a preposition to give a preposition phrase. This possibility is achieved by adding rule (<a href="#ex5.30">5.30</a>) to the <tt>preposition_phrase_layer</tt> rule for including noun phrases in section <a href="#sec3.5">3.5</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>With</i> from a sentence initial position, consider (<a href="#ex5.30">5.30</a>).</p>
 
 <dl>
   <dt>(<a name="ex5.30">5.30</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string(['P-CONN'('With'),'PRO;_genm_'('their'),'N'('load'),</tt><br>
+<tt>'P-ROLE'('of'),'NS'('bombs'),'VVN;~I'('gone'),'PU'(','),'D'('the'),'NS'('planes'),</tt><br>
+<tt>'VBD;~Ip'('moved'),'ADV'('swiftly'),'CONJ'('and'),'ADV'('easily'),'PU'('.')]),</tt><br>
+<tt>parse(utterance('ex5.30')).</tt><br>
+<tt></tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;With)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL&nbsp;(NP-SBJ&nbsp;(NP-GENV&nbsp;(PRO;_genm_&nbsp;their))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;load)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NS&nbsp;bombs))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~I&nbsp;gone)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;planes))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ip&nbsp;moved)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP&nbsp;(AML&nbsp;(ADVP&nbsp;(ADV&nbsp;swiftly))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP&nbsp;(ADV&nbsp;easily)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.30))</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a passive participle (<i>-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>as_if</i> from a sentence final position, consider (<a href="#ex5.31">5.31</a>).</p>
+
+<dl>
+  <dt>(<a name="ex5.31">5.31</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string(['NPR'('Jones'),'VBD;~I'('sighed'),'P-CONN'('as_if'),</tt><br>
+<tt>'VVN;~Tn'('relieved'),'PU'('.')]),&nbsp;parse(utterance('ex5.31')).</tt><br>
+<tt></tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Jones))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~I&nbsp;sighed)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;as_if)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;relieved)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.31))</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+
+<br>
+<h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;Participle clauses as preposition complements</h2>
+
+<p align="justify">Section <a href="#sec5.5.2">5.5.2</a> has shown how a participle (<i>-ing</i>) clause can be added to a containing clause with subordinate conjunction. It is also possible for participle (<i>-ing</i>) clauses to be introduced as the required complement of a preposition to give a preposition phrase. This possibility is achieved by adding rule (<a href="#ex5.32">5.32</a>) to the <tt>preposition_phrase_layer</tt> rule for including noun phrases in section <a href="#sec3.5">3.5</a>.</p>
+
+<dl>
+  <dt>(<a name="ex5.32">5.32</a>)</dt><dd></dd>
 </dl>
 <tt>preposition_phrase_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial(L1-L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the preposition word (<tt>P-ROLE</tt>) <i>like</i>, consider (<a href="#ex5.31">5.31</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the preposition word (<tt>P-ROLE</tt>) <i>like</i>, consider (<a href="#ex5.33">5.33</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.31">5.31</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.33">5.33</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('It'),'VBD;~Ipr'('sounded'),'P-ROLE'('like'),'D'('a'),</tt><br>
-<tt>'N'('man'),'VAG;~Tn'('kicking'),'D'('a'),'N'('melon'),'PU'('.')]),&nbsp;parse(utterance('ex5.31')).</tt><br>
+<tt>'N'('man'),'VAG;~Tn'('kicking'),'D'('a'),'N'('melon'),'PU'('.')]),&nbsp;parse(utterance('ex5.33')).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ipr&nbsp;sounded)</tt><br>
@@ -9298,7 +9346,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;melon))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;ex5.31))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.33))</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ipr&nbsp;sounded)</tt><br>
@@ -9309,11 +9357,31 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;melon)))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;ex5.31))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.33))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The parse of (<a href="#ex5.31">5.31</a>) returns two results. It is the first result that illustrates the possibility of a present participle (<i>-ing</i>) clause being introduced as the required complement of a preposition to form a preposition phrase. Note how, with this structure, there is a subject internal to the present participle clause. The second result illustrates the possibility of an alternative analysis where the present participle clause forms a reduced relative clause. Rule support for reduced relative clauses is introduced in the next section.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The parse of (<a href="#ex5.33">5.33</a>) returns two results. It is the first result that illustrates the possibility of a present participle (<i>-ing</i>) clause being introduced as the required complement of a preposition to form a preposition phrase. Note how, with this structure, there is a subject internal to the present participle clause. The second result illustrates the possibility of an alternative analysis where the present participle clause forms a reduced relative clause. Rule support for reduced relative clauses is introduced in the next section.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-en</i>) clause (<tt>IP-PPL</tt>) introduced by the preposition word (<tt>P-ROLE</tt>) <i>from</i>, consider (<a href="#ex5.34">5.34</a>).</p>
+
+<dl>
+  <dt>(<a name="ex5.34">5.34</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO'('You'),'MD'('can'),'VB;~Tn'('cook'),'PRO'('them'),</tt><br>
+<tt>'P-ROLE'('from'),'VVN;~Tn'('frozen'),'PU'('.')]),&nbsp;parse(utterance('ex5.34')).</tt><br>
+<tt></tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;You))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;can)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;cook)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(PRO&nbsp;them))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-ADV&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;frozen)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.34))</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
 
 <br>
 <h2><a name="sec5.7">5.7</a>&nbsp;&nbsp;&nbsp;Relative clauses</h2>
@@ -9326,10 +9394,10 @@ body {
 <dt>(iv)</dt><dd>as a <i>to</i>-infinitive clause with a missing selected element</dd>
 </dl>
 
-<p align="justify">Cases (i) and (ii) are captured with the first <tt>relative_clause</tt> rule of (<a href="#ex5.32">5.32</a>), case (iii) with the second and third rules (which respectively call <tt>ip_ppl</tt> from section <a href="#sec4.4.2">4.4.2</a> and <tt>ip_ppl_passive</tt> from section <a href="#sec4.4.4">4.4.4</a>), and case (iv) with the fourth rule (which calls <tt>ip_to_inf</tt> from section <a href="#sec4.4.1">4.4.1</a>).</p>
+<p align="justify">Cases (i) and (ii) are captured with the first <tt>relative_clause</tt> rule of (<a href="#ex5.35">5.35</a>), case (iii) with the second and third rules (which respectively call <tt>ip_ppl</tt> from section <a href="#sec4.4.2">4.4.2</a> and <tt>ip_ppl_passive</tt> from section <a href="#sec4.4.4">4.4.4</a>), and case (iv) with the fourth rule (which calls <tt>ip_to_inf</tt> from section <a href="#sec4.4.1">4.4.1</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.32">5.32</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.35">5.35</a>)</dt><dd></dd>
 </dl>
 <tt>relative_clause([IP|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_top_layer(IPL-[]),</tt><br>
@@ -9343,10 +9411,10 @@ body {
 <tt>relative_clause(L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-REL',['np'('*T*')],_Sbj_type,L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_top_layer</tt> rules of (<a href="#ex5.33">5.33</a>) collect content for a relative clause that either has a relative pronoun or involves a trace, or contains coordination from recursive calls to <tt>relative_clause_top_tail</tt> of (<a href="#ex5.34">5.34</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_top_layer</tt> rules of (<a href="#ex5.36">5.36</a>) collect content for a relative clause that either has a relative pronoun or involves a trace, or contains coordination from recursive calls to <tt>relative_clause_top_tail</tt> of (<a href="#ex5.37">5.37</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
 
 <dl>
-  <dt>(<a name="ex5.33">5.33</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.36">5.36</a>)</dt><dd></dd>
 </dl>
 <tt>relative_clause_top_layer(L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
@@ -9366,7 +9434,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex5.34">5.34</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.37">5.37</a>)</dt><dd></dd>
 </dl>
 <tt>relative_clause_top_tail(['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -9382,10 +9450,10 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IMLL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is the first <tt>relative_clause_top_layer</tt> rule of (<a href="#ex5.33">5.33</a>) that gives the option for a relative clause pronoun with a call to <tt>relative_noun_phrase</tt> of (<a href="#ex5.35">5.35</a>) following creation of an index that is entered into the list of inherited displaced items as <tt>np(ICH)</tt> for the call to <tt>relative_clause_inside</tt> of (<a href="#ex5.36">5.36</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is the first <tt>relative_clause_top_layer</tt> rule of (<a href="#ex5.36">5.36</a>) that gives the option for a relative clause pronoun with a call to <tt>relative_noun_phrase</tt> of (<a href="#ex5.38">5.38</a>) following creation of an index that is entered into the list of inherited displaced items as <tt>np(ICH)</tt> for the call to <tt>relative_clause_inside</tt> of (<a href="#ex5.39">5.39</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.35">5.35</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.38">5.38</a>)</dt><dd></dd>
 </dl>
 <tt>relative_noun_phrase(Ext,[NP|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;relative_noun_head_full(NPL-[]),</tt><br>
@@ -9395,7 +9463,7 @@ body {
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <dl>
-  <dt>(<a name="ex5.36">5.36</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.39">5.39</a>)</dt><dd></dd>
 </dl>
 <tt>relative_clause_inside([np(ICH)],['NP-SBJ'(ICH)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_subject,finite,active,L-L0).</tt><br>
@@ -9404,10 +9472,10 @@ body {
 <tt>relative_clause_inside(Displaced,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement,Displaced,L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>that</i> creating a non-subject dependency internally to a relative clause, consider (<a href="#ex5.37">5.37</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>that</i> creating a non-subject dependency internally to a relative clause, consider (<a href="#ex5.40">5.40</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.37">5.37</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.40">5.40</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('a'),'N'('barn'),'RPRO'('that'),'D'('a'),'N'('horse'),</tt><br>
 <tt>'VBD;~Ipr'('raced'),'P-ROLE'('past')]),&nbsp;parse(noun_phrase('')).</tt><br>
@@ -9423,10 +9491,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex5.37">5.37</a>) follow (<a href="#ex5.38">5.38</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex5.40">5.40</a>) follow (<a href="#ex5.41">5.41</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.38">5.38</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.41">5.41</a>)</dt><dd></dd>
 </dl>
 <tt>(noun_phrase</tt><br>
 <tt>&nbsp;(noun_phrase_top</tt><br>
@@ -9689,10 +9757,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a non-subject dependency internal to a relative clause without a relative pronoun, consider (<a href="#ex5.39">5.39</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a non-subject dependency internal to a relative clause without a relative pronoun, consider (<a href="#ex5.42">5.42</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.39">5.39</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.42">5.42</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('a'),'N'('barn'),'D'('a'),'N'('horse'),'VBD;~Ipr'(</tt><br>
 <tt>'raced'),'P-ROLE'('past')]),&nbsp;parse(noun_phrase('')).</tt><br>
@@ -9707,10 +9775,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex5.39">5.39</a>) follow (<a href="#ex5.40">5.40</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex5.42">5.42</a>) follow (<a href="#ex5.43">5.43</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.40">5.40</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.43">5.43</a>)</dt><dd></dd>
 </dl>
 <tt>(noun_phrase</tt><br>
 <tt>&nbsp;(noun_phrase_top</tt><br>
@@ -9945,10 +10013,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> creating a subject dependency internally to a relative clause, consider (<a href="#ex5.41">5.41</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> creating a subject dependency internally to a relative clause, consider (<a href="#ex5.44">5.44</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.41">5.41</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.44">5.44</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('a'),'N'('horse'),'RPRO'('which'),'BED;~cat_Ve'('was'),</tt><br>
 <tt>'VVN;~Tn.pr'('raced'),'P-ROLE'('past'),'D'('a'),'N'('barn')]),&nbsp;parse(noun_phrase('')).</tt><br>
@@ -9966,10 +10034,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex5.41">5.41</a>) follow (<a href="#ex5.42">5.42</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex5.44">5.44</a>) follow (<a href="#ex5.45">5.45</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.42">5.42</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.45">5.45</a>)</dt><dd></dd>
 </dl>
 <tt>(noun_phrase</tt><br>
 <tt>&nbsp;(noun_phrase_top</tt><br>
@@ -10276,10 +10344,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a passive participle (<i>-en</i>) clause, consider (<a href="#ex5.43">5.43</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a passive participle (<i>-en</i>) clause, consider (<a href="#ex5.46">5.46</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.43">5.43</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.46">5.46</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('a'),'N'('horse'),'VVN;~Tn.pr'('raced'),'P-ROLE'(</tt><br>
 <tt>'past'),'D'('a'),'N'('barn')]),&nbsp;parse(noun_phrase('')).</tt><br>
@@ -10294,10 +10362,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex5.43">5.43</a>) follow (<a href="#ex5.44">5.44</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex5.46">5.46</a>) follow (<a href="#ex5.47">5.47</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.44">5.44</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.47">5.47</a>)</dt><dd></dd>
 </dl>
 <tt>(noun_phrase</tt><br>
 <tt>&nbsp;(noun_phrase_top</tt><br>
@@ -10532,10 +10600,10 @@ body {
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="#ex5.45">5.45</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="#ex5.48">5.48</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.45">5.45</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.48">5.48</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['D'('a'),'N'('horse'),'P-CONN'('for'),'PRO'('me'),'TO'('to'),</tt><br>
 <tt>'VB;~Tn.pr'('race'),'P-ROLE'('past'),'D'('a'),'N'('barn')]),&nbsp;parse(noun_phrase('')).</tt><br>
@@ -10553,10 +10621,10 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="#ex5.45">5.45</a>) follow (<a href="#ex5.46">5.46</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="#ex5.48">5.48</a>) follow (<a href="#ex5.49">5.49</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.46">5.46</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.49">5.49</a>)</dt><dd></dd>
 </dl>
 <tt>(noun_phrase</tt><br>
 <tt>&nbsp;(noun_phrase_top</tt><br>
@@ -10862,10 +10930,10 @@ body {
 <br>
 <h2><a name="sec5.8">5.8</a>&nbsp;&nbsp;&nbsp;Cleft constructions</h2>
 
-<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complement</tt> rule of (<a href="#ex5.47">5.47</a>), which selects as complements a noun phrase as the focus (<tt>-FOC</tt>) and a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause. This requires the verb code to be <tt>;~cleft_Vn</tt> and also requires the <tt>Sbj_type</tt> parameter of the clause to be set to the value of <tt>cleft</tt>. This <tt>Sbj_type</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_clf_</tt>, which can only ever be an instance of <i>it</i>.</p>
+<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complement</tt> rule of (<a href="#ex5.50">5.50</a>), which selects as complements a noun phrase as the focus (<tt>-FOC</tt>) and a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause. This requires the verb code to be <tt>;~cleft_Vn</tt> and also requires the <tt>Sbj_type</tt> parameter of the clause to be set to the value of <tt>cleft</tt>. This <tt>Sbj_type</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_clf_</tt>, which can only ever be an instance of <i>it</i>.</p>
 
 <dl>
-  <dt>(<a name="ex5.47">5.47</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.50">5.50</a>)</dt><dd></dd>
 </dl>
 <tt>verb_complement(';~cleft_Vn',[],cleft,active,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-FOC',L-[IP|L0]),</tt><br>
@@ -10874,14 +10942,14 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-CLF'|IPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="#ex5.48">5.48</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="#ex5.51">5.51</a>).</p>
 
 <dl>
-  <dt>(<a name="ex5.48">5.48</a>)</dt><dd></dd>
+  <dt>(<a name="ex5.51">5.51</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(&nbsp;['PRO;_clf_'('It'),'BED;~cleft_Vn'('was'),'D'('an'),</tt><br>
 <tt>'ADJ'('atomic'),'N'('fission'),'PRO'('we'),'VBD;~Tn'('saw'),'PU'('.')]),</tt><br>
-<tt>parse(utterance('ex5.48')).</tt><br>
+<tt>parse(utterance('ex5.51')).</tt><br>
 <tt></tt><br>
 <tt>(&nbsp;(IP-MAT&nbsp;(NP-PSBJ&nbsp;(PRO;_clf_&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BED;~cleft_Vn&nbsp;was)</tt><br>
@@ -10892,7 +10960,7 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Tn&nbsp;saw)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*T*))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;ex5.48))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.51))</tt><br>
 <tt></tt><br>
 <tt>yes</tt><br>
 
