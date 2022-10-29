@@ -277,6 +277,8 @@ body {
 
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write phrase structure rules and get an executable Prolog program.</p>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) includes description of how DCGs relate to the wider field of what Borsley (1996) calls Modern Phrase Strucure Grammar, which includes the approaches of Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG), and Head-driven Phrase Structure Grammar (HPSG).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to write phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="#ex1.1">1.1</a>). When there is left recursion, avoiding infinite loops from rule evaluation requires remembering what has already been evaluated. This is possible with tabling, a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will proceed as follows. The remainder of this chapter, section <a href="#sec1.4">1.4</a>, introduces rules for utterance layers. This will introduce both writing DCG rules and using the Prolog system to query English word input. Subsequent chapters introduce rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="#ch2">2</a> with an inventory of all the kinds of words there are in English. Once we have a handle on the range of words, we will want to start putting words together to create phrases, and this is the goal of chapter <a href="#ch3">3</a>. With access to phrases and words, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="#ch4">4</a>. Chapter <a href="#ch5">5</a> builds on all the preceding chapters by integrating clause subordination.</p>
@@ -534,14 +536,13 @@ body {
 <br>
 <h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
 
-<p align="justify">A subject is always required in a basic clause, and will be captured in a parse with the rules of (<a href="#ex2.10">2.10</a>). The subject is typically a noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. The rules of (<a href="#ex2.10">2.10</a>) also allow for the subject to be a formal word from Table <a href="#table2.6">2.6</a> that will indicate the occurrence elsewhere in the clause of either an existential subject (see section <a href="#sec4.6">4.6</a>), a notional subject (see section <a href="#sec5.4">5.4</a>), or a cleft clause (see section <a href="#sec5.8">5.8</a>).</p>
+<p align="justify">A subject is always required in a basic clause, and will be captured in a parse with the rules of (<a href="#ex2.10">2.10</a>). The subject is typically a noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. This is achieved with the third rule of (<a href="#ex2.10">2.10</a>), which will also set the <tt>Sbj_type</tt> parameter of the clause to the <tt>filled_subject</tt> value. The rules of (<a href="#ex2.10">2.10</a>) also allow for the subject to be a formal word from Table <a href="#table2.6">2.6</a> that will set the <tt>Sbj_type</tt> parameter of the clause to the <tt>there</tt> value (the first rule) or will leave this parameter as an uninstantiated variable (the second rule).</p>
 
 <p><a name="table2.6">Table 2.6: Tags for subject indicating words</a></p>
 
 <table border="1" cellpadding="10px">
-<tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e.&nbsp;<i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
-<tr><td><tt>PRO;_pvl_</tt></td><td>Provisional <tt>it</tt> co-occurring with a notional subject (<tt>-NSBJ</tt>)</td></tr>
-<tr><td><tt>PRO;_clf_</tt></td><td>Cleft <tt>it</tt> co-occurring with a cleft clause (<tt>IP-CLF</tt>)</td></tr>
+<tr><td><tt>EX</tt></td><td>Existential <tt>there</tt>, i.e., <i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
+<tr><td><tt>PRO;_dummy_</tt></td><td>Dummy <tt>it</tt>, e.g., in extraposition (<i>it bothered her that she probably would never know</i>), weather (<i>it's raining</i>), and cleft (<i>so it was you that got them together</i>) constructions</td></tr>
 </table>
 <br>
 
@@ -550,10 +551,8 @@ body {
 </dl>
 <tt>subject(there,['EX'(Word)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;['EX'(Word)].</tt><br>
-<tt>subject(provisional,['NP-PSBJ'('PRO;_pvl_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;['PRO;_pvl_'(Word)].</tt><br>
-<tt>subject(cleft,['NP-PSBJ'('PRO;_clf_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;['PRO;_clf_'(Word)].</tt><br>
+<tt>subject(_Sbj_type,['NP-SBJ;{DUMMY}'('PRO;_dummy_'(Word))|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;['PRO;_dummy_'(Word)].</tt><br>
 <tt>subject(filled_subject,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',L).</tt><br>
 
@@ -718,9 +717,25 @@ body {
 
 <h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;Verb codes</h3>
 
-<p align="justify">We also provide verb codes as tag label extensions in order to further distinguish verbs based on the selection criteria each verb has for its complements. The verb code system for main verbs that we will adopt was developed for Cowie (1989), where the codes are associated with word sense definitions. The Cowie (1989) system is a mnemonic based reworking of the earlier system of Hornby (1975).</p>
+<p align="justify">This section outlines verb codes as tag label extensions. The codes allow for a distinction of verbs to reflect the selection criteria each verb has for its complements.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The different classes of verb allow for different verb codes. We obtain compatible verb codes from calls to <tt>verb_code</tt> of (<a href="#ex2.16">2.16</a>), which takes a capital letter as the value for its first parameter to identify the verb class: <tt>V</tt> for lexical verbs, <tt>D</tt> for <small style="font-size: 75%">DO</small> verbs, <tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs, or <tt>B</tt> for <small style="font-size: 75%">BE</small> verbs. A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For main verbs, there is an adoption of the verb code system from the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989), where the codes are associated with word sense definitions. The system is a mnemonic based reworking of the earlier system of Hornby (1975). A code from the system has:</p>
+<ul>
+<li>a capital letter to signal the number and function of clause elements required by the main verb</li>
+<li>zero or more lower case letters, possibly separated by the dot (&lsquo;.&rsquo;) character, to represent information about the form of the required elements</li>
+</ul>
+
+<p align="justify">For example, the <tt>La</tt> code marks clause structure (<tt>L</tt>) with a linking verb + a subject predicative constituent that is an adjective phrase (<tt>a</tt>)).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the Cowie (1989) main clause codes, there are codes to distinguish:</p>
+<ul>
+<li>catenative verbs (prefixed <tt>cat_</tt>)</li>
+<li>existential verbs (prefixed <tt>ex_</tt>)</li>
+<li>equative verbs (prefixed <tt>equ_</tt>)</li>
+<li>cleft verbs (prefixed <tt>cleft_</tt>)</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The different verb forms (lexical, <small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small>, or <small style="font-size: 75%">BE</small>) allow for different verb codes. <tt>verb_code</tt> of (<a href="#ex2.16">2.16</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify the verb form: <tt>V</tt> for lexical verbs, <tt>D</tt> for <small style="font-size: 75%">DO</small> verbs, <tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs, or <tt>B</tt> for <small style="font-size: 75%">BE</small> verbs. A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
 
 <dl>
   <dt>(<a name="ex2.16">2.16</a>)</dt><dd></dd>
@@ -750,14 +765,17 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Tn',';~Tn.p',';~Tn.pr',';~Tf',';~Tw',';~Tt',';~Tnt',';~Tni',';~Tg',';~Tng',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Dn.n',';~Dn.pr',';~Dn.f',';~Dn.w',';~Dn.t',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Cn.a',';~Cn.n',';~Cn.t',';~Cn.i',';~Cn.g',</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vt',';~cat_Vg',';~cat_Ve'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vt',';~cat_Vg',';~cat_Ve',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~V_as_though&sol;as_if&sol;like'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In the case of <small style="font-size: 75%">HAVE</small> verbs, the returned code will also depend on inflection information inherited with the <tt>Infl</tt> parameter, while all the other verbs have a code picked independently of inflection.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having determined the verb class and the relevant verb code we are in a position to state the complement consequences that result. This is accomplished with the <tt>verb_complement</tt> rules of sections <a href="#sec2.8.2.1">2.8.2.1</a>&ndash;<a href="#sec2.8.2.8">2.8.2.8</a>.</p>
 
 <h4><a name="sec2.8.2.1">2.8.2.1</a>&nbsp;&nbsp;&nbsp;Linking verbs</h4>
 
-<p align="justify">In addition to taking a filled subject, a linking verb requires a phrase with subject predicative function (<tt>-PRD2</tt>) as its complement. This subject predicative can be either an adjective phrase or a noun phrase. This leads to the <tt>verb_complement</tt> rules of (<a href="#ex2.17">2.17</a>) and (<a href="#ex2.18">2.18</a>).</p>
+<p align="justify">In addition to taking a filled subject, a linking verb requires a phrase with subject predicative function (<tt>-PRD2</tt>) as its complement. This subject predicative can be either an adjective phrase (code <tt>;~La</tt>) or a noun phrase (code <tt>;~Ln</tt>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.17">2.17</a>) with code <tt>;~La</tt> there is selection of a subject predicative that is an adjective phrase, and so the parse list should have content for an adjective phrase (<tt>ADJP-PRD2</tt>).</p>
 
@@ -767,21 +785,10 @@ body {
 <tt>verb_complement(';~La',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD2',L).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.18">2.18</a>) with code <tt>;~Ln</tt> there is selection of a subject predicative that is a noun phrase, and so the parse list should have content for a noun phrase (<tt>NP-PRD2</tt>).</p>
-</ul>
+<p align="justify">As an example where (<a href="#ex2.17">2.17</a>) is called from <tt>verb_with_complement</tt> of (<a href="#ex2.14">2.14</a>) because the <tt>;~La</tt> code is encountered, consider (<a href="#ex2.18">2.18</a>).</p>
 
 <dl>
   <dt>(<a name="ex2.18">2.18</a>)</dt><dd></dd>
-</dl>
-<tt>verb_complement(';~Ln',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-PRD2',L).</tt><br>
-<tt>verb_complement(';~Ln',[np(ICH)],filled_subject,active,['NP-PRD2'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;[].</tt><br>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example where (<a href="#ex2.17">2.17</a>) is called from <tt>verb_with_complement</tt> of (<a href="#ex2.14">2.14</a>) because the <tt>;~La</tt> code is encountered, consider (<a href="#ex2.19">2.19</a>).</p>
-
-<dl>
-  <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
 </dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(['VB;~La'('stay'),'ADJ'('happy')]),</tt><br>
 <tt>parse(verb_with_complement([],filled_subject,imperative,active)).</tt><br>
@@ -791,9 +798,19 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how there are two rules of (<a href="#ex2.18">2.18</a>) for the <tt>;~Ln</tt> code. The first rule of (<a href="#ex2.18">2.18</a>) requires a parse list that contains content for a noun phrase to be integrated into the parse result as the subject predicative by calling <tt>noun_phrase</tt> (from section <a href="#sec3.2">3.2</a>) with <tt>-PRD2</tt> as its extension. The second rule captures the possibility of a displaced noun phrase having its index matched by <tt>np(ICH)</tt> to be integrated into the parse as the selected noun phrase with subject predicative function (<tt>NP-PRD2</tt>). For this second rule of (<a href="#ex2.18">2.18</a>) to succeed, the parse list for complements yet to be parsed has to be empty.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.19">2.19</a>) with code <tt>;~Ln</tt> there is selection of a subject predicative that is a noun phrase, and so the parse list should have content for a noun phrase (<tt>NP-PRD2</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example where the first rule of (<a href="#ex2.18">2.18</a>) for the <tt>;~Ln</tt> code is called, consider (<a href="#ex2.20">2.20</a>).</p>
+<dl>
+  <dt>(<a name="ex2.19">2.19</a>)</dt><dd></dd>
+</dl>
+<tt>verb_complement(';~Ln',[],filled_subject,active,L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-PRD2',L).</tt><br>
+<tt>verb_complement(';~Ln',[np(ICH)],filled_subject,active,['NP-PRD2'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[].</tt><br>
+
+<p align="justify">Note how there are two rules of (<a href="#ex2.19">2.19</a>) for the <tt>;~Ln</tt> code. The first rule of (<a href="#ex2.19">2.19</a>) requires a parse list with content for a noun phrase to be integrated into the parse result as the subject predicative. The second rule captures the possibility of a displaced noun phrase having its index matched by <tt>np(ICH)</tt> to be the subject predicative. For this second rule to succeed, the parse list has to be empty.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example where the first rule of (<a href="#ex2.19">2.19</a>) for the <tt>;~Ln</tt> code is called, consider (<a href="#ex2.20">2.20</a>).</p>
 
 <dl>
   <dt>(<a name="ex2.20">2.20</a>)</dt><dd></dd>
@@ -807,7 +824,7 @@ body {
 <tt></tt><br>
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example where the second rule of (<a href="#ex2.18">2.18</a>) for the <tt>;~Ln</tt> code is called, consider (<a href="#ex2.21">2.21</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example where the second rule of (<a href="#ex2.19">2.19</a>) for the <tt>;~Ln</tt> code is called, consider (<a href="#ex2.21">2.21</a>).</p>
 
 <dl>
   <dt>(<a name="ex2.21">2.21</a>)</dt><dd></dd>
@@ -876,7 +893,7 @@ body {
 <tt>verb_complement(';~Ipr',[pp(ICH)],filled_subject,active,['PP'(ICH)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.26">2.26</a>) with code <tt>;~It</tt> there is selection of content from the parse list for a <i>to</i>-infinitive clause, which is labelled <tt>IP-INF-OB1</tt> in the built parse structure.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.26">2.26</a>) with code <tt>;~It</tt> there is selection of content from the parse list for a <i>to</i>-infinitive clause, which will be labelled <tt>IP-INF-OB1</tt> in the built parse structure.</p>
 
 <dl>
   <dt>(<a name="ex2.26">2.26</a>)</dt><dd></dd>
@@ -908,7 +925,7 @@ body {
 <tt>&nbsp;&nbsp;[].</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.28">2.28</a>) with code <tt>;~Tn.p</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP</tt>). While the adverbial particle has to come from an adverb phrase of the parse list, the object noun phrase can occur:</p>
-<dl>
+<ul>
 <li>(the first rule) as content from the parse list that is before the content for the adverb phrase</li>
 <li>(the second rule) as content from the parse list that is after the content for the adverb phrase</li>
 <li>(the third rule) as an <tt>ICH</tt> link to a displaced noun phrase</li>
@@ -1221,7 +1238,6 @@ body {
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.46">2.46</a>) with code <tt>;~Cn.g</tt> and active voice there is selection of a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>), both of which are taken from the parse list, the object occurring first (the first rule).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For (<a href="#ex2.46">2.46</a>) with code <tt>;~Cn.g</tt> and passive voice there is only the present participle (<i>-ing</i>) clause from the parse list (the second rule).</p>
-</ul>
 
 <dl>
   <dt>(<a name="ex2.46">2.46</a>)</dt><dd></dd>
@@ -5330,7 +5346,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Vt</tt> involves selection of a <i>to</i>-infinitive clause as its complement.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_to_inf</tt> rule of (<a href="#ex4.22">4.22</a>) will find content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_layer</tt> of (<a href="#ex4.23">4.23</a>) for overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>EXT</tt> parameter.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_to_inf</tt> rule of (<a href="#ex4.22">4.22</a>) will find content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_layer</tt> of (<a href="#ex4.23">4.23</a>) for overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>Ext</tt> parameter.</p>
 
 <dl>
   <dt>(<a name="ex4.22">4.22</a>)</dt><dd></dd>
@@ -5599,7 +5615,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Ve</tt> involves selection of a past participle (<i>-en</i>) clause as its complement when the word class tag is for a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt>, or <tt>HVN</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A participle clause is found with <tt>ip_ppl</tt> of (<a href="#ex4.27">4.27</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. To find a past participle (<i>-en</i>) clause, the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A participle clause is found with <tt>ip_ppl</tt> of (<a href="#ex4.27">4.27</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. To find a past participle (<i>-en</i>) clause, the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
 
 <dl>
   <dt>(<a name="ex4.27">4.27</a>)</dt><dd></dd>
@@ -5917,7 +5933,7 @@ body {
 
 <p align="justify">The <tt>verb_complement</tt> rule of section <a href="#sec2.8.2.6">2.8.2.6</a> for code <tt>;~cat_Ve</tt> involves selection of a passive participle (<i>-en</i>) clause as its complement when the word class tag is not a form of <small style="font-size: 75%">HAVE</small>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle (<i>-en</i>) clause is found with <tt>ip_ppl_passive</tt> of (<a href="#ex4.32">4.32</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>EXT</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>en_participle</tt> and <tt>passive</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle (<i>-en</i>) clause is found with <tt>ip_ppl_passive</tt> of (<a href="#ex4.32">4.32</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>en_participle</tt> and <tt>passive</tt>.</p>
 
 <dl>
   <dt>(<a name="ex4.32">4.32</a>)</dt><dd></dd>
@@ -7856,16 +7872,16 @@ body {
 <li>a <i>to</i>-infinitive clause (<tt>IP-INF</tt>)</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The maximal constituent of an embedded question clause has the <tt>CP-QUE</tt> tag, together with any extension from the <tt>EXT</tt> parameter taken by <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>). A <tt>cp_que</tt> call can involve a subsequent call of <tt>clause_que_finite_top_layer</tt> to gather under an immediately embedded <tt>IP-SUB</tt> projection the content of either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The maximal constituent of an embedded question clause has the <tt>CP-QUE</tt> tag, together with any extension from the <tt>Ext</tt> parameter taken by <tt>cp_que</tt> of (<a href="#ex5.6">5.6</a>). A <tt>cp_que</tt> call can involve a subsequent call of <tt>clause_que_finite_top_layer</tt> to gather under an immediately embedded <tt>IP-SUB</tt> projection the content of either:</p>
 <ul>
 <li>(the first rule) a finite clause with statement word order</li>
 <li>(the second rule) the first conjunct of a conjunction of statement-word-order finite clauses with a recursive call to <tt>cp_que_finite_tail</tt> to pick up subsequent conjuncts</li>
 </ul>
 
-<p align="justify">A <tt>cp_que</tt> call can also involve a subsequent call of <tt>clause_que_to_infinitive_top_layer</tt> to gather under an immediately embedded <tt>IP-INF</tt> projection the content of either:</p>
+<p align="justify">A <tt>cp_que</tt> call can also involve a subsequent call of <tt>clause_que_to_inf_top_layer</tt> to gather under an immediately embedded <tt>IP-INF</tt> projection the content of either:</p>
 <ul>
 <li>(the third rule) a <i>to</i>-infinitive clause</li>
-<li>(the fourth rule) the first conjunct of a conjunction of <i>to</i>-infinitive clauses with a recursive call to <tt>cp_que_to_infinitive_tail</tt> to pick up subsequent conjuncts</li>
+<li>(the fourth rule) the first conjunct of a conjunction of <i>to</i>-infinitive clauses with a recursive call to <tt>cp_que_to_inf_tail</tt> to pick up subsequent conjuncts</li>
 </ul>
 
 <dl>
@@ -7888,15 +7904,15 @@ body {
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,'IP-SUB'(IML)]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_que(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IPL-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_to_inf_top_layer(Displaced,IPL-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-INF'|IPL],</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;=..&nbsp;[Label,IP]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 <tt>cp_que(Ext,Displaced,[CP|L]-L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IMLL1-[]),</tt><br>
-<tt>&nbsp;&nbsp;cp_que_to_infinitive_tail(Displaced,L1-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_to_inf_top_layer(Displaced,IMLL1-[]),</tt><br>
+<tt>&nbsp;&nbsp;cp_que_to_inf_tail(Displaced,L1-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML1&nbsp;=..&nbsp;['IML'|IMLL1],</tt><br>
@@ -7924,16 +7940,16 @@ body {
 <dl>
   <dt>(<a name="ex5.8">5.8</a>)</dt><dd></dd>
 </dl>
-<tt>cp_que_to_infinitive_tail(Displaced,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
+<tt>cp_que_to_inf_tail(Displaced,['CONJP'(CONJ,IML)|L]-L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
-<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IPL-[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_to_inf_top_layer(Displaced,IPL-[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>cp_que_to_infinitive_tail(Displaced,[PU,'CONJP'(IML)|L]-L0)&nbsp;--&gt;</tt><br>
+<tt>cp_que_to_inf_tail(Displaced,[PU,'CONJP'(IML)|L]-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU]-[]),</tt><br>
-<tt>&nbsp;&nbsp;clause_que_to_infinitive_top_layer(Displaced,IPL-[]),</tt><br>
-<tt>&nbsp;&nbsp;cp_que_to_infinitive_tail(Displaced,L-L0),</tt><br>
+<tt>&nbsp;&nbsp;clause_que_to_inf_top_layer(Displaced,IPL-[]),</tt><br>
+<tt>&nbsp;&nbsp;cp_que_to_inf_tail(Displaced,L-L0),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;IML&nbsp;=..&nbsp;['IML'|IPL]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
@@ -8327,7 +8343,7 @@ body {
 
 <h3><a name="sec5.3.2">5.3.2</a>&nbsp;&nbsp;&nbsp;Embedded question clauses that are to-infinitive clauses</h3>
 
-<p align="justify">The content of an embedded question clause that is a <i>to</i>-infinitive clause is gathered with <tt>clause_que_to_infinitive_top_layer</tt> of (<a href="#ex5.13">5.13</a>). This gives rules that differ in how the embedded question is introduced:</p>
+<p align="justify">The content of an embedded question clause that is a <i>to</i>-infinitive clause is gathered with <tt>clause_que_to_inf_top_layer</tt> of (<a href="#ex5.13">5.13</a>). This gives rules that differ in how the embedded question is introduced:</p>
 <ul>
 <li>the first rule needs to pick up with <tt>comp_wq</tt> an initial embedded question clause marker before going on to find the rest of the clause content with <tt>to_inf_layer</tt></li>
 <li>the second rule needs to pick up a displaced noun phrase (that should contain a WH-item: <tt>WPRO</tt>, <tt>WPRO;_genm_</tt>, <tt>WD</tt>, or <tt>WADV</tt>, although this is not enforced) which receives an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter passed to <tt>to_inf_layer</tt> which finds the rest of the clause content</li>
@@ -8337,17 +8353,17 @@ body {
 <dl>
   <dt>(<a name="ex5.13">5.13</a>)</dt><dd></dd>
 </dl>
-<tt>clause_que_to_infinitive_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
+<tt>clause_que_to_inf_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;comp_wq(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,L1-L0).</tt><br>
-<tt>clause_que_to_infinitive_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
+<tt>clause_que_to_inf_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase(Index,L-L1),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer([np(ICH)|Displaced],filled_subject,L1-L0).</tt><br>
-<tt>clause_que_to_infinitive_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
+<tt>clause_que_to_inf_top_layer(Displaced,L-L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(L-L1),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,L1-L0).</tt><br>
 
@@ -8373,7 +8389,7 @@ body {
 <br>
 <h2><a name="sec5.4">5.4</a>&nbsp;&nbsp;&nbsp;The combination of a provisional it and a notional subject</h2>
 
-<p align="justify">The second rule for <tt>subject</tt> from section <a href="#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_pvl_</tt> which can only ever be an instance of <i>it</i> and in doing so gives the value of <tt>provisional</tt> to the <tt>Sbj_type</tt> parameter of the clause. This begins a ripple effect with parsing to find a clause only being able to complete provided the <tt>Sbj_type</tt> parameter is subsequently changed from its <tt>provisional</tt> value to having a <tt>filled_subject</tt> value. This change is made by the recursive <tt>verb_complement</tt> rule of (<a href="#ex5.15">5.15</a>) which needs to find a notional subject to the right of all the other selected complements of the verb.</p>
+<p align="justify">The second rule for <tt>subject</tt> from section <a href="#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_dummy_</tt> which can only ever be an instance of <i>it</i> and in doing so leaves the <tt>Sbj_type</tt> parameter open. This begins a ripple effect by allowing for the <tt>Sbj_type</tt> parameter to take on a <tt>provisional</tt> value before this is changed to a <tt>filled_subject</tt> value. This change is made by the recursive <tt>verb_complement</tt> rule of (<a href="#ex5.15">5.15</a>) which needs to find a notional subject to the right of all the other selected complements of the verb.</p>
 
 <dl>
   <dt>(<a name="ex5.15">5.15</a>)</dt><dd></dd>
@@ -8407,11 +8423,11 @@ body {
 <dl>
   <dt>(<a name="ex5.17">5.17</a>)</dt><dd></dd>
 </dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO;_pvl_'('It'),'BED;~La'('was'),'ADJ'('good'),</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO;_dummy_'('It'),'BED;~La'('was'),'ADJ'('good'),</tt><br>
 <tt>'C'('that'),'PRO'('he'),'DOD'('did'),'NEG'('n&lt;apos&gt;t'),'VB;~I'('come'),</tt><br>
 <tt>'PU'('.')]),&nbsp;parse(utterance('ex5.17')).</tt><br>
 <tt></tt><br>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-PSBJ&nbsp;(PRO;_pvl_&nbsp;It))</tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ;{DUMMY}&nbsp;(PRO;_dummy_&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BED;~La&nbsp;was)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-PRD2&nbsp;(ADJ&nbsp;good))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CP-THT-NSBJ&nbsp;(IP-SUB&nbsp;(C&nbsp;that)</tt><br>
@@ -8432,7 +8448,7 @@ body {
 <tt>(utterance</tt><br>
 <tt>&nbsp;(clause_top_layer__statement</tt><br>
 <tt>&nbsp;&nbsp;(subject__provisional</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;['PRO;_pvl_'('It')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;['PRO;_dummy_'('It')])</tt><br>
 <tt>&nbsp;&nbsp;(clause_middle_layer__provisional</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_layer__BED__;~La</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(have_be_or_mod_cat_finite_inside__BED__;~La</tt><br>
@@ -8484,7 +8500,7 @@ body {
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>provisional</b></td></tr>
         <tr>
          <td>
-            <tt>['PRO;_pvl_'('It')]</tt>
+            <tt>['PRO;_dummy_'('It')]</tt>
          </td>
         </tr>
        </table>
@@ -10930,7 +10946,7 @@ body {
 <br>
 <h2><a name="sec5.8">5.8</a>&nbsp;&nbsp;&nbsp;Cleft constructions</h2>
 
-<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complement</tt> rule of (<a href="#ex5.50">5.50</a>), which selects as complements a noun phrase as the focus (<tt>-FOC</tt>) and a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause. This requires the verb code to be <tt>;~cleft_Vn</tt> and also requires the <tt>Sbj_type</tt> parameter of the clause to be set to the value of <tt>cleft</tt>. This <tt>Sbj_type</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_clf_</tt>, which can only ever be an instance of <i>it</i>.</p>
+<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complement</tt> rule of (<a href="#ex5.50">5.50</a>), which selects as complements a noun phrase as the focus (<tt>-FOC</tt>) and a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause. This requires the verb code to be <tt>;~cleft_Vn</tt> and also requires the <tt>Sbj_type</tt> parameter of the clause to be set to the value of <tt>cleft</tt>. This <tt>Sbj_type</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_dummy_</tt>, which can only ever be an instance of <i>it</i>.</p>
 
 <dl>
   <dt>(<a name="ex5.50">5.50</a>)</dt><dd></dd>
@@ -10947,11 +10963,11 @@ body {
 <dl>
   <dt>(<a name="ex5.51">5.51</a>)</dt><dd></dd>
 </dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string(&nbsp;['PRO;_clf_'('It'),'BED;~cleft_Vn'('was'),'D'('an'),</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO;_dummy_'('It'),'BED;~cleft_Vn'('was'),'D'('an'),</tt><br>
 <tt>'ADJ'('atomic'),'N'('fission'),'PRO'('we'),'VBD;~Tn'('saw'),'PU'('.')]),</tt><br>
 <tt>parse(utterance('ex5.51')).</tt><br>
 <tt></tt><br>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-PSBJ&nbsp;(PRO;_clf_&nbsp;It))</tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ;{DUMMY}&nbsp;(PRO;_dummy_&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BED;~cleft_Vn&nbsp;was)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-FOC&nbsp;(D&nbsp;an)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;atomic))</tt><br>
@@ -10965,6 +10981,79 @@ body {
 <tt>yes</tt><br>
 
 <br>
+<h2><a name="sec5.9">5.9</a>&nbsp;&nbsp;&nbsp;V_as_though&sol;as_if&sol;like construction</h2>
+
+<dl>
+  <dt>(<a name="ex5.52">5.52</a>)</dt><dd></dd>
+</dl>
+<tt>verb_complement(';~V_as_though&sol;as_if&sol;like',[],Sbj_type,active,[PP|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(PPL-[IP]),</tt><br>
+<tt>&nbsp;&nbsp;subject(Sbj_type,IPL-L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer([],Sbj_type,finite,active,L1-[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-ADV'|IPL],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;PP&nbsp;=..&nbsp;['PP-MNR'|PPL]</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>verb_complement(';~V_as_though&sol;as_if&sol;like',[],Sbj_type,active,[PP|L]-L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(PPL-[IP]),</tt><br>
+<tt>&nbsp;&nbsp;subject(Sbj_type,IPL-L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer([],Sbj_type,L1-[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IP&nbsp;=..&nbsp;['IP-ADV'|IPL],</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;PP&nbsp;=..&nbsp;['PP-MNR'|PPL]</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="#ex5.53">5.53</a>).</p>
+
+<dl>
+  <dt>(<a name="ex5.53">5.53</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['PRO;_dummy_'('It'),'VBP;~V_as_though&sol;as_if&sol;like'('looks'),</tt><br>
+<tt>'P-ROLE'('like'),'EX'('there'),'BEP;~cat_Vg'('is'),'VAG;~cat_Vt'('going'),</tt><br>
+<tt>'TO'('to'),'BE;~ex_V'('be'),'D'('a'),'N'('storm'),'PU'('.')]),</tt><br>
+<tt>parse(utterance('ex5.53')).</tt><br>
+<tt></tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ;{DUMMY}&nbsp;(PRO;_dummy_&nbsp;It))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;~V_as_though&sol;as_if&sol;like&nbsp;looks)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-MNR&nbsp;(P-ROLE&nbsp;like)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(EX&nbsp;there)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP;~cat_Vg&nbsp;is)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~cat_Vt&nbsp;going)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~ex_V&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;storm))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.53))</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider (<a href="#ex5.54">5.54</a>).</p>
+
+<dl>
+  <dt>(<a name="ex5.54">5.54</a>)</dt><dd></dd>
+</dl>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string(['EX'('There'),'VBP;~V_as_though&sol;as_if&sol;like'('looks'),</tt><br>
+<tt>'P-ROLE'('like'),'EX'('there'),'BEP;~cat_Vg'('is'),'VAG;~cat_Vt'('going'),</tt><br>
+<tt>'TO'('to'),'BE;~ex_V'('be'),'D'('a'),'N'('storm'),'PU'('.')]),</tt><br>
+<tt>parse(utterance('ex5.54')).</tt><br>
+<tt></tt><br>
+<tt>(&nbsp;(IP-MAT&nbsp;(EX&nbsp;There)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;~V_as_though&sol;as_if&sol;like&nbsp;looks)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-MNR&nbsp;(P-ROLE&nbsp;like)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(EX&nbsp;there)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP;~cat_Vg&nbsp;is)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~cat_Vt&nbsp;going)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~ex_V&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;storm))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
+<tt>&nbsp;&nbsp;(ID&nbsp;ex5.54))</tt><br>
+<tt></tt><br>
+<tt>yes</tt><br>
+
+<br>
 <br>
 <br>
 <br>
@@ -10972,8 +11061,6 @@ body {
 
 <p align="justify">We have now reached the end of the presentation of Definite Clause Grammar (DCG) definitions in this book. When taken together, they provide a system for parsing contemporary English with a wide coverage. However, in order for the phrase structure rules to be kept straightforward and in order to restrict the amount of structural ambiguity encountered with results, limits were placed on the coverage attempted. Here, we note some of the limitations.</p>
 <ul>
-<li>Subject-verb agreement is not imposed.</li>
-<li>Number agreement is not imposed.</li>
 <li>There is no support for parentheticals.</li>
 <li>There is no support for elision or gapping.</li>
 <li>There is no extrapositioning (e.g., rightward relative clause displacement, right node raising, heavy NP shift).</li>
@@ -10981,7 +11068,6 @@ body {
 <li>There is no logical subject by-phrase with passives.</li>
 <li>A subordinate conjunction word (<tt>P-CONN</tt>) must be present in the parse list for subordinating conjunction to occur.</li>
 <li>More generally, phrase heads need to always be overtly represented in the parse list. Note that representation as a zero head is possible, e.g., <tt>'P-CONN'('*')</tt>.</li>
-<li>Coordination always has an overt conjunction (<tt>CONJ</tt>) word with the last conjunct and comma punctuation (<tt>PU</tt>) before all conjuncts that follow the first conjunct except the last.</li>
 <li>There is no support for <tt>CP-THT</tt> as the complement of nouns or adjectives.</li>
 <li>There is no support for pied-piping with relative clauses or cleft clauses.</li>
 <li>There is no support for relative clauses where the relativised element is an adverb or determiner or genitive pronoun.</li>
@@ -11000,10 +11086,16 @@ body {
 <br>
 <h1><a name="references">References</a></h1>
 
+<p><a name="Blackburn-comma-Bos-and-Striegnitz-2006">Blackburn, Patrick, Johan Bos, and Kristina Striegnitz. 2006.</a> <i>Learn Prolog Now!</i>, vol. 7 of <i>Texts in Computing</i>. London: College Publications.</p>
+<p><a name="Borsley-1996">Borsley, Robert. 1996.</a> <i>Modern Phrase Structure Grammar</i>. Oxford: Blackwell.</p>
 <p><a name="Butler-2022">Butler, Alastair. 2022.</a> The Treebank Semantics Parsed Corpus (TSPC) Web Site. Available at: <a href="https://entrees.github.io" target="_blank">https://entrees.github.io</a>.</p>
+<p><a name="Clocksin-and-Mellish-1981">Clocksin, William F. and Christopher S. Mellish. 1981.</a> <i>Programming in Prolog</i>. Berlin Heidelberg: Springer Verlag.</p>
+<p><a name="Covington-1994">Covington, Michael A. 1994.</a> <i>Natural Language Processing for Prolog Programmers</i>. New Jersey: Prentice-Hall.</p>
 <p><a name="Cowie-1989">Cowie, A P. 1989.</a> <i>Oxford Advanced Learner's Dictionary, Fourth Edition</i>. Oxford: Oxford University Press.</p>
 <p><a name="Hornby-1975">Hornby, A S. 1975.</a> <i>Guide to Patterns and Usage in English, Second Edition</i>. Oxford: Oxford University Press.</p>
-<p><a name="Pereira-and-Warren-1980">Pereira, Fernando C.N. and David H.D. Warren. 1980.</a> Definite clause grammars for language analysis&mdash;a survey of the   formalism and a comparison with augmented transition networks. <i>Artificial Intelligence</i> 13(3):231&ndash;278.</p>
+<p><a name="Pereira-and-Shieber-1987">Pereira, Fernando C.N. and Stuart M. Shieber. 1986.</a> <i>Prolog and Natural-Language Analysis</i>, vol. 10 of <i>CSLI Lecture Notes</i>. Stanford, California: CSLI Publications.</p>
+<p><a name="Pereira-and-Warren-1980">Pereira, Fernando C.N. and David H.D. Warren. 1980.</a> Definite Clause Grammars for Language Analysis&mdash;A survey of the formalism and a comparison with Augmented Transition Networks. <i>Artificial Intelligence</i> 13(3):231&ndash;278.</p>
+<p><a name="Shieber-1986">Shieber, Stuart M. 1986.</a> <i>An Introduction to Unification-based Approaches to Grammar</i>, vol. 4 of <i>CSLI Lecture Notes</i>. Stanford, California: CSLI Publications.</p>
 <p><a name="Swift-and-Warren-2022">Swift, Theresa and David S. Warren. 2022.</a> The XSB System, Version 5, Volume 1: Programmer's Manual. Tech. rep., Stony Brook University. <a href="http://xsb.sourceforge.net/manual1/manual1.pdf" target="_blank">http://xsb.sourceforge.net/manual1/manual1.pdf</a>.</p>
 
 <br/>
