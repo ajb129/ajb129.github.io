@@ -397,6 +397,8 @@ body {
 <table border="1" cellpadding="10px">
 <tr><td><tt>NS</tt></td><td>Plural common noun (e.g., <tt>children</tt>, <tt>revelations</tt>, <tt>times</tt>, <tt>wishes</tt>)</td></tr>
 <tr><td><tt>N</tt></td><td>Common noun not subclassified as <tt>NS</tt>, that is, either singular (e.g., <tt>child</tt>, <tt>revelation</tt>, <tt>time</tt>, <tt>wish</tt>), or neutral for number (e.g., <tt>committee</tt>, <tt>fish</tt>, <tt>information</tt>)</td></tr>
+<tr><td><tt>NPRS</tt></td><td>Plural proper noun (e.g., <tt>Heathers</tt>, <tt>Koreas</tt>)</td></tr>
+<tr><td><tt>NPR</tt></td><td>Proper noun not subclassified as <tt>NPRS</tt>, that is either singular (e.g., <tt>Heather</tt>, <tt>Tokyo</tt>), or neutral for number (e.g., <tt>Andes</tt>, <tt>IBM</tt>)</td></tr>
 </table>
 <br>
 
@@ -405,6 +407,8 @@ body {
 </dl>
 <tt>noun(['NS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NS'(Word)].</tt><br>
 <tt>noun(['N'(Word)|L]-L)&nbsp;--&gt;&nbsp;['N'(Word)].</tt><br>
+<tt>noun(['NPRS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPRS'(Word)].</tt><br>
+<tt>noun(['NPR'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPR'(Word)].</tt><br>
 
 <p align="justify">In (<a href="#ex2.2">2.2</a>), we ask whether a parse list containing the class&sol;word pair <tt>'NS'('boys')</tt> contains <tt>noun</tt> content.</p>
 
@@ -428,8 +432,6 @@ body {
 <p><a name="table2.2">Table 2.2: Tags for noun phrase head words that cannot have premodifiers</a></p>
 
 <table border="1" cellpadding="10px">
-<tr><td><tt>NPRS</tt></td><td>Plural proper noun (e.g., <tt>Heathers</tt>, <tt>Koreas</tt>)</td></tr>
-<tr><td><tt>NPR</tt></td><td>Proper noun not subclassified as <tt>NPRS</tt>, that is either singular (e.g., <tt>Heather</tt>, <tt>Tokyo</tt>), or neutral for number (e.g., <tt>Andes</tt>, <tt>IBM</tt>)</td></tr>
 <tr><td><tt>Q;_nphd_</tt></td><td>Indefinite pronoun with quantification, which can be a compound (e.g., <tt>everybody</tt>, <tt>nothing</tt>), or a word which often occurs with the preposition <tt>of</tt> (e.g., <tt>much</tt>, <tt>many</tt>, <tt>a_lot</tt>)</td></tr>
 <tr><td><tt>D;_nphd_</tt></td><td>Indefinite pronoun not subclassified as <tt>Q</tt> (e.g., <tt>someone</tt>, <tt>anything</tt>, <tt>another</tt>), and demonstrative pronoun (e.g., <tt>this</tt>, <tt>that</tt>, <tt>these</tt>, <tt>those</tt>)</td></tr>
 </table>
@@ -438,8 +440,6 @@ body {
 <dl>
   <dt>(<a name="ex2.3">2.3</a>)</dt><dd></dd>
 </dl>
-<tt>noun_head(['NPRS'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPRS'(Word)].</tt><br>
-<tt>noun_head(['NPR'(Word)|L]-L)&nbsp;--&gt;&nbsp;['NPR'(Word)].</tt><br>
 <tt>noun_head(['D;_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['D;_nphd_'(Word)].</tt><br>
 <tt>noun_head(['Q;_nphd_'(Word)|L]-L)&nbsp;--&gt;&nbsp;['Q;_nphd_'(Word)].</tt><br>
 
