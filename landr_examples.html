@@ -118,14 +118,14 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="Cheese[N] pizza[N] needs[VBD;~Tn] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Cheese[N] pizzas[NS] need[VBD;~Tn] .[PU]"/>
 </form>
 
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="Might[MD] n<apos>t[NEG] cheese[N] pizza[N] smell[VB;~I] ?[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Might[MD] n<apos>t[NEG;_clitic_] cheese[N] pizza[N] smell[VB;~I] ?[PU]"/>
 </form>
 
 
@@ -153,7 +153,7 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="Ought[MD;~cat_Vt] n<apos>t[NEG] he[PRO] to[TO] stand[VB;~Ip] up[ADV] ?[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Ought[MD;~cat_Vt] n<apos>t[NEG;_clitic_] he[PRO] to[TO] stand[VB;~Ip] up[ADV] ?[PU]"/>
 </form>
 
 
@@ -181,7 +181,7 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] did[DOD] n<apos>t[NEG] stand[VB;~Ip] up[ADV] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] did[DOD] n<apos>t[NEG;_clitic_] stand[VB;~Ip] up[ADV] .[PU]"/>
 </form>
 
 
@@ -246,7 +246,7 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_dummy_] was[BED;~La] good[ADJ] that[C] he[PRO] did[DOD] n<apos>t[NEG] come[VB;~I] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_dummy_] was[BED;~La] good[ADJ] that[C] he[PRO] did[DOD] n<apos>t[NEG;_clitic_] come[VB;~I] .[PU]"/>
 </form>
 
 
@@ -310,6 +310,20 @@
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
   <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] barn[N] that[RPRO] a[D] horse[N] raced[VBD;~Ipr] past[P-ROLE]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] barn[N] past[P-ROLE] which[RPRO] a[D] horse[N] raced[VBD;~Ipr]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] person[N] past[P-ROLE] whose[RPRO;_genm_] barn[N] a[D] horse[N] raced[VBD;~Ipr]"/>
 </form>
 
 
@@ -432,6 +446,12 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="To[P-ROLE] bed[N] they[PRO] went[VBD;~Ipr] .[PU]"/>
 </form>
 
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="These[D;_nphd_] are[BEP;~cat_Ve] looked[VVN;~Ipr] after[P-ROLE] by[P-ROLE] us[PRO] .[PU]"/>
+</form>
+
 
 <h4>;~It</h4>
 
@@ -539,7 +559,7 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG] know[VB;~Tw] what[WPRO] to[TO] do[DO;~Tn] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG;_clitic_] know[VB;~Tw] what[WPRO] to[TO] do[DO;~Tn] .[PU]"/>
 </form>
 
 
@@ -653,30 +673,30 @@
 </form>
 
 
-<h4>;~Dn.pr</h4>
+<h4>;~Dpr.n</h4>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="Daddy[N] bought[VBD;~Dn.pr] a[D] new[ADJ] bike[N] for[P-ROLE] me[PRO] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Daddy[N] bought[VBD;~Dpr.n] a[D] new[ADJ] bike[N] for[P-ROLE] me[PRO] .[PU]"/>
 </form>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] want[VBP;~Tt] to[TO] say[VB;~Dn.pr] something[D;_nphd_] to[P-ROLE] you[PRO] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] want[VBP;~Tt] to[TO] say[VB;~Dpr.n] something[D;_nphd_] to[P-ROLE] you[PRO] .[PU]"/>
 </form>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] maximum[ADJ] loan[N] that[RPRO] the[D] state[N] could[MD] make[VB;~Dn.pr] to[P-ROLE] a[D] local[ADJ] water[N] project[N]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] maximum[ADJ] loan[N] that[RPRO] the[D] state[N] could[MD] make[VB;~Dpr.n] to[P-ROLE] a[D] local[ADJ] water[N] project[N]"/>
 </form>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="Details[NS] of[P-ROLE] all[Q] negotiations[NS] are[BEP;~cat_Ve] sent[VVN;~Dn.pr] to[P-ROLE] Head[N] Office[N] .[PU]"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Details[NS] of[P-ROLE] all[Q] negotiations[NS] are[BEP;~cat_Ve] sent[VVN;~Dpr.n] to[P-ROLE] Head[N] Office[N] .[PU]"/>
 </form>
 
 
@@ -1375,19 +1395,6 @@
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] saw[VBD;~Tf] that[C] the[D] plan[N] was[BED;~La] useless[ADJ] .[PU]"/>
-</form>
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
-  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
-  <input type="hidden" name="MODE" value="graph"/>
-  <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_dummy_] was[BED;~cat_Ve] seen[VVN;~Tn] that[C] the[D] plan[N] was[BED;~La] useless[ADJ] .[PU]"/>
-</form>
-
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
-  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
-  <input type="hidden" name="MODE" value="graph"/>
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] funniest[ADJS] boy[N] was[BED;~cat_Vg] cleaning[VAG;~Tn] a[D] dog[N] .[PU]"/>
 </form>
 
@@ -1408,6 +1415,71 @@
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
   <input type="hidden" name="MODE" value="graph"/>
   <input type="text" name="DATA" size="110" spellcheck="false" value="More[Q;_nphd_] of[P-ROLE] the[D] therapy[N] group[N] were[BED;~La] married[ADJ] and[CONJ] married[ADJ] people[NS] with[P-ROLE] cancer[N] are[BEP;~cat_Ve] known[VVN;~Cn.t] to[TO] survive[VB;~Ip] longer[ADVR] .[PU]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] saw[VBD;~Tf] that[C] the[D] plan[N] was[BED;~La] useless[ADJ] .[PU]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_dummy_] was[BED;~cat_Ve] seen[VVN;~Tn] that[C] the[D] plan[N] was[BED;~La] useless[ADJ] .[PU]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] sent[VBD;~Dn.n] her[PRO] an[D] article[N] by[P-ROLE] Fillmore[NPR] .[PU]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="She[PRO] was[BED;~cat_Ve] sent[VVN;~Dn.n] an[D] article[N] by[P-ROLE] Fillmore[NPR] .[PU]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] must[MD] have[HV;~cat_Ve] dropped[VVN;~Tn] the[D] course[N] .[PU]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] must[MD] drop[VB;~Tn] the[D] course[N] .[PU]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] was[BED;~Ipr] in[P-ROLE] prison[N] .[PU]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] was[BED;~cat_Ve] imprisoned[VVN;~Tn] .[PU]"/>
+</form>
+
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] found[VBD;~Cn.n] her[PRO] a[D] great[ADJ] help[N] .[PU]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] found[VBD;~Dn.n] her[PRO] a[D] great[ADJ] belt[N] .[PU]"/>
 </form>
 
 
