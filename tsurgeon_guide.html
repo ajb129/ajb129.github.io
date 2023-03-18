@@ -376,7 +376,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
   <text x="85.8" y="55" text-anchor="middle">PP</text>
   <line x1="85.8" y1="70" x2="85.8" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <rect x="70.8" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="85.8" y="125" text-anchor="middle">__NP</text>
+  <text x="85.8" y="125" text-anchor="middle">NP</text>
   <line x1="85.8" y1="140" x2="38.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="85.8" y1="140" x2="124.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="38.94" y="195" text-anchor="middle">N</text>
@@ -770,19 +770,19 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <h4>Example 13</h4>
 
-<p align="justify">The first pattern-action pair creates a right binarization of the input tree with the creation of &lsquo;artificial&rsquo; non-terminal nodes (<tt>IML</tt>) that span between the second node (&lsquo;<tt>&lt;2 __=x</tt>&rsquo;) and the end node (&lsquo;<tt>&lt;-1 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;) and that contains a main verb that has a preceding sister (&lsquo;<tt>&lt; (&sol;^V&sol; &dollar;, __)</tt>&rsquo;).</p>
+<p align="justify">The first pattern-action pair creates a right binarization of the input tree with the creation of &lsquo;artificial&rsquo; non-terminal nodes (<tt>ILYR</tt>) that span between the second node (&lsquo;<tt>&lt;2 __=x</tt>&rsquo;) and the end node (&lsquo;<tt>&lt;-1 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;) and that contains a main verb that has a preceding sister (&lsquo;<tt>&lt; (&sol;^V&sol; &dollar;, __)</tt>&rsquo;).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second pattern-action pair creates a left binarization of the input tree with the creation of <tt>IML</tt> nodes that span between the first node (&lsquo;<tt>&lt;1 __=x</tt>&rsquo;) and the second to last node (&lsquo;<tt>&lt;-2 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second pattern-action pair creates a left binarization of the input tree with the creation of <tt>ILYR</tt> nodes that span between the first node (&lsquo;<tt>&lt;1 __=x</tt>&rsquo;) and the second to last node (&lsquo;<tt>&lt;-2 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;).</p>
 
 <hr/>
 <tt>&nbsp;&nbsp;__&nbsp;&lt;2&nbsp;__=x&nbsp;&lt;-1&nbsp;__=y&nbsp;&lt;3&nbsp;__&nbsp;&lt;&nbsp;(&sol;^V&sol;&nbsp;$,&nbsp;__)</tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;createSubtree&nbsp;IML&nbsp;x&nbsp;y</tt><br>
+<tt>&nbsp;&nbsp;createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
 <tt></tt><br>
 <tt></tt><br>
 <tt>&nbsp;&nbsp;__&nbsp;&lt;1&nbsp;__=x&nbsp;&lt;-2&nbsp;__=y&nbsp;&lt;3&nbsp;__</tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;createSubtree&nbsp;IML&nbsp;x&nbsp;y</tt><br>
+<tt>&nbsp;&nbsp;createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
 
 <hr/>
 
@@ -803,17 +803,17 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <p align="justify">Output:</p>
 <tt>&nbsp;&nbsp;(&nbsp;(IP-MAT&nbsp;(ADVP-TMP&nbsp;(ADV&nbsp;Yesterday))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IML&nbsp;(PU&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IML&nbsp;(NP-SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IML&nbsp;(IML&nbsp;(IML&nbsp;(IML&nbsp;(VBD&nbsp;ate)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(N&nbsp;pizza)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-COM&nbsp;(P-ROLE&nbsp;with)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-LOC&nbsp;(P-ROLE&nbsp;in)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PU&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(NP-SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(VBD&nbsp;ate)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(N&nbsp;pizza)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-COM&nbsp;(P-ROLE&nbsp;with)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-LOC&nbsp;(P-ROLE&nbsp;in)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.)))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(ID&nbsp;8_texts_purple_basic))</tt><br>
 
 <p align="justify">Notably, the output gives the main verb as the most embedded element surrounded by the left binarization of following elements, which in turn is followed by the right binarization of preceding elements.</p>
@@ -825,17 +825,17 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <h4>Example 14</h4>
 
-<p align="justify">The following example has a pattern to find nodes with labels that start with <tt>NML</tt> and do not dominate nodes that start with <tt>*ICH*</tt> or <tt>CONJP</tt>. This pattern is paired with an action that replaces the matched node with an <tt>NP</tt> node that furthermore has a <tt>PP</tt> projection that contains an initial <tt>(P-ROLE #)</tt> element.</p>
+<p align="justify">The following example has a pattern to find nodes with labels that start with <tt>NLYR</tt> and do not dominate nodes that start with <tt>*ICH*</tt> or <tt>CONJP</tt>. This pattern is paired with an action that replaces the matched node with an <tt>NP</tt> node that furthermore has a <tt>PP</tt> projection that contains an initial <tt>(P-ROLE #)</tt> element.</p>
 
 <hr/>
-<tt>&nbsp;&nbsp;&sol;^NML&#92;b&sol;=x&nbsp;!&lt;&nbsp;&sol;^(&#92;*ICH&#92;*|CONJP&#92;b)&sol;</tt><br>
+<tt>&nbsp;&nbsp;&sol;^NLYR&#92;b&sol;=x&nbsp;!&lt;&nbsp;&sol;^(&#92;*ICH&#92;*|CONJP&#92;b)&sol;</tt><br>
 <tt></tt><br>
 <tt>&nbsp;&nbsp;adjoin&nbsp;(PP&nbsp;(P-ROLE&nbsp;#)&nbsp;NP&#64;)&nbsp;x</tt><br>
 
 <hr/>
 
 <p align="justify">Input:</p>
-<tt>&nbsp;&nbsp;(NP&nbsp;(NML&nbsp;(NML&nbsp;(ADJP&nbsp;(ADJ&nbsp;liquid))</tt><br>
+<tt>&nbsp;&nbsp;(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(ADJP&nbsp;(ADJ&nbsp;liquid))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;phase))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;thermal))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;reaction))</tt><br>
@@ -857,12 +857,12 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <h4>Example 15</h4>
 
-<p align="justify">This illustrates the addition of an <tt>NML</tt> layer into a noun phrase that dominates a <tt>CONJP</tt> node.</p>
+<p align="justify">This illustrates the addition of an <tt>NLYR</tt> layer into a noun phrase that dominates a <tt>CONJP</tt> node.</p>
 
 <hr/>
-<tt>&nbsp;&nbsp;&sol;^NP&#92;b&sol;=x&nbsp;&lt;&nbsp;(CONJP&nbsp;!&gt;&nbsp;&sol;^NML&sol;)</tt><br>
+<tt>&nbsp;&nbsp;&sol;^NP&#92;b&sol;=x&nbsp;&lt;&nbsp;(CONJP&nbsp;!&gt;&nbsp;&sol;^NLYR&sol;)</tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;adjoinH&nbsp;(&nbsp;NML&#64;)&nbsp;x</tt><br>
+<tt>&nbsp;&nbsp;adjoinH&nbsp;(&nbsp;NLYR&#64;)&nbsp;x</tt><br>
 
 <hr/>
 
@@ -872,9 +872,9 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Tony))))</tt><br>
 
 <p align="justify">Output:</p>
-<tt>&nbsp;&nbsp;(NP&nbsp;(NML&nbsp;(NP&nbsp;(NP&nbsp;Pat))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Tony)))))</tt><br>
+<tt>&nbsp;&nbsp;(NP&nbsp;(NLYR&nbsp;(NP&nbsp;(NP&nbsp;Pat))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Tony)))))</tt><br>
 
 <h3><a name="sec5.11">5.11</a>&nbsp;&nbsp;&nbsp;adjoinF</h3>
 <tt>&nbsp;&nbsp;adjoinF&nbsp;&lt;auxiliary-tree&gt;&nbsp;&lt;target-node&gt;</tt><br>
@@ -1028,7 +1028,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <br>
 <h2><a name="sec7">7</a>&nbsp;&nbsp;&nbsp;An extended example</h2>
 
-<p align="justify">Clause-level coordination in the NINJAL Parsed Corpus of Modern Japanese (NPCMJ) is represented by placing the content of clausal conjuncts that are prior to the last conjunct under stacked subordinate <tt>IP-ADV</tt> nodes that contain a <tt>-CONJ</tt> extension or that are followed by a conjunction marker (<tt>CONJ</tt>) (possibly with intervening punctuation) (or both). Example 19 demonstrates how it is possible to transform this coding of clause-level coordination with subordinate structure into a coding that has coordinate structure with <tt>CONJP</tt> and <tt>IML</tt> (clause intermediate level) nodes.</p>
+<p align="justify">Clause-level coordination in the NINJAL Parsed Corpus of Modern Japanese (NPCMJ) is represented by placing the content of clausal conjuncts that are prior to the last conjunct under stacked subordinate <tt>IP-ADV</tt> nodes that contain a <tt>-CONJ</tt> extension or that are followed by a conjunction marker (<tt>CONJ</tt>) (possibly with intervening punctuation) (or both). Example 19 demonstrates how it is possible to transform this coding of clause-level coordination with subordinate structure into a coding that has coordinate structure with <tt>CONJP</tt> and <tt>ILYR</tt> (clause intermediate level) nodes.</p>
 
 <h4>Example 19</h4>
 
@@ -1040,7 +1040,7 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <tt></tt><br>
 <tt>&nbsp;&nbsp;&sol;^IP-ADV&sol;&nbsp;$.&nbsp;(PU=y&nbsp;$.&nbsp;CONJ=x)</tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;adjoinF&nbsp;(IML&nbsp;CONJP&nbsp;&#64;&nbsp;IML)&nbsp;x</tt><br>
+<tt>&nbsp;&nbsp;adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;&#64;&nbsp;ILYR)&nbsp;x</tt><br>
 <tt>&nbsp;&nbsp;move&nbsp;y&nbsp;$+&nbsp;x</tt><br>
 <tt></tt><br>
 <tt></tt><br>
@@ -1052,16 +1052,16 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 <tt></tt><br>
 <tt>&nbsp;&nbsp;&sol;^IP-ADV&sol;&nbsp;$.&nbsp;CONJ=x</tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;adjoinF&nbsp;(IML&nbsp;CONJP&nbsp;&#64;&nbsp;IML)&nbsp;x</tt><br>
+<tt>&nbsp;&nbsp;adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;&#64;&nbsp;ILYR)&nbsp;x</tt><br>
 <tt></tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;&sol;^IP-ADV(.*)$&sol;#1&#92;%extra=x&nbsp;$.&nbsp;(IML&nbsp;&lt;1&nbsp;(CONJP=y&nbsp;!&lt;&nbsp;__))</tt><br>
+<tt>&nbsp;&nbsp;&sol;^IP-ADV(.*)$&sol;#1&#92;%extra=x&nbsp;$.&nbsp;(ILYR&nbsp;&lt;1&nbsp;(CONJP=y&nbsp;!&lt;&nbsp;__))</tt><br>
 <tt></tt><br>
 <tt>&nbsp;&nbsp;move&nbsp;x&nbsp;&gt;1&nbsp;y</tt><br>
-<tt>&nbsp;&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;IML&#92;%{extra}&sol;</tt><br>
+<tt>&nbsp;&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;ILYR&#92;%{extra}&sol;</tt><br>
 <tt></tt><br>
 <tt></tt><br>
-<tt>&nbsp;&nbsp;IML&nbsp;&lt;&nbsp;CONJ&nbsp;&lt;-1&nbsp;IML=y&nbsp;$.&nbsp;__=x</tt><br>
+<tt>&nbsp;&nbsp;ILYR&nbsp;&lt;&nbsp;CONJ&nbsp;&lt;-1&nbsp;ILYR=y&nbsp;$.&nbsp;__=x</tt><br>
 <tt></tt><br>
 <tt>&nbsp;&nbsp;move&nbsp;x&nbsp;&gt;-1&nbsp;y</tt><br>
 <tt></tt><br>
@@ -1100,17 +1100,17 @@ The Tsurgeon program (Levy and Andrew 2006) is a software tool for manipulating 
 
 <p align="justify">Output:</p>
 <tt>&nbsp;&nbsp;(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;*speaker*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IML&nbsp;(CONJP&nbsp;(IML&nbsp;(VB&nbsp;わかり)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;まし)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;た))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;では))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IML&nbsp;(PU&nbsp;、)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-OB1&nbsp;(NP&nbsp;(PRO&nbsp;それ))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;を))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;確認)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;し)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-CONN&nbsp;て))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(CONJP&nbsp;(ILYR&nbsp;(VB&nbsp;わかり)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;まし)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;た))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;、)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;では))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PU&nbsp;、)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-OB1&nbsp;(NP&nbsp;(PRO&nbsp;それ))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;を))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;確認)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;し)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-CONN&nbsp;て))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(ID&nbsp;42_spoken_JF2))</tt><br>
 
 <br>
