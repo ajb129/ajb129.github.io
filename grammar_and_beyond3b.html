@@ -71,60 +71,34 @@ that connect these two resources.
 <br>
 <h2><a name="sec14.1">14.1</a>&nbsp;&nbsp;&nbsp;Negative questions</h2>
 
-<p align="justify">To find negative questions formed as matrix interrogative clauses with no Wh- word, you can use pattern (<a href="#ex14.1">14.1</a>).</p>
-
-<dl>
-  <dt>(<a name="ex14.1">14.1</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#92;bSBJ&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
-</dl>
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/ $.. /\bSBJ/ >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
-  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
-</form>
-
-<p align="justify">With an initial placement inside a matix clause, an interrogative marking word can be:</p>
+<p align="justify">You can make a <i>Yes&sol;No</i> question by giving any of the following words an initial sentence placement:</p>
 <ul>
-<li>a modal word (<tt>MD</tt>)</li>
-<li>a finite form of <small style="font-size: 75%">HAVE</small> (<tt>HVD|HVP</tt>)</li>
-<li>a finite form of <small style="font-size: 75%">BE</small> (<tt>BED|BEP</tt>)</li>
-<li>a finite form of <small style="font-size: 75%">DO</small> (<tt>DOD|DOP</tt>)</li>
+<li>a modal word (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=MD" target="_blank">MD</a></tt>)</li>
+<li>a finite form of <small style="font-size: 75%">HAVE</small> (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=HVD" target="_blank">HVD</a>|<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=HVP" target="_blank">HVP</a></tt>)</li>
+<li>a finite form of <small style="font-size: 75%">BE</small> (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=BED" target="_blank">BED</a>|<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=BEP" target="_blank">BEP</a></tt>)</li>
+<li>a finite form of <small style="font-size: 75%">DO</small> (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=DOD" target="_blank">DOD</a>|<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=DOP" target="_blank">DOP</a></tt>)</li>
 </ul>
 
-<p align="justify">Pattern (<a href="#ex14.1">14.1</a>) says to find an interrogative marking word that is a preceding sister (<tt>&dollar;..</tt>) of both a marker of negation (<tt>NEG</tt>) and a subject (<tt>&sol;&#92;bSBJ&sol;</tt>). The order between the marker of negation and the subject is unspecified. Additional constraints say that the interrogative marking word should have no other intervening clause layer (<tt>IP</tt>) between it and an <tt>IP-SUB</tt> that is dominated by a <tt>CP-QUE</tt> not dominated by <tt>PRN</tt>. Also, the interrogative marking word should not have a prior sister (<tt>&dollar;,,</tt>) that contains a Wh- word (<tt>&sol;^W&sol; &lt; __</tt>).</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can specify the order between negation and the subject, so that (<a href="#ex14.2">14.2</a>) finds negative questions where the subject needs to be a following sister (<tt>&dollar;,,</tt>) of the occurrence of negation.</p>
+<p align="justify">A <b>negative question</b> is made when the negation word <i>not</i> (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=NEG" target="_blank">NEG</a></tt>) or its contracted variant <i>n't</i> (<tt><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_word_class.sh?search=NEG;_clitic_" target="_blank">NEG;_clitic_</a></tt>) is also present in the sentence. Pattern (<a href="#ex14.1">14.1</a>) finds negative questions.</p>
 
 <dl>
-  <dt>(<a name="ex14.2">14.2</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;&#92;bSBJ&sol;&nbsp;&#x24;,,&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
+  <dt>(<a name="ex14.1">14.1</a>)</dt><dd><tt>&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br> <tt>&nbsp;&nbsp;&#x24;,,&nbsp;(&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=op&nbsp;&#x24;..&nbsp;=sbj&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)))</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;[&nbsp;&#x24;&nbsp;ID&nbsp;|&nbsp;&gt;&nbsp;&sol;&#94;utterance&sol;]&nbsp;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/=neg $.. (/\bSBJ/ $,, =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^NEG/ $ /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=op $.. =sbj !$,, (__ << (/^W/ < __))) >> (/^IP-SUB/ > (/^CP-QUE/ [ $ ID | > /^utterance/] ) !<< (/^IP\b/ << =op))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">By contrast, (<a href="#ex14.3">14.3</a>) finds negative questions where the subject needs to be a preceding sister (<tt>&dollar;..</tt>) of the occurrence of negation.</p>
+<p align="justify">For example, pattern (<a href="#ex14.1">14.1</a>) will find both (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>).</p>
 
 <dl>
-  <dt>(<a name="ex14.3">14.3</a>)</dt><dd><tt>&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=imark</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#94;NEG&sol;=neg</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;(&sol;&#92;bSBJ&sol;&nbsp;&#x24;..&nbsp;=neg)</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;!&gt;&nbsp;&sol;&#94;PRN&sol;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=imark))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br></dd>
-</dl>
-
-<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
-  <input type="hidden" name="search" value="/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=imark $.. /^NEG/=neg $.. (/\bSBJ/ $.. =neg) >> (/^IP-SUB/ > (/^CP-QUE/ !> /^PRN/) !<< (/^IP\b/ << =imark)) !$,, (__ << (/^W/ < __))"/>
-  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
-</form>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Thus, pattern (<a href="#ex14.1">14.1</a>) will return both of the trees of (<a href="#ex14.4">14.4</a>) and (<a href="#ex14.5">14.5</a>), while (<a href="#ex14.2">14.2</a>) will return (<a href="#ex14.4">14.4</a>), and (<a href="#ex14.3">14.3</a>) will return (<a href="#ex14.5">14.5</a>).</p>
-
-<dl>
-  <dt>(<a name="ex14.4">14.4</a>)</dt><dd></dd>
+  <dt>(<a name="ex14.2">14.2</a>)</dt><dd></dd>
 </dl>
 
 <p align="justify">
-<font style="background-color: Wheat;">Did</font> n’t they have to go somewhere ?
+Did <font style="background-color: Wheat;">n’t</font> they have to go somewhere ?
 </p>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="666.6" height="357" viewBox="-16.5 17.5 877.8 465">
   <rect x="407.4" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
@@ -133,25 +107,25 @@ that connect these two resources.
   <line x1="422.4" y1="70" x2="805.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <rect x="368.46" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="383.46" y="125" text-anchor="middle">IP-SUB</text>
-  <line x1="383.46" y1="140" x2="42.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="383.46" y1="140" x2="132.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="383.46" y1="140" x2="273.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="383.46" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="383.46" y1="140" x2="172.26" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="383.46" y1="140" x2="309.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="383.46" y1="140" x2="430.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="383.46" y1="140" x2="630.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="42.9" y="195" text-anchor="middle">DOD</text>
-  <line x1="42.9" y1="210" x2="42.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="42.9" y="265" text-anchor="middle">Did</text>
-  <rect x="117.66" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="132.66" y="195" text-anchor="middle">NEG</text>
-  <line x1="132.66" y1="210" x2="132.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="132.66" y="265" text-anchor="middle">n’t</text>
-  <rect x="258.9" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="273.9" y="195" text-anchor="middle">NP-SBJ;{PEOPLE}</text>
-  <line x1="273.9" y1="210" x2="273.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="273.9" y="265" text-anchor="middle">PRO</text>
-  <line x1="273.9" y1="280" x2="273.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="273.9" y="335" text-anchor="middle">they</text>
+  <rect x="31.86" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="46.86" y="195" text-anchor="middle">DOD</text>
+  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="46.86" y="265" text-anchor="middle">Did</text>
+  <rect x="157.26" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="172.26" y="195" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="172.26" y1="210" x2="172.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="172.26" y="265" text-anchor="middle">n’t</text>
+  <rect x="294.54" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="309.54" y="195" text-anchor="middle">NP-SBJ</text>
+  <line x1="309.54" y1="210" x2="309.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="309.54" y="265" text-anchor="middle">PRO</text>
+  <line x1="309.54" y1="280" x2="309.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="309.54" y="335" text-anchor="middle">they</text>
   <text x="430.98" y="195" text-anchor="middle">HV;~cat_Vt</text>
   <line x1="430.98" y1="210" x2="430.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="430.98" y="265" text-anchor="middle">have</text>
@@ -176,14 +150,14 @@ that connect these two resources.
 </svg>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=149_A_LooseChange@3,1,2,5,7" target="_blank">149_A_LooseChange@3,1,2,5,7</a>]</small>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=149_A_LooseChange@5,1,2,3,7" target="_blank">149_A_LooseChange@5,1,2,3,7</a>]</small>
 
 <dl>
-  <dt>(<a name="ex14.5">14.5</a>)</dt><dd></dd>
+  <dt>(<a name="ex14.3">14.3</a>)</dt><dd></dd>
 </dl>
 
 <p align="justify">
-<font style="background-color: Wheat;">did</font> she not go then
+did she <font style="background-color: Wheat;">not</font> go then
 </p>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="384.45" height="304.5" viewBox="-16.5 17.5 501.6 395">
   <rect x="219.3" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
@@ -191,25 +165,25 @@ that connect these two resources.
   <line x1="234.3" y1="70" x2="234.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <rect x="219.3" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
   <text x="234.3" y="125" text-anchor="middle">IP-SUB</text>
-  <line x1="234.3" y1="140" x2="42.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="234.3" y1="140" x2="144.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="234.3" y1="140" x2="250.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="234.3" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="234.3" y1="140" x2="152.46" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="234.3" y1="140" x2="254.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="234.3" y1="140" x2="328.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="234.3" y1="140" x2="413.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="27.9" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="42.9" y="195" text-anchor="middle">DOD</text>
-  <line x1="42.9" y1="210" x2="42.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="42.9" y="265" text-anchor="middle">did</text>
-  <rect x="129.54" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="144.54" y="195" text-anchor="middle">NP-SBJ</text>
-  <line x1="144.54" y1="210" x2="144.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="144.54" y="265" text-anchor="middle">PRO</text>
-  <line x1="144.54" y1="280" x2="144.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="144.54" y="335" text-anchor="middle">she</text>
-  <rect x="235.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="250.14" y="195" text-anchor="middle">NEG</text>
-  <line x1="250.14" y1="210" x2="250.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="250.14" y="265" text-anchor="middle">not</text>
+  <rect x="31.86" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="46.86" y="195" text-anchor="middle">DOD</text>
+  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="46.86" y="265" text-anchor="middle">did</text>
+  <rect x="137.46" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="152.46" y="195" text-anchor="middle">NP-SBJ</text>
+  <line x1="152.46" y1="210" x2="152.46" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="152.46" y="265" text-anchor="middle">PRO</text>
+  <line x1="152.46" y1="280" x2="152.46" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="152.46" y="335" text-anchor="middle">she</text>
+  <rect x="239.1" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="254.1" y="195" text-anchor="middle">NEG</text>
+  <line x1="254.1" y1="210" x2="254.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="254.1" y="265" text-anchor="middle">not</text>
   <text x="328.02" y="195" text-anchor="middle">VB</text>
   <line x1="328.02" y1="210" x2="328.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="328.02" y="265" text-anchor="middle">go</text>
@@ -221,52 +195,87 @@ that connect these two resources.
 </svg>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=332_christine_T39@3,1,2,5,8" target="_blank">332_christine_T39@3,1,2,5,8</a>]</small>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=332_christine_T39@8,1,2,3,5" target="_blank">332_christine_T39@8,1,2,3,5</a>]</small>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;You can specify the order between negation and the subject: Pattern (<a href="#ex14.4">14.4</a>) will find (<a href="#ex14.2">14.2</a>) but not (<a href="#ex14.3">14.3</a>) because negation has to <b>be a sister of and precede</b> (<tt>&dollar;..</tt>) the subject.</p>
+
+<dl>
+  <dt>(<a name="ex14.4">14.4</a>)</dt><dd><tt>&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;..&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br> <tt>&nbsp;&nbsp;&#x24;,,&nbsp;(&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=op&nbsp;&#x24;..&nbsp;=sbj&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)))</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;[&nbsp;&#x24;&nbsp;ID&nbsp;|&nbsp;&gt;&nbsp;&sol;&#94;utterance&sol;]&nbsp;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op))</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^NEG/ $.. /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=op $.. =sbj !$,, (__ << (/^W/ < __))) >> (/^IP-SUB/ > (/^CP-QUE/ [ $ ID | > /^utterance/] ) !<< (/^IP\b/ << =op))"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">By contrast, pattern (<a href="#ex14.5">14.5</a>) will find (<a href="#ex14.3">14.3</a>) but not (<a href="#ex14.2">14.2</a>) because negation has to <b>be a sister of and follow</b> (<tt>&dollar;,,</tt>) the subject.</p>
+
+<dl>
+  <dt>(<a name="ex14.5">14.5</a>)</dt><dd><tt>&sol;&#94;NEG&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;,,&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br> <tt>&nbsp;&nbsp;&#x24;,,&nbsp;(&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=op&nbsp;&#x24;..&nbsp;=sbj&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)))</tt><br> <tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;[&nbsp;&#x24;&nbsp;ID&nbsp;|&nbsp;&gt;&nbsp;&sol;&#94;utterance&sol;]&nbsp;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op))</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^NEG/ $,, /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=op $.. =sbj !$,, (__ << (/^W/ < __))) >> (/^IP-SUB/ > (/^CP-QUE/ [ $ ID | > /^utterance/] ) !<< (/^IP\b/ << =op))"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
 
 <h3>Things to do:</h3>
 <dl>
-<dt>1.</dt><dd>Considering patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>), which pattern finds examples of negative questions with contracted <i>n't</i>?</dd>
-<dt>2.</dt><dd>Considering patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>), which pattern finds examples of negative questions with <i>not</i>?</dd>
-<dt>3.</dt><dd>See the difference in the number of hits returned by patterns (<a href="#ex14.2">14.2</a>) and (<a href="#ex14.3">14.3</a>). Which pattern is more common?</dd>
-<dt>4.</dt><dd>What is the most commonly used interrogative marking word that occurs with negation? What about without negation?</dd>
+<dt>1.</dt><dd>Considering patterns (<a href="#ex14.4">14.4</a>) and (<a href="#ex14.5">14.5</a>), which pattern finds examples of negative questions with contracted <i>n't</i>?</dd>
+<dt>2.</dt><dd>Considering patterns (<a href="#ex14.4">14.4</a>) and (<a href="#ex14.5">14.5</a>), which pattern finds examples of negative questions with <i>not</i>?</dd>
+<dt>3.</dt><dd>See the difference in the number of hits returned by patterns (<a href="#ex14.4">14.4</a>) and (<a href="#ex14.5">14.5</a>). Which pattern is more common?</dd>
+<dt>4.</dt><dd>What is the most commonly used sentence initial word with negative questions? You can use pattern (<a href="#ex14.6">14.6</a>) to help you answer this question.</dd>
+<dt>5.</dt><dd>How are negative questions answered? Are the answers typically negative or positive? Are negative questions used in a rhetorical way (that is, in a manner that doesn't seek an answer)?</dd>
 </dl>
+
+<dl>
+  <dt>(<a name="ex14.6">14.6</a>)</dt><dd><tt>&lowbar;&lowbar;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&sol;&#94;(MD|HVD|HVP|BED|BEP|DOD|DOP)&sol;=op&nbsp;!&#x24;,,&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;W&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x24;..&nbsp;(&sol;&#94;NEG&sol;&nbsp;&#x24;&nbsp;&sol;&#92;bSBJ&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&gt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;[&nbsp;&#x24;&nbsp;ID&nbsp;|&nbsp;&gt;&nbsp;&sol;&#94;utterance&sol;]&nbsp;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)/=op !$,, (__ << (/^W/ < __)) $.. (/^NEG/ $ /\bSBJ/) >> (/^IP-SUB/ > (/^CP-QUE/ [ $ ID | > /^utterance/] ) !<< (/^IP\b/ << =op)) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
 
 <br>
 <h2><a name="sec14.2">14.2</a>&nbsp;&nbsp;&nbsp;Tag questions</h2>
 
-<p align="justify">To find tag questions, you can use pattern (<a href="#ex14.6">14.6</a>):</p>
+<p align="justify">To find tag questions, you can use pattern (<a href="#ex14.7">14.7</a>).</p>
 
 <dl>
-  <dt>(<a name="ex14.6">14.6</a>)</dt><dd><tt>&sol;&#94;PRN&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP-MAT&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;NP-SBJ&sol;))</tt><br></dd>
+  <dt>(<a name="ex14.7">14.7</a>)</dt><dd><tt>&sol;&#94;PRN&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP-MAT&sol;&nbsp;&lt;&nbsp;(&sol;&#94;CP-QUE&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP-SUB&sol;&nbsp;&lt;-1&nbsp;&sol;&#94;NP-SBJ&sol;))</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^PRN/ > /^IP-MAT/ < (/^CP-QUE/ < (/^IP-SUB/ <-1 /^NP-SBJ/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<p align="justify">This looks for a <tt>PRN</tt> node that is itself immediately under an <tt>IP-MAT</tt>, and that has immediately under it a <tt>CP-QUE</tt>. Furthermore the <tt>CP-QUE</tt> needs to immediately dominate an <tt>IP-SUB</tt> that has as its last child an <tt>NP-SBJ</tt>. Thus, (<a href="#ex14.6">14.6</a>) returns example sentences like (<a href="#ex14.7">14.7</a>).</p>
+<p align="justify">Pattern (<a href="#ex14.7">14.7</a>) returns example sentences like (<a href="#ex14.8">14.8</a>).</p>
 
 <dl>
-  <dt>(<a name="ex14.7">14.7</a>)</dt><dd></dd>
+  <dt>(<a name="ex14.8">14.8</a>)</dt><dd></dd>
 </dl>
 
 <p align="justify">
 I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;">was n’t she</font> ?
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="958.65" height="409.5" viewBox="-16.5 17.5 1267.2 535">
-  <rect x="602.1" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="617.1" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="617.1" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="132.66" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="254.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="418.44" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="551.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="675.84" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="788.7" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="991.98" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="617.1" y1="70" x2="1195.26" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1012.11" height="409.5" viewBox="-16.5 17.5 1338.48 535">
+  <rect x="637.74" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="652.74" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="652.74" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="132.66" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="254.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="418.44" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="551.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="675.84" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="788.7" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="1027.62" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="652.74" y1="70" x2="1266.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="125" text-anchor="middle">FRM</text>
   <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="195" text-anchor="middle">I_mean</text>
@@ -304,32 +313,32 @@ I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;"
   <text x="788.7" y="125" text-anchor="middle">PUNC</text>
   <line x1="788.7" y1="140" x2="788.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="788.7" y="195" text-anchor="middle">,</text>
-  <rect x="976.98" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="991.98" y="125" text-anchor="middle">PRN</text>
-  <line x1="991.98" y1="140" x2="991.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="976.98" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="991.98" y="195" text-anchor="middle">CP-QUE</text>
-  <line x1="991.98" y1="210" x2="991.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="976.98" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="991.98" y="265" text-anchor="middle">IP-SUB</text>
-  <line x1="991.98" y1="280" x2="862.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="991.98" y1="280" x2="932.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="991.98" y1="280" x2="1061.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="1012.62" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="1027.62" y="125" text-anchor="middle">PRN</text>
+  <line x1="1027.62" y1="140" x2="1027.62" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="1012.62" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="1027.62" y="195" text-anchor="middle">CP-QUE</text>
+  <line x1="1027.62" y1="210" x2="1027.62" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="1012.62" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="1027.62" y="265" text-anchor="middle">IP-SUB</text>
+  <line x1="1027.62" y1="280" x2="862.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1027.62" y1="280" x2="968.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1027.62" y1="280" x2="1133.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="862.62" y="335" text-anchor="middle">BED</text>
   <line x1="862.62" y1="350" x2="862.62" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="862.62" y="405" text-anchor="middle">was</text>
-  <text x="932.58" y="335" text-anchor="middle">NEG</text>
-  <line x1="932.58" y1="350" x2="932.58" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="932.58" y="405" text-anchor="middle">n’t</text>
-  <rect x="1046.94" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="1061.94" y="335" text-anchor="middle">NP-SBJ;{SIRENA}</text>
-  <line x1="1061.94" y1="350" x2="1061.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1061.94" y="405" text-anchor="middle">PRO</text>
-  <line x1="1061.94" y1="420" x2="1061.94" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1061.94" y="475" text-anchor="middle">she</text>
-  <text x="1195.26" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1195.26" y1="140" x2="1195.26" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1195.26" y="195" text-anchor="middle">?</text>
+  <text x="968.22" y="335" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="968.22" y1="350" x2="968.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="968.22" y="405" text-anchor="middle">n’t</text>
+  <rect x="1118.22" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="1133.22" y="335" text-anchor="middle">NP-SBJ;{SIRENA}</text>
+  <line x1="1133.22" y1="350" x2="1133.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1133.22" y="405" text-anchor="middle">PRO</text>
+  <line x1="1133.22" y1="420" x2="1133.22" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1133.22" y="475" text-anchor="middle">she</text>
+  <text x="1266.54" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1266.54" y1="140" x2="1266.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1266.54" y="195" text-anchor="middle">?</text>
 </svg>
 
 <br/>
@@ -337,21 +346,22 @@ I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;"
 
 <h3>Things to do:</h3>
 <dl>
-<dt>1.</dt><dd>Observe in the hits returned by pattern (<a href="#ex14.6">14.6</a>) how the subject internal to the tag question (e.g., the subject highlighted in (<a href="#ex14.7">14.7</a>)) is a pronoun with a form that will match the subject of the matrix clause. Is this always the case?</dd>
-<dt>2.</dt><dd>Also observe in the hits returned by pattern (<a href="#ex14.6">14.6</a>) how the presence or absence of negation in the tag question can alternate with the absence or presence of negation in the matrix clause. Can you find cases where such alternation doesn't occur?</dd>
+<dt>1.</dt><dd>Observe in the hits returned by pattern (<a href="#ex14.7">14.7</a>) how the subject internal to the tag question (e.g., the subject highlighted in (<a href="#ex14.8">14.8</a>)) is a pronoun with a form that will match the subject of the matrix clause. Is this always the case?</dd>
+<dt>2.</dt><dd>Observe in the hits returned by pattern (<a href="#ex14.7">14.7</a>) how the presence or absence of negation inside the tag question can alternate with the absence or presence of negation inside the main clause. Can you find cases where such alternation doesn't occur?</dd>
+<dt>3.</dt><dd>Do tag questions invite answers or are they used rhetorically?</dd>
 </dl>
 
 <br>
 <h2><a name="sec14.3">14.3</a>&nbsp;&nbsp;&nbsp;Utterances with end reactions</h2>
 
-<p align="justify">Pattern (<a href="#ex14.8">14.8</a>) finds utterances with end reactions. Are these similar to tag questions?</p>
+<p align="justify">Pattern (<a href="#ex14.9">14.9</a>) finds utterances with end reactions. Are these similar to tag questions?</p>
 
 <dl>
-  <dt>(<a name="ex14.8">14.8</a>)</dt><dd><tt>&sol;&#94;PRN&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;REACT&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP&#92;b&sol;</tt><br></dd>
+  <dt>(<a name="ex14.9">14.9</a>)</dt><dd><tt>&sol;&#94;PRN&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;REACT&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP&#92;b&sol;</tt><br></dd>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^PRN\b/ < /^REACT\b/ > /^IP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -369,7 +379,7 @@ I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;"
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CP-THT\b/ < (__ < __)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -381,7 +391,7 @@ I_mean , Sirena last night was a marvel , <font style="background-color: Wheat;"
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^C\b/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -508,7 +518,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CP-THT/ < (__ < __) !<< (/^C\b/ < __)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -523,7 +533,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="__=mid < /CP-THT-OB1/ << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -536,7 +546,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -549,7 +559,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -562,7 +572,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBP\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^BEP\b/ $ (/^IP-PPL-CAT/ < /^VAG\b/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -577,7 +587,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -590,7 +600,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -603,7 +613,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -616,7 +626,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^HVD\b/ $ (/^IP-PPL-CAT/ [ < /^VVN\b/ | < (/^BEN\b/ $ (/^IP-PPL-CAT/ < /^VAG\b/)) ]) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -629,7 +639,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^MD\b/ < would !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -639,7 +649,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^VBD\b/=verb >> (/^IP-MAT/ !<< (/^IP\b/ << =verb)) $ (/^CP-THT-OB1/ < (/^IP\b/=i << (/^BED\b/ . (going . to) !>> (/^IP\b/ >> =i))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -654,7 +664,7 @@ The high quality of the seam on Milos ensured <font style="background-color: Whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^(ADJ|ADJR|ADJS)\b/ $ CP-THT"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -733,7 +743,7 @@ Pamela was <font style="background-color: Wheat;">glad</font> Jim was nowhere ne
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^(N|NS)\b/ $ CP-THT"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -745,13 +755,13 @@ Pamela was <font style="background-color: Wheat;">glad</font> Jim was nowhere ne
 </dl>
 
 <p align="justify">
-The data is arranged in such a <font style="background-color: Wheat;">way</font> that information can be retrieved
+The data is arranged in such <font style="background-color: Wheat;">a</font> way that information can be retrieved
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1081.41" height="514.5" viewBox="-16.5 17.5 1430.88 675">
-  <text x="698.94" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="698.94" y1="70" x2="73.92" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="698.94" y1="70" x2="214.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="698.94" y1="70" x2="839.52" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1187.34" height="514.5" viewBox="-16.5 17.5 1572.12 675">
+  <text x="769.56" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="769.56" y1="70" x2="73.92" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="769.56" y1="70" x2="214.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="769.56" y1="70" x2="910.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="73.92" y="125" text-anchor="middle">NP-SBJ</text>
   <line x1="73.92" y1="140" x2="34.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="73.92" y1="140" x2="108.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
@@ -764,71 +774,75 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
   <text x="214.5" y="125" text-anchor="middle">BEP;~cat_Ve</text>
   <line x1="214.5" y1="140" x2="214.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="214.5" y="195" text-anchor="middle">is</text>
-  <text x="839.52" y="125" text-anchor="middle">IP-PPL-CAT</text>
-  <line x1="839.52" y1="140" x2="328.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="839.52" y1="140" x2="429.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="839.52" y1="140" x2="941.16" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="910.14" y="125" text-anchor="middle">IP-PPL-CAT</text>
+  <line x1="910.14" y1="140" x2="328.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="910.14" y1="140" x2="429.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="910.14" y1="140" x2="1011.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="328.02" y="195" text-anchor="middle">NP-LGS</text>
   <line x1="328.02" y1="210" x2="328.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="328.02" y="265" text-anchor="middle">*</text>
   <text x="429.66" y="195" text-anchor="middle">VBD;~Tn</text>
   <line x1="429.66" y1="210" x2="429.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="429.66" y="265" text-anchor="middle">arranged</text>
-  <text x="941.16" y="195" text-anchor="middle">PP-MNR</text>
-  <line x1="941.16" y1="210" x2="531.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="941.16" y1="210" x2="988.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1011.78" y="195" text-anchor="middle">PP-MNR</text>
+  <line x1="1011.78" y1="210" x2="531.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1011.78" y1="210" x2="1058.64" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="531.3" y="265" text-anchor="middle">P-ROLE</text>
   <line x1="531.3" y1="280" x2="531.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="531.3" y="335" text-anchor="middle">in</text>
-  <text x="988.02" y="265" text-anchor="middle">NP</text>
-  <line x1="988.02" y1="280" x2="617.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="988.02" y1="280" x2="683.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="988.02" y1="280" x2="745.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="988.02" y1="280" x2="1089" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="617.1" y="335" text-anchor="middle">ADJP</text>
-  <line x1="617.1" y1="350" x2="617.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1058.64" y="265" text-anchor="middle">NP</text>
+  <line x1="1058.64" y1="280" x2="675.84" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1058.64" y1="280" x2="808.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1058.64" y1="280" x2="882.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1058.64" y1="280" x2="1230.24" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="675.84" y="335" text-anchor="middle">ADJP</text>
+  <line x1="675.84" y1="350" x2="617.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="675.84" y1="350" x2="714.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="617.1" y="405" text-anchor="middle">ADJ</text>
   <line x1="617.1" y1="420" x2="617.1" y2="450" style="stroke:#000000;stroke-width:2;"/>
   <text x="617.1" y="475" text-anchor="middle">such</text>
-  <text x="683.1" y="335" text-anchor="middle">D</text>
-  <line x1="683.1" y1="350" x2="683.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="683.1" y="405" text-anchor="middle">a</text>
-  <rect x="730.14" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="745.14" y="335" text-anchor="middle">N</text>
-  <line x1="745.14" y1="350" x2="745.14" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="745.14" y="405" text-anchor="middle">way</text>
-  <rect x="1074" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="1089" y="335" text-anchor="middle">CP-THT</text>
-  <line x1="1089" y1="350" x2="1089" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1089" y="405" text-anchor="middle">IP-SUB</text>
-  <line x1="1089" y1="420" x2="819.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1089" y1="420" x2="924.66" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1089" y1="420" x2="1026.3" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1089" y1="420" x2="1123.98" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1089" y1="420" x2="1292.28" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="819.06" y="475" text-anchor="middle">C</text>
-  <line x1="819.06" y1="490" x2="819.06" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="819.06" y="545" text-anchor="middle">that</text>
-  <text x="924.66" y="475" text-anchor="middle">NP-SBJ</text>
-  <line x1="924.66" y1="490" x2="924.66" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="924.66" y="545" text-anchor="middle">N</text>
-  <line x1="924.66" y1="560" x2="924.66" y2="590" style="stroke:#000000;stroke-width:2;"/>
-  <text x="924.66" y="615" text-anchor="middle">information</text>
-  <text x="1026.3" y="475" text-anchor="middle">MD</text>
-  <line x1="1026.3" y1="490" x2="1026.3" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1026.3" y="545" text-anchor="middle">can</text>
-  <text x="1123.98" y="475" text-anchor="middle">BE;~cat_Ve</text>
-  <line x1="1123.98" y1="490" x2="1123.98" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1123.98" y="545" text-anchor="middle">be</text>
-  <text x="1292.28" y="475" text-anchor="middle">IP-PPL-CAT</text>
-  <line x1="1292.28" y1="490" x2="1233.54" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1292.28" y1="490" x2="1339.14" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1233.54" y="545" text-anchor="middle">NP-LGS</text>
-  <line x1="1233.54" y1="560" x2="1233.54" y2="590" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1233.54" y="615" text-anchor="middle">*</text>
-  <text x="1339.14" y="545" text-anchor="middle">VVN;~Tn</text>
-  <line x1="1339.14" y1="560" x2="1339.14" y2="590" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1339.14" y="615" text-anchor="middle">retrieved</text>
+  <text x="714.78" y="405" text-anchor="middle">CP-THT</text>
+  <line x1="714.78" y1="420" x2="714.78" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="714.78" y="475" text-anchor="middle">*ICH*-126</text>
+  <rect x="793.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="808.5" y="335" text-anchor="middle">D</text>
+  <line x1="808.5" y1="350" x2="808.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="808.5" y="405" text-anchor="middle">a</text>
+  <rect x="867.42" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="882.42" y="335" text-anchor="middle">N</text>
+  <line x1="882.42" y1="350" x2="882.42" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="882.42" y="405" text-anchor="middle">way</text>
+  <text x="1230.24" y="335" text-anchor="middle">CP-THT-126</text>
+  <line x1="1230.24" y1="350" x2="1230.24" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1230.24" y="405" text-anchor="middle">IP-SUB</text>
+  <line x1="1230.24" y1="420" x2="960.3" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1230.24" y1="420" x2="1065.9" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1230.24" y1="420" x2="1167.54" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1230.24" y1="420" x2="1265.22" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1230.24" y1="420" x2="1433.52" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="960.3" y="475" text-anchor="middle">C</text>
+  <line x1="960.3" y1="490" x2="960.3" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="960.3" y="545" text-anchor="middle">that</text>
+  <text x="1065.9" y="475" text-anchor="middle">NP-SBJ</text>
+  <line x1="1065.9" y1="490" x2="1065.9" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1065.9" y="545" text-anchor="middle">N</text>
+  <line x1="1065.9" y1="560" x2="1065.9" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1065.9" y="615" text-anchor="middle">information</text>
+  <text x="1167.54" y="475" text-anchor="middle">MD</text>
+  <line x1="1167.54" y1="490" x2="1167.54" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1167.54" y="545" text-anchor="middle">can</text>
+  <text x="1265.22" y="475" text-anchor="middle">BE;~cat_Ve</text>
+  <line x1="1265.22" y1="490" x2="1265.22" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1265.22" y="545" text-anchor="middle">be</text>
+  <text x="1433.52" y="475" text-anchor="middle">IP-PPL-CAT</text>
+  <line x1="1433.52" y1="490" x2="1374.78" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1433.52" y1="490" x2="1480.38" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1374.78" y="545" text-anchor="middle">NP-LGS</text>
+  <line x1="1374.78" y1="560" x2="1374.78" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1374.78" y="615" text-anchor="middle">*</text>
+  <text x="1480.38" y="545" text-anchor="middle">VVN;~Tn</text>
+  <line x1="1480.38" y1="560" x2="1480.38" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1480.38" y="615" text-anchor="middle">retrieved</text>
 </svg>
 
 <br/>
@@ -841,7 +855,7 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/PSBJ/ $ /PRD2/ $ /CP-THT-NSBJ/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -969,7 +983,7 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^NP\b/ <: (/^IP-REL/=i << (/^(RPRO|RD|RADV)\b/ < __ !>> (/^IP-REL\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1061,7 +1075,7 @@ The data is arranged in such a <font style="background-color: Wheat;">way</font>
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CP-QUE-/ < (/^IP/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1172,7 +1186,7 @@ We want you to Know <font style="background-color: Wheat;">why your support of G
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CP-QUE\b/ > /^PP\b/ < (/^IP\b/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1309,7 +1323,7 @@ Could you give me some suggestions for <font style="background-color: Wheat;">wh
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CP-QUE\b/ > /^PP\b/ < (/^IP-INF/=i << (/^W/ < __ !>> (/^IP\b/ >> =i)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1324,7 +1338,7 @@ Could you give me some suggestions for <font style="background-color: Wheat;">wh
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1336,7 +1350,7 @@ Could you give me some suggestions for <font style="background-color: Wheat;">wh
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ < /^(If|if)\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1458,7 +1472,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ < Whether|whether"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1568,7 +1582,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ > (/^ILYR/ $ /^CONJP\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1580,7 +1594,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ [ > (/^IP\b/ > (/^CP-QUE\b/ > /^PP\b/)) | > (/^ILYR/ > (/^ILYR/ > (/^IP\b/ > (/^CP-QUE\b/ > /^PP\b/)))) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1592,7 +1606,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^WQ\b/ [ > /^IP-INF\b/ | > (/^ILYR/ > (/^ILYR/ > (/^IP-INF\b/))) ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1613,7 +1627,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-MAT/ $, /^PU.Q/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1743,7 +1757,7 @@ Excuse_me_. I was wondering <font style="background-color: Wheat;">___if</font> 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^multi-sentence/ $, /^PU.Q/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -1881,7 +1895,7 @@ He said now , “ <font style="background-color: Wheat;">I ’ve got the perfect
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="PRN < /^IP-MAT/ > /^(IP|ILYR)/ $ /^PU.Q/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2036,7 +2050,7 @@ He said now , “ <font style="background-color: Wheat;">I ’ve got the perfect
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^V/ < /\{say\}/ $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2163,7 +2177,7 @@ They <font style="background-color: Wheat;">___say</font> the company has produc
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > /^IP-PPL/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2421,7 +2435,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ $ /^BEP\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2434,7 +2448,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ > (/^IP-PPL-CAT/ $ /^HVP\b/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2447,7 +2461,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ > (/^IP-PPL-CAT/ $ /^BEP\b/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2460,7 +2474,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ $ /^BED\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2473,7 +2487,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ > (/^IP-PPL-CAT/ $ /^HVD\b/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2486,7 +2500,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ < __ > (/^IP-PPL-CAT/ > (/^IP-PPL-CAT/ $ /^BED\b/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2504,7 +2518,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ $ /OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2517,7 +2531,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ $ /OB2/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2538,7 +2552,7 @@ He was followed in 336 b.c. <font style="background-color: Wheat;">by his son Al
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-CAT/ > (/^IP-INF/ $ (/^V/ < /^go/)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2691,7 +2705,7 @@ The book or one of the short stories you have studied is ___going to be <font st
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-CAT/ $ /^MD/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2851,7 +2865,7 @@ Pupils should be <font style="background-color: Wheat;">*</font> expected to rea
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-CAT/ $ (/^V/ < /^(get|got)/))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -2936,7 +2950,7 @@ Or rather , we ___get <font style="background-color: Wheat;">*</font> educated o
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-CAT/ > (/^IP-PPL/ [ == /PPL$/ | == /-SBJ/ | == /-OB/ ]))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3069,7 +3083,7 @@ The hedgehog , and its ancestor , narrowly missed being <font style="background-
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/LGS/ > (/^IP-PPL-CAT/ > /^IP-INF/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3172,7 +3186,7 @@ The hedgehog , and its ancestor , narrowly missed being <font style="background-
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/SBJ/ < /^RPRO\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3189,7 +3203,7 @@ The hedgehog , and its ancestor , narrowly missed being <font style="background-
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < /^RPRO\b/ !>> (/^IP-REL/ >> =rel)) !$, /^PU/ $ __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3339,7 +3353,7 @@ This is a watch that creates a lifestyle for modern individuals <font style="bac
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < /^RPRO\b/ !>> (/^IP-REL/ >> =rel)) $, /^PU/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3460,7 +3474,7 @@ Everyone turned to stare at her , except the boy , <font style="background-color
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/SBJ/ < (/^NP-GENV/ < /^RPRO\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3602,7 +3616,7 @@ There was an influx of young professionals <font style="background-color: Wheat;
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/REL/ << (/SBJ/ < /^\*ICH\*/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3799,7 +3813,7 @@ Behaviour <font style="background-color: Wheat;">that historically , we would ha
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ]"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3822,7 +3836,7 @@ Behaviour <font style="background-color: Wheat;">that historically , we would ha
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) !$, /^PU/ $ __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3902,7 +3916,7 @@ Every movement <font style="background-color: Wheat;">___*T* she made</font> see
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) $, /^PU/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -3984,7 +3998,7 @@ elastic bands , <font style="background-color: Wheat;">which postmen discard whe
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/REL/ << (/OB/ < /^\*ICH\*/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4062,7 +4076,7 @@ the beast <font style="background-color: Wheat;">that I thought I loved ___*ICH*
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^NP\b/ [ < /^RPRO\b/ | < /^\*T\*/ ] > /^PP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4204,7 +4218,7 @@ I always crack the mirrors I look in <font style="background-color: Wheat;">___*
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/REL/ << (/^NP\/ < /^\*ICH\*/ > /^PP\b/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4315,7 +4329,7 @@ a club book <font style="background-color: Wheat;">which we put our password and
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^RADV/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4331,7 +4345,7 @@ a club book <font style="background-color: Wheat;">which we put our password and
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^RADV/ < /^where/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4473,7 +4487,7 @@ we could do somethin fine out there , maybe find a place <font style="background
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^RADV/ < /^when/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4487,16 +4501,16 @@ we could do somethin fine out there , maybe find a place <font style="background
 <p align="justify">
 Last year , <font style="background-color: Wheat;">___when</font> he worked out at halfback all season , he did n’t get into a single game .
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1372.47" height="409.5" viewBox="-16.5 17.5 1818.96 535">
-  <text x="892.98" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="892.98" y1="70" x2="503.58" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1046.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1131.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1213.74" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1283.7" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1353.66" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1548.36" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="892.98" y1="70" x2="1747.02" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1425.93" height="409.5" viewBox="-16.5 17.5 1890.24 535">
+  <text x="928.62" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="928.62" y1="70" x2="503.58" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1046.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1131.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1213.74" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1319.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1424.94" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1619.64" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="928.62" y1="70" x2="1818.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="503.58" y="125" text-anchor="middle">NP-TMP</text>
   <line x1="503.58" y1="140" x2="38.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <line x1="503.58" y1="140" x2="116.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
@@ -4571,36 +4585,36 @@ Last year , <font style="background-color: Wheat;">___when</font> he worked out 
   <text x="1213.74" y="125" text-anchor="middle">DOD</text>
   <line x1="1213.74" y1="140" x2="1213.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="1213.74" y="195" text-anchor="middle">did</text>
-  <text x="1283.7" y="125" text-anchor="middle">NEG</text>
-  <line x1="1283.7" y1="140" x2="1283.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1283.7" y="195" text-anchor="middle">n’t</text>
-  <text x="1353.66" y="125" text-anchor="middle">VB</text>
-  <line x1="1353.66" y1="140" x2="1353.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1353.66" y="195" text-anchor="middle">get</text>
-  <text x="1548.36" y="125" text-anchor="middle">PP-DIR</text>
-  <line x1="1548.36" y1="140" x2="1435.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1548.36" y1="140" x2="1595.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1435.5" y="195" text-anchor="middle">P-ROLE</text>
-  <line x1="1435.5" y1="210" x2="1435.5" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1435.5" y="265" text-anchor="middle">into</text>
-  <text x="1595.22" y="195" text-anchor="middle">NP</text>
-  <line x1="1595.22" y1="210" x2="1509.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1595.22" y1="210" x2="1583.34" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1595.22" y1="210" x2="1669.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1509.42" y="265" text-anchor="middle">D</text>
-  <line x1="1509.42" y1="280" x2="1509.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1509.42" y="335" text-anchor="middle">a</text>
-  <text x="1583.34" y="265" text-anchor="middle">ADJP</text>
-  <line x1="1583.34" y1="280" x2="1583.34" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1583.34" y="335" text-anchor="middle">ADJ</text>
-  <line x1="1583.34" y1="350" x2="1583.34" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1583.34" y="405" text-anchor="middle">single</text>
-  <text x="1669.14" y="265" text-anchor="middle">N</text>
-  <line x1="1669.14" y1="280" x2="1669.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1669.14" y="335" text-anchor="middle">game</text>
-  <text x="1747.02" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1747.02" y1="140" x2="1747.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1747.02" y="195" text-anchor="middle">.</text>
+  <text x="1319.34" y="125" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="1319.34" y1="140" x2="1319.34" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1319.34" y="195" text-anchor="middle">n’t</text>
+  <text x="1424.94" y="125" text-anchor="middle">VB</text>
+  <line x1="1424.94" y1="140" x2="1424.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1424.94" y="195" text-anchor="middle">get</text>
+  <text x="1619.64" y="125" text-anchor="middle">PP-DIR</text>
+  <line x1="1619.64" y1="140" x2="1506.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1619.64" y1="140" x2="1666.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1506.78" y="195" text-anchor="middle">P-ROLE</text>
+  <line x1="1506.78" y1="210" x2="1506.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1506.78" y="265" text-anchor="middle">into</text>
+  <text x="1666.5" y="195" text-anchor="middle">NP</text>
+  <line x1="1666.5" y1="210" x2="1580.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1666.5" y1="210" x2="1654.62" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1666.5" y1="210" x2="1740.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1580.7" y="265" text-anchor="middle">D</text>
+  <line x1="1580.7" y1="280" x2="1580.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1580.7" y="335" text-anchor="middle">a</text>
+  <text x="1654.62" y="265" text-anchor="middle">ADJP</text>
+  <line x1="1654.62" y1="280" x2="1654.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1654.62" y="335" text-anchor="middle">ADJ</text>
+  <line x1="1654.62" y1="350" x2="1654.62" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1654.62" y="405" text-anchor="middle">single</text>
+  <text x="1740.42" y="265" text-anchor="middle">N</text>
+  <line x1="1740.42" y1="280" x2="1740.42" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1740.42" y="335" text-anchor="middle">game</text>
+  <text x="1818.3" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1818.3" y1="140" x2="1818.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1818.3" y="195" text-anchor="middle">.</text>
 </svg>
 
 <br/>
@@ -4613,7 +4627,7 @@ Last year , <font style="background-color: Wheat;">___when</font> he worked out 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^NP-TMP/ < /^\*T\*/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4627,13 +4641,13 @@ Last year , <font style="background-color: Wheat;">___when</font> he worked out 
 <p align="justify">
 you were n’t like that last time <font style="background-color: Wheat;"><font style="background-color: Wheat;">*T*</font> I saw you</font>
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="782.43" height="357" viewBox="-16.5 17.5 1032.24 465">
-  <text x="499.62" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="499.62" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="499.62" y1="70" x2="144.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="499.62" y1="70" x2="230.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="499.62" y1="70" x2="366.96" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="499.62" y1="70" x2="733.92" y2="100" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="835.89" height="357" viewBox="-16.5 17.5 1103.52 465">
+  <text x="535.26" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="535.26" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.26" y1="70" x2="144.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.26" y1="70" x2="265.98" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.26" y1="70" x2="438.24" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="535.26" y1="70" x2="805.2" y2="100" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="125" text-anchor="middle">NP-SBJ</text>
   <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="195" text-anchor="middle">PRO</text>
@@ -4642,57 +4656,57 @@ you were n’t like that last time <font style="background-color: Wheat;"><font 
   <text x="144.54" y="125" text-anchor="middle">BED;~Ln</text>
   <line x1="144.54" y1="140" x2="144.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="144.54" y="195" text-anchor="middle">were</text>
-  <text x="230.34" y="125" text-anchor="middle">NEG</text>
-  <line x1="230.34" y1="140" x2="230.34" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="230.34" y="195" text-anchor="middle">n’t</text>
-  <text x="366.96" y="125" text-anchor="middle">NP-PRD2</text>
-  <line x1="366.96" y1="140" x2="366.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="366.96" y="195" text-anchor="middle">PP</text>
-  <line x1="366.96" y1="210" x2="312.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="366.96" y1="210" x2="413.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="312.18" y="265" text-anchor="middle">P-ROLE</text>
-  <line x1="312.18" y1="280" x2="312.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="312.18" y="335" text-anchor="middle">like</text>
-  <text x="413.82" y="265" text-anchor="middle">NP</text>
-  <line x1="413.82" y1="280" x2="413.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="413.82" y="335" text-anchor="middle">D;_nphd_</text>
-  <line x1="413.82" y1="350" x2="413.82" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="413.82" y="405" text-anchor="middle">that</text>
-  <text x="733.92" y="125" text-anchor="middle">NP-TMP</text>
-  <line x1="733.92" y1="140" x2="507.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="733.92" y1="140" x2="585.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="733.92" y1="140" x2="811.8" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="507.54" y="195" text-anchor="middle">ADJP</text>
-  <line x1="507.54" y1="210" x2="507.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="507.54" y="265" text-anchor="middle">ADJ</text>
-  <line x1="507.54" y1="280" x2="507.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="507.54" y="335" text-anchor="middle">last</text>
-  <text x="585.42" y="195" text-anchor="middle">N</text>
-  <line x1="585.42" y1="210" x2="585.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="585.42" y="265" text-anchor="middle">time</text>
-  <rect x="796.8" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="811.8" y="195" text-anchor="middle">IP-REL</text>
-  <line x1="811.8" y1="210" x2="683.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="811.8" y1="210" x2="788.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="811.8" y1="210" x2="870.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="811.8" y1="210" x2="952.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="668.1" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="683.1" y="265" text-anchor="middle">NP-TMP</text>
-  <line x1="683.1" y1="280" x2="683.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="683.1" y="335" text-anchor="middle">*T*</text>
-  <text x="788.7" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="788.7" y1="280" x2="788.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="788.7" y="335" text-anchor="middle">PRO</text>
-  <line x1="788.7" y1="350" x2="788.7" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="788.7" y="405" text-anchor="middle">I</text>
-  <text x="870.54" y="265" text-anchor="middle">VBD</text>
-  <line x1="870.54" y1="280" x2="870.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="870.54" y="335" text-anchor="middle">saw</text>
-  <text x="952.38" y="265" text-anchor="middle">NP-OB1</text>
-  <line x1="952.38" y1="280" x2="952.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="952.38" y="335" text-anchor="middle">PRO</text>
-  <line x1="952.38" y1="350" x2="952.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="952.38" y="405" text-anchor="middle">you</text>
+  <text x="265.98" y="125" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="265.98" y1="140" x2="265.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="265.98" y="195" text-anchor="middle">n’t</text>
+  <text x="438.24" y="125" text-anchor="middle">NP-PRD2</text>
+  <line x1="438.24" y1="140" x2="438.24" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="438.24" y="195" text-anchor="middle">PP</text>
+  <line x1="438.24" y1="210" x2="383.46" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="438.24" y1="210" x2="485.1" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="383.46" y="265" text-anchor="middle">P-ROLE</text>
+  <line x1="383.46" y1="280" x2="383.46" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="383.46" y="335" text-anchor="middle">like</text>
+  <text x="485.1" y="265" text-anchor="middle">NP</text>
+  <line x1="485.1" y1="280" x2="485.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="485.1" y="335" text-anchor="middle">D;_nphd_</text>
+  <line x1="485.1" y1="350" x2="485.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="485.1" y="405" text-anchor="middle">that</text>
+  <text x="805.2" y="125" text-anchor="middle">NP-TMP</text>
+  <line x1="805.2" y1="140" x2="578.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="805.2" y1="140" x2="656.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="805.2" y1="140" x2="883.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="578.82" y="195" text-anchor="middle">ADJP</text>
+  <line x1="578.82" y1="210" x2="578.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="578.82" y="265" text-anchor="middle">ADJ</text>
+  <line x1="578.82" y1="280" x2="578.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="578.82" y="335" text-anchor="middle">last</text>
+  <text x="656.7" y="195" text-anchor="middle">N</text>
+  <line x1="656.7" y1="210" x2="656.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="656.7" y="265" text-anchor="middle">time</text>
+  <rect x="868.08" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="883.08" y="195" text-anchor="middle">IP-REL</text>
+  <line x1="883.08" y1="210" x2="754.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="883.08" y1="210" x2="859.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="883.08" y1="210" x2="941.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="883.08" y1="210" x2="1023.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="739.38" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="754.38" y="265" text-anchor="middle">NP-TMP</text>
+  <line x1="754.38" y1="280" x2="754.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="754.38" y="335" text-anchor="middle">*T*</text>
+  <text x="859.98" y="265" text-anchor="middle">NP-SBJ</text>
+  <line x1="859.98" y1="280" x2="859.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="859.98" y="335" text-anchor="middle">PRO</text>
+  <line x1="859.98" y1="350" x2="859.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="859.98" y="405" text-anchor="middle">I</text>
+  <text x="941.82" y="265" text-anchor="middle">VBD</text>
+  <line x1="941.82" y1="280" x2="941.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="941.82" y="335" text-anchor="middle">saw</text>
+  <text x="1023.66" y="265" text-anchor="middle">NP-OB1</text>
+  <line x1="1023.66" y1="280" x2="1023.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1023.66" y="335" text-anchor="middle">PRO</text>
+  <line x1="1023.66" y1="350" x2="1023.66" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1023.66" y="405" text-anchor="middle">you</text>
 </svg>
 
 <br/>
@@ -4708,7 +4722,7 @@ you were n’t like that last time <font style="background-color: Wheat;"><font 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NLYR)\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4723,7 +4737,7 @@ you were n’t like that last time <font style="background-color: Wheat;"><font 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NLYR)\b/ < /^VAG/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4809,7 +4823,7 @@ he looked like a cow <font style="background-color: Wheat;">chewing a piece of g
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^IP-PPL/ > /^(NP|NLYR)\b/ < /^VVN/ < /LGS/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4923,7 +4937,7 @@ The site where this was is a little seaside town <font style="background-color: 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -4938,7 +4952,7 @@ The site where this was is a little seaside town <font style="background-color: 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5050,7 +5064,7 @@ But <font style="background-color: Wheat;">if you ask about their education</fon
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/SCON/ < (/^P-CONN/ < /^when/) < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5141,7 +5155,7 @@ you ’re very unpleasant <font style="background-color: Wheat;">___when you ’
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^MD\b/ < /^w/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5247,7 +5261,7 @@ you ’re very unpleasant <font style="background-color: Wheat;">___when you ’
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ /^MD\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5361,7 +5375,7 @@ you ’re very unpleasant <font style="background-color: Wheat;">___when you ’
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) > /IMP/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5458,7 +5472,7 @@ you ’re very unpleasant <font style="background-color: Wheat;">___when you ’
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BED|HVD|DOD|VBD)/ !$ /CAT/)) $ MD"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5560,7 +5574,7 @@ I wonder if it would be good <font style="background-color: Wheat;">if you took 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^BED/ $ (/CAT/ < /^(VAG|BAG)/))) $ /^MD\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5574,28 +5588,28 @@ I wonder if it would be good <font style="background-color: Wheat;">if you took 
 <p align="justify">
 <font style="background-color: Wheat;">If I was n’t working here</font> ... I would be sad ... ”
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="982.41" height="409.5" viewBox="-16.5 17.5 1298.88 535">
-  <text x="632.94" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="632.94" y1="70" x2="320.76" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="680.46" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="766.26" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="856.02" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="945.78" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="1051.38" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="1149.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="632.94" y1="70" x2="1226.94" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="305.76" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="320.76" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
-  <line x1="320.76" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="320.76" y1="140" x2="367.62" y2="170" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1035.87" height="409.5" viewBox="-16.5 17.5 1370.16 535">
+  <text x="668.58" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="668.58" y1="70" x2="356.4" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="751.74" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="837.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="927.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="1017.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="1122.66" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="1220.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="668.58" y1="70" x2="1298.22" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="341.4" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="356.4" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
+  <line x1="356.4" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="356.4" y1="140" x2="403.26" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="195" text-anchor="middle">P-CONN</text>
   <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="46.86" y="265" text-anchor="middle">If</text>
-  <rect x="352.62" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="367.62" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="367.62" y1="210" x2="140.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="367.62" y1="210" x2="265.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="367.62" y1="210" x2="493.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="388.26" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="403.26" y="195" text-anchor="middle">IP-ADV</text>
+  <line x1="403.26" y1="210" x2="140.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="403.26" y1="210" x2="265.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="403.26" y1="210" x2="528.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="140.58" y="265" text-anchor="middle">NP-SBJ</text>
   <line x1="140.58" y1="280" x2="140.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="140.58" y="335" text-anchor="middle">PRO</text>
@@ -5605,49 +5619,49 @@ I wonder if it would be good <font style="background-color: Wheat;">if you took 
   <text x="265.98" y="265" text-anchor="middle">BED;~cat_Vg</text>
   <line x1="265.98" y1="280" x2="265.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="265.98" y="335" text-anchor="middle">was</text>
-  <rect x="478.02" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="493.02" y="265" text-anchor="middle">IP-PPL-CAT</text>
-  <line x1="493.02" y1="280" x2="379.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="493.02" y1="280" x2="473.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="493.02" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="379.5" y="335" text-anchor="middle">NEG</text>
-  <line x1="379.5" y1="350" x2="379.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="379.5" y="405" text-anchor="middle">n’t</text>
-  <rect x="458.22" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="473.22" y="335" text-anchor="middle">VAG;~I</text>
-  <line x1="473.22" y1="350" x2="473.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="473.22" y="405" text-anchor="middle">working</text>
-  <text x="586.74" y="335" text-anchor="middle">ADVP-LOC</text>
-  <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="586.74" y="405" text-anchor="middle">ADV</text>
-  <line x1="586.74" y1="420" x2="586.74" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="586.74" y="475" text-anchor="middle">here</text>
-  <text x="680.46" y="125" text-anchor="middle">PUNC</text>
-  <line x1="680.46" y1="140" x2="680.46" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="680.46" y="195" text-anchor="middle">...</text>
-  <text x="766.26" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="766.26" y1="140" x2="766.26" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="766.26" y="195" text-anchor="middle">PRO</text>
-  <line x1="766.26" y1="210" x2="766.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="766.26" y="265" text-anchor="middle">I</text>
-  <rect x="841.02" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="856.02" y="125" text-anchor="middle">MD</text>
-  <line x1="856.02" y1="140" x2="856.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="856.02" y="195" text-anchor="middle">would</text>
-  <text x="945.78" y="125" text-anchor="middle">BE;~La</text>
-  <line x1="945.78" y1="140" x2="945.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="945.78" y="195" text-anchor="middle">be</text>
-  <text x="1051.38" y="125" text-anchor="middle">ADJP-PRD2</text>
-  <line x1="1051.38" y1="140" x2="1051.38" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1051.38" y="195" text-anchor="middle">ADJ</text>
-  <line x1="1051.38" y1="210" x2="1051.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1051.38" y="265" text-anchor="middle">sad</text>
-  <text x="1149.06" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1149.06" y1="140" x2="1149.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1149.06" y="195" text-anchor="middle">...</text>
-  <text x="1226.94" y="125" text-anchor="middle">PURQ</text>
-  <line x1="1226.94" y1="140" x2="1226.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1226.94" y="195" text-anchor="middle">”</text>
+  <rect x="513.66" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="528.66" y="265" text-anchor="middle">IP-PPL-CAT</text>
+  <line x1="528.66" y1="280" x2="415.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="528.66" y1="280" x2="544.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="528.66" y1="280" x2="658.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="415.14" y="335" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="415.14" y1="350" x2="415.14" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="415.14" y="405" text-anchor="middle">n’t</text>
+  <rect x="529.5" y="315" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="544.5" y="335" text-anchor="middle">VAG;~I</text>
+  <line x1="544.5" y1="350" x2="544.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="544.5" y="405" text-anchor="middle">working</text>
+  <text x="658.02" y="335" text-anchor="middle">ADVP-LOC</text>
+  <line x1="658.02" y1="350" x2="658.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="658.02" y="405" text-anchor="middle">ADV</text>
+  <line x1="658.02" y1="420" x2="658.02" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="658.02" y="475" text-anchor="middle">here</text>
+  <text x="751.74" y="125" text-anchor="middle">PUNC</text>
+  <line x1="751.74" y1="140" x2="751.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="751.74" y="195" text-anchor="middle">...</text>
+  <text x="837.54" y="125" text-anchor="middle">NP-SBJ</text>
+  <line x1="837.54" y1="140" x2="837.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="837.54" y="195" text-anchor="middle">PRO</text>
+  <line x1="837.54" y1="210" x2="837.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="837.54" y="265" text-anchor="middle">I</text>
+  <rect x="912.3" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="927.3" y="125" text-anchor="middle">MD</text>
+  <line x1="927.3" y1="140" x2="927.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="927.3" y="195" text-anchor="middle">would</text>
+  <text x="1017.06" y="125" text-anchor="middle">BE;~La</text>
+  <line x1="1017.06" y1="140" x2="1017.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1017.06" y="195" text-anchor="middle">be</text>
+  <text x="1122.66" y="125" text-anchor="middle">ADJP-PRD2</text>
+  <line x1="1122.66" y1="140" x2="1122.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1122.66" y="195" text-anchor="middle">ADJ</text>
+  <line x1="1122.66" y1="210" x2="1122.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1122.66" y="265" text-anchor="middle">sad</text>
+  <text x="1220.34" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1220.34" y1="140" x2="1220.34" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1220.34" y="195" text-anchor="middle">...</text>
+  <text x="1298.22" y="125" text-anchor="middle">PURQ</text>
+  <line x1="1298.22" y1="140" x2="1298.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1298.22" y="195" text-anchor="middle">”</text>
 </svg>
 
 <br/>
@@ -5669,7 +5683,7 @@ I wonder if it would be good <font style="background-color: Wheat;">if you took 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^HVD/ $ /CAT/)) $ /^MD\b/ $ /^HV\b/ $ /CAT/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5771,7 +5785,7 @@ I wonder if it would be good <font style="background-color: Wheat;">if you took 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^V/ < /^wish/ $ /^CP-THT-OB1/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5876,7 +5890,7 @@ She <font style="background-color: Wheat;">___wished</font> that she could talk 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -5888,7 +5902,7 @@ She <font style="background-color: Wheat;">___wished</font> that she could talk 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < /^NP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6010,7 +6024,7 @@ The prize includes flights , <font style="background-color: Wheat;">accommodatio
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < /^ILYR\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6136,7 +6150,7 @@ She went over_to her , and <font style="background-color: Wheat;">___she said , 
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < /^ADJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6210,7 +6224,7 @@ He ’s plump , <font style="background-color: Wheat;">but not fat</font> .
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < (/^ADVP/ !== /ADVP-/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6360,7 +6374,7 @@ Through reading in particular , pupils have a chance to develop culturally , <fo
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < /^PP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6455,7 +6469,7 @@ English has a pre-eminent place in education <font style="background-color: Whea
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJ\b/ $.. /^CONJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6542,7 +6556,7 @@ There were no tracks of <font style="background-color: Wheat;">either</font> hoo
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="(/^ILYR\b/ < /^CONJP\b/) >: /^IP-MAT/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6689,7 +6703,7 @@ There were no tracks of <font style="background-color: Wheat;">either</font> hoo
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^ILYR\b/ < (/^ILYR\b/ < /SBJ/) < /^CONJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6819,7 +6833,7 @@ In the summer holidays <font style="background-color: Wheat;">I stayed at my cou
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="(/^ILYR\b/ < /^CONJP\b/) $ /SBJ/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -6954,7 +6968,7 @@ We <font style="background-color: Wheat;">went home by the Manx Maid and got bac
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJ\b/ > /^IP-MAT/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -7027,7 +7041,7 @@ We <font style="background-color: Wheat;">went home by the Manx Maid and got bac
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^ADVP-CNT/ > /^CONJP\b/"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
@@ -7041,14 +7055,14 @@ We <font style="background-color: Wheat;">went home by the Manx Maid and got bac
 <p align="justify">
 It ’s dangerous , <font style="background-color: Wheat;">so you should walk on the sidewalk</font> .
 </p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="870.54" height="462" viewBox="-16.5 17.5 1149.72 605">
-  <text x="558.36" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="558.36" y1="70" x2="519.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="558.36" y1="70" x2="1077.78" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <text x="519.42" y="125" text-anchor="middle">ILYR</text>
-  <line x1="519.42" y1="140" x2="156.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="519.42" y1="140" x2="351.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="519.42" y1="140" x2="714.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="888.36" height="462" viewBox="-16.5 17.5 1173.48 605">
+  <text x="570.24" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="570.24" y1="70" x2="531.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="570.24" y1="70" x2="1101.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="531.3" y="125" text-anchor="middle">ILYR</text>
+  <line x1="531.3" y1="140" x2="156.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="531.3" y1="140" x2="351.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="531.3" y1="140" x2="726.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
   <text x="156.42" y="195" text-anchor="middle">ILYR</text>
   <line x1="156.42" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <line x1="156.42" y1="210" x2="144.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
@@ -7069,16 +7083,16 @@ It ’s dangerous , <font style="background-color: Wheat;">so you should walk on
   <text x="351.78" y="195" text-anchor="middle">PUNC</text>
   <line x1="351.78" y1="210" x2="351.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
   <text x="351.78" y="265" text-anchor="middle">,</text>
-  <rect x="699.78" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="714.78" y="195" text-anchor="middle">CONJP</text>
-  <line x1="714.78" y1="210" x2="714.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="699.78" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="714.78" y="265" text-anchor="middle">ILYR</text>
-  <line x1="714.78" y1="280" x2="445.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="714.78" y1="280" x2="547.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="714.78" y1="280" x2="640.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="714.78" y1="280" x2="726.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="714.78" y1="280" x2="902.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="711.66" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="726.66" y="195" text-anchor="middle">CONJP</text>
+  <line x1="726.66" y1="210" x2="726.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="711.66" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="726.66" y="265" text-anchor="middle">ILYR</text>
+  <line x1="726.66" y1="280" x2="445.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="726.66" y1="280" x2="547.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="726.66" y1="280" x2="640.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="726.66" y1="280" x2="738.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="726.66" y1="280" x2="925.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
   <text x="445.5" y="335" text-anchor="middle">ADVP-CNT</text>
   <line x1="445.5" y1="350" x2="445.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="445.5" y="405" text-anchor="middle">ADV</text>
@@ -7092,27 +7106,27 @@ It ’s dangerous , <font style="background-color: Wheat;">so you should walk on
   <text x="640.86" y="335" text-anchor="middle">MD</text>
   <line x1="640.86" y1="350" x2="640.86" y2="380" style="stroke:#000000;stroke-width:2;"/>
   <text x="640.86" y="405" text-anchor="middle">should</text>
-  <text x="726.66" y="335" text-anchor="middle">VB</text>
-  <line x1="726.66" y1="350" x2="726.66" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="726.66" y="405" text-anchor="middle">walk</text>
-  <text x="902.22" y="335" text-anchor="middle">PP-LOC</text>
-  <line x1="902.22" y1="350" x2="812.46" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="902.22" y1="350" x2="949.08" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="812.46" y="405" text-anchor="middle">P-ROLE</text>
-  <line x1="812.46" y1="420" x2="812.46" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="812.46" y="475" text-anchor="middle">on</text>
-  <text x="949.08" y="405" text-anchor="middle">NP</text>
-  <line x1="949.08" y1="420" x2="894.3" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="949.08" y1="420" x2="984.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="894.3" y="475" text-anchor="middle">D</text>
-  <line x1="894.3" y1="490" x2="894.3" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="894.3" y="545" text-anchor="middle">the</text>
-  <text x="984.06" y="475" text-anchor="middle">N</text>
-  <line x1="984.06" y1="490" x2="984.06" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="984.06" y="545" text-anchor="middle">sidewalk</text>
-  <text x="1077.78" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1077.78" y1="140" x2="1077.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1077.78" y="195" text-anchor="middle">.</text>
+  <text x="738.54" y="335" text-anchor="middle">VB;~Ipr</text>
+  <line x1="738.54" y1="350" x2="738.54" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="738.54" y="405" text-anchor="middle">walk</text>
+  <text x="925.98" y="335" text-anchor="middle">PP-CLR-LOC</text>
+  <line x1="925.98" y1="350" x2="836.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="925.98" y1="350" x2="972.84" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="836.22" y="405" text-anchor="middle">P-ROLE</text>
+  <line x1="836.22" y1="420" x2="836.22" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="836.22" y="475" text-anchor="middle">on</text>
+  <text x="972.84" y="405" text-anchor="middle">NP</text>
+  <line x1="972.84" y1="420" x2="918.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="972.84" y1="420" x2="1007.82" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="918.06" y="475" text-anchor="middle">D</text>
+  <line x1="918.06" y1="490" x2="918.06" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="918.06" y="545" text-anchor="middle">the</text>
+  <text x="1007.82" y="475" text-anchor="middle">N</text>
+  <line x1="1007.82" y1="490" x2="1007.82" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1007.82" y="545" text-anchor="middle">sidewalk</text>
+  <text x="1101.54" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1101.54" y1="140" x2="1101.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1101.54" y="195" text-anchor="middle">.</text>
 </svg>
 
 <br/>
@@ -7130,7 +7144,7 @@ It ’s dangerous , <font style="background-color: Wheat;">so you should walk on
 </dl>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
-  <input type="hidden" name="KIND" value="graphical"/>
+  <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/^CONJP\b/ < (/^ILYR\b/ !< /^ILYR\b/ !< /CAT/ !< /^(H|B|D|V)/)"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
