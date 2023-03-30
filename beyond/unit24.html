@@ -1,0 +1,117 @@
+<h1><a name="ch24">Unit 24</a><br>Real Conditionals: Present and Future</h1>
+
+<p align="justify">You can use pattern (<a href="unit24.html#ex24.1">24.1</a>) to find constituents that have a conditional function.</p>
+
+<dl>
+  <dt>(<a name="ex24.1">24.1</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CND/ < __"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<br>
+<h2><a name="sec24.1">24.1</a>&nbsp;&nbsp;&nbsp;Present real conditionals</h2>
+
+<p align="justify">To form present real conditionals, you should use the simple present in the <i>if</i> clause and the main clause. Pattern (<a href="unit24.html#ex24.2">24.2</a>) will find conditionals with this use of tense.</p>
+
+<dl>
+  <dt>(<a name="ex24.2">24.2</a>)</dt><dd><tt>&sol;CND&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit24.html#ex24.3">24.3</a>) is found with (<a href="unit24.html#ex24.2">24.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.3"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=23_A_TED_talk_11@4,7,11,27" target="_blank">24.3</a>)</dt><dd>But if you ask about their education , they pin you to the wall .</dd>
+</dl>
+
+<p align="justify">You can use <i>when</i> or <i>whenever</i> in place of <i>if</i> without changing the conditional meaning. Pattern (<a href="unit24.html#ex24.4">24.4</a>) will find examples with <i>when</i> or <i>whenever</i> and the same use of tense found with (<a href="unit24.html#ex24.2">24.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.4">24.4</a>)</dt><dd><tt>&sol;SCON&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;P-CONN&sol;&nbsp;&lt;&nbsp;&sol;&#94;when&sol;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/SCON/ < (/^P-CONN/ < /^when/) < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit24.html#ex24.5">24.5</a>) is found with (<a href="unit24.html#ex24.4">24.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.5"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=421_christine_T24@13,5,14,15,16,20" target="_blank">24.5</a>)</dt><dd>you &apos;re very unpleasant when you &apos;re like that</dd>
+</dl>
+
+<br>
+<h2><a name="sec24.2">24.2</a>&nbsp;&nbsp;&nbsp;Future real conditionals</h2>
+
+<p align="justify">To form future real conditionals, you should use the simple present in the <i>if</i> clause and a future verb form in the main clause. Pattern (<a href="unit24.html#ex24.6">24.6</a>) will find conditionals with this use of tense.</p>
+
+<dl>
+  <dt>(<a name="ex24.6">24.6</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&#x24;&nbsp;(&sol;&#94;MD&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;w&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^MD\b/ < /^w/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit24.html#ex24.7">24.7</a>) is found with (<a href="unit24.html#ex24.6">24.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.7"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=56_susanne_J03@2,5,9,23,24" target="_blank">24.7</a>)</dt><dd>If they are not ellipsoids , the conclusions will be a reasonable approximation .</dd>
+</dl>
+
+<br>
+<h2><a name="sec24.3">24.3</a>&nbsp;&nbsp;&nbsp;Real conditionals with modals, modal-like expressions, and imperatives</h2>
+
+<p align="justify">Pattern (<a href="unit24.html#ex24.8">24.8</a>) finds  present and future real conditionals with the modals in the main clause.</p>
+
+<dl>
+  <dt>(<a name="ex24.8">24.8</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&#x24;&nbsp;&sol;&#94;MD&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ /^MD\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit24.html#ex24.9">24.9</a>) is found with (<a href="unit24.html#ex24.6">24.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.9"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=83_lucy_bnc_B18@2,5,11,21" target="_blank">24.9</a>)</dt><dd>If this description sounds familiar , you could enter the 1993 Sainsbury &apos;s Wine Taste Challenge .</dd>
+</dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="unit24.html#ex24.10">24.10</a>) finds  present and future real conditionals with the imperative in the main clause.</p>
+
+<dl>
+  <dt>(<a name="ex24.10">24.10</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&gt;&nbsp;&sol;IMP&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) > /IMP/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit24.html#ex24.11">24.11</a>) is found with (<a href="unit24.html#ex24.10">24.10</a>).</p>
+
+<dl>
+  <dt>(<a name="ex24.11"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=121_christine_T21@2,1,5,9" target="_blank">24.11</a>)</dt><dd>if it &apos;s a problem throw it all away</dd>
+</dl>
+
+<br>
+<br>
+<br>
+<br>

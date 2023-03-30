@@ -1,0 +1,249 @@
+<h1><a name="ch26">Unit 26</a><br>Conjunctions</h1>
+
+<p align="justify">Conjunctions connect words, phrases, and clause layers. They do so by connecting elements of equivalent grammatical &lsquo;status&rsquo;. For example, nouns phrases can be coordinated with other noun phrases, clauses can be coordinated with other clauses, but you cannot directly coordinate a noun phrase with a clause.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the annotation, all instances of coordination involve the projection(s) of CONJP layers of structure. We can search for this structure by searching for CONJP nodes with pattern (<a href="unit26.html#ex26.1">26.1</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.1">26.1</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find instances of coordination that involve elements of a particular grammatical status, we can place conditions on the elements that come under the CONJP projection. Thus, to find instances of coordination with noun phrase structure, we can use pattern (<a href="unit26.html#ex26.2">26.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.2">26.2</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;NP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < /^NP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.3">26.3</a>) is found with (<a href="unit26.html#ex26.2">26.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.3"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=89_lucy_bnc_B18@16,17" target="_blank">26.3</a>)</dt><dd>The prize includes flights , accommodation and the cost of a hire car for a week .</dd>
+</dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find instances of coordination with noun phrase structure, we can use pattern (<a href="unit26.html#ex26.4">26.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.4">26.4</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;ILYR&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < /^ILYR\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.5">26.5</a>) is found with (<a href="unit26.html#ex26.4">26.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.5"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=49_A_TED_talk_11@20,23" target="_blank">26.5</a>)</dt><dd>She went over_to her , and she said , &ldquo; What are you drawing ? &rdquo;</dd>
+</dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find instances of coordination with adjective phrase structure, we can use the pattern (<a href="unit26.html#ex26.6">26.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.6">26.6</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;ADJP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < /^ADJP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.7">26.7</a>) is found with (<a href="unit26.html#ex26.6">26.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.7"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=3_lucy_child_11_H25@14,17" target="_blank">26.7</a>)</dt><dd>He &apos;s plump , but not fat .</dd>
+</dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find instances of coordination with adverb phrase structure, we can use pattern (<a href="unit26.html#ex26.8">26.8</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.8">26.8</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;ADVP&sol;&nbsp;!==&nbsp;&sol;ADVP-&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < (/^ADVP/ !== /ADVP-/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.9">26.9</a>) is found with (<a href="unit26.html#ex26.8">26.8</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.9"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=5_A_KS4_English@38,39" target="_blank">26.9</a>)</dt><dd>Through reading in particular , pupils have a chance to develop culturally , emotionally , intellectually , socially and spiritually .</dd>
+</dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find instances of coordination with preposition phrase structure, we can use pattern (<a href="unit26.html#ex26.10">26.10</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.10">26.10</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;PP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < /^PP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.11">26.11</a>) is found with (<a href="unit26.html#ex26.10">26.10</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.11"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=3_A_KS4_English@22,25" target="_blank">26.11</a>)</dt><dd>English has a pre-eminent place in education and in society .</dd>
+</dl>
+
+<br>
+<h2><a name="sec26.1">26.1</a>&nbsp;&nbsp;&nbsp;Correlative conjunctions</h2>
+
+<p align="justify">Correlative conjunctions have two conjuncts and involve an initial introductory conjunction word that is matched with a main conjoining conjunctive word that separates the two conjuncts. We can use the pattern (<a href="unit26.html#ex26.12">26.12</a>) that searches for an initial conjunction word to find instances of the construction.</p>
+
+<dl>
+  <dt>(<a name="ex26.12">26.12</a>)</dt><dd><tt>&sol;&#94;CONJ&#92;b&sol;&nbsp;&#x24;..&nbsp;&sol;&#94;CONJP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJ\b/ $.. /^CONJP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.13">26.13</a>) is found with (<a href="unit26.html#ex26.12">26.12</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.13"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=68_susanne_N11@16,21" target="_blank">26.13</a>)</dt><dd>There were no tracks of either hoofs or boots .</dd>
+</dl>
+
+<br>
+<h2><a name="sec26.2">26.2</a>&nbsp;&nbsp;&nbsp;Connecting clauses with coordinating conjunctions</h2>
+
+<p align="justify">Clause content can be connected at different levels of clause structure. To see this we can look for different placement of conjunction structure within clause structure. Thus, pattern (<a href="unit26.html#ex26.14">26.14</a>) finds conjunction structure that is the only structure immediately below the top level of the matrix clause.</p>
+
+<dl>
+  <dt>(<a name="ex26.14">26.14</a>)</dt><dd><tt>(&sol;&#94;ILYR&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;CONJP&#92;b&sol;)&nbsp;&gt;:&nbsp;&sol;&#94;IP-MAT&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="(/^ILYR\b/ < /^CONJP\b/) >: /^IP-MAT/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.15">26.15</a>) is found with (<a href="unit26.html#ex26.14">26.14</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.15"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=68_christine_T13@2,1,39" target="_blank">26.15</a>)</dt><dd>so I_#_I # you_know I always have a salad for me dinner and I have a salad when I {unclear}_night_{pause}_{unclear}</dd>
+</dl>
+
+<p align="justify">Pattern (<a href="unit26.html#ex26.16">26.16</a>) finds conjunction structure that is <b>above</b> the subject, and consequently all of the conjunct need to contain their own subject.</p>
+
+<dl>
+  <dt>(<a name="ex26.16">26.16</a>)</dt><dd><tt>&sol;&#94;ILYR&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;ILYR&#92;b&sol;&nbsp;&lt;&nbsp;&sol;SBJ&sol;)&nbsp;&lt;&nbsp;&sol;&#94;CONJP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^ILYR\b/ < (/^ILYR\b/ < /SBJ/) < /^CONJP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.17">26.17</a>) is found with (<a href="unit26.html#ex26.16">26.16</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.17"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=7_lucy_child_11_H08@12,13,14,31" target="_blank">26.17</a>)</dt><dd>In the summer holidays I stayed at my cousin &apos;s and we went swimming quite often .</dd>
+</dl>
+
+<p align="justify">Pattern (<a href="unit26.html#ex26.18">26.18</a>) finds conjunction structure that is <b>below</b> the level of the subject, and consequently none of the conjunct are able to contain a subject themselves.</p>
+
+<dl>
+  <dt>(<a name="ex26.18">26.18</a>)</dt><dd><tt>(&sol;&#94;ILYR&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;CONJP&#92;b&sol;)&nbsp;&#x24;&nbsp;&sol;SBJ&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="(/^ILYR\b/ < /^CONJP\b/) $ /SBJ/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.19">26.19</a>) is found with (<a href="unit26.html#ex26.18">26.18</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.19"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=17_lucy_child_10_K05@5,2,22" target="_blank">26.19</a>)</dt><dd>We went home by the Manx Maid and got back to our house in time for tea .</dd>
+</dl>
+
+<p align="justify">Pattern (<a href="unit26.html#ex26.20">26.20</a>) finds conjunction indicated at the level of the discourse.</p>
+
+<dl>
+  <dt>(<a name="ex26.20">26.20</a>)</dt><dd><tt>&sol;&#94;CONJ&#92;b&sol;&nbsp;&gt;&nbsp;&sol;&#94;IP-MAT&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJ\b/ > /^IP-MAT/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.21">26.21</a>) is found with (<a href="unit26.html#ex26.20">26.20</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.21"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=63_susanne_N11@2,1" target="_blank">26.21</a>)</dt><dd>And he collapsed and died instantly .</dd>
+</dl>
+
+<br>
+<h2><a name="sec26.3">26.3</a>&nbsp;&nbsp;&nbsp;Connecting clauses with adverbs</h2>
+
+<p align="justify">In addition to the coordinating conjunction words <i>and</i>, <i>but</i>, and <i>or</i>, it also possible to connect clauses with adverbs such as <i>so</i> and <i>yet</i>. We can find such adverb use with pattern (<a href="unit26.html#ex26.22">26.22</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.22">26.22</a>)</dt><dd><tt>&sol;&#94;ADVP-CNT&sol;&nbsp;&gt;&nbsp;&sol;&#94;CONJP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^ADVP-CNT/ > /^CONJP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.23">26.23</a>) is found with (<a href="unit26.html#ex26.22">26.22</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.23"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=76_X_samples_purple_intermediate@15,14" target="_blank">26.23</a>)</dt><dd>It &apos;s dangerous , so you should walk on the sidewalk .</dd>
+</dl>
+
+<br>
+<h2><a name="sec26.4">26.4</a>&nbsp;&nbsp;&nbsp;Reducing clause content with coordination</h2>
+
+<p align="justify">When conjuncts with similar internal structure are connected, you can often reduce the content in the second conjunct.</p>
+
+<p align="justify">Pattern (<a href="unit26.html#ex26.24">26.24</a>) finds clausal conjuncts that lack a verb.</p>
+
+<dl>
+  <dt>(<a name="ex26.24">26.24</a>)</dt><dd><tt>&sol;&#94;CONJP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;&#94;ILYR&#92;b&sol;&nbsp;!&lt;&nbsp;&sol;&#94;ILYR&#92;b&sol;&nbsp;!&lt;&nbsp;&sol;CAT&sol;&nbsp;!&lt;&nbsp;&sol;&#94;(H|B|D|V)&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CONJP\b/ < (/^ILYR\b/ !< /^ILYR\b/ !< /CAT/ !< /^(H|B|D|V)/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit26.html#ex26.25">26.25</a>) is found with (<a href="unit26.html#ex26.24">26.24</a>).</p>
+
+<dl>
+  <dt>(<a name="ex26.25"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=52_A_lob_G01@21,24" target="_blank">26.25</a>)</dt><dd>London was again in turmoil ; but this time over a question of trade rivalry .</dd>
+</dl>
+
+<br>
+<br>
+<br>

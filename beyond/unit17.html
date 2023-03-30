@@ -1,0 +1,86 @@
+<h1><a name="ch17">Unit 17</a><br>Direct Speech and Indirect Speech</h1>
+
+<br>
+<h2><a name="sec17.1">17.1</a>&nbsp;&nbsp;&nbsp;Direct speech</h2>
+
+<p align="justify">Pattern (<a href="unit17.html#ex17.1">17.1</a>) will find instances of direct speech where the quoted material is itself a single sentence.</p>
+
+<dl>
+  <dt>(<a name="ex17.1">17.1</a>)</dt><dd><tt>&sol;&#94;IP-MAT&sol;&nbsp;&#x24;,&nbsp;&sol;&#94;PU.Q&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^IP-MAT/ $, /^PU.Q/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit17.html#ex17.2">17.2</a>) is found with (<a href="unit17.html#ex17.1">17.1</a>).</p>
+
+<dl>
+  <dt>(<a name="ex17.2"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=18_A_Duplex@4,2" target="_blank">17.2</a>)</dt><dd>&ldquo; Hi - I &apos;m calling to make a reservation , &rdquo; the voice , a woman , begins .</dd>
+</dl>
+
+<p align="justify">Pattern (<a href="unit17.html#ex17.3">17.3</a>) will find instances of direct speech where the quoted material is a series of sentences.</p>
+
+<dl>
+  <dt>(<a name="ex17.3">17.3</a>)</dt><dd><tt>&sol;&#94;multi-sentence&sol;&nbsp;&#x24;,&nbsp;&sol;&#94;PU.Q&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^multi-sentence/ $, /^PU.Q/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit17.html#ex17.4">17.4</a>) is found with (<a href="unit17.html#ex17.3">17.3</a>).</p>
+
+<dl>
+  <dt>(<a name="ex17.4"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=93_susanne_N07@14,12" target="_blank">17.4</a>)</dt><dd>He said now , &ldquo; I &apos;ve got the perfect headquarters set up . The old Haskell mine &rdquo; .</dd>
+</dl>
+
+<p align="justify">Pattern (<a href="unit17.html#ex17.5">17.5</a>) will find instances of direct speech where the reporting clause occurs in the middle of the direct speech.</p>
+
+<dl>
+  <dt>(<a name="ex17.5">17.5</a>)</dt><dd><tt>PRN&nbsp;&lt;&nbsp;&sol;&#94;IP-MAT&sol;&nbsp;&gt;&nbsp;&sol;&#94;(IP|ILYR)&sol;&nbsp;&#x24;&nbsp;&sol;&#94;PU.Q&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="PRN < /^IP-MAT/ > /^(IP|ILYR)/ $ /^PU.Q/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit17.html#ex17.6">17.6</a>) is found with (<a href="unit17.html#ex17.5">17.5</a>).</p>
+
+<dl>
+  <dt>(<a name="ex17.6"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=173_A_LooseChange@19,1,2,20" target="_blank">17.6</a>)</dt><dd>&lsquo; This day , Friday , &rsquo; she went on , &lsquo; I cooked fish for my mother and brother . &rsquo;</dd>
+</dl>
+
+<br>
+<h2><a name="sec17.2">17.2</a>&nbsp;&nbsp;&nbsp;Indirect speech</h2>
+
+<p align="justify">Indirect speech is the content of a <i>that</i> clause (with optional <i>that</i> word) that is selected by a reporting verb. Pattern (<a href="unit17.html#ex17.7">17.7</a>) will find instances of indirect speech where the reporting verb is <small style="font-size: 75%">SAY</small>.</p>
+
+<dl>
+  <dt>(<a name="ex17.7">17.7</a>)</dt><dd><tt>&sol;&#94;V&sol;&nbsp;&lt;&nbsp;&sol;&#92;{say&#92;}&sol;&nbsp;&#x24;&nbsp;&sol;&#94;CP-THT-OB1&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^V/ < /\{say\}/ $ /^CP-THT-OB1/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Note how the regular expression <tt>&sol;&lcub;say&rcub;&sol;</tt> of (<a href="unit17.html#ex17.7">17.7</a>) will match the different forms of <small style="font-size: 75%">SAY</small>: <i>say</i>, <i>says</i>, <i>saying</i>, and <i>said</i>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, (<a href="unit17.html#ex17.8">17.8</a>) is found with (<a href="unit17.html#ex17.7">17.7</a>).</p>
+
+<dl>
+  <dt>(<a name="ex17.8"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=14_A_Voice_of_America@5,6,7" target="_blank">17.8</a>)</dt><dd>They say the company has produced some shoddy work and charges too much money .</dd>
+</dl>
+
+<br>
+<br>
+<br>
+<br>

@@ -1,0 +1,100 @@
+<h1><a name="ch21">Unit 21</a><br>Subject relative clauses</h1>
+
+<p align="justify">You can use pattern (<a href="unit21.html#ex21.1">21.1</a>) to find subject relative clauses.</p>
+
+<dl>
+  <dt>(<a name="ex21.1">21.1</a>)</dt><dd><tt>&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/SBJ/ < /^RPRO\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Pattern (<a href="unit21.html#ex21.1">21.1</a>) finds subject relative clauses by locating a <b>relative pronoun</b> that makes up the content of a subject constituent. A relative pronoun is a word tagged RPRO, e.g.&nbsp;<i>which</i>, <i>who</i>, <i>that</i>. The relative pronoun links the internal contribution of the relative clause to the overall noun phrase contribution of which the relative clause is a part.</p>
+
+<br>
+<h2><a name="sec21.1">21.1</a>&nbsp;&nbsp;&nbsp;Restrictive subject relative clauses</h2>
+
+<p align="justify">Relative clauses can be either restrictive or non-restrictive. In written language, restrictive relative clauses <i>are not</i> immediately preceded by punctuation. Pattern (<a href="unit21.html#ex21.2">21.2</a>) finds subject relative clauses that are not immediately preceded by punctuation.</p>
+
+<dl>
+  <dt>(<a name="ex21.2">21.2</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;!&#x24;,&nbsp;&sol;&#94;PU&sol;&nbsp;&#x24;&nbsp;&lowbar;&lowbar;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < /^RPRO\b/ !>> (/^IP-REL/ >> =rel)) !$, /^PU/ $ __"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit21.html#ex21.3">21.3</a>) is found with (<a href="unit21.html#ex21.2">21.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex21.3"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=5_A_seiko_9R65@32,33,34" target="_blank">21.3</a>)</dt><dd>This is a watch that creates a lifestyle for modern individuals who seek affluence and convenience in their life .</dd>
+</dl>
+
+<br>
+<h2><a name="sec21.2">21.2</a>&nbsp;&nbsp;&nbsp;Non-restrictive subject relative clauses</h2>
+
+<p align="justify">In written language, we can find non-restrictive relative clauses by ensuring that the found relative clause <i>is</i> immediately preceded by punctuation. Such a search is accomplished with pattern (<a href="unit21.html#ex21.4">21.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex21.4">21.4</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;&#x24;,&nbsp;&sol;&#94;PU&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^IP-REL/=rel << (/SBJ/ < /^RPRO\b/ !>> (/^IP-REL/ >> =rel)) $, /^PU/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit21.html#ex21.5">21.5</a>) is found with (<a href="unit21.html#ex21.4">21.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex21.5"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=105_A_LooseChange@32,30,33,34" target="_blank">21.5</a>)</dt><dd>Everyone turned to stare at her , except the boy , who just carried on .</dd>
+</dl>
+
+<br>
+<h2><a name="sec21.3">21.3</a>&nbsp;&nbsp;&nbsp;Subject relative clauses with Whose</h2>
+
+<p align="justify">So far we have considered cases where there is a subject that consists of a relative pronoun. It is also possible for the subject to contain its own restrictive noun phrase content in addition to a genitive (-GENV) relative pronoun <i>whose</i>. Pattern (<a href="unit21.html#ex21.6">21.6</a>) will search for relative clauses that contain subjects that contain genitive relative pronouns.</p>
+
+<dl>
+  <dt>(<a name="ex21.6">21.6</a>)</dt><dd><tt>&sol;SBJ&sol;&nbsp;&lt;&nbsp;(&sol;&#94;NP-GENV&sol;&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/SBJ/ < (/^NP-GENV/ < /^RPRO\b/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit21.html#ex21.7">21.7</a>) is found with (<a href="unit21.html#ex21.6">21.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex21.7"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=18_lucy_student_E94@21,22,23" target="_blank">21.7</a>)</dt><dd>There was an influx of young professionals whose expectation of amenities was different to those of the local community .</dd>
+</dl>
+
+<br>
+<h2><a name="sec21.4">21.4</a>&nbsp;&nbsp;&nbsp;Subject relative clauses with long distance displacements</h2>
+
+<dl>
+  <dt>(<a name="ex22.6">22.6</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/REL/ << (/SBJ/ < /^\*ICH\*/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<dl>
+  <dt>(<a name="ex21.9"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=27_lucy_bnc_B42@5,28,29" target="_blank">21.9</a>)</dt><dd>Behaviour that historically , we would have pretended , did not happen in our good , God&hyphen;fearing country , has suddenly become the latest front page filler this year .</dd>
+</dl>
+
+<br>
+<br>
+<br>
+<br>

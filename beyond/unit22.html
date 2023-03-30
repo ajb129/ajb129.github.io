@@ -1,0 +1,130 @@
+<h1><a name="ch22">Unit 22</a><br>Object relative clauses</h1>
+
+<p align="justify">You can use pattern (<a href="unit22.html#ex22.1">22.1</a>) to find object relative clauses.</p>
+
+<dl>
+  <dt>(<a name="ex22.1">22.1</a>)</dt><dd><tt>&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ]"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Pattern (<a href="unit22.html#ex22.1">22.1</a>) finds object relative clauses by locating a constituent with object function that is either made up of a relative pronoun or a zero element.</p>
+<ul>
+<li>A <b>relative pronoun</b> is a word tagged RPRO, e.g.&nbsp;<i>which</i>, <i>who</i>, <i>whom</i>, <i>that</i>.</li>
+<li>A <b>zero element</b> is an element which is required by the clause, but has an absence that is construction licensed.</li>
+</ul>
+
+<p align="justify">Such objects link the internal object for the relative clause to the overall noun phrase contribution of which the relative clause is a part.</p>
+
+<br>
+<h2><a name="sec22.1">22.1</a>&nbsp;&nbsp;&nbsp;Restrictive object relative clauses</h2>
+
+<p align="justify">Like subject relative clauses, object relative clauses can be either restrictive or non-restrictive. In written language, restrictive relative clauses <i>are not</i> immediately preceded by punctuation. Pattern (<a href="unit22.html#ex22.2">22.2</a>) finds object relative clauses that are not immediately preceded by punctuation.</p>
+
+<dl>
+  <dt>(<a name="ex22.2">22.2</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel</tt><br> <tt>&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))</tt><br> <tt>&nbsp;&nbsp;!&#x24;,&nbsp;&sol;&#94;PU&sol;</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;&lowbar;&lowbar;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) !$, /^PU/ $ __"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit22.html#ex22.3">22.3</a>) is found with (<a href="unit22.html#ex22.2">22.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.3"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=104_susanne_N08@7,8,9" target="_blank">22.3</a>)</dt><dd>Every movement she made seemed unnecessarily noisy .</dd>
+</dl>
+
+<br>
+<h2><a name="sec22.2">22.2</a>&nbsp;&nbsp;&nbsp;Non-restrictive object relative clauses</h2>
+
+<p align="justify">In written language, we can find non-restrictive relative clauses by ensuring that the found relative clause <i>is</i> immediately preceded by punctuation. Such a search is accomplished with pattern (<a href="unit22.html#ex22.4">22.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.4">22.4</a>)</dt><dd><tt>&sol;&#94;IP-REL&sol;=rel&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP-REL&sol;&nbsp;&gt;&gt;&nbsp;=rel))&nbsp;&#x24;,&nbsp;&sol;&#94;PU&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^IP-REL/=rel << (/OB/ [ < /^RPRO\b/ | < /^\*T\*/ ] !>> (/^IP-REL/ >> =rel)) $, /^PU/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit22.html#ex22.5">22.5</a>) is found with (<a href="unit22.html#ex22.4">22.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.5"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=56_A_Hedgehog@27,28,29" target="_blank">22.5</a>)</dt><dd>elastic bands , which postmen discard when delivering letters</dd>
+</dl>
+
+<br>
+<h2><a name="sec22.3">22.3</a>&nbsp;&nbsp;&nbsp;Object relative clauses with long distance displacements</h2>
+
+<dl>
+  <dt>(<a name="ex22.6">22.6</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(&sol;OB&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/REL/ << (/OB/ < /^\*ICH\*/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit22.html#ex22.7">22.7</a>) is found with pattern (<a href="unit22.html#ex22.6">22.6</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.7"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=8_lucy_student_E71@38,54,55" target="_blank">22.7</a>)</dt><dd>the beast that I thought I loved</dd>
+</dl>
+
+<br>
+<h2><a name="sec22.4">22.4</a>&nbsp;&nbsp;&nbsp;Relativised content integrated with prepositions</h2>
+
+<p align="justify">Pattern (<a href="unit22.html#ex22.8">22.8</a>) will find relative clauses where there is relative pronoun or zero element that is integrated into the content of the relative clause with a preposition. Note that neither the preposition nor the containing preposition phrase needs to be mentioned in the pattern. This is because a relative pronoun or zero element will need to occur with functional information and since the pattern says it falls under an NP that has no functional information itself it will have to be the case that the NP is inheriting functional information from a PP layer of structure.</p>
+
+<dl>
+  <dt>(<a name="ex22.8">22.8</a>)</dt><dd><tt>&sol;&#94;NP&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;&#94;RPRO&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;&#94;&#92;*T&#92;*&sol;&nbsp;]&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^NP\b/ [ < /^RPRO\b/ | < /^\*T\*/ ] > /^PP\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit22.html#ex22.9">22.9</a>) and (<a href="unit22.html#ex22.10">22.10</a>) are found with pattern (<a href="unit22.html#ex22.8">22.8</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.9"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=61_A_lob_G01@17,18" target="_blank">22.9</a>)</dt><dd>The method of assessment to which the Commons agreed</dd>
+</dl>
+
+<dl>
+  <dt>(<a name="ex22.10"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=294_christine_T17@24,25" target="_blank">22.10</a>)</dt><dd>I always crack the mirrors I look in</dd>
+</dl>
+
+<p align="justify">It is also possible for relativised content to be integrated with prepositions while also involving displacement. Pattern (<a href="unit22.html#ex22.11">22.11</a>) finds such examples.</p>
+
+<dl>
+  <dt>(<a name="ex22.11">22.11</a>)</dt><dd><tt>&sol;REL&sol;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;NP&#92;&sol;&nbsp;&lt;&nbsp;&sol;&#94;&#92;*ICH&#92;*&sol;&nbsp;&gt;&nbsp;&sol;&#94;PP&#92;b&sol;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/REL/ << (/^NP\/ < /^\*ICH\*/ > /^PP\b/)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit22.html#ex22.12">22.12</a>) is found with pattern (<a href="unit22.html#ex22.11">22.11</a>).</p>
+
+<dl>
+  <dt>(<a name="ex22.12"></a><a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=7_lucy_child_10_K13@26,55,56" target="_blank">22.12</a>)</dt><dd>a club book which we put our password and our motto in</dd>
+</dl>
+
+<br>
+<br>
+<br>
+<br>
