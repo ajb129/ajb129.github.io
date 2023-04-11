@@ -1,0 +1,628 @@
+<h1><a name="ch15">Unit 15</a><br>That Clauses</h1>
+
+<br>
+<h2><a name="sec15.1">15.1</a>&nbsp;&nbsp;&nbsp;Finding that clauses</h2>
+
+<p align="justify"><i>That</i> clauses can be found with pattern (<a href="unit15.html#ex15.1">15.1</a>). This searches for nodes with a label that starts with <tt>CP-THT</tt>. There is also a check that the found node has clause content, since it must dominate at least two further node levels.</p>
+
+<dl>
+  <dt>(<a name="ex15.1">15.1</a>)</dt><dd><tt>&sol;&#94;CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CP-THT\b/ < (__ < __)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify"><i>That</i> clauses may occur with an overt complementizer, which is essentially always the word <i>that</i>. Instances of complementizers are found with pattern (<a href="unit15.html#ex15.2">15.2</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.2">15.2</a>)</dt><dd><tt>&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^C\b/ < __"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Both patterns (<a href="unit15.html#ex15.1">15.1</a>) and (<a href="unit15.html#ex15.2">15.2</a>) will find (<a href="unit15.html#ex15.3">15.3</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.3">15.3</a>)</dt><dd></dd>
+</dl>
+
+<p align="justify">
+The high quality of the seam on Milos ensured <font style="background-color: Wheat;">that</font> the area remained popular with early travelers .
+</p>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1221" height="514.5" viewBox="-16.5 17.5 1617 675">
+  <text x="792" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="792" y1="70" x2="335.28" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="792" y1="70" x2="721.38" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="792" y1="70" x2="1139.16" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="792" y1="70" x2="1545.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="335.28" y="125" text-anchor="middle">NP-SBJ</text>
+  <line x1="335.28" y1="140" x2="34.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="335.28" y1="140" x2="108.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="335.28" y1="140" x2="198.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="335.28" y1="140" x2="460.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="34.98" y="195" text-anchor="middle">D</text>
+  <line x1="34.98" y1="210" x2="34.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="34.98" y="265" text-anchor="middle">The</text>
+  <text x="108.9" y="195" text-anchor="middle">ADJP</text>
+  <line x1="108.9" y1="210" x2="108.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="108.9" y="265" text-anchor="middle">ADJ</text>
+  <line x1="108.9" y1="280" x2="108.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="108.9" y="335" text-anchor="middle">high</text>
+  <text x="198.66" y="195" text-anchor="middle">N</text>
+  <line x1="198.66" y1="210" x2="198.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="198.66" y="265" text-anchor="middle">quality</text>
+  <text x="460.02" y="195" text-anchor="middle">PP</text>
+  <line x1="460.02" y1="210" x2="296.34" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="460.02" y1="210" x2="506.88" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="296.34" y="265" text-anchor="middle">P-ROLE</text>
+  <line x1="296.34" y1="280" x2="296.34" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="296.34" y="335" text-anchor="middle">of</text>
+  <text x="506.88" y="265" text-anchor="middle">NP</text>
+  <line x1="506.88" y1="280" x2="378.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="506.88" y1="280" x2="452.1" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="506.88" y1="280" x2="580.8" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="378.18" y="335" text-anchor="middle">D</text>
+  <line x1="378.18" y1="350" x2="378.18" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="378.18" y="405" text-anchor="middle">the</text>
+  <text x="452.1" y="335" text-anchor="middle">N</text>
+  <line x1="452.1" y1="350" x2="452.1" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="452.1" y="405" text-anchor="middle">seam</text>
+  <text x="580.8" y="335" text-anchor="middle">PP</text>
+  <line x1="580.8" y1="350" x2="537.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="580.8" y1="350" x2="627.66" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="537.9" y="405" text-anchor="middle">P-ROLE</text>
+  <line x1="537.9" y1="420" x2="537.9" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="537.9" y="475" text-anchor="middle">on</text>
+  <text x="627.66" y="405" text-anchor="middle">NP</text>
+  <line x1="627.66" y1="420" x2="627.66" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="627.66" y="475" text-anchor="middle">NPR</text>
+  <line x1="627.66" y1="490" x2="627.66" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="627.66" y="545" text-anchor="middle">Milos</text>
+  <text x="721.38" y="125" text-anchor="middle">VBD;~Tf</text>
+  <line x1="721.38" y1="140" x2="721.38" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="721.38" y="195" text-anchor="middle">ensured</text>
+  <text x="1139.16" y="125" text-anchor="middle">CP-THT-OB1</text>
+  <line x1="1139.16" y1="140" x2="1139.16" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1139.16" y="195" text-anchor="middle">IP-SUB</text>
+  <line x1="1139.16" y1="210" x2="811.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1139.16" y1="210" x2="924" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1139.16" y1="210" x2="1052.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1139.16" y1="210" x2="1306.8" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="796.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="811.14" y="265" text-anchor="middle">C</text>
+  <line x1="811.14" y1="280" x2="811.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="811.14" y="335" text-anchor="middle">that</text>
+  <text x="924" y="265" text-anchor="middle">NP-SBJ</text>
+  <line x1="924" y1="280" x2="885.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="924" y1="280" x2="958.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="885.06" y="335" text-anchor="middle">D</text>
+  <line x1="885.06" y1="350" x2="885.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="885.06" y="405" text-anchor="middle">the</text>
+  <text x="958.98" y="335" text-anchor="middle">N</text>
+  <line x1="958.98" y1="350" x2="958.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="958.98" y="405" text-anchor="middle">area</text>
+  <text x="1052.7" y="265" text-anchor="middle">VBD;~La</text>
+  <line x1="1052.7" y1="280" x2="1052.7" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1052.7" y="335" text-anchor="middle">remained</text>
+  <text x="1306.8" y="265" text-anchor="middle">ADJP-PRD2</text>
+  <line x1="1306.8" y1="280" x2="1158.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1306.8" y1="280" x2="1357.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1158.3" y="335" text-anchor="middle">ADJ</text>
+  <line x1="1158.3" y1="350" x2="1158.3" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1158.3" y="405" text-anchor="middle">popular</text>
+  <text x="1357.62" y="335" text-anchor="middle">PP</text>
+  <line x1="1357.62" y1="350" x2="1255.98" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1357.62" y1="350" x2="1404.48" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1255.98" y="405" text-anchor="middle">P-ROLE</text>
+  <line x1="1255.98" y1="420" x2="1255.98" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1255.98" y="475" text-anchor="middle">with</text>
+  <text x="1404.48" y="405" text-anchor="middle">NP</text>
+  <line x1="1404.48" y1="420" x2="1345.74" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1404.48" y1="420" x2="1447.38" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1345.74" y="475" text-anchor="middle">ADJP</text>
+  <line x1="1345.74" y1="490" x2="1345.74" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1345.74" y="545" text-anchor="middle">ADJ</text>
+  <line x1="1345.74" y1="560" x2="1345.74" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1345.74" y="615" text-anchor="middle">early</text>
+  <text x="1447.38" y="475" text-anchor="middle">NS</text>
+  <line x1="1447.38" y1="490" x2="1447.38" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1447.38" y="545" text-anchor="middle">travelers</text>
+  <text x="1545.06" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1545.06" y1="140" x2="1545.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1545.06" y="195" text-anchor="middle">.</text>
+</svg>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=8_A_ANC_HistoryOfGreece@28" target="_blank">8_A_ANC_HistoryOfGreece@28</a>]</small>
+
+<p align="justify"><i>That</i> clauses may also occur without an overt complementizer. Such cases are found with pattern (<a href="unit15.html#ex15.4">15.4</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.4">15.4</a>)</dt><dd><tt>&sol;&#94;CP-THT&sol;&nbsp;&lt;&nbsp;(&lowbar;&lowbar;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;C&#92;b&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/^CP-THT/ < (__ < __) !<< (/^C\b/ < __)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<br>
+<h2><a name="sec15.2">15.2</a>&nbsp;&nbsp;&nbsp;Verbs that select object that clauses</h2>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.5">15.5</a>) will find verbs that select a <i>that</i>-clause with object function (<tt>CP-THT-OB1</tt>) as the only selected (non-subject) complement.</p>
+
+<dl>
+  <dt>(<a name="ex15.5">15.5</a>)</dt><dd><tt>&lowbar;&lowbar;&nbsp;&gt;&nbsp;&sol;~Tf&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > /~Tf\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.6">15.6</a>) will find verbs that select a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>).</p>
+
+<dl>
+  <dt>(<a name="ex15.6">15.6</a>)</dt><dd><tt>&lowbar;&lowbar;&nbsp;&gt;&nbsp;&sol;~Dn&#92;.f&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > /~Dn\.f\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.7">15.7</a>) will find verbs that select a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>NP-OB1</tt>).</p>
+
+<dl>
+  <dt>(<a name="ex15.7">15.7</a>)</dt><dd><tt>&lowbar;&lowbar;&nbsp;&gt;&nbsp;&sol;~Dpr&#92;.f&#92;b&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > /~Dpr\.f\b/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<br>
+<h2><a name="sec15.3">15.3</a>&nbsp;&nbsp;&nbsp;That clauses that are objects for present tense verbs of a main clause</h2>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.8">15.8</a>) will match a <i>that</i> clause with object function, provided it occurs as the selected complement of a present tense verb in the matrix clause of a statement sentence.</p>
+
+<dl>
+  <dt>(<a name="ex15.8">15.8</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A present form in the <i>that</i> clause expresses a fact or general truth. Look at examples found with pattern (<a href="unit15.html#ex15.9">15.9</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.9">15.9</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVP|BEP|DOP|VBP)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A past form in the <i>that</i> clause describes a past event. Look at examples found with pattern (<a href="unit15.html#ex15.10">15.10</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.10">15.10</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVD|BED|DOD|VBD)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A future form in the <i>that</i> clause describes a future event. Look at examples found with pattern (<a href="unit15.html#ex15.11">15.11</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.11">15.11</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBP&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;BEP&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;&lt;&nbsp;&sol;&#94;VAG&#92;b&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBP\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^BEP\b/ $ (/^IP-PPL-CAT/ < /^VAG\b/) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<br>
+<h2><a name="sec15.4">15.4</a>&nbsp;&nbsp;&nbsp;That clauses that are objects for past tense verbs of a main clause</h2>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.12">15.12</a>) will match a <i>that</i> clause with object function, provided it occurs as the selected complement of a past tense verb in the matrix clause of a statement sentence.</p>
+
+<dl>
+  <dt>(<a name="ex15.12">15.12</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A past form in the <i>that</i> clause describes an event or idea that happened at the same time as the event in the main clause. Look at examples found with pattern (<a href="unit15.html#ex15.13">15.13</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.13">15.13</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVD|BED|DOD|VBD)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^(HVD|BED|DOD|VBD)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A present form in the <i>that</i> clause expresses a universal truth or fact that applies to the present. Look at examples found with pattern (<a href="unit15.html#ex15.14">15.14</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.14">15.14</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;(HVP|BEP|DOP|VBP)&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;!&lt;&nbsp;&sol;LGS&sol;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^(HVP|BEP|DOP|VBP)\b/ !$ (/^IP-PPL-CAT/ !< /LGS/) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> A past perfect or past perfect progressive is used in the <i>that</i> clause when the event of the <i>that</i> clause happened before the event of the main clause. Look at examples found with pattern (<a href="unit15.html#ex15.15">15.15</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.15">15.15</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;HVD&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;&nbsp;&nbsp;&lt;&nbsp;&sol;&#94;VVN&#92;b&sol;</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;&nbsp;(&sol;&#94;BEN&#92;b&sol;&nbsp;&#x24;&nbsp;(&sol;&#94;IP-PPL-CAT&sol;&nbsp;&lt;&nbsp;&sol;&#94;VAG&#92;b&sol;))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^HVD\b/ $ (/^IP-PPL-CAT/ [ < /^VVN\b/ | < (/^BEN\b/ $ (/^IP-PPL-CAT/ < /^VAG\b/)) ] ) !>> (/^IP\b/ >> =i) ) )"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+<ul>
+<li><b>CLAIM:</b> <i>would</i> or <i>was&sol;were going to</i> are used in the <i>that</i> clause when the event of the <i>that</i> clause happened after the event of the main clause. Look at examples found with either pattern (<a href="unit15.html#ex15.16">15.16</a>) or pattern (<a href="unit15.html#ex15.17">15.17</a>) to check this claim.</li>
+</ul>
+
+<dl>
+  <dt>(<a name="ex15.16">15.16</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;MD&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;would&#92;b&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^MD\b/ < /^would\b/ !>> (/^IP\b/ >> =i)))"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<dl>
+  <dt>(<a name="ex15.17">15.17</a>)</dt><dd><tt>&sol;CP-THT-OB1&sol;</tt><br> <tt>&nbsp;&nbsp;&gt;&nbsp;(&lowbar;&lowbar;=mid</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;(&sol;&#94;VBD&#92;b&sol;=verb&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=mid))</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;==&nbsp;&sol;&#94;IP-MAT&#92;b&sol;&nbsp;|&nbsp;!==&nbsp;&sol;&#94;(IP|FS)&#92;b&sol;&nbsp;&gt;&gt;&nbsp;(&sol;&#94;IP-MAT&#92;b&sol;&nbsp;!&lt;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=mid))&nbsp;]</tt><br> <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&#92;b&sol;=i&nbsp;&lt;&lt;&nbsp;(&sol;&#94;BED&#92;b&sol;&nbsp;.&nbsp;(&sol;&#92;{go&#92;}&sol;&nbsp;.&nbsp;&sol;&#92;{to&#92;}&sol;)&nbsp;!&gt;&gt;&nbsp;(&sol;&#94;IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=i)))</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/CP-THT-OB1/ > (__=mid << (/^VBD\b/=verb !>> (/^(IP|FS)\b/ >> =mid)) [ == /^IP-MAT\b/ | !== /^(IP|FS)\b/ >> (/^IP-MAT\b/ !<< (/^IP\b/ << =mid)) ] ) < (/^IP\b/=i << (/^BED\b/ . (/\{go\}/ . /\{to\}/) !>> (/^IP\b/ >> =i)))"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<br>
+<h2><a name="sec15.5">15.5</a>&nbsp;&nbsp;&nbsp;That clauses after adjectives</h2>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.18">15.18</a>) finds sentences where a <i>that</i> clause is selected by an adjective.</p>
+
+<dl>
+  <dt>(<a name="ex15.18">15.18</a>)</dt><dd><tt>&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;(ADJ|ADJR|ADJS)&#92;b&sol;&nbsp;&#x24;&nbsp;CP-THT)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > (/^(ADJ|ADJR|ADJS)\b/ $ CP-THT)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit15.html#ex15.19">15.19</a>) is found with pattern (<a href="unit15.html#ex15.18">15.18</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.19">15.19</a>)</dt><dd></dd>
+</dl>
+
+<p align="justify">
+Pamela was <font style="background-color: Wheat;">glad</font> Jim was nowhere near .
+</p>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="565.62" height="462" viewBox="-16.5 17.5 743.16 605">
+  <text x="355.08" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="355.08" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="355.08" y1="70" x2="144.54" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="355.08" y1="70" x2="413.82" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="355.08" y1="70" x2="671.22" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="46.86" y="125" text-anchor="middle">NP-SBJ</text>
+  <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="46.86" y="195" text-anchor="middle">NPR</text>
+  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="46.86" y="265" text-anchor="middle">Pamela</text>
+  <text x="144.54" y="125" text-anchor="middle">BED;~La</text>
+  <line x1="144.54" y1="140" x2="144.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="144.54" y="195" text-anchor="middle">was</text>
+  <text x="413.82" y="125" text-anchor="middle">ADJP-PRD2</text>
+  <line x1="413.82" y1="140" x2="242.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="413.82" y1="140" x2="460.68" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="227.22" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="242.22" y="195" text-anchor="middle">ADJ</text>
+  <line x1="242.22" y1="210" x2="242.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="227.22" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="242.22" y="265" text-anchor="middle">glad</text>
+  <rect x="445.68" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="460.68" y="195" text-anchor="middle">CP-THT</text>
+  <line x1="460.68" y1="210" x2="460.68" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="460.68" y="265" text-anchor="middle">IP-SUB</text>
+  <line x1="460.68" y1="280" x2="335.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="460.68" y1="280" x2="417.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="460.68" y1="280" x2="542.52" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="335.94" y="335" text-anchor="middle">NP-SBJ</text>
+  <line x1="335.94" y1="350" x2="335.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="335.94" y="405" text-anchor="middle">NPR</text>
+  <line x1="335.94" y1="420" x2="335.94" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="335.94" y="475" text-anchor="middle">Jim</text>
+  <text x="417.78" y="335" text-anchor="middle">BED</text>
+  <line x1="417.78" y1="350" x2="417.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="417.78" y="405" text-anchor="middle">was</text>
+  <text x="542.52" y="335" text-anchor="middle">ADVP-LOC</text>
+  <line x1="542.52" y1="350" x2="503.58" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="542.52" y1="350" x2="593.34" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="503.58" y="405" text-anchor="middle">ADVP</text>
+  <line x1="503.58" y1="420" x2="503.58" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="503.58" y="475" text-anchor="middle">ADV</text>
+  <line x1="503.58" y1="490" x2="503.58" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="503.58" y="545" text-anchor="middle">nowhere</text>
+  <text x="593.34" y="405" text-anchor="middle">ADV</text>
+  <line x1="593.34" y1="420" x2="593.34" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="593.34" y="475" text-anchor="middle">near</text>
+  <text x="671.22" y="125" text-anchor="middle">PUNC</text>
+  <line x1="671.22" y1="140" x2="671.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="671.22" y="195" text-anchor="middle">.</text>
+</svg>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=56_susanne_N08@9,8,10" target="_blank">56_susanne_N08@9,8,10</a>]</small>
+
+<br>
+<h2><a name="sec15.6">15.6</a>&nbsp;&nbsp;&nbsp;That clauses after nouns</h2>
+
+<p align="justify">Pattern (<a href="unit15.html#ex15.20">15.20</a>) finds sentences where a <i>that</i> clause is selected by a noun.</p>
+
+<dl>
+  <dt>(<a name="ex15.20">15.20</a>)</dt><dd><tt>&lowbar;&lowbar;&nbsp;&gt;&nbsp;(&sol;&#94;(N|NS)&#92;b&sol;&nbsp;&#x24;&nbsp;CP-THT)</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="__ > (/^(N|NS)\b/ $ CP-THT)"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit15.html#ex15.21">15.21</a>) is found with pattern (<a href="unit15.html#ex15.20">15.20</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.21">15.21</a>)</dt><dd></dd>
+</dl>
+
+<p align="justify">
+this is n’t a <font style="background-color: Wheat;">situation</font> I ever imagined or intended .
+</p>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="871.53" height="514.5" viewBox="-16.5 17.5 1151.04 675">
+  <text x="559.02" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="559.02" y1="70" x2="54.78" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="559.02" y1="70" x2="160.38" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="559.02" y1="70" x2="281.82" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="559.02" y1="70" x2="696.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="559.02" y1="70" x2="1079.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <text x="54.78" y="125" text-anchor="middle">NP-SBJ</text>
+  <line x1="54.78" y1="140" x2="54.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="54.78" y="195" text-anchor="middle">D;_nphd_</text>
+  <line x1="54.78" y1="210" x2="54.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="54.78" y="265" text-anchor="middle">this</text>
+  <text x="160.38" y="125" text-anchor="middle">BEP;~Ln</text>
+  <line x1="160.38" y1="140" x2="160.38" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="160.38" y="195" text-anchor="middle">is</text>
+  <text x="281.82" y="125" text-anchor="middle">NEG;_clitic_</text>
+  <line x1="281.82" y1="140" x2="281.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="281.82" y="195" text-anchor="middle">n’t</text>
+  <text x="696.3" y="125" text-anchor="middle">NP-PRD2</text>
+  <line x1="696.3" y1="140" x2="379.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="696.3" y1="140" x2="473.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="696.3" y1="140" x2="790.02" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="379.5" y="195" text-anchor="middle">D</text>
+  <line x1="379.5" y1="210" x2="379.5" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="379.5" y="265" text-anchor="middle">a</text>
+  <rect x="458.22" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="473.22" y="195" text-anchor="middle">N</text>
+  <line x1="473.22" y1="210" x2="473.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="458.22" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="473.22" y="265" text-anchor="middle">situation</text>
+  <rect x="775.02" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="790.02" y="195" text-anchor="middle">CP-THT</text>
+  <line x1="790.02" y1="210" x2="790.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="790.02" y="265" text-anchor="middle">IP-SUB</text>
+  <line x1="790.02" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="790.02" y1="280" x2="688.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="790.02" y1="280" x2="891.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="586.74" y="335" text-anchor="middle">NP-SBJ</text>
+  <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="586.74" y="405" text-anchor="middle">PRO</text>
+  <line x1="586.74" y1="420" x2="586.74" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="586.74" y="475" text-anchor="middle">I</text>
+  <text x="688.38" y="335" text-anchor="middle">ADVP-MOD</text>
+  <line x1="688.38" y1="350" x2="688.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="688.38" y="405" text-anchor="middle">ADV</text>
+  <line x1="688.38" y1="420" x2="688.38" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="688.38" y="475" text-anchor="middle">ever</text>
+  <text x="891.66" y="335" text-anchor="middle">ILYR</text>
+  <line x1="891.66" y1="350" x2="797.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="891.66" y1="350" x2="946.44" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="797.94" y="405" text-anchor="middle">ILYR</text>
+  <line x1="797.94" y1="420" x2="797.94" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="797.94" y="475" text-anchor="middle">VBD</text>
+  <line x1="797.94" y1="490" x2="797.94" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="797.94" y="545" text-anchor="middle">imagined</text>
+  <text x="946.44" y="405" text-anchor="middle">CONJP</text>
+  <line x1="946.44" y1="420" x2="891.66" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="946.44" y1="420" x2="985.38" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="891.66" y="475" text-anchor="middle">CONJ</text>
+  <line x1="891.66" y1="490" x2="891.66" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="891.66" y="545" text-anchor="middle">or</text>
+  <text x="985.38" y="475" text-anchor="middle">ILYR</text>
+  <line x1="985.38" y1="490" x2="985.38" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="985.38" y="545" text-anchor="middle">VBD</text>
+  <line x1="985.38" y1="560" x2="985.38" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="985.38" y="615" text-anchor="middle">intended</text>
+  <text x="1079.1" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1079.1" y1="140" x2="1079.1" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1079.1" y="195" text-anchor="middle">.</text>
+</svg>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=1_A_Osaka_statement@15,14,16" target="_blank">1_A_Osaka_statement@15,14,16</a>]</small>
+
+<br>
+<h2><a name="sec15.7">15.7</a>&nbsp;&nbsp;&nbsp;That clause extraposition</h2>
+
+<p align="justify">Note that it is possible for a <i>that</i> clause to immediately follow a noun or adjective and yet not have been (directly) selected by the noun or adjective. One prominent case of this involves <i>that</i> clause extrapositioning, e.g., search for:</p>
+
+<dl>
+  <dt>(<a name="ex15.22">15.22</a>)</dt><dd><tt>&sol;PRD2&sol;&nbsp;&#x24;&nbsp;&sol;PSBJ&sol;&nbsp;&#x24;&nbsp;&sol;CP-THT-NSBJ&sol;</tt><br></dd>
+</dl>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
+  <input type="hidden" name="KIND" value="basic"/>
+  <input type="hidden" name="search" value="/PRD2/ $ /PSBJ/ $ /CP-THT-NSBJ/"/>
+  <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
+</form>
+
+<p align="justify">For example, (<a href="unit15.html#ex15.23">15.23</a>) is found with pattern (<a href="unit15.html#ex15.22">15.22</a>).</p>
+
+<dl>
+  <dt>(<a name="ex15.23">15.23</a>)</dt><dd></dd>
+</dl>
+
+<p align="justify">
+It is <font style="background-color: Wheat;">a sweeping generalisation</font> that greed and selfishness motivate a modern capitalist society .
+</p>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1188.33" height="514.5" viewBox="-16.5 17.5 1573.44 675">
+  <text x="770.22" y="55" text-anchor="middle">IP-MAT</text>
+  <line x1="770.22" y1="70" x2="90.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="770.22" y1="70" x2="231.66" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="770.22" y1="70" x2="442.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="770.22" y1="70" x2="1032.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="770.22" y1="70" x2="1501.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
+  <rect x="75.42" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="90.42" y="125" text-anchor="middle">NP-PSBJ</text>
+  <line x1="90.42" y1="140" x2="90.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="90.42" y="195" text-anchor="middle">PRO;_provisional_</text>
+  <line x1="90.42" y1="210" x2="90.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="90.42" y="265" text-anchor="middle">It</text>
+  <text x="231.66" y="125" text-anchor="middle">BEP;~Ln</text>
+  <line x1="231.66" y1="140" x2="231.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="231.66" y="195" text-anchor="middle">is</text>
+  <rect x="427.86" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+  <text x="442.86" y="125" text-anchor="middle">NP-PRD2</text>
+  <line x1="442.86" y1="140" x2="309.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="442.86" y1="140" x2="391.38" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="442.86" y1="140" x2="524.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="309.54" y="195" text-anchor="middle">D</text>
+  <line x1="309.54" y1="210" x2="309.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="309.54" y="265" text-anchor="middle">a</text>
+  <text x="391.38" y="195" text-anchor="middle">ADJP</text>
+  <line x1="391.38" y1="210" x2="391.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="391.38" y="265" text-anchor="middle">ADJ</text>
+  <line x1="391.38" y1="280" x2="391.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="391.38" y="335" text-anchor="middle">sweeping</text>
+  <text x="524.7" y="195" text-anchor="middle">N</text>
+  <line x1="524.7" y1="210" x2="524.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="524.7" y="265" text-anchor="middle">generalisation</text>
+  <rect x="1017.9" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+  <text x="1032.9" y="125" text-anchor="middle">CP-THT-NSBJ</text>
+  <line x1="1032.9" y1="140" x2="1032.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1032.9" y="195" text-anchor="middle">IP-SUB</text>
+  <line x1="1032.9" y1="210" x2="642.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1032.9" y1="210" x2="829.62" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1032.9" y1="210" x2="1032.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1032.9" y1="210" x2="1275.12" y2="240" style="stroke:#000000;stroke-width:2;"/>
+  <text x="642.18" y="265" text-anchor="middle">C</text>
+  <line x1="642.18" y1="280" x2="642.18" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="642.18" y="335" text-anchor="middle">that</text>
+  <text x="829.62" y="265" text-anchor="middle">NP-SBJ</text>
+  <line x1="829.62" y1="280" x2="829.62" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="829.62" y="335" text-anchor="middle">NLYR</text>
+  <line x1="829.62" y1="350" x2="724.02" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="829.62" y1="350" x2="872.52" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="724.02" y="405" text-anchor="middle">NP</text>
+  <line x1="724.02" y1="420" x2="724.02" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="724.02" y="475" text-anchor="middle">N</text>
+  <line x1="724.02" y1="490" x2="724.02" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="724.02" y="545" text-anchor="middle">greed</text>
+  <text x="872.52" y="405" text-anchor="middle">CONJP</text>
+  <line x1="872.52" y1="420" x2="805.86" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="872.52" y1="420" x2="911.46" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="805.86" y="475" text-anchor="middle">CONJ</text>
+  <line x1="805.86" y1="490" x2="805.86" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="805.86" y="545" text-anchor="middle">and</text>
+  <text x="911.46" y="475" text-anchor="middle">NP</text>
+  <line x1="911.46" y1="490" x2="911.46" y2="520" style="stroke:#000000;stroke-width:2;"/>
+  <text x="911.46" y="545" text-anchor="middle">N</text>
+  <line x1="911.46" y1="560" x2="911.46" y2="590" style="stroke:#000000;stroke-width:2;"/>
+  <text x="911.46" y="615" text-anchor="middle">selfishness</text>
+  <text x="1032.9" y="265" text-anchor="middle">VBP</text>
+  <line x1="1032.9" y1="280" x2="1032.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1032.9" y="335" text-anchor="middle">motivate</text>
+  <text x="1275.12" y="265" text-anchor="middle">NP-OB1</text>
+  <line x1="1275.12" y1="280" x2="1114.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1275.12" y1="280" x2="1188.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1275.12" y1="280" x2="1298.22" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <line x1="1275.12" y1="280" x2="1411.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1114.74" y="335" text-anchor="middle">D</text>
+  <line x1="1114.74" y1="350" x2="1114.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1114.74" y="405" text-anchor="middle">a</text>
+  <text x="1188.66" y="335" text-anchor="middle">ADJP</text>
+  <line x1="1188.66" y1="350" x2="1188.66" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1188.66" y="405" text-anchor="middle">ADJ</text>
+  <line x1="1188.66" y1="420" x2="1188.66" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1188.66" y="475" text-anchor="middle">modern</text>
+  <text x="1298.22" y="335" text-anchor="middle">ADJP</text>
+  <line x1="1298.22" y1="350" x2="1298.22" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1298.22" y="405" text-anchor="middle">ADJ</text>
+  <line x1="1298.22" y1="420" x2="1298.22" y2="450" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1298.22" y="475" text-anchor="middle">capitalist</text>
+  <text x="1411.74" y="335" text-anchor="middle">N</text>
+  <line x1="1411.74" y1="350" x2="1411.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1411.74" y="405" text-anchor="middle">society</text>
+  <text x="1501.5" y="125" text-anchor="middle">PUNC</text>
+  <line x1="1501.5" y1="140" x2="1501.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
+  <text x="1501.5" y="195" text-anchor="middle">.</text>
+</svg>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=19_lucy_student_E53@7,2,15" target="_blank">19_lucy_student_E53@7,2,15</a>]</small>
+
+<br>
+<br>
+<br>
+<br>
