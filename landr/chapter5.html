@@ -1,0 +1,3302 @@
+<br><br><h1><a name="ch5">Chapter 5</a></h1>
+<h1>Clause layers</h1>
+
+<br><h2><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
+
+<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> is concerned with matrix interrogative clauses where the subject is not the frontmost element under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> looks at ripple effects in the clause caused by existential <i>there</i>.</p>
+
+<br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
+
+<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) below. These rules have a clause type parameter, which is set to either:</p>
+
+<ul>
+
+<li><tt>basic_clause</tt></li>
+
+<li><tt>imperative_clause</tt></li>
+
+<li><tt>tag_question</tt></li>
+
+<li><tt>matrix_interrogative</tt></li>
+
+</ul>
+
+<p align="justify">The rules also have a <tt>Displaced</tt> parameter, which takes a list value that accumulates indexing information for dispaced items.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The seven rules of (<a href="chapter5.html#ex5.1">5.1</a>) are all non-recursive. They each have something to say about the clause subject. In the case of rule 2, used for imperatives (with the clause <tt>Type</tt> parameter set to <tt>imperative</tt>), there can be no subject. The other rules need to find either:</p>
+
+<ul>
+
+<li>[rules 1 and 3&ndash;6] noun phrase or subject indicating content found with a call of <tt>subject</tt> (from section <a href="chapter2.html#sec2.5">2.5</a>)</li>
+
+<li>[rule 7] noun phrase content found with a call of <tt>noun_phrase</tt> (from section <a href="chapter3.html#sec3.2">3.2</a>) with <tt>-SBJ</tt> role information</li>
+
+</ul>
+
+<p align="justify">Rules finding subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
+
+<ul>
+
+<li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list and sets the <tt>SbjType</tt> parameter for a clause whose <tt>Type</tt> parameter is <tt>basic_clause</tt></li>
+
+<li>[rules 3 and 4] the <tt>subject</tt> call finds its content with final position in the word list for a clause whose <tt>Type</tt> parameter is <tt>tag_question</tt></li>
+
+<li>[rules 5 and 6] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after components identified with <tt>operator_layer</tt> or <tt>have_be_or_md_cat_finite_layer</tt> (see section <a href="chapter5.html#sec5.3">5.3</a>) and sets the <tt>SbjType</tt> parameter for a clause whose <tt>Type</tt> parameter is <tt>matrix_interrogative</tt></li>
+
+</ul>
+
+<p align="justify">There is also a rule where the subject is found with a call of <tt>noun_phrase</tt>:</p>
+
+<ul>
+
+<li>[rule 7] the subject is a noun phrase with <tt>interrogative</tt> type that is an initial portion of the word list and the <tt>SbjType</tt> parameter is set to <tt>filled_subject</tt> for a clause whose <tt>Type</tt> parameter is <tt>matrix_interrogative</tt></li>
+
+</ul>
+
+<dl><dt>(<a name="ex5.1">5.1</a>)</dt><dd>
+</dd></dl>
+
+<tt>clause_top_layer(basic_clause,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,SbjType,L1,L0).</tt><br>
+<tt>clause_top_layer(imperative_clause,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,filled_subject,imperative_inflection,active_voice,L,L0).</tt><br>
+<tt>clause_top_layer(tag_question,[],L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;operator_layer(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_subject,expletive_subject])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L1,L0).</tt><br>
+<tt>clause_top_layer(tag_question,[],L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_md_cat_finite_layer(_,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_subject,expletive_subject])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;operator_layer(L,L2),</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,active_voice,L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_md_cat_finite_layer(Code,L,L2),</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Displaced,SbjType,active_voice,L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,filled_subject,L1,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>) to enable:</p>
+
+<ul>
+
+<li>[rule 1] a clause initial adverbial, possibly followed by <tt>non_final</tt> punctuation</li>
+
+<li>[rule 2] a clause final adverbial, possibly preceded by <tt>non_final</tt> punctuation</li>
+
+<li>[rule 3] a clause initial noun phrase that is a displaced item</li>
+
+<li>[rule 4] a clause initial adjective_phrase phrase that is a displaced item</li>
+
+<li>[rule 5] a clause initial preposition phrase that is a displaced item</li>
+
+<li>[rule 6] a clause initial adverb phrase with type <tt>interrogative</tt> that is a displaced item</li>
+
+<li>[rule 7] a clause initial adverb phrase with type <tt>interrogative</tt> that has a <tt>-NIM</tt> (unselected adverbial) function</li>
+
+<li>[rule 8] a clause initial utterance phrase that is a displaced item, offset by quotation punctuation and possibly followed by <tt>non_final</tt> punctuation</li>
+
+<li>[rule 9] conjuncts of coordinate structure, with non-initial conjuncts gathered by calls to <tt>clause_top_tail</tt> of (<a href="chapter5.html#ex5.3">5.3</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex5.2">5.2</a>)</dt><dd>
+</dd></dl>
+
+<tt>clause_top_layer(Type,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverbial(L,L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_punc(non_final,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,L1,L0).</tt><br>
+<tt>clause_top_layer(Type,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,L,L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_punc(non_final,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase(Index,interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,[np(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase(Index,interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,[pp(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase(Index,interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,[adjp(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase(Index,interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,[advp(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,Displaced,L1,L0).</tt><br>
+<tt>clause_top_layer(basic_clause,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase(Index,basic,L,L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_punc(non_final,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(basic_clause,[np(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(basic_clause,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase(Index,basic,L,L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_punc(non_final,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(basic_clause,[pp(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(basic_clause,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;punc(left_quotation_mark,L,L4),</tt><br>
+<tt>&nbsp;&nbsp;utterance(Index,L4,L3),</tt><br>
+<tt>&nbsp;&nbsp;punc(right_quotation_mark,L3,L2),</tt><br>
+<tt>&nbsp;&nbsp;optional_punc(non_final,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(basic_clause,[utterance(node(ICH,[]))|Displaced],L1,L0).</tt><br>
+<tt>clause_top_layer(Type,Displaced,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_tail(Type,Displaced,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex5.3">5.3</a>)</dt><dd>
+</dd></dl>
+
+<tt>clause_top_tail(Type,Displaced,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,IL,[]).</tt><br>
+<tt>clause_top_tail(Type,Displaced,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_tail(Type,Displaced,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how with the rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rule 3], adjective phrases [rule 4], preposition phrases [rule 5], adverb phrases [rules 6 and 8], and utterances [rule 9], all of which are parsed as displaced elements, receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item for a <tt>verb_complements_top_layer</tt> call from chapter <a href="chapter4.html#ch4">4</a>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also note how rules 1 and 2 of (<a href="chapter5.html#ex5.2">5.2</a>) have <tt>adverbial</tt> calls (from section <a href="chapter2.html#sec2.10">2.10</a>) to pick up:</p>
+
+<ul>
+
+<li>discourse coordination words (e.g., <i>And</i>, <i>But</i>)</li>
+
+<li>clause level interjection (e.g., <i>aah</i>, <i>eh</i>, <i>ummmmm</i>)</li>
+
+<li>reaction signals (e.g., <i>good_grief</i>, <i>really</i>, <i>yes</i>, <i>wow</i>)</li>
+
+<li>formulaic expressions (e.g., <i>good_afternoon</i>, <i>you_see</i>, <i>thank_you</i>)</li>
+
+<li>adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
+
+<li>preposition phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
+
+<li>the subordinate component of a subordinate conjunction</li>
+
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule 2 for <tt>clause_top_layer</tt> of (<a href="chapter5.html#ex5.1">5.1</a>) calls <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>). This subsequent rule layer is needed to ensure there is a place for introducing inflection and voice information before the verb and its complements are encountered. Having the clause type value <tt>imperative_clause</tt>, rule 2 of (<a href="chapter5.html#ex5.1">5.1</a>) gives the values of <tt>imperative_inflection</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active_voice</tt> for the <tt>Voice</tt> parameter.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The full range of options for the <tt>Infl</tt> parameter are:</p>
+
+<ul>
+
+<li><tt>finite_inflection</tt></li>
+
+<li><tt>imperative_inflection</tt></li>
+
+<li><tt>infinitive_inflection</tt></li>
+
+<li><tt>past_participle</tt></li>
+
+<li><tt>present_participle</tt></li>
+
+</ul>
+
+<p align="justify">Options for the <tt>Voice</tt> parameter are:</p>
+
+<ul>
+
+<li><tt>active_voice</tt></li>
+
+<li><tt>passive_voice</tt></li>
+
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to passing on information for <tt>verb_complements_top_layer</tt> [rule 1], there is, provided the clause has imperative inflection, a non-recursive rule [rule 2] to support the presence of an imperative <small style="font-size: 75%">DO</small> with operator function (so tagged <tt>DO</tt> and with no verb code) possibly followed by a clitic negation (added with <tt>optional_clitic_negation</tt> from section <a href="chapter2.html#sec2.10">2.10</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>verb_phrase_layer</tt> can also be recursive, allowing the parse to either:</p>
+
+<ul>
+
+<li>[rule 3] pick up an initial negation with a call to <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
+
+<li>[rule 4] pick up initial adverb phrases with a call to <tt>adverb_phrase</tt> (from section <a href="chapter3.html#sec3.3">3.3</a>)</li>
+
+<li>[rule 5] pick up clause final adverbials with a call to <tt>adverbial</tt> (from section <a href="chapter6.html#sec6.6">6.6</a>)</li>
+
+<li>[rule 6] start a conjunction structure with non-initial conjuncts gathered by calls to <tt>verb_phrase_tail</tt> of (<a href="chapter5.html#ex5.5">5.5</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex5.4">5.4</a>)</dt><dd>
+</dd></dl>
+
+<tt>verb_phrase_layer(Displaced,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb(Infl,Code,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Displaced,SbjType,Voice,L1,L0).</tt><br>
+<tt>verb_phrase_layer(Displaced,filled_subject,imperative_inflection,active_voice,[node('DO',[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('DO','',Word)],</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,filled_subject,infinitive_inflection,active_voice,L1,L0).</tt><br>
+<tt>verb_phrase_layer(Displaced,filled_subject,infinitive_inflection,active_voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,filled_subject,infinitive_inflection,active_voice,L1,L0).</tt><br>
+<tt>verb_phrase_layer(Displaced,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,Voice,L1,L0).</tt><br>
+<tt>verb_phrase_layer(Displaced,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,Voice,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
+<tt>verb_phrase_layer(Displaced,SbjType,Infl,Voice,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,Voice,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_tail(Displaced,SbjType,Infl,Voice,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex5.5">5.5</a>)</dt><dd>
+</dd></dl>
+
+<tt>verb_phrase_tail(Displaced,SbjType,Infl,Voice,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,Voice,IL,[]).</tt><br>
+<tt>verb_phrase_tail(Displaced,SbjType,Infl,Voice,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,Voice,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_tail(Displaced,SbjType,Infl,Voice,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Query (<a href="chapter5.html#ex5.6">5.6</a>) illustrates how a word list can have content for the top layer of a resulting clause, placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
+
+<dl><dt>(<a name="ex5.6">5.6</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('FRM','Please'), w('VB',';~I','smile')]),&nbsp;parse(clause_top_layer(imperative_clause,[])).</tt><br>
+
+
+<tt>(&nbsp;(FRM&nbsp;Please)</tt><br>
+<tt>&nbsp;&nbsp;(VB;~I&nbsp;smile))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.6">5.6</a>) follow (<a href="chapter5.html#ex5.7">5.7</a>). Notably, <tt>verb_complements_by_code</tt> succeeds because it receives the empty word list.</p>
+
+<dl><dt>(<a name="ex5.7">5.7</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__imperative_clause</tt><br>
+<tt>&nbsp;(adverbial</tt><br>
+<tt>&nbsp;&nbsp;[w('FRM','Please')])</tt><br>
+<tt>&nbsp;(optional_punc__non_final</tt><br>
+<tt>&nbsp;&nbsp;[])</tt><br>
+<tt>&nbsp;(clause_top_layer__imperative_clause</tt><br>
+<tt>&nbsp;&nbsp;(verb_phrase_layer__filled_subject__imperative_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb__imperative_inflection__;~I</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('VB',';~I','smile')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>imperative_clause</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverbial</td></tr>
+    <tr>
+     <td>
+        <tt>[w('FRM','Please')]</tt>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_punc <b>non_final</b></td></tr>
+    <tr>
+     <td>
+        <tt>[]</tt>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">clause_top_layer <b>imperative_clause</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>imperative_inflection</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>imperative_inflection</b> <b>;~I</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('VB',';~I','smile')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                <tr>
+                 <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code</b> <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[]</tt>
+                 </td>
+                </tr>
+               </table>
+                 </td>
+                </tr>
+               </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h2><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Matrix interrogatives</h2>
+
+<p align="justify">This section considers matrix interrogative clauses where the subject is not the frontmost element under question. Prior to its subject, such a clause will have either a modal, a finite <small style="font-size: 75%">DO</small>, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small>, or a modal catenative, any of which can be followed by the contracted form of negation (<i>n't</i>). This section will add rules to match these pre-subject components, including the option for negation, so that they can be integrated into a parse with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
+
+<br><h3><a name="sec5.3.1">5.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause operator layer</h3>
+
+<p align="justify">Having the two <tt>operator_layer</tt> rules of (<a href="chapter5.html#ex5.8">5.8</a>) leads to inclusion of either a modal word [rule 1] or a finite <small style="font-size: 75%">DO</small> [rule 2], with both rules allowing for an optional presence for negation as clitic <i>n't</i> (integrated with <tt>optional_clitic_negation</tt> from section <a href="chapter2.html#sec2.10">2.10</a>).</p>
+
+<dl><dt>(<a name="ex5.8">5.8</a>)</dt><dd>
+</dd></dl>
+
+<tt>operator_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;modal(basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L1,L0).</tt><br>
+<tt>operator_layer([node(Tag,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w(Tag,'',Word)],</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['DOP','DOD'])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes/no question that needs an <tt>operator_layer</tt> call to parse a modal with negation, consider (<a href="chapter5.html#ex5.9">5.9</a>).</p>
+
+<dl><dt>(<a name="ex5.9">5.9</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD','Can'), w('NEG;_clitic_','n<apos>t'), w('PRO','you'), w('VB',';~I','smile')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(MD&nbsp;Can)</tt><br>
+<tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n<apos>t)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;(VB;~I&nbsp;smile))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.9">5.9</a>) follow (<a href="chapter5.html#ex5.10">5.10</a>).</p>
+
+<dl><dt>(<a name="ex5.10">5.10</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(operator_layer</tt><br>
+<tt>&nbsp;&nbsp;(modal__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('MD','Can')])</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('NEG;_clitic_','n<apos>t')]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','you')]))))</tt><br>
+<tt>&nbsp;(verb_phrase_layer__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb__infinitive_inflection__;~I</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('VB',';~I','smile')])</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_top_layer__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">operator_layer</td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">modal <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <tt>[w('MD','Can')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+        <tr>
+         <td>
+           <tt>[w('NEG;_clitic_','n&lt;apos&gt;t')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+        <tr>
+         <td>
+            <tt>[w('PRO','you')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~I</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('VB',';~I','smile')]</tt>
+                 </td>
+                </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+             <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+               <tr>
+                 <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                <tr>
+                 <td style="text-align: center; vertical-align: middle;">
+                    <tt>[]</tt>
+                 </td>
+                </tr>
+               </table>
+                 </td>
+                </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs an <tt>operator_layer</tt> call to parse a finite <small style="font-size: 75%">DO</small>, consider (<a href="chapter5.html#ex5.11">5.11</a>).</p>
+
+<dl><dt>(<a name="ex5.11">5.11</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','What'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tn','need')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(NP-133&nbsp;(WPRO&nbsp;What))</tt><br>
+<tt>&nbsp;&nbsp;(DOP&nbsp;do)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;(VB;~Tn&nbsp;need)</tt><br>
+<tt>&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-133))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.11">5.11</a>) follow (<a href="chapter5.html#ex5.12">5.12</a>).</p>
+
+<dl><dt>(<a name="ex5.12">5.12</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(noun_phrase__-133__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('WPRO','What')])))</tt><br>
+<tt>&nbsp;(clause_top_layer__matrix_interrogative__[np(node('*ICH*-133',[]))]</tt><br>
+<tt>&nbsp;&nbsp;(operator_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('DOP','','do')]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','you')]))))</tt><br>
+<tt>&nbsp;&nbsp;(verb_phrase_layer__[np(node('*ICH*-133',[]))]__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~Tn</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('VB',';~Tn','need')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Tn__[np(node('*ICH*-133',[]))]__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Tn__[np(node('*ICH*-133',[]))]__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-133</b> <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+            <tr>
+             <td>
+                <tt>[w('WPRO','What')]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b> <b>[np(node('*ICH*-133',[]))]</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">operator_layer</td></tr>
+        <tr>
+     <td>
+           <tt>[w('DOP','','do')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+        <tr>
+         <td>
+           <tt>[]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+        <tr>
+         <td>
+            <tt>[w('PRO','you')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>[np(node('*ICH*-133',[]))]</b> <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~Tn</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('VB',';~Tn','need')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Tn</b> <b>[np(node('*ICH*-133',[]))]</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Tn</b> <b>[np(node('*ICH*-133',[]))]</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td style="text-align: center; vertical-align: middle;">
+                       <tt>[]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h3><a name="sec5.3.2">5.3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;HAVE, BE or modal catenative finite layers</h3>
+
+<p align="justify">Having the two <tt>have_be_or_md_cat_finite_layer</tt> rules of (<a href="chapter5.html#ex5.13">5.13</a>) allows for the inclusion of either a finite <small style="font-size: 75%">HAVE</small> word [rule 1], a finite <small style="font-size: 75%">BE</small> word [rule 2], or a modal catenative word [rule 3]. All three rules allow for an optional presence for negation as clitic <i>n't</i>.</p>
+
+<dl><dt>(<a name="ex5.13">5.13</a>)</dt><dd>
+</dd></dl>
+
+<tt>have_be_or_md_cat_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['HVP','HVD']),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('H',finite_inflection,Code),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat(Tag,Code,TagCode)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L,L0).</tt><br>
+<tt>have_be_or_md_cat_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['BEP','BED']),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code('B',finite_inflection,Code),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat(Tag,Code,TagCode)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L,L0).</tt><br>
+<tt>have_be_or_md_cat_finite_layer(';~cat_Vt',L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;modal(catenative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;optional_clitic_negation(L1,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes/no question that needs a <tt>have_be_or_md_cat_finite_layer</tt> call to parse a finite <small style="font-size: 75%">HAVE</small>, consider (<a href="chapter5.html#ex5.14">5.14</a>).</p>
+
+<dl><dt>(<a name="ex5.14">5.14</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('HVP',';~Tn','Has'), w('PRO','he'), w('D','a'), w('N','fever')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(HVP;~Tn&nbsp;Has)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fever)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.14">5.14</a>) follow (<a href="chapter5.html#ex5.15">5.15</a>).</p>
+
+<dl><dt>(<a name="ex5.15">5.15</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~Tn</tt><br>
+<tt>&nbsp;&nbsp;[w('HVP',';~Tn','Has')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~Tn__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~Tn__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-OB1__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','fever')])))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~Tn</b></td></tr>
+     <td>
+           <tt>[w('HVP',';~Tn','Has')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+        <tr>
+         <td>
+           <tt>[]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Tn</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Tn</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-OB1</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('D','a')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','fever')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs a <tt>have_be_or_md_cat_finite_layer</tt> call to parse a finite <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.16">5.16</a>).</p>
+
+<dl><dt>(<a name="ex5.16">5.16</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','What'), w('BEP',';~Ln','is'), w('PRO','he')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(NP-138&nbsp;(WPRO&nbsp;What))</tt><br>
+<tt>&nbsp;&nbsp;(BEP;~Ln&nbsp;is)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(NP-PRD2&nbsp;*ICH*-138))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.16">5.16</a>) follow (<a href="chapter5.html#ex5.17">5.17</a>).</p>
+
+<dl><dt>(<a name="ex5.17">5.17</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(noun_phrase__-138__interrogative</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_top__interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_head_full__interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('WPRO','What')])))</tt><br>
+<tt>&nbsp;(clause_top_layer__matrix_interrogative__[np(node('*ICH*-138',[]))]</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_md_cat_finite_layer__;~Ln</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('BEP',';~Ln','is')]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_top_layer__;~Ln__[np(node('*ICH*-138',[]))]__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Ln__[np(node('*ICH*-138',[]))]__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-138</b> <b>interrogative</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>interrogative</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>interrogative</b></td></tr>
+            <tr>
+             <td>
+                <tt>[w('WPRO','What')]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b> <b>[np(node('*ICH*-138',[]))]</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~Ln</b></td></tr>
+        <tr>
+         <td>
+           <tt>[w('BEP',';~Ln','is')]</tt>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+            <tr>
+             <td>
+               <tt>[]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('PRO','he')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Ln</b> <b>[np(node('*ICH*-138',[]))]</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Ln</b> <b>[np(node('*ICH*-138',[]))]</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td style="text-align: center; vertical-align: middle;">
+           <tt>[]</tt>
+         </td>
+        </tr>
+       </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h2><a name="sec5.4">5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure with a main verb and prior catenative verbs</h2>
+
+<p align="justify">So far we have seen clause structure with only a single verb, but a clause might include a sequence of verbs. The <b>main verb</b> is either the only verb of a clause or the last verb to occur in a sequence of verbs of the same clause. Verbs of a verb sequence that are prior to the main verb are called <b>catenative verbs</b>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Section <a href="chapter4.html#sec4.10">4.10</a> provides <tt>verb_complements_by_code</tt> rules for the full range of catenative verbs. Now we focus on resulting clause structure from catenative verbs with code:</p>
+
+<ul>
+
+<li><tt>;~cat_Vt</tt> selecting a <i>to</i>-infinitive clause complement (section <a href="chapter5.html#sec5.4.1">5.4.1</a>)</li>
+
+<li><tt>;~cat_Ve</tt> selecting an active past participle (<i>-ed&sol;-en</i>) clause complement (section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
+
+<li><tt>;~cat_Vg</tt> selecting an active present participle (<i>-ing</i>) clause complement (section <a href="chapter5.html#sec5.4.3">5.4.3</a>)</li>
+
+<li><tt>;~cat_Ve_passive_</tt> selecting a passive past participle (<i>-ed&sol;-en</i>) clause complement (section <a href="chapter5.html#sec5.4.4">5.4.4</a>)</li>
+
+</ul>
+
+<br><h3><a name="sec5.4.1">5.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verbs with to-infinitive complements</h3>
+
+<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Vt</tt> involves selection of a <i>to</i>-infinitive clause as its complement with the <tt>to_inf_layer</tt> rules of (<a href="chapter5.html#ex5.18">5.18</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first <tt>to_inf_layer</tt> rule is non-recursive and picks up from the word list an initial <tt>to</tt> word (see section <a href="chapter2.html#sec2.10">2.10</a>) to then call <tt>verb_phrase_layer</tt> with the clause in a state of being <tt>infinitive_inflection</tt> and <tt>active_voice</tt>. The other rules of <tt>to_inf_layer</tt> are recursive, enabling a parse to:</p>
+
+<ul>
+
+<li>[rule 2] pick up an initial instance of a connective particle (which is always <tt>for</tt>) followed by content for a noun phrase that is given subject function; note that a call triggered by a catenative verb will set the <tt>SbjType</tt> parameter to a value that is not <tt>unfilled_subject</tt>, while this rule can only occur when the <tt>SbjType</tt> parameter is unifiable to the <tt>unfilled_subject</tt> value, after which the value passed on for the <tt>SbjType</tt> parameter is <tt>filled_subject</tt></li>
+
+<li>[rule 3] provided the <tt>SbjType</tt> is not set to <tt>unfilled_subject</tt>, pick up initial negation with a call to <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
+
+<li>[rule 4] start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with non-initial conjuncts gathered by calls to <tt>to_inf_tail</tt> of (<a href="chapter5.html#ex5.19">5.19</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex5.18">5.18</a>)</dt><dd>
+</dd></dl>
+
+<tt>to_inf_layer(Displaced,SbjType,active_voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;to(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,active_voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,unfilled_subject,active_voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conn(L,L2),</tt><br>
+<tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,SbjType,active_voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,SbjType,passive_voice,[node('NP-LGS',[node('*',[])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;to(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,passive_voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,SbjType,lgs_passive_voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;to(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,passive_voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,unfilled_subject,passive_voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conn(L,L2),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-LGS',basic,L2,L1),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,lgs_passive_voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_subject,there_subject])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,SbjType,Voice,L1,L0).</tt><br>
+<tt>to_inf_layer(Displaced,SbjType,Voice,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,SbjType,Voice,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_tail(Displaced,SbjType,Voice,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex5.19">5.19</a>)</dt><dd>
+</dd></dl>
+
+<tt>to_inf_tail(Displaced,SbjType,Voice,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,SbjType,Voice,IL,[]).</tt><br>
+<tt>to_inf_tail(Displaced,SbjType,Voice,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Displaced,SbjType,Voice,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_tail(Displaced,SbjType,Voice,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a <i>to</i>-infinitive clause as the complement of a modal catenative, consider (<a href="chapter5.html#ex5.20">5.20</a>).</p>
+
+<dl><dt>(<a name="ex5.20">5.20</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD',';~cat_Vt','Ought'), w('NEG;_clitic_','n<apos>t'), w('PRO','he'), w('TO','to'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(MD;~cat_Vt&nbsp;Ought)</tt><br>
+<tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n<apos>t)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.20">5.20</a>) follow (<a href="chapter5.html#ex5.21">5.21</a>).</p>
+
+<dl><dt>(<a name="ex5.21">5.21</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;(modal__catenative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('MD',';~cat_Vt','Ought'))</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('NEG;_clitic_','n<apos>t')]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~cat_Vt__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~cat_Vt__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(to_inf_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(to</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('TO','to')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~Ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VB',';~Ip','stand')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase__-CLR__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADV','up')]))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Vt</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">modal <b>catenative</b></td></tr>
+        <tr>
+         <td>
+            <tt>[w('MD',';~cat_Vt','Ought')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+        <tr>
+         <td>
+           <tt>[w('NEG;_clitic_','n&lt;apos&gt;t')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Vt</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Vt</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">to_inf_layer <b>filled_subject</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">to</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('TO','to')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~Ip</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('VB',';~Ip','stand')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                            <tr>
+                             <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase <b>-CLR</b> <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adv <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('ADV','up')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                             </td>
+                            </tr>
+                           </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h3><a name="sec5.4.2">5.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verbs with active voice past participle complements</h3>
+
+<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve</tt> involves selection of an active past participle (<i>-ed&sol;-en</i>) clause as its complement. This occurs when the word class tag is a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt>, or <tt>HVN</tt>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An active participle clause is found with <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.22">5.22</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active_voice</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>past_participle</tt>.</p>
+
+<dl><dt>(<a name="ex5.22">5.22</a>)</dt><dd>
+</dd></dl>
+
+<tt>ip_ppl_active(Ext,Displaced,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,active_voice,VL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-PPL',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">HAVE</small>, consider (<a href="chapter5.html#ex5.23">5.23</a>).</p>
+
+<dl><dt>(<a name="ex5.23">5.23</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('HVP',';~cat_Ve','Has'), w('PRO','he'), w('VVN',';~I','smiled')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(HVP;~cat_Ve&nbsp;Has)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VVN;~I&nbsp;smiled)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.23">5.23</a>) follow (<a href="chapter5.html#ex5.24">5.24</a>).</p>
+
+<dl><dt>(<a name="ex5.24">5.24</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;[w('HVP',';~cat_Ve','Has')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~cat_Ve_passive___filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~cat_Ve__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__filled_subject__past_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__past_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__past_participle__;~I</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VVN',';~I','smiled')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Ve</b></td></tr>
+    <tr>
+     <td>
+       <tt>[w('HVP',';~cat_Ve','Has')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Ve_passive_</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Ve</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>filled_subject</b> <b>past_participle</b></td></tr>
+        <tr>
+         <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>past_participle</b> <b>active_voice</b></td></tr>
+                <tr>
+                 <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>past_participle</b> <b>;~I</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('VVN',';~I','smiled')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                        <tr>
+                         <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                        <tr>
+                         <td style="text-align: center; vertical-align: middle;">
+                           <tt>[]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                         </td>
+                        </tr>
+                       </table>
+                 </td>
+                </tr>
+               </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h3><a name="sec5.4.3">5.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verbs with active voice present participle complements</h3>
+
+<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Vg</tt> involves selection of a present participle (<i>-ing</i>) clause as its complement.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find a present participle (<i>-ing</i>) clause, the <tt>Infl</tt> parameter for a call to <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.22">5.22</a>) is set to the value of <tt>present_participle</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a present participle (<i>-ing</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.25">5.25</a>).</p>
+
+<dl><dt>(<a name="ex5.25">5.25</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~cat_Vg','Is'), w('PRO','he'), w('VAG',';~I','smiling')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(BEP;~cat_Vg&nbsp;Is)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~I&nbsp;smiling)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.25">5.25</a>) follow (<a href="chapter5.html#ex5.26">5.26</a>).</p>
+
+<dl><dt>(<a name="ex5.26">5.26</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Vg</tt><br>
+<tt>&nbsp;&nbsp;[w('BEP',';~cat_Vg','Is')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~cat_Vg__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~cat_Vg__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__filled_subject__present_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__present_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__present_participle__;~I</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VAG',';~I','smiling')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Vg</b></td></tr>
+    <tr>
+     <td>
+       <tt>[w('BEP',';~cat_Vg','Is')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Vg</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Vg</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>filled_subject</b> <b>present_participle</b></td></tr>
+        <tr>
+         <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>present_participle</b> <b>active_voice</b></td></tr>
+                <tr>
+                 <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>present_participle</b> <b>;~I</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('VAG',';~I','smiling')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                        <tr>
+                         <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                        <tr>
+                         <td style="text-align: center; vertical-align: middle;">
+                           <tt>[]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                         </td>
+                        </tr>
+                       </table>
+                 </td>
+                </tr>
+               </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h3><a name="sec5.4.4">5.4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verb with passive voice past participle complements</h3>
+
+<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve_passive_</tt> involves selection of a passive past participle (<i>-ed&sol;-en</i>) clause as its complement.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle clause is found with <tt>ip_ppl_passive</tt> of (<a href="chapter5.html#ex5.27">5.27</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>passive_voice</tt>.</p>
+
+<dl><dt>(<a name="ex5.27">5.27</a>)</dt><dd>
+</dd></dl>
+
+<tt>ip_ppl_passive(Ext,Displaced,SbjType,Infl,[node(Label,[node('NP-LGS',[node('*',[])])|VL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,Infl,passive_voice,VL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-PPL',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.28">5.28</a>).</p>
+
+<dl><dt>(<a name="ex5.28">5.28</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BED',';~cat_Ve_passive_','Was'), w('PRO','he'), w('VVN',';~Tn','scolded')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(BED;~cat_Ve_passive_&nbsp;Was)</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;scolded)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.28">5.28</a>) follow (<a href="chapter5.html#ex5.29">5.29</a>).</p>
+
+<dl><dt>(<a name="ex5.29">5.29</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Ve_passive_</tt><br>
+<tt>&nbsp;&nbsp;[w('BED',';~cat_Ve_passive_','Was')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~cat_Ve_passive___filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~cat_Ve_passive___filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(ip_ppl_passive__-CAT__filled_subject__past_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__past_participle__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__past_participle__;~Tn</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VVN',';~Tn','scolded')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Tn__filled_subject__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Tn__filled_subject__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Ve_passive_</b></td></tr>
+    <tr>
+     <td>
+       <tt>[w('BED',';~cat_Ve_passive_','Was')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Ve_passive_</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Ve_passive_</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_passive <b>-CAT</b> <b>filled_subject</b> <b>past_participle</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>past_participle</b> <b>passive</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>past_participle</b> <b>;~Tn</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('VVN',';~Tn','scolded')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Tn</b> <b>filled_subject</b> <b>passive</b></td></tr>
+                    <tr>
+                     <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Tn</b> <b>filled_subject</b> <b>passive</b></td></tr>
+                    <tr>
+                     <td style="text-align: center; vertical-align: middle;">
+                       <tt>[]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h2><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Statement word order with clause middle layers</h2>
+
+<p align="justify">So far, we have only seen subjects that are created with a <tt>subject</tt> call as the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1 of (<a href="chapter5.html#ex5.1">5.1</a>)] that first finds the subject with a <tt>subject</tt> call, and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>). Similarly, there is rule 7 of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an <tt>interrogative</tt> noun phrase, which also goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.30">5.30</a>) that will either:</p>
+
+<ul>
+
+<li>[rule 1] directly call <tt>verb_phrase_layer</tt> after adding the information that the clause has <tt>finite_inflection</tt> and <tt>active_voice</tt></li>
+
+<li>[rule 2] integrate <tt>operator_layer</tt> so that this will occur after the subject and before the subsequent call of <tt>verb_phrase_layer</tt> with <tt>infinitive_inflection</tt> and <tt>active_voice</tt> information added</li>
+
+<li>[rule 3] integrate <tt>have_be_or_md_cat_finite_layer</tt> so that this will occur after the subject and before a call of <tt>verb_complements_top_layer</tt></li>
+
+<li>[rule 4] integrate an <tt>operator_layer</tt> only</li>
+
+<li>[rule 5] integrate <tt>have_be_or_md_cat_finite_layer</tt> only</li>
+
+</ul>
+
+<p align="justify">There are also recursive rules allowing initial adverb phrases with <tt>-NIM</tt> (unselected adverbial) function [rule 6] and coordination at this middle clause level [rule 7] with non-initial conjuncts gathered by calls to <tt>clause_middle_tail</tt> of (<a href="chapter5.html#ex5.31">5.31</a>).</p>
+
+<dl><dt>(<a name="ex5.30">5.30</a>)</dt><dd>
+</dd></dl>
+
+<tt>clause_middle_layer(Displaced,SbjType,L1,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,finite_inflection,active_voice,L1,L0).</tt><br>
+<tt>clause_middle_layer(Displaced,SbjType,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;operator_layer(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,active_voice,L1,L0).</tt><br>
+<tt>clause_middle_layer(Displaced,SbjType,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;have_be_or_md_cat_finite_layer(Code,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Displaced,SbjType,active_voice,L1,L0).</tt><br>
+<tt>clause_middle_layer(Displaced,SbjType,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,SbjType,L1,L0).</tt><br>
+<tt>clause_middle_layer(Displaced,SbjType,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,SbjType,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_tail(Displaced,SbjType,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex5.31">5.31</a>)</dt><dd>
+</dd></dl>
+
+<tt>clause_middle_tail(Displaced,SbjType,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,SbjType,IL,[]).</tt><br>
+<tt>clause_middle_tail(Displaced,SbjType,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Displaced,SbjType,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_tail(Displaced,SbjType,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of <i>didn't</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.32">5.32</a>).</p>
+
+<dl><dt>(<a name="ex5.32">5.32</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('NEG;_clitic_','n<apos>t'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(basic_clause,[])).</tt><br>
+
+
+<tt>(&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
+<tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n<apos>t)</tt><br>
+<tt>&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.32">5.32</a>) follow (<a href="chapter5.html#ex5.33">5.33</a>).</p>
+
+<dl><dt>(<a name="ex5.33">5.33</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__basic_clause</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(clause_middle_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(operator_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('DOD','','did')]</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('NEG;_clitic_','n<apos>t')]))</tt><br>
+<tt>&nbsp;&nbsp;(verb_phrase_layer__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~Ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('VB',';~Ip','stand')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase__-CLR__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADV','up')]))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>basic_clause</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_middle_layer <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">operator_layer</td></tr>
+        <tr>
+         <td>
+           <tt>[w('DOD','','did')]</tt>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+            <tr>
+             <td>
+               <tt>[w('NEG;_clitic_','n&lt;apos&gt;t')]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~Ip</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('VB',';~Ip','stand')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase <b>-CLR</b> <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase_layer <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adv <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('ADV','up')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with catenative modal <i>ought</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.34">5.34</a>).</p>
+
+<dl><dt>(<a name="ex5.34">5.34</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('ADV','really'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(basic_clause,[])).</tt><br>
+
+
+<tt>(&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;really))</tt><br>
+<tt>&nbsp;&nbsp;(MD;~cat_Vt&nbsp;ought)</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.34">5.34</a>) follow (<a href="chapter5.html#ex5.35">5.35</a>).</p>
+
+<dl><dt>(<a name="ex5.35">5.35</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__basic_clause</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')]))))</tt><br>
+<tt>&nbsp;(clause_middle_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(adverb_phrase</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(adverb_phrase_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(adv</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADV','really')])))</tt><br>
+<tt>&nbsp;&nbsp;(clause_middle_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(modal__catenative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('MD',';~cat_Vt','ought')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Vt__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Vt__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(to_inf_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(to</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('TO','to')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~Ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VB',';~Ip','stand')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Ip__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase__-CLR__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADV','up')]))))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>basic_clause</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PRO','he')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_middle_layer <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase</td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adv</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('ADV','really')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_middle_layer <b>filled_subject</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Vt</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">modal <b>catenative</b></td></tr>
+                <tr>
+                 <td>
+                   <tt>[w('MD',';~cat_Vt','ought')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Vt</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Vt</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">to_inf_layer <b>filled_subject</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">to</td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('TO','to')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+                            <tr>
+                             <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~Ip</b></td></tr>
+                                    <tr>
+                                     <td>
+                                        <tt>[w('VB',';~Ip','stand')]</tt>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                    <tr>
+                                     <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Ip</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase <b>-CLR</b> <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase_layer <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adv <b>basic</b></td></tr>
+                                                <tr>
+                                                 <td>
+                                                    <tt>[w('ADV','up')]</tt>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                             </td>
+                            </tr>
+                           </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with modal <i>may</i> occurring with statement word order in a clause that also has catenative <i>have</i> followed by catenative <i>been</i> followed by catenative <i>being</i>, consider (<a href="chapter5.html#ex5.36">5.36</a>).</p>
+
+<dl><dt>(<a name="ex5.36">5.36</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('N','ship'), w('MD','may'), w('HV',';~cat_Ve','have'), w('BEN',';~cat_Vg','been'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','sunk')]),&nbsp;parse(clause_top_layer(basic_clause,[])).</tt><br>
+
+
+<tt>(&nbsp;(NP-SBJ&nbsp;(D&nbsp;A)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ship))</tt><br>
+<tt>&nbsp;&nbsp;(MD&nbsp;may)</tt><br>
+<tt>&nbsp;&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~cat_Vg&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BAG;~cat_Ve_passive_&nbsp;being)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;sunk)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.36">5.36</a>) follow (<a href="chapter5.html#ex5.37">5.37</a>).</p>
+
+<dl><dt>(<a name="ex5.37">5.37</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__basic_clause</tt><br>
+<tt>&nbsp;(subject__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','A')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','ship')])))))))</tt><br>
+<tt>&nbsp;(clause_middle_layer__filled_subject</tt><br>
+<tt>&nbsp;&nbsp;(operator_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(modal__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('MD','may')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;&nbsp;(verb_phrase_layer__filled_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('HV',';~cat_Ve','have')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Ve__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Ve__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__filled_subject__en_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__past_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__past_participle__;~cat_Vg</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('BEN',';~cat_Vg','been')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Vg__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Vg__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__filled_subject__present_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__present_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__present_participle__;~cat_Ve_passive_</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('BAG',';~cat_Ve_passive_','being')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Ve_passive___filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Ve_passive___filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ip_ppl_passive__-CAT__filled_subject__past_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__past_participle__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__past_participle__;~Tn</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VVN',';~Tn','sunk')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~Tn__filled_subject__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~Tn__filled_subject__passive</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>basic_clause</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('D','A')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','ship')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_middle_layer <b>filled_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">operator_layer</td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">modal <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <tt>[w('MD','may')]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~cat_Ve</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('HV',';~cat_Ve','have')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Ve</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Ve</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>filled_subject</b> <b>past_participle</b></td></tr>
+                        <tr>
+                         <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>past_participle</b> <b>active_voice</b></td></tr>
+                                <tr>
+                                 <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>past_participle</b> <b>;~cat_Vg</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('BEN',';~cat_Vg','been')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Vg</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                        <tr>
+                                         <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Vg</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>filled_subject</b> <b>present_participle</b></td></tr>
+                                            <tr>
+                                             <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>present_participle</b> <b>active_voice</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>present_participle</b> <b>;~cat_Ve_passive_</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                                <tt>[w('BAG',';~cat_Ve_passive_','being')]</tt>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Ve_passive_</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Ve_passive_</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_passive <b>-CAT</b> <b>filled_subject</b> <b>past_participle</b></td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>past_participle</b> <b>passive</b></td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>past_participle</b> <b>;~Tn</b></td></tr>
+                                                                            <tr>
+                                                                             <td>
+                                                                                <tt>[w('VVN',';~Tn','sunk')]</tt>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                         </td>
+                                                                         <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~Tn</b> <b>filled_subject</b> <b>passive</b></td></tr>
+                                                                            <tr>
+                                                                             <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~Tn</b> <b>filled_subject</b> <b>passive</b></td></tr>
+                                                                            <tr>
+                                                                             <td style="text-align: center; vertical-align: middle;">
+                                                                               <tt>[]</tt>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                 </td>
+                                </tr>
+                               </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h4>Question:</h4>
+
+<p align="justify">Which of examples (<a href="chapter5.html#ex5.38">5.38</a>) &ndash; (<a href="chapter5.html#ex5.43">5.43</a>) can be successfully parsed? If a parse is not possible, why is this so?</p>
+
+<dl><dt>(<a name="ex5.38">5.38</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.39">5.39</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.40">5.40</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('BEN',';~cat_Vg','been'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.41">5.41</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('BEN',';~cat_Vg','been'), w('HAG',';~cat_Ve','having'), w('BEN',';~cat_Vg','been'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.42">5.42</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('BEN',';~La','been'), w('ADJ','happy'), w('P-CONN','_'), w('HAG',';~cat_Ve','having'), w('BEN',';~cat_Vg','been'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.43">5.43</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Vt','had'), w('TO','to'), w('HV',';~cat_Ve','have'), w('HVN',';~cat_Vt','had'), w('TO','to'), w('HV',';~cat_Ve','have'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]</tt><br>
+
+<br><h4>Question:</h4>
+
+<p align="justify">At what levels of the clause structure do the coordinations of (<a href="chapter5.html#ex5.44">5.44</a>) &ndash; (<a href="chapter5.html#ex5.47">5.47</a>) happen?</p>
+
+<dl><dt>(<a name="ex5.44">5.44</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VVN',';~Tn.pr','put'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.45">5.45</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VAG',';~Ipr','going'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.46">5.46</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VBD',';~Ipr','went'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.47">5.47</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('NS','computers'), w('VBD',';~Ipr','went'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+
+<br><h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Existential there</h2>
+
+<p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb that is marked with an existential verb code by setting the <tt>SbjType</tt> parameter of the clause to have <tt>there_subject</tt> as its value. The existential verb licensed by this <tt>SbjType</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt>, or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt>, or <tt>;~ex_cat_Ve_passive_</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="chapter5.html#ex5.48">5.48</a>).</p>
+
+<dl><dt>(<a name="ex5.48">5.48</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_V','Is'), w('EX','there'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(BEP;~ex_V&nbsp;Is)</tt><br>
+<tt>&nbsp;&nbsp;(EX&nbsp;there)</tt><br>
+<tt>&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;doctor)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.48">5.48</a>) follow (<a href="chapter5.html#ex5.49">5.49</a>).</p>
+
+<dl><dt>(<a name="ex5.49">5.49</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~ex_V</tt><br>
+<tt>&nbsp;&nbsp;[w('BEP',';~ex_V','Is')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__there_subject</tt><br>
+<tt>&nbsp;&nbsp;[w('EX','there')])</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~ex_V__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~ex_V__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-ESBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','doctor')])))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~ex_V</b></td></tr>
+    <tr>
+     <td>
+       <tt>[w('BEP',';~ex_V','Is')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>there_subject</b></td></tr>
+    <tr>
+     <td>
+        <tt>[w('EX','there')]</tt>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~ex_V</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~ex_V</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-ESBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('D','a')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','doctor')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the <tt>SbjType</tt> parameter of the clause to the <tt>there_subject</tt> value and the occurrence of the existential verb that needs this parameter setting, provided this happens in the same clause and the <tt>there_subject</tt> setting of the <tt>SbjType</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="chapter5.html#ex5.50">5.50</a>).</p>
+
+<dl><dt>(<a name="ex5.50">5.50</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('EX','there'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('HV',';~cat_Ve','have'), w('BEN',';~ex_V','been'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(basic_clause,[])).</tt><br>
+
+
+<tt>(&nbsp;(EX&nbsp;there)</tt><br>
+<tt>&nbsp;&nbsp;(MD;~cat_Vt&nbsp;ought)</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~ex_V&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;doctor)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.50">5.50</a>) follow (<a href="chapter5.html#ex5.51">5.51</a>).</p>
+
+<dl><dt>(<a name="ex5.51">5.51</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__basic_clause</tt><br>
+<tt>&nbsp;(subject__there_subject</tt><br>
+<tt>&nbsp;&nbsp;[w('EX','there')])</tt><br>
+<tt>&nbsp;(clause_middle_layer__there_subject</tt><br>
+<tt>&nbsp;&nbsp;(have_be_or_md_cat_finite_layer__;~cat_Vt</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(modal__catenative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[w('MD',';~cat_Vt','ought')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Vt__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Vt__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(to_inf_layer__there_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(to</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('TO','to')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__there_subject__infinitive_inflection__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__infinitive_inflection__;~cat_Ve</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('HV',';~cat_Ve','have')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~cat_Ve__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~cat_Ve__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__there_subject__en_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__there_subject__past_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__past_participle__;~ex_V</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('BEN',';~ex_V','been')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~ex_V__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~ex_V__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__-ESBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','doctor')]))))))))))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_top_layer <b>basic_clause</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>there_subject</b></td></tr>
+    <tr>
+     <td>
+        <tt>[w('EX','there')]</tt>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">clause_middle_layer <b>there_subject</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~cat_Vt</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">modal <b>catenative</b></td></tr>
+            <tr>
+             <td>
+               <tt>[w('MD',';~cat_Vt','ought')]</tt>
+             </td>
+            </tr>
+           </table>
+         </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Vt</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Vt</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+        <tr>
+         <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">to_inf_layer <b>there_subject</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">to</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('TO','to')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>there_subject</b> <b>infinitive_inflection</b> <b>active_voice</b></td></tr>
+                        <tr>
+                         <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>infinitive_inflection</b> <b>;~cat_Ve</b></td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('HV',';~cat_Ve','have')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~cat_Ve</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+                                <tr>
+                                 <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~cat_Ve</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>there_subject</b> <b>past_participle</b></td></tr>
+                                    <tr>
+                                     <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>there_subject</b> <b>past_participle</b> <b>active_voice</b></td></tr>
+                                            <tr>
+                                             <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>past_participle</b> <b>;~ex_V</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                        <tt>[w('BEN',';~ex_V','been')]</tt>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~ex_V</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~ex_V</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-ESBJ</b> <b>basic</b></td></tr>
+                                                        <tr>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_phrase_layer <b>basic</b></td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                                                        <tr>
+                                                                         <td>
+                                                                            <tt>[w('D','a')]</tt>
+                                                                         </td>
+                                                                        </tr>
+                                                                       </table>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                                                        <tr>
+                                                                         <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                                            <tr>
+                                                                             <td>
+                                                                                <tt>[w('N','doctor')]</tt>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                         </td>
+                                                                        </tr>
+                                                                       </table>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                                 </td>
+                                </tr>
+                               </table>
+                         </td>
+                        </tr>
+                       </table>
+                 </td>
+                </tr>
+               </table>
+         </td>
+        </tr>
+       </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there_subject</tt> value to having a <tt>filled_subject</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.52">5.52</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
+
+<dl><dt>(<a name="ex5.52">5.52</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_cat_Vg','Is'), w('EX','there'), w('Q;_nphd_','nobody_else'), w('VAG',';~I','coming')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+
+
+<tt>(&nbsp;(BEP;~ex_cat_Vg&nbsp;Is)</tt><br>
+<tt>&nbsp;&nbsp;(EX&nbsp;there)</tt><br>
+<tt>&nbsp;&nbsp;(NP-ESBJ&nbsp;(Q;_nphd_&nbsp;nobody_else))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~I&nbsp;coming)))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.52">5.52</a>) follow (<a href="chapter5.html#ex5.53">5.53</a>).</p>
+
+<dl><dt>(<a name="ex5.53">5.53</a>)</dt><dd>
+</dd></dl>
+
+<tt>(clause_top_layer__matrix_interrogative</tt><br>
+<tt>&nbsp;(have_be_or_md_cat_finite_layer__;~ex_cat_Vg</tt><br>
+<tt>&nbsp;&nbsp;[w('BEP',';~ex_cat_Vg','Is')]</tt><br>
+<tt>&nbsp;&nbsp;(optional_clitic_negation</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[]))</tt><br>
+<tt>&nbsp;(subject__there_subject</tt><br>
+<tt>&nbsp;&nbsp;[w('EX','there')])</tt><br>
+<tt>&nbsp;(verb_complements_top_layer__;~ex_cat_Vg__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;(verb_complements_by_code__;~ex_cat_Vg__there_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__-ESBJ__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('Q;_nphd_','nobody_else')]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(ip_ppl_active__-CAT__filled_subject__present_participle</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(verb_phrase_layer__filled_subject__present_participle__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb__present_participle__;~I</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('VAG',';~I','coming')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_top_layer__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(verb_complements_by_code__;~I__filled_subject__active_voice</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[])))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="3" style="text-align: center; vertical-align: middle;">clause_top_layer <b>matrix_interrogative</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">have_be_or_md_cat_finite_layer <b>;~ex_cat_Vg</b></td></tr>
+    <tr>
+     <td>
+       <tt>[w('BEP',';~ex_cat_Vg','Is')]</tt>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+         <tr><td colspan="1" style="text-align: center; vertical-align: middle;">optional_clitic_negation</td></tr>
+         <tr>
+           <td>
+             <tt>[]</tt>
+           </td>
+         </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">subject <b>there_subject</b></td></tr>
+    <tr>
+     <td>
+        <tt>[w('EX','there')]</tt>
+     </td>
+    </tr>
+   </table>
+ </td>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~ex_cat_Vg</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~ex_cat_Vg</b> <b>there_subject</b> <b>active_voice</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-ESBJ</b> <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('Q;_nphd_','nobody_else')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">ip_ppl_active <b>-CAT</b> <b>filled_subject</b> <b>present_participle</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">verb_phrase_layer <b>filled_subject</b> <b>present_participle</b> <b>active_voice</b></td></tr>
+            <tr>
+             <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb <b>present_participle</b> <b>;~I</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('VAG',';~I','coming')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_top_layer <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">verb_complements_by_code <b>;~I</b> <b>filled_subject</b> <b>active_voice</b></td></tr>
+                    <tr>
+                     <td style="text-align: center; vertical-align: middle;">
+                       <tt>[]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                     </td>
+                    </tr>
+                   </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h4>Question:</h4>
+
+<p align="justify">Consider (<a href="chapter5.html#ex5.54">5.54</a>) &ndash; (<a href="chapter5.html#ex5.56">5.56</a>) taken from Lumsden 1988, p.&nbsp;4, illustrating the &lsquo;left most be condition&rsquo;. What are the parse results, if any? Do the results reflect your expectations, and can you describe the cause of any parse failure?</p>
+
+<dl><dt>(<a name="ex5.54">5.54</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('EX','There'), w('BED',';~ex_cat_Vg','was'), w('D','a'), w('N','man'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','interrogated'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.55">5.55</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('EX','There'), w('BED',';~cat_Vg','was'), w('BAG',';~ex_cat_Ve_passive_','being'), w('D','a'), w('N','man'), w('VVN',';~Tn','interrogated'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex5.56">5.56</a>)</dt><dd>
+</dd></dl>
+
+<tt>[w('EX','There'), w('BED',';~cat_Vt','was'), w('TO','to'), w('HV',';~cat_Ve','have'), w('BEN',';~ex_cat_Ve_passive_','been'), w('D','a'), w('N','man'), w('VVN',';~Tn','interrogated'), w('PUNC','.')]</tt><br>
+
+<br>
+<br>
+<br>

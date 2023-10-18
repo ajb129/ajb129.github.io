@@ -1,0 +1,2764 @@
+<br><br><h1><a name="ch3">Chapter 3</a></h1>
+<h1>Phrase layers</h1>
+
+<br><h2><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
+
+<p align="justify">This chapter considers phrase layers. These are intermediate levels of organisation between a word and the clause. Each phrase is made up of a HEAD word and any DEPENDENTs. The head word is the word that the phrase is required to have in order to exist and may be the only element of the phrase. A phrase is named after the word class of the head word. There are four phrase types:</p>
+
+<ul>
+
+<li><b>noun phrases</b> &mdash; with a <b>noun</b> head word (section <a href="chapter3.html#sec3.2">3.2</a>)</li>
+
+<li><b>adverb phrases</b> &mdash; with an <b>adverb</b> head word (section <a href="chapter3.html#sec3.3">3.3</a>)</li>
+
+<li><b>adjective phrases</b> &mdash; with an <b>adjective</b> head word (section <a href="chapter3.html#sec3.4">3.4</a>)</li>
+
+<li><b>preposition phrases</b> &mdash; with a <b>preposition</b> head word (section <a href="chapter3.html#sec3.5">3.5</a>)</li>
+
+</ul>
+
+<br><h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Noun phrases</h2>
+
+<p align="justify">This section considers noun phrases. A noun phrase is created with <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content <tt>NPL</tt> of daughter elements for a <tt>node</tt> structure with its <tt>Label</tt> consisting of <tt>'NP'</tt> together with any extension from the <tt>Ext</tt> parameter. A contentful <tt>Ext</tt> gives role/function/indexing information for the noun phrase. The assembled structure is added to the content collected from outside the noun phrase with list <tt>L</tt>.</p>
+
+<dl><dt>(<a name="ex3.1">3.1</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase(Ext,Type,[node(Label,NL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_top(Type,NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('NP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is need for <tt>basic</tt>, <tt>interrogative</tt>, or <tt>relative</tt> type information for:</p>
+
+<ul>
+
+<li>head nouns that can't be modified (section <a href="chapter2.html#sec2.2">2.2</a>)</li>
+
+<li>determiners (section <a href="chapter2.html#sec2.3">2.3</a>)</li>
+
+<li>genitive pronouns (section <a href="chapter2.html#sec2.4">2.4</a>)</li>
+
+</ul>
+
+<p align="justify">This type information has to come from the containing noun phrase and will in turn determine noun phrase use as reflected by distribution. Additional to the <tt>Ext</tt> (extension) parameter, <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>) has a <tt>Type</tt> parameter whose value (<tt>basic</tt>, <tt>interrogative</tt>, or <tt>relative</tt>) is passed on to the <tt>noun_phrase_top</tt> call.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of the <tt>noun_phrase_top</tt> rule (<a href="chapter3.html#ex3.2">3.2</a>) concerns gathering content from either:</p>
+
+<ul>
+
+<li>[rule 1] a call of <tt>noun_head_full</tt> (from section <a href="chapter2.html#sec2.2">2.2</a>) which will identify a word that essentially contributes a full noun phrase by itself</li>
+
+<li>[rule 2] a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="chapter3.html#sec3.2.1">3.2.1</a> below)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.2">3.2</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase_top(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_head_full(Type,L,L0).</tt><br>
+<tt>noun_phrase_top(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(Type,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Query (<a href="chapter3.html#ex3.3">3.3</a>) asks if <tt>w('PRO','he')</tt> provides content to project structure for a noun phrase.</p>
+
+<dl><dt>(<a name="ex3.3">3.3</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">The affirmative response and tree output of (<a href="chapter3.html#ex3.3">3.3</a>) is achieved by following the call structure of (<a href="chapter3.html#ex3.4">3.4</a>).</p>
+
+<dl><dt>(<a name="ex3.4">3.4</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;[w('PRO','he')])))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+        <tr>
+         <td>
+            <tt>[w('PRO','he')]</tt>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how the noun phrase type information from the call of (<a href="chapter3.html#ex3.4">3.4</a>) (<tt>basic</tt>) is passed down the call structure to determine what can be an appropriate word for the noun phrase. In contrast to (<a href="chapter3.html#ex3.3">3.3</a>), query (<a href="chapter3.html#ex3.5">3.5</a>) fails: the noun phrase call provides <tt>basic</tt> type information, but the word list contains a word with <tt>RPRO</tt> word class (a relative pronoun) requiring <tt>relative</tt> type information.</p>
+
+<dl><dt>(<a name="ex3.5">3.5</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>no</tt><br>
+
+<br><h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
+
+<p align="justify">With (<a href="chapter3.html#ex3.3">3.3</a>) we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="chapter3.html#ex3.6">3.6</a>) may return. Among other things, entering a call of <tt>noun_phrase_initial_layer</tt> opens the possibility of having coordinate structures at the top level of the noun phrase.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are two ways to achieve this highest level of noun phrase coordination:</p>
+
+<ul>
+
+<li>with a set structure that has an initial conjunct word followed by a first conjunct noun phrase followed by another conjunct word followed by a second conjunct noun phrase</li>
+
+<li>with a call of <tt>noun_phrase</tt> that introduces the first noun phrase conjunct along with a subsequent call to <tt>noun_phrase_initial_tail</tt> of (<a href="chapter3.html#ex3.7">3.7</a>) that recursively accumulates further conjuncts</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.6">3.6</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;determiner_layer(Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1,L0).</tt><br>
+<tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[interrogative,basic])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1,L0).</tt><br>
+<tt>noun_phrase_initial_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_head(L,L0).</tt><br>
+<tt>noun_phrase_initial_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L,L0).</tt><br>
+<tt>noun_phrase_initial_layer(Type,[node('NLYR',[CONJ1,NP1,node('CONJP',[CONJ2,NP2])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,[NP1],[]),</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ2),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,[NP2],[]).</tt><br>
+<tt>noun_phrase_initial_layer(Type,[node('NLYR',[NP|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,[NP],[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_tail(Type,CL,[]).</tt><br>
+<tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',basic,L1,L0).</tt><br>
+<tt>noun_phrase_initial_layer(relative,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',relative,L1,L0).</tt><br>
+<tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;relative_clause(L1,L0).</tt><br>
+
+<dl><dt>(<a name="ex3.7">3.7</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase_initial_tail(Type,[node('CONJP',[CONJ,NP])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,[NP],[]).</tt><br>
+<tt>noun_phrase_initial_tail(Type,[PU,node('CONJP',[NP])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,[NP],[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_tail(Type,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing of a noun phrase with a top level coordination is illustrated with (<a href="chapter3.html#ex3.8">3.8</a>), which leads to output of a noun phrase that immediately contains an <tt>NLYR</tt> (nominal intermediate level) phrasal projection as its only daughter element. The <tt>NLYR</tt> itself is comprised of three conjuncts, each of which contains an element with full noun phrase structure.</p>
+
+<dl><dt>(<a name="ex3.8">3.8</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(NP&nbsp;(PRO&nbsp;he)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;I)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to reach the output of (<a href="chapter3.html#ex3.8">3.8</a>) follow (<a href="chapter3.html#ex3.9">3.9</a>). After the initial <tt>noun_phrase</tt> call, there are three further calls to <tt>noun_phrase</tt>, each for one of the three conjuncts. Also note how the coordination arises from the creation of a sequence of calls to <tt>noun_phrase_initial_tail</tt> of (<a href="chapter3.html#ex3.7">3.7</a>). This gives a call structure that branches to the right, while leading to the return of conjuncts that are all placed under the same <tt>NLYR</tt> of the output tree structure of (<a href="chapter3.html#ex3.8">3.8</a>).</p>
+
+<dl><dt>(<a name="ex3.9">3.9</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','you')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(punc__non_final</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PUNC',',')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(conj</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('CONJ','and')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','I')]))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('PRO','you')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="3" style="text-align: center; vertical-align: middle;">noun_phrase_initial_tail <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">punc <b>non_final</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('PUNC',',')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('PRO','he')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_tail <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">conj</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('CONJ','and')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head_full <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('PRO','I')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The recursion seen with the call structure of (<a href="chapter3.html#ex3.9">3.9</a>) when parsing conjunction is not the only opportunity for recursion created by calling <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>). Calls can also be recursive so that the parse is able to pick up on the left edge of the noun phrase modifiers that are either preposition phrases (discussed in section <a href="chapter3.html#sec3.5">3.5</a>) or relative clauses (discussed in section <a href="chapter6.html#sec6.8">6.8</a>).</p>
+
+<br><h4>Question:</h4>
+
+<p align="justify">[This question is based on an exercise from Borsley 1996 p.&nbsp;23.] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>), and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
+
+<dl><dt>(<a name="ex3.10">3.10</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('CONJ','and'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(NLYR&nbsp;(CONJ&nbsp;both)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;he)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;I)))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(CONJ&nbsp;both)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;I))))))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(CONJ&nbsp;both)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;he)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;I)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<dl><dt>(<a name="ex3.11">3.11</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>no</tt><br>
+
+<dl><dt>(<a name="ex3.12">3.12</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('CONJ','and'), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NLYR&nbsp;(CONJ&nbsp;both)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;I))))))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<dl><dt>(<a name="ex3.13">3.13</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>no</tt><br>
+
+<br><h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
+
+<p align="justify">In addition to allowing at the highest levels of noun phrase structure for recursive calls that establish coordination or add post-head modifiers, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) can also be preparation for delving deeper into noun phase structure, in particular, by allowing for subsequent calls to the <tt>internal_np_higher_layer</tt> rules of (<a href="chapter3.html#ex3.14">3.14</a>) that lead through to calls of the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion with <tt>internal_np_higher_layer</tt> allows for:</p>
+
+<ul>
+
+<li>adjective phrases with <tt>basic</tt> type information as pre-head modifiers</li>
+
+<li>preposition phrases or relative clauses as post-head modifiers</li>
+
+<li>the integration of coordination, with conjuncts subsequent to the first accumulated with <tt>internal_np_higher_tail</tt> of (<a href="chapter3.html#ex3.15">3.15</a>)</li>
+
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with <tt>internal_np_lower_layer</tt> to integrate nouns as noun modifiers or coordination. For coordination, conjuncts subsequent to the first are accumulated with <tt>internal_np_lower_tail</tt> of (<a href="chapter3.html#ex3.17">3.17</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive calls of <tt>internal_np_lower_tail</tt> all involve finding a noun that will be the head noun, either without or with a complement. A complement can be either a <i>to</i>-infinitive clause (found with <tt>ip_to_inf</tt>) or a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> (found with <tt>cp_that</tt> called with its type parameter set to <tt>with_c</tt>).</p>
+
+<dl><dt>(<a name="ex3.14">3.14</a>)</dt><dd>
+</dd></dl>
+
+<tt>internal_np_higher_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L1,L0).</tt><br>
+<tt>internal_np_higher_layer([node('IP-PPL',[node('VAG;~I',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('VAG',';~I',Word)],</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L,L0).</tt><br>
+<tt>internal_np_higher_layer([node('IP-PPL',[node('NP-LGS',[node('*',[])]),node('VVN;~Tn',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('VVN',';~Tn',Word)],</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L,L0).</tt><br>
+<tt>internal_np_higher_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L,L0).</tt><br>
+<tt>internal_np_higher_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',basic,L1,L0).</tt><br>
+<tt>internal_np_higher_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;relative_clause(L1,L0).</tt><br>
+<tt>internal_np_higher_layer([node('NLYR',[node('NP',NL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_tail(CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex3.15">3.15</a>)</dt><dd>
+</dd></dl>
+
+<tt>internal_np_higher_tail([node('CONJP',[CONJ,node('NP',NL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]).</tt><br>
+<tt>internal_np_higher_tail([PU,node('CONJP',[node('NP',NL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_tail(L,L0).</tt><br>
+
+<dl><dt>(<a name="ex3.16">3.16</a>)</dt><dd>
+</dd></dl>
+
+<tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun(L,L0).</tt><br>
+<tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L1,L0).</tt><br>
+<tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
+<tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;cp_that('',with_c,[],L1,L0).</tt><br>
+<tt>internal_np_lower_layer([node('NLYR',[node('NP',NL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_tail(CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex3.17">3.17</a>)</dt><dd>
+</dd></dl>
+
+<tt>internal_np_lower_tail([node('CONJP',[CONJ,node('NP',NL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NL,[]).</tt><br>
+<tt>internal_np_lower_tail([PU,node('CONJP',[node('NP',NL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_tail(L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="chapter3.html#ex3.18">3.18</a>) we can see a demonstration of how a word list containing only a single general noun word gives content for the creation of a resulting noun phrase.</p>
+
+<dl><dt>(<a name="ex3.18">3.18</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NS','boys')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NS&nbsp;boys))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the output of (<a href="chapter3.html#ex3.18">3.18</a>) follow (<a href="chapter3.html#ex3.19">3.19</a>), amounting to the full range of internal noun phrase structure needing to have been accessed before the head <tt>noun</tt> call is reached.</p>
+
+<dl><dt>(<a name="ex3.19">3.19</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('NS','boys')]))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('NS','boys')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
+
+<p align="justify">The internal structuring revealed by (<a href="chapter3.html#ex3.19">3.19</a>) allows for more elements to be placed around the noun phrase head word. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) allows for placement of a determiner layer before the noun phrase head word. A determiner layer is created with the <tt>determiner_layer</tt> rules of (<a href="chapter3.html#ex3.20">3.20</a>) which are sensitive to the type information (<tt>basic</tt>, <tt>interrogative</tt>, or <tt>relative</tt>) carried by the calling noun phrase.</p>
+
+<dl><dt>(<a name="ex3.20">3.20</a>)</dt><dd>
+</dd></dl>
+
+<tt>determiner_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;det(Type,L,L0).</tt><br>
+<tt>determiner_layer(Type,[node('NP-GENV',NL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_layer(Type,NL,[]).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter3.html#ex3.21">3.21</a>) contains a determiner word, followed by a general noun word that can serve as a noun phrase head, followed by a coordination word, and ending with a second general noun word that can also serve as a noun phrase head. As (<a href="chapter3.html#ex3.21">3.21</a>) shows, this leads to coordination, with each general noun word occupying its own conjunct internal to the noun phrase structure. What is still more interesting is the location of the determiner word, because the results reveal two alternative placements.</p>
+
+<dl><dt>(<a name="ex3.21">3.21</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','knife'), w('CONJ','and'), w('N','fork')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;knife))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;fork)))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(NP&nbsp;(N&nbsp;knife))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;fork)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can see why these two different placements for the determiner arise by considering the call structures involved in creating the results. The first result of (<a href="chapter3.html#ex3.21">3.21</a>) is created with the calls of (<a href="chapter3.html#ex3.22">3.22</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from within the first conjunct. The first conjunct is itself introduced by an earlier call of <tt>noun_phrase_initial_layer</tt> that also calls <tt>noun_phrase_initial_tail</tt>.</p>
+
+<dl><dt>(<a name="ex3.22">3.22</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','knife')]))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(conj</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('CONJ','and')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','fork')]))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('D','a')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('N','knife')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_tail <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">conj</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('CONJ','and')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                    <tr>
+                                     <td>
+                                        <tt>[w('N','fork')]</tt>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In contrast, the second result of (<a href="chapter3.html#ex3.21">3.21</a>) is created with the calls of (<a href="chapter3.html#ex3.23">3.23</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
+
+<dl><dt>(<a name="ex3.23">3.23</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','knife')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_tail</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(conj</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('CONJ','and')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','fork')]))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('D','a')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('N','knife')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_lower_tail</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">conj</td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('CONJ','and')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','fork')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="chapter3.html#ex3.24">3.24</a>), with its word list that contains a second determiner word that follows the conjunct word. The result shows only one resulting structure.</p>
+
+<dl><dt>(<a name="ex3.24">3.24</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','knife'), w('CONJ','and'), w('D','a'), w('N','fork')]),</tt><br>
+<tt>parse(noun_phrase('')).</tt><br>
+
+
+<tt>(NP&nbsp;(NLYR&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;knife))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fork)))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">Calls to reach the single output of (<a href="chapter3.html#ex3.24">3.24</a>) follow (<a href="chapter3.html#ex3.25">3.25</a>). Notably, the conjuncts are introduced by calls of <tt>noun_phrase_initial_layer</tt> and <tt>noun_phrase_initial_tail</tt>, as was the case with (<a href="chapter3.html#ex3.22">3.22</a>). This results in structure for the second conjunct that is sufficiently high in the hierarchy of noun phrase structure to allow for determiner integration with a <tt>noun_phrase_initial_layer</tt> call.</p>
+
+<dl><dt>(<a name="ex3.25">3.25</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','knife')]))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(conj</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('CONJ','and')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','fork')]))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('D','a')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('N','knife')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_tail <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">conj</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('CONJ','and')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('D','a')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                    <tr>
+                                     <td>
+                                        <tt>[w('N','fork')]</tt>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the query of (<a href="chapter3.html#ex3.24">3.24</a>) had instead followed the call structure of (<a href="chapter3.html#ex3.23">3.23</a>), then <tt>internal_np_higher_layer</tt> calls would be reached from where there is no way to integrate the determiner for the second conjunct.</p>
+
+<br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
+
+<p align="justify">The second <tt>determiner_layer</tt> rule of (<a href="chapter3.html#ex3.20">3.20</a>) leads to calling the <tt>noun_phrase_genm_layer</tt> rules of (<a href="chapter3.html#ex3.26">3.26</a>) to establish structure for a distinct internal noun phrase with genitive case role. The non-recursive rules of <tt>noun_phrase_genm_layer</tt> involves either:</p>
+
+<ul>
+
+<li>picking up a genitive pronoun with <tt>pronoun_genm</tt> (from section <a href="chapter2.html#sec2.4">2.4</a>)</li>
+
+<li>finding content for a noun phrase followed by a genitive marker, identified with <tt>genm</tt> of (from section <a href="chapter2.html#sec2.4">2.4</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.26">3.26</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase_genm_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;pronoun_genm(Type,L,L0).</tt><br>
+<tt>noun_phrase_genm_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_initial_layer(Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;genm(L1,L0).</tt><br>
+<tt>noun_phrase_genm_layer(Type,[node('NLYR',[node('NP',NL)|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_layer(Type,NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_tail(Type,CL,[]).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that conjunction is possible at the top level of genitive noun phrase structure. This is captured by <tt>determiner_layer</tt> having a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>noun_phrase_genm_tail</tt> of (<a href="chapter3.html#ex3.27">3.27</a>).</p>
+
+<dl><dt>(<a name="ex3.27">3.27</a>)</dt><dd>
+</dd></dl>
+
+<tt>noun_phrase_genm_tail(Type,[node('CONJP',[CONJ,node('NP',NL)])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_layer(Type,NL,[]).</tt><br>
+<tt>noun_phrase_genm_tail(Type,[PU,node('CONJP',[node('NP',NL)])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_layer(Type,NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase_genm_tail(Type,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider (<a href="chapter3.html#ex3.28">3.28</a>), with its word list that contains two proper noun words, followed by a genitive marker, followed by two general noun words.</p>
+
+<dl><dt>(<a name="ex3.28">3.28</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D;_nphd_','someone'), w('GENM','<apos>s'), w('N','cash'), w('N','offer')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(NP-GENV&nbsp;(D;_nphd_&nbsp;someone)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(GENM&nbsp;<apos>s))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;cash)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;offer))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to reach the output of (<a href="chapter3.html#ex3.28">3.28</a>) follow (<a href="chapter3.html#ex3.29">3.29</a>).</p>
+
+<dl><dt>(<a name="ex3.29">3.29</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_genm_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D;_nphd_','someone')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(genm</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('GENM','<apos>s')])))</tt><br>
+<tt>&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','cash')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','offer')]))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_genm_layer <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_head</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('D;_nphd_','someone')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">genm</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('GENM','&lt;apos&gt;s')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('N','cash')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('N','offer')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h2><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb phrases</h2>
+
+<p align="justify">An adverb phrase is created with (<a href="chapter3.html#ex3.30">3.30</a>), which calls <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADVP</tt> labelled structure, possibly with a label extension as role/function/indexing information. As with <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>), there is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information: <tt>basic</tt>, <tt>interrogative</tt>, or <tt>relative</tt>.</p>
+
+<dl><dt>(<a name="ex3.30">3.30</a>)</dt><dd>
+</dd></dl>
+
+<tt>adverb_phrase(Ext,Type,[node(Label,AL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_layer(Type,AL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('ADVP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.31">3.31</a>) [rules 1 and 2] establish the head word as a word found with calls of <tt>adv</tt> (see section <a href="chapter2.html#sec2.6">2.6</a>). Rule 2 of (<a href="chapter3.html#ex3.31">3.31</a>) brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.1">5.4.1</a>) with parameters stating:</p>
+
+<ul>
+
+<li>no function information (<tt>''</tt>)</li>
+
+<li>no inheritance of displaced content (<tt>[]</tt>)</li>
+
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) can also be recursive, allowing the parse to either:</p>
+
+<ul>
+
+<li>[rule 3] pick up pre-head modifier noun phrases</li>
+
+<li>[rule 4] pick up pre-head modifier adverb phrases</li>
+
+<li>[rule 5] pick up post-head modifier preposition phrases</li>
+
+<li>[rule 6] start a conjunction structure where all conjuncts are added with <tt>adverb_phrase</tt> with non-initial conjuncts gathered by calls to <tt>adverb_phrase_tail</tt> of (<a href="chapter3.html#ex3.32">3.32</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.31">3.31</a>)</dt><dd>
+</dd></dl>
+
+<tt>adverb_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adv(Type,L,L0).</tt><br>
+<tt>adverb_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adv(catenative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
+<tt>adverb_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adverb_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adverb_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',basic,L1,L0).</tt><br>
+<tt>adverb_phrase_layer(Type,[node('AVLYR',[ADVP|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',Type,[ADVP],[]),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_tail(Type,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex3.32">3.32</a>)</dt><dd>
+</dd></dl>
+
+<tt>adverb_phrase_tail(Type,[node('CONJP',[CONJ,ADVP])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',Type,[ADVP],[]).</tt><br>
+<tt>adverb_phrase_tail(Type,[PU,node('CONJP',[ADVP])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',Type,[ADVP],[]),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_tail(Type,L,L0).</tt><br>
+
+<br><h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
+
+<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>ADJPL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information. As with <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>) and <tt>adverb_phrase</tt> of (<a href="chapter3.html#ex3.30">3.30</a>), there is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information: <tt>basic</tt>, <tt>interrogative</tt>, or <tt>relative</tt>.</p>
+
+<dl><dt>(<a name="ex3.33">3.33</a>)</dt><dd>
+</dd></dl>
+
+<tt>adjective_phrase(Ext,Type,[node(Label,AL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_layer(Type,AL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('ADJP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.34">3.34</a>) [rules 1&ndash;3] establish the head word as a word found with calls of <tt>adj</tt> (see section <a href="chapter2.html#sec2.7">2.7</a>). Rule 2 of (<a href="chapter3.html#ex3.34">3.34</a>) brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.1">5.4.1</a>) with parameters stating:</p>
+
+<ul>
+
+<li>no function information (<tt>''</tt>)</li>
+
+<li>no inheritance of displaced content (<tt>[]</tt>)</li>
+
+</ul>
+
+<p align="justify">Rule 3 of (<a href="chapter3.html#ex3.34">3.34</a>) brings the additional need for word list content that will support a call of <tt>cp_that</tt> called with its type parameter set to <tt>with_c</tt> (see section <a href="chapter5.html#sec5.4.1">5.4.1</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) can also be recursive, allowing the parse to either:</p>
+
+<ul>
+
+<li>[rule 4] pick up pre-head modifier noun phrases</li>
+
+<li>[rule 5] pick up pre-head negation</li>
+
+<li>[rule 6] pick up pre-head modifier adverb phrases</li>
+
+<li>[rule 7] pick up post-head modifier preposition phrases</li>
+
+<li>[rule 8] start a conjunction structure where all conjuncts are added with <tt>adjective_phrase</tt> with non-initial conjuncts gathered by calls to <tt>adjective_phrase_tail</tt> of (<a href="chapter3.html#ex3.35">3.35</a>)</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.34">3.34</a>)</dt><dd>
+</dd></dl>
+
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adj(basic,L,L0).</tt><br>
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adj(catenative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adj(basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;cp_that('',with_c,[],L1,L0).</tt><br>
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adjective_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',Type,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adjective_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_layer(basic,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',basic,L1,L0).</tt><br>
+<tt>adjective_phrase_layer(Type,[node('AJLYR',[ADJP|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',Type,[ADJP],[]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_tail(Type,CL,[]).</tt><br>
+
+<dl><dt>(<a name="ex3.35">3.35</a>)</dt><dd>
+</dd></dl>
+
+<tt>adjective_phrase_tail(Type,[node('CONJP',[CONJ,ADJP])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',Type,[ADJP],[]).</tt><br>
+<tt>adjective_phrase_tail(Type,[PU,node('CONJP',[ADJP])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',Type,[ADJP],[]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase_tail(Type,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with adjective phrases, consider (<a href="chapter3.html#ex3.36">3.36</a>). The word list gives overall content for a noun phrase, while containing two adjective word instances: <tt>w('ADJ','important')</tt> and <tt>w('ADJ','difficult')</tt>. Each adjective word will require its own adjective phrase projection, which is seen in the result of (<a href="chapter3.html#ex3.36">3.36</a>) with its two adjective phrase structures, the first of which has an adverb structure as an internal modifier projected by the adverb word <tt>w('ADV','especially')</tt>.</p>
+
+<dl><dt>(<a name="ex3.36">3.36</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','one'), w('ADV','especially'), w('ADJ','important'), w('ADJ','difficult'), w('N','area')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;one)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADVP&nbsp;(ADV&nbsp;especially))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJ&nbsp;important))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;difficult))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;area))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can see how the calculation of (<a href="chapter3.html#ex3.36">3.36</a>) will have worked with the call structure of (<a href="chapter3.html#ex3.37">3.37</a>).</p>
+
+<dl><dt>(<a name="ex3.37">3.37</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','one')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adverb_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adv__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADV','especially')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','important')]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','difficult')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','area')]))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('D','one')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adverb_phrase_layer <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adv <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                    <tt>[w('ADV','especially')]</tt>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('ADJ','important')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('ADJ','difficult')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','area')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<br><h2><a name="sec3.5">3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Preposition phrases</h2>
+
+<p align="justify">A preposition phrase can be created with (<a href="chapter3.html#ex3.38">3.38</a>) by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.39">3.39</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. As with <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>), <tt>adverb_phrase</tt> of (<a href="chapter3.html#ex3.30">3.30</a>), and <tt>adjective_phrase</tt> of (<a href="chapter3.html#ex3.33">3.33</a>), there is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information:</p>
+
+<ul>
+
+<li><tt>basic</tt></li>
+
+<li><tt>interrogative</tt></li>
+
+<li><tt>relative</tt></li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.38">3.38</a>)</dt><dd>
+</dd></dl>
+
+<tt>preposition_phrase(Ext,Type,[node(Label,PL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase_layer(Type,PL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>preposition_phrase(Ext,Type,[node(Label,[PP1|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',Type,[PP1],[]),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase_tail(Type,CL,[]),</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is only one <tt>preposition_phrase_layer</tt> rule in (<a href="chapter3.html#ex3.39">3.39</a>), requiring a word list that has an initial preposition word found with <tt>role</tt> (from section <a href="chapter2.html#sec2.11">2.11</a>). The initial preposition word needs to then be followed by content for:</p>
+
+<ul>
+
+<li>[rule 1] a noun phrase</li>
+
+<li>[rule 2] an adverb phrase</li>
+
+<li>[rule 3] a participle clause with control inheritance</li>
+
+<li>[rule 4] a participle clause with an unfilled subject</li>
+
+<li>[rule 5] an embedded question</li>
+
+</ul>
+
+<dl><dt>(<a name="ex3.39">3.39</a>)</dt><dd>
+</dd></dl>
+
+<tt>preposition_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('',Type,L1,L0).</tt><br>
+<tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('',basic,L1,L0).</tt><br>
+<tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,[node('IP-PPL;IP-PPL2',IL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,IL,[]).</tt><br>
+<tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,[node('IP-PPL3',IL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_subject,IL,[]).</tt><br>
+<tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;cp_embedded_que('',[],L1,L0).</tt><br>
+<tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;role(L,[node('IP-ADV',IL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;clause_top_layer(basic_clause,[],IL,[]).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. This is captured by <tt>preposition_phrase</tt> of (<a href="chapter3.html#ex3.38">3.38</a>) having a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="chapter3.html#ex3.40">3.40</a>).</p>
+
+<dl><dt>(<a name="ex3.40">3.40</a>)</dt><dd>
+</dd></dl>
+
+<tt>preposition_phrase_tail(Type,[node('CONJP',[CONJ,PP])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',Type,[PP],[]).</tt><br>
+<tt>preposition_phrase_tail(Type,[PU,node('CONJP',[PP])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('',Type,[PP],[]),</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase_tail(Type,L,L0).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with preposition phrases, consider (<a href="chapter3.html#ex3.41">3.41</a>). The word list gives overall content for a noun phrase, while containing three preposition word instances: <tt>w('P-ROLE','of')</tt>, <tt>w('P-ROLE','from')</tt>, and another <tt>w('P-ROLE','of')</tt>. Each preposition word will introduce a preposition phrase, so we should expect parse results with three contained preposition phrases.</p>
+
+<dl><dt>(<a name="ex3.41">3.41</a>)</dt><dd>
+</dd></dl>
+
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','ascent'), w('P-ROLE','of'), w('D','a'), w('ADJ','human'), w('N','figure'), w('P-ROLE','from'), w('D','the'), w('N','direction'), w('P-ROLE','of'), w('D','the'), w('ADJ','distant'), w('N','town')]),&nbsp;parse(noun_phrase('-SBJ',basic)).</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ascent)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;human))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;figure)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;direction)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;distant))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;town))))))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ascent)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;human))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;figure)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;direction)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;distant))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;town))))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ascent)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;human))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;figure)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;direction)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;distant))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;town))))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ascent)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;human))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;figure)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;direction)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;distant))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;town))))</tt><br>
+
+
+<tt>(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;ascent)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;human))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;figure)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;from)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;direction)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;distant))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;town))))</tt><br>
+
+
+<tt>yes</tt><br>
+
+<p align="justify">We can see that attachment ambiguity leads to five distinct structures returned in the results of (<a href="chapter3.html#ex3.41">3.41</a>). Of these, it is only the third structure where all attachments are found to make semantic sense, but the rules we have are not sensitive to this distinction.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the attachment ambiguity revealed in the results of (<a href="chapter3.html#ex3.41">3.41</a>), there is further parsing variation unseen in the results in regards to how the parsing rules are applied. For example, there are different ways to derive the semantically valid third structure of (<a href="chapter3.html#ex3.41">3.41</a>), e.g., from the call structure of (<a href="chapter3.html#ex3.42">3.42</a>) or the call structure of (<a href="chapter3.html#ex3.43">3.43</a>).</p>
+
+<dl><dt>(<a name="ex3.42">3.42</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','ascent')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','of')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','human')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','figure')]))))))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','from')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','direction')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','of')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','distant')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','town')]))))))))))))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                    <tt>[w('D','the')]</tt>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','ascent')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('P-ROLE','of')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                                <tt>[w('D','a')]</tt>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                                                <tr>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                        <tt>[w('ADJ','human')]</tt>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                                <tr>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                    <tr>
+                                                     <td>
+                                                        <tt>[w('N','figure')]</tt>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('P-ROLE','from')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('D','the')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                <tr>
+                                                 <td>
+                                                    <tt>[w('N','direction')]</tt>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                                                <tr>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                                                    <tr>
+                                                     <td>
+                                                        <tt>[w('P-ROLE','of')]</tt>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                                                        <tr>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                        <tt>[w('D','the')]</tt>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                                                                        <tr>
+                                                                         <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                                                                            <tr>
+                                                                             <td>
+                                                                                <tt>[w('ADJ','distant')]</tt>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                         </td>
+                                                                        </tr>
+                                                                       </table>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                 <td>
+                                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                                    <tr>
+                                                                     <td>
+                                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                                                        <tr>
+                                                                         <td>
+                                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                                            <tr>
+                                                                             <td>
+                                                                                <tt>[w('N','town')]</tt>
+                                                                             </td>
+                                                                            </tr>
+                                                                           </table>
+                                                                         </td>
+                                                                        </tr>
+                                                                       </table>
+                                                                     </td>
+                                                                    </tr>
+                                                                   </table>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<dl><dt>(<a name="ex3.43">3.43</a>)</dt><dd>
+</dd></dl>
+
+<tt>(noun_phrase__-SBJ__basic</tt><br>
+<tt>&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','ascent')]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','of')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','a')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','human')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','figure')]))))))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','from')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','direction')]))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(preposition_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(role</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('P-ROLE','of')])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(determiner_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(det__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('D','the')]))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adjective_phrase_layer__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(adj__basic</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('ADJ','distant')])))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_higher_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(internal_np_lower_layer</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('N','town')])))))))))))))))))</tt><br>
+
+<br>
+<table cellpadding="5px" style="border:2px solid;">
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>-SBJ</b> <b>basic</b></td></tr>
+<tr>
+ <td>
+   <table cellpadding="5px" style="border:2px solid;">
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+    <tr>
+     <td>
+       <table cellpadding="5px" style="border:2px solid;">
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+        <tr>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('D','the')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                            <tr>
+                             <td>
+                                <tt>[w('N','ascent')]</tt>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                        <tr>
+                         <td>
+                            <tt>[w('P-ROLE','of')]</tt>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('D','a')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                                                <tr>
+                                                 <td>
+                                                    <tt>[w('ADJ','human')]</tt>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                <tr>
+                                                 <td>
+                                                    <tt>[w('N','figure')]</tt>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+         <td>
+           <table cellpadding="5px" style="border:2px solid;">
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+            <tr>
+             <td>
+               <table cellpadding="5px" style="border:2px solid;">
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                <tr>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                    <tr>
+                     <td>
+                        <tt>[w('P-ROLE','from')]</tt>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                 <td>
+                   <table cellpadding="5px" style="border:2px solid;">
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                    <tr>
+                     <td>
+                       <table cellpadding="5px" style="border:2px solid;">
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                        <tr>
+                         <td>
+                           <table cellpadding="5px" style="border:2px solid;">
+                            <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                            <tr>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('D','the')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                            <tr>
+                                             <td>
+                                                <tt>[w('N','direction')]</tt>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                             <td>
+                               <table cellpadding="5px" style="border:2px solid;">
+                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">preposition_phrase <b>basic</b></td></tr>
+                                <tr>
+                                 <td>
+                                   <table cellpadding="5px" style="border:2px solid;">
+                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">preposition_phrase_layer <b>basic</b></td></tr>
+                                    <tr>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">role</td></tr>
+                                        <tr>
+                                         <td>
+                                            <tt>[w('P-ROLE','of')]</tt>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                     <td>
+                                       <table cellpadding="5px" style="border:2px solid;">
+                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase <b>basic</b></td></tr>
+                                        <tr>
+                                         <td>
+                                           <table cellpadding="5px" style="border:2px solid;">
+                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun_phrase_top <b>basic</b></td></tr>
+                                            <tr>
+                                             <td>
+                                               <table cellpadding="5px" style="border:2px solid;">
+                                                <tr><td colspan="2" style="text-align: center; vertical-align: middle;">noun_phrase_initial_layer <b>basic</b></td></tr>
+                                                <tr>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;">determiner_layer <b>basic</b></td></tr>
+                                                    <tr>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">det <b>basic</b></td></tr>
+                                                        <tr>
+                                                         <td>
+                                                            <tt>[w('D','the')]</tt>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                 <td>
+                                                   <table cellpadding="5px" style="border:2px solid;">
+                                                    <tr><td colspan="2" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                    <tr>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase <b>basic</b></td></tr>
+                                                        <tr>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adjective_phrase_layer <b>basic</b></td></tr>
+                                                            <tr>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">adj <b>basic</b></td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                    <tt>[w('ADJ','distant')]</tt>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                     <td>
+                                                       <table cellpadding="5px" style="border:2px solid;">
+                                                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_higher_layer</td></tr>
+                                                        <tr>
+                                                         <td>
+                                                           <table cellpadding="5px" style="border:2px solid;">
+                                                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;">internal_np_lower_layer</td></tr>
+                                                            <tr>
+                                                             <td>
+                                                               <table cellpadding="5px" style="border:2px solid;">
+                                                                <tr><td colspan="1" style="text-align: center; vertical-align: middle;">noun</td></tr>
+                                                                <tr>
+                                                                 <td>
+                                                                    <tt>[w('N','town')]</tt>
+                                                                 </td>
+                                                                </tr>
+                                                               </table>
+                                                             </td>
+                                                            </tr>
+                                                           </table>
+                                                         </td>
+                                                        </tr>
+                                                       </table>
+                                                     </td>
+                                                    </tr>
+                                                   </table>
+                                                 </td>
+                                                </tr>
+                                               </table>
+                                             </td>
+                                            </tr>
+                                           </table>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                     </td>
+                                    </tr>
+                                   </table>
+                                 </td>
+                                </tr>
+                               </table>
+                             </td>
+                            </tr>
+                           </table>
+                         </td>
+                        </tr>
+                       </table>
+                     </td>
+                    </tr>
+                   </table>
+                 </td>
+                </tr>
+               </table>
+             </td>
+            </tr>
+           </table>
+         </td>
+        </tr>
+       </table>
+     </td>
+    </tr>
+   </table>
+ </td>
+</tr>
+</table>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Looking back at the rules for noun phrase construction, we can see that the variations in call structure between (<a href="chapter3.html#ex3.42">3.42</a>) and (<a href="chapter3.html#ex3.43">3.43</a>) arise from there being multiple opportunities within the structure of a noun phrase for integrating preposition phrases. Notably, there are recursive rules with <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) and <tt>internal_np_higher_layer</tt> of (<a href="chapter3.html#ex3.14">3.14</a>) that will find a preposition phrase on the right edge of noun phrase structure.</p>
+
+<br>
+<br>
+<br>
