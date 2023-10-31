@@ -20,2052 +20,300 @@ body {
   </style>
 </head>
 <body>
-
-<br>
-<br>
 <br>
 <center><h1>About English Puzzle Graphs</h1></center>
 <center><h2>Alastair Butler</h2></center>
 <center><h3>Hirosaki University</h3></center>
-
 <br>
 <br>
 
-<br>
-<h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;Aims</h2>
+<br><h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;&nbsp;Aims</h2>
 
 <p align="justify">You can study English while having fun with English puzzle graphs. You will learn about word interactions while solving puzzles. The puzzles will help you understand how word connections can guide the building of sentences. Goals for working through the puzzles are:</p>
+
 <ul>
+
 <li>to learn about the components that go into building up a sentence</li>
+
 <li>to get a stronger feeling for how words interact with each other (word dependencies)</li>
+
 <li>to learn how to structure content for complex sentences, which are sentences with multiple clauses</li>
+
 <li>to see how sentences can connect with other sentences</li>
+
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Each puzzle takes the form of a graph of words with labelled arrows that connect the graph nodes. The labelled arrows are clues for building either a sentence fragment, a single sentence or multiple sentences of English. The puzzle task is to turn the graph of words with connecting clues into sentences, called &lsquo;solution sentences&rsquo;. You can check your success by seeing if your solution sentence(s) match the suggested answer solution sentence(s).</p>
 
-<br>
-<h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;How to read a puzzle graph</h2>
+<br><h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;&nbsp;How to read a puzzle graph</h2>
 
-<p align="justify">In a puzzle graph, word content for solution sentences is found outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;) and is always accompanied by numbering inside round brackets (&lsquo;<tt>(</tt>&rsquo;, &lsquo;<tt>)</tt>&rsquo;) to say the word position within the solution sentence(s). Word position numbering involves two numbers separated by an underscore character (&lsquo;<tt>&lowbar;</tt>&rsquo;). The first number says which solution sentence the word belongs to. The second number says the position of the word within its solution sentence.</p>
+<p align="justify">In a puzzle graph, word content for solution sentences is found outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;). Square bracket content tells us about how words function, that is, what words <i>do</i> in their sentences. These are important clues that help to say where words should go to form solution sentences.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content tells us about how words function, that is, what words <i>do</i> in their sentences. These are important clues that help to say where words should go to form solution sentences.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words and square bracket function information can provide the content for a graph node. They can also provide the label for a directed arrow that connects graph nodes. An arrow connects content from one node (the <b>governor node</b>) to another node (the <b>dependent node</b>). It is typically square bracket function information that is used to label a directed arrow.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words with position numbering and&sol;or square bracket function information can provide the content for a graph node. They can also provide the label for a directed arrow that connects graph nodes. An arrow connects content from one node (the <b>governor node</b>) to another node (the <b>dependent node</b>). It is typically square bracket function information that is used to label a directed arrow.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is possible to &lsquo;reverse&rsquo; a node connection by adding <tt>[of]</tt> to the end of the arrow label, e.g., <tt>[arg0]</tt> changes to <tt>[arg0][of]</tt>. This has the consequence that what would have been the governor node is made the dependent node and what would have been the dependent node is made the governor node. Use of a reverse connection is illustrated below in section <a href="#sec3.3">3.3</a>.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content should not be included in your completed solution sentence(s). In contrast, all words that have position information should be included in your completed solution sentence(s). You never have to modify the forms of words, so a word should be entered into its solution sentence as you find it in the graph.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content should not be included in your completed solution sentence(s). In contrast, all word content should be included in your completed solution sentence(s). You never have to modify the forms of words, so a word should be entered into its solution sentence as you find it in the graph.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most of the words you need for the solution sentence(s) of a puzzle are found inside its graph, but sometimes you will need to add additional &lsquo;invisible&rsquo; words. Some of the invisible words will turn out to be words that are involved with referencing what is talked about. These words can be:</p>
+
 <ul>
+
 <li><b>indefinites</b> (e.g., <i>a</i>, <i>an</i>, <i>some</i>) used to introduce new items (graph nodes) for discussion</li>
+
 <li><b>definites</b> (e.g., <i>the</i>, <i>these</i>, <i>this</i>) used to reference unique new items (graph nodes) for discussion</li>
+
 <li><b>bound pronouns</b> (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) that reference already established graph nodes introduced because of earlier words</li>
+
 <li><b>definites with following nouns</b> (e.g., <i>the garden</i>, <i>the tool-shed</i>) when used to reference already familiar graph nodes introduced because of earlier words</li>
+
 <li><b>proper nouns</b> (e.g., <i>Peter</i>, <i>Mr.&nbsp;McGregor</i>) when used to reference already familiar graph nodes introduced because of earlier instances of the same proper noun</li>
+
 </ul>
 
 <p align="justify">Note that unbound pronouns do have graph presence.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Other invisible words are words that contribute no contentful information, but rather have a formal role of marking grammatical structure:</p>
+
 <ul>
+
 <li><b>relative pronouns</b> used at the start of a relative clause, e.g., <i>who</i>, <i>which</i>, <i>that</i> (<i>Mr.&nbsp;McGregor came up with a sieve, <u>which</u> he intended to pop upon the top of Peter</i>)</li>
+
 <li>the <b>complementizer</b> <i>that</i> used at the start of an embedded clause (<i>Mr.&nbsp;McGregor was sure <u>that</u> Peter was somewhere</i>, <i>I am sorry to say <u>that</u> Peter was not very well</i>)</li>
+
 <li>the <b>infinitive marker</b> <i>to</i> used at the start of a <i>to</i>-infinitive clause (<i>a beautiful thing <u>to</u> hide in</i>, <i>Peter sat down <u>to</u> rest </i>)</li>
+
 <li><b>existential</b> <i>there</i> used to signal a <i>there</i> construction (<i><u>there</u> were four little Rabbits</i>)</li>
+
 <li><b>dummy</b> <i>it</i>, e.g., in extraposition constructions (<i>Peter thought <u>it</u> best to go away</i>) and cleft constructions (<i><u>It</u> was the second jacket that Peter had lost</i>)</li>
+
 <li><b>dummy</b> <i>do</i>, e.g., with questions (<i><u>Do</u> you remember?</i>, <i>What <u>did</u> you say?</i>) and when offering support for contracted negation <i>n't</i> (<i>I <u>do</u>n't care</i>)</li>
+
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for graph content to involve the &lsquo;#&rsquo; symbol. This marks a word absence that has an abstract location in its solution sentence, as illustrated below in section <a href="#sec3.2">3.2</a>.</p>
 
-<br>
-<h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;Tips for reaching solution sentences</h2>
+<br><h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;&nbsp;Tips for reaching solution sentences</h2>
 
 <p align="justify">This section offers tips for reaching solution sentences. This starts with a simple puzzle. Then we gradually pick up skills to tackle more complex puzzles.</p>
 
-<h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;A simple puzzle</h3>
+<br><h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;A simple puzzle</h3>
 
 <p align="justify">To form a solution sentence, you can start by looking into a puzzle graph for an arrow that includes <tt>[arg0]</tt> in its label. The governor node for such an arrow will be the verb content for the clause, possibly with other supporting words, while the dependent node will be the head word corresponding to the <b>subject</b>, that is, the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the clause.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider figure <a href="#fig1">1</a>. This gives the puzzle graph for a single clause. By finding the arrow labelled <tt>[arg0]</tt>, we identify <tt>were(1_6)</tt> as the main verb. We also identify <tt>Rabbits(1_9)</tt> as the &lsquo;be-er&rsquo; (subject).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider figure <a href="#figure1">1</a>. This gives the puzzle graph for a single clause. By finding the arrow labelled <tt>[arg0]</tt>, we identify <tt>were</tt> as the main verb. We also identify <tt>Rabbits</tt> as the &lsquo;be-er&rsquo; (subject).</p>
 
 <p><a name="fig1">Figure 1: Puzzle graph for a single clause</a></p>
 
-<svg width="374pt" height="218pt"
- viewBox="0.00 0.00 374.49 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 370.49,-214 370.49,4 -4,4"/>
-<!-- 0001_0001 -->
-<g id="node1" class="node">
-<title>0001_0001</title>
-<ellipse fill="none" stroke="black" cx="57.19" cy="-105" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="57.19" y="-101.3" font-family="fixed" font-size="14.00">Once(1_1)</text>
-</g>
-<!-- 0001_0004 -->
-<g id="node2" class="node">
-<title>0001_0004</title>
-<ellipse fill="none" stroke="black" cx="57.19" cy="-18" rx="53.89" ry="18"/>
-<text text-anchor="middle" x="57.19" y="-14.3" font-family="fixed" font-size="14.00">time(1_4)</text>
-</g>
-<!-- 0001_0001&#45;&gt;0001_0004 -->
-<g id="edge1" class="edge">
-<title>0001_0001&#45;&gt;0001_0004</title>
-<path fill="none" stroke="black" d="M57.19,-86.8C57.19,-75.16 57.19,-59.55 57.19,-46.24"/>
-<polygon fill="black" stroke="black" points="60.7,-46.18 57.19,-36.18 53.7,-46.18 60.7,-46.18"/>
-<text text-anchor="middle" x="92.69" y="-57.8" font-family="fixed" font-size="14.00">upon(1_2)</text>
-</g>
-<!-- 0001_0006 -->
-<g id="node3" class="node">
-<title>0001_0006</title>
-<ellipse fill="none" stroke="black" cx="128.19" cy="-192" rx="55.49" ry="18"/>
-<text text-anchor="middle" x="128.19" y="-188.3" font-family="fixed" font-size="14.00">were(1_6)</text>
-</g>
-<!-- 0001_0006&#45;&gt;0001_0001 -->
-<g id="edge2" class="edge">
-<title>0001_0006&#45;&gt;0001_0001</title>
-<path fill="none" stroke="black" d="M93.88,-177.88C83.9,-172.51 73.9,-165.32 67.19,-156 62.45,-149.4 59.82,-141.11 58.4,-133.19"/>
-<polygon fill="black" stroke="black" points="61.86,-132.64 57.16,-123.15 54.92,-133.51 61.86,-132.64"/>
-<text text-anchor="middle" x="120.69" y="-144.8" font-family="fixed" font-size="14.00">[modifier][tmp]</text>
-</g>
-<!-- 0001_0009 -->
-<g id="node4" class="node">
-<title>0001_0009</title>
-<ellipse fill="none" stroke="black" cx="200.19" cy="-105" rx="67.69" ry="18"/>
-<text text-anchor="middle" x="200.19" y="-101.3" font-family="fixed" font-size="14.00">Rabbits(1_9)</text>
-</g>
-<!-- 0001_0006&#45;&gt;0001_0009 -->
-<g id="edge3" class="edge">
-<title>0001_0006&#45;&gt;0001_0009</title>
-<path fill="none" stroke="black" d="M152.37,-175.71C159.97,-170.13 167.99,-163.37 174.19,-156 180.08,-149.01 185.14,-140.46 189.18,-132.42"/>
-<polygon fill="black" stroke="black" points="192.36,-133.88 193.45,-123.34 186.03,-130.9 192.36,-133.88"/>
-<text text-anchor="middle" x="205.69" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0001_0007 -->
-<g id="node5" class="node">
-<title>0001_0007</title>
-<ellipse fill="none" stroke="black" cx="190.19" cy="-18" rx="51.99" ry="18"/>
-<text text-anchor="middle" x="190.19" y="-14.3" font-family="fixed" font-size="14.00">four(1_7)</text>
-</g>
-<!-- 0001_0009&#45;&gt;0001_0007 -->
-<g id="edge4" class="edge">
-<title>0001_0009&#45;&gt;0001_0007</title>
-<path fill="none" stroke="black" d="M198.17,-86.8C196.8,-75.16 194.97,-59.55 193.4,-46.24"/>
-<polygon fill="black" stroke="black" points="196.86,-45.7 192.22,-36.18 189.91,-46.52 196.86,-45.7"/>
-<text text-anchor="middle" x="217.69" y="-57.8" font-family="fixed" font-size="14.00">[num]</text>
-</g>
-<!-- 0001_0008 -->
-<g id="node6" class="node">
-<title>0001_0008</title>
-<ellipse fill="none" stroke="black" cx="313.19" cy="-18" rx="53.09" ry="18"/>
-<text text-anchor="middle" x="313.19" y="-14.3" font-family="fixed" font-size="14.00">little(1_8)</text>
-</g>
-<!-- 0001_0009&#45;&gt;0001_0008 -->
-<g id="edge5" class="edge">
-<title>0001_0009&#45;&gt;0001_0008</title>
-<path fill="none" stroke="black" d="M221.72,-87.81C239.34,-74.55 264.46,-55.66 283.91,-41.03"/>
-<polygon fill="black" stroke="black" points="286.25,-43.65 292.14,-34.84 282.04,-38.05 286.25,-43.65"/>
-<text text-anchor="middle" x="298.69" y="-57.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-</g>
-</svg>
+<img src="clausetherewerepic.png">
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When the main verb of a clause is a form of the verb <small style="font-size: 75%">BE</small> like <i>were</i> and there is no subject predicative connection (<tt>[prd2]</tt>, as in Figure <a href="#fig2">2</a> below) or closely related (<tt>[clr]</tt>) connection, then the <tt>[arg0]</tt> dependent will typically need to occur after <i>were</i>. Moreover, <i>were</i> should occur after an existential <i>there</i>. With this knowledge, we can construct (<a href="#ex1">1</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When the main verb of a clause is a form of the verb <small style="font-size: 75%">BE</small> like <i>were</i> and there is no subject predicative connection (<tt>[prd2]</tt>, as in Figure <a href="#figure2">2</a> below) or closely related (<tt>[clr]</tt>) connection, then the <tt>[arg0]</tt> dependent will typically need to occur after <i>were</i>. Moreover, <i>were</i> should occur after an existential <i>there</i>. With this knowledge, we can construct (<a href="#ex1">1</a>).</p>
 
-<dl>
-  <dt>(<a name="ex1">1</a>)</dt><dd>there were Rabbits</dd>
-</dl>
+<dl><dt>(<a name="ex1">1</a>)</dt><dd>
+there were Rabbits
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete solution sentence for figure <a href="#fig1">1</a>, since there are words that have yet to be used. Two of these words come at the ends of arrows that have <tt>Rabbits(1_9)</tt> as their governor node. These words act to modify <tt>Rabbits(1_9)</tt>. Specifically, there is a numeral modifier to tell us about the number of rabbits (<tt>four(1_7)</tt>), and there is an attributive modifier to tell us about the size of the rabbits (<tt>little(1_8)</tt>). In English, a numeral modifier should occur before an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete solution sentence for figure <a href="#figure1">1</a>, since there are words that have yet to be used. Two of these words come at the ends of arrows that have <tt>Rabbits</tt> as their governor node. These words act to modify <tt>Rabbits</tt>. Specifically, there is a numeral modifier to tell us about the number of rabbits (<tt>four</tt>), and there is an attributive modifier to tell us about the size of the rabbits (<tt>little</tt>). In English, a numeral modifier should occur before an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
 
-<dl>
-  <dt>(<a name="ex2">2</a>)</dt><dd>there were four little Rabbits</dd>
-</dl>
+<dl><dt>(<a name="ex2">2</a>)</dt><dd>
+there were four little Rabbits
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#fig1">1</a> also contains content for a temporal modifier with an arrow labelled <tt>[modifier][tmp]</tt> that has the main verb as its governor node and that points to the adverb <tt>Once(1_1)</tt>. This adverb has itself a modifier labelled with the preposition word <tt>upon(1_2)</tt> and with <tt>time(1_4)</tt> as the dependent word. After connecting these words, we get the solution sentence of (<a href="#ex3">3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#figure1">1</a> also contains content for a temporal modifier with an arrow labelled <tt>[modifier][tmp]</tt> that has the main verb as its governor node and that points to the adverb <tt>Once</tt>. This adverb has itself a modifier labelled with the preposition word <tt>upon</tt> and with <tt>time</tt> as the dependent word. After connecting these words, we get the solution sentence of (<a href="#ex3">3</a>).</p>
 
-<dl>
-  <dt>(<a name="ex3">3</a>)</dt><dd>Once upon a time there were four little Rabbits</dd>
-</dl>
+<dl><dt>(<a name="ex3">3</a>)</dt><dd>
+Once upon a time there were four little Rabbits
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that (<a href="#ex3">3</a>) includes <i>a</i> as the third word, and yet this word is not part of figure <a href="#fig1">1</a>. This is an example of an &lsquo;invisible&rsquo; word that, as already noted in section <a href="#sec2">2</a>, we might sometimes need to add in addition to the words from the puzzle graph. We can gain confirmation that this extra word insertion is needed from observing that the resulting solution sentence now has words with positions that follow the word numbering of figure <a href="#fig1">1</a>, as (<a href="#ex4">4</a>) makes explicit.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that (<a href="#ex3">3</a>) includes <i>a</i> as the third word, and yet this word is not part of figure <a href="#figure1">1</a>. This is an example of an &lsquo;invisible&rsquo; word that, as already noted in section <a href="#sec2">2</a>, we might sometimes need to add in addition to the words from the puzzle graph.</p>
 
-<dl>
-  <dt>(<a name="ex4">4</a>)</dt><dd><tt>Once(1_1)</tt> <tt>upon(1_2)</tt> <u>a(1_3)</u> <tt>time(1_4)</tt> <tt>there(1_5)</tt> <tt>were(1_6)</tt> <tt>four(1_7)</tt> <tt>little(1_8)</tt> <tt>Rabbits(1_9)</tt></dd>
-</dl>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider figure <a href="#fig2">2</a>, which also has content for a single clause sentence.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider figure <a href="#figure2">2</a>, which also has content for a single clause sentence.</p>
 
 <p><a name="fig2">Figure 2: Puzzle graph for another single clause</a></p>
 
-<svg width="718pt" height="218pt"
- viewBox="0.00 0.00 717.79 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 713.79,-214 713.79,4 -4,4"/>
-<!-- 0002_0001 -->
-<g id="node1" class="node">
-<title>0002_0001</title>
-<ellipse fill="none" stroke="black" cx="54.6" cy="-18" rx="54.69" ry="18"/>
-<text text-anchor="middle" x="54.6" y="-14.3" font-family="fixed" font-size="14.00">their(2_1)</text>
-</g>
-<!-- 0002_0002 -->
-<g id="node2" class="node">
-<title>0002_0002</title>
-<ellipse fill="none" stroke="black" cx="128.6" cy="-105" rx="63.89" ry="18"/>
-<text text-anchor="middle" x="128.6" y="-101.3" font-family="fixed" font-size="14.00">names(2_2)</text>
-</g>
-<!-- 0002_0002&#45;&gt;0002_0001 -->
-<g id="edge1" class="edge">
-<title>0002_0002&#45;&gt;0002_0001</title>
-<path fill="none" stroke="black" d="M113.98,-87.21C103.06,-74.67 87.98,-57.35 75.75,-43.3"/>
-<polygon fill="black" stroke="black" points="78.14,-40.71 68.93,-35.47 72.86,-45.31 78.14,-40.71"/>
-<text text-anchor="middle" x="119.6" y="-57.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0002_0003 -->
-<g id="node3" class="node">
-<title>0002_0003</title>
-<ellipse fill="none" stroke="black" cx="194.6" cy="-192" rx="55.49" ry="18"/>
-<text text-anchor="middle" x="194.6" y="-188.3" font-family="fixed" font-size="14.00">were(2_3)</text>
-</g>
-<!-- 0002_0003&#45;&gt;0002_0002 -->
-<g id="edge2" class="edge">
-<title>0002_0003&#45;&gt;0002_0002</title>
-<path fill="none" stroke="black" d="M181.56,-174.21C171.97,-161.87 158.8,-144.89 147.98,-130.97"/>
-<polygon fill="black" stroke="black" points="150.51,-128.51 141.61,-122.76 144.98,-132.8 150.51,-128.51"/>
-<text text-anchor="middle" x="187.1" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0002_0007 -->
-<g id="node4" class="node">
-<title>0002_0007</title>
-<ellipse fill="none" stroke="black" cx="334.6" cy="-105" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="334.6" y="-101.3" font-family="fixed" font-size="14.00">and(2_7)</text>
-</g>
-<!-- 0002_0003&#45;&gt;0002_0007 -->
-<g id="edge3" class="edge">
-<title>0002_0003&#45;&gt;0002_0007</title>
-<path fill="none" stroke="black" d="M219.62,-175.8C242.32,-162.02 275.95,-141.6 300.99,-126.41"/>
-<polygon fill="black" stroke="black" points="303.05,-129.25 309.78,-121.06 299.42,-123.26 303.05,-129.25"/>
-<text text-anchor="middle" x="295.1" y="-144.8" font-family="fixed" font-size="14.00">[prd2]</text>
-</g>
-<!-- 0002_0004 -->
-<g id="node5" class="node">
-<title>0002_0004</title>
-<ellipse fill="none" stroke="black" cx="190.6" cy="-18" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="190.6" y="-14.3" font-family="fixed" font-size="14.00">Flopsy(2_4)</text>
-</g>
-<!-- 0002_0007&#45;&gt;0002_0004 -->
-<g id="edge4" class="edge">
-<title>0002_0007&#45;&gt;0002_0004</title>
-<path fill="none" stroke="black" d="M309.51,-89.19C286.3,-75.49 251.57,-54.99 225.63,-39.68"/>
-<polygon fill="black" stroke="black" points="227.24,-36.57 216.85,-34.5 223.68,-42.6 227.24,-36.57"/>
-<text text-anchor="middle" x="296.1" y="-57.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0002_0005 -->
-<g id="node6" class="node">
-<title>0002_0005</title>
-<ellipse fill="none" stroke="black" cx="334.6" cy="-18" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="334.6" y="-14.3" font-family="fixed" font-size="14.00">Mopsy(2_5)</text>
-</g>
-<!-- 0002_0007&#45;&gt;0002_0005 -->
-<g id="edge5" class="edge">
-<title>0002_0007&#45;&gt;0002_0005</title>
-<path fill="none" stroke="black" d="M334.6,-86.8C334.6,-75.16 334.6,-59.55 334.6,-46.24"/>
-<polygon fill="black" stroke="black" points="338.1,-46.18 334.6,-36.18 331.1,-46.18 338.1,-46.18"/>
-<text text-anchor="middle" x="359.1" y="-57.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0002_0006 -->
-<g id="node7" class="node">
-<title>0002_0006</title>
-<ellipse fill="none" stroke="black" cx="496.6" cy="-18" rx="80.69" ry="18"/>
-<text text-anchor="middle" x="496.6" y="-14.3" font-family="fixed" font-size="14.00">Cotton&#45;tail(2_6)</text>
-</g>
-<!-- 0002_0007&#45;&gt;0002_0006 -->
-<g id="edge6" class="edge">
-<title>0002_0007&#45;&gt;0002_0006</title>
-<path fill="none" stroke="black" d="M361.71,-89.77C387.88,-76.04 427.79,-55.1 457.41,-39.56"/>
-<polygon fill="black" stroke="black" points="459.41,-42.46 466.64,-34.72 456.16,-36.26 459.41,-42.46"/>
-<text text-anchor="middle" x="450.1" y="-57.8" font-family="fixed" font-size="14.00">[conj3]</text>
-</g>
-<!-- 0002_0008 -->
-<g id="node8" class="node">
-<title>0002_0008</title>
-<ellipse fill="none" stroke="black" cx="652.6" cy="-18" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="652.6" y="-14.3" font-family="fixed" font-size="14.00">Peter(2_8)</text>
-</g>
-<!-- 0002_0007&#45;&gt;0002_0008 -->
-<g id="edge7" class="edge">
-<title>0002_0007&#45;&gt;0002_0008</title>
-<path fill="none" stroke="black" d="M375.99,-94.42C404.83,-87.63 444.15,-78.13 478.6,-69 520.63,-57.86 568.04,-44.16 602.75,-33.92"/>
-<polygon fill="black" stroke="black" points="604.05,-37.18 612.64,-30.99 602.06,-30.47 604.05,-37.18"/>
-<text text-anchor="middle" x="556.1" y="-57.8" font-family="fixed" font-size="14.00">[conj4]</text>
-</g>
-</g>
-</svg>
+<img src="clausenameswerepic.png">
 
-<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find that <i>were</i> is once again the main verb of the clause, now as <tt>were(2_3)</tt>. The &lsquo;be-er&rsquo; (subject) of the clause is <tt>names(2_2)</tt>, which itself has an arrow labelled <tt>[genv]</tt> (genitive), which takes us to the genitive pronoun <tt>their(2_1)</tt>. There is also an arrow labelled <tt>[prd2]</tt> (subject predicative), which provides content for &lsquo;<i><b>what</b> their names were</i>&rsquo; by taking us to <tt>and(2_7)</tt>, which in turn takes us to four conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all of this into content for a sentence of English gets us to the solution sentence (<a href="#ex5">5</a>).</p>
+<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find that <i>were</i> is once again the main verb of the clause. The &lsquo;be-er&rsquo; (subject) of the clause is <tt>names</tt>, which itself has an arrow labelled <tt>[genv]</tt> (genitive), which takes us to the genitive pronoun <tt>their</tt>. There is also an arrow labelled <tt>[prd2]</tt> (subject predicative), which provides content for &lsquo;<i><b>what</b> their names were</i>&rsquo; by taking us to <tt>and</tt>, which in turn takes us to four conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all of this into content for a sentence of English gets us to the solution sentence (<a href="#ex4">4</a>).</p>
 
-<dl>
-  <dt>(<a name="ex5">5</a>)</dt><dd>their names were Flopsy, Mopsy, Cotton-tail, and Peter</dd>
-</dl>
+<dl><dt>(<a name="ex4">4</a>)</dt><dd>
+their names were Flopsy, Mopsy, Cotton-tail, and Peter
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure3">3</a>.</p>
 
-<p><a name="fig3">Figure 3: Puzzle graph combining figures 1 and 2</a></p>
+<p><a name="fig3">Figure 3: Puzzle graph combining figures <a href="#figure1">1</a> and <a href="#figure2">2</a></a></p>
 
-<svg width="915pt" height="392pt"
- viewBox="0.00 0.00 914.99 392.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 388)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-388 910.99,-388 910.99,4 -4,4"/>
-<!-- 0003_0001 -->
-<g id="node1" class="node">
-<title>0003_0001</title>
-<ellipse fill="none" stroke="black" cx="57.95" cy="-192" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="57.95" y="-188.3" font-family="fixed" font-size="14.00">Once(3_1)</text>
-</g>
-<!-- 0003_0004 -->
-<g id="node2" class="node">
-<title>0003_0004</title>
-<ellipse fill="none" stroke="black" cx="53.95" cy="-105" rx="53.89" ry="18"/>
-<text text-anchor="middle" x="53.95" y="-101.3" font-family="fixed" font-size="14.00">time(3_4)</text>
-</g>
-<!-- 0003_0001&#45;&gt;0003_0004 -->
-<g id="edge1" class="edge">
-<title>0003_0001&#45;&gt;0003_0004</title>
-<path fill="none" stroke="black" d="M57.14,-173.8C56.59,-162.16 55.85,-146.55 55.23,-133.24"/>
-<polygon fill="black" stroke="black" points="58.72,-133 54.75,-123.18 51.73,-133.33 58.72,-133"/>
-<text text-anchor="middle" x="92.45" y="-144.8" font-family="fixed" font-size="14.00">upon(3_2)</text>
-</g>
-<!-- 0003_0006 -->
-<g id="node3" class="node">
-<title>0003_0006</title>
-<ellipse fill="none" stroke="black" cx="183.95" cy="-279" rx="55.49" ry="18"/>
-<text text-anchor="middle" x="183.95" y="-275.3" font-family="fixed" font-size="14.00">were(3_6)</text>
-</g>
-<!-- 0003_0006&#45;&gt;0003_0001 -->
-<g id="edge2" class="edge">
-<title>0003_0006&#45;&gt;0003_0001</title>
-<path fill="none" stroke="black" d="M129.83,-275.22C106.16,-271.11 80.15,-262.12 63.95,-243 58.68,-236.79 56.45,-228.47 55.75,-220.41"/>
-<polygon fill="black" stroke="black" points="59.24,-220.09 55.57,-210.15 52.24,-220.21 59.24,-220.09"/>
-<text text-anchor="middle" x="117.45" y="-231.8" font-family="fixed" font-size="14.00">[modifier][tmp]</text>
-</g>
-<!-- 0003_0009 -->
-<g id="node4" class="node">
-<title>0003_0009</title>
-<ellipse fill="none" stroke="black" cx="193.95" cy="-105" rx="67.69" ry="18"/>
-<text text-anchor="middle" x="193.95" y="-101.3" font-family="fixed" font-size="14.00">Rabbits(3_9)</text>
-</g>
-<!-- 0003_0006&#45;&gt;0003_0009 -->
-<g id="edge3" class="edge">
-<title>0003_0006&#45;&gt;0003_0009</title>
-<path fill="none" stroke="black" d="M184.94,-260.88C186.68,-231 190.28,-169.11 192.36,-133.27"/>
-<polygon fill="black" stroke="black" points="195.87,-133.24 192.95,-123.05 188.88,-132.83 195.87,-133.24"/>
-<text text-anchor="middle" x="211.45" y="-188.3" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0003_0007 -->
-<g id="node5" class="node">
-<title>0003_0007</title>
-<ellipse fill="none" stroke="black" cx="131.95" cy="-18" rx="51.99" ry="18"/>
-<text text-anchor="middle" x="131.95" y="-14.3" font-family="fixed" font-size="14.00">four(3_7)</text>
-</g>
-<!-- 0003_0009&#45;&gt;0003_0007 -->
-<g id="edge4" class="edge">
-<title>0003_0009&#45;&gt;0003_0007</title>
-<path fill="none" stroke="black" d="M181.7,-87.21C172.69,-74.87 160.32,-57.89 150.16,-43.97"/>
-<polygon fill="black" stroke="black" points="152.89,-41.77 144.17,-35.76 147.23,-45.9 152.89,-41.77"/>
-<text text-anchor="middle" x="188.45" y="-57.8" font-family="fixed" font-size="14.00">[num]</text>
-</g>
-<!-- 0003_0008 -->
-<g id="node6" class="node">
-<title>0003_0008</title>
-<ellipse fill="none" stroke="black" cx="254.95" cy="-18" rx="53.09" ry="18"/>
-<text text-anchor="middle" x="254.95" y="-14.3" font-family="fixed" font-size="14.00">little(3_8)</text>
-</g>
-<!-- 0003_0009&#45;&gt;0003_0008 -->
-<g id="edge5" class="edge">
-<title>0003_0009&#45;&gt;0003_0008</title>
-<path fill="none" stroke="black" d="M206,-87.21C214.85,-74.87 227.03,-57.89 237.03,-43.97"/>
-<polygon fill="black" stroke="black" points="239.93,-45.92 242.92,-35.76 234.24,-41.84 239.93,-45.92"/>
-<text text-anchor="middle" x="264.45" y="-57.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-<!-- 0003_0010 -->
-<g id="node7" class="node">
-<title>0003_0010</title>
-<ellipse fill="none" stroke="black" cx="250.95" cy="-366" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="250.95" y="-362.3" font-family="fixed" font-size="14.00">and(3_10)</text>
-</g>
-<!-- 0003_0010&#45;&gt;0003_0006 -->
-<g id="edge6" class="edge">
-<title>0003_0010&#45;&gt;0003_0006</title>
-<path fill="none" stroke="black" d="M237.71,-348.21C227.98,-335.87 214.6,-318.89 203.63,-304.97"/>
-<polygon fill="black" stroke="black" points="206.09,-302.45 197.15,-296.76 200.6,-306.78 206.09,-302.45"/>
-<text text-anchor="middle" x="246.45" y="-318.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0003_0013 -->
-<g id="node8" class="node">
-<title>0003_0013</title>
-<ellipse fill="none" stroke="black" cx="317.95" cy="-279" rx="61.19" ry="18"/>
-<text text-anchor="middle" x="317.95" y="-275.3" font-family="fixed" font-size="14.00">were(3_13)</text>
-</g>
-<!-- 0003_0010&#45;&gt;0003_0013 -->
-<g id="edge7" class="edge">
-<title>0003_0010&#45;&gt;0003_0013</title>
-<path fill="none" stroke="black" d="M264.18,-348.21C273.91,-335.87 287.29,-318.89 298.26,-304.97"/>
-<polygon fill="black" stroke="black" points="301.29,-306.78 304.74,-296.76 295.8,-302.45 301.29,-306.78"/>
-<text text-anchor="middle" x="312.45" y="-318.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0003_0012 -->
-<g id="node9" class="node">
-<title>0003_0012</title>
-<ellipse fill="none" stroke="black" cx="316.95" cy="-192" rx="69.59" ry="18"/>
-<text text-anchor="middle" x="316.95" y="-188.3" font-family="fixed" font-size="14.00">names(3_12)</text>
-</g>
-<!-- 0003_0013&#45;&gt;0003_0012 -->
-<g id="edge9" class="edge">
-<title>0003_0013&#45;&gt;0003_0012</title>
-<path fill="none" stroke="black" d="M317.74,-260.8C317.61,-249.16 317.42,-233.55 317.27,-220.24"/>
-<polygon fill="black" stroke="black" points="320.76,-220.13 317.15,-210.18 313.77,-220.22 320.76,-220.13"/>
-<text text-anchor="middle" x="338.45" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0003_0017 -->
-<g id="node10" class="node">
-<title>0003_0017</title>
-<ellipse fill="none" stroke="black" cx="503.95" cy="-192" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="503.95" y="-188.3" font-family="fixed" font-size="14.00">and(3_17)</text>
-</g>
-<!-- 0003_0013&#45;&gt;0003_0017 -->
-<g id="edge10" class="edge">
-<title>0003_0013&#45;&gt;0003_0017</title>
-<path fill="none" stroke="black" d="M349.5,-263.58C380.95,-249.21 429.38,-227.08 463.61,-211.43"/>
-<polygon fill="black" stroke="black" points="465.22,-214.55 472.86,-207.21 462.31,-208.18 465.22,-214.55"/>
-<text text-anchor="middle" x="443.45" y="-231.8" font-family="fixed" font-size="14.00">[prd2]</text>
-</g>
-<!-- 0003_0012&#45;&gt;0003_0009 -->
-<g id="edge8" class="edge">
-<title>0003_0012&#45;&gt;0003_0009</title>
-<path fill="none" stroke="black" d="M293.81,-175.01C274.6,-161.74 247.09,-142.73 225.8,-128.01"/>
-<polygon fill="black" stroke="black" points="227.61,-125.01 217.4,-122.21 223.63,-130.77 227.61,-125.01"/>
-<text text-anchor="middle" x="284.95" y="-144.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0003_0014 -->
-<g id="node11" class="node">
-<title>0003_0014</title>
-<ellipse fill="none" stroke="black" cx="347.95" cy="-105" rx="68.79" ry="18"/>
-<text text-anchor="middle" x="347.95" y="-101.3" font-family="fixed" font-size="14.00">Flopsy(3_14)</text>
-</g>
-<!-- 0003_0017&#45;&gt;0003_0014 -->
-<g id="edge11" class="edge">
-<title>0003_0017&#45;&gt;0003_0014</title>
-<path fill="none" stroke="black" d="M476.77,-176.19C451.52,-162.43 413.67,-141.81 385.53,-126.48"/>
-<polygon fill="black" stroke="black" points="386.84,-123.21 376.39,-121.5 383.49,-129.36 386.84,-123.21"/>
-<text text-anchor="middle" x="459.45" y="-144.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0003_0015 -->
-<g id="node12" class="node">
-<title>0003_0015</title>
-<ellipse fill="none" stroke="black" cx="503.95" cy="-105" rx="68.79" ry="18"/>
-<text text-anchor="middle" x="503.95" y="-101.3" font-family="fixed" font-size="14.00">Mopsy(3_15)</text>
-</g>
-<!-- 0003_0017&#45;&gt;0003_0015 -->
-<g id="edge12" class="edge">
-<title>0003_0017&#45;&gt;0003_0015</title>
-<path fill="none" stroke="black" d="M503.95,-173.8C503.95,-162.16 503.95,-146.55 503.95,-133.24"/>
-<polygon fill="black" stroke="black" points="507.45,-133.18 503.95,-123.18 500.45,-133.18 507.45,-133.18"/>
-<text text-anchor="middle" x="528.45" y="-144.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0003_0016 -->
-<g id="node13" class="node">
-<title>0003_0016</title>
-<ellipse fill="none" stroke="black" cx="676.95" cy="-105" rx="86.38" ry="18"/>
-<text text-anchor="middle" x="676.95" y="-101.3" font-family="fixed" font-size="14.00">Cotton&#45;tail(3_16)</text>
-</g>
-<!-- 0003_0017&#45;&gt;0003_0016 -->
-<g id="edge13" class="edge">
-<title>0003_0017&#45;&gt;0003_0016</title>
-<path fill="none" stroke="black" d="M533.29,-176.58C561.46,-162.74 604.25,-141.72 635.81,-126.21"/>
-<polygon fill="black" stroke="black" points="637.37,-129.34 644.81,-121.79 634.29,-123.06 637.37,-129.34"/>
-<text text-anchor="middle" x="624.45" y="-144.8" font-family="fixed" font-size="14.00">[conj3]</text>
-</g>
-<!-- 0003_0018 -->
-<g id="node14" class="node">
-<title>0003_0018</title>
-<ellipse fill="none" stroke="black" cx="843.95" cy="-105" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="843.95" y="-101.3" font-family="fixed" font-size="14.00">Peter(3_18)</text>
-</g>
-<!-- 0003_0017&#45;&gt;0003_0018 -->
-<g id="edge14" class="edge">
-<title>0003_0017&#45;&gt;0003_0018</title>
-<path fill="none" stroke="black" d="M548.68,-180.8C578.31,-173.97 618,-164.68 652.95,-156 699.21,-144.51 751.58,-130.75 789.76,-120.57"/>
-<polygon fill="black" stroke="black" points="790.88,-123.9 799.64,-117.94 789.08,-117.13 790.88,-123.9"/>
-<text text-anchor="middle" x="734.45" y="-144.8" font-family="fixed" font-size="14.00">[conj4]</text>
-</g>
-</g>
-</svg>
+<img src="twoconjoinedclausespic.png">
 
-<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and(3_10)</tt>. Nodes corresponding to the main verb nodes of the two earlier graphs form the dependent nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a solution sentence that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex5">5</a>).</p>
+<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and</tt>. Nodes corresponding to the main verb nodes of the two earlier graphs form the dependent nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a solution sentence that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex4">4</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow <tt>[genv]</tt> of figure <a href="#fig3">3</a> does not have a node with content <i>their</i> as its dependent like in figure <a href="#fig2">2</a>, but rather takes as its dependent <tt>Rabbits(3_9)</tt>, which corresponds to the <tt>Rabbits(1_9)</tt> of figure <a href="#fig1">1</a>. We can interpret this <tt>[genv]</tt> arrow connection as having an &lsquo;invisible&rsquo; instance of <i>their</i> as the arrow's dependent. That is, the word <i>their</i> is absent from the puzzle graph because it's presence is captured as a direct arrow connection (referential link) to <tt>Rabbits(3_9)</tt>, which occurs in the puzzle graph for independent reasons. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex5">5</a>)&rsquo; &mdash; namely (<a href="#ex6">6</a>) &mdash; to be the overall solution sentence for the puzzle graph of figure <a href="#fig3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow <tt>[genv]</tt> of figure <a href="#figure3">3</a> does not have a node with content <i>their</i> as its dependent like in figure <a href="#figure2">2</a>, but rather takes as its dependent <tt>Rabbits</tt>, which corresponds to the <tt>Rabbits</tt> of figure <a href="#figure1">1</a>. We can interpret this <tt>[genv]</tt> arrow connection as having an &lsquo;invisible&rsquo; instance of <i>their</i> as the arrow's dependent. That is, the word <i>their</i> is absent from the puzzle graph because it's presence is captured as a direct arrow connection (referential link) to <tt>Rabbits</tt>, which occurs in the puzzle graph for independent reasons. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex4">4</a>)&rsquo; &mdash; namely (<a href="#ex5">5</a>) &mdash; to be the overall solution sentence for the puzzle graph of figure <a href="#figure3">3</a>.</p>
 
-<dl>
-  <dt>(<a name="ex6">6</a>)</dt><dd>Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.</dd>
-</dl>
+<dl><dt>(<a name="ex5">5</a>)</dt><dd>
+Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.
+</dd></dl>
 
-<h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;An example with &lsquo;#&rsquo;</h3>
+<br><h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;An example with &lsquo;#&rsquo;</h3>
 
-<p align="justify">Figure <a href="#fig4">4</a> has a similar structure to figure <a href="#fig3">3</a>, in the sense that there are two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from <tt>and(4_10)</tt> occurring topmost in the graph. However, while the verb of the first conjunct is overtly realised with <tt>lost(4_2)</tt>, the content for the verb of the second conjunct is shown as <tt>#4_1001</tt> to indicate the licensed absence of a verb (a lost <i>lost</i>!) from the solution sentence. Note that the indexing with &lsquo;<tt>#</tt>&rsquo; involves two numbers without round brackets. The first number says which solution sentence the elision belongs to. The second number follows a count of the number of elision instances that occur within the sentence, starting from 1000. This gives indexing that is distinct from the word location indexing within round brackets that accompanies each word.</p>
+<p align="justify">Figure <a href="#figure4">4</a> has a similar structure to figure <a href="#figure3">3</a>, in the sense that there are two verbs connected by <tt>[conj1]</tt> and <tt>[conj2]</tt> arrows from <tt>and</tt> occurring topmost in the graph. However, while the verb of the first conjunct is overtly realised with <tt>lost</tt>, the content for the verb of the second conjunct is shown as <tt>#4_1009</tt> to indicate the licensed absence of a verb (a lost <i>lost</i>!) from the solution sentence. The indexing with &lsquo;<tt>#</tt>&rsquo; involves two numbers separated by an underscore character (<tt>_</tt>). The first number says which solution sentence the elision belongs to. The second number is unique for the elision instance.</p>
 
 <p><a name="fig4">Figure 4: Puzzle graph with &lsquo;#&rsquo;</a></p>
 
-<svg width="661pt" height="392pt"
- viewBox="0.00 0.00 661.28 392.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 388)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-388 657.28,-388 657.28,4 -4,4"/>
-<!-- 0004_0001 -->
-<g id="node1" class="node">
-<title>0004_0001</title>
-<ellipse fill="none" stroke="black" cx="87.64" cy="-18" rx="46.29" ry="18"/>
-<text text-anchor="middle" x="87.64" y="-14.3" font-family="fixed" font-size="14.00">He(4_1)</text>
-</g>
-<!-- 0004_0002 -->
-<g id="node2" class="node">
-<title>0004_0002</title>
-<ellipse fill="none" stroke="black" cx="138.64" cy="-279" rx="50.09" ry="18"/>
-<text text-anchor="middle" x="138.64" y="-275.3" font-family="fixed" font-size="14.00">lost(4_2)</text>
-</g>
-<!-- 0004_0002&#45;&gt;0004_0001 -->
-<g id="edge1" class="edge">
-<title>0004_0002&#45;&gt;0004_0001</title>
-<path fill="none" stroke="black" d="M99.8,-267.45C71.8,-257.58 36,-239.79 18.64,-210 -8.89,-162.77 -2.47,-137.43 18.64,-87 26.53,-68.15 42.47,-51.87 57.04,-39.98"/>
-<polygon fill="black" stroke="black" points="59.2,-42.73 64.94,-33.83 54.9,-37.21 59.2,-42.73"/>
-<text text-anchor="middle" x="23.14" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0004_0003 -->
-<g id="node3" class="node">
-<title>0004_0003</title>
-<ellipse fill="none" stroke="black" cx="77.64" cy="-192" rx="50.09" ry="18"/>
-<text text-anchor="middle" x="77.64" y="-188.3" font-family="fixed" font-size="14.00">one(4_3)</text>
-</g>
-<!-- 0004_0002&#45;&gt;0004_0003 -->
-<g id="edge2" class="edge">
-<title>0004_0002&#45;&gt;0004_0003</title>
-<path fill="none" stroke="black" d="M126.59,-261.21C117.73,-248.87 105.55,-231.89 95.55,-217.97"/>
-<polygon fill="black" stroke="black" points="98.34,-215.84 89.66,-209.76 92.65,-219.92 98.34,-215.84"/>
-<text text-anchor="middle" x="134.14" y="-231.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0004_0009 -->
-<g id="node4" class="node">
-<title>0004_0009</title>
-<ellipse fill="none" stroke="black" cx="222.64" cy="-192" rx="77.19" ry="18"/>
-<text text-anchor="middle" x="222.64" y="-188.3" font-family="fixed" font-size="14.00">cabbages(4_9)</text>
-</g>
-<!-- 0004_0002&#45;&gt;0004_0009 -->
-<g id="edge3" class="edge">
-<title>0004_0002&#45;&gt;0004_0009</title>
-<path fill="none" stroke="black" d="M154.83,-261.61C167.3,-248.99 184.73,-231.36 198.79,-217.13"/>
-<polygon fill="black" stroke="black" points="201.66,-219.2 206.2,-209.63 196.69,-214.28 201.66,-219.2"/>
-<text text-anchor="middle" x="243.64" y="-231.8" font-family="fixed" font-size="14.00">[loc]among(4_7)</text>
-</g>
-<!-- 0004_0006 -->
-<g id="node5" class="node">
-<title>0004_0006</title>
-<ellipse fill="none" stroke="black" cx="87.64" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="87.64" y="-101.3" font-family="fixed" font-size="14.00">shoes(4_6)</text>
-</g>
-<!-- 0004_0003&#45;&gt;0004_0006 -->
-<g id="edge4" class="edge">
-<title>0004_0003&#45;&gt;0004_0006</title>
-<path fill="none" stroke="black" d="M79.66,-173.8C81.03,-162.16 82.87,-146.55 84.43,-133.24"/>
-<polygon fill="black" stroke="black" points="87.92,-133.52 85.62,-123.18 80.97,-132.7 87.92,-133.52"/>
-<text text-anchor="middle" x="108.14" y="-144.8" font-family="fixed" font-size="14.00">of(4_4)</text>
-</g>
-<!-- 0004_0006&#45;&gt;0004_0001 -->
-<g id="edge5" class="edge">
-<title>0004_0006&#45;&gt;0004_0001</title>
-<path fill="none" stroke="black" d="M87.64,-86.8C87.64,-75.16 87.64,-59.55 87.64,-46.24"/>
-<polygon fill="black" stroke="black" points="91.14,-46.18 87.64,-36.18 84.14,-46.18 91.14,-46.18"/>
-<text text-anchor="middle" x="110.64" y="-57.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0004_0010 -->
-<g id="node6" class="node">
-<title>0004_0010</title>
-<ellipse fill="none" stroke="black" cx="232.64" cy="-366" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="232.64" y="-362.3" font-family="fixed" font-size="14.00">and(4_10)</text>
-</g>
-<!-- 0004_0010&#45;&gt;0004_0002 -->
-<g id="edge6" class="edge">
-<title>0004_0010&#45;&gt;0004_0002</title>
-<path fill="none" stroke="black" d="M214.51,-348.61C200.12,-335.59 179.82,-317.24 163.84,-302.79"/>
-<polygon fill="black" stroke="black" points="166.15,-300.16 156.39,-296.05 161.46,-305.35 166.15,-300.16"/>
-<text text-anchor="middle" x="216.14" y="-318.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- e_0004_1001 -->
-<g id="node7" class="node">
-<title>e_0004_1001</title>
-<ellipse fill="none" stroke="black" cx="357.64" cy="-279" rx="51.99" ry="18"/>
-<text text-anchor="middle" x="357.64" y="-275.3" font-family="fixed" font-size="14.00">#4_1001</text>
-</g>
-<!-- 0004_0010&#45;&gt;e_0004_1001 -->
-<g id="edge7" class="edge">
-<title>0004_0010&#45;&gt;e_0004_1001</title>
-<path fill="none" stroke="black" d="M255.56,-349.41C275.47,-335.87 304.49,-316.14 326.5,-301.17"/>
-<polygon fill="black" stroke="black" points="328.55,-304.01 334.86,-295.49 324.62,-298.22 328.55,-304.01"/>
-<text text-anchor="middle" x="327.14" y="-318.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- e_0004_1001&#45;&gt;0004_0001 -->
-<g id="edge9" class="edge">
-<title>e_0004_1001&#45;&gt;0004_0001</title>
-<path fill="none" stroke="black" d="M352.66,-261C345.6,-239.07 331,-200.57 308.64,-174 256.02,-111.48 172.54,-62.21 124.66,-37.16"/>
-<polygon fill="black" stroke="black" points="126.07,-33.94 115.58,-32.47 122.86,-40.17 126.07,-33.94"/>
-<text text-anchor="middle" x="314.14" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0004_0013 -->
-<g id="node9" class="node">
-<title>0004_0013</title>
-<ellipse fill="none" stroke="black" cx="416.64" cy="-192" rx="61.19" ry="18"/>
-<text text-anchor="middle" x="416.64" y="-188.3" font-family="fixed" font-size="14.00">shoe(4_13)</text>
-</g>
-<!-- e_0004_1001&#45;&gt;0004_0013 -->
-<g id="edge10" class="edge">
-<title>e_0004_1001&#45;&gt;0004_0013</title>
-<path fill="none" stroke="black" d="M369.29,-261.21C377.78,-248.98 389.42,-232.21 399.03,-218.36"/>
-<polygon fill="black" stroke="black" points="402.18,-219.97 405,-209.76 396.43,-215.98 402.18,-219.97"/>
-<text text-anchor="middle" x="413.14" y="-231.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0004_0016 -->
-<g id="node10" class="node">
-<title>0004_0016</title>
-<ellipse fill="none" stroke="black" cx="574.64" cy="-192" rx="78.79" ry="18"/>
-<text text-anchor="middle" x="574.64" y="-188.3" font-family="fixed" font-size="14.00">potatoes(4_16)</text>
-</g>
-<!-- e_0004_1001&#45;&gt;0004_0016 -->
-<g id="edge11" class="edge">
-<title>e_0004_1001&#45;&gt;0004_0016</title>
-<path fill="none" stroke="black" d="M391.07,-264.91C427.5,-250.63 486.08,-227.69 527.24,-211.56"/>
-<polygon fill="black" stroke="black" points="528.75,-214.73 536.79,-207.83 526.2,-208.21 528.75,-214.73"/>
-<text text-anchor="middle" x="546.64" y="-231.8" font-family="fixed" font-size="14.00">[loc]amongst(4_14)</text>
-</g>
-<!-- 0004_0012 -->
-<g id="node8" class="node">
-<title>0004_0012</title>
-<ellipse fill="none" stroke="black" cx="419.64" cy="-105" rx="63.89" ry="18"/>
-<text text-anchor="middle" x="419.64" y="-101.3" font-family="fixed" font-size="14.00">other(4_12)</text>
-</g>
-<!-- 0004_0013&#45;&gt;0004_0012 -->
-<g id="edge8" class="edge">
-<title>0004_0013&#45;&gt;0004_0012</title>
-<path fill="none" stroke="black" d="M417.24,-173.8C417.65,-162.16 418.21,-146.55 418.68,-133.24"/>
-<polygon fill="black" stroke="black" points="422.18,-133.29 419.03,-123.18 415.18,-133.05 422.18,-133.29"/>
-<text text-anchor="middle" x="454.14" y="-144.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-</g>
-</svg>
+<img src="withelisionpic.png">
 
-<p align="justify">Following all the links of figure <a href="#fig4">4</a>, we can arrive at solution sentence (<a href="#ex7">7</a>).</p>
+<p align="justify">Following all the links of figure <a href="#figure4">4</a>, we can arrive at solution sentence (<a href="#ex6">6</a>).</p>
 
-<dl>
-  <dt>(<a name="ex7">7</a>)</dt><dd>He lost one of his shoes among the cabbages, and the other shoe amongst the potatoes.</dd>
-</dl>
+<dl><dt>(<a name="ex6">6</a>)</dt><dd>
+He lost one of his shoes among the cabbages, and the other shoe amongst the potatoes.
+</dd></dl>
 
-<h3><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;An example with a reverse link</h3>
-
-<p align="justify">Figure <a href="#fig4">4</a> above has <tt>[arg1]</tt> as the label for two arrows that connect their governor node contributing verb content to a dependent node corresponding to the object for the verb. Links can be reversed by adding <tt>[of]</tt> to the arrow label, so, when an arrow is labelled <tt>[arg1][of]</tt>, it connects an object as its governor node to a verb as its dependent node. Such a node label occurs in Figure <a href="#fig5">5</a>.</p>
-
-<p><a name="fig5">Figure 5: Puzzle graph with a reverse link</a></p>
-
-<svg width="645pt" height="305pt"
- viewBox="0.00 0.00 644.54 305.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 301)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-301 640.54,-301 640.54,4 -4,4"/>
-<!-- 0005_0002 -->
-<g id="node1" class="node">
-<title>0005_0002</title>
-<ellipse fill="none" stroke="black" cx="52" cy="-105" rx="51.99" ry="18"/>
-<text text-anchor="middle" x="52" y="-101.3" font-family="fixed" font-size="14.00">first(5_2)</text>
-</g>
-<!-- 0005_0003 -->
-<g id="node2" class="node">
-<title>0005_0003</title>
-<ellipse fill="none" stroke="black" cx="173" cy="-192" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="173" y="-188.3" font-family="fixed" font-size="14.00">thing(5_3)</text>
-</g>
-<!-- 0005_0003&#45;&gt;0005_0002 -->
-<g id="edge1" class="edge">
-<title>0005_0003&#45;&gt;0005_0002</title>
-<path fill="none" stroke="black" d="M150.8,-175.41C131.61,-161.93 103.69,-142.32 82.42,-127.37"/>
-<polygon fill="black" stroke="black" points="84.24,-124.38 74.05,-121.49 80.22,-130.1 84.24,-124.38"/>
-<text text-anchor="middle" x="141.5" y="-144.8" font-family="fixed" font-size="14.00">[num]</text>
-</g>
-<!-- 0005_0005 -->
-<g id="node3" class="node">
-<title>0005_0005</title>
-<ellipse fill="none" stroke="black" cx="173" cy="-105" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="173" y="-101.3" font-family="fixed" font-size="14.00">saw(5_5)</text>
-</g>
-<!-- 0005_0003&#45;&gt;0005_0005 -->
-<g id="edge2" class="edge">
-<title>0005_0003&#45;&gt;0005_0005</title>
-<path fill="none" stroke="black" d="M173,-173.8C173,-162.16 173,-146.55 173,-133.24"/>
-<polygon fill="black" stroke="black" points="176.5,-133.18 173,-123.18 169.5,-133.18 176.5,-133.18"/>
-<text text-anchor="middle" x="206.5" y="-144.8" font-family="fixed" font-size="14.00">[arg1][of]</text>
-</g>
-<!-- 0005_0004 -->
-<g id="node4" class="node">
-<title>0005_0004</title>
-<ellipse fill="none" stroke="black" cx="173" cy="-18" rx="44.69" ry="18"/>
-<text text-anchor="middle" x="173" y="-14.3" font-family="fixed" font-size="14.00">he(5_4)</text>
-</g>
-<!-- 0005_0005&#45;&gt;0005_0004 -->
-<g id="edge7" class="edge">
-<title>0005_0005&#45;&gt;0005_0004</title>
-<path fill="none" stroke="black" d="M173,-86.8C173,-75.16 173,-59.55 173,-46.24"/>
-<polygon fill="black" stroke="black" points="176.5,-46.18 173,-36.18 169.5,-46.18 176.5,-46.18"/>
-<text text-anchor="middle" x="194.5" y="-57.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0005_0006 -->
-<g id="node5" class="node">
-<title>0005_0006</title>
-<ellipse fill="none" stroke="black" cx="267" cy="-279" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="267" y="-275.3" font-family="fixed" font-size="14.00">was(5_6)</text>
-</g>
-<!-- 0005_0006&#45;&gt;0005_0003 -->
-<g id="edge3" class="edge">
-<title>0005_0006&#45;&gt;0005_0003</title>
-<path fill="none" stroke="black" d="M249.31,-262.01C234.96,-249.04 214.54,-230.57 198.43,-216"/>
-<polygon fill="black" stroke="black" points="200.68,-213.32 190.92,-209.21 195.99,-218.51 200.68,-213.32"/>
-<text text-anchor="middle" x="247.5" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0005_0009 -->
-<g id="node6" class="node">
-<title>0005_0009</title>
-<ellipse fill="none" stroke="black" cx="361" cy="-192" rx="64.19" ry="18"/>
-<text text-anchor="middle" x="361" y="-188.3" font-family="fixed" font-size="14.00">hoeing(5_9)</text>
-</g>
-<!-- 0005_0006&#45;&gt;0005_0009 -->
-<g id="edge4" class="edge">
-<title>0005_0006&#45;&gt;0005_0009</title>
-<path fill="none" stroke="black" d="M284.68,-262.01C298.94,-249.12 319.19,-230.8 335.25,-216.28"/>
-<polygon fill="black" stroke="black" points="337.68,-218.8 342.75,-209.5 332.99,-213.61 337.68,-218.8"/>
-<text text-anchor="middle" x="341.5" y="-231.8" font-family="fixed" font-size="14.00">[prd2]</text>
-</g>
-<!-- 0005_0007_0005_0008 -->
-<g id="node7" class="node">
-<title>0005_0007_0005_0008</title>
-<ellipse fill="none" stroke="black" cx="361" cy="-105" rx="118.08" ry="18"/>
-<text text-anchor="middle" x="361" y="-101.3" font-family="fixed" font-size="14.00">Mr.(5_7)_McGregor(5_8)</text>
-</g>
-<!-- 0005_0009&#45;&gt;0005_0007_0005_0008 -->
-<g id="edge5" class="edge">
-<title>0005_0009&#45;&gt;0005_0007_0005_0008</title>
-<path fill="none" stroke="black" d="M361,-173.8C361,-162.16 361,-146.55 361,-133.24"/>
-<polygon fill="black" stroke="black" points="364.5,-133.18 361,-123.18 357.5,-133.18 364.5,-133.18"/>
-<text text-anchor="middle" x="382.5" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0005_0010 -->
-<g id="node8" class="node">
-<title>0005_0010</title>
-<ellipse fill="none" stroke="black" cx="567" cy="-105" rx="69.59" ry="18"/>
-<text text-anchor="middle" x="567" y="-101.3" font-family="fixed" font-size="14.00">onions(5_10)</text>
-</g>
-<!-- 0005_0009&#45;&gt;0005_0010 -->
-<g id="edge6" class="edge">
-<title>0005_0009&#45;&gt;0005_0010</title>
-<path fill="none" stroke="black" d="M395.48,-176.77C430.32,-162.4 484.31,-140.12 522.39,-124.4"/>
-<polygon fill="black" stroke="black" points="523.8,-127.61 531.71,-120.56 521.13,-121.14 523.8,-127.61"/>
-<text text-anchor="middle" x="498.5" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-</g>
-</svg>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The reverse link <tt>[arg1][of]</tt> in figure <a href="#fig5">5</a> is a clue for a solution sentence to include a restrictive relative clause. The governor for the reverse link <tt>[arg1][of]</tt> (<tt>thing(5_3)</tt>) is the relativised element with <tt>[arg1]</tt> (object) function for <tt>saw(5_5)</tt> as content internal to the relative clause. We thereby get solution sentence (<a href="#ex8">8</a>).</p>
-
-<dl>
-  <dt>(<a name="ex8">8</a>)</dt><dd>The first thing he saw was Mr.&nbsp;McGregor hoeing onions.</dd>
-</dl>
-
-<h3><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;A complex puzzle</h3>
+<br><h3><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;A complex puzzle</h3>
 
 <p align="justify">This section demonstrates how to approach a complex puzzle. We will break this into stages, first building content for simpler graphs, which then combine to give larger graphs, and so ultimately lead to the final graph for reaching the overall solution sentence.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To start, consider figure 6.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To start, consider figure 5.</p>
 
-<p><a name="fig6">Figure 6: Puzzle graph for a single clause</a></p>
+<p><a name="fig5">Figure 5: Puzzle graph for a single clause</a></p>
 
-<svg width="525pt" height="218pt"
- viewBox="0.00 0.00 524.73 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 520.73,-214 520.73,4 -4,4"/>
-<!-- 0006_0001_0006_0002 -->
-<g id="node1" class="node">
-<title>0006_0001_0006_0002</title>
-<ellipse fill="none" stroke="black" cx="118.29" cy="-18" rx="118.08" ry="18"/>
-<text text-anchor="middle" x="118.29" y="-14.3" font-family="fixed" font-size="14.00">Mr.(6_1)_McGregor(6_2)</text>
-</g>
-<!-- 0006_0003 -->
-<g id="node2" class="node">
-<title>0006_0003</title>
-<ellipse fill="none" stroke="black" cx="156.29" cy="-192" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="156.29" y="-188.3" font-family="fixed" font-size="14.00">was(6_3)</text>
-</g>
-<!-- 0006_0003&#45;&gt;0006_0001_0006_0002 -->
-<g id="edge1" class="edge">
-<title>0006_0003&#45;&gt;0006_0001_0006_0002</title>
-<path fill="none" stroke="black" d="M152.51,-173.88C145.91,-144 132.23,-82.11 124.32,-46.27"/>
-<polygon fill="black" stroke="black" points="127.63,-45.06 122.06,-36.05 120.8,-46.57 127.63,-45.06"/>
-<text text-anchor="middle" x="162.79" y="-101.3" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0006_0007 -->
-<g id="node3" class="node">
-<title>0006_0007</title>
-<ellipse fill="none" stroke="black" cx="295.29" cy="-105" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="295.29" y="-101.3" font-family="fixed" font-size="14.00">and(6_7)</text>
-</g>
-<!-- 0006_0003&#45;&gt;0006_0007 -->
-<g id="edge2" class="edge">
-<title>0006_0003&#45;&gt;0006_0007</title>
-<path fill="none" stroke="black" d="M180.82,-176C203.45,-162.16 237.22,-141.51 262.23,-126.22"/>
-<polygon fill="black" stroke="black" points="264.3,-129.05 271,-120.85 260.65,-123.08 264.3,-129.05"/>
-<text text-anchor="middle" x="289.79" y="-144.8" font-family="fixed" font-size="14.00">[clr][loc]on(6_4)</text>
-</g>
-<!-- 0006_0007&#45;&gt;0006_0001_0006_0002 -->
-<g id="edge3" class="edge">
-<title>0006_0007&#45;&gt;0006_0001_0006_0002</title>
-<path fill="none" stroke="black" d="M266.46,-90.15C238.02,-76.5 194.19,-55.45 161.56,-39.78"/>
-<polygon fill="black" stroke="black" points="162.79,-36.49 152.26,-35.31 159.76,-42.8 162.79,-36.49"/>
-<text text-anchor="middle" x="241.29" y="-57.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0006_0006 -->
-<g id="node4" class="node">
-<title>0006_0006</title>
-<ellipse fill="none" stroke="black" cx="316.29" cy="-18" rx="61.99" ry="18"/>
-<text text-anchor="middle" x="316.29" y="-14.3" font-family="fixed" font-size="14.00">hands(6_6)</text>
-</g>
-<!-- 0006_0007&#45;&gt;0006_0006 -->
-<g id="edge4" class="edge">
-<title>0006_0007&#45;&gt;0006_0006</title>
-<path fill="none" stroke="black" d="M299.54,-86.8C302.41,-75.16 306.27,-59.55 309.56,-46.24"/>
-<polygon fill="black" stroke="black" points="313.05,-46.72 312.05,-36.18 306.25,-45.04 313.05,-46.72"/>
-<text text-anchor="middle" x="331.79" y="-57.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0006_0008 -->
-<g id="node5" class="node">
-<title>0006_0008</title>
-<ellipse fill="none" stroke="black" cx="456.29" cy="-18" rx="60.39" ry="18"/>
-<text text-anchor="middle" x="456.29" y="-14.3" font-family="fixed" font-size="14.00">knees(6_8)</text>
-</g>
-<!-- 0006_0007&#45;&gt;0006_0008 -->
-<g id="edge5" class="edge">
-<title>0006_0007&#45;&gt;0006_0008</title>
-<path fill="none" stroke="black" d="M322.6,-89.58C349.07,-75.61 389.43,-54.3 418.88,-38.75"/>
-<polygon fill="black" stroke="black" points="420.82,-41.68 428.03,-33.92 417.55,-35.49 420.82,-41.68"/>
-<text text-anchor="middle" x="409.79" y="-57.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-</g>
-</svg>
+<img src="handsandkneespic.png">
 
-<p align="justify">By finding <tt>[arg0]</tt>, we can identify <tt>was(6_3)</tt> as the main verb, and <tt>Mr.(6_1)_McGregor(6_2)</tt> as the &lsquo;be-er&rsquo; (subject). One other arrow extends from <tt>was(6_3)</tt> to <tt>and(6_7)</tt> and this is labelled with the preposition word <tt>on(6_4)</tt> and the functional information <tt>[clr][loc]</tt> (closely related location). In turn, <tt>and(6_7)</tt> takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <tt>hands(6_6)</tt> and <tt>[conj2]</tt> leading to <tt>knees(6_8)</tt>. One more connection, labelled <tt>[genv]</tt> (genitive&sol;possessive), originates from <tt>and(6_7)</tt> and leads to <tt>Mr.(6_1)_McGregor(6_2)</tt> to capture the information that <tt>hands(6_6)</tt> and <tt>knees(6_8)</tt> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive&sol;possessive connection, we can reach (<a href="#ex9">9</a>) as the solution sentence.</p>
+<p align="justify">By finding <tt>[arg0]</tt>, we can identify <tt>was</tt> as the main verb, and <tt>Mr._McGregor</tt> as the &lsquo;be-er&rsquo; (subject). One other arrow extends from <tt>was</tt>. This is labelled with the preposition word <tt>on</tt> and the functional information <tt>[prd2]</tt> (subject predicative) and connects to <tt>and</tt>, which takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <tt>hands</tt> and <tt>[conj2]</tt> leading to <tt>knees</tt>. One more connection, labelled <tt>[genv]</tt> (genitive/possessive), originates from <tt>and</tt> and leads to <tt>Mr._McGregor</tt> to capture the information that the <tt>hands</tt> and <tt>knees</tt> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive/possessive connection, we can reach (<a href="#ex7">7</a>) as the solution sentence.</p>
 
-<dl>
-  <dt>(<a name="ex9">9</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees</dd>
-</dl>
+<dl><dt>(<a name="ex7">7</a>)</dt><dd>
+Mr.&nbsp;McGregor was on his hands and knees
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig7">7</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure6">6</a>.</p>
 
-<p><a name="fig7">Figure 7: Puzzle content for a participle clause</a></p>
+<p><a name="fig6">Figure 6: Puzzle content for a participle clause</a></p>
 
-<svg width="233pt" height="218pt"
- viewBox="0.00 0.00 232.88 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 228.88,-214 228.88,4 -4,4"/>
-<!-- 0007_0001_0007_0002 -->
-<g id="node1" class="node">
-<title>0007_0001_0007_0002</title>
-<ellipse fill="none" stroke="black" cx="112.44" cy="-192" rx="112.38" ry="18"/>
-<text text-anchor="middle" x="112.44" y="-188.3" font-family="fixed" font-size="14.00">planting(7_1)_out(7_2)</text>
-</g>
-<!-- 0007_0004 -->
-<g id="node2" class="node">
-<title>0007_0004</title>
-<ellipse fill="none" stroke="black" cx="112.44" cy="-105" rx="77.19" ry="18"/>
-<text text-anchor="middle" x="112.44" y="-101.3" font-family="fixed" font-size="14.00">cabbages(7_4)</text>
-</g>
-<!-- 0007_0001_0007_0002&#45;&gt;0007_0004 -->
-<g id="edge1" class="edge">
-<title>0007_0001_0007_0002&#45;&gt;0007_0004</title>
-<path fill="none" stroke="black" d="M112.44,-173.8C112.44,-162.16 112.44,-146.55 112.44,-133.24"/>
-<polygon fill="black" stroke="black" points="115.94,-133.18 112.44,-123.18 108.94,-133.18 115.94,-133.18"/>
-<text text-anchor="middle" x="133.94" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0007_0003 -->
-<g id="node3" class="node">
-<title>0007_0003</title>
-<ellipse fill="none" stroke="black" cx="112.44" cy="-18" rx="61.99" ry="18"/>
-<text text-anchor="middle" x="112.44" y="-14.3" font-family="fixed" font-size="14.00">young(7_3)</text>
-</g>
-<!-- 0007_0004&#45;&gt;0007_0003 -->
-<g id="edge2" class="edge">
-<title>0007_0004&#45;&gt;0007_0003</title>
-<path fill="none" stroke="black" d="M112.44,-86.8C112.44,-75.16 112.44,-59.55 112.44,-46.24"/>
-<polygon fill="black" stroke="black" points="115.94,-46.18 112.44,-36.18 108.94,-46.18 115.94,-46.18"/>
-<text text-anchor="middle" x="147.94" y="-57.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-</g>
-</svg>
+<img src="plantingpic.png">
 
-<p align="justify">An arrow labelled <tt>[arg1]</tt> (object) extends from <tt>planting(7_1)_out(7_2)</tt> to <tt>cabbages(7_4)</tt>. In turn, <tt>cabbages(7_4)</tt> leads via an <tt>[attribute]</tt> labelled arrow to <tt>young(7_3)</tt>. By following these connections of the graph, we reach the sentence fragment (<a href="#ex10">10</a>).</p>
+<p align="justify">An arrow labelled <tt>[arg1]</tt> (object) extends from <tt>planting_out</tt> to <tt>cabbages</tt>. In turn, <tt>cabbages</tt> leads via an <tt>[attrib]</tt> (attribute) labelled arrow to <tt>young</tt>. By following these connections of the graph, we reach the sentence fragment (<a href="#ex8">8</a>).</p>
 
-<dl>
-  <dt>(<a name="ex10">10</a>)</dt><dd>planting out young cabbages</dd>
-</dl>
+<dl><dt>(<a name="ex8">8</a>)</dt><dd>
+planting out young cabbages
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig8">8</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure7">7</a>.</p>
 
-<p><a name="fig8">Figure 8: Puzzle graph combining figures 6 and 7</a></p>
+<p><a name="fig7">Figure 7: Puzzle graph combining figures <a href="#figure5">5</a> and <a href="#figure6">6</a></a></p>
 
-<svg width="709pt" height="305pt"
- viewBox="0.00 0.00 708.64 305.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 301)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-301 704.64,-301 704.64,4 -4,4"/>
-<!-- 0008_0001_0008_0002 -->
-<g id="node1" class="node">
-<title>0008_0001_0008_0002</title>
-<ellipse fill="none" stroke="black" cx="398.44" cy="-105" rx="118.08" ry="18"/>
-<text text-anchor="middle" x="398.44" y="-101.3" font-family="fixed" font-size="14.00">Mr.(8_1)_McGregor(8_2)</text>
-</g>
-<!-- 0008_0003 -->
-<g id="node2" class="node">
-<title>0008_0003</title>
-<ellipse fill="none" stroke="black" cx="357.44" cy="-279" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="357.44" y="-275.3" font-family="fixed" font-size="14.00">was(8_3)</text>
-</g>
-<!-- 0008_0003&#45;&gt;0008_0001_0008_0002 -->
-<g id="edge1" class="edge">
-<title>0008_0003&#45;&gt;0008_0001_0008_0002</title>
-<path fill="none" stroke="black" d="M357.1,-260.75C357.09,-239.85 358.43,-203.75 366.44,-174 370.37,-159.44 377.27,-144.17 383.66,-131.8"/>
-<polygon fill="black" stroke="black" points="386.75,-133.43 388.39,-122.96 380.58,-130.13 386.75,-133.43"/>
-<text text-anchor="middle" x="387.94" y="-188.3" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0008_0007 -->
-<g id="node3" class="node">
-<title>0008_0007</title>
-<ellipse fill="none" stroke="black" cx="202.44" cy="-192" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="202.44" y="-188.3" font-family="fixed" font-size="14.00">and(8_7)</text>
-</g>
-<!-- 0008_0003&#45;&gt;0008_0007 -->
-<g id="edge2" class="edge">
-<title>0008_0003&#45;&gt;0008_0007</title>
-<path fill="none" stroke="black" d="M308.83,-273.03C283.96,-268.48 254.39,-259.74 232.44,-243 224.41,-236.87 218.07,-227.91 213.34,-219.26"/>
-<polygon fill="black" stroke="black" points="216.4,-217.56 208.82,-210.15 210.13,-220.67 216.4,-217.56"/>
-<text text-anchor="middle" x="287.94" y="-231.8" font-family="fixed" font-size="14.00">[clr][loc]on(8_4)</text>
-</g>
-<!-- 0008_0009_0008_0010 -->
-<g id="node4" class="node">
-<title>0008_0009_0008_0010</title>
-<ellipse fill="none" stroke="black" cx="536.44" cy="-192" rx="118.08" ry="18"/>
-<text text-anchor="middle" x="536.44" y="-188.3" font-family="fixed" font-size="14.00">planting(8_9)_out(8_10)</text>
-</g>
-<!-- 0008_0003&#45;&gt;0008_0009_0008_0010 -->
-<g id="edge3" class="edge">
-<title>0008_0003&#45;&gt;0008_0009_0008_0010</title>
-<path fill="none" stroke="black" d="M386.6,-264.15C415.37,-250.5 459.69,-229.45 492.68,-213.78"/>
-<polygon fill="black" stroke="black" points="494.56,-216.76 502.09,-209.31 491.56,-210.44 494.56,-216.76"/>
-<text text-anchor="middle" x="526.94" y="-231.8" font-family="fixed" font-size="14.00">[scon][cnt]#8_1001</text>
-</g>
-<!-- 0008_0007&#45;&gt;0008_0001_0008_0002 -->
-<g id="edge4" class="edge">
-<title>0008_0007&#45;&gt;0008_0001_0008_0002</title>
-<path fill="none" stroke="black" d="M227.74,-176.35C246.59,-165.76 273.16,-151.53 297.44,-141 310.86,-135.18 325.59,-129.63 339.55,-124.73"/>
-<polygon fill="black" stroke="black" points="340.76,-128.02 349.07,-121.45 338.48,-121.4 340.76,-128.02"/>
-<text text-anchor="middle" x="320.44" y="-144.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0008_0006 -->
-<g id="node5" class="node">
-<title>0008_0006</title>
-<ellipse fill="none" stroke="black" cx="200.44" cy="-105" rx="61.99" ry="18"/>
-<text text-anchor="middle" x="200.44" y="-101.3" font-family="fixed" font-size="14.00">hands(8_6)</text>
-</g>
-<!-- 0008_0007&#45;&gt;0008_0006 -->
-<g id="edge5" class="edge">
-<title>0008_0007&#45;&gt;0008_0006</title>
-<path fill="none" stroke="black" d="M202.04,-173.8C201.77,-162.16 201.4,-146.55 201.09,-133.24"/>
-<polygon fill="black" stroke="black" points="204.58,-133.09 200.85,-123.18 197.59,-133.26 204.58,-133.09"/>
-<text text-anchor="middle" x="226.94" y="-144.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0008_0008 -->
-<g id="node6" class="node">
-<title>0008_0008</title>
-<ellipse fill="none" stroke="black" cx="60.44" cy="-105" rx="60.39" ry="18"/>
-<text text-anchor="middle" x="60.44" y="-101.3" font-family="fixed" font-size="14.00">knees(8_8)</text>
-</g>
-<!-- 0008_0007&#45;&gt;0008_0008 -->
-<g id="edge6" class="edge">
-<title>0008_0007&#45;&gt;0008_0008</title>
-<path fill="none" stroke="black" d="M177.71,-176.19C154.82,-162.49 120.57,-141.99 94.99,-126.68"/>
-<polygon fill="black" stroke="black" points="96.71,-123.63 86.33,-121.5 93.12,-129.64 96.71,-123.63"/>
-<text text-anchor="middle" x="164.94" y="-144.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0008_0009_0008_0010&#45;&gt;0008_0001_0008_0002 -->
-<g id="edge7" class="edge">
-<title>0008_0009_0008_0010&#45;&gt;0008_0001_0008_0002</title>
-<path fill="none" stroke="black" d="M509.51,-174.41C487.95,-161.13 457.52,-142.39 433.97,-127.88"/>
-<polygon fill="black" stroke="black" points="435.66,-124.81 425.31,-122.55 431.99,-130.77 435.66,-124.81"/>
-<text text-anchor="middle" x="496.94" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0008_0012 -->
-<g id="node7" class="node">
-<title>0008_0012</title>
-<ellipse fill="none" stroke="black" cx="617.44" cy="-105" rx="83.39" ry="18"/>
-<text text-anchor="middle" x="617.44" y="-101.3" font-family="fixed" font-size="14.00">cabbages(8_12)</text>
-</g>
-<!-- 0008_0009_0008_0010&#45;&gt;0008_0012 -->
-<g id="edge8" class="edge">
-<title>0008_0009_0008_0010&#45;&gt;0008_0012</title>
-<path fill="none" stroke="black" d="M552.84,-173.8C564.77,-161.27 581.1,-144.14 594.35,-130.23"/>
-<polygon fill="black" stroke="black" points="596.99,-132.54 601.35,-122.89 591.92,-127.71 596.99,-132.54"/>
-<text text-anchor="middle" x="602.94" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0008_0011 -->
-<g id="node8" class="node">
-<title>0008_0011</title>
-<ellipse fill="none" stroke="black" cx="617.44" cy="-18" rx="67.69" ry="18"/>
-<text text-anchor="middle" x="617.44" y="-14.3" font-family="fixed" font-size="14.00">young(8_11)</text>
-</g>
-<!-- 0008_0012&#45;&gt;0008_0011 -->
-<g id="edge9" class="edge">
-<title>0008_0012&#45;&gt;0008_0011</title>
-<path fill="none" stroke="black" d="M617.44,-86.8C617.44,-75.16 617.44,-59.55 617.44,-46.24"/>
-<polygon fill="black" stroke="black" points="620.94,-46.18 617.44,-36.18 613.94,-46.18 620.94,-46.18"/>
-<text text-anchor="middle" x="652.94" y="-57.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-</g>
-</svg>
+<img src="handsandkneesandplantingpic.png">
 
-<p align="justify">Figure <a href="#fig8">8</a> has connections to bring together node content from figures <a href="#fig6">6</a> and <a href="#fig7">7</a>. There is a <tt>[scon][cnt]#8_1001</tt> (continuative subordinate conjunction) connection to state that <tt>planting(8_9)_out(8_10)</tt> (&sol;<tt>planting(6_1)_out(6_2)</tt>) is subordinate to <tt>was(8_3)</tt> (&sol;<tt>was(6_3)</tt>). There is also an <tt>[arg0]</tt> connection from <tt>planting(8_9)_out(8_10)</tt> (&sol;<tt>planting(6_1)_out(6_2)</tt>) to <tt>Mr.(8_1)_McGregor(8_2)</tt> (&sol;<tt>Mr.(6_1)_McGregor(6_2)</tt>), the &lsquo;be-er&rsquo; (subject) of the main clause. A solution sentence that meets these new criteria of Figure <a href="#fig8">8</a> is (<a href="#ex11">11</a>).</p>
+<p align="justify">Figure <a href="#figure7">7</a> has connections to bring together node content from figures <a href="#figure5">5</a> and <a href="#figure6">6</a>. There is a <tt>[cnt]</tt> node (continuative subordinate conjunction) to state that <tt>planting_out</tt> acts as a restiction on the content from <tt>was</tt>. There is also an <tt>[arg0]</tt> connection from <tt>planting_out</tt> to <tt>Mr._McGregor</tt>, the &lsquo;be-er&rsquo; (subject) of the main clause. A solution sentence that meets these new criteria of Figure <a href="#figure7">7</a> is (<a href="#ex9">9</a>).</p>
 
-<dl>
-  <dt>(<a name="ex11">11</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages</dd>
-</dl>
+<dl><dt>(<a name="ex9">9</a>)</dt><dd>
+Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig9">9</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure8">8</a>.</p>
 
-<p><a name="fig9">Figure 9: Puzzle graph for a single clause</a></p>
+<p><a name="fig8">Figure 8: Puzzle graph for a single clause</a></p>
 
-<svg width="206pt" height="131pt"
- viewBox="0.00 0.00 206.34 131.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 127)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-127 202.34,-127 202.34,4 -4,4"/>
-<!-- 0009_0001 -->
-<g id="node1" class="node">
-<title>0009_0001</title>
-<ellipse fill="none" stroke="black" cx="44.85" cy="-18" rx="44.69" ry="18"/>
-<text text-anchor="middle" x="44.85" y="-14.3" font-family="fixed" font-size="14.00">he(9_1)</text>
-</g>
-<!-- 0009_0002 -->
-<g id="node2" class="node">
-<title>0009_0002</title>
-<ellipse fill="none" stroke="black" cx="98.85" cy="-105" rx="67.69" ry="18"/>
-<text text-anchor="middle" x="98.85" y="-101.3" font-family="fixed" font-size="14.00">jumped(9_2)</text>
-</g>
-<!-- 0009_0002&#45;&gt;0009_0001 -->
-<g id="edge1" class="edge">
-<title>0009_0002&#45;&gt;0009_0001</title>
-<path fill="none" stroke="black" d="M88.18,-87.21C80.41,-74.98 69.76,-58.21 60.96,-44.36"/>
-<polygon fill="black" stroke="black" points="63.81,-42.32 55.49,-35.76 57.9,-46.08 63.81,-42.32"/>
-<text text-anchor="middle" x="97.35" y="-57.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0009_0003 -->
-<g id="node3" class="node">
-<title>0009_0003</title>
-<ellipse fill="none" stroke="black" cx="152.85" cy="-18" rx="45.49" ry="18"/>
-<text text-anchor="middle" x="152.85" y="-14.3" font-family="fixed" font-size="14.00">up(9_3)</text>
-</g>
-<!-- 0009_0002&#45;&gt;0009_0003 -->
-<g id="edge2" class="edge">
-<title>0009_0002&#45;&gt;0009_0003</title>
-<path fill="none" stroke="black" d="M110.77,-87.05C114.69,-81.36 119.02,-74.95 122.85,-69 127.88,-61.16 133.17,-52.5 137.88,-44.62"/>
-<polygon fill="black" stroke="black" points="141.01,-46.21 143.1,-35.82 134.99,-42.64 141.01,-46.21"/>
-<text text-anchor="middle" x="160.85" y="-57.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-</g>
-</svg>
+<img src="jumpeduppic.png">
 
-<p align="justify">Looking at <tt>jumped(9_2)</tt>, this is linked to <tt>he(9_1)</tt> with an <tt>[arg0]</tt> arrow, and to <tt>up(9_3)</tt> with a <tt>[clr][dir]</tt> (closely related directional) arrow. Therefore, we can identify <i>jumped</i> as the main verb, <i>he</i> as the &lsquo;do-er&rsquo; (subject), and <i>up</i> as an adverbial modifier, to derive the simple sentence of (<a href="#ex12">12</a>).</p>
+<p align="justify">Looking at <tt>jumped</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> arrow, and to <tt>up</tt> with a <tt>[clr][dir]</tt> (closely related directional) arrow. Therefore, we can identify <i>jumped</i> as the main verb, <i>he</i> as the &lsquo;do-er&rsquo; (subject), and <i>up</i> as an adverbial modifier, to derive the simple sentence of (<a href="#ex10">10</a>).</p>
 
-<dl>
-  <dt>(<a name="ex12">12</a>)</dt><dd>he jumped up</dd>
-</dl>
+<dl><dt>(<a name="ex10">10</a>)</dt><dd>
+he jumped up
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig10">10</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure9">9</a>.</p>
 
-<p><a name="fig10">Figure 10: Puzzle graph for another single clause</a></p>
+<p><a name="fig9">Figure 9: Puzzle graph for another single clause</a></p>
 
-<svg width="295pt" height="131pt"
- viewBox="0.00 0.00 294.70 131.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 127)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-127 290.7,-127 290.7,4 -4,4"/>
-<!-- 0010_0001 -->
-<g id="node1" class="node">
-<title>0010_0001</title>
-<ellipse fill="none" stroke="black" cx="50.7" cy="-18" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="50.7" y="-14.3" font-family="fixed" font-size="14.00">he(10_1)</text>
-</g>
-<!-- 0010_0002 -->
-<g id="node2" class="node">
-<title>0010_0002</title>
-<ellipse fill="none" stroke="black" cx="116.7" cy="-105" rx="54.69" ry="18"/>
-<text text-anchor="middle" x="116.7" y="-101.3" font-family="fixed" font-size="14.00">ran(10_2)</text>
-</g>
-<!-- 0010_0002&#45;&gt;0010_0001 -->
-<g id="edge1" class="edge">
-<title>0010_0002&#45;&gt;0010_0001</title>
-<path fill="none" stroke="black" d="M103.66,-87.21C94.01,-74.79 80.72,-57.67 69.87,-43.7"/>
-<polygon fill="black" stroke="black" points="72.38,-41.22 63.48,-35.47 66.85,-45.51 72.38,-41.22"/>
-<text text-anchor="middle" x="109.2" y="-57.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0010_0004 -->
-<g id="node3" class="node">
-<title>0010_0004</title>
-<ellipse fill="none" stroke="black" cx="182.7" cy="-18" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="182.7" y="-14.3" font-family="fixed" font-size="14.00">Peter(10_4)</text>
-</g>
-<!-- 0010_0002&#45;&gt;0010_0004 -->
-<g id="edge2" class="edge">
-<title>0010_0002&#45;&gt;0010_0004</title>
-<path fill="none" stroke="black" d="M129.73,-87.21C139.32,-74.87 152.5,-57.89 163.31,-43.97"/>
-<polygon fill="black" stroke="black" points="166.31,-45.8 169.68,-35.76 160.79,-41.51 166.31,-45.8"/>
-<text text-anchor="middle" x="219.7" y="-57.8" font-family="fixed" font-size="14.00">[clr][dir]after(10_3)</text>
-</g>
-</g>
-</svg>
+<img src="ranafterpic.png">
 
-<p align="justify">Looking at <tt>ran(10_2)</tt>, this is linked to <tt>he(10_1)</tt> with an <tt>[arg0]</tt> arrow. Also, <tt>ran(10_2)</tt> is linked to <tt>Peter(10_4)</tt> with an arrow that contains the preposition word <tt>after(10_3)</tt> and the function information <tt>[clr][dir]</tt> (closely related direction). With these words and connections, we can derive the solution sentence (<a href="#ex13">13</a>).</p>
+<p align="justify">Looking at <tt>ran</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> arrow. Also, <tt>ran</tt> is linked to <tt>Peter</tt> with an arrow that contains the preposition word <tt>after</tt> and the function information <tt>[clr][dir]</tt> (closely related direction). With these words and connections, we can derive the solution sentence (<a href="#ex11">11</a>).</p>
 
-<dl>
-  <dt>(<a name="ex13">13</a>)</dt><dd>he ran after Peter</dd>
-</dl>
+<dl><dt>(<a name="ex11">11</a>)</dt><dd>
+he ran after Peter
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig11">11</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure10">10</a>.</p>
 
-<p><a name="fig11">Figure 11: Puzzle graph combining figures 9 and 10</a></p>
+<p><a name="fig10">Figure 10: Puzzle graph combining figures <a href="#figure8">8</a> and <a href="#figure9">9</a></a></p>
 
-<svg width="427pt" height="218pt"
- viewBox="0.00 0.00 427.35 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 423.35,-214 423.35,4 -4,4"/>
-<!-- 0011_0001 -->
-<g id="node1" class="node">
-<title>0011_0001</title>
-<ellipse fill="none" stroke="black" cx="171.35" cy="-18" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="171.35" y="-14.3" font-family="fixed" font-size="14.00">he(11_1)</text>
-</g>
-<!-- 0011_0002 -->
-<g id="node2" class="node">
-<title>0011_0002</title>
-<ellipse fill="none" stroke="black" cx="117.35" cy="-105" rx="73.39" ry="18"/>
-<text text-anchor="middle" x="117.35" y="-101.3" font-family="fixed" font-size="14.00">jumped(11_2)</text>
-</g>
-<!-- 0011_0002&#45;&gt;0011_0001 -->
-<g id="edge1" class="edge">
-<title>0011_0002&#45;&gt;0011_0001</title>
-<path fill="none" stroke="black" d="M128.27,-86.8C136.01,-74.62 146.51,-58.09 155.21,-44.4"/>
-<polygon fill="black" stroke="black" points="158.21,-46.2 160.62,-35.89 152.3,-42.45 158.21,-46.2"/>
-<text text-anchor="middle" x="169.85" y="-57.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0011_0003 -->
-<g id="node3" class="node">
-<title>0011_0003</title>
-<ellipse fill="none" stroke="black" cx="51.35" cy="-18" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="51.35" y="-14.3" font-family="fixed" font-size="14.00">up(11_3)</text>
-</g>
-<!-- 0011_0002&#45;&gt;0011_0003 -->
-<g id="edge2" class="edge">
-<title>0011_0002&#45;&gt;0011_0003</title>
-<path fill="none" stroke="black" d="M97.23,-87.64C91.08,-82.09 84.57,-75.62 79.35,-69 73.58,-61.7 68.3,-53.07 63.91,-45.05"/>
-<polygon fill="black" stroke="black" points="66.93,-43.28 59.19,-36.04 60.73,-46.52 66.93,-43.28"/>
-<text text-anchor="middle" x="108.35" y="-57.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0011_0004 -->
-<g id="node4" class="node">
-<title>0011_0004</title>
-<ellipse fill="none" stroke="black" cx="190.35" cy="-192" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="190.35" y="-188.3" font-family="fixed" font-size="14.00">and(11_4)</text>
-</g>
-<!-- 0011_0004&#45;&gt;0011_0002 -->
-<g id="edge3" class="edge">
-<title>0011_0004&#45;&gt;0011_0002</title>
-<path fill="none" stroke="black" d="M175.92,-174.21C165.22,-161.75 150.47,-144.57 138.45,-130.57"/>
-<polygon fill="black" stroke="black" points="140.91,-128.06 131.74,-122.76 135.6,-132.63 140.91,-128.06"/>
-<text text-anchor="middle" x="182.85" y="-144.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0011_0005 -->
-<g id="node5" class="node">
-<title>0011_0005</title>
-<ellipse fill="none" stroke="black" cx="263.35" cy="-105" rx="54.69" ry="18"/>
-<text text-anchor="middle" x="263.35" y="-101.3" font-family="fixed" font-size="14.00">ran(11_5)</text>
-</g>
-<!-- 0011_0004&#45;&gt;0011_0005 -->
-<g id="edge4" class="edge">
-<title>0011_0004&#45;&gt;0011_0005</title>
-<path fill="none" stroke="black" d="M204.77,-174.21C215.54,-161.67 230.41,-144.35 242.47,-130.3"/>
-<polygon fill="black" stroke="black" points="245.34,-132.34 249.2,-122.47 240.03,-127.78 245.34,-132.34"/>
-<text text-anchor="middle" x="254.85" y="-144.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0011_0005&#45;&gt;0011_0001 -->
-<g id="edge5" class="edge">
-<title>0011_0005&#45;&gt;0011_0001</title>
-<path fill="none" stroke="black" d="M245.61,-87.61C231.65,-74.71 212.01,-56.57 196.44,-42.18"/>
-<polygon fill="black" stroke="black" points="198.44,-39.27 188.72,-35.05 193.69,-44.41 198.44,-39.27"/>
-<text text-anchor="middle" x="243.85" y="-57.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0011_0007 -->
-<g id="node6" class="node">
-<title>0011_0007</title>
-<ellipse fill="none" stroke="black" cx="303.35" cy="-18" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="303.35" y="-14.3" font-family="fixed" font-size="14.00">Peter(11_7)</text>
-</g>
-<!-- 0011_0005&#45;&gt;0011_0007 -->
-<g id="edge6" class="edge">
-<title>0011_0005&#45;&gt;0011_0007</title>
-<path fill="none" stroke="black" d="M271.44,-86.8C277.06,-74.85 284.66,-58.72 291.02,-45.18"/>
-<polygon fill="black" stroke="black" points="294.31,-46.42 295.4,-35.89 287.97,-43.44 294.31,-46.42"/>
-<text text-anchor="middle" x="352.35" y="-57.8" font-family="fixed" font-size="14.00">[clr][dir]after(11_6)</text>
-</g>
-</g>
-</svg>
+<img src="jumpedupranafterpic.png">
 
-<p align="justify">This combines figures <a href="#fig9">9</a> and <a href="#fig10">10</a>, with <tt>and(11_4)</tt> to connect <tt>jumped(11_2)</tt> (&sol;<tt>jumped(9_2)</tt>) and <tt>ran(11_5)</tt> (&sol;<tt>ran(10_2)</tt>). Note how the single <tt>he(11_1)</tt> (&sol;<tt>he(9_1)</tt>&sol;<tt>he(10_1)</tt>) connects as the &lsquo;do-er&rsquo; (subject) to both verbs. A solution sentence is (<a href="#ex14">14</a>).</p>
+<p align="justify">This combines figures <a href="#figure8">8</a> and <a href="#figure9">9</a>, with <tt>and</tt> to connect <tt>jumped</tt> and <tt>ran</tt>. Note how the single <tt>he</tt> connects as the &lsquo;do-er&rsquo; (subject) to both verbs. A solution sentence is (<a href="#ex12">12</a>).</p>
 
-<dl>
-  <dt>(<a name="ex14">14</a>)</dt><dd>he jumped up and ran after Peter</dd>
-</dl>
+<dl><dt>(<a name="ex12">12</a>)</dt><dd>
+he jumped up and ran after Peter
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig12">12</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure11">11</a>.</p>
 
-<p><a name="fig12">Figure 12: Puzzle graph for a participle clause</a></p>
+<p><a name="fig11">Figure 11: Puzzle graph for a participle clause</a></p>
 
-<svg width="151pt" height="131pt"
- viewBox="0.00 0.00 150.99 131.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 127)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-127 146.99,-127 146.99,4 -4,4"/>
-<!-- 0012_0001 -->
-<g id="node1" class="node">
-<title>0012_0001</title>
-<ellipse fill="none" stroke="black" cx="71.49" cy="-105" rx="71.49" ry="18"/>
-<text text-anchor="middle" x="71.49" y="-101.3" font-family="fixed" font-size="14.00">waving(12_1)</text>
-</g>
-<!-- 0012_0003 -->
-<g id="node2" class="node">
-<title>0012_0003</title>
-<ellipse fill="none" stroke="black" cx="71.49" cy="-18" rx="59.29" ry="18"/>
-<text text-anchor="middle" x="71.49" y="-14.3" font-family="fixed" font-size="14.00">rake(12_3)</text>
-</g>
-<!-- 0012_0001&#45;&gt;0012_0003 -->
-<g id="edge1" class="edge">
-<title>0012_0001&#45;&gt;0012_0003</title>
-<path fill="none" stroke="black" d="M71.49,-86.8C71.49,-75.16 71.49,-59.55 71.49,-46.24"/>
-<polygon fill="black" stroke="black" points="74.99,-46.18 71.49,-36.18 67.99,-46.18 74.99,-46.18"/>
-<text text-anchor="middle" x="92.99" y="-57.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-</g>
-</svg>
+<img src="wavingpic.png">
 
-<p align="justify">We can see <tt>waving(12_1)</tt> is connected to <tt>rake(12_3)</tt> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (object) arrow. A solution sentence fragment is (<a href="#ex15">15</a>).</p>
+<p align="justify">We can see <tt>waving</tt> is connected to <tt>rake</tt> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (object) arrow. A solution sentence fragment is (<a href="#ex13">13</a>).</p>
 
-<dl>
-  <dt>(<a name="ex15">15</a>)</dt><dd>waving a rake</dd>
-</dl>
+<dl><dt>(<a name="ex13">13</a>)</dt><dd>
+waving a rake
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig13">13</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure12">12</a>.</p>
 
-<p><a name="fig13">Figure 13: Puzzle graph for an imperative clause</a></p>
+<p><a name="fig12">Figure 12: Puzzle graph for an imperative clause</a></p>
 
-<svg width="241pt" height="131pt"
- viewBox="0.00 0.00 240.79 131.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 127)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-127 236.79,-127 236.79,4 -4,4"/>
-<!-- 0013_0001 -->
-<g id="node1" class="node">
-<title>0013_0001</title>
-<ellipse fill="none" stroke="black" cx="115.79" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="115.79" y="-101.3" font-family="fixed" font-size="14.00">Stop(13_1)</text>
-</g>
-<!-- 0013_0002 -->
-<g id="node2" class="node">
-<title>0013_0002</title>
-<ellipse fill="none" stroke="black" cx="59.79" cy="-18" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="59.79" y="-14.3" font-family="fixed" font-size="14.00">thief(13_2)</text>
-</g>
-<!-- 0013_0001&#45;&gt;0013_0002 -->
-<g id="edge1" class="edge">
-<title>0013_0001&#45;&gt;0013_0002</title>
-<path fill="none" stroke="black" d="M104.73,-87.21C96.68,-74.98 85.63,-58.21 76.5,-44.36"/>
-<polygon fill="black" stroke="black" points="79.26,-42.18 70.84,-35.76 73.41,-46.03 79.26,-42.18"/>
-<text text-anchor="middle" x="109.29" y="-57.8" font-family="fixed" font-size="14.00">[voc]</text>
-</g>
-<!-- imp_0013_2001 -->
-<g id="node3" class="node">
-<title>imp_0013_2001</title>
-<ellipse fill="none" stroke="black" cx="171.79" cy="-18" rx="34.39" ry="18"/>
-<text text-anchor="middle" x="171.79" y="-14.3" font-family="fixed" font-size="14.00">[imp]</text>
-</g>
-<!-- 0013_0001&#45;&gt;imp_0013_2001 -->
-<g id="edge2" class="edge">
-<title>0013_0001&#45;&gt;imp_0013_2001</title>
-<path fill="none" stroke="black" d="M126.86,-87.21C135.02,-74.82 146.25,-57.78 155.44,-43.82"/>
-<polygon fill="black" stroke="black" points="158.55,-45.46 161.13,-35.18 152.71,-41.61 158.55,-45.46"/>
-<text text-anchor="middle" x="189.79" y="-57.8" font-family="fixed" font-size="14.00">[clausetype]</text>
-</g>
-</g>
-</svg>
+<img src="stopthiefpic.png">
 
-<p align="justify">The <tt>[clausetype]</tt> arrow that extends from <tt>Stop(13_1)</tt> tells us that <i>Stop</i> is the verb of the clause. This connects to <tt>[imp]</tt> to tell us that the clause is an imperative. Typically, an imperative is an order or instruction for an unmentioned &lsquo;do-er&rsquo; to do something, but also the &lsquo;do-er&rsquo; can be addressed with a <tt>[voc]</tt> (vocative) connection. A vocative &mdash; figure <a href="#fig13">13</a> has <tt>thief(13_2)</tt> &mdash; can occur either at the front or end of an imperative, making (<a href="#ex16">16</a>) a possible solution sentence.</p>
+<p align="justify">The <tt>[imperative]</tt> node that has an arrow labelled <tt>[scope]</tt> to <tt>Stop</tt> tells us that the clause is an imperative with <i>Stop</i> as the verb of the clause. Typically, an imperative is an order or instruction for an unmentioned &lsquo;do-er&rsquo; to do something, but also the &lsquo;do-er&rsquo; can be addressed with a <tt>[voc]</tt> (vocative) connection. A vocative &mdash; figure <a href="#figure12">12</a> has <tt>thief</tt> &mdash; can occur either at the front or end of an imperative, making (<a href="#ex14">14</a>) a possible solution sentence.</p>
 
-<dl>
-  <dt>(<a name="ex16">16</a>)</dt><dd>Stop thief!</dd>
-</dl>
+<dl><dt>(<a name="ex14">14</a>)</dt><dd>
+Stop thief!
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig14">14</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure13">13</a>.</p>
 
-<p><a name="fig14">Figure 14: Puzzle graph for a clause with an embedding with the content of figure 13</a></p>
+<p><a name="fig13">Figure 13: Puzzle graph for a clause with an embedding with the content of figure <a href="#figure12">12</a></a></p>
 
-<svg width="311pt" height="218pt"
- viewBox="0.00 0.00 310.95 218.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-214 306.95,-214 306.95,4 -4,4"/>
-<!-- 0014_0001 -->
-<g id="node1" class="node">
-<title>0014_0001</title>
-<ellipse fill="none" stroke="black" cx="93.95" cy="-192" rx="68.79" ry="18"/>
-<text text-anchor="middle" x="93.95" y="-188.3" font-family="fixed" font-size="14.00">calling(14_1)</text>
-</g>
-<!-- 0014_0002 -->
-<g id="node2" class="node">
-<title>0014_0002</title>
-<ellipse fill="none" stroke="black" cx="53.95" cy="-105" rx="53.89" ry="18"/>
-<text text-anchor="middle" x="53.95" y="-101.3" font-family="fixed" font-size="14.00">out(14_2)</text>
-</g>
-<!-- 0014_0001&#45;&gt;0014_0002 -->
-<g id="edge1" class="edge">
-<title>0014_0001&#45;&gt;0014_0002</title>
-<path fill="none" stroke="black" d="M85.85,-173.8C80.23,-161.85 72.64,-145.72 66.27,-132.18"/>
-<polygon fill="black" stroke="black" points="69.32,-130.44 61.89,-122.89 62.98,-133.42 69.32,-130.44"/>
-<text text-anchor="middle" x="105.95" y="-144.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0014_0003 -->
-<g id="node3" class="node">
-<title>0014_0003</title>
-<ellipse fill="none" stroke="black" cx="185.95" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="185.95" y="-101.3" font-family="fixed" font-size="14.00">Stop(14_3)</text>
-</g>
-<!-- 0014_0001&#45;&gt;0014_0003 -->
-<g id="edge2" class="edge">
-<title>0014_0001&#45;&gt;0014_0003</title>
-<path fill="none" stroke="black" d="M115.46,-174.82C122.77,-169.08 130.87,-162.44 137.95,-156 146.8,-147.93 156.02,-138.58 163.99,-130.16"/>
-<polygon fill="black" stroke="black" points="166.64,-132.45 170.91,-122.76 161.53,-127.68 166.64,-132.45"/>
-<text text-anchor="middle" x="175.45" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0014_0004 -->
-<g id="node4" class="node">
-<title>0014_0004</title>
-<ellipse fill="none" stroke="black" cx="129.95" cy="-18" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="129.95" y="-14.3" font-family="fixed" font-size="14.00">thief(14_4)</text>
-</g>
-<!-- 0014_0003&#45;&gt;0014_0004 -->
-<g id="edge3" class="edge">
-<title>0014_0003&#45;&gt;0014_0004</title>
-<path fill="none" stroke="black" d="M174.88,-87.21C166.83,-74.98 155.78,-58.21 146.65,-44.36"/>
-<polygon fill="black" stroke="black" points="149.41,-42.18 140.99,-35.76 143.56,-46.03 149.41,-42.18"/>
-<text text-anchor="middle" x="179.45" y="-57.8" font-family="fixed" font-size="14.00">[voc]</text>
-</g>
-<!-- imp_0014_2004 -->
-<g id="node5" class="node">
-<title>imp_0014_2004</title>
-<ellipse fill="none" stroke="black" cx="241.95" cy="-18" rx="34.39" ry="18"/>
-<text text-anchor="middle" x="241.95" y="-14.3" font-family="fixed" font-size="14.00">[imp]</text>
-</g>
-<!-- 0014_0003&#45;&gt;imp_0014_2004 -->
-<g id="edge4" class="edge">
-<title>0014_0003&#45;&gt;imp_0014_2004</title>
-<path fill="none" stroke="black" d="M197.01,-87.21C205.17,-74.82 216.4,-57.78 225.59,-43.82"/>
-<polygon fill="black" stroke="black" points="228.71,-45.46 231.28,-35.18 222.86,-41.61 228.71,-45.46"/>
-<text text-anchor="middle" x="259.95" y="-57.8" font-family="fixed" font-size="14.00">[clausetype]</text>
-</g>
-</g>
-</svg>
+<img src="callingpic.png">
 
-<p align="justify">This is the puzzle graph for a clause with an embedding with the content of figure <a href="#fig13">13</a>. This embedding is connected by an <tt>[arg1]</tt> (object) arrow to the verb content <tt>calling(14_1)</tt> (with <tt>[clr][dir]</tt> (closely related directional)  modifier <tt>out(14_2)</tt>). A solution sentence fragment is (<a href="#ex17">17</a>).</p>
+<p align="justify">This is the puzzle graph for a clause with an embedding with the content of figure <a href="#figure12">12</a>. This embedding is connected by an <tt>[arg1]</tt> (object) arrow to the verb content <tt>calling</tt> (with <tt>[clr][dir]</tt> (closely related directional) modifier <tt>out</tt>). A solution sentence fragment is (<a href="#ex15">15</a>).</p>
 
-<dl>
-  <dt>(<a name="ex17">17</a>)</dt><dd>calling out, &lsquo;Stop thief!&rsquo;</dd>
-</dl>
+<dl><dt>(<a name="ex15">15</a>)</dt><dd>
+calling out, &lsquo;Stop thief!&rsquo;
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig15">15</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure14">14</a>.</p>
 
-<p><a name="fig15">Figure 15: Puzzle graph combining figures 12 and 14</a></p>
+<p><a name="fig14">Figure 14: Puzzle graph combining figures <a href="#figure11">11</a> and <a href="#figure13">13</a></a></p>
 
-<svg width="472pt" height="305pt"
- viewBox="0.00 0.00 472.49 305.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 301)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-301 468.49,-301 468.49,4 -4,4"/>
-<!-- 0015_0001 -->
-<g id="node1" class="node">
-<title>0015_0001</title>
-<ellipse fill="none" stroke="black" cx="71.49" cy="-192" rx="71.49" ry="18"/>
-<text text-anchor="middle" x="71.49" y="-188.3" font-family="fixed" font-size="14.00">waving(15_1)</text>
-</g>
-<!-- 0015_0003 -->
-<g id="node2" class="node">
-<title>0015_0003</title>
-<ellipse fill="none" stroke="black" cx="71.49" cy="-105" rx="59.29" ry="18"/>
-<text text-anchor="middle" x="71.49" y="-101.3" font-family="fixed" font-size="14.00">rake(15_3)</text>
-</g>
-<!-- 0015_0001&#45;&gt;0015_0003 -->
-<g id="edge1" class="edge">
-<title>0015_0001&#45;&gt;0015_0003</title>
-<path fill="none" stroke="black" d="M71.49,-173.8C71.49,-162.16 71.49,-146.55 71.49,-133.24"/>
-<polygon fill="black" stroke="black" points="74.99,-133.18 71.49,-123.18 67.99,-133.18 74.99,-133.18"/>
-<text text-anchor="middle" x="92.99" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0015_0004 -->
-<g id="node3" class="node">
-<title>0015_0004</title>
-<ellipse fill="none" stroke="black" cx="150.49" cy="-279" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="150.49" y="-275.3" font-family="fixed" font-size="14.00">and(15_4)</text>
-</g>
-<!-- 0015_0004&#45;&gt;0015_0001 -->
-<g id="edge2" class="edge">
-<title>0015_0004&#45;&gt;0015_0001</title>
-<path fill="none" stroke="black" d="M135.26,-261.61C123.53,-248.99 107.15,-231.36 93.92,-217.13"/>
-<polygon fill="black" stroke="black" points="96.32,-214.57 86.95,-209.63 91.19,-219.34 96.32,-214.57"/>
-<text text-anchor="middle" x="140.99" y="-231.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0015_0005 -->
-<g id="node4" class="node">
-<title>0015_0005</title>
-<ellipse fill="none" stroke="black" cx="229.49" cy="-192" rx="68.79" ry="18"/>
-<text text-anchor="middle" x="229.49" y="-188.3" font-family="fixed" font-size="14.00">calling(15_5)</text>
-</g>
-<!-- 0015_0004&#45;&gt;0015_0005 -->
-<g id="edge3" class="edge">
-<title>0015_0004&#45;&gt;0015_0005</title>
-<path fill="none" stroke="black" d="M165.73,-261.61C177.45,-248.99 193.84,-231.36 207.07,-217.13"/>
-<polygon fill="black" stroke="black" points="209.79,-219.34 214.04,-209.63 204.67,-214.57 209.79,-219.34"/>
-<text text-anchor="middle" x="219.99" y="-231.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0015_0006 -->
-<g id="node5" class="node">
-<title>0015_0006</title>
-<ellipse fill="none" stroke="black" cx="215.49" cy="-105" rx="53.89" ry="18"/>
-<text text-anchor="middle" x="215.49" y="-101.3" font-family="fixed" font-size="14.00">out(15_6)</text>
-</g>
-<!-- 0015_0005&#45;&gt;0015_0006 -->
-<g id="edge4" class="edge">
-<title>0015_0005&#45;&gt;0015_0006</title>
-<path fill="none" stroke="black" d="M226.66,-173.8C224.74,-162.16 222.17,-146.55 219.98,-133.24"/>
-<polygon fill="black" stroke="black" points="223.4,-132.47 218.32,-123.18 216.49,-133.61 223.4,-132.47"/>
-<text text-anchor="middle" x="252.49" y="-144.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0015_0007 -->
-<g id="node6" class="node">
-<title>0015_0007</title>
-<ellipse fill="none" stroke="black" cx="347.49" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="347.49" y="-101.3" font-family="fixed" font-size="14.00">Stop(15_7)</text>
-</g>
-<!-- 0015_0005&#45;&gt;0015_0007 -->
-<g id="edge5" class="edge">
-<title>0015_0005&#45;&gt;0015_0007</title>
-<path fill="none" stroke="black" d="M256.13,-175.26C265.57,-169.44 276.15,-162.65 285.49,-156 297.43,-147.5 310.11,-137.47 320.87,-128.63"/>
-<polygon fill="black" stroke="black" points="323.22,-131.23 328.69,-122.15 318.75,-125.84 323.22,-131.23"/>
-<text text-anchor="middle" x="326.99" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0015_0008 -->
-<g id="node7" class="node">
-<title>0015_0008</title>
-<ellipse fill="none" stroke="black" cx="291.49" cy="-18" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="291.49" y="-14.3" font-family="fixed" font-size="14.00">thief(15_8)</text>
-</g>
-<!-- 0015_0007&#45;&gt;0015_0008 -->
-<g id="edge6" class="edge">
-<title>0015_0007&#45;&gt;0015_0008</title>
-<path fill="none" stroke="black" d="M336.43,-87.21C328.38,-74.98 317.33,-58.21 308.2,-44.36"/>
-<polygon fill="black" stroke="black" points="310.96,-42.18 302.53,-35.76 305.11,-46.03 310.96,-42.18"/>
-<text text-anchor="middle" x="340.99" y="-57.8" font-family="fixed" font-size="14.00">[voc]</text>
-</g>
-<!-- imp_0015_2004 -->
-<g id="node8" class="node">
-<title>imp_0015_2004</title>
-<ellipse fill="none" stroke="black" cx="403.49" cy="-18" rx="34.39" ry="18"/>
-<text text-anchor="middle" x="403.49" y="-14.3" font-family="fixed" font-size="14.00">[imp]</text>
-</g>
-<!-- 0015_0007&#45;&gt;imp_0015_2004 -->
-<g id="edge7" class="edge">
-<title>0015_0007&#45;&gt;imp_0015_2004</title>
-<path fill="none" stroke="black" d="M358.56,-87.21C366.72,-74.82 377.95,-57.78 387.14,-43.82"/>
-<polygon fill="black" stroke="black" points="390.25,-45.46 392.83,-35.18 384.41,-41.61 390.25,-45.46"/>
-<text text-anchor="middle" x="421.49" y="-57.8" font-family="fixed" font-size="14.00">[clausetype]</text>
-</g>
-</g>
-</svg>
+<img src="wavingandcallingpic.png">
 
-<p align="justify">Figure <a href="#fig15">15</a> results from combining figure <a href="#fig12">12</a> and <a href="#fig14">14</a>. Here, <tt>and(15_4)</tt> has conjuncts <tt>waving(15_1)</tt> (&sol;<tt>waving(12_1)</tt>) and <tt>calling(15_5)</tt> (&sol;<tt>calling(14_1)</tt>). A solution sentence fragment is (<a href="#ex18">18</a>).</p>
+<p align="justify">Figure <a href="#figure14">14</a> results from combining figure <a href="#figure11">11</a> and <a href="#figure13">13</a>. Here, <tt>and</tt> has conjuncts <tt>waving</tt> and <tt>calling</tt>. A solution sentence fragment is (<a href="#ex16">16</a>).</p>
 
-<dl>
-  <dt>(<a name="ex18">18</a>)</dt><dd>waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>
-</dl>
+<dl><dt>(<a name="ex16">16</a>)</dt><dd>
+waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#fig16">16</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider figure <a href="#figure15">15</a>.</p>
 
-<p><a name="fig16">Figure 16: Puzzle graph combining figures 11 and 15</a></p>
+<p><a name="fig15">Figure 15: Puzzle graph combining figures <a href="#figure10">10</a> and <a href="#figure14">14</a></a></p>
 
-<svg width="874pt" height="479pt"
- viewBox="0.00 0.00 874.35 479.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 475)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-475 870.35,-475 870.35,4 -4,4"/>
-<!-- 0016_0001 -->
-<g id="node1" class="node">
-<title>0016_0001</title>
-<ellipse fill="none" stroke="black" cx="327.35" cy="-105" rx="50.89" ry="18"/>
-<text text-anchor="middle" x="327.35" y="-101.3" font-family="fixed" font-size="14.00">he(16_1)</text>
-</g>
-<!-- 0016_0002 -->
-<g id="node2" class="node">
-<title>0016_0002</title>
-<ellipse fill="none" stroke="black" cx="130.35" cy="-366" rx="73.39" ry="18"/>
-<text text-anchor="middle" x="130.35" y="-362.3" font-family="fixed" font-size="14.00">jumped(16_2)</text>
-</g>
-<!-- 0016_0002&#45;&gt;0016_0001 -->
-<g id="edge1" class="edge">
-<title>0016_0002&#45;&gt;0016_0001</title>
-<path fill="none" stroke="black" d="M130.09,-347.99C130.48,-326.39 133.64,-288.59 149.35,-261 184,-200.12 251.75,-151.43 292.94,-125.8"/>
-<polygon fill="black" stroke="black" points="294.85,-128.73 301.55,-120.53 291.2,-122.76 294.85,-128.73"/>
-<text text-anchor="middle" x="193.85" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0016_0003 -->
-<g id="node3" class="node">
-<title>0016_0003</title>
-<ellipse fill="none" stroke="black" cx="51.35" cy="-279" rx="51.19" ry="18"/>
-<text text-anchor="middle" x="51.35" y="-275.3" font-family="fixed" font-size="14.00">up(16_3)</text>
-</g>
-<!-- 0016_0002&#45;&gt;0016_0003 -->
-<g id="edge2" class="edge">
-<title>0016_0002&#45;&gt;0016_0003</title>
-<path fill="none" stroke="black" d="M85.81,-351.62C75.32,-346.46 65.21,-339.44 58.35,-330 53.61,-323.49 51.38,-315.23 50.45,-307.3"/>
-<polygon fill="black" stroke="black" points="53.94,-307.03 49.89,-297.24 46.95,-307.42 53.94,-307.03"/>
-<text text-anchor="middle" x="87.35" y="-318.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0016_0004 -->
-<g id="node4" class="node">
-<title>0016_0004</title>
-<ellipse fill="none" stroke="black" cx="203.35" cy="-453" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="203.35" y="-449.3" font-family="fixed" font-size="14.00">and(16_4)</text>
-</g>
-<!-- 0016_0004&#45;&gt;0016_0002 -->
-<g id="edge3" class="edge">
-<title>0016_0004&#45;&gt;0016_0002</title>
-<path fill="none" stroke="black" d="M188.92,-435.21C178.22,-422.75 163.47,-405.57 151.45,-391.57"/>
-<polygon fill="black" stroke="black" points="153.91,-389.06 144.74,-383.76 148.6,-393.63 153.91,-389.06"/>
-<text text-anchor="middle" x="195.85" y="-405.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0016_0005 -->
-<g id="node5" class="node">
-<title>0016_0005</title>
-<ellipse fill="none" stroke="black" cx="308.35" cy="-366" rx="54.69" ry="18"/>
-<text text-anchor="middle" x="308.35" y="-362.3" font-family="fixed" font-size="14.00">ran(16_5)</text>
-</g>
-<!-- 0016_0004&#45;&gt;0016_0005 -->
-<g id="edge4" class="edge">
-<title>0016_0004&#45;&gt;0016_0005</title>
-<path fill="none" stroke="black" d="M223.1,-436.01C239.37,-422.83 262.65,-403.99 280.77,-389.33"/>
-<polygon fill="black" stroke="black" points="283.11,-391.93 288.68,-382.92 278.71,-386.49 283.11,-391.93"/>
-<text text-anchor="middle" x="286.85" y="-405.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0016_0005&#45;&gt;0016_0001 -->
-<g id="edge5" class="edge">
-<title>0016_0005&#45;&gt;0016_0001</title>
-<path fill="none" stroke="black" d="M319.62,-348.26C322.76,-342.69 325.75,-336.3 327.35,-330 344.87,-261 337.33,-176.14 331.61,-133.38"/>
-<polygon fill="black" stroke="black" points="335.04,-132.63 330.18,-123.21 328.11,-133.6 335.04,-132.63"/>
-<text text-anchor="middle" x="359.85" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0016_0007 -->
-<g id="node6" class="node">
-<title>0016_0007</title>
-<ellipse fill="none" stroke="black" cx="221.35" cy="-279" rx="63.09" ry="18"/>
-<text text-anchor="middle" x="221.35" y="-275.3" font-family="fixed" font-size="14.00">Peter(16_7)</text>
-</g>
-<!-- 0016_0005&#45;&gt;0016_0007 -->
-<g id="edge6" class="edge">
-<title>0016_0005&#45;&gt;0016_0007</title>
-<path fill="none" stroke="black" d="M254.82,-362.34C232.08,-358.23 207.57,-349.2 193.35,-330 187.48,-322.09 190.34,-312.82 196.05,-304.42"/>
-<polygon fill="black" stroke="black" points="198.96,-306.39 202.5,-296.4 193.51,-302 198.96,-306.39"/>
-<text text-anchor="middle" x="260.35" y="-318.8" font-family="fixed" font-size="14.00">[clr][dir]after(16_6)</text>
-</g>
-<!-- 0016_0011 -->
-<g id="node7" class="node">
-<title>0016_0011</title>
-<ellipse fill="none" stroke="black" cx="440.35" cy="-279" rx="62.29" ry="18"/>
-<text text-anchor="middle" x="440.35" y="-275.3" font-family="fixed" font-size="14.00">and(16_11)</text>
-</g>
-<!-- 0016_0005&#45;&gt;0016_0011 -->
-<g id="edge7" class="edge">
-<title>0016_0005&#45;&gt;0016_0011</title>
-<path fill="none" stroke="black" d="M332.25,-349.61C353.2,-336.12 383.86,-316.37 407.18,-301.36"/>
-<polygon fill="black" stroke="black" points="409.21,-304.21 415.72,-295.85 405.42,-298.33 409.21,-304.21"/>
-<text text-anchor="middle" x="456.35" y="-318.8" font-family="fixed" font-size="14.00">[scon][cnt]#16_1001</text>
-</g>
-<!-- 0016_0008 -->
-<g id="node8" class="node">
-<title>0016_0008</title>
-<ellipse fill="none" stroke="black" cx="440.35" cy="-192" rx="71.49" ry="18"/>
-<text text-anchor="middle" x="440.35" y="-188.3" font-family="fixed" font-size="14.00">waving(16_8)</text>
-</g>
-<!-- 0016_0011&#45;&gt;0016_0008 -->
-<g id="edge10" class="edge">
-<title>0016_0011&#45;&gt;0016_0008</title>
-<path fill="none" stroke="black" d="M440.35,-260.8C440.35,-249.16 440.35,-233.55 440.35,-220.24"/>
-<polygon fill="black" stroke="black" points="443.85,-220.18 440.35,-210.18 436.85,-220.18 443.85,-220.18"/>
-<text text-anchor="middle" x="464.85" y="-231.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0016_0012 -->
-<g id="node10" class="node">
-<title>0016_0012</title>
-<ellipse fill="none" stroke="black" cx="604.35" cy="-192" rx="74.99" ry="18"/>
-<text text-anchor="middle" x="604.35" y="-188.3" font-family="fixed" font-size="14.00">calling(16_12)</text>
-</g>
-<!-- 0016_0011&#45;&gt;0016_0012 -->
-<g id="edge11" class="edge">
-<title>0016_0011&#45;&gt;0016_0012</title>
-<path fill="none" stroke="black" d="M469.29,-263C495.92,-249.19 535.65,-228.61 565.12,-213.33"/>
-<polygon fill="black" stroke="black" points="567.04,-216.28 574.31,-208.57 563.82,-210.06 567.04,-216.28"/>
-<text text-anchor="middle" x="556.85" y="-231.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0016_0008&#45;&gt;0016_0001 -->
-<g id="edge8" class="edge">
-<title>0016_0008&#45;&gt;0016_0001</title>
-<path fill="none" stroke="black" d="M418.83,-174.81C401.09,-161.47 375.77,-142.42 356.26,-127.75"/>
-<polygon fill="black" stroke="black" points="358.12,-124.77 348.02,-121.55 353.91,-130.36 358.12,-124.77"/>
-<text text-anchor="middle" x="412.85" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0016_0010 -->
-<g id="node9" class="node">
-<title>0016_0010</title>
-<ellipse fill="none" stroke="black" cx="461.35" cy="-105" rx="64.99" ry="18"/>
-<text text-anchor="middle" x="461.35" y="-101.3" font-family="fixed" font-size="14.00">rake(16_10)</text>
-</g>
-<!-- 0016_0008&#45;&gt;0016_0010 -->
-<g id="edge9" class="edge">
-<title>0016_0008&#45;&gt;0016_0010</title>
-<path fill="none" stroke="black" d="M444.6,-173.8C447.47,-162.16 451.33,-146.55 454.62,-133.24"/>
-<polygon fill="black" stroke="black" points="458.1,-133.72 457.1,-123.18 451.31,-132.04 458.1,-133.72"/>
-<text text-anchor="middle" x="473.85" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0016_0012&#45;&gt;0016_0001 -->
-<g id="edge12" class="edge">
-<title>0016_0012&#45;&gt;0016_0001</title>
-<path fill="none" stroke="black" d="M576.71,-175.16C556.03,-163.98 526.72,-149.52 499.35,-141 451.21,-126.01 436.57,-133.89 387.35,-123 383.18,-122.08 378.88,-121.04 374.58,-119.94"/>
-<polygon fill="black" stroke="black" points="375.19,-116.48 364.62,-117.29 373.39,-123.24 375.19,-116.48"/>
-<text text-anchor="middle" x="559.85" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0016_0013 -->
-<g id="node11" class="node">
-<title>0016_0013</title>
-<ellipse fill="none" stroke="black" cx="604.35" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="604.35" y="-101.3" font-family="fixed" font-size="14.00">out(16_13)</text>
-</g>
-<!-- 0016_0012&#45;&gt;0016_0013 -->
-<g id="edge13" class="edge">
-<title>0016_0012&#45;&gt;0016_0013</title>
-<path fill="none" stroke="black" d="M604.35,-173.8C604.35,-162.16 604.35,-146.55 604.35,-133.24"/>
-<polygon fill="black" stroke="black" points="607.85,-133.18 604.35,-123.18 600.85,-133.18 607.85,-133.18"/>
-<text text-anchor="middle" x="633.35" y="-144.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0016_0014 -->
-<g id="node12" class="node">
-<title>0016_0014</title>
-<ellipse fill="none" stroke="black" cx="747.35" cy="-105" rx="65.79" ry="18"/>
-<text text-anchor="middle" x="747.35" y="-101.3" font-family="fixed" font-size="14.00">Stop(16_14)</text>
-</g>
-<!-- 0016_0012&#45;&gt;0016_0014 -->
-<g id="edge14" class="edge">
-<title>0016_0012&#45;&gt;0016_0014</title>
-<path fill="none" stroke="black" d="M632.88,-175.2C643.44,-169.27 655.49,-162.41 666.35,-156 682.02,-146.74 699.2,-136.2 713.69,-127.18"/>
-<polygon fill="black" stroke="black" points="715.69,-130.06 722.32,-121.8 711.99,-124.12 715.69,-130.06"/>
-<text text-anchor="middle" x="712.85" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0016_0015 -->
-<g id="node13" class="node">
-<title>0016_0015</title>
-<ellipse fill="none" stroke="black" cx="688.35" cy="-18" rx="65.79" ry="18"/>
-<text text-anchor="middle" x="688.35" y="-14.3" font-family="fixed" font-size="14.00">thief(16_15)</text>
-</g>
-<!-- 0016_0014&#45;&gt;0016_0015 -->
-<g id="edge15" class="edge">
-<title>0016_0014&#45;&gt;0016_0015</title>
-<path fill="none" stroke="black" d="M735.69,-87.21C727.2,-74.98 715.56,-58.21 705.95,-44.36"/>
-<polygon fill="black" stroke="black" points="708.56,-41.98 699.98,-35.76 702.8,-45.97 708.56,-41.98"/>
-<text text-anchor="middle" x="739.85" y="-57.8" font-family="fixed" font-size="14.00">[voc]</text>
-</g>
-<!-- imp_0016_2002 -->
-<g id="node14" class="node">
-<title>imp_0016_2002</title>
-<ellipse fill="none" stroke="black" cx="806.35" cy="-18" rx="34.39" ry="18"/>
-<text text-anchor="middle" x="806.35" y="-14.3" font-family="fixed" font-size="14.00">[imp]</text>
-</g>
-<!-- 0016_0014&#45;&gt;imp_0016_2002 -->
-<g id="edge16" class="edge">
-<title>0016_0014&#45;&gt;imp_0016_2002</title>
-<path fill="none" stroke="black" d="M759,-87.21C767.68,-74.71 779.65,-57.45 789.39,-43.43"/>
-<polygon fill="black" stroke="black" points="792.29,-45.39 795.11,-35.18 786.54,-41.4 792.29,-45.39"/>
-<text text-anchor="middle" x="823.35" y="-57.8" font-family="fixed" font-size="14.00">[clausetype]</text>
-</g>
-</g>
-</svg>
+<img src="jumpedupranafterwavingandcallingpic.png">
 
-<p align="justify">Figure <a href="#fig16">16</a> has an arrow labelled <tt>[scon][cnt]#16_1001</tt> (continuative subordinate conjunction) to combine figures <a href="#fig11">11</a> and <a href="#fig15">15</a>, much like we saw happen with figure <a href="#fig8">8</a>. Note how the verbs <tt>jumped(16_2)</tt>, <tt>ran(16_5)</tt>, <tt>waving(16_8)</tt>, and <tt>calling(16_12)</tt> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrows that connect to the same <tt>he(16_1)</tt>. A solution sentence is (<a href="#ex19">19</a>).</p>
+<p align="justify">Figure <a href="#figure15">15</a> has a <tt>[cnt]</tt> (continuative subordinate conjunction) node to combine figures <a href="#figure10">10</a> and <a href="#figure14">14</a>, much like we saw happen with figure <a href="#figure7">7</a>. Note how the verbs <tt>jumped</tt>, <tt>ran</tt>, <tt>waving</tt>, and <tt>calling</tt> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (subject) arrows that connect to the same <tt>he</tt>. A solution sentence is (<a href="#ex17">17</a>).</p>
 
-<dl>
-  <dt>(<a name="ex19">19</a>)</dt><dd>he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>
-</dl>
+<dl><dt>(<a name="ex17">17</a>)</dt><dd>
+he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We are finally able to consider the overall puzzle graph of figure <a href="#fig17">17</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We are finally able to consider the overall puzzle graph of figure <a href="#figure16">16</a>.</p>
 
-<p><a name="fig17">Figure 17: Puzzle graph combining figures 8 and 16</a></p>
+<p><a name="fig16">Figure 16: Puzzle graph combining figures <a href="#figure7">7</a> and <a href="#figure15">15</a></a></p>
 
-<svg width="1293pt" height="566pt"
- viewBox="0.00 0.00 1293.29 566.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 562)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-562 1289.29,-562 1289.29,4 -4,4"/>
-<!-- 0017_0001_0017_0002 -->
-<g id="node1" class="node">
-<title>0017_0001_0017_0002</title>
-<ellipse fill="none" stroke="black" cx="658.29" cy="-105" rx="129.98" ry="18"/>
-<text text-anchor="middle" x="658.29" y="-101.3" font-family="fixed" font-size="14.00">Mr.(17_1)_McGregor(17_2)</text>
-</g>
-<!-- 0017_0003 -->
-<g id="node2" class="node">
-<title>0017_0003</title>
-<ellipse fill="none" stroke="black" cx="436.29" cy="-279" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="436.29" y="-275.3" font-family="fixed" font-size="14.00">was(17_3)</text>
-</g>
-<!-- 0017_0003&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge1" class="edge">
-<title>0017_0003&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M486.15,-270.11C519.73,-263.91 560.21,-254.42 573.29,-243 598.23,-221.23 584.23,-202.36 601.29,-174 610.61,-158.52 623.36,-142.94 634.43,-130.62"/>
-<polygon fill="black" stroke="black" points="637.23,-132.75 641.42,-123.02 632.07,-128.01 637.23,-132.75"/>
-<text text-anchor="middle" x="622.79" y="-188.3" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0007 -->
-<g id="node3" class="node">
-<title>0017_0007</title>
-<ellipse fill="none" stroke="black" cx="216.29" cy="-192" rx="56.59" ry="18"/>
-<text text-anchor="middle" x="216.29" y="-188.3" font-family="fixed" font-size="14.00">and(17_7)</text>
-</g>
-<!-- 0017_0003&#45;&gt;0017_0007 -->
-<g id="edge2" class="edge">
-<title>0017_0003&#45;&gt;0017_0007</title>
-<path fill="none" stroke="black" d="M387.95,-269.26C361.2,-263.53 327.72,-254.89 299.29,-243 281,-235.35 261.96,-224.14 246.73,-214.28"/>
-<polygon fill="black" stroke="black" points="248.52,-211.26 238.25,-208.66 244.65,-217.1 248.52,-211.26"/>
-<text text-anchor="middle" x="359.29" y="-231.8" font-family="fixed" font-size="14.00">[clr][loc]on(17_4)</text>
-</g>
-<!-- 0017_0009_0017_0010 -->
-<g id="node4" class="node">
-<title>0017_0009_0017_0010</title>
-<ellipse fill="none" stroke="black" cx="421.29" cy="-192" rx="129.98" ry="18"/>
-<text text-anchor="middle" x="421.29" y="-188.3" font-family="fixed" font-size="14.00">planting(17_9)_out(17_10)</text>
-</g>
-<!-- 0017_0003&#45;&gt;0017_0009_0017_0010 -->
-<g id="edge3" class="edge">
-<title>0017_0003&#45;&gt;0017_0009_0017_0010</title>
-<path fill="none" stroke="black" d="M430.03,-260.75C428.22,-255.16 426.44,-248.88 425.29,-243 423.89,-235.76 422.97,-227.85 422.38,-220.49"/>
-<polygon fill="black" stroke="black" points="425.86,-220.01 421.72,-210.25 418.87,-220.46 425.86,-220.01"/>
-<text text-anchor="middle" x="499.29" y="-231.8" font-family="fixed" font-size="14.00">[scon][cnt]#17_1001</text>
-</g>
-<!-- 0017_0007&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge4" class="edge">
-<title>0017_0007&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M257.29,-179.51C265.53,-177.47 274.15,-175.51 282.29,-174 350.92,-161.27 373.78,-182.64 438.29,-156 448.24,-151.89 447.47,-145.39 457.29,-141 482.78,-129.61 511.63,-121.91 539.35,-116.72"/>
-<polygon fill="black" stroke="black" points="540.27,-120.11 549.51,-114.91 539.05,-113.22 540.27,-120.11"/>
-<text text-anchor="middle" x="480.29" y="-144.8" font-family="fixed" font-size="14.00">[genv]</text>
-</g>
-<!-- 0017_0006 -->
-<g id="node5" class="node">
-<title>0017_0006</title>
-<ellipse fill="none" stroke="black" cx="218.29" cy="-105" rx="67.69" ry="18"/>
-<text text-anchor="middle" x="218.29" y="-101.3" font-family="fixed" font-size="14.00">hands(17_6)</text>
-</g>
-<!-- 0017_0007&#45;&gt;0017_0006 -->
-<g id="edge5" class="edge">
-<title>0017_0007&#45;&gt;0017_0006</title>
-<path fill="none" stroke="black" d="M216.7,-173.8C216.97,-162.16 217.34,-146.55 217.65,-133.24"/>
-<polygon fill="black" stroke="black" points="221.15,-133.26 217.89,-123.18 214.16,-133.09 221.15,-133.26"/>
-<text text-anchor="middle" x="242.79" y="-144.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0017_0008 -->
-<g id="node6" class="node">
-<title>0017_0008</title>
-<ellipse fill="none" stroke="black" cx="66.29" cy="-105" rx="66.09" ry="18"/>
-<text text-anchor="middle" x="66.29" y="-101.3" font-family="fixed" font-size="14.00">knees(17_8)</text>
-</g>
-<!-- 0017_0007&#45;&gt;0017_0008 -->
-<g id="edge6" class="edge">
-<title>0017_0007&#45;&gt;0017_0008</title>
-<path fill="none" stroke="black" d="M189.82,-176C165.49,-162.21 129.22,-141.66 102.27,-126.38"/>
-<polygon fill="black" stroke="black" points="103.94,-123.31 93.51,-121.42 100.49,-129.4 103.94,-123.31"/>
-<text text-anchor="middle" x="174.79" y="-144.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0017_0009_0017_0010&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge7" class="edge">
-<title>0017_0009_0017_0010&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M465.34,-174.96C479.03,-169.47 494.01,-162.95 507.29,-156 518.11,-150.34 519.16,-146 530.29,-141 546.02,-133.93 563.48,-128.01 580.33,-123.16"/>
-<polygon fill="black" stroke="black" points="581.46,-126.48 590.16,-120.43 579.58,-119.73 581.46,-126.48"/>
-<text text-anchor="middle" x="551.79" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0012 -->
-<g id="node7" class="node">
-<title>0017_0012</title>
-<ellipse fill="none" stroke="black" cx="394.29" cy="-105" rx="89.08" ry="18"/>
-<text text-anchor="middle" x="394.29" y="-101.3" font-family="fixed" font-size="14.00">cabbages(17_12)</text>
-</g>
-<!-- 0017_0009_0017_0010&#45;&gt;0017_0012 -->
-<g id="edge8" class="edge">
-<title>0017_0009_0017_0010&#45;&gt;0017_0012</title>
-<path fill="none" stroke="black" d="M405.46,-174.07C401.37,-168.69 397.5,-162.45 395.29,-156 392.85,-148.85 391.95,-140.79 391.83,-133.26"/>
-<polygon fill="black" stroke="black" points="395.33,-133.2 392.1,-123.11 388.34,-133.02 395.33,-133.2"/>
-<text text-anchor="middle" x="416.79" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0017_0011 -->
-<g id="node8" class="node">
-<title>0017_0011</title>
-<ellipse fill="none" stroke="black" cx="394.29" cy="-18" rx="73.39" ry="18"/>
-<text text-anchor="middle" x="394.29" y="-14.3" font-family="fixed" font-size="14.00">young(17_11)</text>
-</g>
-<!-- 0017_0012&#45;&gt;0017_0011 -->
-<g id="edge9" class="edge">
-<title>0017_0012&#45;&gt;0017_0011</title>
-<path fill="none" stroke="black" d="M394.29,-86.8C394.29,-75.16 394.29,-59.55 394.29,-46.24"/>
-<polygon fill="black" stroke="black" points="397.79,-46.18 394.29,-36.18 390.79,-46.18 397.79,-46.18"/>
-<text text-anchor="middle" x="429.79" y="-57.8" font-family="fixed" font-size="14.00">[attribute]</text>
-</g>
-<!-- 0017_0013 -->
-<g id="node9" class="node">
-<title>0017_0013</title>
-<ellipse fill="none" stroke="black" cx="465.29" cy="-540" rx="60.39" ry="18"/>
-<text text-anchor="middle" x="465.29" y="-536.3" font-family="fixed" font-size="14.00">but(17_13)</text>
-</g>
-<!-- 0017_0013&#45;&gt;0017_0003 -->
-<g id="edge10" class="edge">
-<title>0017_0013&#45;&gt;0017_0003</title>
-<path fill="none" stroke="black" d="M463.39,-522.01C458.48,-478.1 445.32,-360.6 439.33,-307.15"/>
-<polygon fill="black" stroke="black" points="442.79,-306.6 438.2,-297.06 435.84,-307.38 442.79,-306.6"/>
-<text text-anchor="middle" x="476.79" y="-405.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0017_0017 -->
-<g id="node10" class="node">
-<title>0017_0017</title>
-<ellipse fill="none" stroke="black" cx="580.29" cy="-453" rx="62.29" ry="18"/>
-<text text-anchor="middle" x="580.29" y="-449.3" font-family="fixed" font-size="14.00">and(17_17)</text>
-</g>
-<!-- 0017_0013&#45;&gt;0017_0017 -->
-<g id="edge11" class="edge">
-<title>0017_0013&#45;&gt;0017_0017</title>
-<path fill="none" stroke="black" d="M486.92,-523.01C504.91,-509.72 530.7,-490.65 550.62,-475.93"/>
-<polygon fill="black" stroke="black" points="552.8,-478.67 558.76,-469.92 548.64,-473.05 552.8,-478.67"/>
-<text text-anchor="middle" x="554.79" y="-492.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0017_0015 -->
-<g id="node11" class="node">
-<title>0017_0015</title>
-<ellipse fill="none" stroke="black" cx="580.29" cy="-366" rx="79.09" ry="18"/>
-<text text-anchor="middle" x="580.29" y="-362.3" font-family="fixed" font-size="14.00">jumped(17_15)</text>
-</g>
-<!-- 0017_0017&#45;&gt;0017_0015 -->
-<g id="edge14" class="edge">
-<title>0017_0017&#45;&gt;0017_0015</title>
-<path fill="none" stroke="black" d="M580.29,-434.8C580.29,-423.16 580.29,-407.55 580.29,-394.24"/>
-<polygon fill="black" stroke="black" points="583.79,-394.18 580.29,-384.18 576.79,-394.18 583.79,-394.18"/>
-<text text-anchor="middle" x="604.79" y="-405.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0017_0018 -->
-<g id="node13" class="node">
-<title>0017_0018</title>
-<ellipse fill="none" stroke="black" cx="750.29" cy="-366" rx="60.39" ry="18"/>
-<text text-anchor="middle" x="750.29" y="-362.3" font-family="fixed" font-size="14.00">ran(17_18)</text>
-</g>
-<!-- 0017_0017&#45;&gt;0017_0018 -->
-<g id="edge15" class="edge">
-<title>0017_0017&#45;&gt;0017_0018</title>
-<path fill="none" stroke="black" d="M610.3,-437C638.46,-422.92 680.73,-401.78 711.46,-386.42"/>
-<polygon fill="black" stroke="black" points="713.21,-389.45 720.59,-381.85 710.08,-383.19 713.21,-389.45"/>
-<text text-anchor="middle" x="700.79" y="-405.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0017_0015&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge12" class="edge">
-<title>0017_0015&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M571.49,-348C561.64,-326.4 548.93,-288.62 564.29,-261 571.67,-247.74 580.48,-251.12 593.29,-243 616.1,-228.55 629.84,-232.8 644.29,-210 658.8,-187.13 661.18,-155.74 660.62,-133.45"/>
-<polygon fill="black" stroke="black" points="664.11,-133.14 660.16,-123.31 657.12,-133.46 664.11,-133.14"/>
-<text text-anchor="middle" x="646.79" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0016 -->
-<g id="node12" class="node">
-<title>0017_0016</title>
-<ellipse fill="none" stroke="black" cx="630.29" cy="-279" rx="57.39" ry="18"/>
-<text text-anchor="middle" x="630.29" y="-275.3" font-family="fixed" font-size="14.00">up(17_16)</text>
-</g>
-<!-- 0017_0015&#45;&gt;0017_0016 -->
-<g id="edge13" class="edge">
-<title>0017_0015&#45;&gt;0017_0016</title>
-<path fill="none" stroke="black" d="M590.41,-347.8C597.51,-335.74 607.12,-319.4 615.12,-305.79"/>
-<polygon fill="black" stroke="black" points="618.31,-307.28 620.36,-296.89 612.27,-303.73 618.31,-307.28"/>
-<text text-anchor="middle" x="637.29" y="-318.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0017_0018&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge16" class="edge">
-<title>0017_0018&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M745.38,-347.87C734.35,-310 706.14,-216.56 675.29,-141 674.13,-138.15 672.84,-135.21 671.51,-132.3"/>
-<polygon fill="black" stroke="black" points="674.67,-130.78 667.22,-123.25 668.34,-133.78 674.67,-130.78"/>
-<text text-anchor="middle" x="733.79" y="-231.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0020 -->
-<g id="node14" class="node">
-<title>0017_0020</title>
-<ellipse fill="none" stroke="black" cx="812.29" cy="-279" rx="68.79" ry="18"/>
-<text text-anchor="middle" x="812.29" y="-275.3" font-family="fixed" font-size="14.00">Peter(17_20)</text>
-</g>
-<!-- 0017_0018&#45;&gt;0017_0020 -->
-<g id="edge17" class="edge">
-<title>0017_0018&#45;&gt;0017_0020</title>
-<path fill="none" stroke="black" d="M762.54,-348.21C771.54,-335.87 783.92,-318.89 794.08,-304.97"/>
-<polygon fill="black" stroke="black" points="797.01,-306.9 800.07,-296.76 791.35,-302.77 797.01,-306.9"/>
-<text text-anchor="middle" x="856.79" y="-318.8" font-family="fixed" font-size="14.00">[clr][dir]after(17_19)</text>
-</g>
-<!-- 0017_0024 -->
-<g id="node15" class="node">
-<title>0017_0024</title>
-<ellipse fill="none" stroke="black" cx="969.29" cy="-279" rx="62.29" ry="18"/>
-<text text-anchor="middle" x="969.29" y="-275.3" font-family="fixed" font-size="14.00">and(17_24)</text>
-</g>
-<!-- 0017_0018&#45;&gt;0017_0024 -->
-<g id="edge18" class="edge">
-<title>0017_0018&#45;&gt;0017_0024</title>
-<path fill="none" stroke="black" d="M810.88,-364.31C848.37,-361.36 896.08,-352.8 932.29,-330 941.75,-324.05 949.61,-314.73 955.62,-305.75"/>
-<polygon fill="black" stroke="black" points="958.73,-307.37 961,-297.02 952.77,-303.7 958.73,-307.37"/>
-<text text-anchor="middle" x="1023.29" y="-318.8" font-family="fixed" font-size="14.00">[scon][cnt]#17_1002</text>
-</g>
-<!-- 0017_0021 -->
-<g id="node16" class="node">
-<title>0017_0021</title>
-<ellipse fill="none" stroke="black" cx="853.29" cy="-192" rx="77.19" ry="18"/>
-<text text-anchor="middle" x="853.29" y="-188.3" font-family="fixed" font-size="14.00">waving(17_21)</text>
-</g>
-<!-- 0017_0024&#45;&gt;0017_0021 -->
-<g id="edge21" class="edge">
-<title>0017_0024&#45;&gt;0017_0021</title>
-<path fill="none" stroke="black" d="M947.48,-262.01C929.56,-248.88 903.97,-230.13 883.99,-215.49"/>
-<polygon fill="black" stroke="black" points="885.94,-212.58 875.81,-209.5 881.8,-218.23 885.94,-212.58"/>
-<text text-anchor="middle" x="942.79" y="-231.8" font-family="fixed" font-size="14.00">[conj1]</text>
-</g>
-<!-- 0017_0025 -->
-<g id="node18" class="node">
-<title>0017_0025</title>
-<ellipse fill="none" stroke="black" cx="1023.29" cy="-192" rx="74.99" ry="18"/>
-<text text-anchor="middle" x="1023.29" y="-188.3" font-family="fixed" font-size="14.00">calling(17_25)</text>
-</g>
-<!-- 0017_0024&#45;&gt;0017_0025 -->
-<g id="edge22" class="edge">
-<title>0017_0024&#45;&gt;0017_0025</title>
-<path fill="none" stroke="black" d="M979.96,-261.21C987.68,-249.06 998.24,-232.43 1007.01,-218.63"/>
-<polygon fill="black" stroke="black" points="1010.05,-220.37 1012.46,-210.05 1004.15,-216.61 1010.05,-220.37"/>
-<text text-anchor="middle" x="1024.79" y="-231.8" font-family="fixed" font-size="14.00">[conj2]</text>
-</g>
-<!-- 0017_0021&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge19" class="edge">
-<title>0017_0021&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M805.7,-177.77C787.63,-172.04 767.12,-164.64 749.29,-156 738.31,-150.68 736.84,-147.13 726.29,-141 718.2,-136.3 709.41,-131.53 700.92,-127.09"/>
-<polygon fill="black" stroke="black" points="702.36,-123.89 691.87,-122.42 699.15,-130.11 702.36,-123.89"/>
-<text text-anchor="middle" x="770.79" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0023 -->
-<g id="node17" class="node">
-<title>0017_0023</title>
-<ellipse fill="none" stroke="black" cx="880.29" cy="-105" rx="64.99" ry="18"/>
-<text text-anchor="middle" x="880.29" y="-101.3" font-family="fixed" font-size="14.00">rake(17_23)</text>
-</g>
-<!-- 0017_0021&#45;&gt;0017_0023 -->
-<g id="edge20" class="edge">
-<title>0017_0021&#45;&gt;0017_0023</title>
-<path fill="none" stroke="black" d="M858.76,-173.8C862.49,-162.05 867.51,-146.24 871.77,-132.84"/>
-<polygon fill="black" stroke="black" points="875.15,-133.77 874.84,-123.18 868.48,-131.65 875.15,-133.77"/>
-<text text-anchor="middle" x="890.79" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0017_0025&#45;&gt;0017_0001_0017_0002 -->
-<g id="edge23" class="edge">
-<title>0017_0025&#45;&gt;0017_0001_0017_0002</title>
-<path fill="none" stroke="black" d="M968.7,-179.52C958.92,-177.59 948.82,-175.67 939.29,-174 885.74,-164.6 869.63,-173.9 818.29,-156 805.7,-151.61 804.64,-146.06 792.29,-141 774.85,-133.84 755.52,-127.79 737.1,-122.83"/>
-<polygon fill="black" stroke="black" points="737.83,-119.4 727.27,-120.26 736.06,-126.18 737.83,-119.4"/>
-<text text-anchor="middle" x="839.79" y="-144.8" font-family="fixed" font-size="14.00">[arg0]</text>
-</g>
-<!-- 0017_0026 -->
-<g id="node19" class="node">
-<title>0017_0026</title>
-<ellipse fill="none" stroke="black" cx="1023.29" cy="-105" rx="59.59" ry="18"/>
-<text text-anchor="middle" x="1023.29" y="-101.3" font-family="fixed" font-size="14.00">out(17_26)</text>
-</g>
-<!-- 0017_0025&#45;&gt;0017_0026 -->
-<g id="edge24" class="edge">
-<title>0017_0025&#45;&gt;0017_0026</title>
-<path fill="none" stroke="black" d="M1023.29,-173.8C1023.29,-162.16 1023.29,-146.55 1023.29,-133.24"/>
-<polygon fill="black" stroke="black" points="1026.79,-133.18 1023.29,-123.18 1019.79,-133.18 1026.79,-133.18"/>
-<text text-anchor="middle" x="1052.29" y="-144.8" font-family="fixed" font-size="14.00">[clr][dir]</text>
-</g>
-<!-- 0017_0027 -->
-<g id="node20" class="node">
-<title>0017_0027</title>
-<ellipse fill="none" stroke="black" cx="1166.29" cy="-105" rx="65.79" ry="18"/>
-<text text-anchor="middle" x="1166.29" y="-101.3" font-family="fixed" font-size="14.00">Stop(17_27)</text>
-</g>
-<!-- 0017_0025&#45;&gt;0017_0027 -->
-<g id="edge25" class="edge">
-<title>0017_0025&#45;&gt;0017_0027</title>
-<path fill="none" stroke="black" d="M1051.82,-175.2C1062.39,-169.27 1074.44,-162.41 1085.29,-156 1100.97,-146.74 1118.15,-136.2 1132.64,-127.18"/>
-<polygon fill="black" stroke="black" points="1134.64,-130.06 1141.27,-121.8 1130.94,-124.12 1134.64,-130.06"/>
-<text text-anchor="middle" x="1131.79" y="-144.8" font-family="fixed" font-size="14.00">[arg1]</text>
-</g>
-<!-- 0017_0028 -->
-<g id="node21" class="node">
-<title>0017_0028</title>
-<ellipse fill="none" stroke="black" cx="1107.29" cy="-18" rx="65.79" ry="18"/>
-<text text-anchor="middle" x="1107.29" y="-14.3" font-family="fixed" font-size="14.00">thief(17_28)</text>
-</g>
-<!-- 0017_0027&#45;&gt;0017_0028 -->
-<g id="edge26" class="edge">
-<title>0017_0027&#45;&gt;0017_0028</title>
-<path fill="none" stroke="black" d="M1154.64,-87.21C1146.15,-74.98 1134.51,-58.21 1124.9,-44.36"/>
-<polygon fill="black" stroke="black" points="1127.5,-41.98 1118.93,-35.76 1121.75,-45.97 1127.5,-41.98"/>
-<text text-anchor="middle" x="1158.79" y="-57.8" font-family="fixed" font-size="14.00">[voc]</text>
-</g>
-<!-- imp_0017_2004 -->
-<g id="node22" class="node">
-<title>imp_0017_2004</title>
-<ellipse fill="none" stroke="black" cx="1225.29" cy="-18" rx="34.39" ry="18"/>
-<text text-anchor="middle" x="1225.29" y="-14.3" font-family="fixed" font-size="14.00">[imp]</text>
-</g>
-<!-- 0017_0027&#45;&gt;imp_0017_2004 -->
-<g id="edge27" class="edge">
-<title>0017_0027&#45;&gt;imp_0017_2004</title>
-<path fill="none" stroke="black" d="M1177.95,-87.21C1186.63,-74.71 1198.6,-57.45 1208.34,-43.43"/>
-<polygon fill="black" stroke="black" points="1211.24,-45.39 1214.06,-35.18 1205.48,-41.4 1211.24,-45.39"/>
-<text text-anchor="middle" x="1242.29" y="-57.8" font-family="fixed" font-size="14.00">[clausetype]</text>
-</g>
-</g>
-</svg>
+<img src="handscallingpic.png">
 
-<p align="justify">This combines figures <a href="#fig8">8</a> and <a href="#fig16">16</a>, with <tt>but(17_13)</tt> connecting to <tt>was(17_3)</tt> (corresponding to <tt>was(8_3)</tt> of figure <a href="#fig8">8</a>) and <tt>and(17_17)</tt> (corresponding to <tt>and(16_4)</tt> of figure <a href="#fig16">16</a>). Note how the verbs <tt>was(17_3)</tt>, <tt>planting(17_9)_out(6_5)</tt>, <tt>jumped(17_15)</tt>, <tt>ran(17_18)</tt>, <tt>waving(17_21)</tt>, and <tt>calling(17_25)</tt> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (subject) arrows that connect to the same instance of <tt>Mr.(17_1)_McGregor(17_2)</tt>. An overall solution sentence for figure <a href="#fig17">17</a> is (<a href="#ex20">20</a>).</p>
+<p align="justify">This has <tt>but</tt> to combine figures <a href="#figure7">7</a> and <a href="#figure15">15</a>. Note how the verbs <tt>was</tt>, <tt>planting_out</tt>, <tt>jumped</tt>, <tt>ran</tt>, <tt>waving</tt>, and <tt>calling</tt> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (subject) arrows that connect to the same instance of <tt>Mr._McGregor</tt>. An overall solution sentence for figure <a href="#figure16">16</a> is (<a href="#ex18">18</a>).</p>
 
-<dl>
-  <dt>(<a name="ex20">20</a>)</dt><dd>Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;</dd>
-</dl>
-
+<dl><dt>(<a name="ex18">18</a>)</dt><dd>
+Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+</dd></dl>
 <br>
 <br>
 <br>
 </body>
 </html>
-
