@@ -223,9 +223,9 @@
 
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers can take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write phrase structure rules (like (<a href="chapter1.html#ex1.1">1.1</a>) above) and then we have an executable Prolog program.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish 1981, Pereira and Shieber 1987, Covington 1994, Matthews 1998, Blackburn, Bos and Striegnitz 2006, among others. Shieber 1986 contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG), and Head-driven Phrase Structure Grammar (HPSG).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Matthews (1998), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG), and Head-driven Phrase Structure Grammar (HPSG).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to include phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="chapter1.html#ex1.1">1.1</a>) above. When there is left recursion, avoiding infinite loops from rule calls requires remembering what has already been evaluated. This is possible with a technique called tabling introduced by Swift and Warren 1994. Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022). Christiansen and Dahl 2018 discuss the evolution of natural language processing as it relates to Logic Programming, with particular focus on DCGs and tabling.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to include phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="chapter1.html#ex1.1">1.1</a>) above. When there is left recursion, avoiding infinite loops from rule calls requires remembering what has already been evaluated. This is possible with a technique called tabling introduced by Swift and Warren (1994). Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022). Christiansen and Dahl (2018) discuss the evolution of natural language processing as it relates to Logic Programming, with particular focus on DCGs and tabling.</p>
 
 <br><h2><a name="sec1.4">1.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Structural analysis and labelling in this book</h2>
 
@@ -277,7 +277,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs, that is, verbs of a verb sequence that are prior to the final main verb, and this type of verb is further supported in the annotation by the layering of clause structure. These catenative codes are relatable to the analysis of catenative verbs in Huddleston and Pullum 2002. The codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby 1975.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs, that is, verbs of a verb sequence that are prior to the final main verb, and this type of verb is further supported in the annotation by the layering of clause structure. These catenative codes are relatable to the analysis of catenative verbs in Huddleston and Pullum (2002). The codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The most innovative aspect of the annotation gives the TSPC its name: It can be fed to the Treebank Semantics evaluation system (Butler 2021). Treebank Semantics processes constituency tree annotations and returns logic-based meaning representations. While the annotation seldom includes indexing, results calculated with Treebank Semantics resolve both inter and intra clause dependencies, including cross sentential anaphoric dependencies.</p>
 
@@ -438,7 +438,7 @@
 <dl><dt>(<a name="ex1.11">1.11</a>)</dt><dd>
 </dd></dl>
 
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD','might'), w('NEG;_clitic_','n<apos>t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 
 
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
@@ -446,7 +446,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;smile)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;(CP-QUE&nbsp;(IP-SUB&nbsp;(MD&nbsp;might)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NEG;_clitic_&nbsp;n<apos>t)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he)))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 

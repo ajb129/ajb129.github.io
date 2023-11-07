@@ -24,9 +24,9 @@
 
 <p align="justify">An atom is a general-purpose name with no inherent meaning. Atoms are usually bare words (character sequences) written with no special syntax. However, if spaces or certain other special characters (e.g.&nbsp;punctuation characters) are contained, then the atom must be surrounded by single quotes. Atoms beginning with either a capital letter or an underscore characters must also be quoted, to distinguish them from variables. Examples of atoms include: <tt>foo</tt>, <tt>'Bar'</tt>, and <tt>'foo bar'</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="#ex1.1">1.1</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="#ex1">1</a>).</p>
 
-<dl><dt>(<a name="ex1.1">1.1</a>)</dt><dd>
+<dl><dt>(<a name="ex1">1</a>)</dt><dd>
 </dd></dl>
 
 <tt>|&nbsp;?-&nbsp;atom_concat('BEP',&nbsp;';~La',&nbsp;A).</tt><br>
@@ -37,9 +37,9 @@
 
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="#ex1.2">1.2</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="#ex2">2</a>).</p>
 
-<dl><dt>(<a name="ex1.2">1.2</a>)</dt><dd>
+<dl><dt>(<a name="ex2">2</a>)</dt><dd>
 </dd></dl>
 
 <tt>|&nbsp;?-&nbsp;sub_atom('BEP',0,1,_,C).</tt><br>
@@ -50,9 +50,9 @@
 
 <tt>yes</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="#ex1.3">1.3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="#ex3">3</a>).</p>
 
-<dl><dt>(<a name="ex1.3">1.3</a>)</dt><dd>
+<dl><dt>(<a name="ex3">3</a>)</dt><dd>
 </dd></dl>
 
 <tt>|?-&nbsp;gensym('-',Index),&nbsp;atom_concat('*ICH*',Index,ICH).</tt><br>
@@ -74,9 +74,9 @@
 
 <p align="justify">Lists are a special case of compound terms. Constructors for lists are the atom <tt>[]</tt> (empty list) and the functor <tt>'.'/2</tt>, where the first argument is a term and the second argument a list. A list of <tt>N</tt> elements is the term <tt>.(a1, .( ... .(aN, []) ... ))</tt>, which may also be written with square bracket notation: <tt>[a1, ..., aN]</tt>. List construction is also possible with a concatenation function &lsquo;<tt>[_|_]/2</tt>&rsquo;: <tt>[a1, ..., aN|t]</tt> is the term <tt>.(a1, .( ... .(aN, t)))</tt>. With the concatenation function, a list can be processed by processing the first element(s), and then the rest of the list, in a recursive manner.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="#ex1.4">1.4</a>) demonstrates.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="#ex4">4</a>) demonstrates.</p>
 
-<dl><dt>(<a name="ex1.4">1.4</a>)</dt><dd>
+<dl><dt>(<a name="ex4">4</a>)</dt><dd>
 </dd></dl>
 
 <tt>|&nbsp;?-&nbsp;member(E,[a,b,c]).</tt><br>
@@ -95,9 +95,9 @@
 
 <br><h2>Incomplete lists</h2>
 
-<p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="#ex1.5">1.5</a>) is such a structure.</p>
+<p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="#ex5">5</a>) is such a structure.</p>
 
-<dl><dt>(<a name="ex1.5">1.5</a>)</dt><dd>
+<dl><dt>(<a name="ex5">5</a>)</dt><dd>
 </dd></dl>
 
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
@@ -108,9 +108,9 @@
 
 <tt>no</tt><br>
 
-<p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="#ex1.6">1.6</a>).</p>
+<p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="#ex6">6</a>).</p>
 
-<dl><dt>(<a name="ex1.6">1.6</a>)</dt><dd>
+<dl><dt>(<a name="ex6">6</a>)</dt><dd>
 </dd></dl>
 
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[1,2,3|L1],&nbsp;L1&nbsp;=&nbsp;[4,5|L0].</tt><br>
@@ -125,9 +125,9 @@
 
 <br><h2>Pretty printing trees</h2>
 
-<p align="justify">Trees seen throughout this book have been pretty printed with (<a href="#ex1.7">1.7</a>). <tt>pp_ptree_list</tt> takes a list of <tt>node</tt> structures, as described in section <a href="#sec__treestructure__">__treestructure__</a>, and prints each tree with a following new line. Trees are printed as labelled bracketed structures with one terminal node per line and indentation to indicate the depth of embedding.</p>
+<p align="justify">Trees seen throughout this book have been pretty printed with (<a href="#ex7">7</a>). <tt>pp_ptree_list</tt> takes a list of <tt>node</tt> structures, as described in section <a href="#sec__treestructure__">__treestructure__</a>, and prints each tree with a following new line. Trees are printed as labelled bracketed structures with one terminal node per line and indentation to indicate the depth of embedding.</p>
 
-<dl><dt>(<a name="ex1.7">1.7</a>)</dt><dd>
+<dl><dt>(<a name="ex7">7</a>)</dt><dd>
 </dd></dl>
 
 <tt>pp_ptree_list([]).</tt><br>
@@ -168,9 +168,9 @@
 
 <br><h2>The parse routine</h2>
 
-<p align="justify">The <tt>parse</tt> routine introduced in section <a href="#sec__sentence__">__sentence__</a> and called with examples throughout the book is defined in (<a href="#ex1.8">1.8</a>).</p>
+<p align="justify">The <tt>parse</tt> routine introduced in section <a href="#sec__sentence__">__sentence__</a> and called with examples throughout the book is defined in (<a href="#ex8">8</a>).</p>
 
-<dl><dt>(<a name="ex1.8">1.8</a>)</dt><dd>
+<dl><dt>(<a name="ex8">8</a>)</dt><dd>
 </dd></dl>
 
 <tt>add_node_layer([],[]).</tt><br>
