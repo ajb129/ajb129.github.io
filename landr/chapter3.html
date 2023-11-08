@@ -1341,6 +1341,9 @@
 <tt>adverb_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',basic,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L1,L0).</tt><br>
+<tt>adverb_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L1,L0).</tt><br>
 <tt>adverb_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('',Type,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase_layer(basic,L1,L0).</tt><br>
@@ -1699,7 +1702,7 @@
 <tt>&nbsp;&nbsp;role(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('',basic,L1,L0).</tt><br>
 <tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;role(L,[node('IP-PPL;IP-PPL2',IL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;role(L,[node('IP-PPL2;IP-PPL',IL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,IL,[]).</tt><br>
 <tt>preposition_phrase_layer(basic,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(L,[node('IP-PPL3',IL)|L0]),</tt><br>
