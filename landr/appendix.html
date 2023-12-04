@@ -28,40 +28,31 @@
 
 <dl><dt>(<a name="ex1">1</a>)</dt><dd>
 </dd></dl>
-
 <tt>|&nbsp;?-&nbsp;atom_concat('BEP',&nbsp;';~La',&nbsp;A).</tt><br>
-
-
+<br>
 <tt>A&nbsp;=&nbsp;BEP;~La</tt><br>
-
-
+<br>
 <tt>yes</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="#ex2">2</a>).</p>
 
 <dl><dt>(<a name="ex2">2</a>)</dt><dd>
 </dd></dl>
-
 <tt>|&nbsp;?-&nbsp;sub_atom('BEP',0,1,_,C).</tt><br>
-
-
+<br>
 <tt>C&nbsp;=&nbsp;B</tt><br>
-
-
+<br>
 <tt>yes</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="#ex3">3</a>).</p>
 
 <dl><dt>(<a name="ex3">3</a>)</dt><dd>
 </dd></dl>
-
 <tt>|?-&nbsp;gensym('-',Index),&nbsp;atom_concat('*ICH*',Index,ICH).</tt><br>
-
-
+<br>
 <tt>Index&nbsp;=&nbsp;-5</tt><br>
 <tt>ICH&nbsp;=&nbsp;*ICH*-5</tt><br>
-
-
+<br>
 <tt>yes</tt><br>
 
 <p align="justify">When parsing, <tt>gensym</tt> can be invoked to provide a tree component with a distinct index, which can go on to be distributed elsehere in the parse.</p>
@@ -78,19 +69,14 @@
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
 </dd></dl>
-
 <tt>|&nbsp;?-&nbsp;member(E,[a,b,c]).</tt><br>
-
-
+<br>
 <tt>E&nbsp;=&nbsp;a;</tt><br>
-
-
+<br>
 <tt>E&nbsp;=&nbsp;b;</tt><br>
-
-
+<br>
 <tt>E&nbsp;=&nbsp;c;</tt><br>
-
-
+<br>
 <tt>no</tt><br>
 
 <br><h2>Incomplete lists</h2>
@@ -99,28 +85,22 @@
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
 </dd></dl>
-
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
-
-
+<br>
 <tt>L&nbsp;=&nbsp;[a,b,c|_h383];</tt><br>
-
-
+<br>
 <tt>no</tt><br>
 
 <p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="#ex6">6</a>).</p>
 
 <dl><dt>(<a name="ex6">6</a>)</dt><dd>
 </dd></dl>
-
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[1,2,3|L1],&nbsp;L1&nbsp;=&nbsp;[4,5|L0].</tt><br>
-
-
+<br>
 <tt>L&nbsp;=&nbsp;[1,2,3,4,5|_h527]</tt><br>
 <tt>L1&nbsp;=&nbsp;[4,5|_h527]</tt><br>
 <tt>L0&nbsp;=&nbsp;_h527;</tt><br>
-
-
+<br>
 <tt>no</tt><br>
 
 <br><h2>Pretty printing trees</h2>
@@ -129,7 +109,6 @@
 
 <dl><dt>(<a name="ex7">7</a>)</dt><dd>
 </dd></dl>
-
 <tt>pp_ptree_list([]).</tt><br>
 <tt>pp_ptree_list([node(Label,[])|T])&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;write(Label),</tt><br>
@@ -139,16 +118,14 @@
 <tt>&nbsp;&nbsp;pp_nonterminal_node(Label,First,Rest,0),</tt><br>
 <tt>&nbsp;&nbsp;nl,</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(T).</tt><br>
-
-
+<br>
 <tt>pp_ptree_first_child(node(Label,[]),&nbsp;_)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;tab(1),</tt><br>
 <tt>&nbsp;&nbsp;write(Label).</tt><br>
 <tt>pp_ptree_first_child(node(Label,[First|Rest]),&nbsp;Column)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;tab(1),</tt><br>
 <tt>&nbsp;&nbsp;pp_nonterminal_node(Label,First,Rest,Column).</tt><br>
-
-
+<br>
 <tt>pp_ptree_rest([],&nbsp;_)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;write(')').</tt><br>
 <tt>pp_ptree_rest([node(Label,[First|Rest])|T],&nbsp;Column)&nbsp;:-</tt><br>
@@ -156,8 +133,7 @@
 <tt>&nbsp;&nbsp;tab(Column),</tt><br>
 <tt>&nbsp;&nbsp;pp_nonterminal_node(Label,First,Rest,Column),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_rest(T,&nbsp;Column).</tt><br>
-
-
+<br>
 <tt>pp_nonterminal_node(Label,First,Rest,Column)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;write('('),</tt><br>
 <tt>&nbsp;&nbsp;write(Label),</tt><br>
@@ -172,12 +148,10 @@
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
 </dd></dl>
-
 <tt>add_node_layer([],[]).</tt><br>
 <tt>add_node_layer([H|T0],[node('',H)|T])&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;add_node_layer(T0,T).</tt><br>
-
-
+<br>
 <tt>parse(Phrase1)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;Phrase1&nbsp;=..&nbsp;L1,</tt><br>
 <tt>&nbsp;&nbsp;append(L1,[[X],[]],L2),</tt><br>
