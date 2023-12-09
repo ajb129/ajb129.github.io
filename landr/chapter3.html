@@ -35,7 +35,7 @@
 
 <li><tt>general</tt></li>
 
-<li><tt>non_interrogative_subject</tt></li>
+<li><tt>non_interrogative</tt></li>
 
 <li><tt>interrogative</tt></li>
 
@@ -150,12 +150,12 @@
 <tt>&nbsp;&nbsp;internal_np_higher_layer(L1,L0).</tt><br>
 <tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative_subject,general])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative,general])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;noun_head(L,L0).</tt><br>
 <tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative_subject,general])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative,general])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;internal_np_higher_layer(L,L0).</tt><br>
 <tt>noun_phrase_initial_layer(Type,[node('NLYR',[CONJ1,NP1,node('CONJP',[CONJ2,NP2])])|L],L)&nbsp;--&gt;</tt><br>
@@ -190,7 +190,7 @@
 
 <dl><dt>(<a name="ex3.8">3.8</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative_subject)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
 <br>
 <tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
@@ -204,51 +204,51 @@
 
 <dl><dt>(<a name="ex3.9">3.9</a>)</dt><dd>
 </dd></dl>
-<tt>(noun_phrase__-SBJ__non_interrogative_subject</tt><br>
-<tt>&nbsp;(noun_phrase_top__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative_subject</tt><br>
+<tt>(noun_phrase__-SBJ__non_interrogative</tt><br>
+<tt>&nbsp;(noun_phrase_top__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;(noun_phrase_initial_layer__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','you')])))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__non_interrogative_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__non_interrogative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(punc__non_final</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PUNC',',')])</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','he')])))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__non_interrogative_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_initial_tail__non_interrogative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(conj</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('CONJ','and')])</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative_subject</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative_subject</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_phrase_top__non_interrogative</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noun_head_full__non_interrogative</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[w('PRO','I')]))))))))</tt><br>
 
 <br>
 <table cellpadding="5px" style="border:2px solid;">
-<tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>-SBJ</b> <b>non_interrogative_subject</b></tt></td></tr>
+<tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>-SBJ</b> <b>non_interrogative</b></tt></td></tr>
 <tr>
  <td>
    <table cellpadding="5px" style="border:2px solid;">
-    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative_subject</b></tt></td></tr>
+    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative</b></tt></td></tr>
     <tr>
      <td>
        <table cellpadding="5px" style="border:2px solid;">
-        <tr><td colspan="2" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_layer <b>non_interrogative_subject</b></tt></td></tr>
+        <tr><td colspan="2" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_layer <b>non_interrogative</b></tt></td></tr>
         <tr>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative_subject</b></tt></td></tr>
+            <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative</b></tt></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative_subject</b></tt></td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative</b></tt></td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative_subject</b></tt></td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative</b></tt></td></tr>
                     <tr>
                      <td>
                         <tt>[w('PRO','you')]</tt>
@@ -264,7 +264,7 @@
          </td>
          <td>
            <table cellpadding="5px" style="border:2px solid;">
-            <tr><td colspan="3" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_tail <b>non_interrogative_subject</b></tt></td></tr>
+            <tr><td colspan="3" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_tail <b>non_interrogative</b></tt></td></tr>
             <tr>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
@@ -278,15 +278,15 @@
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative_subject</b></tt></td></tr>
+                <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative</b></tt></td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative_subject</b></tt></td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative</b></tt></td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative_subject</b></tt></td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative</b></tt></td></tr>
                         <tr>
                          <td>
                             <tt>[w('PRO','he')]</tt>
@@ -302,7 +302,7 @@
              </td>
              <td>
                <table cellpadding="5px" style="border:2px solid;">
-                <tr><td colspan="2" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_tail <b>non_interrogative_subject</b></tt></td></tr>
+                <tr><td colspan="2" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_initial_tail <b>non_interrogative</b></tt></td></tr>
                 <tr>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
@@ -316,15 +316,15 @@
                  </td>
                  <td>
                    <table cellpadding="5px" style="border:2px solid;">
-                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative_subject</b></tt></td></tr>
+                    <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase <b>non_interrogative</b></tt></td></tr>
                     <tr>
                      <td>
                        <table cellpadding="5px" style="border:2px solid;">
-                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative_subject</b></tt></td></tr>
+                        <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_phrase_top <b>non_interrogative</b></tt></td></tr>
                         <tr>
                          <td>
                            <table cellpadding="5px" style="border:2px solid;">
-                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative_subject</b></tt></td></tr>
+                            <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>noun_head_full <b>non_interrogative</b></tt></td></tr>
                             <tr>
                              <td>
                                 <tt>[w('PRO','I')]</tt>
@@ -361,7 +361,7 @@
 
 <dl><dt>(<a name="ex3.10">3.10</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('CONJ','and'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative_subject)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('CONJ','and'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
 <br>
 <tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(NLYR&nbsp;(CONJ&nbsp;both)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
@@ -388,13 +388,13 @@
 
 <dl><dt>(<a name="ex3.11">3.11</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative_subject)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('PUNC',','), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
 <br>
 <tt>no</tt><br>
 
 <dl><dt>(<a name="ex3.12">3.12</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('CONJ','and'), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative_subject)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('CONJ','and'), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
 <br>
 <tt>(NP-SBJ&nbsp;(NLYR&nbsp;(NP&nbsp;(PRO&nbsp;you))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
@@ -407,7 +407,7 @@
 
 <dl><dt>(<a name="ex3.13">3.13</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative_subject)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('PUNC',','), w('CONJ','both'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
 <br>
 <tt>no</tt><br>
 
