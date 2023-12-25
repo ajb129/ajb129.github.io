@@ -433,10 +433,6 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with <tt>internal_np_lower_layer</tt> to integrate nouns as noun modifiers or coordination. For coordination, conjuncts subsequent to the first are accumulated with <tt>internal_np_lower_tail</tt> of (<a href="chapter3.html#ex3.17">3.17</a>).</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive calls of <tt>internal_np_lower_tail</tt> all involve finding a noun that will be the head noun, either without or with a complement. A complement can be either a <i>to</i>-infinitive clause (found with <tt>ip_to_inf</tt>) or a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> (found with <tt>cp_that</tt> called with its type parameter set to <tt>with_c</tt>).</p>
-
 <dl><dt>(<a name="ex3.14">3.14</a>)</dt><dd>
 </dd></dl>
 <tt>internal_np_higher_layer(L,L0)&nbsp;--&gt;</tt><br>
@@ -470,6 +466,40 @@
 <tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_higher_tail(L,L0).</tt><br>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>) to integrate nouns as:</p>
+
+<ul>
+
+<li>[rule 2] noun modifiers</li>
+
+<li>[rule 6] coordinations</li>
+
+</ul>
+
+<p align="justify">For coordination, conjuncts subsequent to the first are accumulated with <tt>internal_np_lower_tail</tt> of (<a href="chapter3.html#ex3.17">3.17</a>).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive calls of <tt>internal_np_lower_tail</tt> all involve finding a noun that will be the head noun, either:</p>
+
+<ul>
+
+<li>[rule 1] without a complement</li>
+
+<li>[rules 3&ndash;5] with a complement</li>
+
+</ul>
+
+<p align="justify">A complement can be either:</p>
+
+<ul>
+
+<li>[rule 3] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.4.2">6.4.2</a></li>
+
+<li>[rule 4] a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> found with <tt>cp_that</tt> of section <a href="chapter6.html#sec6.2">6.2</a> called with its type parameter set to <tt>with_c</tt></li>
+
+<li>[rule 5] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.3">6.3</a></li>
+
+</ul>
+
 <dl><dt>(<a name="ex3.16">3.16</a>)</dt><dd>
 </dd></dl>
 <tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
@@ -483,6 +513,9 @@
 <tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_that('',with_c,[],L1,L0).</tt><br>
+<tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
+<tt>&nbsp;&nbsp;cp_embedded_que('',[],L1,L0).</tt><br>
 <tt>internal_np_lower_layer([node('NLYR',[node('NP',NL)|CL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_layer(NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_tail(CL,[]).</tt><br>

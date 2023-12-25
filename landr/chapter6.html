@@ -10960,9 +10960,29 @@
 </tr>
 </table>
 
+<br><h4>Question:</h4>
+
+<p align="justify">Consider (<a href="chapter6.html#ex6.80">6.80</a>) &ndash; (<a href="chapter6.html#ex6.83">6.83</a>) taken from Gazdar et al (1985, p.178). (Examples (<a href="chapter6.html#ex6.80">6.80</a>) &ndash; (<a href="chapter6.html#ex6.82">6.82</a>) are from Williams (1978, p.34), with (<a href="chapter6.html#ex6.83">6.83</a>) attributed to Paul Hirshbuhler.) What are the parse results, if any? Do the results reflect your expectations, and can you describe how they arise?</p>
+
+<dl><dt>(<a name="ex6.80">6.80</a>)</dt><dd>
+</dd></dl>
+<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('NPR','Mary'), w('VBD',';~Tn','liked'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex6.81">6.81</a>)</dt><dd>
+</dd></dl>
+<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('VBD',';~Tn','saw'), w('NPR','Bill'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex6.82">6.82</a>)</dt><dd>
+</dd></dl>
+<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex6.83">6.83</a>)</dt><dd>
+</dd></dl>
+<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Mary'), w('VBP',';~Tn','likes'), w('CONJ','and'), w('VBP',';~Tf','hopes'), w('MD','will'), w('VB',';~I','win'), w('PUNC','.')]</tt><br>
+
 <br><h3><a name="sec6.8.2">6.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are to-infinitive clauses</h3>
 
-<p align="justify">A relative clause that is a <i>to</i>-infinitive clause introduced with rule 2 of (<a href="chapter6.html#ex6.66">6.66</a>) above will, with the rules of (<a href="chapter6.html#ex6.80">6.80</a>), establish its internal link to the head of the external noun phrase either:</p>
+<p align="justify">A relative clause that is a <i>to</i>-infinitive clause introduced with rule 2 of (<a href="chapter6.html#ex6.66">6.66</a>) above will, with the rules of (<a href="chapter6.html#ex6.84">6.84</a>), establish its internal link to the head of the external noun phrase either:</p>
 
 <ul>
 
@@ -10984,9 +11004,9 @@
 
 </ul>
 
-<p align="justify">With the coordination of rule 5, each conjunct is itself a <i>to</i>-infinitive clause with its own way from the rules of (<a href="chapter6.html#ex6.80">6.80</a>) for establishing its internal link to the head of the external noun phrase.</p>
+<p align="justify">With the coordination of rule 5, each conjunct is itself a <i>to</i>-infinitive clause with its own way from the rules of (<a href="chapter6.html#ex6.84">6.84</a>) for establishing its internal link to the head of the external noun phrase.</p>
 
-<dl><dt>(<a name="ex6.80">6.80</a>)</dt><dd>
+<dl><dt>(<a name="ex6.84">6.84</a>)</dt><dd>
 </dd></dl>
 <tt>relative_clause_to_inf_top_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
@@ -11006,7 +11026,7 @@
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_layer(IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_tail(CL,[]).</tt><br>
 
-<dl><dt>(<a name="ex6.81">6.81</a>)</dt><dd>
+<dl><dt>(<a name="ex6.85">6.85</a>)</dt><dd>
 </dd></dl>
 <tt>relative_clause_to_inf_top_tail([node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -11016,9 +11036,9 @@
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_layer(IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_tail(L,L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="chapter6.html#ex6.82">6.82</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="chapter6.html#ex6.86">6.86</a>).</p>
 
-<dl><dt>(<a name="ex6.82">6.82</a>)</dt><dd>
+<dl><dt>(<a name="ex6.86">6.86</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('P-CONN','for'), w('PRO','me'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
 <br>
@@ -11035,9 +11055,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.82">6.82</a>) follow (<a href="chapter6.html#ex6.83">6.83</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.86">6.86</a>) follow (<a href="chapter6.html#ex6.87">6.87</a>).</p>
 
-<dl><dt>(<a name="ex6.83">6.83</a>)</dt><dd>
+<dl><dt>(<a name="ex6.87">6.87</a>)</dt><dd>
 </dd></dl>
 <tt>(noun_phrase__general</tt><br>
 <tt>&nbsp;(noun_phrase_top__general</tt><br>
@@ -11348,9 +11368,25 @@
 </tr>
 </table>
 
+<br><h4>Question</h4>
+
+<p align="justify">Zandvoort (1969, p.56) points out that the passive infinitive may vary with the active infinitive when functioning as a relative clause, especially after <i>there is</i> and <i>there was</i>. Show this is possible with parse results for (<a href="chapter6.html#ex6.88">6.88</a>) and (<a href="chapter6.html#ex6.89">6.89</a>) and say why this is so.</p>
+
+<dl><dt>(<a name="ex6.88">6.88</a>)</dt><dd>
+</dd></dl>
+<tt>[w('EX','There'), w('BED',';~ex_V','was'), w('Q','no'), w('N','time'), w('TO','to'), w('VB',';~Tn','lose'), w('PUNC','.')]</tt><br>
+
+<dl><dt>(<a name="ex6.89">6.89</a>)</dt><dd>
+</dd></dl>
+<tt>[w('EX','There'), w('BED',';~ex_V','was'), w('Q','no'), w('N','time'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','lost'), w('PUNC','.')]</tt><br>
+
 <br><h3><a name="sec6.8.3">6.8.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are present participle clauses</h3>
 
-<dl><dt>(<a name="ex6.84">6.84</a>)</dt><dd>
+<p align="justify">The relative clause has the form of a participle clause occurring directly inside the noun phrase whose noun head is modified, so that inside the reduced relative clause there is a present participle (<i>-ing</i>) verb and its complements, but no finite verb and no clause subject.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a present participle clause, consider (<a href="chapter6.html#ex6.90">6.90</a>).</p>
+
+<dl><dt>(<a name="ex6.90">6.90</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VAG',';~Ipr','jumping'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
 <br>
@@ -11363,9 +11399,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.84">6.84</a>) follow (<a href="chapter6.html#ex6.85">6.85</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.90">6.90</a>) follow (<a href="chapter6.html#ex6.91">6.91</a>).</p>
 
-<dl><dt>(<a name="ex6.85">6.85</a>)</dt><dd>
+<dl><dt>(<a name="ex6.91">6.91</a>)</dt><dd>
 </dd></dl>
 <tt>(noun_phrase__general</tt><br>
 <tt>&nbsp;(noun_phrase_top__general</tt><br>
@@ -11712,11 +11748,11 @@
 
 <br><h3><a name="sec6.8.4">6.8.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are past participle clauses</h3>
 
-<p align="justify">The relative clause has the form of a participle clause occurring directly inside the noun phrase whose head is modified, so that inside the reduced relative clause there is a participle verb and its complements, but no finite verb and no clause subject.</p>
+<p align="justify">The relative clause has the form of a participle clause occurring directly inside the noun phrase whose noun head is modified, so that inside the reduced relative clause there is a past participle (<i>-ed&sol;-en</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle (<i>-ed&sol;-en</i>) clause, consider (<a href="chapter6.html#ex6.86">6.86</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle clause, consider (<a href="chapter6.html#ex6.92">6.92</a>).</p>
 
-<dl><dt>(<a name="ex6.86">6.86</a>)</dt><dd>
+<dl><dt>(<a name="ex6.92">6.92</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
 <br>
@@ -11730,9 +11766,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.86">6.86</a>) follow (<a href="chapter6.html#ex6.87">6.87</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.92">6.92</a>) follow (<a href="chapter6.html#ex6.93">6.93</a>).</p>
 
-<dl><dt>(<a name="ex6.87">6.87</a>)</dt><dd>
+<dl><dt>(<a name="ex6.93">6.93</a>)</dt><dd>
 </dd></dl>
 <tt>(noun_phrase__general</tt><br>
 <tt>&nbsp;(noun_phrase_top__general</tt><br>
@@ -11967,31 +12003,11 @@
 </tr>
 </table>
 
-<br><h4>Question:</h4>
-
-<p align="justify">Consider (<a href="chapter6.html#ex6.88">6.88</a>) &ndash; (<a href="chapter6.html#ex6.91">6.91</a>) taken from Gazdar et al (1985), p.&nbsp;178. (Examples (<a href="chapter6.html#ex6.88">6.88</a>) &ndash; (<a href="chapter6.html#ex6.90">6.90</a>) are from Williams (1978), p.&nbsp;34, with (<a href="chapter6.html#ex6.91">6.91</a>) attributed to Paul Hirshbuhler.) What are the parse results, if any? Do the results reflect your expectations, and can you describe how they arise?</p>
-
-<dl><dt>(<a name="ex6.88">6.88</a>)</dt><dd>
-</dd></dl>
-<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('NPR','Mary'), w('VBD',';~Tn','liked'), w('PUNC','.')]</tt><br>
-
-<dl><dt>(<a name="ex6.89">6.89</a>)</dt><dd>
-</dd></dl>
-<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('VBD',';~Tn','saw'), w('NPR','Bill'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
-
-<dl><dt>(<a name="ex6.90">6.90</a>)</dt><dd>
-</dd></dl>
-<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
-
-<dl><dt>(<a name="ex6.91">6.91</a>)</dt><dd>
-</dd></dl>
-<tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Mary'), w('VBP',';~Tn','likes'), w('CONJ','and'), w('VBP',';~Tf','hopes'), w('MD','will'), w('VB',';~I','win'), w('PUNC','.')]</tt><br>
-
 <br><h2><a name="sec6.9">6.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Cleft constructions</h2>
 
-<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complements_by_code</tt> rules of (<a href="chapter6.html#ex6.92">6.92</a>).</p>
+<p align="justify">Support for cleft constructions can be added with the extra <tt>verb_complements_by_code</tt> rules of (<a href="chapter6.html#ex6.94">6.94</a>).</p>
 
-<dl><dt>(<a name="ex6.92">6.92</a>)</dt><dd>
+<dl><dt>(<a name="ex6.94">6.94</a>)</dt><dd>
 </dd></dl>
 <tt>verb_complements_by_code(Code,Displaced,cleft_subject,active_voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
@@ -12002,9 +12018,9 @@
 <tt>verb_complements_by_code(';~cleft_Vn',[np(ICH)],cleft_subject,active_voice,[node('NP-FOC',[ICH]),node('IP-CLF',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="chapter6.html#ex6.92">6.92</a>) is recursive, allowing for negation.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first rule of (<a href="chapter6.html#ex6.94">6.94</a>) is recursive, allowing for negation.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second and third rules of (<a href="chapter6.html#ex6.92">6.92</a>), requiring the verb code to be <tt>;~cleft_Vn</tt>, select as complements:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second and third rules of (<a href="chapter6.html#ex6.94">6.94</a>), requiring the verb code to be <tt>;~cleft_Vn</tt>, select as complements:</p>
 
 <ul>
 
@@ -12014,11 +12030,11 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;All of the rules of (<a href="chapter6.html#ex6.92">6.92</a>) require the <tt>SbjType</tt> parameter of the clause to be set to the value of <tt>cleft_subject</tt>. This <tt>SbjType</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;All of the rules of (<a href="chapter6.html#ex6.94">6.94</a>) require the <tt>SbjType</tt> parameter of the clause to be set to the value of <tt>cleft_subject</tt>. This <tt>SbjType</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="chapter6.html#ex6.93">6.93</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="chapter6.html#ex6.95">6.95</a>).</p>
 
-<dl><dt>(<a name="ex6.93">6.93</a>)</dt><dd>
+<dl><dt>(<a name="ex6.95">6.95</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_cleft_','It'), w('BED',';~cleft_Vn','was'), w('D','an'), w('ADJ','atomic'), w('N','fission'), w('PRO','we'), w('VBD',';~Tn','saw'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
@@ -12034,9 +12050,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.93">6.93</a>) follow (<a href="chapter6.html#ex6.94">6.94</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.95">6.95</a>) follow (<a href="chapter6.html#ex6.96">6.96</a>).</p>
 
-<dl><dt>(<a name="ex6.94">6.94</a>)</dt><dd>
+<dl><dt>(<a name="ex6.96">6.96</a>)</dt><dd>
 </dd></dl>
 <tt>(sentence</tt><br>
 <tt>&nbsp;(clause_top_layer__statement_order</tt><br>
@@ -12474,7 +12490,7 @@
 
 <p align="justify">Code <tt>;~V_as_though&sol;as_if&sol;like</tt> selects an adverbial clause (<tt>PP-SCON-MNR</tt>) introduced by a subordinating conjunction word (<tt>P-CONN</tt>), e.g., <i>as_though</i>&sol;<i>as_if</i>&sol;<i>like</i>.</p>
 
-<dl><dt>(<a name="ex6.95">6.95</a>)</dt><dd>
+<dl><dt>(<a name="ex6.97">6.97</a>)</dt><dd>
 </dd></dl>
 <tt>verb_complements_by_code(';~V_as_though&sol;as_if&sol;like',Displaced,there_subject,active_voice,[node('PP-CLR',PL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(PL,[node('IP-ADV',IL)]),</tt><br>
@@ -12487,9 +12503,9 @@
 <tt>&nbsp;&nbsp;role(PL,[node('IP-ADV',IL)]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Displaced,IL,[]).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.96">6.96</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.98">6.98</a>).</p>
 
-<dl><dt>(<a name="ex6.96">6.96</a>)</dt><dd>
+<dl><dt>(<a name="ex6.98">6.98</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_expletive_','It'), w('VBP',';~V_as_though&sol;as_if&sol;like','looks'), w('P-ROLE','like'), w('EX','there'), w('BEP',';~cat_Vg','is'), w('VAG',';~cat_Vt','going'), w('TO','to'), w('BE',';~ex_V','be'), w('D','a'), w('N','storm'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
@@ -12507,9 +12523,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.96">6.96</a>) follow (<a href="chapter6.html#ex6.97">6.97</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.98">6.98</a>) follow (<a href="chapter6.html#ex6.99">6.99</a>).</p>
 
-<dl><dt>(<a name="ex6.97">6.97</a>)</dt><dd>
+<dl><dt>(<a name="ex6.99">6.99</a>)</dt><dd>
 </dd></dl>
 <tt>(sentence</tt><br>
 <tt>&nbsp;(clause_top_layer__statement_order</tt><br>
@@ -12999,9 +13015,9 @@
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider (<a href="chapter6.html#ex6.98">6.98</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider (<a href="chapter6.html#ex6.100">6.100</a>).</p>
 
-<dl><dt>(<a name="ex6.98">6.98</a>)</dt><dd>
+<dl><dt>(<a name="ex6.100">6.100</a>)</dt><dd>
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('EX','There'), w('VBP',';~V_as_though&sol;as_if&sol;like','looks'), w('P-ROLE','like'), w('EX','there'), w('BEP',';~cat_Vg','is'), w('VAG',';~cat_Vt','going'), w('TO','to'), w('BE',';~ex_V','be'), w('D','a'), w('N','storm'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
@@ -13019,9 +13035,9 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.98">6.98</a>) follow (<a href="chapter6.html#ex6.99">6.99</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.100">6.100</a>) follow (<a href="chapter6.html#ex6.101">6.101</a>).</p>
 
-<dl><dt>(<a name="ex6.99">6.99</a>)</dt><dd>
+<dl><dt>(<a name="ex6.101">6.101</a>)</dt><dd>
 </dd></dl>
 <tt>(sentence</tt><br>
 <tt>&nbsp;(clause_top_layer__statement_order</tt><br>

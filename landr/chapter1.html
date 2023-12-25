@@ -510,7 +510,9 @@
 
 <li>[rule 4] a <i>to</i>-infinite clause (see section <a href="chapter6.html#sec6.4.2">6.4.2</a>)</li>
 
-<li>[rule 5] a participle clause (see section <a href="chapter6.html#sec6.49">6.49</a>)</li>
+<li>[rule 5] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.49">6.49</a>)</li>
+
+<li>[rule 6] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.49">6.49</a>)</li>
 
 </ul>
 
@@ -525,7 +527,9 @@
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('',[],L,L0).</tt><br>
 <tt>fragment_layer([node('IP-PPL2;IP-PPL',IL)|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(_,IL,[]).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,IL,[]).</tt><br>
+<tt>fragment_layer([node('IP-PPL3',IL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_subject,IL,[]).</tt><br>
 
 <p align="justify">For rule 3 of (<a href="chapter1.html#ex1.16">1.16</a>), an adverbial (see section <a href="chapter2.html#sec2.10">2.10</a> for the <tt>adverbial</tt> rules) can be:</p>
 
