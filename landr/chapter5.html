@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> is concerned with matrix interrogative clauses where the subject is not the frontmost element under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> looks at ripple effects in the clause caused by existential <i>there</i>.</p>
+<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> is concerned with matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> looks at ripple effects in the clause caused by existential <i>there</i>.</p>
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
@@ -403,7 +403,7 @@
 
 <br><h2><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Matrix interrogatives</h2>
 
-<p align="justify">This section considers matrix interrogative clauses where the subject is not the frontmost element under question. Prior to its subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a modal, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small>, or a modal catenative, any of which can be followed by the contracted form of negation (<i>n't</i>). This section will add rules to match these pre-subject components, including the option for negation, so that they can be integrated into a parse with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
+<p align="justify">This section considers matrix interrogative clauses where the subject is not under question. Prior to its subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a modal, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small>, or a modal catenative, any of which can be followed by the contracted form of negation (<i>n't</i>). This section will add rules to match these pre-subject components, including the option for negation, so that they can be integrated into a parse with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
 
 <br><h3><a name="sec5.3.1">5.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;DO operator layer</h3>
 
@@ -1819,7 +1819,7 @@
 
 <br><h2><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Statement word order with clause middle layers</h2>
 
-<p align="justify">So far, we have only seen subjects that are created with a <tt>subject</tt> call as the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1 of (<a href="chapter5.html#ex5.1">5.1</a>)] that first finds the subject with a <tt>subject</tt> call, and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.31">5.31</a>). Similarly, there is rule 7 of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an <tt>interrogative</tt> noun phrase, which also goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.31">5.31</a>).</p>
+<p align="justify">So far, we have only seen subjects that are created with a <tt>subject</tt> call as the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1 of (<a href="chapter5.html#ex5.1">5.1</a>)] that first finds the subject with a <tt>subject</tt> call, and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.31">5.31</a>). Similarly, there are rules 9 and 10 of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an inherited <tt>interrogative</tt> noun phrase, which also go on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.31">5.31</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.31">5.31</a>) that will either:</p>
 
