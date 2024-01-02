@@ -5773,7 +5773,10 @@
 
 <dl><dt>(<a name="ex6.49">6.49</a>)</dt><dd>
 </dd></dl>
-<tt>ip_ppl_adverbial_layer(unfilled_subject,L,L0)&nbsp;--&gt;</tt><br>
+<tt>ip_ppl_adverbial_layer(SbjType0,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType0&nbsp;==&nbsp;unfilled_subject</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(SbjType,L1,L0).</tt><br>
 <tt>ip_ppl_adverbial_layer(SbjType,[node('HAG;~cat_Ve',[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>

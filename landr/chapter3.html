@@ -169,7 +169,10 @@
 <tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase_initial_layer(Type,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('',general,L1,L0).</tt><br>
-<tt>noun_phrase_initial_layer(relative,L,L0)&nbsp;--&gt;</tt><br>
+<tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;==&nbsp;relative</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase_initial_layer(general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('',relative,L1,L0).</tt><br>
 <tt>noun_phrase_initial_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
@@ -1678,16 +1681,18 @@
 
 <dl><dt>(<a name="ex3.38">3.38</a>)</dt><dd>
 </dd></dl>
-<tt>preposition_phrase(Ext,Type,[node(Label,PL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>preposition_phrase(Ext,Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase_layer(Type,PL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;[node(Label,PL)|L0]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
-<tt>preposition_phrase(Ext,Type,[node(Label,[PP1|CL])|L],L)&nbsp;--&gt;</tt><br>
+<tt>preposition_phrase(Ext,Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('',Type,[PP1],[]),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase_tail(Type,CL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;[node(Label,[PP1|CL])|L0]</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is only one <tt>preposition_phrase_layer</tt> rule in (<a href="chapter3.html#ex3.39">3.39</a>), requiring a word list that has an initial preposition word found with <tt>role</tt> (from section <a href="chapter2.html#sec2.11">2.11</a>). The initial preposition word needs to then be followed by content for:</p>
