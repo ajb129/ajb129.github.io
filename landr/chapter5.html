@@ -7,7 +7,7 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) below. These rules have a <tt>Displaced</tt> parameter, which takes a list value that accumulates indexing information for dispaced items. These rules also have a clause type parameter, which is set in the rules of (<a href="chapter5.html#ex5.1">5.1</a>) to either:</p>
+<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) below. These rules have a <tt>Displaced</tt> parameter, which takes a list value that accumulates indexing information for displaced items. These rules also have a clause <tt>Type</tt> parameter, which needs to be set in the rules of (<a href="chapter5.html#ex5.1">5.1</a>) to either:</p>
 
 <ul>
 
@@ -17,13 +17,13 @@
 
 <li>[rules 3&ndash;5] <tt>tag_question</tt></li>
 
-<li>[rules 6&ndash;8] <tt>matrix_interrogative</tt></li>
+<li>[rules 6&ndash;8] <tt>matrix_interrogative</tt> or <tt>matrix_constituent_interrogative</tt></li>
 
 <li>[rules 9 and 10] <tt>matrix_constituent_interrogative</tt></li>
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The ten rules of (<a href="chapter5.html#ex5.1">5.1</a>) are all non-recursive. They each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The ten rules of (<a href="chapter5.html#ex5.1">5.1</a>) are all non-recursive. They each have something to say about the clause subject. For rule 2, with the <tt>Type</tt> parameter for the clause set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
 
 <ul>
 
@@ -35,19 +35,19 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules 9 and 10 differ in how the clause <tt>SbjType</tt> parameter is set: <tt>filled_subject</tt> for rule 9, <tt>derived_subject</tt> for rule 10.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules finding subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules finding subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the <tt>Type</tt> parameter of the clause, as follows:</p>
 
 <ul>
 
 <li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list and sets the <tt>SbjType</tt> parameter for a clause whose <tt>Type</tt> parameter is <tt>statement_order</tt></li>
 
-<li>[rules 3&ndash;8] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after components (see section <a href="chapter5.html#sec5.3">5.3</a> below) identified with either <tt>do_operator_layer</tt> (rules 3 and 6), <tt>operator_layer</tt> (rules 4 and 7) or <tt>have_be_or_md_cat_finite_layer</tt> (rules 5 and 8)</li>
+<li>[rules 3&ndash;8] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after components (see section <a href="chapter5.html#sec5.3">5.3</a> below) identified with either <tt>do_operator_layer</tt> [rules 3 and 6], <tt>operator_layer</tt> [rules 4 and 7] or <tt>have_be_or_md_cat_finite_layer</tt> [rules 5 and 8]</li>
 
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With rules 3&ndash;5, the <tt>SbjType</tt> parameter is limited to either <tt>filled_subject</tt> or <tt>expletive_subject</tt> for a subject with final position in the word list identifying a clause whose <tt>Type</tt> parameter is <tt>tag_question</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With rules 6&ndash;8, the clause <tt>Type</tt> parameter is <tt>matrix_interrogative</tt>, with the subject having a position in the word list that is before content identified with either <tt>verb_phrase_layer</tt> (rules 6 and 7) or <tt>verb_complements_top_layer</tt> (rule 8).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With rules 6&ndash;8, the <tt>Type</tt> parameter of the clause is <tt>matrix_interrogative</tt>, with the subject having a position in the word list that is before content identified with either <tt>verb_phrase_layer</tt> [rules 6 and 7] or <tt>verb_complements_top_layer</tt> [rule 8].</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When rules give clause inflection parameter information, this varies:</p>
 
@@ -88,23 +88,23 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_subject,expletive_subject])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L1,L0).</tt><br>
-<tt>clause_top_layer(ClauseType,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>clause_top_layer(Type,Displaced,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(ClauseType,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,do_infinitive_inflection,active_voice,L1,L0).</tt><br>
-<tt>clause_top_layer(ClauseType,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>clause_top_layer(Type,Displaced,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(ClauseType,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;operator_layer(L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Displaced,SbjType,infinitive_inflection,active_voice,L1,L0).</tt><br>
-<tt>clause_top_layer(ClauseType,Displaced,L,L0)&nbsp;--&gt;</tt><br>
+<tt>clause_top_layer(Type,Displaced,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(ClauseType,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_cat_finite_layer(Code,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
@@ -223,7 +223,17 @@
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Displaced,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_tail(Type,Displaced,L,L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how with the rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rule 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7], and utterances [rule 10], all of which are parsed as displaced elements, receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item for a <tt>verb_complements_top_layer</tt> call from chapter <a href="chapter4.html#ch4">4</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how, with the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rule 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7] and utterances [rule 10], all of which are parsed as displaced elements, receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Displaced</tt> parameter to ultimately be inherited as a selected item. A displaced item is inherited as a selected item when either it is:</p>
+
+<ul>
+
+<li>a required element for a <tt>verb_complements_top_layer</tt> call from chapter <a href="chapter4.html#ch4">4</a></li>
+
+<li>a noun phrase from rule 3 received by a <tt>clause_top_layer</tt> rule 9 or rule 10 call of (<a href="chapter5.html#ex5.1">5.1</a>)</li>
+
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that rules for displaced items carrying <tt>interrogative</tt> type information [rules 3&ndash;7] change the <tt>Type</tt> information of the clause from <tt>matrix_interrogative</tt> to <tt>matrix_constituent_interrogative</tt>. Consequently, only one displaced element with <tt>interrogative</tt> type information is possible with a matrix clause. Moreover, when under question, the noun phrase subject of the clause must be the displaced phrase with <tt>interrogative</tt> type information.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also note how rules 1 and 2 of (<a href="chapter5.html#ex5.2">5.2</a>) have <tt>adverbial</tt> calls (from section <a href="chapter2.html#sec2.10">2.10</a>) to pick up:</p>
 
