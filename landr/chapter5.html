@@ -7,7 +7,7 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) below. These rules have a <tt>Displaced</tt> parameter, which takes a list value that accumulates indexing information for displaced items. These rules also have a clause <tt>Type</tt> parameter, which needs to be set in the rules of (<a href="chapter5.html#ex5.1">5.1</a>) to either:</p>
+<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) below. These rules have a <tt>Displaced</tt> parameter, which takes a list value that accumulates indexing information for displaced items. Also, these rules have a clause <tt>Type</tt> parameter, which needs to be set for the rules of (<a href="chapter5.html#ex5.1">5.1</a>) to either:</p>
 
 <ul>
 
@@ -39,7 +39,7 @@
 
 <ul>
 
-<li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list and sets the <tt>SbjType</tt> parameter for a clause whose <tt>Type</tt> parameter is <tt>statement_order</tt></li>
+<li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list for a clause whose <tt>Type</tt> parameter is <tt>statement_order</tt></li>
 
 <li>[rules 3&ndash;8] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after components (see section <a href="chapter5.html#sec5.3">5.3</a> below) identified with either <tt>do_operator_layer</tt> [rules 3 and 6], <tt>operator_layer</tt> [rules 4 and 7] or <tt>have_be_or_md_cat_finite_layer</tt> [rules 5 and 8]</li>
 
@@ -233,7 +233,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that rules for displaced items carrying <tt>interrogative</tt> type information [rules 3&ndash;7] change the <tt>Type</tt> information of the clause from <tt>matrix_interrogative</tt> to <tt>matrix_constituent_interrogative</tt>. Consequently, only one displaced element with <tt>interrogative</tt> type information is possible with a matrix clause. Moreover, when under question, the noun phrase subject of the clause must be the displaced phrase with <tt>interrogative</tt> type information.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that rules for displaced items carrying <tt>interrogative</tt> type information [rules 3&ndash;7] change the <tt>Type</tt> information of the clause from <tt>matrix_interrogative</tt> to <tt>matrix_constituent_interrogative</tt>. Consequently, only one displaced element with <tt>interrogative</tt> type information is possible with a matrix clause. Moreover, when under question, the noun phrase subject of a matrix clause must be the one displaced phrase with <tt>interrogative</tt> type information.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also note how rules 1 and 2 of (<a href="chapter5.html#ex5.2">5.2</a>) have <tt>adverbial</tt> calls (from section <a href="chapter2.html#sec2.10">2.10</a>) to pick up:</p>
 
