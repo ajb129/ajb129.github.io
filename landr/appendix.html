@@ -55,7 +55,7 @@
 <br>
 <tt>yes</tt><br>
 
-<p align="justify">When parsing, <tt>gensym</tt> can be invoked to provide a tree component with a distinct index, which can go on to be distributed elsehere in the parse.</p>
+<p align="justify">When parsing, <tt>gensym</tt> can be invoked to provide a tree component with a distinct index, which can go on to be distributed elsewhere in the parse.</p>
 
 <br><h2>Compound terms</h2>
 
@@ -148,23 +148,22 @@
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
 </dd></dl>
-<tt>add_node_layer([],[]).</tt><br>
-<tt>add_node_layer([H|T0],[node('',H)|T])&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;add_node_layer(T0,T).</tt><br>
-<br>
-<tt>parse(Phrase1)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;Phrase1&nbsp;=..&nbsp;L1,</tt><br>
+<tt>parse(Goal)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;Goal&nbsp;=..&nbsp;L1,</tt><br>
 <tt>&nbsp;&nbsp;append(L1,[[X],[]],L2),</tt><br>
-<tt>&nbsp;&nbsp;Phrase2&nbsp;=..&nbsp;L2,</tt><br>
-<tt>&nbsp;&nbsp;setof(X,&nbsp;tphrase(Phrase2),&nbsp;R),</tt><br>
+<tt>&nbsp;&nbsp;Goal2&nbsp;=..&nbsp;L2,</tt><br>
+<tt>&nbsp;&nbsp;setof(X,&nbsp;tphrase(Goal2),&nbsp;R),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(R).</tt><br>
-<tt>parse(Phrase1)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;Phrase1&nbsp;=..&nbsp;L1,</tt><br>
-<tt>&nbsp;&nbsp;append(L1,[[H1,H2|T],[]],L2),</tt><br>
-<tt>&nbsp;&nbsp;Phrase2&nbsp;=..&nbsp;L2,</tt><br>
-<tt>&nbsp;&nbsp;setof([H1,H2|T],&nbsp;tphrase(Phrase2),&nbsp;R1),</tt><br>
-<tt>&nbsp;&nbsp;add_node_layer(R1,&nbsp;R),</tt><br>
+<tt>parse(Goal)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;Goal&nbsp;=..&nbsp;L1,</tt><br>
+<tt>&nbsp;&nbsp;append(L1,[[X,Y|T],[]],L2),</tt><br>
+<tt>&nbsp;&nbsp;Goal2&nbsp;=..&nbsp;L2,</tt><br>
+<tt>&nbsp;&nbsp;setof(node('',[X,Y|T]),&nbsp;tphrase(Goal2),&nbsp;R),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(R).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (altcite [Swift-and-Warren-2022]).</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of either single <tt>node</tt> compound terms in the case of Rule 1 or lists with at least two <tt>node</tt> compound terms in the case of Rule 2. For rule 2, the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. With both rules, the set of all results is collected and pretty printed with calls to <tt>pp_ptree_list</tt> of (<a href="#ex7">7</a>) above.</p>
 <br>
 <br>
 <br>
