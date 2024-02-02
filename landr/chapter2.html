@@ -517,7 +517,7 @@
 <tt>verb_tag(finite_inflection,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
 <tt>verb_tag(imperative_inflection,['VB','DO','HV','BE']).</tt><br>
 <tt>verb_tag(infinitive_inflection,['VB','DO','HV','BE']).</tt><br>
-<tt>verb_tag(do_infinitive_inflection,['VB','DO','HV']).</tt><br>
+<tt>verb_tag(do_supported_infinitive_inflection,['VB','DO','HV']).</tt><br>
 <tt>verb_tag(present_participle,['VAG','DAG','HAG','BAG']).</tt><br>
 <tt>verb_tag(past_participle,['VVN','DON','HVN','BEN']).</tt><br>
 
@@ -629,7 +629,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite_inflection,infinitive_inflection,do_infinitive_inflection]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite_inflection,infinitive_inflection,do_supported_infinitive_inflection]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
@@ -671,22 +671,22 @@
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([Word]),&nbsp;parse(verb(Infl,Tag,Code)),&nbsp;fail.</tt><br>
 
-<br><h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Modal words</h2>
+<br><h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Modal verbs</h2>
 
-<p align="justify">Modal words are tagged as in Table <a href="chapter2.html#table2.15">2.15</a>.</p>
+<p align="justify">Modal verbs have the tags and verb codes of Table <a href="chapter2.html#table2.15">2.15</a>.</p>
 
-<p><a name="table2.15">Table 2.15: Modal words with tags</a></p>
+<p><a name="table2.15">Table 2.15: Modal verbs with tags and verb codes</a></p>
 
 <table border="1" cellpadding="10px">
 <tr><td>Present tense</td><td>Past tense</td></tr>
-<tr><td><tt>w('MD','shall')</tt></td><td><tt>w('MD','should')</tt></td></tr>
-<tr><td><tt>w('MD','will')</tt></td><td><tt>w('MD','would')</tt></td></tr>
-<tr><td><tt>w('MD','can')</tt></td><td><tt>w('MD','could')</tt></td></tr>
-<tr><td><tt>w('MD','may')</tt></td><td><tt>w('MD','might')</tt></td></tr>
-<tr><td><tt>w('MD','must')</tt></td><td></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','shall')</tt></td><td><tt>w('MD',';~cat_Vi','should')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','will')</tt></td><td><tt>w('MD',';~cat_Vi','would')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','can')</tt></td><td><tt>w('MD',';~cat_Vi','could')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','may')</tt></td><td><tt>w('MD',';~cat_Vi','might')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','must')</tt></td><td></td></tr>
 <tr><td><tt>w('MD',';~cat_Vt','ought')</tt></td><td></td></tr>
-<tr><td><tt>w('MD','need')</tt></td><td></td></tr>
-<tr><td><tt>w('MD','dare')</tt></td><td></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','need')</tt></td><td></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','dare')</tt></td><td></td></tr>
 <tr><td></td><td><tt>w('MD',';~cat_Vt','used')</tt></td></tr>
 </table>
 
@@ -694,8 +694,8 @@
 
 <dl><dt>(<a name="ex2.32">2.32</a>)</dt><dd>
 </dd></dl>
-<tt>modal(general,[node('MD',[node(Word,[])])|L],L)&nbsp;--&gt;&nbsp;[w('MD',Word)].</tt><br>
-<tt>modal(catenative,[node('MD;~cat_Vt',[node(Word,[])])|L],L)&nbsp;--&gt;&nbsp;[w('MD',';~cat_Vt',Word)].</tt><br>
+<tt>modal(';~cat_Vi',[node('MD;~cat_Vi',[node(Word,[])])|L],L)&nbsp;--&gt;&nbsp;[w('MD',';~cat_Vi',Word)].</tt><br>
+<tt>modal(';~cat_Vt',[node('MD;~cat_Vt',[node(Word,[])])|L],L)&nbsp;--&gt;&nbsp;[w('MD',';~cat_Vt',Word)].</tt><br>
 
 <br><h2><a name="sec2.10">2.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Other clause level words</h2>
 

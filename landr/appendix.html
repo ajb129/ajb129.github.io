@@ -161,7 +161,7 @@
 <tt>&nbsp;&nbsp;setof(node('',[X,Y|T]),&nbsp;tphrase(Goal2),&nbsp;R),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(R).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (altcite [Swift-and-Warren-2022]).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of either single <tt>node</tt> compound terms in the case of Rule 1 or lists with at least two <tt>node</tt> compound terms in the case of Rule 2. For rule 2, the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. With both rules, the set of all results is collected and pretty printed with calls to <tt>pp_ptree_list</tt> of (<a href="#ex7">7</a>) above.</p>
 <br>

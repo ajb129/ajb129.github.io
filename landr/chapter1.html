@@ -430,13 +430,13 @@
 
 <dl><dt>(<a name="ex1.11">1.11</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD',';~cat_Vi','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD',';~cat_Vi','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;might)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;smile)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;might)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~I&nbsp;smile))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;(CP-QUE&nbsp;(IP-SUB&nbsp;(MD&nbsp;might)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;(CP-QUE&nbsp;(IP-SUB&nbsp;(MD;~cat_Vi&nbsp;might)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he)))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>

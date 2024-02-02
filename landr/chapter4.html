@@ -100,7 +100,7 @@
 
 <dl><dt>(<a name="ex4.6">4.6</a>)</dt><dd>
 </dd></dl>
-<tt>[w('WADV','How'), w('ADJ','annoying'), w('MD','would'), w('D;_nphd_','that'), w('BE',';~La','be'), w('PUNC','?')]</tt><br>
+<tt>[w('WADV','How'), w('ADJ','annoying'), w('MD',';~cat_Vi','would'), w('D;_nphd_','that'), w('BE',';~La','be'), w('PUNC','?')]</tt><br>
 
 <dl><dt>(<a name="ex4.7">4.7</a>)</dt><dd>
 </dd></dl>
@@ -364,7 +364,7 @@
 
 <li>[rule 1] the word list should only have content for a noun phrase</li>
 
-<li>[rule 3] the word list should only have content for a preposition phrase</li>
+<li>[rule 2] the word list should only have content for a preposition phrase</li>
 
 </ul>
 
@@ -420,7 +420,7 @@
 
 <dl><dt>(<a name="ex4.39">4.39</a>)</dt><dd>
 </dd></dl>
-<tt>[w('PRO','We'), w('MD','will'), w('NEG','not'), w('VB',';~It','hesitate'), w('TO','to'), w('VB',';~Ip','go'), w('ADV','further'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','We'), w('MD',';~cat_Vi','will'), w('NEG','not'), w('VB',';~It','hesitate'), w('TO','to'), w('VB',';~Ip','go'), w('ADV','further'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.40">4.40</a>)</dt><dd>
 </dd></dl>
@@ -887,18 +887,18 @@
 
 <dl><dt>(<a name="ex4.85">4.85</a>)</dt><dd>
 </dd></dl>
-<tt>[w('WPRO','What'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','suppose'), w('D','an'), w('N','exploring'), w('N','party'), w('MD','would'), w('VB',';~Tn','find'), w('PUNC','?')]</tt><br>
+<tt>[w('WPRO','What'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','suppose'), w('D','an'), w('N','exploring'), w('N','party'), w('MD',';~cat_Vi','would'), w('VB',';~Tn','find'), w('PUNC','?')]</tt><br>
 
 <dl><dt>(<a name="ex4.86">4.86</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','an'), w('N','exploring'), w('N','party'), w('MD','would'), w('VB',';~Tn','find')]),&nbsp;parse(verb_complements_by_code(';~Tf',[np(node('*ICH*-192',[]))],filled_subject,active_voice)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','an'), w('N','exploring'), w('N','party'), w('MD',';~cat_Vi','would'), w('VB',';~Tn','find')]),&nbsp;parse(verb_complements_by_code(';~Tf',[np(node('*ICH*-192',[]))],filled_subject,active_voice)).</tt><br>
 <br>
 <tt>(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(NP-SBJ&nbsp;(D&nbsp;an)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;exploring)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;party))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;would)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;find)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-192)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;would)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Tn&nbsp;find)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-192))))</tt><br>
 <br>
 <tt>yes</tt><br>
 
@@ -1069,7 +1069,7 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,active_voice,VL,[]),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L,L0).</tt><br>
 
-<p align="justify">Note that the <i>to</i>-infinitive clause is integrated into the parse with the call of <tt>to_inf_layer</tt> (see section <a href="chapter5.html#sec5.4.1">5.4.1</a>) in all of the rules of (<a href="chapter4.html#ex4.100">4.100</a>). This has the consequence that there can be no <i>for</i>-introduced subject internal to the object <i>to</i>-infinitive clause, ensuring no disruption of control inheritance from the derived object (/subject when passive).</p>
+<p align="justify">Note that the <i>to</i>-infinitive clause is integrated into the parse with the call of <tt>to_inf_layer</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>) in all of the rules of (<a href="chapter4.html#ex4.100">4.100</a>). This has the consequence that there can be no <i>for</i>-introduced subject internal to the object <i>to</i>-infinitive clause, ensuring no disruption of control inheritance from the derived object (/subject when passive).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing the word list of (<a href="chapter4.html#ex4.101">4.101</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.102">4.102</a>).</p>
 
@@ -1163,7 +1163,7 @@
 
 <dl><dt>(<a name="ex4.110">4.110</a>)</dt><dd>
 </dd></dl>
-<tt>[w('PRO','You'), w('MD','can'), w('VB',';~Tni','see'), w('D','the'), w('N','blood'), w('VB',';~Ipr','run'), w('P-ROLE','from'), w('PRO;_genm_','their'), w('N','face'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','You'), w('MD',';~cat_Vi','can'), w('VB',';~Tni','see'), w('D','the'), w('N','blood'), w('VB',';~Ipr','run'), w('P-ROLE','from'), w('PRO;_genm_','their'), w('N','face'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.111">4.111</a>)</dt><dd>
 </dd></dl>
@@ -1254,7 +1254,7 @@
 
 <dl><dt>(<a name="ex4.118">4.118</a>)</dt><dd>
 </dd></dl>
-<tt>[w('PRO','She'), w('MD','could'), w('VB',';~Tng','feel'), w('PRO','it'), w('VAG',';~I','coming'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','She'), w('MD',';~cat_Vi','could'), w('VB',';~Tng','feel'), w('PRO','it'), w('VAG',';~I','coming'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.119">4.119</a>)</dt><dd>
 </dd></dl>
@@ -1285,7 +1285,7 @@
 
 <dl><dt>(<a name="ex4.122">4.122</a>)</dt><dd>
 </dd></dl>
-<tt>[w('D','The'), w('NS','raiders'), w('MD','can'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tng','seen'), w('VAG',';~Ipr','hovering'), w('P-ROLE','around'), w('D','the'), w('N','surface'), w('PUNC','.')]</tt><br>
+<tt>[w('D','The'), w('NS','raiders'), w('MD',';~cat_Vi','can'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tng','seen'), w('VAG',';~Ipr','hovering'), w('P-ROLE','around'), w('D','the'), w('N','surface'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.123">4.123</a>)</dt><dd>
 </dd></dl>
@@ -1509,17 +1509,17 @@
 
 <dl><dt>(<a name="ex4.141">4.141</a>)</dt><dd>
 </dd></dl>
-<tt>[w('D;_nphd_','That'), w('BEP',';~equ_Vw','is'), w('WPRO','what'), w('D','the'), w('N','advice'), w('VBP',';~Dn.f','tells'), w('PRO','us'), w('PRO','we'), w('MD','must'), w('DO',';~Tn','do'), w('PUNC','.')]</tt><br>
+<tt>[w('D;_nphd_','That'), w('BEP',';~equ_Vw','is'), w('WPRO','what'), w('D','the'), w('N','advice'), w('VBP',';~Dn.f','tells'), w('PRO','us'), w('PRO','we'), w('MD',';~cat_Vi','must'), w('DO',';~Tn','do'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.142">4.142</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','us'), w('PRO','we'), w('MD','must'), w('DO',';~Tn','do')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[np(node('*ICH*-274',[]))],filled_subject,active_voice)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','us'), w('PRO','we'), w('MD',';~cat_Vi','must'), w('DO',';~Tn','do')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[np(node('*ICH*-274',[]))],filled_subject,active_voice)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(PRO&nbsp;us))</tt><br>
 <tt>&nbsp;&nbsp;(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;we))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;must)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DO;~Tn&nbsp;do)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-274))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;must)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(DO;~Tn&nbsp;do)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-274)))))</tt><br>
 <br>
 <tt>yes</tt><br>
 
@@ -1527,19 +1527,19 @@
 
 <dl><dt>(<a name="ex4.143">4.143</a>)</dt><dd>
 </dd></dl>
-<tt>[w('PRO','We'), w('VBD',';~cat_Ve_passive_','got'), w('VVN',';~Dn.f','told'), w('C','that'), w('D','that'), w('N','laser'), w('MD','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','We'), w('VBD',';~cat_Ve_passive_','got'), w('VVN',';~Dn.f','told'), w('C','that'), w('D','that'), w('N','laser'), w('MD',';~cat_Vi','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.144">4.144</a>)</dt><dd>
 </dd></dl>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('C','that'), w('D','that'), w('N','laser'), w('MD','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[],filled_subject,passive_voice)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('C','that'), w('D','that'), w('N','laser'), w('MD',';~cat_Vi','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[],filled_subject,passive_voice)).</tt><br>
 <br>
 <tt>(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(C&nbsp;that)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;that)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;laser))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD&nbsp;can)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ipr&nbsp;cut)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;through)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;concrete)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;can)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Ipr&nbsp;cut)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;through)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;concrete))))))</tt><br>
 <br>
 <tt>yes</tt><br>
 
@@ -1713,7 +1713,7 @@
 <tt>verb_complements_by_code(';~Dn.t',Displaced,filled_subject,passive_voice,[node('IP-INF-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,active_voice,VL,[]).</tt><br>
 
-<p align="justify">Note that the <i>to</i>-infinitive clause is integrated into the parse with the call of <tt>to_inf_layer</tt> (see section <a href="chapter5.html#sec5.4.1">5.4.1</a>) in both rules of (<a href="chapter4.html#ex4.100">4.100</a>). This has the consequence that there can be no <i>for</i>-introduced subject internal to the object <i>to</i>-infinitive clause, ensuring no disruption of control inheritance from the indirect object (/subject when passive). Also note how the calls of <tt>to_inf_layer</tt> inherit any <tt>Displaced</tt> information.</p>
+<p align="justify">Note that the <i>to</i>-infinitive clause is integrated into the parse with the call of <tt>to_inf_layer</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>) in both rules of (<a href="chapter4.html#ex4.100">4.100</a>). This has the consequence that there can be no <i>for</i>-introduced subject internal to the object <i>to</i>-infinitive clause, ensuring no disruption of control inheritance from the indirect object (/subject when passive). Also note how the calls of <tt>to_inf_layer</tt> inherit any <tt>Displaced</tt> information.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing the word list of (<a href="chapter4.html#ex4.156">4.156</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.157">4.157</a>).</p>
 
@@ -1849,7 +1849,7 @@
 
 <dl><dt>(<a name="ex4.168">4.168</a>)</dt><dd>
 </dd></dl>
-<tt>[w('D','the'), w('ADJ','maximum'), w('N','loan'), w('RPRO','that'), w('D','the'), w('N','state'), w('MD','could'), w('VB',';~Dpr.n','make'), w('P-ROLE','to'), w('D','a'), w('N','project')]</tt><br>
+<tt>[w('D','the'), w('ADJ','maximum'), w('N','loan'), w('RPRO','that'), w('D','the'), w('N','state'), w('MD',';~cat_Vi','could'), w('VB',';~Dpr.n','make'), w('P-ROLE','to'), w('D','a'), w('N','project')]</tt><br>
 
 <dl><dt>(<a name="ex4.169">4.169</a>)</dt><dd>
 </dd></dl>
@@ -2040,7 +2040,7 @@
 
 <dl><dt>(<a name="ex4.183">4.183</a>)</dt><dd>
 </dd></dl>
-<tt>[w('PRO;_genm_','her'), w('NS','habits'), w('RPRO','that'), w('Q;_nphd_','most'), w('MD','would'), w('VB',';~Cn.a','find'), w('ADJ','annoying')]</tt><br>
+<tt>[w('PRO;_genm_','her'), w('NS','habits'), w('RPRO','that'), w('Q;_nphd_','most'), w('MD',';~cat_Vi','would'), w('VB',';~Cn.a','find'), w('ADJ','annoying')]</tt><br>
 
 <dl><dt>(<a name="ex4.184">4.184</a>)</dt><dd>
 </dd></dl>
@@ -2343,7 +2343,7 @@
 
 <dl><dt>(<a name="ex4.212">4.212</a>)</dt><dd>
 </dd></dl>
-<tt>[w('NPR','Geoffrey'), w('MD','could'), w('VB',';~Cn.pr','imagine'), w('PNX','himself'), w('P-ROLE','in'), w('D','an'), w('ADJ','upper'), w('N','gallery'), w('PUNC','.')]</tt><br>
+<tt>[w('NPR','Geoffrey'), w('MD',';~cat_Vi','could'), w('VB',';~Cn.pr','imagine'), w('PNX','himself'), w('P-ROLE','in'), w('D','an'), w('ADJ','upper'), w('N','gallery'), w('PUNC','.')]</tt><br>
 
 <dl><dt>(<a name="ex4.213">4.213</a>)</dt><dd>
 </dd></dl>
@@ -2425,7 +2425,7 @@
 
 <dl><dt>(<a name="ex4.219">4.219</a>)</dt><dd>
 </dd></dl>
-<tt>[w('D','the'), w('N','person'), w('RPRO','that'), w('PRO','he'), w('MD','&lt;apos&gt;ll'), w('VB',';~Cn.t','get'), w('TO','to'), w('DO',';~Tn','do'), w('PRO;_genm_','his'), w('ADJ','dirty'), w('N','work')]</tt><br>
+<tt>[w('D','the'), w('N','person'), w('RPRO','that'), w('PRO','he'), w('MD',';~cat_Vi','&lt;apos&gt;ll'), w('VB',';~Cn.t','get'), w('TO','to'), w('DO',';~Tn','do'), w('PRO;_genm_','his'), w('ADJ','dirty'), w('N','work')]</tt><br>
 
 <dl><dt>(<a name="ex4.220">4.220</a>)</dt><dd>
 </dd></dl>
