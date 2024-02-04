@@ -1,26 +1,26 @@
-<h1><a name="ch24">Unit 24</a><br>Real Conditionals: Present and Future</h1>
+<br><br><h1><a name="ch24">Unit 24</a></h1>
+<h1>Real Conditionals: Present and Future</h1>
 
 <p align="justify">You can use pattern (<a href="unit24.html#ex24.1">24.1</a>) to find constituents that have a conditional function.</p>
 
-<dl>
-  <dt>(<a name="ex24.1">24.1</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;&lowbar;&lowbar;</tt><br></dd>
-</dl>
-
+<dl><dt>(<a name="ex24.1">24.1</a>)</dt></dl>
+<tt>&sol;CND&sol;&nbsp;&lt;&nbsp;__</tt><br>
+<br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < __"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
-<br>
-<h2><a name="sec24.1">24.1</a>&nbsp;&nbsp;&nbsp;Present real conditionals</h2>
+<br><h2><a name="sec24.1">24.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Present real conditionals</h2>
 
 <p align="justify">To form present real conditionals, you should use the simple present in the <i>if</i> clause and the main clause. Pattern (<a href="unit24.html#ex24.2">24.2</a>) will find conditionals with this use of tense.</p>
 
-<dl>
-  <dt>(<a name="ex24.2">24.2</a>)</dt><dd><tt>&sol;CND&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;)</tt><br></dd>
-</dl>
-
+<dl><dt>(<a name="ex24.2">24.2</a>)</dt></dl>
+<tt>&sol;CND&sol;</tt><br>
+<tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;^IP&sol;&nbsp;&lt;&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;))</tt><br>
+<tt>&nbsp;&nbsp;$&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;)</tt><br>
+<br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
@@ -29,110 +29,18 @@
 
 <p align="justify">For example, (<a href="unit24.html#ex24.3">24.3</a>) is found with (<a href="unit24.html#ex24.2">24.2</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.3">24.3</a>)</dt><dd></dd>
-</dl>
-
-<p align="justify">
-But <font style="background-color: Wheat;">if you ask about their education</font> , they pin you to the wall .
-</p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1093.29" height="462" viewBox="-16.5 17.5 1446.72 605">
-  <text x="706.86" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="706.86" y1="70" x2="58.74" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="426.36" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="774.18" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="859.98" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="953.7" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="1047.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="1215.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="706.86" y1="70" x2="1374.78" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <text x="58.74" y="125" text-anchor="middle">CONJ;_cl_</text>
-  <line x1="58.74" y1="140" x2="58.74" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="58.74" y="195" text-anchor="middle">But</text>
-  <rect x="411.36" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="426.36" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
-  <line x1="426.36" y1="140" x2="164.34" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="426.36" y1="140" x2="473.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="164.34" y="195" text-anchor="middle">P-CONN</text>
-  <line x1="164.34" y1="210" x2="164.34" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="164.34" y="265" text-anchor="middle">if</text>
-  <rect x="458.22" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="473.22" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="473.22" y1="210" x2="258.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="473.22" y1="210" x2="351.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="473.22" y1="210" x2="566.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="258.06" y1="280" x2="258.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="335" text-anchor="middle">PRO</text>
-  <line x1="258.06" y1="350" x2="258.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="405" text-anchor="middle">you</text>
-  <rect x="336.78" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="351.78" y="265" text-anchor="middle">VBP</text>
-  <line x1="351.78" y1="280" x2="351.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="351.78" y="335" text-anchor="middle">ask</text>
-  <text x="566.94" y="265" text-anchor="middle">PP-RST</text>
-  <line x1="566.94" y1="280" x2="445.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="566.94" y1="280" x2="613.8" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="445.5" y="335" text-anchor="middle">P-ROLE</text>
-  <line x1="445.5" y1="350" x2="445.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="445.5" y="405" text-anchor="middle">about</text>
-  <text x="613.8" y="335" text-anchor="middle">NP</text>
-  <line x1="613.8" y1="350" x2="555.06" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="613.8" y1="350" x2="676.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="555.06" y="405" text-anchor="middle">NP-GENV</text>
-  <line x1="555.06" y1="420" x2="555.06" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="555.06" y="475" text-anchor="middle">PRO;_genm_</text>
-  <line x1="555.06" y1="490" x2="555.06" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="555.06" y="545" text-anchor="middle">their</text>
-  <text x="676.5" y="405" text-anchor="middle">N</text>
-  <line x1="676.5" y1="420" x2="676.5" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="676.5" y="475" text-anchor="middle">education</text>
-  <text x="774.18" y="125" text-anchor="middle">PUNC</text>
-  <line x1="774.18" y1="140" x2="774.18" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="774.18" y="195" text-anchor="middle">,</text>
-  <text x="859.98" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="859.98" y1="140" x2="859.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="859.98" y="195" text-anchor="middle">PRO</text>
-  <line x1="859.98" y1="210" x2="859.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="859.98" y="265" text-anchor="middle">they</text>
-  <rect x="938.7" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="953.7" y="125" text-anchor="middle">VBP</text>
-  <line x1="953.7" y1="140" x2="953.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="953.7" y="195" text-anchor="middle">pin</text>
-  <text x="1047.42" y="125" text-anchor="middle">NP-OB1</text>
-  <line x1="1047.42" y1="140" x2="1047.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1047.42" y="195" text-anchor="middle">PRO</text>
-  <line x1="1047.42" y1="210" x2="1047.42" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1047.42" y="265" text-anchor="middle">you</text>
-  <text x="1215.06" y="125" text-anchor="middle">PP-LOC</text>
-  <line x1="1215.06" y1="140" x2="1141.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1215.06" y1="140" x2="1261.92" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1141.14" y="195" text-anchor="middle">P-ROLE</text>
-  <line x1="1141.14" y1="210" x2="1141.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1141.14" y="265" text-anchor="middle">to</text>
-  <text x="1261.92" y="195" text-anchor="middle">NP</text>
-  <line x1="1261.92" y1="210" x2="1222.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1261.92" y1="210" x2="1296.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1222.98" y="265" text-anchor="middle">D</text>
-  <line x1="1222.98" y1="280" x2="1222.98" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1222.98" y="335" text-anchor="middle">the</text>
-  <text x="1296.9" y="265" text-anchor="middle">N</text>
-  <line x1="1296.9" y1="280" x2="1296.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1296.9" y="335" text-anchor="middle">wall</text>
-  <text x="1374.78" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1374.78" y1="140" x2="1374.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1374.78" y="195" text-anchor="middle">.</text>
-</svg>
-
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=23_a_ted_talk_11@4,7,11,27" target="_blank">23_a_ted_talk_11@4,7,11,27</a>]</small>
+<dl><dt>(<a name="ex24.3">24.3</a>)</dt><dd>
+<img src="23_a_ted_talk_11__if_1_13.png">
+</dd></dl>
 
 <p align="justify">You can use <i>when</i> or <i>whenever</i> in place of <i>if</i> without changing the conditional meaning. Pattern (<a href="unit24.html#ex24.4">24.4</a>) will find examples with <i>when</i> or <i>whenever</i> and the same use of tense found with (<a href="unit24.html#ex24.2">24.2</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.4">24.4</a>)</dt><dd><tt>&sol;SCON&sol;</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;P-CONN&sol;&nbsp;&lt;&nbsp;&sol;&#94;when&sol;)</tt><br> <tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))</tt><br> <tt>&nbsp;&nbsp;&#x24;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;)</tt><br></dd>
-</dl>
-
+<dl><dt>(<a name="ex24.4">24.4</a>)</dt></dl>
+<tt>&sol;SCON&sol;</tt><br>
+<tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;^P-CONN&sol;&nbsp;&lt;&nbsp;&sol;^when&sol;)</tt><br>
+<tt>&nbsp;&nbsp;&lt;&nbsp;(&sol;^IP&sol;&nbsp;&lt;&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;))</tt><br>
+<tt>&nbsp;&nbsp;$&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;)</tt><br>
+<br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/SCON/ < (/^P-CONN/ < /^when/) < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)"/>
@@ -141,89 +49,17 @@ But <font style="background-color: Wheat;">if you ask about their education</fon
 
 <p align="justify">For example, (<a href="unit24.html#ex24.5">24.5</a>) is found with (<a href="unit24.html#ex24.4">24.4</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.5">24.5</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex24.5">24.5</a>)</dt><dd>
+<img src="421_christine_t24__when_4_4.png">
+</dd></dl>
 
-<p align="justify">
-you ’re very unpleasant <font style="background-color: Wheat;">when you ’re like that</font>
-</p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="754.71" height="462" viewBox="-16.5 17.5 995.28 605">
-  <text x="481.14" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="481.14" y1="70" x2="46.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="481.14" y1="70" x2="156.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="481.14" y1="70" x2="320.76" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="481.14" y1="70" x2="692.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="46.86" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="195" text-anchor="middle">PRO</text>
-  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="265" text-anchor="middle">you</text>
-  <rect x="141.42" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="156.42" y="125" text-anchor="middle">BEP;~La</text>
-  <line x1="156.42" y1="140" x2="156.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="156.42" y="195" text-anchor="middle">’re</text>
-  <text x="320.76" y="125" text-anchor="middle">ADJP-PRD2</text>
-  <line x1="320.76" y1="140" x2="258.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="320.76" y1="140" x2="359.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="195" text-anchor="middle">ADVP</text>
-  <line x1="258.06" y1="210" x2="258.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="265" text-anchor="middle">ADV</text>
-  <line x1="258.06" y1="280" x2="258.06" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="258.06" y="335" text-anchor="middle">very</text>
-  <text x="359.7" y="195" text-anchor="middle">ADJ</text>
-  <line x1="359.7" y1="210" x2="359.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="359.7" y="265" text-anchor="middle">unpleasant</text>
-  <rect x="677.34" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="692.34" y="125" text-anchor="middle">PP-SCON-TMP</text>
-  <line x1="692.34" y1="140" x2="481.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="692.34" y1="140" x2="751.08" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="466.14" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="481.14" y="195" text-anchor="middle">P-CONN</text>
-  <line x1="481.14" y1="210" x2="481.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="466.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="481.14" y="265" text-anchor="middle">when</text>
-  <rect x="736.08" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="751.08" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="751.08" y1="210" x2="586.74" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="751.08" y1="210" x2="696.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="751.08" y1="210" x2="860.64" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="586.74" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="586.74" y1="280" x2="586.74" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="586.74" y="335" text-anchor="middle">PRO</text>
-  <line x1="586.74" y1="350" x2="586.74" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="586.74" y="405" text-anchor="middle">you</text>
-  <rect x="681.3" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="696.3" y="265" text-anchor="middle">BEP;~Ln</text>
-  <line x1="696.3" y1="280" x2="696.3" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="696.3" y="335" text-anchor="middle">’re</text>
-  <text x="860.64" y="265" text-anchor="middle">NP-PRD2</text>
-  <line x1="860.64" y1="280" x2="860.64" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="860.64" y="335" text-anchor="middle">PP</text>
-  <line x1="860.64" y1="350" x2="805.86" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="860.64" y1="350" x2="907.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="805.86" y="405" text-anchor="middle">P-ROLE</text>
-  <line x1="805.86" y1="420" x2="805.86" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="805.86" y="475" text-anchor="middle">like</text>
-  <text x="907.5" y="405" text-anchor="middle">NP</text>
-  <line x1="907.5" y1="420" x2="907.5" y2="450" style="stroke:#000000;stroke-width:2;"/>
-  <text x="907.5" y="475" text-anchor="middle">D;_nphd_</text>
-  <line x1="907.5" y1="490" x2="907.5" y2="520" style="stroke:#000000;stroke-width:2;"/>
-  <text x="907.5" y="545" text-anchor="middle">that</text>
-</svg>
-
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=421_christine_t24@13,5,14,15,16,20" target="_blank">421_christine_t24@13,5,14,15,16,20</a>]</small>
-
-<br>
-<h2><a name="sec24.2">24.2</a>&nbsp;&nbsp;&nbsp;Future real conditionals</h2>
+<br><h2><a name="sec24.2">24.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Future real conditionals</h2>
 
 <p align="justify">To form future real conditionals, you should use the simple present in the <i>if</i> clause and a future verb form in the main clause. Pattern (<a href="unit24.html#ex24.6">24.6</a>) will find conditionals with this use of tense.</p>
 
-<dl>
-  <dt>(<a name="ex24.6">24.6</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&#x24;&nbsp;(&sol;&#94;MD&#92;b&sol;&nbsp;&lt;&nbsp;&sol;&#94;w&sol;)</tt><br></dd>
-</dl>
-
+<dl><dt>(<a name="ex24.6">24.6</a>)</dt></dl>
+<tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;^IP&sol;&nbsp;&lt;&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;))&nbsp;$&nbsp;(&sol;^MD&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^w&sol;)</tt><br>
+<br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ (/^MD\b/ < /^w/)"/>
@@ -232,104 +68,17 @@ you ’re very unpleasant <font style="background-color: Wheat;">when you ’re 
 
 <p align="justify">For example, (<a href="unit24.html#ex24.7">24.7</a>) is found with (<a href="unit24.html#ex24.6">24.6</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.7">24.7</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex24.7">24.7</a>)</dt><dd>
+<img src="56_susanne_j03__If_0_13.png">
+</dd></dl>
 
-<p align="justify">
-<font style="background-color: Wheat;">If they are not ellipsoids</font> , the conclusions will be a reasonable approximation .
-</p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1076.46" height="357" viewBox="-16.5 17.5 1424.28 465">
-  <text x="695.64" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="695.64" y1="70" x2="254.1" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="547.14" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="687.72" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="840.18" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="937.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="1149.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="695.64" y1="70" x2="1352.34" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="239.1" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="254.1" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
-  <line x1="254.1" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="254.1" y1="140" x2="300.96" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="195" text-anchor="middle">P-CONN</text>
-  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="265" text-anchor="middle">If</text>
-  <rect x="285.96" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="300.96" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="300.96" y1="210" x2="140.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="300.96" y1="210" x2="250.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="300.96" y1="210" x2="347.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="300.96" y1="210" x2="445.5" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="140.58" y1="280" x2="140.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="335" text-anchor="middle">PRO</text>
-  <line x1="140.58" y1="350" x2="140.58" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="405" text-anchor="middle">they</text>
-  <rect x="235.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="250.14" y="265" text-anchor="middle">BEP;~Ln</text>
-  <line x1="250.14" y1="280" x2="250.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="250.14" y="335" text-anchor="middle">are</text>
-  <text x="347.82" y="265" text-anchor="middle">NEG</text>
-  <line x1="347.82" y1="280" x2="347.82" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="347.82" y="335" text-anchor="middle">not</text>
-  <text x="445.5" y="265" text-anchor="middle">NP-PRD2</text>
-  <line x1="445.5" y1="280" x2="445.5" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="445.5" y="335" text-anchor="middle">NS</text>
-  <line x1="445.5" y1="350" x2="445.5" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="445.5" y="405" text-anchor="middle">ellipsoids</text>
-  <text x="547.14" y="125" text-anchor="middle">PUNC</text>
-  <line x1="547.14" y1="140" x2="547.14" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="547.14" y="195" text-anchor="middle">,</text>
-  <text x="687.72" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="687.72" y1="140" x2="621.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="687.72" y1="140" x2="722.7" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="621.06" y="195" text-anchor="middle">D</text>
-  <line x1="621.06" y1="210" x2="621.06" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="621.06" y="265" text-anchor="middle">the</text>
-  <text x="722.7" y="195" text-anchor="middle">NS</text>
-  <line x1="722.7" y1="210" x2="722.7" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="722.7" y="265" text-anchor="middle">conclusions</text>
-  <rect x="825.18" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="840.18" y="125" text-anchor="middle">MD</text>
-  <line x1="840.18" y1="140" x2="840.18" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="825.18" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="840.18" y="195" text-anchor="middle">will</text>
-  <text x="937.86" y="125" text-anchor="middle">BE;~Ln</text>
-  <line x1="937.86" y1="140" x2="937.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="937.86" y="195" text-anchor="middle">be</text>
-  <text x="1149.06" y="125" text-anchor="middle">NP-PRD2</text>
-  <line x1="1149.06" y1="140" x2="1011.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1149.06" y1="140" x2="1101.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1149.06" y1="140" x2="1238.82" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1011.78" y="195" text-anchor="middle">D</text>
-  <line x1="1011.78" y1="210" x2="1011.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1011.78" y="265" text-anchor="middle">a</text>
-  <text x="1101.54" y="195" text-anchor="middle">ADJP</text>
-  <line x1="1101.54" y1="210" x2="1101.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1101.54" y="265" text-anchor="middle">ADJ</text>
-  <line x1="1101.54" y1="280" x2="1101.54" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1101.54" y="335" text-anchor="middle">reasonable</text>
-  <text x="1238.82" y="195" text-anchor="middle">N</text>
-  <line x1="1238.82" y1="210" x2="1238.82" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1238.82" y="265" text-anchor="middle">approximation</text>
-  <text x="1352.34" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1352.34" y1="140" x2="1352.34" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1352.34" y="195" text-anchor="middle">.</text>
-</svg>
+<br><h2><a name="sec24.3">24.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Real conditionals with modals, modal-like expressions, and imperatives</h2>
 
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=56_susanne_j03@2,5,9,23,24" target="_blank">56_susanne_j03@2,5,9,23,24</a>]</small>
+<p align="justify">Pattern (<a href="unit24.html#ex24.8">24.8</a>) finds present and future real conditionals with the modals in the main clause.</p>
 
+<dl><dt>(<a name="ex24.8">24.8</a>)</dt></dl>
+<tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;^IP&sol;&nbsp;&lt;&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;))&nbsp;$&nbsp;&sol;^MD&#92;b&sol;</tt><br>
 <br>
-<h2><a name="sec24.3">24.3</a>&nbsp;&nbsp;&nbsp;Real conditionals with modals, modal-like expressions, and imperatives</h2>
-
-<p align="justify">Pattern (<a href="unit24.html#ex24.8">24.8</a>) finds  present and future real conditionals with the modals in the main clause.</p>
-
-<dl>
-  <dt>(<a name="ex24.8">24.8</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&#x24;&nbsp;&sol;&#94;MD&#92;b&sol;</tt><br></dd>
-</dl>
-
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) $ /^MD\b/"/>
@@ -338,112 +87,15 @@ you ’re very unpleasant <font style="background-color: Wheat;">when you ’re 
 
 <p align="justify">For example, (<a href="unit24.html#ex24.9">24.9</a>) is found with (<a href="unit24.html#ex24.6">24.6</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.9">24.9</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex24.9">24.9</a>)</dt><dd>
+<img src="83_lucy_bnc_b18__If_0_16.png">
+</dd></dl>
 
-<p align="justify">
-<font style="background-color: Wheat;">If this description sounds familiar</font> , you could enter the 1993 Sainsbury ’s Wine Taste Challenge .
-</p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="1204.17" height="357" viewBox="-16.5 17.5 1594.56 465">
-  <text x="780.78" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="780.78" y1="70" x2="258.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="555.06" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="640.86" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="730.62" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="816.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="1171.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="780.78" y1="70" x2="1522.62" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="243.06" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="258.06" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
-  <line x1="258.06" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="258.06" y1="140" x2="304.92" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="195" text-anchor="middle">P-CONN</text>
-  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="265" text-anchor="middle">If</text>
-  <rect x="289.92" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="304.92" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="304.92" y1="210" x2="199.32" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="304.92" y1="210" x2="351.78" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="304.92" y1="210" x2="457.38" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="199.32" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="199.32" y1="280" x2="132.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="199.32" y1="280" x2="238.26" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="132.66" y="335" text-anchor="middle">D</text>
-  <line x1="132.66" y1="350" x2="132.66" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="132.66" y="405" text-anchor="middle">this</text>
-  <text x="238.26" y="335" text-anchor="middle">N</text>
-  <line x1="238.26" y1="350" x2="238.26" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="238.26" y="405" text-anchor="middle">description</text>
-  <rect x="336.78" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="351.78" y="265" text-anchor="middle">VBP</text>
-  <line x1="351.78" y1="280" x2="351.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="351.78" y="335" text-anchor="middle">sounds</text>
-  <text x="457.38" y="265" text-anchor="middle">ADJP-PRD2</text>
-  <line x1="457.38" y1="280" x2="457.38" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="457.38" y="335" text-anchor="middle">ADJ</text>
-  <line x1="457.38" y1="350" x2="457.38" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="457.38" y="405" text-anchor="middle">familiar</text>
-  <text x="555.06" y="125" text-anchor="middle">PUNC</text>
-  <line x1="555.06" y1="140" x2="555.06" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="555.06" y="195" text-anchor="middle">,</text>
-  <text x="640.86" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="640.86" y1="140" x2="640.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="640.86" y="195" text-anchor="middle">PRO</text>
-  <line x1="640.86" y1="210" x2="640.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="640.86" y="265" text-anchor="middle">you</text>
-  <rect x="715.62" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="730.62" y="125" text-anchor="middle">MD</text>
-  <line x1="730.62" y1="140" x2="730.62" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="730.62" y="195" text-anchor="middle">could</text>
-  <text x="816.42" y="125" text-anchor="middle">VB</text>
-  <line x1="816.42" y1="140" x2="816.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="816.42" y="195" text-anchor="middle">enter</text>
-  <text x="1171.5" y="125" text-anchor="middle">NP-OB1</text>
-  <line x1="1171.5" y1="140" x2="894.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1171.5" y1="140" x2="968.22" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1171.5" y1="140" x2="1104.84" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1171.5" y1="140" x2="1241.46" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1171.5" y1="140" x2="1323.3" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1171.5" y1="140" x2="1424.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="894.3" y="195" text-anchor="middle">D</text>
-  <line x1="894.3" y1="210" x2="894.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="894.3" y="265" text-anchor="middle">the</text>
-  <text x="968.22" y="195" text-anchor="middle">NUM</text>
-  <line x1="968.22" y1="210" x2="968.22" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="968.22" y="265" text-anchor="middle">1993</text>
-  <text x="1104.84" y="195" text-anchor="middle">NP-GENV</text>
-  <line x1="1104.84" y1="210" x2="1065.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="1104.84" y1="210" x2="1163.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1065.9" y="265" text-anchor="middle">NPR</text>
-  <line x1="1065.9" y1="280" x2="1065.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1065.9" y="335" text-anchor="middle">Sainsbury</text>
-  <text x="1163.58" y="265" text-anchor="middle">GENM</text>
-  <line x1="1163.58" y1="280" x2="1163.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1163.58" y="335" text-anchor="middle">’s</text>
-  <text x="1241.46" y="195" text-anchor="middle">NPR</text>
-  <line x1="1241.46" y1="210" x2="1241.46" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1241.46" y="265" text-anchor="middle">Wine</text>
-  <text x="1323.3" y="195" text-anchor="middle">NPR</text>
-  <line x1="1323.3" y1="210" x2="1323.3" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1323.3" y="265" text-anchor="middle">Taste</text>
-  <text x="1424.94" y="195" text-anchor="middle">NPR</text>
-  <line x1="1424.94" y1="210" x2="1424.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1424.94" y="265" text-anchor="middle">Challenge</text>
-  <text x="1522.62" y="125" text-anchor="middle">PUNC</text>
-  <line x1="1522.62" y1="140" x2="1522.62" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="1522.62" y="195" text-anchor="middle">.</text>
-</svg>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="unit24.html#ex24.10">24.10</a>) finds present and future real conditionals with the imperative in the main clause.</p>
 
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=83_lucy_bnc_b18@2,5,11,21" target="_blank">83_lucy_bnc_b18@2,5,11,21</a>]</small>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="unit24.html#ex24.10">24.10</a>) finds  present and future real conditionals with the imperative in the main clause.</p>
-
-<dl>
-  <dt>(<a name="ex24.10">24.10</a>)</dt><dd><tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;&#94;IP&sol;&nbsp;&lt;&nbsp;(&sol;&#94;(BEP|HVP|DOP|VBP)&sol;&nbsp;!&#x24;&nbsp;&sol;CAT&sol;))&nbsp;&gt;&nbsp;&sol;IMP&sol;</tt><br></dd>
-</dl>
-
+<dl><dt>(<a name="ex24.10">24.10</a>)</dt></dl>
+<tt>&sol;CND&sol;&nbsp;&lt;&nbsp;(&sol;^IP&sol;&nbsp;&lt;&nbsp;(&sol;^(BEP|HVP|DOP|VBP)&sol;&nbsp;!$&nbsp;&sol;CAT&sol;))&nbsp;&gt;&nbsp;&sol;IMP&sol;</tt><br>
+<br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
   <input type="hidden" name="search" value="/CND/ < (/^IP/ < (/^(BEP|HVP|DOP|VBP)/ !$ /CAT/)) > /IMP/"/>
@@ -452,75 +104,10 @@ you ’re very unpleasant <font style="background-color: Wheat;">when you ’re 
 
 <p align="justify">For example, (<a href="unit24.html#ex24.11">24.11</a>) is found with (<a href="unit24.html#ex24.10">24.10</a>).</p>
 
-<dl>
-  <dt>(<a name="ex24.11">24.11</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex24.11">24.11</a>)</dt><dd>
+<img src="121_christine_t21__if_0_8.png">
+</dd></dl>
 
-<p align="justify">
-<font style="background-color: Wheat;">if it ’s a problem</font> throw it all away
-</p>
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="683.43" height="357" viewBox="-16.5 17.5 900.24 465">
-  <rect x="418.62" y="35" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="433.62" y="55" text-anchor="middle">IP-IMP</text>
-  <line x1="433.62" y1="70" x2="234.3" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="433.62" y1="70" x2="511.5" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="433.62" y1="70" x2="601.26" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="433.62" y1="70" x2="702.9" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="433.62" y1="70" x2="812.46" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <rect x="219.3" y="105" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-  <text x="234.3" y="125" text-anchor="middle">PP-SCON-CNT-CND</text>
-  <line x1="234.3" y1="140" x2="46.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="234.3" y1="140" x2="281.16" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="195" text-anchor="middle">P-CONN</text>
-  <line x1="46.86" y1="210" x2="46.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="46.86" y="265" text-anchor="middle">if</text>
-  <rect x="266.16" y="175" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="281.16" y="195" text-anchor="middle">IP-ADV</text>
-  <line x1="281.16" y1="210" x2="140.58" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="281.16" y1="210" x2="250.14" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="281.16" y1="210" x2="390.72" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="265" text-anchor="middle">NP-SBJ</text>
-  <line x1="140.58" y1="280" x2="140.58" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="335" text-anchor="middle">PRO</text>
-  <line x1="140.58" y1="350" x2="140.58" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="140.58" y="405" text-anchor="middle">it</text>
-  <rect x="235.14" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-  <text x="250.14" y="265" text-anchor="middle">BEP;~Ln</text>
-  <line x1="250.14" y1="280" x2="250.14" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="250.14" y="335" text-anchor="middle">’s</text>
-  <text x="390.72" y="265" text-anchor="middle">NP-PRD2</text>
-  <line x1="390.72" y1="280" x2="339.9" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="390.72" y1="280" x2="417.78" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="339.9" y="335" text-anchor="middle">D</text>
-  <line x1="339.9" y1="350" x2="339.9" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="339.9" y="405" text-anchor="middle">a</text>
-  <text x="417.78" y="335" text-anchor="middle">N</text>
-  <line x1="417.78" y1="350" x2="417.78" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="417.78" y="405" text-anchor="middle">problem</text>
-  <text x="511.5" y="125" text-anchor="middle">VB</text>
-  <line x1="511.5" y1="140" x2="511.5" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="511.5" y="195" text-anchor="middle">throw</text>
-  <text x="601.26" y="125" text-anchor="middle">NP-OB1</text>
-  <line x1="601.26" y1="140" x2="601.26" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="601.26" y="195" text-anchor="middle">PRO</text>
-  <line x1="601.26" y1="210" x2="601.26" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="601.26" y="265" text-anchor="middle">it</text>
-  <text x="702.9" y="125" text-anchor="middle">ADVP-MNR</text>
-  <line x1="702.9" y1="140" x2="702.9" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="702.9" y="195" text-anchor="middle">ADV</text>
-  <line x1="702.9" y1="210" x2="702.9" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="702.9" y="265" text-anchor="middle">all</text>
-  <text x="812.46" y="125" text-anchor="middle">ADVP-DIR</text>
-  <line x1="812.46" y1="140" x2="812.46" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="812.46" y="195" text-anchor="middle">ADV</text>
-  <line x1="812.46" y1="210" x2="812.46" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="812.46" y="265" text-anchor="middle">away</text>
-</svg>
-
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>[<a href="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc.sh?tree=121_christine_t21@2,1,5,9" target="_blank">121_christine_t21@2,1,5,9</a>]</small>
-
-<br>
 <br>
 <br>
 <br>
