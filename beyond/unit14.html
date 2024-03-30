@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec14.1">14.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Negative questions</h2>
 
-<p align="justify">You can ask a <i>Yes/No</i> question by giving any of the following words an initial sentence placement:</p>
+<p align="justify">You can ask a <b>Yes/No question</b> by giving any of the following words an initial sentence placement:</p>
 
 <ul>
 
@@ -17,17 +17,21 @@
 
 </ul>
 
-<p align="justify">A <b>negative question</b> is made when the negation word <i>not</i> (<tt>NEG</tt>) or its contracted variant <i>n't</i> (<tt>NEG;_clitic_</tt>) is also present in the sentence. Pattern (<a href="unit14.html#ex14.1">14.1</a>) finds negative questions.</p>
+<p align="justify">A <b>negative question</b> is made when the negation word <i>not</i> (<tt>NEG</tt>) or its contracted variant <i>n't</i> (<tt>NEG;_clitic_</tt>) is also present in a Yes-No question. Pattern (<a href="unit14.html#ex14.1">14.1</a>) finds negative questions.</p>
 
 <dl><dt>(<a name="ex14.1">14.1</a>)</dt></dl>
-<tt>&sol;^NEG&sol;</tt><br>
+<tt>&sol;^NEG&#92;b&sol;</tt><br>
 <tt>&nbsp;&nbsp;$&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br>
-<tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op&nbsp;$..&nbsp;=sbj)</tt><br>
-<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
+<tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$..&nbsp;=sbj</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip))))</tt><br>
 <br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
-  <input type="hidden" name="search" value="/^NEG/ $ /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
+  <input type="hidden" name="search" value="/^NEG\b/ $ /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -44,28 +48,34 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Let's specify an ordering relationship between negation and the subject: Pattern (<a href="unit14.html#ex14.4">14.4</a>) finds (<a href="unit14.html#ex14.2">14.2</a>) but not (<a href="unit14.html#ex14.3">14.3</a>) because negation has to <b>be a sister of and precede</b> (<tt>&dollar;..</tt>) the subject.</p>
 
 <dl><dt>(<a name="ex14.4">14.4</a>)</dt></dl>
-<tt>&sol;^NEG&sol;</tt><br>
+<tt>&sol;^NEG&#92;b&sol;</tt><br>
 <tt>&nbsp;&nbsp;$..&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br>
 <tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op&nbsp;$..&nbsp;=sbj)</tt><br>
-<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
+<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
 <br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
-  <input type="hidden" name="search" value="/^NEG/ $.. /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
+  <input type="hidden" name="search" value="/^NEG\b/ $.. /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
 <p align="justify">By contrast, pattern (<a href="unit14.html#ex14.5">14.5</a>) finds (<a href="unit14.html#ex14.3">14.3</a>) but not (<a href="unit14.html#ex14.2">14.2</a>) because negation has to <b>be a sister of and follow</b> (<tt>&dollar;,,</tt>) the subject.</p>
 
 <dl><dt>(<a name="ex14.5">14.5</a>)</dt></dl>
-<tt>&sol;^NEG&sol;</tt><br>
+<tt>&sol;^NEG&#92;b&sol;</tt><br>
 <tt>&nbsp;&nbsp;$,,&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br>
 <tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op&nbsp;$..&nbsp;=sbj)</tt><br>
-<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
+<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
 <br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
-  <input type="hidden" name="search" value="/^NEG/ $,, /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
+  <input type="hidden" name="search" value="/^NEG\b/ $,, /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -88,14 +98,16 @@
 <dl><dt>(<a name="ex14.6">14.6</a>)</dt></dl>
 <tt>__</tt><br>
 <tt>&nbsp;&nbsp;&gt;&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op&nbsp;!$,,&nbsp;(__&nbsp;&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$..&nbsp;&sol;^NEG&sol;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$..&nbsp;&sol;^NEG&#92;b&sol;</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$..&nbsp;&sol;&#92;bSBJ&sol;</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip))))</tt><br>
 <br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
-  <input type="hidden" name="search" value="__ > (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op !$,, (__ << (/^W/ < __)) $.. /^NEG/ $.. /\bSBJ/ >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip))) )"/>
+  <input type="hidden" name="search" value="__ > (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op !$,, (__ << (/^W/ < __)) $.. /^NEG\b/ $.. /\bSBJ/ >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip))))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -126,7 +138,7 @@
 
 <dt>2.</dt><dd>Observe in the hits returned by pattern (<a href="unit14.html#ex14.7">14.7</a>) how the presence or absence of negation inside the tag question can alternate with the absence or presence of negation inside the main clause. Can you find cases where such alternation doesn't occur?</dd>
 
-<dt>3.</dt><dd>Do tag questions invite answers or are they used rhetorically?</dd>
+<dt>3.</dt><dd>Do tag questions invite answers or are they used rhetorically? A question is used rhetorically when it is asked with the purpose of making a statement rather than getting an answer.</dd>
 
 </dl>
 
