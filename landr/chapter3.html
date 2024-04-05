@@ -133,7 +133,7 @@
 
 <br><h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
 
-<p align="justify">With (<a href="chapter3.html#ex3.3">3.3</a>) we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="chapter3.html#ex3.6">3.6</a>) may return.</p>
+<p align="justify">With (<a href="chapter3.html#ex3.3">3.3</a>), we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="chapter3.html#ex3.6">3.6</a>) may return.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Among other things, a <tt>noun_phrase_initial_layer</tt> call opens the possibility of having coordinate structures at the top level of the noun phrase. With (<a href="chapter3.html#ex3.6">3.6</a>), there are two ways to achieve this highest level of noun phrase coordination:</p>
 
@@ -141,7 +141,7 @@
 
 <li>[rule 5] with structure involving an initial conjunct word followed by a first conjunct noun phrase followed by another conjunct word followed by a second conjunct noun phrase</li>
 
-<li>[rule 6] with a call of <tt>noun_phrase</tt> that introduces the first noun phrase conjunct along with a subsequent call to <tt>noun_phrase_initial_tail</tt> of (<a href="chapter3.html#ex3.7">3.7</a>) that recursively accumulates further conjuncts</li>
+<li>[rule 6] with a call of <tt>noun_phrase</tt> that introduces the first noun phrase conjunct along with a subsequent call to <tt>noun_phrase_initial_tail</tt> of (<a href="chapter3.html#ex3.7">3.7</a>) that begins a recursive accumulation of further conjuncts</li>
 
 </ul>
 
@@ -487,7 +487,7 @@
 
 <li>[rule 6] relative clauses as post-head modifiers</li>
 
-<li>[rule 7] the integration of coordination, with conjuncts subsequent to the first accumulated with <tt>internal_np_higher_tail</tt> of (<a href="chapter3.html#ex3.15">3.15</a>)</li>
+<li>[rule 7] the integration of coordination</li>
 
 </ul>
 
@@ -514,6 +514,8 @@
 <tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_higher_tail(CL,[]).</tt><br>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For coordinations of <tt>internal_np_higher_layer</tt> structure, conjuncts subsequent to the first are accumulated with <tt>internal_np_higher_tail</tt> of (<a href="chapter3.html#ex3.15">3.15</a>).</p>
+
 <dl><dt>(<a name="ex3.15">3.15</a>)</dt><dd>
 </dd></dl>
 <tt>internal_np_higher_tail([node('CONJP',[CONJ,node('NP',NL)])|L],L)&nbsp;--&gt;</tt><br>
@@ -524,17 +526,19 @@
 <tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_higher_tail(L,L0).</tt><br>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>) to integrate nouns as:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>) to integrate:</p>
 
 <ul>
 
-<li>[rule 2] noun modifiers</li>
+<li>[rule 2] a noun that is a noun modifier</li>
 
-<li>[rule 6] coordinations</li>
+<li>[rule 3] content for an <tt>internal_np_higher_layer</tt> that is a noun modifier</li>
+
+<li>[rule 4] content for conjoined <tt>internal_np_higher_layer</tt> structure that is a noun modifier</li>
+
+<li>[rule 8] coordinations of <tt>internal_np_lower_layer</tt> structure</li>
 
 </ul>
-
-<p align="justify">For coordination, conjuncts subsequent to the first are accumulated with <tt>internal_np_lower_tail</tt> of (<a href="chapter3.html#ex3.17">3.17</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive calls of <tt>internal_np_lower_tail</tt> all involve finding a noun that will be the head noun, either:</p>
 
@@ -542,7 +546,7 @@
 
 <li>[rule 1] without a complement</li>
 
-<li>[rules 3&ndash;5] with a complement</li>
+<li>[rules 5&ndash;7] with a complement</li>
 
 </ul>
 
@@ -550,11 +554,11 @@
 
 <ul>
 
-<li>[rule 3] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.4.2">6.4.2</a></li>
+<li>[rule 5] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.4.2">6.4.2</a></li>
 
-<li>[rule 4] a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> found with <tt>cp_that</tt> of section <a href="chapter6.html#sec6.2">6.2</a> called with its type parameter set to <tt>with_c</tt></li>
+<li>[rule 6] a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> found with <tt>cp_that</tt> of section <a href="chapter6.html#sec6.2">6.2</a> called with its type parameter set to <tt>with_c</tt></li>
 
-<li>[rule 5] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.3">6.3</a></li>
+<li>[rule 7] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.3">6.3</a></li>
 
 </ul>
 
@@ -565,6 +569,13 @@
 <tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_layer(L1,L0).</tt><br>
+<tt>internal_np_lower_layer([node('NLYR',[NL1,NL2|NL3])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer([NL1,NL2|NL3],[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L,L0).</tt><br>
+<tt>internal_np_lower_layer([node('NLYR',[node('NLYR',[node('NP',NL)|CL])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_layer(NL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_higher_tail(CL,[]),</tt><br>
+<tt>&nbsp;&nbsp;internal_np_lower_layer(L,L0).</tt><br>
 <tt>internal_np_lower_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
@@ -577,6 +588,8 @@
 <tt>internal_np_lower_layer([node('NLYR',[node('NP',NL)|CL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_layer(NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;internal_np_lower_tail(CL,[]).</tt><br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For coordinations of <tt>internal_np_lower_layer</tt> structure, conjuncts subsequent to the first are accumulated with <tt>internal_np_lower_tail</tt> of (<a href="chapter3.html#ex3.17">3.17</a>).</p>
 
 <dl><dt>(<a name="ex3.17">3.17</a>)</dt><dd>
 </dd></dl>
