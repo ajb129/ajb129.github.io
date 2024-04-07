@@ -711,7 +711,7 @@
 <tt>verb_complements_by_code(';~Tn.pr',[],filled_subject,active_voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-CLR',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L1,L0).</tt><br>
-<tt>verb_complements_by_code(';~Tn.pr',[],filled_subject,active_voice,[node('NP-POB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Tn.pr',[],filled_subject,active_voice,[node('NP-OB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-CLR',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L1,L0).</tt><br>
@@ -773,7 +773,7 @@
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('P-ROLE','to'), w('PRO','you'), w('TO','to'), w('VB',';~I','decide')]),&nbsp;parse(verb_complements_by_code(';~Tn.pr',[],filled_subject,active_voice)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-POB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
 <tt>&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;you)))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(TO&nbsp;to)</tt><br>
@@ -1064,7 +1064,7 @@
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_subject,active_voice,VL,[]).</tt><br>
 <tt>verb_complements_by_code(';~Tnt',Displaced,filled_subject,passive_voice,[node('IP-INF-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,active_voice,VL,[]).</tt><br>
-<tt>verb_complements_by_code(';~Tnt',Displaced,filled_subject,active_voice,[node('NP-POB1',[node('PRO;_provisional_',[node(Word,[])])]),node('IP-INF-OB1',VL)|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Tnt',Displaced,filled_subject,active_voice,[node('NP-DOB1',[node('PRO;_provisional_',[node(Word,[])])]),node('IP-INF-OB1',VL)|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Displaced,filled_subject,active_voice,VL,[]),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L,L0).</tt><br>
@@ -1129,7 +1129,7 @@
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('TO','to'), w('BE',';~La','be'), w('ADJ','easy'), w('TO','to'), w('VB',';~Tn','impress'), w('NPR','Sandy')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_subject,active_voice)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-POB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
+<tt>(&nbsp;(NP-DOB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~La&nbsp;be)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-PRD2&nbsp;(ADJ&nbsp;easy)))</tt><br>
@@ -1986,7 +1986,7 @@
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[np(ICH)],filled_subject,active_voice,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',general,L,L0).</tt><br>
-<tt>verb_complements_by_code(';~Cn.a',[],filled_subject,active_voice,[node('NP-POB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Cn.a',[],filled_subject,active_voice,[node('NP-OB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L1,L0).</tt><br>
@@ -2061,7 +2061,7 @@
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('ADJR','easier'), w('TO','to'), w('VB',';~I','accept')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_subject,active_voice)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-POB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
 <tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJR&nbsp;easier))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;accept)))</tt><br>
@@ -2164,7 +2164,7 @@
 <tt>verb_complements_by_code(';~Cn.n',[],filled_subject,active_voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-PRD',general,L1,L0).</tt><br>
-<tt>verb_complements_by_code(';~Cn.n',[],filled_subject,active_voice,[node('NP-POB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Cn.n',[],filled_subject,active_voice,[node('NP-OB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-PRD',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L1,L0).</tt><br>
@@ -2200,7 +2200,7 @@
 </dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('D','a'), w('N','rule'), w('TO','to'), w('VB',';~Ip','get'), w('RP','up')]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[],filled_subject,active_voice)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-POB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
 <tt>&nbsp;&nbsp;(NP-PRD&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;rule))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(TO&nbsp;to)</tt><br>

@@ -308,16 +308,16 @@
 </dd></dl>
 <tt>subject(there_subject,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('EX',Word)].</tt><br>
-<tt>subject(cleft_subject,[node('NP-CSBJ',[node('PRO;_cleft_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(cleft_subject,[node('NP-SBJ',[node('PRO;_cleft_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_cleft_',Word)].</tt><br>
 <tt>subject(expletive_subject,[node('NP-SBJ',[node('PRO;_expletive_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
-<tt>subject(provisional_subject,[node('NP-PSBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(provisional_subject,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
 <tt>subject(filled_subject,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
 <tt>subject(derived_subject,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-DSBJ',non_interrogative,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first four rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the <tt>SbjType</tt> parameter of the clause to:</p>
 
