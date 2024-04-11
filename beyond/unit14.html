@@ -62,16 +62,15 @@
 <dl><dt>(<a name="ex14.5">14.5</a>)</dt></dl>
 <tt>&sol;^NEG&#92;b&sol;</tt><br>
 <tt>&nbsp;&nbsp;$&nbsp;&sol;&#92;bSBJ&sol;=sbj</tt><br>
-<tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$..&nbsp;=sbj</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip))))</tt><br>
+<tt>&nbsp;&nbsp;$,,&nbsp;(&sol;^(MD|HVD|HVP|BED|BEP|DOD|DOP)&#92;b&sol;=op&nbsp;$..&nbsp;=sbj)</tt><br>
+<tt>&nbsp;&nbsp;&gt;&gt;&nbsp;(&sol;^IP-SUB&sol;=ip</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;(&sol;^CP-QUE&sol;&nbsp;[&nbsp;!&gt;&nbsp;(__&nbsp;&gt;&nbsp;__)&nbsp;|&nbsp;&gt;&nbsp;&sol;^utterance&sol;&nbsp;])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;=op)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!&lt;&lt;&nbsp;(&sol;^W&sol;&nbsp;&lt;&nbsp;__&nbsp;!&gt;&gt;&nbsp;(&sol;^IP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=ip)))</tt><br>
 <br>
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/tspc_tgrep2.sh" method="post">
   <input type="hidden" name="KIND" value="basic"/>
-  <input type="hidden" name="search" value="/^NEG\b/ $ /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip))))"/>
+  <input type="hidden" name="search" value="/^NEG\b/ $ /\bSBJ/=sbj $,, (/^(MD|HVD|HVP|BED|BEP|DOD|DOP)\b/=op $.. =sbj) >> (/^IP-SUB/=ip > (/^CP-QUE/ [ !> (__ > __) | > /^utterance/ ]) !<< (/^IP\b/ << =op) !<< (/^W/ < __ !>> (/^IP\b/ >> =ip)))"/>
   <button type="submit" name="submit_param" value="submit_value" class="link-button">Try</button>
 </form>
 
@@ -205,7 +204,7 @@
 
 <dt>3.</dt><dd>See the difference in the number of hits returned by patterns (<a href="unit14.html#ex14.8">14.8</a>) and (<a href="unit14.html#ex14.9">14.9</a>). Which pattern is more common?</dd>
 
-<dt>4.</dt><dd>What is the most commonly used sentence initial word with negative Yes-No questions? You can use pattern (<a href="unit14.html#ex14.10">14.10</a>) below to help you answer this question.</dd>
+<dt>4.</dt><dd>What is the most commonly used sentence initial word with negative Yes-No questions? You can use pattern (<a href="unit14.html#ex14.10">14.10</a>) below to help you answer this question by looking at the numbers for returned matches of the pattern.</dd>
 
 <dt>5.</dt><dd>How are negative Yes-No questions answered? Are answers typically negative or positive? Can you find any evidence of negative Yes-No questions being used in a &lsquo;loaded way&rsquo;, that is, in a manner that already presumes a negative answer?</dd>
 
