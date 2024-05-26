@@ -147,14 +147,14 @@
 
 <br><h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-dominates relation</h3>
 
-<p align="justify">As a demonstration of the immediately dominates relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex8">8</a>) are constrained to match any node that happens to be immediately dominated by the node labelled <tt>C</tt>.</p>
+<p align="justify">As a demonstration of the immediately dominates relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex8">8</a>) are constrained to match any node that happens to be immediately dominated by a node labelled <tt>C</tt>.</p>
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
 <tt>C&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;dominates&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
 <tt>__&nbsp;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex8">8</a>) can match any of the marked nodes in (<a href="#ex9">9</a>) (one match for each search hit) that are not <tt>C</tt>, all of which are situated immediately below <tt>C</tt>, but not any lower.</p>
+<p align="justify">As examples of search matching, the wildcards of (<a href="#ex8">8</a>) can match any of the marked nodes in (<a href="#ex9">9</a>) (one match for each search hit) that are not <tt>C</tt>, both of which are situated immediately below <tt>C</tt>, but not any lower.</p>
 
 <dl><dt>(<a name="ex9">9</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -223,7 +223,7 @@
 
 <br><h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The dominates relation</h3>
 
-<p align="justify">As a demonstration of the dominates relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex10">10</a>) are constrained to match any of the nodes that happen to be dominated by the node labelled <tt>C</tt>.</p>
+<p align="justify">As a demonstration of the dominates relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex10">10</a>) are constrained to match any of the nodes that happen to be dominated by a node labelled <tt>C</tt>.</p>
 
 <dl><dt>(<a name="ex10">10</a>)</dt><dd>
 <tt>C&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
@@ -306,7 +306,7 @@
 
 <br><h3><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;The is-dominated-by relation</h3>
 
-<p align="justify">As a demonstration of the is-dominated-by relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex12">12</a>) are constrained to match any node that happens to dominate the node labelled <tt>E</tt>.</p>
+<p align="justify">As a demonstration of the is-dominated-by relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex12">12</a>) are constrained to match any node that happens to dominate a node labelled <tt>E</tt>.</p>
 
 <dl><dt>(<a name="ex12">12</a>)</dt><dd>
 <tt>E&nbsp;&gt;&gt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
@@ -384,7 +384,7 @@
 
 <br><h3><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;The precedes relation</h3>
 
-<p align="justify">As a demonstration of the precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex14">14</a>) are constrained to match any node that happens to be preceded by the node labelled <tt>I</tt>.</p>
+<p align="justify">As a demonstration of the precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex14">14</a>) are constrained to match any node that happens to be preceded by a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex14">14</a>)</dt><dd>
 <tt>I&nbsp;..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
@@ -469,7 +469,7 @@
 
 <br><h3><a name="sec3.5">3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The follows relation</h3>
 
-<p align="justify">As a demonstration of the follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex16">16</a>) are constrained to match any node that happens to be followed by the node labelled <tt>I</tt>.</p>
+<p align="justify">As a demonstration of the follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex16">16</a>) are constrained to match any node that happens to be followed by a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex16">16</a>)</dt><dd>
 <tt>I&nbsp;,,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
@@ -553,7 +553,7 @@
 
 <br><h3><a name="sec3.6">3.6</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-precedes relation</h3>
 
-<p align="justify">As a demonstration of the immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex18">18</a>) are constrained to match any node that happens to be immediately preceded by the node labelled <tt>I</tt>.</p>
+<p align="justify">As a demonstration of the immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex18">18</a>) are constrained to match any node that happens to be immediately preceded by a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex18">18</a>)</dt><dd>
 <tt>I&nbsp;.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
@@ -630,7 +630,7 @@
 
 <br><h3><a name="sec3.7">3.7</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-follows relation</h3>
 
-<p align="justify">As a demonstration of the immediately-follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex20">20</a>) are constrained to match any node that happens to be immediately followed by the node labelled <tt>I</tt>.</p>
+<p align="justify">As a demonstration of the immediately-follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex20">20</a>) are constrained to match any node that happens to be immediately followed by a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex20">20</a>)</dt><dd>
 <tt>I&nbsp;,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
@@ -707,7 +707,7 @@
 
 <br><h3><a name="sec3.8">3.8</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister relation</h3>
 
-<p align="justify">As a demonstration of the sister relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex22">22</a>) are constrained to match any node that happens to be a sister of the node labelled <tt>F</tt>.</p>
+<p align="justify">As a demonstration of the sister relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex22">22</a>) are constrained to match any node that happens to be a sister of a node labelled <tt>F</tt>.</p>
 
 <dl><dt>(<a name="ex22">22</a>)</dt><dd>
 <tt>F&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
@@ -783,7 +783,7 @@
 
 <br><h3><a name="sec3.9">3.9</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister-and-precedes or sister-and-follows relations</h3>
 
-<p align="justify">As a demonstration of the sister-and-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex24">24</a>) are constrained to match any node where the node labelled <tt>E</tt> is a preceding sister.</p>
+<p align="justify">As a demonstration of the sister-and-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex24">24</a>) are constrained to match any node where a node labelled <tt>E</tt> is a preceding sister.</p>
 
 <dl><dt>(<a name="ex24">24</a>)</dt><dd>
 <tt>E&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
@@ -859,7 +859,7 @@
 
 <br><h3><a name="sec3.10">3.10</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister-and-immediately-precedes and sister-and-immediately-follows relations</h3>
 
-<p align="justify">As a demonstration of the sister-and-immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex26">26</a>) are constrained to match the node where the node labelled <tt>E</tt> is the immediately preceding sister.</p>
+<p align="justify">As a demonstration of the sister-and-immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex26">26</a>) are constrained to match the node where a node labelled <tt>E</tt> is the immediately preceding sister.</p>
 
 <dl><dt>(<a name="ex26">26</a>)</dt><dd>
 <tt>E&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
