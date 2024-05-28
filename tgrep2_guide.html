@@ -62,13 +62,13 @@
 
 <li>A simple character string, such as <tt>P-CONN</tt>, <tt>VB</tt>, <tt>そのような</tt>, etc., matches if it is the full content of the matched node.</li>
 
-<li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern can match a node if any of its components match the node's full content. For example, <tt>VB|VB0</tt> can match <tt>VB</tt> or <tt>VB0</tt> nodes.</li>
+<li>A pattern can be built from simple character strings separated by pipes (<tt>|</tt>) with no spaces. Such a pattern can match a node if any of its components match the node's full content. For example, <tt>VB|VB0</tt> matches nodes labelled <tt>VB</tt> or <tt>VB0</tt>.</li>
 
 <li>A regular expression, indicated by surrounding slashes (<tt>&sol;</tt>), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a simple character string or a regular expression begins with an exclamation mark (<tt>!</tt>), the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> can match any node that is not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> can match any node that does not start with <tt>I</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a simple character string or a regular expression begins with an exclamation mark (<tt>!</tt>), the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> matches any node that is not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> can match any node that does not start with <tt>I</tt>.</p>
 
 <br><h3><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Tips for using node descriptions that are regular expressions</h3>
 
@@ -143,7 +143,7 @@
 <tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
 </dd></dl>
 
-<p align="justify">Any relationship can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>). Examples of patterns with negated relations are given below in section <a href="#sec3.11">3.11</a>.</p>
+<p align="justify">Any relationship can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>). Examples of patterns with negated relations are given below in sections <a href="#sec3.11">3.11</a>, <a href="#sec4">4</a> and <a href="#sec5">5</a>.</p>
 
 <br><h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-dominates relation</h3>
 
@@ -154,7 +154,7 @@
 <tt>__&nbsp;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex8">8</a>) can match any of the marked nodes in (<a href="#ex9">9</a>) (one match for each search hit) that are not <tt>C</tt>, both of which are situated immediately below <tt>C</tt>, but not any lower.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex9">9</a>) which has a node labelled <tt>C</tt>.</p>
 
 <dl><dt>(<a name="ex9">9</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -221,6 +221,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex8">8</a>) can match any of the marked nodes in (<a href="#ex9">9</a>) (one match for each search hit) that are not <tt>C</tt>, both of which are situated immediately below <tt>C</tt>, but not any lower.</p>
+
 <br><h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The dominates relation</h3>
 
 <p align="justify">As a demonstration of the dominates relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex10">10</a>) are constrained to match any of the nodes that happen to be dominated by a node labelled <tt>C</tt>.</p>
@@ -230,7 +232,7 @@
 <tt>__&nbsp;&gt;&gt;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex10">10</a>) can match any of the marked nodes in (<a href="#ex11">11</a>) (one match for each search hit) that are not <tt>C</tt>, all of which are situated below <tt>C</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex11">11</a>) which has a node labelled <tt>C</tt>.</p>
 
 <dl><dt>(<a name="ex11">11</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -304,6 +306,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex10">10</a>) can match any of the marked nodes in (<a href="#ex11">11</a>) (one match for each search hit) that are not <tt>C</tt>, all of which are situated below <tt>C</tt>.</p>
+
 <br><h3><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;The is-dominated-by relation</h3>
 
 <p align="justify">As a demonstration of the is-dominated-by relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex12">12</a>) are constrained to match any node that happens to dominate a node labelled <tt>E</tt>.</p>
@@ -313,7 +317,7 @@
 <tt>__&nbsp;&lt;&lt;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex12">12</a>) can match any of the marked nodes in (<a href="#ex13">13</a>) (one match for each search hit) that are not <tt>E</tt>, all of which are situated above <tt>E</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex13">13</a>) which has a node labelled <tt>E</tt>.</p>
 
 <dl><dt>(<a name="ex13">13</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -382,6 +386,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex12">12</a>) can match any of the marked nodes in (<a href="#ex13">13</a>) (one match for each search hit) that are not <tt>E</tt>, all of which are situated above <tt>E</tt>.</p>
+
 <br><h3><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;The precedes relation</h3>
 
 <p align="justify">As a demonstration of the precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex14">14</a>) are constrained to match any node that happens to be preceded by a node labelled <tt>I</tt>.</p>
@@ -391,7 +397,7 @@
 <tt>__&nbsp;,,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex14">14</a>) can match any of the marked nodes in (<a href="#ex15">15</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur after <tt>I</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex15">15</a>) which has a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex15">15</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -467,6 +473,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex14">14</a>) can match any of the marked nodes in (<a href="#ex15">15</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur after <tt>I</tt>.</p>
+
 <br><h3><a name="sec3.5">3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The follows relation</h3>
 
 <p align="justify">As a demonstration of the follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex16">16</a>) are constrained to match any node that happens to be followed by a node labelled <tt>I</tt>.</p>
@@ -476,7 +484,7 @@
 <tt>__&nbsp;..&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex16">16</a>) can match any of the marked nodes in (<a href="#ex17">17</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur before <tt>I</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex17">17</a>) which has a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex17">17</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -551,6 +559,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex16">16</a>) can match any of the marked nodes in (<a href="#ex17">17</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur before <tt>I</tt>.</p>
+
 <br><h3><a name="sec3.6">3.6</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-precedes relation</h3>
 
 <p align="justify">As a demonstration of the immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex18">18</a>) are constrained to match any node that happens to be immediately preceded by a node labelled <tt>I</tt>.</p>
@@ -560,7 +570,7 @@
 <tt>__&nbsp;,&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex18">18</a>) can match any of the marked nodes in (<a href="#ex19">19</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur immediately after <tt>I</tt> and no later.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex19">19</a>) which has a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex19">19</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -628,6 +638,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex18">18</a>) can match any of the marked nodes in (<a href="#ex19">19</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur immediately after <tt>I</tt> and no later.</p>
+
 <br><h3><a name="sec3.7">3.7</a>&nbsp;&nbsp;&nbsp;&nbsp;The immediately-follows relation</h3>
 
 <p align="justify">As a demonstration of the immediately-follows relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex20">20</a>) are constrained to match any node that happens to be immediately followed by a node labelled <tt>I</tt>.</p>
@@ -637,7 +649,7 @@
 <tt>__&nbsp;.&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex20">20</a>) can match any of the marked nodes in (<a href="#ex21">21</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur immediately before <tt>I</tt> and no earlier.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex21">21</a>) which has a node labelled <tt>I</tt>.</p>
 
 <dl><dt>(<a name="ex21">21</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -705,6 +717,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex20">20</a>) can match any of the marked nodes in (<a href="#ex21">21</a>) (one match for each search hit) that are not <tt>I</tt>, all of which occur immediately before <tt>I</tt> and no earlier.</p>
+
 <br><h3><a name="sec3.8">3.8</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister relation</h3>
 
 <p align="justify">As a demonstration of the sister relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex22">22</a>) are constrained to match any node that happens to be a sister of a node labelled <tt>F</tt>.</p>
@@ -714,7 +728,7 @@
 <tt>__&nbsp;$&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex22">22</a>) can match any of the marked nodes in (<a href="#ex23">23</a>) (one match for each search hit) that are not <tt>F</tt>, both of which occur at the same level as <tt>F</tt> in the tree structure.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex23">23</a>) which has a node labelled <tt>F</tt>.</p>
 
 <dl><dt>(<a name="ex23">23</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -781,6 +795,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex22">22</a>) can match any of the marked nodes in (<a href="#ex23">23</a>) (one match for each search hit) that are not <tt>F</tt>, both of which occur at the same level as <tt>F</tt> in the tree structure.</p>
+
 <br><h3><a name="sec3.9">3.9</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister-and-precedes or sister-and-follows relations</h3>
 
 <p align="justify">As a demonstration of the sister-and-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex24">24</a>) are constrained to match any node where a node labelled <tt>E</tt> is a preceding sister.</p>
@@ -790,7 +806,7 @@
 <tt>__&nbsp;$,,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex24">24</a>) can match any of the marked nodes in (<a href="#ex25">25</a>) (one match for each search hit) that are not <tt>E</tt>, both of which occur at the same level in the tree structure as <tt>E</tt> and occur after <tt>E</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex25">25</a>) which has a node labelled <tt>E</tt>.</p>
 
 <dl><dt>(<a name="ex25">25</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -857,6 +873,8 @@
 </svg>
 </dd></dl>
 
+<p align="justify">The wildcards of (<a href="#ex24">24</a>) can match any of the marked nodes in (<a href="#ex25">25</a>) (one match for each search hit) that are not <tt>E</tt>, both of which occur at the same level in the tree structure as <tt>E</tt> and occur after <tt>E</tt>.</p>
+
 <br><h3><a name="sec3.10">3.10</a>&nbsp;&nbsp;&nbsp;&nbsp;The sister-and-immediately-precedes and sister-and-immediately-follows relations</h3>
 
 <p align="justify">As a demonstration of the sister-and-immediately-precedes relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex26">26</a>) are constrained to match the node where a node labelled <tt>E</tt> is the immediately preceding sister.</p>
@@ -866,7 +884,7 @@
 <tt>__&nbsp;$,&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
 </dd></dl>
 
-<p align="justify">As examples of search matching, the wildcards of (<a href="#ex26">26</a>) can match the marked <tt>F</tt> node in (<a href="#ex27">27</a>), which occurs at the same level in the tree structure as <tt>E</tt> and comes immediately after <tt>E</tt>.</p>
+<p align="justify">As examples of search matching, consider the tree in (<a href="#ex27">27</a>) which has a node labelled <tt>E</tt>.</p>
 
 <dl><dt>(<a name="ex27">27</a>)</dt><dd>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="550" height="330" viewBox="-5.50 -1.650 660.0 396.0">
@@ -931,6 +949,8 @@
 <line x1="275" y1="55" x2="522.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
+
+<p align="justify">The wildcards of (<a href="#ex26">26</a>) can match the marked <tt>F</tt> node in (<a href="#ex27">27</a>), which occurs at the same level in the tree structure as <tt>E</tt> and comes immediately after <tt>E</tt>.</p>
 
 <br><h3><a name="sec3.11">3.11</a>&nbsp;&nbsp;&nbsp;&nbsp;The <tt>i</tt>-th child relationships</h3>
 
