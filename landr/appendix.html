@@ -27,33 +27,33 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="#ex1">1</a>).</p>
 
 <dl><dt>(<a name="ex1">1</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;atom_concat('BEP',&nbsp;';~La',&nbsp;A).</tt><br>
 <br>
 <tt>A&nbsp;=&nbsp;BEP;~La</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="#ex2">2</a>).</p>
 
 <dl><dt>(<a name="ex2">2</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;sub_atom('BEP',0,1,_,C).</tt><br>
 <br>
 <tt>C&nbsp;=&nbsp;B</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="#ex3">3</a>).</p>
 
 <dl><dt>(<a name="ex3">3</a>)</dt><dd>
-</dd></dl>
 <tt>|?-&nbsp;gensym('-',Index),&nbsp;atom_concat('*ICH*',Index,ICH).</tt><br>
 <br>
 <tt>Index&nbsp;=&nbsp;-5</tt><br>
 <tt>ICH&nbsp;=&nbsp;*ICH*-5</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">When parsing, <tt>gensym</tt> can be invoked to provide a tree component with a distinct index, which can go on to be distributed elsewhere in the parse.</p>
 
@@ -68,7 +68,6 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="#ex4">4</a>) demonstrates.</p>
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;member(E,[a,b,c]).</tt><br>
 <br>
 <tt>E&nbsp;=&nbsp;a;</tt><br>
@@ -78,23 +77,23 @@
 <tt>E&nbsp;=&nbsp;c;</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <br><h2>Incomplete lists</h2>
 
 <p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="#ex5">5</a>) is such a structure.</p>
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
 <br>
 <tt>L&nbsp;=&nbsp;[a,b,c|_h383];</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="#ex6">6</a>).</p>
 
 <dl><dt>(<a name="ex6">6</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[1,2,3|L1],&nbsp;L1&nbsp;=&nbsp;[4,5|L0].</tt><br>
 <br>
 <tt>L&nbsp;=&nbsp;[1,2,3,4,5|_h527]</tt><br>
@@ -102,13 +101,13 @@
 <tt>L0&nbsp;=&nbsp;_h527;</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <br><h2>Pretty printing trees</h2>
 
 <p align="justify">Trees seen throughout this book have been pretty printed with (<a href="#ex7">7</a>). <tt>pp_ptree_list</tt> takes a list of <tt>node</tt> structures, as described in section <a href="#sec__treestructure__">__treestructure__</a>, and prints each tree with a following new line. Trees are printed as labelled bracketed structures with one terminal node per line and indentation to indicate the depth of embedding.</p>
 
 <dl><dt>(<a name="ex7">7</a>)</dt><dd>
-</dd></dl>
 <tt>pp_ptree_list([]).</tt><br>
 <tt>pp_ptree_list([node(Label,[])|T])&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;write(Label),</tt><br>
@@ -141,13 +140,13 @@
 <tt>&nbsp;&nbsp;NextColumn&nbsp;is&nbsp;Column+More+2,</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_first_child(First,&nbsp;NextColumn),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_rest(Rest,&nbsp;NextColumn).</tt><br>
+</dd></dl>
 
 <br><h2>The parse routine</h2>
 
 <p align="justify">The <tt>parse</tt> routine introduced in section <a href="#sec__sentence__">__sentence__</a> and called with examples throughout the book is defined in (<a href="#ex8">8</a>).</p>
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
-</dd></dl>
 <tt>parse(Goal)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;Goal&nbsp;=..&nbsp;L1,</tt><br>
 <tt>&nbsp;&nbsp;append(L1,[[X],[]],L2),</tt><br>
@@ -160,6 +159,7 @@
 <tt>&nbsp;&nbsp;Goal2&nbsp;=..&nbsp;L2,</tt><br>
 <tt>&nbsp;&nbsp;setof(node('',[X,Y|T]),&nbsp;tphrase(Goal2),&nbsp;R),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(R).</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 

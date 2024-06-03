@@ -63,21 +63,21 @@
 
 <li>a left-hand side that is the label for the layer</li>
 
-<li>a right-hand side made of one, two, or more embedded elements, where an embedded element can be either the label of a layer or a terminal element</li>
+<li>a right-hand side made of one, two or more embedded elements, where an embedded element can be either the label of a layer or a terminal element</li>
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, the five rules of (<a href="chapter1.html#ex1.1">1.1</a>) involve labelled layers: <tt>vp</tt>, <tt>np_sbj</tt>, and <tt>ip</tt>; and terminal elements: <tt>[smiles]</tt>, <tt>[and]</tt>, and <tt>[he]</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, the five rules of (<a href="chapter1.html#ex1.1">1.1</a>) involve labelled layers: <tt>vp</tt>, <tt>np_sbj</tt> and <tt>ip</tt>; and terminal elements: <tt>[smiles]</tt>, <tt>[and]</tt> and <tt>[he]</tt>.</p>
 
 <dl><dt>(<a name="ex1.1">1.1</a>)</dt><dd>
-</dd></dl>
 <tt>1.&nbsp;&nbsp;vp&nbsp;--&gt;&nbsp;[smiles].</tt><br>
 <tt>2.&nbsp;&nbsp;vp&nbsp;--&gt;&nbsp;vp,&nbsp;[and],&nbsp;vp.</tt><br>
 <tt>3.&nbsp;&nbsp;np_sbj&nbsp;--&gt;&nbsp;[he].</tt><br>
 <tt>4.&nbsp;&nbsp;ip&nbsp;--&gt;&nbsp;np_sbj,&nbsp;vp.</tt><br>
 <tt>5.&nbsp;&nbsp;ip&nbsp;--&gt;&nbsp;ip,&nbsp;[and],&nbsp;ip.</tt><br>
+</dd></dl>
 
-<p align="justify">By following the rules of (<a href="chapter1.html#ex1.1">1.1</a>), we can assemble the structure of (<a href="chapter1.html#ex1.2">1.2</a>): We can start with rule 4 where an <tt>ip</tt> layer can consist of an <tt>np_sbj</tt> layer followed by a <tt>vp</tt> layer. With rule 3, we get to a complete <tt>np_sbj</tt> with the terminal word <tt>[he]</tt>. With rule 2, we get to a <tt>vp</tt>, which is itself made up of a <tt>vp</tt>, followed by an <tt>[and]</tt> word, followed by a <tt>vp</tt>. Finally, with rule 1, we can get to complete <tt>vp</tt> layers with the terminal word <tt>[smiles]</tt>.</p>
+<p align="justify">By following the rules of (<a href="chapter1.html#ex1.1">1.1</a>), we can assemble the structure of (<a href="chapter1.html#ex1.2">1.2</a>): We can start with rule 4, where an <tt>ip</tt> layer can consist of an <tt>np_sbj</tt> layer followed by a <tt>vp</tt> layer. Rule 3 gives a complete <tt>np_sbj</tt> with the terminal word <tt>[he]</tt>. Rule 2 gives a <tt>vp</tt> which is itself made up of a <tt>vp</tt>, followed by terminal word <tt>[and]</tt>, followed by a <tt>vp</tt>. Finally, rule 1 gives <tt>vp</tt> layers with the terminal word <tt>[smiles]</tt>.</p>
 
 <dl><dt>(<a name="ex1.2">1.2</a>)</dt><dd>
 </dd></dl>
@@ -214,7 +214,7 @@
 </tr>
 </table>
 
-<br><h4>Question:</h4>
+<br><h4>Question</h4>
 
 <p align="justify">Applying the phrase structure rules of (<a href="chapter1.html#ex1.1">1.1</a>), how many different <tt>ip</tt> structures can be made?</p>
 
@@ -252,9 +252,9 @@
 
 <ul>
 
-<li>the tag labelling: <tt>CP</tt> and <tt>IP</tt> for clause layers; <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt>, and <tt>PP</tt> for phrase layers</li>
+<li>the tag labelling: <tt>CP</tt> and <tt>IP</tt> for clause layers; <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt> and <tt>PP</tt> for phrase layers</li>
 
-<li>that label extensions are added to <tt>CP</tt>, <tt>IP</tt>, <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt>, and <tt>PP</tt> to indicate functions</li>
+<li>that label extensions are added to <tt>CP</tt>, <tt>IP</tt>, <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt> and <tt>PP</tt> to indicate functions</li>
 
 <li>the presentation of conjunction structure with <tt>CONJP</tt> layers</li>
 
@@ -311,7 +311,6 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With this background, consider (<a href="chapter1.html#ex1.4">1.4</a>) as an example of encircling layers gathered with <tt>node</tt> structures.</p>
 
 <dl><dt>(<a name="ex1.4">1.4</a>)</dt><dd>
-</dd></dl>
 <tt>node('IP-MAT',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('NP-SBJ',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('PRO',</tt><br>
@@ -328,16 +327,17 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('smiles',[])])])])]),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node('PUNC',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('.',[])])])</tt><br>
+</dd></dl>
 
 <p align="justify">We will more typically present <tt>node</tt> structure as labelled bracketed structure, as in (<a href="chapter1.html#ex1.5">1.5</a>).</p>
 
 <dl><dt>(<a name="ex1.5">1.5</a>)</dt><dd>
-</dd></dl>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(ILYR&nbsp;(VBP;~I&nbsp;smiles))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VBP;~I&nbsp;smiles))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+</dd></dl>
 
 <br><h2><a name="sec1.6">1.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Orientation</h2>
 
@@ -350,7 +350,6 @@
 <p align="justify">The Prolog code of (<a href="chapter1.html#ex1.6">1.6</a>) gives phrase structure rules to initiate finding layered content to say there is a sentence.</p>
 
 <dl><dt>(<a name="ex1.6">1.6</a>)</dt><dd>
-</dd></dl>
 <tt>sentence([node('IP-MAT',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,[],IL,IL1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,IL1,[]).</tt><br>
@@ -365,13 +364,13 @@
 <tt>&nbsp;&nbsp;punc(non_final,IL2,[node('PRN',[node('CP-QUE',[node('IP-SUB',TL)])])|IL1]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(tag_question,[],TL,[]),</tt><br>
 <tt>&nbsp;&nbsp;punc(final_question,IL1,[]).</tt><br>
+</dd></dl>
 
 <p align="justify">Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) will create a <tt>node</tt> structure with a list <tt>IL</tt> for the layer content of the node and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, rule 1 needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="chapter5.html#sec5.2">5.2</a>), and where the last list item is an instance of final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="chapter1.html#ex1.7">1.7</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to store a list of word items to parse. Let's call this the <b>word list</b>. The second call has <tt>parse</tt> to question whether the stored word list has content to satisfy a call of <tt>sentence</tt>. Note that the parameter of <tt>sentence</tt> for accumulating parse structure is hidden internally to the <tt>parse</tt> call. If <tt>parse</tt> succeeds, then all parse results are presented as bracketed tree output.</p>
 
 <dl><dt>(<a name="ex1.7">1.7</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
@@ -379,19 +378,20 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">The output from (<a href="chapter1.html#ex1.7">1.7</a>) is structure with <tt>IP-MAT</tt> as the topmost node, so rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) completed successfully.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="chapter1.html#ex1.8">1.8</a>).</p>
 
 <dl><dt>(<a name="ex1.8">1.8</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~I','Smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-IMP&nbsp;(VB;~I&nbsp;Smile)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">The output from (<a href="chapter1.html#ex1.8">1.8</a>) is structure with <tt>IP-IMP</tt> (imperative clause) as the topmost node: Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) fails, but rule 2 succeeds. Rules 1 and 2 are similar. Both rules call <tt>clause_top_layer</tt>, but they do so with different clause type settings:</p>
 
@@ -406,15 +406,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As with (<a href="chapter1.html#ex1.8">1.8</a>), an imperative clause should have no subject and an initial verb with imperative form (a word with <tt>VB</tt>, <tt>DO</tt>, <tt>HV</tt> or <tt>BE</tt> word class information). If we try (<a href="chapter1.html#ex1.9">1.9</a>), which is unsuitable as a statement sentence because of the lack of content for a subject but then also unsuitable as an imperative sentence because the verb has <tt>VBP</tt> (present tense) word class, then there can be no parse result, as (<a href="chapter1.html#ex1.9">1.9</a>) shows.</p>
 
 <dl><dt>(<a name="ex1.9">1.9</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VBP',';~I','Smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a further example of checking if there is word list content for a sentence, consider (<a href="chapter1.html#ex1.10">1.10</a>).</p>
 
 <dl><dt>(<a name="ex1.10">1.10</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(CP-QUE&nbsp;(IP-SUB&nbsp;(DOD&nbsp;Did)</tt><br>
@@ -423,13 +422,13 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">The output from (<a href="chapter1.html#ex1.10">1.10</a>) shows the return of a structure with <tt>CP-QUE</tt> (interrogative clause) as the topmost node. This is achieved with rule 3 of (<a href="chapter1.html#ex1.6">1.6</a>), which expects the word list to provide content for the success of a <tt>clause_top_layer</tt> rule with the clause type parameter set to <tt>matrix_interrogative</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As yet another example of checking word list content for being a sentence, consider (<a href="chapter1.html#ex1.11">1.11</a>).</p>
 
 <dl><dt>(<a name="ex1.11">1.11</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD',';~cat_Vi','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD',';~cat_Vi','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
@@ -442,6 +441,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <p align="justify">The output from (<a href="chapter1.html#ex1.11">1.11</a>) shows the return of a sentence ending in a tag question, which is achieved with rule 4 of (<a href="chapter1.html#ex1.6">1.6</a>).</p>
 
@@ -459,18 +459,17 @@
 
 </ul>
 
-<br><h4>Question:</h4>
+<br><h4>Question</h4>
 
 <p align="justify">Why do the failure and success results of (<a href="chapter1.html#ex1.12">1.12</a>)&ndash;(<a href="chapter1.html#ex1.14">1.14</a>) obtain? (Also, note the result of (<a href="chapter1.html#ex1.10">1.10</a>) above.)</p>
 
 <dl><dt>(<a name="ex1.12">1.12</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <dl><dt>(<a name="ex1.13">1.13</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
@@ -479,12 +478,13 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <dl><dt>(<a name="ex1.14">1.14</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
+</dd></dl>
 
 <br><h2><a name="sec1.8">1.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Sentence fragments and utterances</h2>
 
@@ -493,10 +493,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule (<a href="chapter1.html#ex1.15">1.15</a>) identifies a sentence fragment as content for a fragment layer followed by sentence final punctuation.</p>
 
 <dl><dt>(<a name="ex1.15">1.15</a>)</dt><dd>
-</dd></dl>
 <tt>fragment([node('FRAG',FL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;fragment_layer(FL,FL1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,FL1,[]).</tt><br>
+</dd></dl>
 
 <p align="justify">Fragment layer content is found with calls of (<a href="chapter1.html#ex1.16">1.16</a>) that detect:</p>
 
@@ -506,36 +506,36 @@
 
 <li>[rule 2] an adjective phrase (see section <a href="chapter3.html#sec3.4">3.4</a>)</li>
 
-<li>[rule 3] an adverbial</li>
+<li>[rule 3] an adverbial from an <tt>initial_adverbial</tt> call (see section <a href="chapter2.html#sec2.10">2.10</a>)</li>
 
 <li>[rule 4] a <i>to</i>-infinite clause (see section <a href="chapter6.html#sec6.4.2">6.4.2</a>)</li>
 
-<li>[rule 5] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.49">6.49</a>)</li>
+<li>[rule 5] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.6.2">6.6.2</a>)</li>
 
-<li>[rule 6] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.49">6.49</a>)</li>
+<li>[rule 6] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.6.2">6.6.2</a>)</li>
 
 </ul>
 
 <dl><dt>(<a name="ex1.16">1.16</a>)</dt><dd>
-</dd></dl>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',_,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('',_,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverbial(L,L0).</tt><br>
+<tt>&nbsp;&nbsp;initial_adverbial(L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('',[],L,L0).</tt><br>
 <tt>fragment_layer([node('IP-PPL2;IP-PPL',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_subject,IL,[]).</tt><br>
 <tt>fragment_layer([node('IP-PPL3',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_subject,IL,[]).</tt><br>
+</dd></dl>
 
 <p align="justify">For rule 3 of (<a href="chapter1.html#ex1.16">1.16</a>), an adverbial (see section <a href="chapter2.html#sec2.10">2.10</a> for the <tt>adverbial</tt> rules) can be:</p>
 
 <ul>
 
-<li>a clause level word (but not a verb word, negation, or infinitival <i>to</i>)</li>
+<li>a clause level word (but not a verb word, negation or infinitival <i>to</i>)</li>
 
 <li>an adverb phrase</li>
 
@@ -548,15 +548,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments, and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.17">1.17</a>) calls the rules of (<a href="chapter1.html#ex1.18">1.18</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4 of (<a href="chapter1.html#ex1.18">1.18</a>)]. The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2 of (<a href="chapter1.html#ex1.18">1.18</a>)].</p>
 
 <dl><dt>(<a name="ex1.17">1.17</a>)</dt><dd>
-</dd></dl>
 <tt>utterance(Ext,[node(Label,UL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;utterance_collect(UL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('utterance',Ext,Label)</tt><br>
 <tt>&nbsp;&nbsp;}.</tt><br>
+</dd></dl>
 
 <dl><dt>(<a name="ex1.18">1.18</a>)</dt><dd>
-</dd></dl>
 <tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;sentence(L,L0).</tt><br>
 <tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
@@ -567,11 +566,11 @@
 <tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;fragment(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;utterance_collect(L1,L0).</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Example (<a href="chapter1.html#ex1.19">1.19</a>) illustrates the parse of an utterance that has an initial imperative sentence and ends with a sentence fragment that has a noun phrase as content for its fragment layer.</p>
 
 <dl><dt>(<a name="ex1.19">1.19</a>)</dt><dd>
-</dd></dl>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~I','Beware'), w('PUNC','!'), w('PRO;_genm_','His'), w('ADJ','flashing'), w('NS','eyes'), w('PUNC','!')]),&nbsp;parse(utterance('')).</tt><br>
 <br>
 <tt>(utterance&nbsp;(IP-IMP&nbsp;(VB;~I&nbsp;Beware)</tt><br>
@@ -582,6 +581,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;!)))</tt><br>
 <br>
 <tt>yes</tt><br>
+</dd></dl>
 
 <br>
 <br>
