@@ -470,7 +470,7 @@
 
 <br><h2><a name="sec2.8">2.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb words</h2>
 
-<p align="justify">This section covers how verb words are integrated into a parse. The <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) matches verb words from the word list, collecting information for three parameters: <tt>Tag</tt>, <tt>Code</tt>, and <tt>Word</tt>.</p>
+<p align="justify">This section covers how verb words are integrated into a parse. The <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) matches verb words from the word list, collecting information for three parameters: <tt>Tag</tt>, <tt>Code</tt> and <tt>Word</tt>.</p>
 
 <dl><dt>(<a name="ex2.28">2.28</a>)</dt><dd>
 <tt>verb(Infl,Code,[node(TagCode,[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -556,7 +556,7 @@
 <tt>verb_tag(finite,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
 <tt>verb_tag(imperative,['VB','DO','HV','BE']).</tt><br>
 <tt>verb_tag(infinitive,['VB','DO','HV','BE']).</tt><br>
-<tt>verb_tag(do_support_infinitive,['VB','DO','HV']).</tt><br>
+<tt>verb_tag(do_infinitive,['VB','DO','HV']).</tt><br>
 <tt>verb_tag(ing_participle,['VAG','DAG','HAG','BAG']).</tt><br>
 <tt>verb_tag(ed_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
@@ -653,7 +653,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The different verb forms (lexical, <small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">BE</small>) allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify the verb form: <tt>V</tt> for lexical verbs, <tt>D</tt> for <small style="font-size: 75%">DO</small> verbs, <tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs, or <tt>B</tt> for <small style="font-size: 75%">BE</small> verbs. A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The different verb forms (lexical, <small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">BE</small>) allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify the verb form: <tt>V</tt> for lexical verbs, <tt>D</tt> for <small style="font-size: 75%">DO</small> verbs, <tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs or <tt>B</tt> for <small style="font-size: 75%">BE</small> verbs. A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
 
 <dl><dt>(<a name="ex2.30">2.30</a>)</dt><dd>
 <tt>verb_code('V',_,Code)&nbsp;:-</tt><br>
@@ -671,7 +671,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_support_infinitive]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>

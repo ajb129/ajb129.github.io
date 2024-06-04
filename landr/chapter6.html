@@ -6014,7 +6014,7 @@
 
 <br><h3><a name="sec6.6.2">6.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with participle clauses</h3>
 
-<p align="justify">The <tt>ip_ppl_active</tt> rule from section <a href="chapter5.html#sec5.4.3">5.4.3</a> creates complements for catenative verbs (<tt>IP-PPL-CAT</tt>), notional subjects (<tt>IP-PPL-NSBJ</tt>), and objects (<tt>IP-PPL-OB1</tt>). But subordinate conjunction creates the opportunity for more content to be part of a participle clause. The extra possibilities are created with the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="chapter6.html#ex6.49">6.49</a>). These rules add the possibility of:</p>
+<p align="justify">The <tt>ip_ppl_active</tt> rule from section <a href="chapter5.html#sec5.4.3">5.4.3</a> creates complements for catenative verbs (<tt>IP-PPL-CAT</tt>), notional subjects (<tt>IP-PPL-NSBJ</tt>) and objects (<tt>IP-PPL-OB1</tt>). But subordinate conjunction creates the opportunity for more content to be part of a participle clause. The extra possibilities are created with the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="chapter6.html#ex6.49">6.49</a>). These rules add the possibility of:</p>
 
 <ul>
 
@@ -8932,7 +8932,17 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.67">6.67</a>) collect content for a relative clause that either has a relative word [rules 1&ndash;4] or involves a trace [rule 5], or contains coordination [rule 6] from recursive calls to <tt>relative_clause_finite_top_tail</tt> of (<a href="chapter6.html#ex6.68">6.68</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.67">6.67</a>) collect content for a relative clause that either:</p>
+
+<dl>
+
+<li>has a relative word [rules 1&ndash;4]</li>
+
+<li>involves a trace [rule 5]</li>
+
+<li>contains coordination [rule 6]</li>
+
+</dl>
 
 <dl><dt>(<a name="ex6.67">6.67</a>)</dt><dd>
 <tt>relative_clause_finite_top_layer(L,L0)&nbsp;--&gt;</tt><br>
@@ -8971,6 +8981,8 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_tail(CL,[]).</tt><br>
 </dd></dl>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Coordination with [rule 6] of (<a href="chapter6.html#ex6.67">6.67</a>) involves recursive calls to <tt>relative_clause_finite_top_tail</tt> of (<a href="chapter6.html#ex6.68">6.68</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
+
 <dl><dt>(<a name="ex6.68">6.68</a>)</dt><dd>
 <tt>relative_clause_finite_top_tail([node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
@@ -8981,7 +8993,7 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_tail(L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule 1 of (<a href="chapter6.html#ex6.67">6.67</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that is entered as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.69">6.69</a>) to inherit as the subject for the relative clause [rule 1], or as a non-subject [rule 2].</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule 1 of (<a href="chapter6.html#ex6.67">6.67</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that is entered as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.69">6.69</a>) to inherit as the subject for the relative clause [rule 1] or as a non-subject [rule 2].</p>
 
 <dl><dt>(<a name="ex6.69">6.69</a>)</dt><dd>
 <tt>relative_clause_finite_inside([np(ICH)],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>

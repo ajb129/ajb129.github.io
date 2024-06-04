@@ -136,7 +136,7 @@
 </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an alternative to (<a href="chapter1.html#ex1.2">1.2</a>), we might have started with rule 5 of (<a href="chapter1.html#ex1.1">1.1</a>), and thereafter assembled (<a href="chapter1.html#ex1.3">1.3</a>), and so on.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an alternative to (<a href="chapter1.html#ex1.2">1.2</a>), we might have started with rule 5 of (<a href="chapter1.html#ex1.1">1.1</a>) and thereafter assembled (<a href="chapter1.html#ex1.3">1.3</a>), and so on.</p>
 
 <dl><dt>(<a name="ex1.3">1.3</a>)</dt><dd>
 </dd></dl>
@@ -222,7 +222,7 @@
 
 <p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers can take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write phrase structure rules (like (<a href="chapter1.html#ex1.1">1.1</a>) above) and then we have an executable Prolog program.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Matthews (1998), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG), and Head-driven Phrase Structure Grammar (HPSG).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Matthews (1998), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG) and Head-driven Phrase Structure Grammar (HPSG).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to include phrase structure grammar rules with left recursion, like rules 2 and 5 of (<a href="chapter1.html#ex1.1">1.1</a>) above. When there is left recursion, avoiding infinite loops from rule calls requires remembering what has already been evaluated. This is possible with a technique called tabling introduced by Swift and Warren (1994). Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022). Christiansen and Dahl (2018) discuss the evolution of natural language processing as it relates to Logic Programming, with particular focus on DCGs and tabling.</p>
 
@@ -276,7 +276,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs; cf.&nbsp;Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause, and this type of verb is further supported in the annotation by (<tt>IP-PPL-CAT</tt>) intermediate clause structure. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs; cf.&nbsp;Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and this type of verb is further supported in the annotation by (<tt>IP-PPL-CAT</tt>) intermediate clause structure. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The most innovative aspect of the annotation gives the TSPC its name: It can be fed to the Treebank Semantics evaluation system (Butler 2021). Treebank Semantics processes constituency tree annotations and returns logic-based meaning representations. While the annotation seldom includes indexing, results calculated with Treebank Semantics resolve both inter and intra clause dependencies, including cross sentential anaphoric dependencies.</p>
 
@@ -341,9 +341,9 @@
 
 <br><h2><a name="sec1.6">1.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Orientation</h2>
 
-<p align="justify">We will proceed as follows. In the remainder of this chapter, section <a href="chapter1.html#sec1.7">1.7</a> introduces rules for identifying sentences, and section <a href="chapter1.html#sec1.8">1.8</a> introduces rules for sentence fragments and utterances. This will demonstrate writing DCG rules with attributes for collecting layered structure and passing on ripple information. This will also demonstrate using the Prolog system to query English word input.</p>
+<p align="justify">We will proceed as follows. In the remainder of this chapter, section <a href="chapter1.html#sec1.7">1.7</a> introduces rules for identifying sentences and section <a href="chapter1.html#sec1.8">1.8</a> introduces rules for sentence fragments and utterances. This will demonstrate writing DCG rules with attributes for collecting layered structure and passing on ripple information. This will also demonstrate using the Prolog system to query English word input.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Subsequent chapters define rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="chapter2.html#ch2">2</a> with an inventory of the kinds of words there are in English. Once we have a handle on the range of words, we will want to start placing words together to create phrases, and this is the goal of chapter <a href="chapter3.html#ch3">3</a>. Chapter <a href="chapter4.html#ch4">4</a> establishes what verbs require to be present in the clause based on their given verb code. With access to phrases and verb words with their selection requirements, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="chapter5.html#ch5">5</a>. Chapter <a href="chapter6.html#ch6">6</a> builds on all the preceding chapters by integrating clause subordination. Chapter <a href="chapter7.html#ch7">7</a> gives closing remarks.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Subsequent chapters define rules to build up a wide coverage of consequences from word input. This starts in chapter <a href="chapter2.html#ch2">2</a> with an inventory of the kinds of words there are in English. Once we have a handle on the range of words, we will want to start placing words together to create phrases and this is the goal of chapter <a href="chapter3.html#ch3">3</a>. Chapter <a href="chapter4.html#ch4">4</a> establishes what verbs require to be present in the clause based on their given verb code. With access to phrases and verb words with their selection requirements, we will have content for clause layers. Establishing what is possible at the clause layer is the goal of chapter <a href="chapter5.html#ch5">5</a>. Chapter <a href="chapter6.html#ch6">6</a> builds on all the preceding chapters by integrating clause subordination. Chapter <a href="chapter7.html#ch7">7</a> gives closing remarks.</p>
 
 <br><h2><a name="sec1.7">1.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Sentences</h2>
 
@@ -366,7 +366,7 @@
 <tt>&nbsp;&nbsp;punc(final_question,IL1,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) will create a <tt>node</tt> structure with a list <tt>IL</tt> for the layer content of the node and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, rule 1 needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="chapter5.html#sec5.2">5.2</a>), and where the last list item is an instance of final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
+<p align="justify">Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) will create a <tt>node</tt> structure with a list <tt>IL</tt> for the layer content of the node and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, rule 1 needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="chapter5.html#sec5.2">5.2</a>) and where the last list item is an instance of final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="chapter1.html#ex1.7">1.7</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to store a list of word items to parse. Let's call this the <b>word list</b>. The second call has <tt>parse</tt> to question whether the stored word list has content to satisfy a call of <tt>sentence</tt>. Note that the parameter of <tt>sentence</tt> for accumulating parse structure is hidden internally to the <tt>parse</tt> call. If <tt>parse</tt> succeeds, then all parse results are presented as bracketed tree output.</p>
 
@@ -488,7 +488,7 @@
 
 <br><h2><a name="sec1.8">1.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Sentence fragments and utterances</h2>
 
-<p align="justify">An overall utterance can consist of a single sentence or sentence fragment, or multiple instances of sentences and/or sentence fragments, and might itself form part of an embedding as reported speech.</p>
+<p align="justify">An overall utterance can consist of a single sentence or sentence fragment or multiple instances of sentences and/or sentence fragments and might itself form part of an embedding as reported speech.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule (<a href="chapter1.html#ex1.15">1.15</a>) identifies a sentence fragment as content for a fragment layer followed by sentence final punctuation.</p>
 
@@ -545,7 +545,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments, and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.17">1.17</a>) calls the rules of (<a href="chapter1.html#ex1.18">1.18</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4 of (<a href="chapter1.html#ex1.18">1.18</a>)]. The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2 of (<a href="chapter1.html#ex1.18">1.18</a>)].</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.17">1.17</a>) calls the rules of (<a href="chapter1.html#ex1.18">1.18</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4 of (<a href="chapter1.html#ex1.18">1.18</a>)]. The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2 of (<a href="chapter1.html#ex1.18">1.18</a>)].</p>
 
 <dl><dt>(<a name="ex1.17">1.17</a>)</dt><dd>
 <tt>utterance(Ext,[node(Label,UL)|L],L)&nbsp;--&gt;</tt><br>

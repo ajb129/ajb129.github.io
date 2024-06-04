@@ -417,7 +417,7 @@
 
 <br><h4>Question</h4>
 
-<p align="justify">[This question is based on an exercise from Borsley (1996, p.&nbsp;23).] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>), and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
+<p align="justify">[This question is based on an exercise from Borsley (1996, p.&nbsp;23).] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>) and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
 
 <dl><dt>(<a name="ex3.10">3.10</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('CONJ','and'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
@@ -1581,7 +1581,7 @@
 
 <br><h2><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb phrases</h2>
 
-<p align="justify">An adverb phrase is created with (<a href="chapter3.html#ex3.30">3.30</a>), which calls <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADVP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information:</p>
+<p align="justify">An adverb phrase is created with (<a href="chapter3.html#ex3.30">3.30</a>), which calls <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADVP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
@@ -1662,7 +1662,7 @@
 
 <br><h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
 
-<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information:</p>
+<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
@@ -2006,7 +2006,7 @@
 
 <br><h2><a name="sec3.5">3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Preposition phrases</h2>
 
-<p align="justify">A preposition phrase can be created with (<a href="chapter3.html#ex3.38">3.38</a>) by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.39">3.39</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension, and a <tt>Type</tt> parameter for type information:</p>
+<p align="justify">A preposition phrase can be created with (<a href="chapter3.html#ex3.38">3.38</a>) by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.39">3.39</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
@@ -2083,7 +2083,7 @@
 <tt>&nbsp;&nbsp;preposition_phrase_tail(Type,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with preposition phrases, consider (<a href="chapter3.html#ex3.41">3.41</a>). The word list gives overall content for a noun phrase, while containing three preposition word instances: <tt>w('P-ROLE','of')</tt>, <tt>w('P-ROLE','from')</tt>, and another <tt>w('P-ROLE','of')</tt>. Each preposition word will introduce a preposition phrase, so we should expect parse results with three contained preposition phrases.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with preposition phrases, consider (<a href="chapter3.html#ex3.41">3.41</a>). The word list gives overall content for a noun phrase, while containing three preposition word instances: <tt>w('P-ROLE','of')</tt>, <tt>w('P-ROLE','from')</tt> and another <tt>w('P-ROLE','of')</tt>. Each preposition word will introduce a preposition phrase, so we should expect parse results with three contained preposition phrases.</p>
 
 <dl><dt>(<a name="ex3.41">3.41</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','ascent'), w('P-ROLE','of'), w('D','a'), w('ADJ','human'), w('N','figure'), w('P-ROLE','from'), w('D','the'), w('N','direction'), w('P-ROLE','of'), w('D','the'), w('ADJ','distant'), w('N','town')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
