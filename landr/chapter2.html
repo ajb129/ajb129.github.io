@@ -346,7 +346,7 @@
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first four rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the <tt>SbjType</tt> parameter of the clause to:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first four rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
 
 <ul>
 
@@ -369,7 +369,7 @@
 <tr><td><tt>PRO;_provisional_</tt></td><td>provisional <tt>it</tt> occuring with extraposition (<i>it bothered her that she probably would never know</i>)</td></tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with rule 5 of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the <tt>SbjType</tt> parameter of the clause to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with rule 5 of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
 
 <ul>
 
@@ -377,7 +377,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.5">6.5</a>), a contentful noun phrase can lead to the <tt>SbjType</tt> parameter of the clause being set to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.5">6.5</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
 
 <ul>
 
@@ -653,7 +653,21 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The different verb forms (lexical, <small style="font-size: 75%">DO</small>, <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">BE</small>) allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify the verb form: <tt>V</tt> for lexical verbs, <tt>D</tt> for <small style="font-size: 75%">DO</small> verbs, <tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs or <tt>B</tt> for <small style="font-size: 75%">BE</small> verbs. A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Different verb forms allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify the verb form:</p>
+
+<ul>
+
+<li><tt>V</tt> for lexical verbs</li>
+
+<li><tt>D</tt> for <small style="font-size: 75%">DO</small> verbs</li>
+
+<li><tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs</li>
+
+<li><tt>B</tt> for <small style="font-size: 75%">BE</small> verbs</li>
+
+</ul>
+
+<p align="justify">A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
 
 <dl><dt>(<a name="ex2.30">2.30</a>)</dt><dd>
 <tt>verb_code('V',_,Code)&nbsp;:-</tt><br>

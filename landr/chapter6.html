@@ -2308,7 +2308,7 @@
 
 <br><h2><a name="sec6.4">6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a provisional it and a notional subject</h2>
 
-<p align="justify">Rule 4 of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_provisional_</tt> which can only be an instance of <i>it</i>. In doing so, the <tt>SbjType</tt> parameter for the clause is set to <tt>provisional_sbj</tt>. This begins a ripple effect, with <tt>provisional_sbj</tt> needing to change to <tt>filled_sbj</tt>. This change is made by rule 3 of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.25">6.25</a>), which needs to find a notional subject (<tt>-NSBJ</tt>) to the right of all the other selected complements of the verb.</p>
+<p align="justify">Rule 4 of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_provisional_</tt> which can only be an instance of <i>it</i>. In doing so, the clause <tt>SbjType</tt> parameter is set to <tt>provisional_sbj</tt>. This begins a ripple effect, with <tt>provisional_sbj</tt> needing to change to <tt>filled_sbj</tt>. This change is made by rule 3 of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.25">6.25</a>), which needs to find a notional subject (<tt>-NSBJ</tt>) to the right of all the other selected complements of the verb.</p>
 
 <dl><dt>(<a name="ex6.25">6.25</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,provisional_sbj,Voice,L-L0)&nbsp;--&gt;</tt><br>
@@ -3289,9 +3289,9 @@
 
 <br><h2><a name="sec6.5">6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h2>
 
-<p align="justify">Rule 6 of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, the <tt>SbjType</tt> parameter for the clause is set to <tt>derived_sbj</tt>. The same <tt>SbjType</tt> parameter setting is made with rule 10 of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for the inclusion of a derived subject as an <tt>interrogative</tt> noun phrase.</p>
+<p align="justify">Rule 6 of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, the clause <tt>SbjType</tt> parameter is set to <tt>derived_sbj</tt>. The same <tt>SbjType</tt> parameter setting is made with rule 10 of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for the inclusion of a derived subject as an <tt>interrogative</tt> noun phrase.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>derived_sbj</tt> setting for the <tt>SbjType</tt> parameter of the clause begins a ripple effect that leads to a <i>tough</i>-construction, with the <tt>derived_sbj</tt> setting needing to change to the <tt>filled_sbj</tt> setting. This change is made by rule 2 of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.33">6.33</a>), which needs to find a notional subject that comes after the selected complement of a linking verb with code <tt>;~La</tt>, which will be an adjective phrase with subject predicative function.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>derived_sbj</tt> setting for the clause <tt>SbjType</tt> parameter begins a ripple effect that leads to a <i>tough</i>-construction, with the <tt>derived_sbj</tt> setting needing to change to the <tt>filled_sbj</tt> setting. This change is made by rule 2 of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.33">6.33</a>), which needs to find a notional subject that comes after the selected complement of a linking verb with code <tt>;~La</tt>, which will be an adjective phrase with subject predicative function.</p>
 
 <dl><dt>(<a name="ex6.33">6.33</a>)</dt><dd>
 <tt>verb_complements_top_layer(';~La',Store,derived_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -12360,7 +12360,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;All of the rules of (<a href="chapter6.html#ex6.95">6.95</a>) require the <tt>SbjType</tt> parameter of the clause to be set to the value of <tt>cleft_sbj</tt>. This <tt>SbjType</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;All of the rules of (<a href="chapter6.html#ex6.95">6.95</a>) require the clause <tt>SbjType</tt> parameter to be set to the value of <tt>cleft_sbj</tt>. This <tt>SbjType</tt> parameter setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="chapter6.html#ex6.96">6.96</a>).</p>
 
