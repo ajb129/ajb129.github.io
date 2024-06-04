@@ -332,17 +332,17 @@
 <p align="justify">Except when the clause type parameter is set to <tt>imperative_clause</tt>, there is always the requirement that a subject should be introduced with a finite clause. The subject of a non-imperative finite clause is captured in a parse with the rules of (<a href="chapter2.html#ex2.25">2.25</a>), provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
 
 <dl><dt>(<a name="ex2.25">2.25</a>)</dt><dd>
-<tt>subject(there_subject,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('EX',Word)].</tt><br>
-<tt>subject(cleft_subject,[node('NP-SBJ',[node('PRO;_cleft_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(cleft_sbj,[node('NP-SBJ',[node('PRO;_cleft_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_cleft_',Word)].</tt><br>
-<tt>subject(expletive_subject,[node('NP-SBJ',[node('PRO;_expletive_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(expletive_sbj,[node('NP-SBJ',[node('PRO;_expletive_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
-<tt>subject(provisional_subject,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>subject(provisional_sbj,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
-<tt>subject(filled_subject,L,L0)&nbsp;--&gt;</tt><br>
+<tt>subject(filled_sbj,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
-<tt>subject(derived_subject,L,L0)&nbsp;--&gt;</tt><br>
+<tt>subject(derived_sbj,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
 </dd></dl>
 
@@ -350,13 +350,13 @@
 
 <ul>
 
-<li>[rule 1] <tt>there_subject</tt></li>
+<li>[rule 1] <tt>there_sbj</tt></li>
 
-<li>[rule 2] <tt>cleft_subject</tt></li>
+<li>[rule 2] <tt>cleft_sbj</tt></li>
 
-<li>[rule 3] <tt>expletive_subject</tt></li>
+<li>[rule 3] <tt>expletive_sbj</tt></li>
 
-<li>[rule 4] <tt>provisional_subject</tt></li>
+<li>[rule 4] <tt>provisional_sbj</tt></li>
 
 </ul>
 
@@ -373,7 +373,7 @@
 
 <ul>
 
-<li>[rule 5] <tt>filled_subject</tt></li>
+<li>[rule 5] <tt>filled_sbj</tt></li>
 
 </ul>
 
@@ -381,7 +381,7 @@
 
 <ul>
 
-<li>[rule 6] <tt>derived_subject</tt></li>
+<li>[rule 6] <tt>derived_sbj</tt></li>
 
 </ul>
 
@@ -553,12 +553,12 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can access the verb tag information of tables <a href="chapter2.html#table2.9">2.9</a>&ndash;<a href="chapter2.html#table2.12">2.12</a> on the basis of inflection information with <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>).</p>
 
 <dl><dt>(<a name="ex2.29">2.29</a>)</dt><dd>
-<tt>verb_tag(finite_inflection,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
-<tt>verb_tag(imperative_inflection,['VB','DO','HV','BE']).</tt><br>
-<tt>verb_tag(infinitive_inflection,['VB','DO','HV','BE']).</tt><br>
-<tt>verb_tag(do_supported_infinitive_inflection,['VB','DO','HV']).</tt><br>
-<tt>verb_tag(present_participle,['VAG','DAG','HAG','BAG']).</tt><br>
-<tt>verb_tag(past_participle,['VVN','DON','HVN','BEN']).</tt><br>
+<tt>verb_tag(finite,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
+<tt>verb_tag(imperative,['VB','DO','HV','BE']).</tt><br>
+<tt>verb_tag(infinitive,['VB','DO','HV','BE']).</tt><br>
+<tt>verb_tag(do_support_infinitive,['VB','DO','HV']).</tt><br>
+<tt>verb_tag(ing_participle,['VAG','DAG','HAG','BAG']).</tt><br>
+<tt>verb_tag(ed_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
 
 <p align="justify">The <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) are called by <tt>verb</tt> of (<a href="chapter2.html#ex2.28">2.28</a>) above to ensure a tag compatible with the inflection of the <tt>Infl</tt> parameter when seeking to match a verb word from the word list.</p>
@@ -671,21 +671,21 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite_inflection,infinitive_inflection,do_supported_infinitive_inflection]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_support_infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[imperative_inflection,present_participle,past_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,ed_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',';~cat_Ve_passive_']).</tt><br>
 <tt>verb_code('D',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~Tn']).</tt><br>
 <tt>verb_code('H',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~Tn',';~VP24B',';~VP24C']).</tt><br>
 <tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite_inflection,infinitive_inflection]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt',';~cat_Ve']).</tt><br>
 <tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[imperative_inflection,present_participle,past_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,ed_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt']).</tt><br>
 <tt>verb_code('B',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
@@ -695,7 +695,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite_inflection,infinitive_inflection,past_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,ed_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vg',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~ex_V',';~ex_Vp',';~ex_Vpr',</tt><br>
