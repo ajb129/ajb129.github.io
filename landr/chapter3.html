@@ -29,7 +29,7 @@
 <tt>&nbsp;&nbsp;}.</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additional to the <tt>Ext</tt> parameter, there is a <tt>Type</tt> parameter whose value is passed on to the <tt>noun_phrase_top</tt> call. This type information has to come from the containing noun phrase and will determine noun phrase use as reflected by distribution. Possible values are:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additional to the <tt>Ext</tt> parameter, there is a <tt>Type</tt> parameter whose value goes through to the <tt>noun_phrase_top</tt> call. This type information will determine noun phrase use as reflected by distribution. There are four possible values:</p>
 
 <ul>
 
@@ -43,11 +43,11 @@
 
 </ul>
 
-<p align="justify">This type information is passed on to:</p>
+<p align="justify">Ultimately, this type information has to match the type information of internal elements:</p>
 
 <ul>
 
-<li>head nouns that can't be modified (see section <a href="chapter2.html#sec2.2">2.2</a>)</li>
+<li>head nouns that can have no modifiers (see section <a href="chapter2.html#sec2.2">2.2</a>)</li>
 
 <li>determiners (see section <a href="chapter2.html#sec2.3">2.3</a>)</li>
 
@@ -55,13 +55,15 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call of the <tt>noun_phrase_top</tt> rule (<a href="chapter3.html#ex3.2">3.2</a>) concerns gathering content from either:</p>
+<br><h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The noun phrase top rule</h3>
+
+<p align="justify">A call of the <tt>noun_phrase_top</tt> rule (<a href="chapter3.html#ex3.2">3.2</a>) gathers content for a noun phrase with either:</p>
 
 <ul>
 
 <li>[rule 1] a call of <tt>noun_head_full</tt> (from section <a href="chapter2.html#sec2.2">2.2</a>) which will identify a word that essentially contributes a full noun phrase by itself</li>
 
-<li>[rule 2] a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="chapter3.html#sec3.2.1">3.2.1</a> below)</li>
+<li>[rule 2] a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="chapter3.html#sec3.2.2">3.2.2</a> below)</li>
 
 </ul>
 
@@ -131,7 +133,7 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
+<br><h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
 
 <p align="justify">With (<a href="chapter3.html#ex3.3">3.3</a>), we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="chapter3.html#ex3.6">3.6</a>) may return.</p>
 
@@ -469,7 +471,7 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
+<br><h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
 
 <p align="justify">In addition to allowing at the highest levels of noun phrase structure for recursive calls that establish coordination or add post-head modifiers, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) can also be preparation for delving deeper into noun phase structure, in particular, by allowing for subsequent calls to the <tt>internal_np_higher_layer</tt> rules of (<a href="chapter3.html#ex3.14">3.14</a>) that lead through to calls of the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>).</p>
 
@@ -685,7 +687,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
+<br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
 
 <p align="justify">The internal structuring revealed by (<a href="chapter3.html#ex3.19">3.19</a>) allows for more elements to be placed around the noun phrase head word. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) allows for placement of a determiner layer before the noun phrase head word. A determiner layer is created with the <tt>determiner_layer</tt> rules of (<a href="chapter3.html#ex3.20">3.20</a>) which are sensitive to the type information carried by the calling noun phrase.</p>
 
@@ -1377,7 +1379,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the query of (<a href="chapter3.html#ex3.24">3.24</a>) had instead followed the call structure of (<a href="chapter3.html#ex3.23">3.23</a>), then <tt>internal_np_higher_layer</tt> calls would be reached from where there is no way to integrate the determiner for the second conjunct.</p>
 
-<br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
+<br><h3><a name="sec3.2.5">3.2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
 
 <p align="justify">The second <tt>determiner_layer</tt> rule of (<a href="chapter3.html#ex3.20">3.20</a>) leads to calling the <tt>noun_phrase_genm_layer</tt> rules of (<a href="chapter3.html#ex3.26">3.26</a>) to establish structure for a distinct internal noun phrase with genitive case role. The non-recursive rules of <tt>noun_phrase_genm_layer</tt> involves either:</p>
 
