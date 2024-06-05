@@ -7,7 +7,7 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The opening elements of a clause are established with the non-recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and the recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.2">5.2</a>). All of these rules have a <tt>Store</tt> parameter for a list value of index information for parsed items that have yet to integrate with the overall parse structure. Also, all of these rules have a clause <tt>Type</tt> parameter.</p>
+<p align="justify">The opening elements of a clause are established with the non-recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and the recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.2">5.2</a>). All of these rules have a <tt>Store</tt> parameter for a list value of index information for parse structure that needs to integrate with the overall parse structure. Also, all of these rules have a clause <tt>Type</tt> parameter.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.1">5.1</a>) each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
 
@@ -19,7 +19,7 @@
 
 </ul>
 
-<p align="justify">Rules 1 and 3-6 that find subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
+<p align="justify">Rules 1 and 3&ndash;6 that find subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
 
 <ul>
 
@@ -31,7 +31,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules 2, 3, 4 and 7 restrict how the clause <tt>SbjType</tt> parameter is set:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules 2&ndash;4 and 7 restrict how the clause <tt>SbjType</tt> parameter is set:</p>
 
 <ul>
 
@@ -203,13 +203,13 @@
 <tt>&nbsp;&nbsp;clause_top_tail(Type,Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how, with the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rule 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7] and utterances [rule 10], all of which are parsed as stored items, receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Store</tt> parameter to ultimately be inherited as a selected item. A stored item is inherited as a selected item when either it is:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how, with the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rules 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7] and utterances [rule 10], all receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Store</tt> parameter to ultimately be:</p>
 
 <ul>
 
-<li>a required element for a <tt>verb_complements_top_layer</tt> call from chapter <a href="chapter4.html#ch4">4</a></li>
+<li>matched to a required element for a <tt>verb_complements_top_layer</tt> call from chapter <a href="chapter4.html#ch4">4</a></li>
 
-<li>a noun phrase from rule 3 received by a <tt>clause_top_layer</tt> rule 9 or rule 10 call of (<a href="chapter5.html#ex5.1">5.1</a>)</li>
+<li>taken as a subject contribution by rule 7 of (<a href="chapter5.html#ex5.1">5.1</a>), which is only possible with an index matching a noun phrase that a rule 3 call of (<a href="chapter5.html#ex5.2">5.2</a>) identifies</li>
 
 </ul>
 
@@ -247,7 +247,7 @@
 
 <li><tt>infinitive</tt></li>
 
-<li><tt>ed_participle</tt></li>
+<li><tt>en_participle</tt></li>
 
 <li><tt>ing_participle</tt></li>
 
@@ -346,7 +346,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>adverbial</tt>
+      <tt>initial_adverbial</tt>
       </td>
       </tr>
       <tr>
@@ -1661,7 +1661,7 @@
 
 <p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve</tt> involves selection of an active past participle (<i>-ed&sol;-en</i>) clause as its complement. This occurs when the word class tag is a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt> or <tt>HVN</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An active participle clause is found with <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.22">5.22</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>ed_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An active participle clause is found with <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.22">5.22</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
 
 <dl><dt>(<a name="ex5.22">5.22</a>)</dt><dd>
 <tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
@@ -1791,7 +1791,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>ip_ppl_active <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small></tt>
+              <tt>ip_ppl_active <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -1799,7 +1799,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small>&nbsp;<small><b>active</b></small></tt>
+                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>active</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -1807,7 +1807,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>verb <small><b>ed_participle</b></small>&nbsp;<small><b>;~I</b></small></tt>
+                      <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~I</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -2192,7 +2192,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small></tt>
+              <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -2200,7 +2200,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
+                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -2208,7 +2208,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>verb <small><b>ed_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
+                      <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -3071,7 +3071,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small>&nbsp;<small><b>active</b></small></tt>
+                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>active</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -3079,7 +3079,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>verb <small><b>ed_participle</b></small>&nbsp;<small><b>;~cat_Vg</b></small></tt>
+                                      <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~cat_Vg</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -3157,7 +3157,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small></tt>
+                                                              <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -3165,7 +3165,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>ed_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -3173,7 +3173,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>verb <small><b>ed_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
+                                                                      <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -3793,7 +3793,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                      <tt>verb_phrase_layer <small><b>there_sbj</b></small>&nbsp;<small><b>ed_participle</b></small>&nbsp;<small><b>active</b></small></tt>
+                                      <tt>verb_phrase_layer <small><b>there_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>active</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -3801,7 +3801,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>verb <small><b>ed_participle</b></small>&nbsp;<small><b>;~ex_V</b></small></tt>
+                                          <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~ex_V</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>

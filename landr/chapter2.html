@@ -558,7 +558,7 @@
 <tt>verb_tag(infinitive,['VB','DO','HV','BE']).</tt><br>
 <tt>verb_tag(do_infinitive,['VB','DO','HV']).</tt><br>
 <tt>verb_tag(ing_participle,['VAG','DAG','HAG','BAG']).</tt><br>
-<tt>verb_tag(ed_participle,['VVN','DON','HVN','BEN']).</tt><br>
+<tt>verb_tag(en_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
 
 <p align="justify">The <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) are called by <tt>verb</tt> of (<a href="chapter2.html#ex2.28">2.28</a>) above to ensure a tag compatible with the inflection of the <tt>Infl</tt> parameter when seeking to match a verb word from the word list.</p>
@@ -689,7 +689,7 @@
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,ed_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',';~cat_Ve_passive_']).</tt><br>
 <tt>verb_code('D',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~Tn']).</tt><br>
@@ -699,7 +699,7 @@
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt',';~cat_Ve']).</tt><br>
 <tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,ed_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt']).</tt><br>
 <tt>verb_code('B',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
@@ -709,7 +709,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,ed_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vg',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~ex_V',';~ex_Vp',';~ex_Vpr',</tt><br>
