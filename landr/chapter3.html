@@ -1603,21 +1603,13 @@
 <tt>&nbsp;&nbsp;}.</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.31">3.31</a>) [rules 1 and 2] establish the head word as a word found with calls of <tt>adv</tt> (see section <a href="chapter2.html#sec2.6">2.6</a>). Rule 2 of (<a href="chapter3.html#ex3.31">3.31</a>) brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>) with parameters stating:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The only non-recursive rule of (<a href="chapter3.html#ex3.31">3.31</a>) [rule 1] establishes the head word as a word found with calls of <tt>adv</tt> (see section <a href="chapter2.html#sec2.6">2.6</a>). Provided the <tt>Type</tt> parameter is set to <tt>general</tt>, recursive calls to <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) are possible, allowing the parse to:</p>
 
 <ul>
 
-<li>no function information (<tt>''</tt>)</li>
+<li>[rule 2] pick up pre-head modifier noun phrases</li>
 
-<li>no inheritance of stored content (<tt>[]</tt>)</li>
-
-</ul>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) can also be recursive, allowing the parse to either:</p>
-
-<ul>
-
-<li>[rule 3] pick up pre-head modifier noun phrases</li>
+<li>[rule 3] pick up pre-head negation</li>
 
 <li>[rule 4] pick up pre-head modifier adverb phrases</li>
 
@@ -1630,9 +1622,6 @@
 <dl><dt>(<a name="ex3.31">3.31</a>)</dt><dd>
 <tt>adverb_phrase_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adv(Type,L,L0).</tt><br>
-<tt>adverb_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adv(catenative,L,L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
 <tt>adverb_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase_layer(general,L1,L0).</tt><br>
@@ -1662,17 +1651,7 @@
 
 <br><h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
 
-<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
-
-<ul>
-
-<li><tt>general</tt></li>
-
-<li><tt>interrogative</tt></li>
-
-<li><tt>relative</tt></li>
-
-</ul>
+<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information.</p>
 
 <dl><dt>(<a name="ex3.33">3.33</a>)</dt><dd>
 <tt>adjective_phrase(Ext,Type,[node(Label,AL)|L],L)&nbsp;--&gt;</tt><br>
@@ -1682,17 +1661,33 @@
 <tt>&nbsp;&nbsp;}.</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.34">3.34</a>) [rules 1&ndash;3] establish the head word as a word found with calls of <tt>adj</tt> (see section <a href="chapter2.html#sec2.7">2.7</a>). Rule 2 of (<a href="chapter3.html#ex3.34">3.34</a>) brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>) with parameters stating:</p>
+<p align="justify">There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
-<li>no function information (<tt>''</tt>)</li>
+<li><tt>general</tt></li>
 
-<li>no inheritance of stored content (<tt>[]</tt>)</li>
+<li><tt>catenative</tt></li>
+
+<li><tt>interrogative</tt></li>
+
+<li><tt>relative</tt></li>
 
 </ul>
 
-<p align="justify">Rule 3 of (<a href="chapter3.html#ex3.34">3.34</a>) brings the additional need for word list content that will support a call of <tt>cp_that</tt> called with its type parameter set to <tt>with_c</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>).</p>
+<p align="justify">Note that when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information is passed on to calls of <tt>adverb_phrase</tt> [see rule 6 of (<a href="chapter3.html#ex3.34">3.34</a>)] whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>general</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.34">3.34</a>) [rules 1&ndash;3], establish the head word as a word found with a call of <tt>adj</tt> (see section <a href="chapter2.html#sec2.7">2.7</a>):</p>
+
+<ul>
+
+<li>rule 1, with a <tt>Type</tt> parameter setting of <tt>general</tt>, requires a word list that contains only an adjective word</li>
+
+<li>rule 2, with a <tt>Type</tt> parameter setting of <tt>general</tt>, brings the additional need for word list content that will support a call of <tt>cp_that</tt> called with its type parameter set to <tt>with_c</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
+
+<li>rule 3, with a <tt>Type</tt> parameter setting of <tt>catenative</tt>, brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
+
+</ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) can also be recursive, allowing the parse to either:</p>
 
@@ -1714,11 +1709,11 @@
 <tt>adjective_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adj(general,L,L0).</tt><br>
 <tt>adjective_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adj(catenative,L,L1),</tt><br>
-<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
-<tt>adjective_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adj(general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_that('',with_c,[],L1,L0).</tt><br>
+<tt>adjective_phrase_layer(catenative,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adj(catenative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;ip_to_inf('',[],L1,L0).</tt><br>
 <tt>adjective_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase_layer(general,L1,L0).</tt><br>

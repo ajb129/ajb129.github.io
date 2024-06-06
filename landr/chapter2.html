@@ -395,7 +395,6 @@
 <tr><td><tt>ADV</tt></td><td>general adverb (e.g., <tt>often</tt>, <tt>well</tt>, <tt>really</tt>).</td></tr>
 <tr><td><tt>ADVR</tt></td><td>comparative adverb (e.g., <tt>more</tt>, <tt>less</tt>, <tt>farther</tt>)</td></tr>
 <tr><td><tt>ADVS</tt></td><td>superlative adverb (e.g., <tt>most</tt>, <tt>least</tt>, <tt>farthest</tt>)</td></tr>
-<tr><td><tt>ADV;_cat_</tt></td><td>catenative adverb (<tt>about</tt> in <i>I was <b>about</b> to say</i>; <tt>enough</tt> in <i>People feel confident <b>enough</b> to do it</i>)</td></tr>
 <tr><td><tt>WADV</tt></td><td>wh-adverb (e.g., <tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>why</tt>)</td></tr>
 <tr><td><tt>RADV</tt></td><td>relative adverb of a relative clause (e.g., <tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>whereby</tt>)</td></tr>
 <tr><td><tt>RP</tt></td><td>adverbial particle (e.g., <tt>up</tt>, <tt>off</tt>, <tt>out</tt>)</td></tr>
@@ -408,8 +407,6 @@
 <tt>&nbsp;&nbsp;[w('ADVR',Word)].</tt><br>
 <tt>adv(general,[node('ADVS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADVS',Word)].</tt><br>
-<tt>adv(catenative,[node('ADV;_cat_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;[w('ADV;_cat_',Word)].</tt><br>
 <tt>adv(interrogative,[node('WADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('WADV',Word)].</tt><br>
 <tt>adv(relative,[node('RADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -423,8 +420,6 @@
 <ul>
 
 <li><tt>general</tt></li>
-
-<li><tt>catenative</tt></li>
 
 <li><tt>interrogative</tt></li>
 

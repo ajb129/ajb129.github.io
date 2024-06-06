@@ -76,7 +76,10 @@
 
 <dl><dt>(<a name="ex4.3">4.3</a>)</dt><dd>
 <tt>verb_complements_by_code(';~La',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD2',general,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[catenative,general])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD2',Type,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~La',[adjp(ICH)],filled_sbj,active,[node('ADJP-PRD2',[ICH])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
@@ -1035,7 +1038,9 @@
 
 <li>[rule 1] as content from the word list before the content of the <i>to</i>-infinitive clause</li>
 
-<li>[rule 2] as a stored <tt>np(ICH)</tt></li>
+<li>[rule 2] as word <tt>w('PRO;_expletive_',Word)</tt> of the word list before the content of the <i>to</i>-infinitive clause</li>
+
+<li>[rule 3] as a stored <tt>np(ICH)</tt></li>
 
 </ul>
 
@@ -1043,7 +1048,7 @@
 
 <ul>
 
-<li>[rule 3] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the <i>to</i>-infinitive clause</li>
+<li>[rule 4] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the <i>to</i>-infinitive clause</li>
 
 </ul>
 
@@ -1051,13 +1056,16 @@
 
 <ul>
 
-<li>[rule 4] the derived object noun phrase occurs as content from the word list for a provisional <i>it</i> noun phrase followed by the content of the <i>to</i>-infinitive clause followed by content for a notional object</li>
+<li>[rule 5] the derived object noun phrase occurs as content from the word list for a provisional <i>it</i> noun phrase followed by the content of the <i>to</i>-infinitive clause followed by content for a notional object</li>
 
 </ul>
 
 <dl><dt>(<a name="ex4.100">4.100</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Tnt',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-DOB1',general,L,[node('IP-INF-OB1',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
+<tt>verb_complements_by_code(';~Tnt',Store,filled_sbj,active,[node('NP-DOB1',[node('PRO;_expletive_',[node(Word,[])])]),node('IP-INF-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
 <tt>verb_complements_by_code(';~Tnt',[np(ICH)],filled_sbj,active,[node('NP-DOB1',[ICH]),node('IP-INF-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_sbj,active,VL,[]).</tt><br>
@@ -1087,13 +1095,29 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.103">4.103</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.104">4.104</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.103">4.103</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.104">4.104</a>).</p>
 
 <dl><dt>(<a name="ex4.103">4.103</a>)</dt><dd>
-<tt>[w('NS','people'), w('RPRO','who'), w('PRO','it'), w('VBP',';~Tnt','believes'), w('TO','to'), w('BE',';~La','be'), w('ADJ','subversive')]</tt><br>
+<tt>[w('NPR','John'), w('VBD',';~Tnt','needed'), w('PRO;_expletive_','it'), w('TO','to'), w('VB',';~I','rain'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.104">4.104</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_expletive_','it'), w('TO','to'), w('VB',';~I','rain')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
+<br>
+<tt>(&nbsp;(NP-DOB1&nbsp;(PRO;_expletive_&nbsp;it))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;rain)))</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.105">4.105</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.106">4.106</a>).</p>
+
+<dl><dt>(<a name="ex4.105">4.105</a>)</dt><dd>
+<tt>[w('NS','people'), w('RPRO','who'), w('PRO','it'), w('VBP',';~Tnt','believes'), w('TO','to'), w('BE',';~La','be'), w('ADJ','subversive')]</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex4.106">4.106</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~La','be'), w('ADJ','subversive')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[np(node('*ICH*-243',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-243)</tt><br>
@@ -1104,13 +1128,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.105">4.105</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.106">4.106</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.107">4.107</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.108">4.108</a>).</p>
 
-<dl><dt>(<a name="ex4.105">4.105</a>)</dt><dd>
+<dl><dt>(<a name="ex4.107">4.107</a>)</dt><dd>
 <tt>[w('PRO','We'), w('BED',';~cat_Ve_passive_','were'), w('VVN',';~Tnt','allowed'), w('TO','to'), w('VB',';~I','go'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.106">4.106</a>)</dt><dd>
+<dl><dt>(<a name="ex4.108">4.108</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~I','go')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
@@ -1119,13 +1143,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.107">4.107</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.108">4.108</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.109">4.109</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.110">4.110</a>).</p>
 
-<dl><dt>(<a name="ex4.107">4.107</a>)</dt><dd>
+<dl><dt>(<a name="ex4.109">4.109</a>)</dt><dd>
 <tt>[w('NPR','Kim'), w('VBD',';~Tnt','expected'), w('PRO;_provisional_','it'), w('TO','to'), w('BE',';~La','be'), w('ADJ','easy'), w('TO','to'), w('VB',';~Tn','impress'), w('NPR','Sandy'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.108">4.108</a>)</dt><dd>
+<dl><dt>(<a name="ex4.110">4.110</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('TO','to'), w('BE',';~La','be'), w('ADJ','easy'), w('TO','to'), w('VB',';~Tn','impress'), w('NPR','Sandy')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
@@ -1141,7 +1165,7 @@
 
 <br><h3><a name="sec4.4.9">4.4.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Tni</h3>
 
-<p align="justify">Code <tt>;~Tni</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a bare infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.109">4.109</a>), while content for the bare infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Tni</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a bare infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.111">4.111</a>), while content for the bare infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -1151,7 +1175,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.109">4.109</a>)</dt><dd>
+<dl><dt>(<a name="ex4.111">4.111</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Tni',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-DOB1',general,L,[node('IP-INF-OB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_sbj,infinitive,active,VL,[]).</tt><br>
@@ -1159,13 +1183,13 @@
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_sbj,infinitive,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.110">4.110</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.111">4.111</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.112">4.112</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.113">4.113</a>).</p>
 
-<dl><dt>(<a name="ex4.110">4.110</a>)</dt><dd>
+<dl><dt>(<a name="ex4.112">4.112</a>)</dt><dd>
 <tt>[w('PRO','You'), w('MD',';~cat_Vi','can'), w('VB',';~Tni','see'), w('D','the'), w('N','blood'), w('VB',';~Ipr','run'), w('P-ROLE','from'), w('PRO;_genm_','their'), w('N','face'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.111">4.111</a>)</dt><dd>
+<dl><dt>(<a name="ex4.113">4.113</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','blood'), w('VB',';~Ipr','run'), w('P-ROLE','from'), w('PRO;_genm_','their'), w('N','face')]),&nbsp;parse(verb_complements_by_code(';~Tni',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;(D&nbsp;the)</tt><br>
@@ -1178,13 +1202,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.112">4.112</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.113">4.113</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.114">4.114</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.115">4.115</a>).</p>
 
-<dl><dt>(<a name="ex4.112">4.112</a>)</dt><dd>
+<dl><dt>(<a name="ex4.114">4.114</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_V','is'), w('D;_nphd_','someone'), w('RPRO','whom'), w('NPR','Helen'), w('VBD',';~Tni','saw'), w('VB',';~Tn','answer'), w('D','the'), w('N','phone'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.113">4.113</a>)</dt><dd>
+<dl><dt>(<a name="ex4.115">4.115</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~Tn','answer'), w('D','the'), w('N','phone')]),&nbsp;parse(verb_complements_by_code(';~Tni',[np(node('*ICH*-253',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-253)</tt><br>
@@ -1197,20 +1221,20 @@
 
 <br><h3><a name="sec4.4.10">4.4.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Tg</h3>
 
-<p align="justify">Code <tt>;~Tg</tt> selects a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.114">4.114</a>), there has to be content from the word list for a present participle (<i>-ing</i>) clause.</p>
+<p align="justify">Code <tt>;~Tg</tt> selects a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.116">4.116</a>), there has to be content from the word list for a present participle (<i>-ing</i>) clause.</p>
 
-<dl><dt>(<a name="ex4.114">4.114</a>)</dt><dd>
+<dl><dt>(<a name="ex4.116">4.116</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Tg',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-OB1',Store,filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.115">4.115</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.116">4.116</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.117">4.117</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.118">4.118</a>).</p>
 
-<dl><dt>(<a name="ex4.115">4.115</a>)</dt><dd>
+<dl><dt>(<a name="ex4.117">4.117</a>)</dt><dd>
 <tt>[w('VB',';~Tg','Stop'), w('VAG',';~I','shouting'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.116">4.116</a>)</dt><dd>
+<dl><dt>(<a name="ex4.118">4.118</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~I','shouting')]),&nbsp;parse(verb_complements_by_code(';~Tg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL-OB1&nbsp;(VAG;~I&nbsp;shouting))</tt><br>
@@ -1220,7 +1244,7 @@
 
 <br><h3><a name="sec4.4.11">4.4.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Tng</h3>
 
-<p align="justify">Code <tt>;~Tng</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.117">4.117</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the participle clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Tng</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.119">4.119</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the participle clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -1238,7 +1262,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.117">4.117</a>)</dt><dd>
+<dl><dt>(<a name="ex4.119">4.119</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Tng',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-DOB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-OB1',[],filled_sbj,ing_participle,L1,L0).</tt><br>
@@ -1248,15 +1272,15 @@
 <tt>&nbsp;&nbsp;ip_ppl_active('-OB1',[],filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">Note that <tt>ip_ppl_active</tt> (see section <a href="chapter5.html#sec5.4.3">5.4.3</a>) in all of the rules of (<a href="chapter4.html#ex4.117">4.117</a>) takes the <tt>filled_sbj</tt> parameter value. This ensure no disruption of control inheritance from the derived object (/subject when passive).</p>
+<p align="justify">Note that <tt>ip_ppl_active</tt> (see section <a href="chapter5.html#sec5.4.3">5.4.3</a>) in all of the rules of (<a href="chapter4.html#ex4.119">4.119</a>) takes the <tt>filled_sbj</tt> parameter value. This ensure no disruption of control inheritance from the derived object (/subject when passive).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.118">4.118</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.119">4.119</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.120">4.120</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.121">4.121</a>).</p>
 
-<dl><dt>(<a name="ex4.118">4.118</a>)</dt><dd>
+<dl><dt>(<a name="ex4.120">4.120</a>)</dt><dd>
 <tt>[w('PRO','She'), w('MD',';~cat_Vi','could'), w('VB',';~Tng','feel'), w('PRO','it'), w('VAG',';~I','coming'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.119">4.119</a>)</dt><dd>
+<dl><dt>(<a name="ex4.121">4.121</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it'), w('VAG',';~I','coming')]),&nbsp;parse(verb_complements_by_code(';~Tng',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;(PRO&nbsp;it))</tt><br>
@@ -1265,13 +1289,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.120">4.120</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.121">4.121</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.122">4.122</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.123">4.123</a>).</p>
 
-<dl><dt>(<a name="ex4.120">4.120</a>)</dt><dd>
+<dl><dt>(<a name="ex4.122">4.122</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_V','is'), w('D;_nphd_','someone'), w('RPRO','whom'), w('NPR','Helen'), w('VBD',';~Tng','saw'), w('VAG',';~Tn','hoeing'), w('NS','onions'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.121">4.121</a>)</dt><dd>
+<dl><dt>(<a name="ex4.123">4.123</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~Tn','hoeing'), w('NS','onions')]),&nbsp;parse(verb_complements_by_code(';~Tng',[np(node('*ICH*-263',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-263)</tt><br>
@@ -1281,13 +1305,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.122">4.122</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.123">4.123</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.124">4.124</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.125">4.125</a>).</p>
 
-<dl><dt>(<a name="ex4.122">4.122</a>)</dt><dd>
+<dl><dt>(<a name="ex4.124">4.124</a>)</dt><dd>
 <tt>[w('D','The'), w('NS','raiders'), w('MD',';~cat_Vi','can'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tng','seen'), w('VAG',';~Ipr','hovering'), w('P-ROLE','around'), w('D','the'), w('N','surface'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.123">4.123</a>)</dt><dd>
+<dl><dt>(<a name="ex4.125">4.125</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~Ipr','hovering'), w('P-ROLE','around'), w('D','the'), w('N','surface')]),&nbsp;parse(verb_complements_by_code(';~Tng',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-PPL-OB1&nbsp;(VAG;~Ipr&nbsp;hovering)</tt><br>
@@ -1300,7 +1324,7 @@
 
 <br><h3><a name="sec4.4.12">4.4.12</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsg</h3>
 
-<p align="justify">Code <tt>;~Tsg</tt> selects a noun phrase that is the internal subject (<tt>-SBJ</tt>) of a selected present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.124">4.124</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, content for the noun phrase and the participle clause comes from the word list, with the internal form of noun phrase being either:</p>
+<p align="justify">Code <tt>;~Tsg</tt> selects a noun phrase that is the internal subject (<tt>-SBJ</tt>) of a selected present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.126">4.126</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, content for the noun phrase and the participle clause comes from the word list, with the internal form of noun phrase being either:</p>
 
 <ul>
 
@@ -1310,7 +1334,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.124">4.124</a>)</dt><dd>
+<dl><dt>(<a name="ex4.126">4.126</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Tsg',[],filled_sbj,active,[node('IP-PPL3-OB1',[node('NP-SBJ',NL)|VL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase_genm_layer(general,NL,[]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_sbj,ing_participle,active,VL,[]).</tt><br>
@@ -1319,13 +1343,13 @@
 <tt>&nbsp;&nbsp;verb_phrase_layer([],filled_sbj,ing_participle,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.125">4.125</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.126">4.126</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.127">4.127</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.128">4.128</a>).</p>
 
-<dl><dt>(<a name="ex4.125">4.125</a>)</dt><dd>
+<dl><dt>(<a name="ex4.127">4.127</a>)</dt><dd>
 <tt>[w('DOP','','Do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','you'), w('VB',';~Tsg','remember'), w('PRO;_genm_','my'), w('VAG',';~Dn.*','telling'), w('PRO','you'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.126">4.126</a>)</dt><dd>
+<dl><dt>(<a name="ex4.128">4.128</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_genm_','my'), w('VAG',';~Dn.*','telling'), w('PRO','you')]),&nbsp;parse(verb_complements_by_code(';~Tsg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL3-OB1&nbsp;(NP-SBJ&nbsp;(PRO;_genm_&nbsp;my))</tt><br>
@@ -1335,13 +1359,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.127">4.127</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.128">4.128</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.129">4.129</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.130">4.130</a>).</p>
 
-<dl><dt>(<a name="ex4.127">4.127</a>)</dt><dd>
+<dl><dt>(<a name="ex4.129">4.129</a>)</dt><dd>
 <tt>[w('DOP','','Do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','you'), w('VB',';~Tsg','remember'), w('PRO','me'), w('VAG',';~Dn.*','telling'), w('PRO','you'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.128">4.128</a>)</dt><dd>
+<dl><dt>(<a name="ex4.130">4.130</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me'), w('VAG',';~Dn.*','telling'), w('PRO','you')]),&nbsp;parse(verb_complements_by_code(';~Tsg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL3-OB1&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;me))</tt><br>
@@ -1357,7 +1381,7 @@
 
 <br><h3><a name="sec4.5.1">4.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.n</h3>
 
-<p align="justify">Code <tt>;~Dn.n</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.129">4.129</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Dn.n</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.131">4.131</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
 
 <ul>
 
@@ -1379,7 +1403,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.129">4.129</a>)</dt><dd>
+<dl><dt>(<a name="ex4.131">4.131</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.n',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L1,L0).</tt><br>
@@ -1393,13 +1417,13 @@
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.130">4.130</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.131">4.131</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.132">4.132</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.133">4.133</a>).</p>
 
-<dl><dt>(<a name="ex4.130">4.130</a>)</dt><dd>
+<dl><dt>(<a name="ex4.132">4.132</a>)</dt><dd>
 <tt>[w('N','Daddy'), w('VBD',';~Dn.n','bought'), w('PRO','me'), w('D','a'), w('ADJ','new'), w('N','bike'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.131">4.131</a>)</dt><dd>
+<dl><dt>(<a name="ex4.133">4.133</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me'), w('D','a'), w('ADJ','new'), w('N','bike')]),&nbsp;parse(verb_complements_by_code(';~Dn.n',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(PRO&nbsp;me))</tt><br>
@@ -1410,13 +1434,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.132">4.132</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.133">4.133</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.134">4.134</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.135">4.135</a>).</p>
 
-<dl><dt>(<a name="ex4.132">4.132</a>)</dt><dd>
+<dl><dt>(<a name="ex4.134">4.134</a>)</dt><dd>
 <tt>[w('D','the'), w('N','task'), w('PRO','he'), w('VBD',';~Dn.n','set'), w('PNX','himself')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.133">4.133</a>)</dt><dd>
+<dl><dt>(<a name="ex4.135">4.135</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','himself')]),&nbsp;parse(verb_complements_by_code(';~Dn.n',[np(node('*T*',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*T*)</tt><br>
@@ -1428,13 +1452,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.134">4.134</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.135">4.135</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.136">4.136</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.137">4.137</a>).</p>
 
-<dl><dt>(<a name="ex4.134">4.134</a>)</dt><dd>
+<dl><dt>(<a name="ex4.136">4.136</a>)</dt><dd>
 <tt>[w('D','the'), w('N','student'), w('PRO','he'), w('VBD',';~Dn.n','set'), w('D','the'), w('N','task')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.135">4.135</a>)</dt><dd>
+<dl><dt>(<a name="ex4.137">4.137</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','task')]),&nbsp;parse(verb_complements_by_code(';~Dn.n',[np(node('*T*',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*T*)</tt><br>
@@ -1448,13 +1472,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.136">4.136</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.137">4.137</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.138">4.138</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.139">4.139</a>).</p>
 
-<dl><dt>(<a name="ex4.136">4.136</a>)</dt><dd>
+<dl><dt>(<a name="ex4.138">4.138</a>)</dt><dd>
 <tt>[w('PRO','We'), w('BED',';~cat_Ve_passive_','were'), w('VVN',';~Dn.n','played'), w('Q','two'), w('NS','recordings'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.137">4.137</a>)</dt><dd>
+<dl><dt>(<a name="ex4.139">4.139</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q','two'), w('NS','recordings')]),&nbsp;parse(verb_complements_by_code(';~Dn.n',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(NP-OB1&nbsp;(Q&nbsp;two)</tt><br>
@@ -1463,13 +1487,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.138">4.138</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.139">4.139</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.140">4.140</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.141">4.141</a>).</p>
 
-<dl><dt>(<a name="ex4.138">4.138</a>)</dt><dd>
+<dl><dt>(<a name="ex4.140">4.140</a>)</dt><dd>
 <tt>[w('Q;_nphd_','everything'), w('Q;_nphd_','everyone'), w('HVP',';~cat_Ve','has'), w('BEN',';~cat_Ve_passive_','been'), w('VVN',';~Dn.n','taught')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.139">4.139</a>)</dt><dd>
+<dl><dt>(<a name="ex4.141">4.141</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([]),&nbsp;parse(verb_complements_by_code(';~Dn.n',[np(node('*T*',[]))],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(NP-OB1&nbsp;*T*)</tt><br>
@@ -1479,7 +1503,7 @@
 
 <br><h3><a name="sec4.5.2">4.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.f</h3>
 
-<p align="justify">Code <tt>;~Dn.f</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.140">4.140</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.f</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.142">4.142</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -1495,7 +1519,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.140">4.140</a>)</dt><dd>
+<dl><dt>(<a name="ex4.142">4.142</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.f',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-OB1',_,Store,L1,L0).</tt><br>
@@ -1503,15 +1527,15 @@
 <tt>&nbsp;&nbsp;cp_that('-OB1',_,Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">Note how, for both rules of (<a href="chapter4.html#ex4.140">4.140</a>), inherited <tt>Store</tt> information is passed on to the <tt>cp_that</tt> call.</p>
+<p align="justify">Note how, for both rules of (<a href="chapter4.html#ex4.142">4.142</a>), inherited <tt>Store</tt> information is passed on to the <tt>cp_that</tt> call.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.141">4.141</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.142">4.142</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.143">4.143</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.144">4.144</a>).</p>
 
-<dl><dt>(<a name="ex4.141">4.141</a>)</dt><dd>
+<dl><dt>(<a name="ex4.143">4.143</a>)</dt><dd>
 <tt>[w('D;_nphd_','That'), w('BEP',';~equ_Vw','is'), w('WPRO','what'), w('D','the'), w('N','advice'), w('VBP',';~Dn.f','tells'), w('PRO','us'), w('PRO','we'), w('MD',';~cat_Vi','must'), w('DO',';~Tn','do'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.142">4.142</a>)</dt><dd>
+<dl><dt>(<a name="ex4.144">4.144</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','us'), w('PRO','we'), w('MD',';~cat_Vi','must'), w('DO',';~Tn','do')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[np(node('*ICH*-274',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(PRO&nbsp;us))</tt><br>
@@ -1523,13 +1547,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.143">4.143</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.144">4.144</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.145">4.145</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.146">4.146</a>).</p>
 
-<dl><dt>(<a name="ex4.143">4.143</a>)</dt><dd>
+<dl><dt>(<a name="ex4.145">4.145</a>)</dt><dd>
 <tt>[w('PRO','We'), w('VBD',';~cat_Ve_passive_','got'), w('VVN',';~Dn.f','told'), w('C','that'), w('D','that'), w('N','laser'), w('MD',';~cat_Vi','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.144">4.144</a>)</dt><dd>
+<dl><dt>(<a name="ex4.146">4.146</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('C','that'), w('D','that'), w('N','laser'), w('MD',';~cat_Vi','can'), w('VB',';~Ipr','cut'), w('P-ROLE','through'), w('N','concrete')]),&nbsp;parse(verb_complements_by_code(';~Dn.f',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(C&nbsp;that)</tt><br>
@@ -1545,7 +1569,7 @@
 
 <br><h3><a name="sec4.5.3">4.5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.w</h3>
 
-<p align="justify">Code <tt>;~Dn.w</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.145">4.145</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.w</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.147">4.147</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -1561,7 +1585,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.145">4.145</a>)</dt><dd>
+<dl><dt>(<a name="ex4.147">4.147</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.w',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_embedded_que('-OB1',Store,L1,L0).</tt><br>
@@ -1569,15 +1593,15 @@
 <tt>&nbsp;&nbsp;cp_embedded_que('-OB1',Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">Note how, for both rules of (<a href="chapter4.html#ex4.140">4.140</a>), inherited <tt>Store</tt> information is passed on to the <tt>cp_embedded_que</tt> call.</p>
+<p align="justify">Note how, for both rules of (<a href="chapter4.html#ex4.142">4.142</a>), inherited <tt>Store</tt> information is passed on to the <tt>cp_embedded_que</tt> call.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.146">4.146</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.147">4.147</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.148">4.148</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.149">4.149</a>).</p>
 
-<dl><dt>(<a name="ex4.146">4.146</a>)</dt><dd>
+<dl><dt>(<a name="ex4.148">4.148</a>)</dt><dd>
 <tt>[w('PRO;_genm_','My'), w('N','uncle'), w('VBD',';~Dn.w','showed'), w('PRO','me'), w('WADV','how'), w('TO','to'), w('VB',';~Tn','milk'), w('D','the'), w('NS','cows'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.147">4.147</a>)</dt><dd>
+<dl><dt>(<a name="ex4.149">4.149</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me'), w('WADV','how'), w('TO','to'), w('VB',';~Tn','milk'), w('D','the'), w('NS','cows')]),&nbsp;parse(verb_complements_by_code(';~Dn.w',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(PRO&nbsp;me))</tt><br>
@@ -1590,13 +1614,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.148">4.148</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.149">4.149</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.150">4.150</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.151">4.151</a>).</p>
 
-<dl><dt>(<a name="ex4.148">4.148</a>)</dt><dd>
+<dl><dt>(<a name="ex4.150">4.150</a>)</dt><dd>
 <tt>[w('PRO','They'), w('BED',';~cat_Ve_passive_','were'), w('VVN',';~Dn.w','asked'), w('WQ','if'), w('PRO','they'), w('VBD',';~Tf','believed'), w('NPR','Windows_98'), w('BED',';~Ln','was'), w('D','the'), w('ADJ','correct'), w('N','system'), w('TO','to'), w('HV',';~Tn','have'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.149">4.149</a>)</dt><dd>
+<dl><dt>(<a name="ex4.151">4.151</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WQ','if'), w('PRO','they'), w('VBD',';~Tf','believed'), w('NPR','Windows_98'), w('BED',';~Ln','was'), w('D','the'), w('ADJ','correct'), w('N','system'), w('TO','to'), w('HV',';~Tn','have')]),&nbsp;parse(verb_complements_by_code(';~Dn.w',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(CP-QUE-OB1&nbsp;(IP-SUB&nbsp;(WQ&nbsp;if)</tt><br>
@@ -1616,7 +1640,7 @@
 
 <br><h3><a name="sec4.5.4">4.5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.r</h3>
 
-<p align="justify">Code <tt>;~Dn.r</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.150">4.150</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.r</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.152">4.152</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -1632,7 +1656,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.150">4.150</a>)</dt><dd>
+<dl><dt>(<a name="ex4.152">4.152</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.r',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,L4),</tt><br>
 <tt>&nbsp;&nbsp;optional_punc(non_final,L4,L3),</tt><br>
@@ -1646,13 +1670,13 @@
 <tt>&nbsp;&nbsp;punc(right_quotation_mark,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.151">4.151</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.152">4.152</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.153">4.153</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.154">4.154</a>).</p>
 
-<dl><dt>(<a name="ex4.151">4.151</a>)</dt><dd>
+<dl><dt>(<a name="ex4.153">4.153</a>)</dt><dd>
 <tt>[w('PRO','She'), w('VBD',';~Dn.r','asked'), w('D','the'), w('NPR','Prime'), w('NPR','Minister'), w('PULQ','<ldquo>'), w('BEP',';~La','Is'), w('PRO','it'), w('ADJ','true'), w('PUNC','?'), w('PURQ','<rdquo>'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.152">4.152</a>)</dt><dd>
+<dl><dt>(<a name="ex4.154">4.154</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('NPR','Prime'), w('NPR','Minister'), w('PULQ','<ldquo>'), w('BEP',';~La','Is'), w('PRO','it'), w('ADJ','true'), w('PUNC','?'), w('PURQ','<rdquo>')]),&nbsp;parse(verb_complements_by_code(';~Dn.r',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(D&nbsp;the)</tt><br>
@@ -1668,13 +1692,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.153">4.153</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.154">4.154</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.155">4.155</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.156">4.156</a>).</p>
 
-<dl><dt>(<a name="ex4.153">4.153</a>)</dt><dd>
+<dl><dt>(<a name="ex4.155">4.155</a>)</dt><dd>
 <tt>[w('D','The'), w('NPR','Prime'), w('NPR','Minister'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Dn.r','asked'), w('PULQ','<ldquo>'), w('BEP',';~La','Is'), w('PRO','it'), w('ADJ','true'), w('PUNC','?'), w('PURQ','<rdquo>'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.154">4.154</a>)</dt><dd>
+<dl><dt>(<a name="ex4.156">4.156</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PULQ','<ldquo>'), w('BEP',';~La','Is'), w('PRO','it'), w('ADJ','true'), w('PUNC','?'), w('PURQ','<rdquo>')]),&nbsp;parse(verb_complements_by_code(';~Dn.r',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(&nbsp;(PULQ&nbsp;<ldquo>)</tt><br>
@@ -1689,7 +1713,7 @@
 
 <br><h3><a name="sec4.5.5">4.5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.t</h3>
 
-<p align="justify">Code <tt>;~Dn.t</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.155">4.155</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.t</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.157">4.157</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -1705,7 +1729,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.155">4.155</a>)</dt><dd>
+<dl><dt>(<a name="ex4.157">4.157</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.t',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,[node('IP-INF-OB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
@@ -1715,13 +1739,13 @@
 
 <p align="justify">Note that the <i>to</i>-infinitive clause is integrated into the parse with the call of <tt>to_inf_layer</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>) in both rules of (<a href="chapter4.html#ex4.100">4.100</a>). This has the consequence that there can be no <i>for</i>-introduced subject internal to the object <i>to</i>-infinitive clause, ensuring no disruption of control inheritance from the indirect object (/subject when passive). Also note how the calls of <tt>to_inf_layer</tt> inherit any <tt>Store</tt> information.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.156">4.156</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.157">4.157</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.158">4.158</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.159">4.159</a>).</p>
 
-<dl><dt>(<a name="ex4.156">4.156</a>)</dt><dd>
+<dl><dt>(<a name="ex4.158">4.158</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBD',';~Dn.t','asked'), w('NPR','Andrew'), w('TO','to'), w('HV',';~Tn','have'), w('D','a'), w('N','go'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.157">4.157</a>)</dt><dd>
+<dl><dt>(<a name="ex4.159">4.159</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','Andrew'), w('TO','to'), w('HV',';~Tn','have'), w('D','a'), w('N','go')]),&nbsp;parse(verb_complements_by_code(';~Dn.t',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB2&nbsp;(NPR&nbsp;Andrew))</tt><br>
@@ -1733,13 +1757,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.158">4.158</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.159">4.159</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.160">4.160</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.161">4.161</a>).</p>
 
-<dl><dt>(<a name="ex4.158">4.158</a>)</dt><dd>
+<dl><dt>(<a name="ex4.160">4.160</a>)</dt><dd>
 <tt>[w('PRO','I'), w('HVP',';~cat_Ve','have'), w('ADV','now'), w('BEN',';~cat_Ve_passive_','been'), w('VVN',';~Dn.t','forbidden'), w('TO','to'), w('VB',';~Tn','make'), w('D;_nphd_','anything'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.159">4.159</a>)</dt><dd>
+<dl><dt>(<a name="ex4.161">4.161</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~Tn','make'), w('D;_nphd_','anything')]),&nbsp;parse(verb_complements_by_code(';~Dn.t',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
@@ -1751,20 +1775,20 @@
 
 <br><h3><a name="sec4.5.6">4.5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.*</h3>
 
-<p align="justify">Code <tt>;~Dn.*</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and there is no element with direct object function. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.160">4.160</a>), there has to be content from the word list for a noun phrase.</p>
+<p align="justify">Code <tt>;~Dn.*</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and there is no element with direct object function. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.162">4.162</a>), there has to be content from the word list for a noun phrase.</p>
 
-<dl><dt>(<a name="ex4.160">4.160</a>)</dt><dd>
+<dl><dt>(<a name="ex4.162">4.162</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dn.*',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',general,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.161">4.161</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.162">4.162</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.163">4.163</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.164">4.164</a>).</p>
 
-<dl><dt>(<a name="ex4.161">4.161</a>)</dt><dd>
+<dl><dt>(<a name="ex4.163">4.163</a>)</dt><dd>
 <tt>[w('PRO','You'), w('DOD','','did'), w('VB',';~Dn.*','tell'), w('PRO','me'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.162">4.162</a>)</dt><dd>
+<dl><dt>(<a name="ex4.164">4.164</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me')]),&nbsp;parse(verb_complements_by_code(';~Dn.*',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(NP-OB2&nbsp;(PRO&nbsp;me))</tt><br>
@@ -1774,7 +1798,7 @@
 
 <br><h3><a name="sec4.5.7">4.5.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.n</h3>
 
-<p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.163">4.163</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.165">4.165</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
 
 <ul>
 
@@ -1796,7 +1820,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.163">4.163</a>)</dt><dd>
+<dl><dt>(<a name="ex4.165">4.165</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dpr.n',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',general,L1,L0).</tt><br>
@@ -1811,13 +1835,13 @@
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',general,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.164">4.164</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.165">4.165</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.166">4.166</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.167">4.167</a>).</p>
 
-<dl><dt>(<a name="ex4.164">4.164</a>)</dt><dd>
+<dl><dt>(<a name="ex4.166">4.166</a>)</dt><dd>
 <tt>[w('N','Daddy'), w('VBD',';~Dpr.n','bought'), w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.165">4.165</a>)</dt><dd>
+<dl><dt>(<a name="ex4.167">4.167</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
@@ -1829,13 +1853,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.166">4.166</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.167">4.167</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.168">4.168</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.169">4.169</a>).</p>
 
-<dl><dt>(<a name="ex4.166">4.166</a>)</dt><dd>
+<dl><dt>(<a name="ex4.168">4.168</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Tt','want'), w('TO','to'), w('VB',';~Dpr.n','say'), w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.167">4.167</a>)</dt><dd>
+<dl><dt>(<a name="ex4.169">4.169</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
@@ -1845,13 +1869,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.168">4.168</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.169">4.169</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.170">4.170</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.171">4.171</a>).</p>
 
-<dl><dt>(<a name="ex4.168">4.168</a>)</dt><dd>
+<dl><dt>(<a name="ex4.170">4.170</a>)</dt><dd>
 <tt>[w('D','the'), w('ADJ','maximum'), w('N','loan'), w('RPRO','that'), w('D','the'), w('N','state'), w('MD',';~cat_Vi','could'), w('VB',';~Dpr.n','make'), w('P-ROLE','to'), w('D','a'), w('N','project')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.169">4.169</a>)</dt><dd>
+<dl><dt>(<a name="ex4.171">4.171</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('D','a'), w('N','project')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[np(node('*ICH*-283',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*ICH*-283)</tt><br>
@@ -1862,13 +1886,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.170">4.170</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.171">4.171</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.172">4.172</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.173">4.173</a>).</p>
 
-<dl><dt>(<a name="ex4.170">4.170</a>)</dt><dd>
+<dl><dt>(<a name="ex4.172">4.172</a>)</dt><dd>
 <tt>[w('NS','Details'), w('P-ROLE','of'), w('Q','all'), w('NS','negotiations'), w('BEP',';~cat_Ve_passive_','are'), w('VVN',';~Dpr.n','sent'), w('P-ROLE','to'), w('N','Head'), w('N','Office'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.171">4.171</a>)</dt><dd>
+<dl><dt>(<a name="ex4.173">4.173</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('N','Head'), w('N','Office')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
@@ -1880,21 +1904,21 @@
 
 <br><h3><a name="sec4.5.8">4.5.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.f</h3>
 
-<p align="justify">Code <tt>;~Dpr.f</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>NP-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.172">4.172</a>), there has to be content from the word list for a preposition phrase followed by a <i>that</i>-clause.</p>
+<p align="justify">Code <tt>;~Dpr.f</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>NP-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.174">4.174</a>), there has to be content from the word list for a preposition phrase followed by a <i>that</i>-clause.</p>
 
-<dl><dt>(<a name="ex4.172">4.172</a>)</dt><dd>
+<dl><dt>(<a name="ex4.174">4.174</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dpr.f',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-OB1',_,Store,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.173">4.173</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.174">4.174</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.175">4.175</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.176">4.176</a>).</p>
 
-<dl><dt>(<a name="ex4.173">4.173</a>)</dt><dd>
+<dl><dt>(<a name="ex4.175">4.175</a>)</dt><dd>
 <tt>[w('PRO','They'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('VB',';~Dpr.f','say'), w('P-ROLE','to'), w('D','the'), w('N','man'), w('C','that'), w('PRO','they'), w('BED',';~La','were'), w('ADJ','sorry'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.174">4.174</a>)</dt><dd>
+<dl><dt>(<a name="ex4.176">4.176</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('D','the'), w('N','man'), w('C','that'), w('PRO','they'), w('BED',';~La','were'), w('ADJ','sorry')]),&nbsp;parse(verb_complements_by_code(';~Dpr.f',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
@@ -1910,9 +1934,9 @@
 
 <br><h3><a name="sec4.5.9">4.5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.r</h3>
 
-<p align="justify">Code <tt>;~Dpr.r</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.175">4.175</a>), there has to be content from the word list for a preposition followed by left quotation punctuation followed by an utterance followed by right quotation punctuation.</p>
+<p align="justify">Code <tt>;~Dpr.r</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.177">4.177</a>), there has to be content from the word list for a preposition followed by left quotation punctuation followed by an utterance followed by right quotation punctuation.</p>
 
-<dl><dt>(<a name="ex4.175">4.175</a>)</dt><dd>
+<dl><dt>(<a name="ex4.177">4.177</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Dpr.r',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',general,L,L4),</tt><br>
 <tt>&nbsp;&nbsp;optional_punc(non_final,L4,L3),</tt><br>
@@ -1921,13 +1945,13 @@
 <tt>&nbsp;&nbsp;punc(right_quotation_mark,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.176">4.176</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.177">4.177</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.178">4.178</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.179">4.179</a>).</p>
 
-<dl><dt>(<a name="ex4.176">4.176</a>)</dt><dd>
+<dl><dt>(<a name="ex4.178">4.178</a>)</dt><dd>
 <tt>[w('PRO','She'), w('VBD',';~Dpr.r','said'), w('P-ROLE','to'), w('PRO','me'), w('PULQ','<ldquo>'), w('BEP',';~cat_Vg','are'), w('PRO','you'), w('VAG',';~I','going'), w('PUNC','?'), w('PURQ','<rdquo>'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.177">4.177</a>)</dt><dd>
+<dl><dt>(<a name="ex4.179">4.179</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('PRO','me'), w('PULQ','<ldquo>'), w('BEP',';~cat_Vg','are'), w('PRO','you'), w('VAG',';~I','going'), w('PUNC','?'), w('PURQ','<rdquo>')]),&nbsp;parse(verb_complements_by_code(';~Dpr.r',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
@@ -1948,7 +1972,7 @@
 
 <br><h3><a name="sec4.6.1">4.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.a</h3>
 
-<p align="justify">Code <tt>;~Cn.a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.178">4.178</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Cn.a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.180">4.180</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
 
 <ul>
 
@@ -1976,7 +2000,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.178">4.178</a>)</dt><dd>
+<dl><dt>(<a name="ex4.180">4.180</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',general,L1,L0).</tt><br>
@@ -2003,13 +2027,13 @@
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_sbj,passive,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.179">4.179</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.180">4.180</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.181">4.181</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.182">4.182</a>).</p>
 
-<dl><dt>(<a name="ex4.179">4.179</a>)</dt><dd>
+<dl><dt>(<a name="ex4.181">4.181</a>)</dt><dd>
 <tt>[w('D','The'), w('ADJ','setting'), w('N','sun'), w('VBD',';~Cn.a','painted'), w('D','the'), w('ADJ','western'), w('N','sky'), w('ADJ','red'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.180">4.180</a>)</dt><dd>
+<dl><dt>(<a name="ex4.182">4.182</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('ADJ','western'), w('N','sky'), w('ADJ','red')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(D&nbsp;the)</tt><br>
@@ -2020,13 +2044,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.181">4.181</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.182">4.182</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.183">4.183</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.184">4.184</a>).</p>
 
-<dl><dt>(<a name="ex4.181">4.181</a>)</dt><dd>
+<dl><dt>(<a name="ex4.183">4.183</a>)</dt><dd>
 <tt>[w('PRO','He'), w('VBD',';~Cn.a','flung'), w('ADJ','open'), w('D','the'), w('N','canopy'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.182">4.182</a>)</dt><dd>
+<dl><dt>(<a name="ex4.184">4.184</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','open'), w('D','the'), w('N','canopy')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;open))</tt><br>
@@ -2036,13 +2060,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.183">4.183</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.184">4.184</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.185">4.185</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.186">4.186</a>).</p>
 
-<dl><dt>(<a name="ex4.183">4.183</a>)</dt><dd>
+<dl><dt>(<a name="ex4.185">4.185</a>)</dt><dd>
 <tt>[w('PRO;_genm_','her'), w('NS','habits'), w('RPRO','that'), w('Q;_nphd_','most'), w('MD',';~cat_Vi','would'), w('VB',';~Cn.a','find'), w('ADJ','annoying')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.184">4.184</a>)</dt><dd>
+<dl><dt>(<a name="ex4.186">4.186</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','annoying')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[np(node('*ICH*-296',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*ICH*-296)</tt><br>
@@ -2051,13 +2075,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.185">4.185</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.186">4.186</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.187">4.187</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.188">4.188</a>).</p>
 
-<dl><dt>(<a name="ex4.185">4.185</a>)</dt><dd>
+<dl><dt>(<a name="ex4.187">4.187</a>)</dt><dd>
 <tt>[w('D','The'), w('N','decline'), w('VBP',';~Cn.a','makes'), w('PRO;_provisional_','it'), w('ADJR','easier'), w('TO','to'), w('VB',';~I','accept'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.186">4.186</a>)</dt><dd>
+<dl><dt>(<a name="ex4.188">4.188</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('ADJR','easier'), w('TO','to'), w('VB',';~I','accept')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
@@ -2068,13 +2092,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.187">4.187</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.188">4.188</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.189">4.189</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.190">4.190</a>).</p>
 
-<dl><dt>(<a name="ex4.187">4.187</a>)</dt><dd>
+<dl><dt>(<a name="ex4.189">4.189</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Cn.a','find'), w('D;_nphd_','this'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.188">4.188</a>)</dt><dd>
+<dl><dt>(<a name="ex4.190">4.190</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D;_nphd_','this'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;(D;_nphd_&nbsp;this))</tt><br>
@@ -2086,13 +2110,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.189">4.189</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.190">4.190</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.191">4.191</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.192">4.192</a>).</p>
 
-<dl><dt>(<a name="ex4.189">4.189</a>)</dt><dd>
+<dl><dt>(<a name="ex4.191">4.191</a>)</dt><dd>
 <tt>[w('WPRO','What'), w('DOD','','did'), w('PRO','you'), w('VB',';~Cn.a','find'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.190">4.190</a>)</dt><dd>
+<dl><dt>(<a name="ex4.192">4.192</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[np(node('*ICH*-311',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-311)</tt><br>
@@ -2104,13 +2128,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.191">4.191</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.192">4.192</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.193">4.193</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.194">4.194</a>).</p>
 
-<dl><dt>(<a name="ex4.191">4.191</a>)</dt><dd>
+<dl><dt>(<a name="ex4.193">4.193</a>)</dt><dd>
 <tt>[w('D','The'), w('ADJ','western'), w('N','sky'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Cn.a','painted'), w('ADJ','red'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.192">4.192</a>)</dt><dd>
+<dl><dt>(<a name="ex4.194">4.194</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','red')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(ADJP-PRD&nbsp;(ADJ&nbsp;red))</tt><br>
@@ -2118,13 +2142,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.193">4.193</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.194">4.194</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.195">4.195</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.196">4.196</a>).</p>
 
-<dl><dt>(<a name="ex4.193">4.193</a>)</dt><dd>
+<dl><dt>(<a name="ex4.195">4.195</a>)</dt><dd>
 <tt>[w('D;_nphd_','This'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Cn.a','found'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.194">4.194</a>)</dt><dd>
+<dl><dt>(<a name="ex4.196">4.196</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;difficult))</tt><br>
@@ -2137,7 +2161,7 @@
 
 <br><h3><a name="sec4.6.2">4.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n</h3>
 
-<p align="justify">Code <tt>;~Cn.n</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.195">4.195</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Cn.n</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.197">4.197</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
 
 <ul>
 
@@ -2159,7 +2183,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.195">4.195</a>)</dt><dd>
+<dl><dt>(<a name="ex4.197">4.197</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.n',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-PRD',general,L1,L0).</tt><br>
@@ -2175,13 +2199,13 @@
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.196">4.196</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.197">4.197</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.198">4.198</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.199">4.199</a>).</p>
 
-<dl><dt>(<a name="ex4.196">4.196</a>)</dt><dd>
+<dl><dt>(<a name="ex4.198">4.198</a>)</dt><dd>
 <tt>[w('PRO','He'), w('HVP',';~cat_Ve','has'), w('VVN',';~Cn.n','made'), w('PRO','it'), w('PRO;_ppge_','his'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.197">4.197</a>)</dt><dd>
+<dl><dt>(<a name="ex4.199">4.199</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it'), w('PRO;_ppge_','his')]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO&nbsp;it))</tt><br>
@@ -2190,13 +2214,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.198">4.198</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.199">4.199</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.200">4.200</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.201">4.201</a>).</p>
 
-<dl><dt>(<a name="ex4.198">4.198</a>)</dt><dd>
+<dl><dt>(<a name="ex4.200">4.200</a>)</dt><dd>
 <tt>[w('VB',';~Cn.n','Make'), w('PRO;_provisional_','it'), w('D','a'), w('N','rule'), w('TO','to'), w('VB',';~Ip','get'), w('RP','up'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.199">4.199</a>)</dt><dd>
+<dl><dt>(<a name="ex4.201">4.201</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','it'), w('D','a'), w('N','rule'), w('TO','to'), w('VB',';~Ip','get'), w('RP','up')]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO;_provisional_&nbsp;it))</tt><br>
@@ -2209,13 +2233,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.200">4.200</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.201">4.201</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.202">4.202</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.203">4.203</a>).</p>
 
-<dl><dt>(<a name="ex4.200">4.200</a>)</dt><dd>
+<dl><dt>(<a name="ex4.202">4.202</a>)</dt><dd>
 <tt>[w('D','a'), w('N','kitten'), w('RPRO','who'), w('PRO','we'), w('VBD',';~Cn.n','called'), w('NPR','Ruffels')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.201">4.201</a>)</dt><dd>
+<dl><dt>(<a name="ex4.203">4.203</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','Ruffels')]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[np(node('*ICH*-301',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*ICH*-301)</tt><br>
@@ -2224,13 +2248,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.202">4.202</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.203">4.203</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.204">4.204</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.205">4.205</a>).</p>
 
-<dl><dt>(<a name="ex4.202">4.202</a>)</dt><dd>
+<dl><dt>(<a name="ex4.204">4.204</a>)</dt><dd>
 <tt>[w('D','The'), w('N','kitten'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Cn.n','called'), w('NPR','Ruffels'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.203">4.203</a>)</dt><dd>
+<dl><dt>(<a name="ex4.205">4.205</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','Ruffels')]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(NP-PRD&nbsp;(NPR&nbsp;Ruffels))</tt><br>
@@ -2238,13 +2262,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.204">4.204</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.205">4.205</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.206">4.206</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.207">4.207</a>).</p>
 
-<dl><dt>(<a name="ex4.204">4.204</a>)</dt><dd>
+<dl><dt>(<a name="ex4.206">4.206</a>)</dt><dd>
 <tt>[w('WPRO','What'), w('BED',';~cat_Ve_passive_','was'), w('D','the'), w('N','city'), w('VVN',';~Cn.n','called'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.205">4.205</a>)</dt><dd>
+<dl><dt>(<a name="ex4.207">4.207</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([]),&nbsp;parse(verb_complements_by_code(';~Cn.n',[np(node('*ICH*-314',[]))],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(NP-PRD&nbsp;*ICH*-314)</tt><br>
@@ -2254,7 +2278,7 @@
 
 <br><h3><a name="sec4.6.3">4.6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n/a</h3>
 
-<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.206">4.206</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.208">4.208</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -2270,7 +2294,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.206">4.206</a>)</dt><dd>
+<dl><dt>(<a name="ex4.208">4.208</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-PRD',general,L1,L0).</tt><br>
@@ -2278,13 +2302,13 @@
 <tt>&nbsp;&nbsp;preposition_phrase('-PRD',general,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.207">4.207</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.208">4.208</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.209">4.209</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.210">4.210</a>).</p>
 
-<dl><dt>(<a name="ex4.207">4.207</a>)</dt><dd>
+<dl><dt>(<a name="ex4.209">4.209</a>)</dt><dd>
 <tt>[w('PRO','They'), w('VBD',';~Cn.n&sol;a','accepted'), w('PRO','it'), w('P-ROLE','as'), w('D','a'), w('ADJ','natural'), w('N','thing'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.208">4.208</a>)</dt><dd>
+<dl><dt>(<a name="ex4.210">4.210</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it'), w('P-ROLE','as'), w('D','a'), w('ADJ','natural'), w('N','thing')]),&nbsp;parse(verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO&nbsp;it))</tt><br>
@@ -2296,13 +2320,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.209">4.209</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.210">4.210</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.211">4.211</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.212">4.212</a>).</p>
 
-<dl><dt>(<a name="ex4.209">4.209</a>)</dt><dd>
+<dl><dt>(<a name="ex4.211">4.211</a>)</dt><dd>
 <tt>[w('D','The'), w('N','alliance'), w('VBD',';~cat_Ve_passive_','became'), w('VVN',';~Cn.n&sol;a','known'), w('P-ROLE','as'), w('D','the'), w('NPR','Delian'), w('NPR','League'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.210">4.210</a>)</dt><dd>
+<dl><dt>(<a name="ex4.212">4.212</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','as'), w('D','the'), w('NPR','Delian'), w('NPR','League')]),&nbsp;parse(verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(PP-PRD&nbsp;(P-ROLE&nbsp;as)</tt><br>
@@ -2315,7 +2339,7 @@
 
 <br><h3><a name="sec4.6.4">4.6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.pr</h3>
 
-<p align="justify">Code <tt>;~Cn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.211">4.211</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.213">4.213</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -2331,7 +2355,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.211">4.211</a>)</dt><dd>
+<dl><dt>(<a name="ex4.213">4.213</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.pr',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-PRD',general,L1,L0).</tt><br>
@@ -2339,13 +2363,13 @@
 <tt>&nbsp;&nbsp;preposition_phrase('-PRD',general,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.212">4.212</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.213">4.213</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.214">4.214</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.215">4.215</a>).</p>
 
-<dl><dt>(<a name="ex4.212">4.212</a>)</dt><dd>
+<dl><dt>(<a name="ex4.214">4.214</a>)</dt><dd>
 <tt>[w('NPR','Geoffrey'), w('MD',';~cat_Vi','could'), w('VB',';~Cn.pr','imagine'), w('PNX','himself'), w('P-ROLE','in'), w('D','an'), w('ADJ','upper'), w('N','gallery'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.213">4.213</a>)</dt><dd>
+<dl><dt>(<a name="ex4.215">4.215</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','himself'), w('P-ROLE','in'), w('D','an'), w('ADJ','upper'), w('N','gallery')]),&nbsp;parse(verb_complements_by_code(';~Cn.pr',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PNX&nbsp;himself))</tt><br>
@@ -2357,13 +2381,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.214">4.214</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.215">4.215</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.216">4.216</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.217">4.217</a>).</p>
 
-<dl><dt>(<a name="ex4.214">4.214</a>)</dt><dd>
+<dl><dt>(<a name="ex4.216">4.216</a>)</dt><dd>
 <tt>[w('NPR','Thorn'), w('BEP',';~cat_Ve_passive_','is'), w('VVN',';~Cn.pr','involved'), w('P-ROLE','in'), w('ADJ','parallel'), w('N','computing'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.215">4.215</a>)</dt><dd>
+<dl><dt>(<a name="ex4.217">4.217</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','in'), w('ADJ','parallel'), w('N','computing')]),&nbsp;parse(verb_complements_by_code(';~Cn.pr',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(PP-PRD&nbsp;(P-ROLE&nbsp;in)</tt><br>
@@ -2375,7 +2399,7 @@
 
 <br><h3><a name="sec4.6.5">4.6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.t</h3>
 
-<p align="justify">Code <tt>;~Cn.t</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.216">4.216</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Cn.t</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.218">4.218</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -2393,7 +2417,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.216">4.216</a>)</dt><dd>
+<dl><dt>(<a name="ex4.218">4.218</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.t',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,[node('IP-INF-PRD',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
@@ -2403,13 +2427,13 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.217">4.217</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.218">4.218</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.219">4.219</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.220">4.220</a>).</p>
 
-<dl><dt>(<a name="ex4.217">4.217</a>)</dt><dd>
+<dl><dt>(<a name="ex4.219">4.219</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBD',';~Cn.t','persuaded'), w('PRO','it'), w('TO','to'), w('VB',';~Ipr','get'), w('P-ROLE','off'), w('PRO','me'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.218">4.218</a>)</dt><dd>
+<dl><dt>(<a name="ex4.220">4.220</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it'), w('TO','to'), w('VB',';~Ipr','get'), w('P-ROLE','off'), w('PRO','me')]),&nbsp;parse(verb_complements_by_code(';~Cn.t',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO&nbsp;it))</tt><br>
@@ -2421,13 +2445,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.219">4.219</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.220">4.220</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.221">4.221</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.222">4.222</a>).</p>
 
-<dl><dt>(<a name="ex4.219">4.219</a>)</dt><dd>
+<dl><dt>(<a name="ex4.221">4.221</a>)</dt><dd>
 <tt>[w('D','the'), w('N','person'), w('RPRO','that'), w('PRO','he'), w('MD',';~cat_Vi','&lt;apos&gt;ll'), w('VB',';~Cn.t','get'), w('TO','to'), w('DO',';~Tn','do'), w('PRO;_genm_','his'), w('ADJ','dirty'), w('N','work')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.220">4.220</a>)</dt><dd>
+<dl><dt>(<a name="ex4.222">4.222</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('DO',';~Tn','do'), w('PRO;_genm_','his'), w('ADJ','dirty'), w('N','work')]),&nbsp;parse(verb_complements_by_code(';~Cn.t',[np(node('*ICH*-325',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*ICH*-325)</tt><br>
@@ -2440,13 +2464,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.221">4.221</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.222">4.222</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.223">4.223</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.224">4.224</a>).</p>
 
-<dl><dt>(<a name="ex4.221">4.221</a>)</dt><dd>
+<dl><dt>(<a name="ex4.223">4.223</a>)</dt><dd>
 <tt>[w('ADJ','Such'), w('NS','receptors'), w('BEP',';~cat_Ve_passive_','are'), w('VVN',';~Cn.t','thought'), w('TO','to'), w('BE',';~Ln','be'), w('NS','neurons'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.222">4.222</a>)</dt><dd>
+<dl><dt>(<a name="ex4.224">4.224</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~Ln','be'), w('NS','neurons')]),&nbsp;parse(verb_complements_by_code(';~Cn.t',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-INF-PRD&nbsp;(TO&nbsp;to)</tt><br>
@@ -2458,21 +2482,21 @@
 
 <br><h3><a name="sec4.6.6">4.6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.i</h3>
 
-<p align="justify">Code <tt>;~Cn.i</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a bare infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.223">4.223</a>), there has to be content from the word list for a noun phrase followed by a bare infinitive clause.</p>
+<p align="justify">Code <tt>;~Cn.i</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a bare infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.225">4.225</a>), there has to be content from the word list for a noun phrase followed by a bare infinitive clause.</p>
 
-<dl><dt>(<a name="ex4.223">4.223</a>)</dt><dd>
+<dl><dt>(<a name="ex4.225">4.225</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.i',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,[node('IP-INF-PRD',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,filled_sbj,infinitive,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.224">4.224</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.225">4.225</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.226">4.226</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.227">4.227</a>).</p>
 
-<dl><dt>(<a name="ex4.224">4.224</a>)</dt><dd>
+<dl><dt>(<a name="ex4.226">4.226</a>)</dt><dd>
 <tt>[w('VB',';~Cn.i','Let'), w('PRO','me'), w('HV',';~Tn','have'), w('D','a'), w('N','go'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.225">4.225</a>)</dt><dd>
+<dl><dt>(<a name="ex4.227">4.227</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me'), w('HV',';~Tn','have'), w('D','a'), w('N','go')]),&nbsp;parse(verb_complements_by_code(';~Cn.i',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO&nbsp;me))</tt><br>
@@ -2485,7 +2509,7 @@
 
 <br><h3><a name="sec4.6.7">4.6.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.g</h3>
 
-<p align="justify">Code <tt>;~Cn.g</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.226">4.226</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.g</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.228">4.228</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -2501,7 +2525,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.226">4.226</a>)</dt><dd>
+<dl><dt>(<a name="ex4.228">4.228</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.g',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-PRD',Store,filled_sbj,ing_participle,L1,L0).</tt><br>
@@ -2509,13 +2533,13 @@
 <tt>&nbsp;&nbsp;ip_ppl_active('-PRD',Store,filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.227">4.227</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.228">4.228</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.229">4.229</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.230">4.230</a>).</p>
 
-<dl><dt>(<a name="ex4.227">4.227</a>)</dt><dd>
+<dl><dt>(<a name="ex4.229">4.229</a>)</dt><dd>
 <tt>[w('ADV','So'), w('PRO','they'), w('HVD',';~cat_Ve','&lt;apos&gt;d'), w('VVN',';~Cn.g','got'), w('D','a'), w('ADJ','ticking'), w('N','clock'), w('VAG',';~I','running'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.228">4.228</a>)</dt><dd>
+<dl><dt>(<a name="ex4.230">4.230</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('ADJ','ticking'), w('N','clock'), w('VAG',';~I','running')]),&nbsp;parse(verb_complements_by_code(';~Cn.g',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
@@ -2526,13 +2550,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.229">4.229</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.230">4.230</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.231">4.231</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.232">4.232</a>).</p>
 
-<dl><dt>(<a name="ex4.229">4.229</a>)</dt><dd>
+<dl><dt>(<a name="ex4.231">4.231</a>)</dt><dd>
 <tt>[w('D','The'), w('N','unit'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Cn.g','assumed'), w('VAG',';~I','working'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.230">4.230</a>)</dt><dd>
+<dl><dt>(<a name="ex4.232">4.232</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~I','working')]),&nbsp;parse(verb_complements_by_code(';~Cn.g',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-PPL-PRD&nbsp;(VAG;~I&nbsp;working))</tt><br>
@@ -2546,7 +2570,7 @@
 
 <br><h3><a name="sec4.7.1">4.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24A</h3>
 
-<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.231">4.231</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.233">4.233</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
 
 <ul>
 
@@ -2562,7 +2586,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.231">4.231</a>)</dt><dd>
+<dl><dt>(<a name="ex4.233">4.233</a>)</dt><dd>
 <tt>verb_complements_by_code(';~VP24A',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-PRD',Store,filled_sbj,en_participle,L1,L0).</tt><br>
@@ -2570,13 +2594,13 @@
 <tt>&nbsp;&nbsp;ip_ppl_passive('-PRD',Store,filled_sbj,en_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.232">4.232</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.233">4.233</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.234">4.234</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.235">4.235</a>).</p>
 
-<dl><dt>(<a name="ex4.232">4.232</a>)</dt><dd>
+<dl><dt>(<a name="ex4.234">4.234</a>)</dt><dd>
 <tt>[w('PRO','She'), w('VBD',';~VP24A','made'), w('PRO','me'), w('VVN',';~Tn.pr','obliged'), w('P-ROLE','to'), w('PRO','her'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.233">4.233</a>)</dt><dd>
+<dl><dt>(<a name="ex4.235">4.235</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','me'), w('VVN',';~Tn.pr','obliged'), w('P-ROLE','to'), w('PRO','her')]),&nbsp;parse(verb_complements_by_code(';~VP24A',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(PRO&nbsp;me))</tt><br>
@@ -2588,13 +2612,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.234">4.234</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.235">4.235</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.236">4.236</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.237">4.237</a>).</p>
 
-<dl><dt>(<a name="ex4.234">4.234</a>)</dt><dd>
+<dl><dt>(<a name="ex4.236">4.236</a>)</dt><dd>
 <tt>[w('D','A'), w('ADJ','prominent'), w('N','journalist'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~VP24A','found'), w('VVN',';~Cn.a','shot'), w('ADJ','dead'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.235">4.235</a>)</dt><dd>
+<dl><dt>(<a name="ex4.237">4.237</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VVN',';~Cn.a','shot'), w('ADJ','dead')]),&nbsp;parse(verb_complements_by_code(';~VP24A',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-PPL-PRD&nbsp;(NP-LGS&nbsp;*)</tt><br>
@@ -2606,21 +2630,21 @@
 
 <br><h3><a name="sec4.7.2">4.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24B</h3>
 
-<p align="justify">Code <tt>;~VP24B</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24B</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> indicating what its subject experiences, undergoes or suffers. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.236">4.236</a>), there has to be content from the word list for a noun phrase followed by a past participle clause.</p>
+<p align="justify">Code <tt>;~VP24B</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24B</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> indicating what its subject experiences, undergoes or suffers. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.238">4.238</a>), there has to be content from the word list for a noun phrase followed by a past participle clause.</p>
 
-<dl><dt>(<a name="ex4.236">4.236</a>)</dt><dd>
+<dl><dt>(<a name="ex4.238">4.238</a>)</dt><dd>
 <tt>verb_complements_by_code(';~VP24B',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-PRD',Store,filled_sbj,en_participle,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.237">4.237</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.238">4.238</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.239">4.239</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.240">4.240</a>).</p>
 
-<dl><dt>(<a name="ex4.237">4.237</a>)</dt><dd>
+<dl><dt>(<a name="ex4.239">4.239</a>)</dt><dd>
 <tt>[w('PRO','I'), w('HVD',';~cat_Ve','&lt;apos&gt;d'), w('HVN',';~VP24B','had'), w('D','a'), w('N','novel'), w('VVN',';~Tn','published'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.238">4.238</a>)</dt><dd>
+<dl><dt>(<a name="ex4.240">4.240</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','novel'), w('VVN',';~Tn','published')]),&nbsp;parse(verb_complements_by_code(';~VP24B',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
@@ -2633,21 +2657,21 @@
 
 <br><h3><a name="sec4.7.3">4.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24C</h3>
 
-<p align="justify">Code <tt>;~VP24C</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24C</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">GET</small> meaning &lsquo;cause to be&rsquo;. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.239">4.239</a>), there has to be content from the word list for a noun phrase followed by a past participle clause.</p>
+<p align="justify">Code <tt>;~VP24C</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with passive voice and object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24C</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">GET</small> meaning &lsquo;cause to be&rsquo;. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.241">4.241</a>), there has to be content from the word list for a noun phrase followed by a past participle clause.</p>
 
-<dl><dt>(<a name="ex4.239">4.239</a>)</dt><dd>
+<dl><dt>(<a name="ex4.241">4.241</a>)</dt><dd>
 <tt>verb_complements_by_code(';~VP24C',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-PRD',Store,filled_sbj,en_participle,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.240">4.240</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.241">4.241</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.242">4.242</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.243">4.243</a>).</p>
 
-<dl><dt>(<a name="ex4.240">4.240</a>)</dt><dd>
+<dl><dt>(<a name="ex4.242">4.242</a>)</dt><dd>
 <tt>[w('PRO','She'), w('HVP',';~cat_Ve','&lt;apos&gt;s'), w('VVN',';~VP24C','got'), w('PRO;_genm_','her'), w('N','hair'), w('VVN',';~Tn','cut'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.241">4.241</a>)</dt><dd>
+<dl><dt>(<a name="ex4.243">4.243</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_genm_','her'), w('N','hair'), w('VVN',';~Tn','cut')]),&nbsp;parse(verb_complements_by_code(';~VP24C',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(NP-GENV&nbsp;(PRO;_genm_&nbsp;her))</tt><br>
@@ -2664,7 +2688,7 @@
 
 <br><h3><a name="sec4.8.1">4.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_V</h3>
 
-<p align="justify">Code <tt>;~ex_V</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.242">4.242</a>), the selected noun phrase occurs either:</p>
+<p align="justify">Code <tt>;~ex_V</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.244">4.244</a>), the selected noun phrase occurs either:</p>
 
 <ul>
 
@@ -2674,20 +2698,20 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.242">4.242</a>)</dt><dd>
+<dl><dt>(<a name="ex4.244">4.244</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_V',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~ex_V',[np(ICH)],there_sbj,active,[node('NP-ESBJ',[ICH])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.243">4.243</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.244">4.244</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.245">4.245</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.246">4.246</a>).</p>
 
-<dl><dt>(<a name="ex4.243">4.243</a>)</dt><dd>
+<dl><dt>(<a name="ex4.245">4.245</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_V','are'), w('ADJ','other'), w('NS','complications'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.244">4.244</a>)</dt><dd>
+<dl><dt>(<a name="ex4.246">4.246</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','other'), w('NS','complications')]),&nbsp;parse(verb_complements_by_code(';~ex_V',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(NP-ESBJ&nbsp;(ADJP&nbsp;(ADJ&nbsp;other))</tt><br>
@@ -2696,13 +2720,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.245">4.245</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.246">4.246</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.247">4.247</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.248">4.248</a>).</p>
 
-<dl><dt>(<a name="ex4.245">4.245</a>)</dt><dd>
+<dl><dt>(<a name="ex4.247">4.247</a>)</dt><dd>
 <tt>[w('WADV','How'), w('ADJ','many'), w('NS','flats'), w('BEP',';~ex_V','are'), w('EX','there'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.246">4.246</a>)</dt><dd>
+<dl><dt>(<a name="ex4.248">4.248</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([]),&nbsp;parse(verb_complements_by_code(';~ex_V',[np(node('*ICH*-338',[]))],there_sbj,active)).</tt><br>
 <br>
 <tt>(NP-ESBJ&nbsp;*ICH*-338)</tt><br>
@@ -2712,7 +2736,7 @@
 
 <br><h3><a name="sec4.8.2">4.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vp</h3>
 
-<p align="justify">Code <tt>;~ex_Vp</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.247">4.247</a>), while the adverbial particle has to come from an adverb phrase of the word list, the noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~ex_Vp</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.249">4.249</a>), while the adverbial particle has to come from an adverb phrase of the word list, the noun phrase can occur either:</p>
 
 <ul>
 
@@ -2722,7 +2746,7 @@
 
 </ul>
 
-<dl><dt>(<a name="ex4.247">4.247</a>)</dt><dd>
+<dl><dt>(<a name="ex4.249">4.249</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_Vp',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('-CLR',particle,L1,L0).</tt><br>
@@ -2730,13 +2754,13 @@
 <tt>&nbsp;&nbsp;adverb_phrase('-CLR',particle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.248">4.248</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.249">4.249</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.250">4.250</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.251">4.251</a>).</p>
 
-<dl><dt>(<a name="ex4.248">4.248</a>)</dt><dd>
+<dl><dt>(<a name="ex4.250">4.250</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_Vp','&lt;apos&gt;s'), w('Q;_nphd_','nothing'), w('ADV','there'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.249">4.249</a>)</dt><dd>
+<dl><dt>(<a name="ex4.251">4.251</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q;_nphd_','nothing'), w('ADV','there')]),&nbsp;parse(verb_complements_by_code(';~ex_Vp',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;(Q;_nphd_&nbsp;nothing))</tt><br>
@@ -2745,13 +2769,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.250">4.250</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.251">4.251</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.252">4.252</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.253">4.253</a>).</p>
 
-<dl><dt>(<a name="ex4.250">4.250</a>)</dt><dd>
+<dl><dt>(<a name="ex4.252">4.252</a>)</dt><dd>
 <tt>[w('WADV','How'), w('ADJ','many'), w('NS','flats'), w('BEP',';~ex_Vp','are'), w('EX','there'), w('ADV','here'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.251">4.251</a>)</dt><dd>
+<dl><dt>(<a name="ex4.253">4.253</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADV','here')]),&nbsp;parse(verb_complements_by_code(';~ex_Vp',[np(node('*ICH*-338',[]))],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;*ICH*-338)</tt><br>
@@ -2762,21 +2786,21 @@
 
 <br><h3><a name="sec4.8.3">4.8.3</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vpr</h3>
 
-<p align="justify">Code <tt>;~ex_Vpr</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a preposition phrase (<tt>PP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.252">4.252</a>), there has to be content from the word list for a noun phrase followed by a preposition phrase.</p>
+<p align="justify">Code <tt>;~ex_Vpr</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a preposition phrase (<tt>PP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.254">4.254</a>), there has to be content from the word list for a noun phrase followed by a preposition phrase.</p>
 
-<dl><dt>(<a name="ex4.252">4.252</a>)</dt><dd>
+<dl><dt>(<a name="ex4.254">4.254</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_Vpr',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-CLR',general,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.253">4.253</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.254">4.254</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.255">4.255</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.256">4.256</a>).</p>
 
-<dl><dt>(<a name="ex4.253">4.253</a>)</dt><dd>
+<dl><dt>(<a name="ex4.255">4.255</a>)</dt><dd>
 <tt>[w('EX','There'), w('BED',';~ex_Vpr','was'), w('ADJ','open'), w('N','mockery'), w('P-ROLE','in'), w('PRO;_genm_','his'), w('N','tone'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.254">4.254</a>)</dt><dd>
+<dl><dt>(<a name="ex4.256">4.256</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','open'), w('N','mockery'), w('P-ROLE','in'), w('PRO;_genm_','his'), w('N','tone')]),&nbsp;parse(verb_complements_by_code(';~ex_Vpr',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;(ADJP&nbsp;(ADJ&nbsp;open))</tt><br>
@@ -2790,9 +2814,9 @@
 
 <br><h3><a name="sec4.8.4">4.8.4</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt</h3>
 
-<p align="justify">Code <tt>;~ex_cat_Vt</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.255">4.255</a>), there has to be content from the word list for a noun phrase followed by a <i>to</i>-infinitive clause.</p>
+<p align="justify">Code <tt>;~ex_cat_Vt</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.257">4.257</a>), there has to be content from the word list for a noun phrase followed by a <i>to</i>-infinitive clause.</p>
 
-<dl><dt>(<a name="ex4.255">4.255</a>)</dt><dd>
+<dl><dt>(<a name="ex4.257">4.257</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
@@ -2800,13 +2824,13 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.256">4.256</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.257">4.257</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.258">4.258</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.259">4.259</a>).</p>
 
-<dl><dt>(<a name="ex4.256">4.256</a>)</dt><dd>
+<dl><dt>(<a name="ex4.258">4.258</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_cat_Vt','is'), w('Q','no'), w('N','evidence'), w('TO','to'), w('VB',';~Tf','prove'), w('NPR','Hollis'), w('BED',';~Ln','was'), w('D','a'), w('ADJ','Russian'), w('N','mole'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.257">4.257</a>)</dt><dd>
+<dl><dt>(<a name="ex4.259">4.259</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q','no'), w('N','evidence'), w('TO','to'), w('VB',';~Tf','prove'), w('NPR','Hollis'), w('BED',';~Ln','was'), w('D','a'), w('ADJ','Russian'), w('N','mole')]),&nbsp;parse(verb_complements_by_code(';~ex_cat_Vt',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;(Q&nbsp;no)</tt><br>
@@ -2824,7 +2848,7 @@
 
 <br><h3><a name="sec4.8.5">4.8.5</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt_passive_</h3>
 
-<dl><dt>(<a name="ex4.258">4.258</a>)</dt><dd>
+<dl><dt>(<a name="ex4.260">4.260</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
@@ -2838,13 +2862,13 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType,passive,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.259">4.259</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.260">4.260</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.261">4.261</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.262">4.262</a>).</p>
 
-<dl><dt>(<a name="ex4.259">4.259</a>)</dt><dd>
+<dl><dt>(<a name="ex4.261">4.261</a>)</dt><dd>
 <tt>[w('WPRO','What'), w('BEP',';~ex_cat_Vt_passive_','is'), w('EX','there'), w('P-CONN','for'), w('PRO','her'), w('TO','to'), w('DO',';~Tn','do'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.260">4.260</a>)</dt><dd>
+<dl><dt>(<a name="ex4.262">4.262</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-CONN','for'), w('PRO','her'), w('TO','to'), w('DO',';~Tn','do')]),&nbsp;parse(verb_complements_by_code(';~ex_cat_Vt_passive_',[np(node('*ICH*-348',[]))],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;*ICH*-348)</tt><br>
@@ -2858,9 +2882,9 @@
 
 <br><h3><a name="sec4.8.6">4.8.6</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vg</h3>
 
-<p align="justify">Code <tt>;~ex_cat_Vg</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.261">4.261</a>), there has to be content from the word list for a noun phrase followed by a participle clause.</p>
+<p align="justify">Code <tt>;~ex_cat_Vg</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.263">4.263</a>), there has to be content from the word list for a noun phrase followed by a participle clause.</p>
 
-<dl><dt>(<a name="ex4.261">4.261</a>)</dt><dd>
+<dl><dt>(<a name="ex4.263">4.263</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vg',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,filled_sbj,ing_participle,L1,L0).</tt><br>
@@ -2868,13 +2892,13 @@
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.262">4.262</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.263">4.263</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.264">4.264</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.265">4.265</a>).</p>
 
-<dl><dt>(<a name="ex4.262">4.262</a>)</dt><dd>
+<dl><dt>(<a name="ex4.264">4.264</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_cat_Vg','&lt;apos&gt;s'), w('D','a'), w('N','bear'), w('VAG',';~Ipr','sitting'), w('P-ROLE','in'), w('D','the'), w('N','corner'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.263">4.263</a>)</dt><dd>
+<dl><dt>(<a name="ex4.265">4.265</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','bear'), w('VAG',';~Ipr','sitting'), w('P-ROLE','in'), w('D','the'), w('N','corner')]),&nbsp;parse(verb_complements_by_code(';~ex_cat_Vg',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)</tt><br>
@@ -2889,9 +2913,9 @@
 
 <br><h3><a name="sec4.8.7">4.8.7</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Ve_passive_</h3>
 
-<p align="justify">Code <tt>;~ex_cat_Ve_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.264">4.264</a>), there has to be content from the word list for a noun phrase followed by a participle clause.</p>
+<p align="justify">Code <tt>;~ex_cat_Ve_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a past participle (<i>-ed&sol;-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.266">4.266</a>), there has to be content from the word list for a noun phrase followed by a participle clause.</p>
 
-<dl><dt>(<a name="ex4.264">4.264</a>)</dt><dd>
+<dl><dt>(<a name="ex4.266">4.266</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Ve_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-ESBJ',general,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,filled_sbj,en_participle,L1,L0).</tt><br>
@@ -2899,13 +2923,13 @@
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,filled_sbj,en_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.265">4.265</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.266">4.266</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.267">4.267</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.268">4.268</a>).</p>
 
-<dl><dt>(<a name="ex4.265">4.265</a>)</dt><dd>
+<dl><dt>(<a name="ex4.267">4.267</a>)</dt><dd>
 <tt>[w('EX','There'), w('BEP',';~ex_cat_Ve_passive_','&lt;apos&gt;s'), w('D;_nphd_','something'), w('VVN',';~Tn.pr','inscribed'), w('P-ROLE','on'), w('D;_nphd_','this'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.266">4.266</a>)</dt><dd>
+<dl><dt>(<a name="ex4.268">4.268</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D;_nphd_','something'), w('VVN',';~Tn.pr','inscribed'), w('P-ROLE','on'), w('D;_nphd_','this')]),&nbsp;parse(verb_complements_by_code(';~ex_cat_Ve_passive_',[],there_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-ESBJ&nbsp;(D;_nphd_&nbsp;something))</tt><br>
@@ -2923,20 +2947,20 @@
 
 <br><h3><a name="sec4.9.1">4.9.1</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vf</h3>
 
-<p align="justify">Code <tt>;~equ_Vf</tt> selects a <i>that</i>-clause with subject predicative function (<tt>CP-THT-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.267">4.267</a>), there has to be content from the word list for a <i>that</i>-clause.</p>
+<p align="justify">Code <tt>;~equ_Vf</tt> selects a <i>that</i>-clause with subject predicative function (<tt>CP-THT-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.269">4.269</a>), there has to be content from the word list for a <i>that</i>-clause.</p>
 
-<dl><dt>(<a name="ex4.267">4.267</a>)</dt><dd>
+<dl><dt>(<a name="ex4.269">4.269</a>)</dt><dd>
 <tt>verb_complements_by_code(';~equ_Vf',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_that('-PRD2',_,[],L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.268">4.268</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.269">4.269</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.270">4.270</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.271">4.271</a>).</p>
 
-<dl><dt>(<a name="ex4.268">4.268</a>)</dt><dd>
+<dl><dt>(<a name="ex4.270">4.270</a>)</dt><dd>
 <tt>[w('PRO;_genm_','My'), w('N','excuse'), w('BED',';~equ_Vf','was'), w('C','that'), w('PRO','I'), w('HVD',';~Tn','had'), w('NS','lessons'), w('TO','to'), w('VB',';~Tn','prepare'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.269">4.269</a>)</dt><dd>
+<dl><dt>(<a name="ex4.271">4.271</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('C','that'), w('PRO','I'), w('HVD',';~Tn','had'), w('NS','lessons'), w('TO','to'), w('VB',';~Tn','prepare')]),&nbsp;parse(verb_complements_by_code(';~equ_Vf',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(CP-THT-PRD2&nbsp;(IP-SUB&nbsp;(C&nbsp;that)</tt><br>
@@ -2952,20 +2976,20 @@
 
 <br><h3><a name="sec4.9.2">4.9.2</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vw</h3>
 
-<p align="justify">Code <tt>;~equ_Vw</tt> selects an embedded question clause with subject predicative function (<tt>CP-QUE-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.270">4.270</a>), there has to be content from the word list for an embedded question clause.</p>
+<p align="justify">Code <tt>;~equ_Vw</tt> selects an embedded question clause with subject predicative function (<tt>CP-QUE-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.272">4.272</a>), there has to be content from the word list for an embedded question clause.</p>
 
-<dl><dt>(<a name="ex4.270">4.270</a>)</dt><dd>
+<dl><dt>(<a name="ex4.272">4.272</a>)</dt><dd>
 <tt>verb_complements_by_code(';~equ_Vw',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_embedded_que('-PRD2',[],L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.271">4.271</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.272">4.272</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.273">4.273</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.274">4.274</a>).</p>
 
-<dl><dt>(<a name="ex4.271">4.271</a>)</dt><dd>
+<dl><dt>(<a name="ex4.273">4.273</a>)</dt><dd>
 <tt>[w('D;_nphd_','That'), w('BEP',';~equ_Vw','is'), w('WADV','how'), w('PRO','I'), w('VBD',';~Tt','learnt'), w('TO','to'), w('VB',';~I','ride'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.272">4.272</a>)</dt><dd>
+<dl><dt>(<a name="ex4.274">4.274</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WADV','how'), w('PRO','I'), w('VBD',';~Tt','learnt'), w('TO','to'), w('VB',';~I','ride')]),&nbsp;parse(verb_complements_by_code(';~equ_Vw',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(CP-QUE-PRD2&nbsp;(IP-SUB&nbsp;(ADVP-NIM&nbsp;(WADV&nbsp;how))</tt><br>
@@ -2977,13 +3001,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.273">4.273</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.274">4.274</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.275">4.275</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.276">4.276</a>).</p>
 
-<dl><dt>(<a name="ex4.273">4.273</a>)</dt><dd>
+<dl><dt>(<a name="ex4.275">4.275</a>)</dt><dd>
 <tt>[w('BEP',';~equ_Vw','Is'), w('D;_nphd_','that'), w('WPRO','what'), w('TO','to'), w('VB',';~Tn.pr','say'), w('P-ROLE','to'), w('N','people'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.274">4.274</a>)</dt><dd>
+<dl><dt>(<a name="ex4.276">4.276</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','what'), w('TO','to'), w('VB',';~Tn.pr','say'), w('P-ROLE','to'), w('N','people')]),&nbsp;parse(verb_complements_by_code(';~equ_Vw',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(CP-QUE-PRD2&nbsp;(IP-INF&nbsp;(NP-1717&nbsp;(WPRO&nbsp;what))</tt><br>
@@ -2998,20 +3022,20 @@
 
 <br><h3><a name="sec4.9.3">4.9.3</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vt</h3>
 
-<p align="justify">Code <tt>;~equ_Vt</tt> selects a <i>to</i>-infinitive clause with subject predicative function (<tt>IP-INF-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.275">4.275</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
+<p align="justify">Code <tt>;~equ_Vt</tt> selects a <i>to</i>-infinitive clause with subject predicative function (<tt>IP-INF-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.277">4.277</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
 
-<dl><dt>(<a name="ex4.275">4.275</a>)</dt><dd>
+<dl><dt>(<a name="ex4.277">4.277</a>)</dt><dd>
 <tt>verb_complements_by_code(';~equ_Vt',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('-PRD2',[],L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.276">4.276</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.277">4.277</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.278">4.278</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.279">4.279</a>).</p>
 
-<dl><dt>(<a name="ex4.276">4.276</a>)</dt><dd>
+<dl><dt>(<a name="ex4.278">4.278</a>)</dt><dd>
 <tt>[w('D;_nphd_','This'), w('BEP',';~equ_Vt','is'), w('TO','to'), w('VB',';~Dn.n','give'), w('D','the'), w('N','application'), w('D','an'), w('N','iconbar'), w('N','menu'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.277">4.277</a>)</dt><dd>
+<dl><dt>(<a name="ex4.279">4.279</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~Dn.n','give'), w('D','the'), w('N','application'), w('D','an'), w('N','iconbar'), w('N','menu')]),&nbsp;parse(verb_complements_by_code(';~equ_Vt',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-INF-PRD2&nbsp;(TO&nbsp;to)</tt><br>
@@ -3027,22 +3051,22 @@
 
 <br><h3><a name="sec4.9.4">4.9.4</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vg</h3>
 
-<p align="justify">Code <tt>;~equ_Vg</tt> selects a present participle (<i>-ing</i>) clause with subject predicative function (<tt>IP-PPL-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.278">4.278</a>), there has to be content from the word list for a participle clause.</p>
+<p align="justify">Code <tt>;~equ_Vg</tt> selects a present participle (<i>-ing</i>) clause with subject predicative function (<tt>IP-PPL-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.280">4.280</a>), there has to be content from the word list for a participle clause.</p>
 
-<dl><dt>(<a name="ex4.278">4.278</a>)</dt><dd>
+<dl><dt>(<a name="ex4.280">4.280</a>)</dt><dd>
 <tt>verb_complements_by_code(';~equ_Vg',[],filled_sbj,active,[node('IP-PPL-PRD2',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_sbj,IL,[]).</tt><br>
 <tt>verb_complements_by_code(';~equ_Vg',[],filled_sbj,active,[node('IP-PPL3-PRD2',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_sbj,IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.279">4.279</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.280">4.280</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.281">4.281</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.282">4.282</a>).</p>
 
-<dl><dt>(<a name="ex4.279">4.279</a>)</dt><dd>
+<dl><dt>(<a name="ex4.281">4.281</a>)</dt><dd>
 <tt>[w('D;_nphd_','One'), w('P-ROLE','of'), w('PRO;_genm_','my'), w('ADJ','funny'), w('NS','stories'), w('BEP',';~equ_Vg','is'), w('VAG',';~cat_Vt','trying'), w('TO','to'), w('VB',';~Tn','debug'), w('D','the'), w('N','interface'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.280">4.280</a>)</dt><dd>
+<dl><dt>(<a name="ex4.282">4.282</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~cat_Vt','trying'), w('TO','to'), w('VB',';~Tn','debug'), w('D','the'), w('N','interface')]),&nbsp;parse(verb_complements_by_code(';~equ_Vg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL3-PRD2&nbsp;(VAG;~cat_Vt&nbsp;trying)</tt><br>
@@ -3054,13 +3078,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.281">4.281</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.282">4.282</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.283">4.283</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.284">4.284</a>).</p>
 
-<dl><dt>(<a name="ex4.281">4.281</a>)</dt><dd>
+<dl><dt>(<a name="ex4.283">4.283</a>)</dt><dd>
 <tt>[w('D','The'), w('ADJ','first'), w('N','thing'), w('PRO','he'), w('VBD',';~Tn','saw'), w('BED',';~equ_Vg','was'), w('N','Mr.'), w('NPR','McGregor'), w('VAG',';~Tn','hoeing'), w('NS','onions'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.282">4.282</a>)</dt><dd>
+<dl><dt>(<a name="ex4.284">4.284</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('N','Mr.'), w('NPR','McGregor'), w('VAG',';~Tn','hoeing'), w('NS','onions')]),&nbsp;parse(verb_complements_by_code(';~equ_Vg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL3-PRD2&nbsp;(NP-SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
@@ -3075,20 +3099,20 @@
 
 <br><h3><a name="sec4.10.1">4.10.1</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt</h3>
 
-<p align="justify">Code <tt>;~cat_Vt</tt> selects a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.283">4.283</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
+<p align="justify">Code <tt>;~cat_Vt</tt> selects a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.285">4.285</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
 
-<dl><dt>(<a name="ex4.283">4.283</a>)</dt><dd>
+<dl><dt>(<a name="ex4.285">4.285</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Vt',Store,SbjType,active,[node('IP-INF-CAT',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.284">4.284</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.285">4.285</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.286">4.286</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.287">4.287</a>).</p>
 
-<dl><dt>(<a name="ex4.284">4.284</a>)</dt><dd>
+<dl><dt>(<a name="ex4.286">4.286</a>)</dt><dd>
 <tt>[w('D','A'), w('N','ship'), w('HVD',';~cat_Vt','had'), w('TO','to'), w('VB',';~I','sink'), w('','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.285">4.285</a>)</dt><dd>
+<dl><dt>(<a name="ex4.287">4.287</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~I','sink')]),&nbsp;parse(verb_complements_by_code(';~cat_Vt',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
@@ -3099,7 +3123,7 @@
 
 <br><h3><a name="sec4.10.2">4.10.2</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt_passive_</h3>
 
-<dl><dt>(<a name="ex4.286">4.286</a>)</dt><dd>
+<dl><dt>(<a name="ex4.288">4.288</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Vt_passive_',Store,filled_sbj,active,[node('IP-INF-CAT',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,unfilled_sbj])</tt><br>
@@ -3107,11 +3131,11 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType,passive,VL,[]).</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.287">4.287</a>)</dt><dd>
+<dl><dt>(<a name="ex4.289">4.289</a>)</dt><dd>
 <tt>[w('D','The'), w('N','government'), w('BEP',';~cat_Vt_passive_','is'), w('TO','to'), w('VB',';~Tn','blame'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.288">4.288</a>)</dt><dd>
+<dl><dt>(<a name="ex4.290">4.290</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~Tn','blame')]),&nbsp;parse(verb_complements_by_code(';~cat_Vt_passive_',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-INF-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
@@ -3123,20 +3147,20 @@
 
 <br><h3><a name="sec4.10.3">4.10.3</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vi</h3>
 
-<p align="justify">Code <tt>;~cat_Vi</tt> selects a bare infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.289">4.289</a>), there has to be content from the word list for a bare infinitive clause.</p>
+<p align="justify">Code <tt>;~cat_Vi</tt> selects a bare infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.291">4.291</a>), there has to be content from the word list for a bare infinitive clause.</p>
 
-<dl><dt>(<a name="ex4.289">4.289</a>)</dt><dd>
+<dl><dt>(<a name="ex4.291">4.291</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Vi',Store,SbjType,active,[node('IP-INF-CAT',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,infinitive,active,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.290">4.290</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.291">4.291</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.292">4.292</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.293">4.293</a>).</p>
 
-<dl><dt>(<a name="ex4.290">4.290</a>)</dt><dd>
+<dl><dt>(<a name="ex4.292">4.292</a>)</dt><dd>
 <tt>[w('PRO','It'), w('VBD',';~cat_Vi','helped'), w('VB',';~Tn','cut'), w('D','the'), w('N','cost'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.291">4.291</a>)</dt><dd>
+<dl><dt>(<a name="ex4.293">4.293</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~Tn','cut'), w('D','the'), w('N','cost')]),&nbsp;parse(verb_complements_by_code(';~cat_Vi',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-INF-CAT&nbsp;(VB;~Tn&nbsp;cut)</tt><br>
@@ -3148,20 +3172,20 @@
 
 <br><h3><a name="sec4.10.4">4.10.4</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg</h3>
 
-<p align="justify">Code <tt>;~cat_Vg</tt> selects a present participle (<i>-ing</i>) clause with active voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.292">4.292</a>), there has to be content from the word list for a participle clause.</p>
+<p align="justify">Code <tt>;~cat_Vg</tt> selects a present participle (<i>-ing</i>) clause with active voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.294">4.294</a>), there has to be content from the word list for a participle clause.</p>
 
-<dl><dt>(<a name="ex4.292">4.292</a>)</dt><dd>
+<dl><dt>(<a name="ex4.294">4.294</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Vg',Store,SbjType,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,SbjType,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.293">4.293</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.294">4.294</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.295">4.295</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.296">4.296</a>).</p>
 
-<dl><dt>(<a name="ex4.293">4.293</a>)</dt><dd>
+<dl><dt>(<a name="ex4.295">4.295</a>)</dt><dd>
 <tt>[w('D','A'), w('N','ship'), w('BED',';~cat_Vg','was'), w('VAG',';~I','sinking'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.294">4.294</a>)</dt><dd>
+<dl><dt>(<a name="ex4.296">4.296</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~I','sinking')]),&nbsp;parse(verb_complements_by_code(';~cat_Vg',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL-CAT&nbsp;(VAG;~I&nbsp;sinking))</tt><br>
@@ -3171,20 +3195,20 @@
 
 <br><h3><a name="sec4.10.5">4.10.5</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg_passive_</h3>
 
-<p align="justify">Code <tt>;~cat_Vg_passive_</tt> selects a present participle (<i>-ing</i>) clause with passive voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.295">4.295</a>), there has to be content from the word list for a participle clause.</p>
+<p align="justify">Code <tt>;~cat_Vg_passive_</tt> selects a present participle (<i>-ing</i>) clause with passive voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.297">4.297</a>), there has to be content from the word list for a participle clause.</p>
 
-<dl><dt>(<a name="ex4.295">4.295</a>)</dt><dd>
+<dl><dt>(<a name="ex4.297">4.297</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Vg_passive_',Store,SbjType,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,SbjType,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.296">4.296</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.297">4.297</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.298">4.298</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.299">4.299</a>).</p>
 
-<dl><dt>(<a name="ex4.296">4.296</a>)</dt><dd>
+<dl><dt>(<a name="ex4.298">4.298</a>)</dt><dd>
 <tt>[w('PRO;_genm_','His'), w('NS','wounds'), w('VBP',';~cat_Vg_passive_','need'), w('VAG',';~Tn','dressing'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.297">4.297</a>)</dt><dd>
+<dl><dt>(<a name="ex4.299">4.299</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VAG',';~Tn','dressing')]),&nbsp;parse(verb_complements_by_code(';~cat_Vg_passive_',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
@@ -3195,20 +3219,20 @@
 
 <br><h3><a name="sec4.10.6">4.10.6</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve</h3>
 
-<p align="justify">Code <tt>;~cat_Ve</tt> selects a participle (<i>-ed&sol;-en</i>) clause with active past and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.301">4.301</a>), the participle clause should form the content of the word list.</p>
+<p align="justify">Code <tt>;~cat_Ve</tt> selects a participle (<i>-ed&sol;-en</i>) clause with active past and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.303">4.303</a>), the participle clause should form the content of the word list.</p>
 
-<dl><dt>(<a name="ex4.298">4.298</a>)</dt><dd>
+<dl><dt>(<a name="ex4.300">4.300</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Ve',Store,SbjType,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,SbjType,en_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.299">4.299</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.300">4.300</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.301">4.301</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.302">4.302</a>).</p>
 
-<dl><dt>(<a name="ex4.299">4.299</a>)</dt><dd>
+<dl><dt>(<a name="ex4.301">4.301</a>)</dt><dd>
 <tt>[w('D','A'), w('N','ship'), w('HVD',';~cat_Ve','had'), w('VVN',';~I','sunk'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.300">4.300</a>)</dt><dd>
+<dl><dt>(<a name="ex4.302">4.302</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VVN',';~I','sunk')]),&nbsp;parse(verb_complements_by_code(';~cat_Ve',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL-CAT&nbsp;(VVN;~I&nbsp;sunk))</tt><br>
@@ -3218,20 +3242,20 @@
 
 <br><h3><a name="sec4.10.7">4.10.7</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve_passive_</h3>
 
-<p align="justify">Code <tt>;~cat_Ve_passive_</tt> selects a past participle (<i>-ed&sol;-en</i>) clause with passive voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.301">4.301</a>), the participle clause should form the content of the word list.</p>
+<p align="justify">Code <tt>;~cat_Ve_passive_</tt> selects a past participle (<i>-ed&sol;-en</i>) clause with passive voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.303">4.303</a>), the participle clause should form the content of the word list.</p>
 
-<dl><dt>(<a name="ex4.301">4.301</a>)</dt><dd>
+<dl><dt>(<a name="ex4.303">4.303</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cat_Ve_passive_',Store,SbjType,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,SbjType,en_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.302">4.302</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.303">4.303</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.304">4.304</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.305">4.305</a>).</p>
 
-<dl><dt>(<a name="ex4.302">4.302</a>)</dt><dd>
+<dl><dt>(<a name="ex4.304">4.304</a>)</dt><dd>
 <tt>[w('D','A'), w('N','ship'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','sunk'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.303">4.303</a>)</dt><dd>
+<dl><dt>(<a name="ex4.305">4.305</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VVN',';~Tn','sunk')]),&nbsp;parse(verb_complements_by_code(';~cat_Ve_passive_',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
@@ -3242,15 +3266,15 @@
 
 <br><h4>Question</h4>
 
-<p align="justify">Why do the queries of (<a href="chapter4.html#ex4.304">4.304</a>) and (<a href="chapter4.html#ex4.305">4.305</a>) fail?</p>
+<p align="justify">Why do the queries of (<a href="chapter4.html#ex4.306">4.306</a>) and (<a href="chapter4.html#ex4.307">4.307</a>) fail?</p>
 
-<dl><dt>(<a name="ex4.304">4.304</a>)</dt><dd>
+<dl><dt>(<a name="ex4.306">4.306</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('N','ship'), w('HVD',';~cat_Ve','had'), w('VVN',';~Tn','sunk'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex4.305">4.305</a>)</dt><dd>
+<dl><dt>(<a name="ex4.307">4.307</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('N','ship'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~I','sunk'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
