@@ -7,9 +7,9 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The opening elements of a clause are established with the non-recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and the recursive <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.2">5.2</a>). All of these rules have a <tt>Store</tt> parameter for a list value of index information for parse structure that needs to integrate with the overall parse structure. Also, all of these rules have a clause <tt>Type</tt> parameter.</p>
+<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>). All have a <tt>Store</tt> parameter for a list value of index information for parse structure that has yet to be integrated with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.1">5.1</a>) each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
 
 <ul>
 
@@ -25,7 +25,7 @@
 
 <li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list for a clause with its <tt>Type</tt> parameter set to <tt>statement_order</tt></li>
 
-<li>[rules 3 and 4] the content identified with <tt>subject</tt> has final position in the word list coming immediately after content identified with <tt>do_operator_layer</tt> [rule 3] or <tt>have_be_or_md_finite_layer</tt> [rule 4] for a clause with its <tt>Type</tt> parameter set to <tt>tag_question</tt></li>
+<li>[rules 3 and 4] the content identified with <tt>subject</tt> has final position in the word list, coming immediately after content identified with <tt>do_operator_layer</tt> [rule 3] or <tt>have_be_or_md_finite_layer</tt> [rule 4] for a clause with its <tt>Type</tt> parameter set to <tt>tag_question</tt></li>
 
 <li>[rules 5 and 6] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after content identified with <tt>do_operator_layer</tt> [rule 5] or <tt>have_be_or_md_finite_layer</tt> [rule 6] and immediately before content identified with <tt>verb_phrase_layer</tt> [rule 5] or <tt>verb_complements_top_layer</tt> [rule 6] for a clause with its <tt>Type</tt> parameter set to <tt>matrix_interrogative</tt> or <tt>matrix_constituent_interrogative</tt></li>
 
@@ -94,7 +94,7 @@
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the non-recursive rules of (<a href="chapter5.html#ex5.1">5.1</a>), there are also the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>) to enable:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the rules of (<a href="chapter5.html#ex5.1">5.1</a>), there are also the rules of (<a href="chapter5.html#ex5.2">5.2</a>), all of which are recursive, to enable:</p>
 
 <ul>
 
