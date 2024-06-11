@@ -19,7 +19,7 @@
 
 </ul>
 
-<p align="justify">Rules 1 and 3&ndash;6 that find subject content with a call of <tt>subject</tt> vary in regards to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
+<p align="justify">Rules 1 and 3&ndash;6 that find subject content with a call of <tt>subject</tt> vary in regard to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
 
 <ul>
 
@@ -215,7 +215,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that rules of (<a href="chapter5.html#ex5.2">5.2</a>) with indexed items that carry <tt>interrogative</tt> type information [rules 3&ndash;7] change the clause <tt>Type</tt> parameter from <tt>matrix_interrogative</tt> to <tt>matrix_constituent_interrogative</tt>. Consequently, only one stored index related to an item with <tt>interrogative</tt> type information is possible with a matrix clause. Moreover, when under question, the noun phrase subject of a matrix clause must be the one indexed phrase with <tt>interrogative</tt> type information.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also note how rule 1 of (<a href="chapter5.html#ex5.2">5.2</a>) has an <tt>initial_adverbial</tt> call (from section <a href="chapter2.html#sec2.10">2.10</a>) to pick up:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, note how rule 1 of (<a href="chapter5.html#ex5.2">5.2</a>) has an <tt>initial_adverbial</tt> call (from section <a href="chapter2.html#sec2.10">2.10</a>) to pick up:</p>
 
 <ul>
 
@@ -1110,7 +1110,7 @@
 
 <br><h2><a name="sec5.4">5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure with catenative verbs</h2>
 
-<p align="justify">So far we have seen clause structure with only a single verb, but a clause might include a sequence of verbs. The <b>main verb</b> is either the only verb of a clause or the last verb to occur in a sequence of verbs of the same clause. Verbs of a verb sequence that are prior to the main verb are called <b>catenative verbs</b>.</p>
+<p align="justify">So far, we have seen clause structure with only a single verb, but a clause might include a sequence of verbs. The <b>main verb</b> is either the only verb of a clause or the last verb to occur in a sequence of verbs of the same clause. Verbs of a verb sequence that are prior to the main verb are called <b>catenative verbs</b>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Section <a href="chapter4.html#sec4.10">4.10</a> provides <tt>verb_complements_by_code</tt> rules for the full range of catenative verbs. Now we focus on resulting clause structure from catenative verbs with code:</p>
 
@@ -3962,7 +3962,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there_sbj</tt> value to having a <tt>filled_sbj</tt> value for the continuation of the parsing of the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.58">5.58</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there_sbj</tt> value to having a <tt>filled_sbj</tt> value for the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.58">5.58</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
 
 <dl><dt>(<a name="ex5.58">5.58</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_cat_Vg','Is'), w('EX','there'), w('Q;_nphd_','nobody_else'), w('VAG',';~I','coming')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>

@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter presents all of the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular <b>word class</b>. Also some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
+<p align="justify">This chapter presents all the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular <b>word class</b>. Also, some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="chapter1.html#sec1.7">1.7</a>, we capture the parse consequences for a word by having it as an item in a word list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)/word pairing in a word list.</p>
 
@@ -111,7 +111,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) fall into four different types that depend on the value of the first parameter:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) fall into four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -268,7 +268,7 @@
 <tt>&nbsp;&nbsp;[w('RD',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) fall into four different types that depend on the value of the first parameter:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) fall into four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -313,7 +313,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO;_genm_',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) fall four three different types that depend on the value of the first parameter:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) fall into four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -387,7 +387,7 @@
 
 <br><h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb words</h2>
 
-<p align="justify">Table <a href="chapter2.html#table2.7">2.7</a> sets out the range of support for different kinds of adverbs. Parse integration is achieved with the <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>).</p>
+<p align="justify">Table <a href="chapter2.html#table2.7">2.7</a> sets out the range of support for adverbs. Parse integration is achieved with the <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>).</p>
 
 <p><a name="table2.7">Table 2.7: Tags for adverb words</a></p>
 
@@ -415,7 +415,7 @@
 <tt>&nbsp;&nbsp;[w('RP',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) fall into five different types that depend on the value of the first parameter:</p>
+<p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) fall into five types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -431,7 +431,7 @@
 
 <br><h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective words</h2>
 
-<p align="justify">Table <a href="chapter2.html#table2.8">2.8</a> sets out the range of support for different kinds of adjectives. Parse integration is achieved with the <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>).</p>
+<p align="justify">Table <a href="chapter2.html#table2.8">2.8</a> sets out the range of support for adjectives. Parse integration is achieved with the <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>).</p>
 
 <p><a name="table2.8">Table 2.8: Tags for adjective words</a></p>
 
@@ -453,7 +453,7 @@
 <tt>&nbsp;&nbsp;[w('ADJ;_cat_',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) fall into two different types that depend on the value of the first parameter:</p>
+<p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) fall into two types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -491,11 +491,11 @@
 
 <p align="justify">Once matched and licensed, the verb word information is added to the parse tree information accumulated with <tt>L</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section distinguishes (section <a href="chapter2.html#sec2.8.1">2.8.1</a>) different verb classes with tags that vary to mark form and inflection information, and distinguishes (section <a href="chapter2.html#sec2.8.2">2.8.2</a>) the grammatical codes that are compatible with the different combinations of verb forms and inflection information. Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section distinguishes (section <a href="chapter2.html#sec2.8.1">2.8.1</a>) verb classes with tags that vary to mark form and inflection information, and distinguishes (section <a href="chapter2.html#sec2.8.2">2.8.2</a>) the grammatical codes that are compatible with combinations of verb forms and inflection information. Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
 
 <br><h3><a name="sec2.8.1">2.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb classes</h3>
 
-<p align="justify">The aim of this section is to distinguish with tags different classes of verb words. Distinctions will be made on the basis of form divided further to distinguish inflection.</p>
+<p align="justify">The aim of this section is to distinguish classes of verb words. Distinctions will be made on the basis of form divided further to distinguish inflection.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.9">2.9</a> gives tags for the different forms of lexical verbs.</p>
 
@@ -830,7 +830,7 @@
 
 <br><h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Connective words</h2>
 
-<p align="justify">So far we have considered words that serve as components of either phrases or clauses. There is a further class of words with the tags of Table <a href="chapter2.html#table2.17">2.17</a> that serve as the means to connect phrases and clauses.</p>
+<p align="justify">So far, we have considered words that serve as components of either phrases or clauses. There is a further class of words with the tags of Table <a href="chapter2.html#table2.17">2.17</a> that serve as the means to connect phrases and clauses.</p>
 
 <p><a name="table2.17">Table 2.17: Tags for connective words</a></p>
 
@@ -842,7 +842,7 @@
 <tr><td><tt>P-ROLE</tt></td><td>Role preposition (e.g., <tt>in</tt>, <tt>of</tt>, <tt>under</tt>)</td></tr>
 </table>
 
-<p align="justify">The <tt>conj</tt>, <tt>comp</tt>, <tt>comp_wq</tt>, <tt>conn</tt> and <tt>role</tt> rules of (<a href="chapter2.html#ex2.36">2.36</a>) support the integration of the different connective words of Table <a href="chapter2.html#table2.17">2.17</a>.</p>
+<p align="justify">The <tt>conj</tt>, <tt>comp</tt>, <tt>comp_wq</tt>, <tt>conn</tt> and <tt>role</tt> rules of (<a href="chapter2.html#ex2.36">2.36</a>) support the integration of the connective words of Table <a href="chapter2.html#table2.17">2.17</a>.</p>
 
 <dl><dt>(<a name="ex2.36">2.36</a>)</dt><dd>
 <tt>conj(node('CONJ',[node(Word,[])]))&nbsp;--&gt;</tt><br>
