@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter presents all the types of words we will aim to distinguish. This is achieved by saying that a word belongs to a particular <b>word class</b>. Also, some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
+<p align="justify">This chapter presents all the types of words we will aim to distinguish. We will do this by introducing <b>word classes</b> to which words belong. Also, some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="chapter1.html#sec1.7">1.7</a>, we capture the parse consequences for a word by having it as an item in a word list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)/word pairing in a word list.</p>
 
@@ -98,7 +98,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how rules 4 and 5 of (<a href="chapter2.html#ex2.4">2.4</a>) return annotation for a genitive case marked noun phrase (<tt>NP-GENV</tt>) that is projected by <tt>PRO;_ppge_</tt> and that will go on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how rules 4 and 5 of (<a href="chapter2.html#ex2.4">2.4</a>) involve the word class together with code information of <tt>PRO;_ppge_</tt> that results in the projection of a genitive case marked noun phrase (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
 
 <dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -111,7 +111,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) fall into four types that depend on the value of the first parameter:</p>
+<p align="justify">(Section <a href="chapter2.html#sec2.4">2.4</a> below introduces other words that lead to the introduction of a genitive case marked noun phrases, with the difference that they will need to occur in noun phrases where there is head content to modify.)</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -127,7 +129,7 @@
 
 <br><h4>Question</h4>
 
-<p align="justify">What do the results of (<a href="chapter2.html#ex2.6">2.6</a>)&ndash;(<a href="chapter2.html#ex2.21">2.21</a>) tell us about where words with the different word classes of Table <a href="chapter2.html#table2.3">2.3</a> can be used?</p>
+<p align="justify">What do the results of (<a href="chapter2.html#ex2.6">2.6</a>)&ndash;(<a href="chapter2.html#ex2.21">2.21</a>) tell us about where words with the different word classes of Table <a href="chapter2.html#table2.3">2.3</a> can occur?</p>
 
 <dl><dt>(<a name="ex2.6">2.6</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(general)).</tt><br>
@@ -268,7 +270,7 @@
 <tt>&nbsp;&nbsp;[w('RD',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) fall into four types that depend on the value of the first parameter:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -284,7 +286,7 @@
 
 <br><h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive markers</h2>
 
-<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="chapter2.html#table2.5">2.5</a>. Phrase structure integration is achieved with <tt>genm</tt> of (<a href="chapter2.html#ex2.23">2.23</a>) and <tt>pronoun_genm</tt> of (<a href="chapter2.html#ex2.24">2.24</a>).</p>
+<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="chapter2.html#table2.5">2.5</a>. Phrase structure integration follows from <tt>genm</tt> of (<a href="chapter2.html#ex2.23">2.23</a>) and <tt>pronoun_genm</tt> of (<a href="chapter2.html#ex2.24">2.24</a>).</p>
 
 <p><a name="table2.5">Table 2.5: Tags for genitive markers</a></p>
 
@@ -313,7 +315,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO;_genm_',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) fall into four types that depend on the value of the first parameter:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -329,7 +331,7 @@
 
 <br><h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
 
-<p align="justify">Except when the clause type parameter is set to <tt>imperative_clause</tt>, there is always the requirement that a subject should be introduced with a finite clause. The subject of a non-imperative finite clause is captured in a parse with the rules of (<a href="chapter2.html#ex2.25">2.25</a>), provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
+<p align="justify">Except when the clause type parameter is set to <tt>imperative_clause</tt>, there is always the requirement that a finite clause should include a subject. The rules of (<a href="chapter2.html#ex2.25">2.25</a>) integrate the subject requirement, provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
 
 <dl><dt>(<a name="ex2.25">2.25</a>)</dt><dd>
 <tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -387,7 +389,7 @@
 
 <br><h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb words</h2>
 
-<p align="justify">Table <a href="chapter2.html#table2.7">2.7</a> sets out the range of support for adverbs. Parse integration is achieved with the <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>).</p>
+<p align="justify">Table <a href="chapter2.html#table2.7">2.7</a> sets out the range of support for adverbs. Parse integration follows from the <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>).</p>
 
 <p><a name="table2.7">Table 2.7: Tags for adverb words</a></p>
 
@@ -415,7 +417,7 @@
 <tt>&nbsp;&nbsp;[w('RP',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) fall into five types that depend on the value of the first parameter:</p>
+<p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) are of five types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -431,7 +433,7 @@
 
 <br><h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective words</h2>
 
-<p align="justify">Table <a href="chapter2.html#table2.8">2.8</a> sets out the range of support for adjectives. Parse integration is achieved with the <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>).</p>
+<p align="justify">Table <a href="chapter2.html#table2.8">2.8</a> sets out the range of support for adjectives. Parse integration follows from the <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>).</p>
 
 <p><a name="table2.8">Table 2.8: Tags for adjective words</a></p>
 
@@ -453,7 +455,7 @@
 <tt>&nbsp;&nbsp;[w('ADJ;_cat_',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) fall into two types that depend on the value of the first parameter:</p>
+<p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) are of two types that depend on the value of the first parameter:</p>
 
 <ul>
 
@@ -489,7 +491,7 @@
 
 </ul>
 
-<p align="justify">Once matched and licensed, the verb word information is added to the parse tree information accumulated with <tt>L</tt>.</p>
+<p align="justify">Once matched and licensed, the verb word information goes into the parse tree information accumulated with <tt>L</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section distinguishes (section <a href="chapter2.html#sec2.8.1">2.8.1</a>) verb classes with tags that vary to mark form and inflection information, and distinguishes (section <a href="chapter2.html#sec2.8.2">2.8.2</a>) the grammatical codes that are compatible with combinations of verb forms and inflection information. Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
 
@@ -556,13 +558,13 @@
 <tt>verb_tag(en_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) are called by <tt>verb</tt> of (<a href="chapter2.html#ex2.28">2.28</a>) above to ensure a tag compatible with the inflection of the <tt>Infl</tt> parameter when seeking to match a verb word from the word list.</p>
+<p align="justify">When seeking to match a verb word together with tag and verb code from the word list, the <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) above calls the <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) to ensure that the tag is compatible with the inflection inhertied from the <tt>Infl</tt> parameter.</p>
 
 <br><h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb codes</h3>
 
 <p align="justify">This section outlines verb codes as tag label extensions. The codes allow for a distinction of verbs to reflect the selection criteria each verb has for its complements, detailed in chapter <a href="chapter4.html#ch4">4</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To form a handle on the complement information for main verbs, we adopt the verb code system from the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). In this dictionary, the verb codes are associated with word sense definitions. The system is a mnemonic based reworking of the earlier system of Hornby (1975). A code from the system has:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To form a handle on the complement information for main verbs, we adopt the verb code system from the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). In this dictionary, there is matching of verb codes to word sense definitions. The system is a mnemonic based reworking of the earlier system of Hornby (1975). A code from the system has:</p>
 
 <ul>
 
@@ -580,28 +582,28 @@
   <tr>
     <td><tt>L</tt></td>
     <td colspan="2"><b>Linking</b> verb</td>
-    <td>is associated with a <b>subject predicative</b> (<tt>-PRD2</tt>), an element which provides information about the subject of the clause.</td>
+    <td>selects a <b>subject predicative</b> (<tt>-PRD2</tt>), an element which provides information about the subject of the clause.</td>
   </tr>
   <tr>
     <td><tt>I</tt></td>
     <td colspan="2"><b>Intransitive</b> verb</td>
-    <td>is NOT associated with a subject predicative or an object, although it may be associated with an <b>adverbial</b>, an element which tells us about time, place, manner, etc of the action of the verb.</td>
+    <td>there is no selection of a subject predicative or an object, although there may be selection of an <b>adverbial</b>, an element which tells us about time, place, manner, etc of the action of the verb.</td>
   </tr>
   <tr>
     <td><tt>T</tt></td>
     <td rowspan="3"><b>Transitive</b> verb</td>
     <td><b>Mono-transitive</b> verb</td>
-    <td>is associated with a <b>direct object</b> (<tt>-OB1</tt>), an element which often refers to the person or thing affected by the action of the verb.</td>
+    <td>selects a <b>direct object</b> (<tt>-OB1</tt>), an element which often refers to the person or thing affected by the action of the verb.</td>
   </tr>
   <tr>
     <td><tt>C</tt></td>
     <td><b>Complex-transitive</b> verb</td>
-    <td>is associated with both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>object predicative</b> (<tt>-PRD</tt>), an element which provides more information about the direct object. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the object predicative.</td>
+    <td>selects both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>object predicative</b> (<tt>-PRD</tt>), an element which provides more information about the direct object. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the object predicative.</td>
   </tr>
   <tr>
     <td><tt>D</tt></td>
     <td><b>Ditransitive</b> verb</td>
-    <td>is associated with both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>indirect object</b> (<tt>-OB2</tt>), an element which refers to a person who receives something or benefits from an action. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the indirect object.</td>
+    <td>selects both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>indirect object</b> (<tt>-OB2</tt>), an element which refers to a person who receives something or benefits from an action. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the indirect object.</td>
   </tr>
 </table>
 
@@ -869,7 +871,7 @@
 <tr><td><tt>PURQ</tt></td><td>punctuation: right quotation mark (<tt>&lt;rdquo&gt;</tt> <tt>&lt;rsquo&gt;</tt>)</td></tr>
 </table>
 
-<p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation is placed as high as possible. For example, a full stop that ends a sentence is treated as the last constituent of the highest clause layer.</p>
+<p align="justify">This makes punctuation part of a sentence in its own right. With the creation of constituent structure, punctuation occurs as high as possible. For example, a full stop that ends a sentence is the last constituent of the highest clause layer.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="chapter2.html#ex2.37">2.37</a>) give support for the integration of punctuation, with an initial parameter to distinguish types:</p>
 
@@ -906,7 +908,7 @@
 <tt>&nbsp;&nbsp;[w('PURQ','<rdquo>')].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional punctuation is achieved with (<a href="chapter2.html#ex2.38">2.38</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional punctuation follows from (<a href="chapter2.html#ex2.38">2.38</a>).</p>
 
 <dl><dt>(<a name="ex2.38">2.38</a>)</dt><dd>
 <tt>optional_punc(Type,L,L0)&nbsp;--&gt;</tt><br>

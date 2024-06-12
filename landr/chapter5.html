@@ -3,13 +3,13 @@
 
 <br><h2><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> is concerned with matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> looks at ripple effects in the clause caused by existential <i>there</i>.</p>
+<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> looks at matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> focuses on ripple effects in the clause caused by existential <i>there</i>.</p>
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The opening elements of a clause are established with the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>). All have a <tt>Store</tt> parameter for a list value of index information for parse structure that has yet to be integrated with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
+<p align="justify">The <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) establish the initial elements of a clause. All have a <tt>Store</tt> parameter for a list value of index information for parse structure that has yet to integrate with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For rule 2, with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to:</p>
 
 <ul>
 
@@ -19,7 +19,7 @@
 
 </ul>
 
-<p align="justify">Rules 1 and 3&ndash;6 that find subject content with a call of <tt>subject</tt> vary in regard to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
+<p align="justify">Rules 1 and 3&ndash;6 that find subject content with <tt>subject</tt> vary in regard to where the subject occurs in the word list and the value taken by the clause <tt>Type</tt> parameter, as follows:</p>
 
 <ul>
 
@@ -203,7 +203,7 @@
 <tt>&nbsp;&nbsp;clause_top_tail(Type,Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how, with the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rules 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7] and utterances [rule 10], all receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that is added to the <tt>Store</tt> parameter to ultimately be:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how, with the recursive rules of (<a href="chapter5.html#ex5.2">5.2</a>): noun phrases [rules 3 and 8], preposition phrases [rules 4 and 9], adjective phrases [rule 5], adverb phrases [rules 6 and 7] and utterances [rule 10], all receive an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that goes into the <tt>Store</tt> parameter to ultimately be:</p>
 
 <ul>
 
@@ -235,7 +235,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule 2 for <tt>clause_top_layer</tt> of (<a href="chapter5.html#ex5.1">5.1</a>) calls <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>). This subsequent rule layer is needed to ensure there is a place for introducing inflection and voice information before the verb and its complements are encountered. Having the clause type value <tt>imperative_clause</tt>, rule 2 of (<a href="chapter5.html#ex5.1">5.1</a>) gives the values of <tt>imperative</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule 2 for <tt>clause_top_layer</tt> of (<a href="chapter5.html#ex5.1">5.1</a>) calls <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>). This subsequent rule layer ensures there is a place for introducing inflection and voice information before the verb and its complements are encountered. Having the clause type value <tt>imperative_clause</tt>, rule 2 of (<a href="chapter5.html#ex5.1">5.1</a>) gives the values of <tt>imperative</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The full range of options for the <tt>Infl</tt> parameter are:</p>
 
@@ -442,7 +442,7 @@
 
 <br><h2><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Matrix interrogatives</h2>
 
-<p align="justify">This section considers matrix interrogative clauses where the subject is not under question. Prior to its non-interrogative subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small> or a modal verb, any of which can be followed by the contracted form of negation (<i>n't</i>). This section adds rules to match these pre-subject components, so they can be integrated into a parse with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
+<p align="justify">This section considers matrix interrogative clauses where the subject is not under question. Prior to its non-interrogative subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small> or a modal verb, any of which the contracted form of negation (<i>n't</i>) can follow. This section adds rules to match these pre-subject components, so that a parse can integrate them with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
 
 <br><h3><a name="sec5.3.1">5.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;DO operator layer</h3>
 
@@ -1345,7 +1345,7 @@
 
 <li>[rule 3] provided the <tt>SbjType</tt> is not set to <tt>unfilled_sbj</tt>, pick up initial negation with a call to <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
 
-<li>[rule 4] start a conjunction structure where all conjuncts are added with <tt>to_inf_layer</tt> with non-initial conjuncts gathered by calls to <tt>to_inf_tail</tt> of (<a href="chapter5.html#ex5.19">5.19</a>)</li>
+<li>[rule 4] start a conjunction structure where <tt>to_inf_layer</tt> adds all conjuncts and calls to <tt>to_inf_tail</tt> of (<a href="chapter5.html#ex5.19">5.19</a>) gather non-initial conjuncts</li>
 
 </ul>
 
@@ -1661,7 +1661,7 @@
 
 <p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve</tt> involves selection of an active past participle (<i>-ed&sol;-en</i>) clause as its complement. This occurs when the word class tag is a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt> or <tt>HVN</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;An active participle clause is found with <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.22">5.22</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_ppl_active</tt> rule of (<a href="chapter5.html#ex5.22">5.22</a>) finds an active participle clause for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
 
 <dl><dt>(<a name="ex5.22">5.22</a>)</dt><dd>
 <tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
@@ -2061,7 +2061,7 @@
 
 <p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve_passive_</tt> involves selection of a passive past participle (<i>-ed&sol;-en</i>) clause as its complement.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A passive participle clause is found with <tt>ip_ppl_passive</tt> of (<a href="chapter5.html#ex5.27">5.27</a>) for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>passive</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_ppl_passive</tt> rule of (<a href="chapter5.html#ex5.27">5.27</a>) finds a passive participle clause for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>passive</tt>.</p>
 
 <dl><dt>(<a name="ex5.27">5.27</a>)</dt><dd>
 <tt>ip_ppl_passive(Ext,Store,SbjType,Infl,[node(Label,[node('NP-LGS',[node('*',[])])|VL])|L],L)&nbsp;--&gt;</tt><br>
@@ -2264,7 +2264,7 @@
 
 <br><h2><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Statement word order with clause middle layers</h2>
 
-<p align="justify">So far, we have only seen subjects that are created with a <tt>subject</tt> call as the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1 of (<a href="chapter5.html#ex5.1">5.1</a>)] that first finds the subject with a <tt>subject</tt> call and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>). Similarly, there are rules 9 and 10 of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an inherited <tt>interrogative</tt> noun phrase, which also go on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>).</p>
+<p align="justify">So far, we have only seen subjects from a <tt>subject</tt> call form the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1 of (<a href="chapter5.html#ex5.1">5.1</a>)] that first finds the subject with a <tt>subject</tt> call and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>). Similarly, there are rules 9 and 10 of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an inherited <tt>interrogative</tt> noun phrase, which also go on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.30">5.30</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.30">5.30</a>) set the clause voice parameter to <tt>active</tt>. They will also either:</p>
 
@@ -3420,7 +3420,7 @@
 
 <br><h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Existential there</h2>
 
-<p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb that is marked with an existential verb code by setting the clause <tt>SbjType</tt> parameter to <tt>there_sbj</tt>. The existential verb licensed by this <tt>SbjType</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt> or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt> or <tt>;~ex_cat_Ve_passive_</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
+<p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb with an existential verb code by setting the clause <tt>SbjType</tt> parameter to <tt>there_sbj</tt>. The existential verb licensed by this <tt>SbjType</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt> or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt> or <tt>;~ex_cat_Ve_passive_</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="chapter5.html#ex5.54">5.54</a>).</p>
 
@@ -3962,7 +3962,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter is changed from its <tt>there_sbj</tt> value to having a <tt>filled_sbj</tt> value for the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.58">5.58</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter changes from its initial <tt>there_sbj</tt> value to having a <tt>filled_sbj</tt> value for the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.58">5.58</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
 
 <dl><dt>(<a name="ex5.58">5.58</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_cat_Vg','Is'), w('EX','there'), w('Q;_nphd_','nobody_else'), w('VAG',';~I','coming')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>

@@ -18,11 +18,11 @@
 
 <br><h2>Variables</h2>
 
-<p align="justify">Variables are denoted by a string consisting of letters, numbers and underscore characters. A variable has to begin with either an upper-case letter or an underscore character and cannot be placed inside quote characters. Variables closely resemble variables in logic in that they are placeholders for arbitrary terms. A variable can become instantiated (bound to equal a specific term) via unification. A single underscore character (<tt>_</tt>) denotes an anonymous variable and means &lsquo;any term&rsquo;. Unlike other variables, when there are multiple instances of the single underscore character as a variable, the different instances will not necessarily represent the same value.</p>
+<p align="justify">Variables are denoted by a string consisting of letters, numbers and underscore characters. A variable has to begin with either an upper-case letter or an underscore character and cannot occur inside quote characters. Variables closely resemble variables in logic in that they are placeholders for arbitrary terms. A variable can become instantiated (bound to equal a specific term) via unification. A single underscore character (<tt>_</tt>) denotes an anonymous variable and means &lsquo;any term&rsquo;. Unlike other variables, when there are multiple instances of the single underscore character as a variable, the different instances will not necessarily represent the same value.</p>
 
 <br><h2>Atoms</h2>
 
-<p align="justify">An atom is a general-purpose name with no inherent meaning. Atoms are usually bare words (character sequences) written with no special syntax. However, if spaces or certain other special characters (e.g.&nbsp;punctuation characters) are contained, then the atom must be surrounded by single quotes. Atoms beginning with either a capital letter or an underscore characters must also be quoted, to distinguish them from variables. Examples of atoms include: <tt>foo</tt>, <tt>'Bar'</tt>, and <tt>'foo bar'</tt>.</p>
+<p align="justify">An atom is a general-purpose name with no inherent meaning. Atoms are usually bare words (character sequences) written with no special syntax. However, if spaces or certain other special characters (e.g.&nbsp;punctuation characters) are contained, then single quotes must surround the atom. Such quotation is also necessary when atoms begin with either a capital letter or the underscore character, to distinguish them from variables. Examples of atoms include: <tt>foo</tt>, <tt>'Bar'</tt>, and <tt>'foo bar'</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="#ex1">1</a>).</p>
 
@@ -55,7 +55,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">When parsing, <tt>gensym</tt> can be invoked to provide a tree component with a distinct index, which can go on to be distributed elsewhere in the parse.</p>
+<p align="justify">When parsing, <tt>gensym</tt> provides a tree component with a distinct index, which can go on to occur elsewhere in the parse.</p>
 
 <br><h2>Compound terms</h2>
 
@@ -63,7 +63,7 @@
 
 <br><h2>Lists</h2>
 
-<p align="justify">Lists are a special case of compound terms. Constructors for lists are the atom <tt>[]</tt> (empty list) and the functor <tt>'.'/2</tt>, where the first argument is a term and the second argument a list. A list of <tt>N</tt> elements is the term <tt>.(a1, .( ... .(aN, []) ... ))</tt>, which may also be written with square bracket notation: <tt>[a1, ..., aN]</tt>. List construction is also possible with a concatenation function &lsquo;<tt>[_|_]/2</tt>&rsquo;: <tt>[a1, ..., aN|t]</tt> is the term <tt>.(a1, .( ... .(aN, t)))</tt>. With the concatenation function, a list can be processed by processing the first element(s), and then the rest of the list, in a recursive manner.</p>
+<p align="justify">Lists are a special case of compound terms. Constructors for lists are the atom <tt>[]</tt> (empty list) and the functor <tt>'.'/2</tt>, where the first argument is a term and the second argument a list. A list of <tt>N</tt> elements is the term <tt>.(a1, .( ... .(aN, []) ... ))</tt>, which may also be written with square bracket notation: <tt>[a1, ..., aN]</tt>. List construction is also possible with a concatenation function &lsquo;<tt>[_|_]/2</tt>&rsquo;: <tt>[a1, ..., aN|t]</tt> is the term <tt>.(a1, .( ... .(aN, t)))</tt>. The concatenation function makes it possible to process the first element(s) of a list, before turning to process the rest of the list in a recursive manner.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="#ex4">4</a>) demonstrates.</p>
 
@@ -163,7 +163,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of either single <tt>node</tt> compound terms in the case of Rule 1 or lists with at least two <tt>node</tt> compound terms in the case of Rule 2. For rule 2, the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. With both rules, the set of all results is collected and pretty printed with calls to <tt>pp_ptree_list</tt> of (<a href="#ex7">7</a>) above.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of either single <tt>node</tt> compound terms in the case of Rule 1 or lists with at least two <tt>node</tt> compound terms in the case of Rule 2. For rule 2, the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. Both rules collect the set of all results and pretty print them with calls to <tt>pp_ptree_list</tt> of (<a href="#ex7">7</a>) above.</p>
 <br>
 <br>
 <br>

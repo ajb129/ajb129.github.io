@@ -19,7 +19,7 @@
 
 <br><h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Noun phrases</h2>
 
-<p align="justify">This section considers noun phrases. A noun phrase is created with <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>) which calls <tt>noun_phrase_top</tt> to create list content <tt>NL</tt> of daughter elements for a <tt>node</tt> structure with its <tt>Label</tt> consisting of <tt>'NP'</tt> together with any extension from the <tt>Ext</tt> parameter. A contentful <tt>Ext</tt> gives role/function/indexing information for the noun phrase. The assembled structure is added to the content collected from outside the noun phrase with list <tt>L</tt>.</p>
+<p align="justify">This section considers noun phrases. <tt>noun_phrase</tt> of (<a href="chapter3.html#ex3.1">3.1</a>) will create a noun phrase by calling <tt>noun_phrase_top</tt> to create list content <tt>NL</tt> of daughter elements for a <tt>node</tt> structure with its <tt>Label</tt> consisting of <tt>'NP'</tt> together with any extension from the <tt>Ext</tt> parameter. A contentful <tt>Ext</tt> gives role/function/indexing information for the noun phrase. The assembled structure adds to the content collected from outside the noun phrase with list <tt>L</tt>.</p>
 
 <dl><dt>(<a name="ex3.1">3.1</a>)</dt><dd>
 <tt>noun_phrase(Ext,Type,[node(Label,NL)|L],L)&nbsp;--&gt;</tt><br>
@@ -84,7 +84,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The affirmative response and tree output of (<a href="chapter3.html#ex3.3">3.3</a>) is achieved by following the call structure of (<a href="chapter3.html#ex3.4">3.4</a>).</p>
+<p align="justify">The affirmative response and tree output of (<a href="chapter3.html#ex3.3">3.3</a>) follows from the call structure of (<a href="chapter3.html#ex3.4">3.4</a>).</p>
 
 <dl><dt>(<a name="ex3.4">3.4</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -125,7 +125,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how the noun phrase type information from the call of (<a href="chapter3.html#ex3.4">3.4</a>) (<tt>general</tt>) is passed down the call structure to determine what can be an appropriate word for the noun phrase. In contrast to (<a href="chapter3.html#ex3.3">3.3</a>), query (<a href="chapter3.html#ex3.5">3.5</a>) fails: the noun phrase call provides <tt>general</tt> type information, but the word list contains a word with <tt>RPRO</tt> word class (a relative pronoun) requiring <tt>relative</tt> type information.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how the noun phrase type information from the call of (<a href="chapter3.html#ex3.4">3.4</a>) (<tt>general</tt>) passes down the call structure to determine what can be an appropriate word for the noun phrase. In contrast to (<a href="chapter3.html#ex3.3">3.3</a>), query (<a href="chapter3.html#ex3.5">3.5</a>) fails: the noun phrase call provides <tt>general</tt> type information, but the word list contains a word with <tt>RPRO</tt> word class (a relative pronoun) requiring <tt>relative</tt> type information.</p>
 
 <dl><dt>(<a name="ex3.5">3.5</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
@@ -417,7 +417,7 @@
 
 <br><h4>Question</h4>
 
-<p align="justify">[This question is based on an exercise from Borsley (1996, p.&nbsp;23).] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>) and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
+<p align="justify">[This question repeats an exercise from Borsley (1996, p.&nbsp;23).] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>) and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
 
 <dl><dt>(<a name="ex3.10">3.10</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('CONJ','both'), w('PRO','you'), w('CONJ','and'), w('PRO','he'), w('CONJ','and'), w('PRO','I')]),&nbsp;parse(noun_phrase('-SBJ',non_interrogative)).</tt><br>
@@ -689,7 +689,7 @@
 
 <br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
 
-<p align="justify">The internal structuring revealed by (<a href="chapter3.html#ex3.19">3.19</a>) allows for more elements to be placed around the noun phrase head word. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) allows for placement of a determiner layer before the noun phrase head word. A determiner layer is created with the <tt>determiner_layer</tt> rules of (<a href="chapter3.html#ex3.20">3.20</a>) which are sensitive to the type information carried by the calling noun phrase.</p>
+<p align="justify">The internal structuring revealed by (<a href="chapter3.html#ex3.19">3.19</a>) allows for more elements around the noun phrase head word. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) allows for placement of a determiner layer before the noun phrase head word. The <tt>determiner_layer</tt> rules of (<a href="chapter3.html#ex3.20">3.20</a>) create determiner layers which are sensitive to the type information carried by the calling noun phrase.</p>
 
 <dl><dt>(<a name="ex3.20">3.20</a>)</dt><dd>
 <tt>determiner_layer(Type,L,L0)&nbsp;--&gt;</tt><br>
@@ -716,7 +716,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can see why these two different placements for the determiner arise by considering the call structures involved in creating the results. The first result of (<a href="chapter3.html#ex3.21">3.21</a>) is created with the calls of (<a href="chapter3.html#ex3.22">3.22</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from within the first conjunct. The first conjunct is itself introduced by an earlier call of <tt>noun_phrase_initial_layer</tt> that also calls <tt>noun_phrase_initial_tail</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can see why these two different placements for the determiner arise by considering the call structures involved in creating the results. The calls of (<a href="chapter3.html#ex3.22">3.22</a>) create the first result of (<a href="chapter3.html#ex3.21">3.21</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from within the first conjunct. The first conjunct is itself introduced by an earlier call of <tt>noun_phrase_initial_layer</tt> that also calls <tt>noun_phrase_initial_tail</tt>.</p>
 
 <dl><dt>(<a name="ex3.22">3.22</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -945,7 +945,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In contrast, the second result of (<a href="chapter3.html#ex3.21">3.21</a>) is created with the calls of (<a href="chapter3.html#ex3.23">3.23</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In contrast, the calls of (<a href="chapter3.html#ex3.23">3.23</a>) create the second result of (<a href="chapter3.html#ex3.21">3.21</a>). This shows a call to <tt>noun_phrase_initial_layer</tt> being responsible for the integration of the determiner from outside both conjuncts, with both conjuncts being introduced by a call of <tt>internal_np_lower_layer</tt>.</p>
 
 <dl><dt>(<a name="ex3.23">3.23</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -1377,7 +1377,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the query of (<a href="chapter3.html#ex3.24">3.24</a>) had instead followed the call structure of (<a href="chapter3.html#ex3.23">3.23</a>), then <tt>internal_np_higher_layer</tt> calls would be reached from where there is no way to integrate the determiner for the second conjunct.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the query of (<a href="chapter3.html#ex3.24">3.24</a>) had instead followed the call structure of (<a href="chapter3.html#ex3.23">3.23</a>), then <tt>internal_np_higher_layer</tt> calls would occur from where there is no way to integrate the determiner for the second conjunct.</p>
 
 <br><h3><a name="sec3.2.5">3.2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
 
@@ -1402,7 +1402,7 @@
 <tt>&nbsp;&nbsp;noun_phrase_genm_tail(Type,CL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that conjunction is possible at the top level of genitive noun phrase structure. This is captured by <tt>determiner_layer</tt> having a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>noun_phrase_genm_tail</tt> of (<a href="chapter3.html#ex3.27">3.27</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note that conjunction is possible at the top level of genitive noun phrase structure. This follows from <tt>noun_phrase_genm_layer</tt> having a recursive rule [rule 3] for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>noun_phrase_genm_tail</tt> of (<a href="chapter3.html#ex3.27">3.27</a>).</p>
 
 <dl><dt>(<a name="ex3.27">3.27</a>)</dt><dd>
 <tt>noun_phrase_genm_tail(Type,[node('CONJP',[CONJ,node('NP',NL)])|L],L)&nbsp;--&gt;</tt><br>
@@ -1581,7 +1581,7 @@
 
 <br><h2><a name="sec3.3">3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb phrases</h2>
 
-<p align="justify">An adverb phrase is created with (<a href="chapter3.html#ex3.30">3.30</a>), which calls <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADVP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
+<p align="justify">The <tt>adverb_phrase</tt> rule of (<a href="chapter3.html#ex3.30">3.30</a>) will create an adverb phrase by calling <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.31">3.31</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADVP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
@@ -1615,7 +1615,7 @@
 
 <li>[rule 5] pick up post-head modifier preposition phrases</li>
 
-<li>[rule 6] start a conjunction structure where all conjuncts are added with <tt>adverb_phrase</tt> with non-initial conjuncts gathered by calls to <tt>adverb_phrase_tail</tt> of (<a href="chapter3.html#ex3.32">3.32</a>)</li>
+<li>[rule 6] start a conjunction structure where <tt>adverb_phrase</tt> adds all conjuncts and calls to <tt>adverb_phrase_tail</tt> of (<a href="chapter3.html#ex3.32">3.32</a>) gather non-initial conjuncts</li>
 
 </ul>
 
@@ -1651,7 +1651,7 @@
 
 <br><h2><a name="sec3.4">3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective phrases</h2>
 
-<p align="justify">An adjective phrase is created with (<a href="chapter3.html#ex3.33">3.33</a>) which calls <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information.</p>
+<p align="justify">The <tt>adjective_phrase</tt> rule of (<a href="chapter3.html#ex3.33">3.33</a>) will create an adjective phrase by calling <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) to create list content (<tt>AL</tt>) to place under an <tt>ADJP</tt> labelled structure, possibly with a label extension as role/function/indexing information.</p>
 
 <dl><dt>(<a name="ex3.33">3.33</a>)</dt><dd>
 <tt>adjective_phrase(Ext,Type,[node(Label,AL)|L],L)&nbsp;--&gt;</tt><br>
@@ -1675,7 +1675,7 @@
 
 </ul>
 
-<p align="justify">Note that when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information is passed on to calls of <tt>adverb_phrase</tt> [see rule 6 of (<a href="chapter3.html#ex3.34">3.34</a>)] whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>general</tt>.</p>
+<p align="justify">Note that when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information passes on to calls of <tt>adverb_phrase</tt> [see rule 6 of (<a href="chapter3.html#ex3.34">3.34</a>)] whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>general</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.34">3.34</a>) [rules 1&ndash;3], establish the head word as a word found with a call of <tt>adj</tt> (see section <a href="chapter2.html#sec2.7">2.7</a>):</p>
 
@@ -1701,7 +1701,7 @@
 
 <li>[rule 7] pick up post-head modifier preposition phrases</li>
 
-<li>[rule 8] start a conjunction structure where all conjuncts are added with <tt>adjective_phrase</tt> with non-initial conjuncts gathered by calls to <tt>adjective_phrase_tail</tt> of (<a href="chapter3.html#ex3.35">3.35</a>)</li>
+<li>[rule 8] start a conjunction structure where <tt>adjective_phrase</tt> adds all conjuncts and calls to <tt>adjective_phrase_tail</tt> of (<a href="chapter3.html#ex3.35">3.35</a>) gather non-initial conjuncts</li>
 
 </ul>
 
@@ -2001,7 +2001,7 @@
 
 <br><h2><a name="sec3.5">3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Preposition phrases</h2>
 
-<p align="justify">A preposition phrase can be created with (<a href="chapter3.html#ex3.38">3.38</a>) by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.39">3.39</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
+<p align="justify">The first rule of (<a href="chapter3.html#ex3.38">3.38</a>) builds a preposition phrase by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.39">3.39</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
 
@@ -2029,7 +2029,7 @@
 <tt>&nbsp;&nbsp;}.</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is only one <tt>preposition_phrase_layer</tt> rule in (<a href="chapter3.html#ex3.39">3.39</a>), requiring a word list that has an initial preposition word found with <tt>role</tt> (from section <a href="chapter2.html#sec2.11">2.11</a>). The initial preposition word needs to then be followed by content for:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is only one <tt>preposition_phrase_layer</tt> rule in (<a href="chapter3.html#ex3.39">3.39</a>), requiring a word list that has an initial preposition word found with <tt>role</tt> (from section <a href="chapter2.html#sec2.11">2.11</a>). The preposition word needs to occur immediately before content for:</p>
 
 <ul>
 
@@ -2066,7 +2066,7 @@
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,[],IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. This is captured by <tt>preposition_phrase</tt> of (<a href="chapter3.html#ex3.38">3.38</a>) having a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="chapter3.html#ex3.40">3.40</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. Rule 2 of (<a href="chapter3.html#ex3.38">3.38</a>) is a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="chapter3.html#ex3.40">3.40</a>).</p>
 
 <dl><dt>(<a name="ex3.40">3.40</a>)</dt><dd>
 <tt>preposition_phrase_tail(Type,[node('CONJP',[CONJ,PP])|L],L)&nbsp;--&gt;</tt><br>
@@ -2156,7 +2156,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">We can see that attachment ambiguity leads to five distinct structures returned in the results of (<a href="chapter3.html#ex3.41">3.41</a>). Of these, it is only the third structure where all attachments are found to make semantic sense, but the rules we have are not sensitive to this distinction.</p>
+<p align="justify">We can see that attachment ambiguity leads to five distinct structures returned in the results of (<a href="chapter3.html#ex3.41">3.41</a>). Of these, it is only the third structure where all attachments make semantic sense, but the rules we have are not sensitive to this distinction.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the attachment ambiguity revealed in the results of (<a href="chapter3.html#ex3.41">3.41</a>), there is further parsing variation unseen in the results in regard to how the parsing rules are applied. For example, there are different ways to derive the semantically valid third structure of (<a href="chapter3.html#ex3.41">3.41</a>), e.g., from the call structure of (<a href="chapter3.html#ex3.42">3.42</a>) or the call structure of (<a href="chapter3.html#ex3.43">3.43</a>).</p>
 
