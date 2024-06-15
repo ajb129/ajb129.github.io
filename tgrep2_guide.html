@@ -34,7 +34,7 @@
 
 <p align="justify">TGrep (Pito 1994) was the original tree-matching command-line program that came with the Penn Treebank. TGrep2 (Rohde 2005) is an implementation that adds extensions to the query language. Tregex (Levy and Andrew 2006) is yet another implementation that replicates the extended search functionality of TGrep2 while also offering a desktop application for directly browsing source trees, and even manipulating syntax trees in traditional bracketed (Penn) treebank notation. This guide provides an introduction to the extended query language which is shared by both TGrep2 and Tregex and which is available when searching for data with the online search interface.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search queries are expressed as patterns that consist of node descriptions to match nodes and relationships defining links or negated links to other nodes. Notably:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search queries are expressed as patterns that consist of node descriptions to match nodes and relationships establishing links or negated links to other nodes. Notably:</p>
 
 <ul>
 
@@ -116,7 +116,7 @@
 
 <br><h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;&nbsp;Relationships between nodes</h2>
 
-<p align="justify">Relationships define connections between nodes matched by node descriptions. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships can be pictured as in Figure <a href="#figure1">1</a>.</p>
+<p align="justify">Relationships establish connections between nodes matched by node descriptions. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships can be pictured as in Figure <a href="#figure1">1</a>.</p>
 
 <p><a name="fig1">Figure 1: Notable relationships between nodes</a></p>
 
@@ -1061,7 +1061,7 @@
 
 <br><h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;&nbsp;Segmented patterns</h2>
 
-<p align="justify">Search patterns can be split into multiple segments, which are separated by colons (<tt>:</tt>). Segments following the first have to include a reference to a labelled node that is defined in a previous segment. Thus, pattern (<a href="#ex42">42</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
+<p align="justify">Search patterns can be split into multiple segments, which are separated by colons (<tt>:</tt>). Segments following the first have to include a reference to a labelled node that is introduced in a previous segment. Thus, pattern (<a href="#ex42">42</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
 
 <dl><dt>(<a name="ex42">42</a>)</dt><dd>
 <tt>&sol;^NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;^CP-THT&#92;b&sol;</tt><br>
