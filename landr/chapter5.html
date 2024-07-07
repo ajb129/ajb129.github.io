@@ -49,7 +49,7 @@
 
 <li>[rule 2] <tt>imperative</tt></li>
 
-<li>[rule 5] <tt>do_infinitive</tt></li>
+<li>[rule 5] <tt>do_supported_infinitive</tt></li>
 
 </ul>
 
@@ -79,7 +79,7 @@
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_infinitive,active,L1,L0).</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_supported_infinitive,active,L1,L0).</tt><br>
 <tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
@@ -2272,7 +2272,7 @@
 
 <li>[rule 1] call <tt>verb_phrase_layer</tt> after adding the information that the clause has <tt>finite</tt></li>
 
-<li>[rule 2] integrate <tt>do_operator_layer</tt> so that this will occur after the subject and before a subsequent call of <tt>verb_phrase_layer</tt> given <tt>do_infinitive</tt> clause information</li>
+<li>[rule 2] integrate <tt>do_operator_layer</tt> so that this will occur after the subject and before a subsequent call of <tt>verb_phrase_layer</tt> given <tt>do_supported_infinitive</tt> clause information</li>
 
 <li>[rule 3] integrate <tt>have_be_or_md_finite_layer</tt> so that this will occur after the subject and before a call of <tt>verb_complements_top_layer</tt></li>
 
@@ -2285,7 +2285,7 @@
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,finite,active,L1,L0).</tt><br>
 <tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L1),</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_infinitive,active,L1,L0).</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_supported_infinitive,active,L1,L0).</tt><br>
 <tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_finite_layer(Code,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,SbjType,active,L1,L0).</tt><br>

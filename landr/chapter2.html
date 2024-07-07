@@ -553,7 +553,7 @@
 <tt>verb_tag(finite,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
 <tt>verb_tag(imperative,['VB','DO','HV','BE']).</tt><br>
 <tt>verb_tag(infinitive,['VB','DO','HV','BE']).</tt><br>
-<tt>verb_tag(do_infinitive,['VB','DO','HV']).</tt><br>
+<tt>verb_tag(do_supported_infinitive,['VB','DO','HV']).</tt><br>
 <tt>verb_tag(ing_participle,['VAG','DAG','HAG','BAG']).</tt><br>
 <tt>verb_tag(en_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
@@ -682,7 +682,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
-<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_infinitive]),</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_supported_infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
 <tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
