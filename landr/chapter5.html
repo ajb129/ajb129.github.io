@@ -1408,14 +1408,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a <i>to</i>-infinitive clause as the complement of a modal verb, consider (<a href="chapter5.html#ex5.20">5.20</a>).</p>
 
 <dl><dt>(<a name="ex5.20">5.20</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD',';~cat_Vt','Ought'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('TO','to'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD',';~cat_Vt','Ought'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(matrix_interrogative,[])).</tt><br>
 <br>
 <tt>(&nbsp;(MD;~cat_Vt&nbsp;Ought)</tt><br>
 <tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1601,7 +1601,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -1609,7 +1609,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                  <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -1617,13 +1617,13 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adv <small><b>general</b></small></tt>
+                                      <tt>adv <small><b>particle</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
                                       <td>
                                           <br>
-                                          <tt>[w(&#39;ADV&#39;,&#39;up&#39;)]</tt>
+                                          <tt>[w(&#39;RP&#39;,&#39;up&#39;)]</tt>
                                       </td>
                                       </tr>
                                       </table>
@@ -2310,13 +2310,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of <i>didn't</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.32">5.32</a>).</p>
 
 <dl><dt>(<a name="ex5.32">5.32</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(statement_order,[])).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,[])).</tt><br>
 <br>
 <tt>(&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
 <tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up)))</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2460,7 +2460,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                      <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -2468,7 +2468,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                          <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -2476,13 +2476,13 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adv <small><b>general</b></small></tt>
+                              <tt>adv <small><b>particle</b></small></tt>
                               </td>
                               </tr>
                               <tr>
                               <td>
                                   <br>
-                                  <tt>[w(&#39;ADV&#39;,&#39;up&#39;)]</tt>
+                                  <tt>[w(&#39;RP&#39;,&#39;up&#39;)]</tt>
                               </td>
                               </tr>
                               </table>
@@ -2513,14 +2513,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with catenative modal <i>ought</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.34">5.34</a>).</p>
 
 <dl><dt>(<a name="ex5.34">5.34</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('ADV','really'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('VB',';~Ip','stand'), w('ADV','up')]),&nbsp;parse(clause_top_layer(statement_order,[])).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('ADV','really'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,[])).</tt><br>
 <br>
 <tt>(&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;really))</tt><br>
 <tt>&nbsp;&nbsp;(MD;~cat_Vt&nbsp;ought)</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;up))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2759,7 +2759,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -2767,7 +2767,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                          <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -2775,13 +2775,13 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>adv <small><b>general</b></small></tt>
+                                              <tt>adv <small><b>particle</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
                                               <td>
                                                   <br>
-                                                  <tt>[w(&#39;ADV&#39;,&#39;up&#39;)]</tt>
+                                                  <tt>[w(&#39;RP&#39;,&#39;up&#39;)]</tt>
                                               </td>
                                               </tr>
                                               </table>

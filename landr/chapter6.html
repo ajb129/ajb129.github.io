@@ -80,7 +80,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a <i>that</i>-clause that is the object complement of <i>think</i>, consider (<a href="chapter6.html#ex6.4">6.4</a>).</p>
 
 <dl><dt>(<a name="ex6.4">6.4</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('MD',';~cat_Vi','will'), w('VB',';~Ip','arrive'), w('ADV','early'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('MD',';~cat_Vi','will'), w('VB',';~Ip','arrive'), w('RP','early'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(CP-QUE&nbsp;(IP-SUB&nbsp;(NP-349&nbsp;(WPRO&nbsp;Who))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DOP&nbsp;do)</tt><br>
@@ -89,7 +89,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(NP-SBJ&nbsp;*ICH*-349)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;will)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Ip&nbsp;arrive)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;early))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;early))))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -399,7 +399,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                          <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -407,7 +407,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                                              <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -415,13 +415,13 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>adv <small><b>general</b></small></tt>
+                                                                  <tt>adv <small><b>particle</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
                                                                   <td>
                                                                       <br>
-                                                                      <tt>[w(&#39;ADV&#39;,&#39;early&#39;)]</tt>
+                                                                      <tt>[w(&#39;RP&#39;,&#39;early&#39;)]</tt>
                                                                   </td>
                                                                   </tr>
                                                                   </table>
@@ -496,11 +496,11 @@
 <p align="justify">Example (<a href="chapter6.html#ex6.6">6.6</a>) differs from (<a href="chapter6.html#ex6.4">6.4</a>) above by including a complementizer (<tt>w('C','that')</tt>) with the consequence that parsing fails. (This is an example of the so-called <i>that</i>-trace effect.) In contrast, parsing succeeds for (<a href="chapter6.html#ex6.7">6.7</a>) despite the inclusion of a complementizer. Why does this contrast occur?</p>
 
 <dl><dt>(<a name="ex6.6">6.6</a>)</dt><dd>
-<tt>[w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('C','that'), w('MD',';~cat_Vi','will'), w('VB',';~Ip','arrive'), w('ADV','early'), w('PUNC','?')]</tt><br>
+<tt>[w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('C','that'), w('MD',';~cat_Vi','will'), w('VB',';~Ip','arrive'), w('RP','early'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex6.7">6.7</a>)</dt><dd>
-<tt>[w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('C','that'), w('PRO','you'), w('MD',';~cat_Vi','will'), w('VB',';~Tni','see'), w('VB',';~Ip','arrive'), w('ADV','early'), w('PUNC','?')]</tt><br>
+<tt>[w('WPRO','Who'), w('DOP','','do'), w('PRO','you'), w('VB',';~Tf','think'), w('C','that'), w('PRO','you'), w('MD',';~cat_Vi','will'), w('VB',';~Tni','see'), w('VB',';~Ip','arrive'), w('RP','early'), w('PUNC','?')]</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec6.3">6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;CP-QUE projections that are embedded question clauses</h2>
@@ -649,7 +649,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with an embedded question clause that is a finite clause with an initial embedded question clause marker and that is the object complement of <i>asked</i>, consider (<a href="chapter6.html#ex6.13">6.13</a>).</p>
 
 <dl><dt>(<a name="ex6.13">6.13</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBD',';~Dn.w','asked'), w('PRO','her'), w('WQ','whether'), w('PRO','she'), w('MD',';~cat_Vi','would'), w('VB',';~Ip','arrive'), w('ADV','early'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBD',';~Dn.w','asked'), w('PRO','her'), w('WQ','whether'), w('PRO','she'), w('MD',';~cat_Vi','would'), w('VB',';~Ip','arrive'), w('RP','early'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Dn.w&nbsp;asked)</tt><br>
@@ -658,7 +658,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;she))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;would)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Ip&nbsp;arrive)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;early)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;early)))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -1001,7 +1001,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                          <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -1009,7 +1009,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                                              <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -1017,13 +1017,13 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>adv <small><b>general</b></small></tt>
+                                                                  <tt>adv <small><b>particle</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
                                                                   <td>
                                                                       <br>
-                                                                      <tt>[w(&#39;ADV&#39;,&#39;early&#39;)]</tt>
+                                                                      <tt>[w(&#39;RP&#39;,&#39;early&#39;)]</tt>
                                                                   </td>
                                                                   </tr>
                                                                   </table>
@@ -5373,7 +5373,7 @@
 <p align="justify">As an example with a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>in_order</i>, consider (<a href="chapter6.html#ex6.47">6.47</a>).</p>
 
 <dl><dt>(<a name="ex6.47">6.47</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('VBP',';~Tt','need'), w('TO','to'), w('VB',';~Tn','spread'), w('PRO;_genm_','my'), w('NS','wings'), w('CONJ','and'), w('VB',';~I','fly'), w('PUNC',','), w('P-CONN','in_order'), w('TO','to'), w('VB',';~Ip','come'), w('ADV','back'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('VBP',';~Tt','need'), w('TO','to'), w('VB',';~Tn','spread'), w('PRO;_genm_','my'), w('NS','wings'), w('CONJ','and'), w('VB',';~I','fly'), w('PUNC',','), w('P-CONN','in_order'), w('TO','to'), w('VB',';~Ip','come'), w('RP','back'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;~Tt&nbsp;need)</tt><br>
@@ -5387,7 +5387,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;in_order)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF2;IP-INF&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Ip&nbsp;come)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;back))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;back))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -5944,7 +5944,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                  <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -5952,7 +5952,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                      <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -5960,13 +5960,13 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adv <small><b>general</b></small></tt>
+                                          <tt>adv <small><b>particle</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
                                           <td>
                                               <br>
-                                              <tt>[w(&#39;ADV&#39;,&#39;back&#39;)]</tt>
+                                              <tt>[w(&#39;RP&#39;,&#39;back&#39;)]</tt>
                                           </td>
                                           </tr>
                                           </table>
@@ -6092,7 +6092,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>without</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.51">6.51</a>).</p>
 
 <dl><dt>(<a name="ex6.51">6.51</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','Without'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','told'), w('PUNC',','), w('D','the'), w('N','chauffeur'), w('VBD',';~Ip','drove'), w('ADV','away'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','Without'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','told'), w('PUNC',','), w('D','the'), w('N','chauffeur'), w('VBD',';~Ip','drove'), w('RP','away'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;Without)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL2;IP-PPL&nbsp;(BAG;~cat_Ve_passive_&nbsp;being)</tt><br>
@@ -6102,7 +6102,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;chauffeur))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ip&nbsp;drove)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;away))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;away))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -6477,7 +6477,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>particle</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -6485,7 +6485,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                  <tt>adverb_phrase_layer <small><b>particle</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -6493,13 +6493,13 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adv <small><b>general</b></small></tt>
+                                      <tt>adv <small><b>particle</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
                                       <td>
                                           <br>
-                                          <tt>[w(&#39;ADV&#39;,&#39;away&#39;)]</tt>
+                                          <tt>[w(&#39;RP&#39;,&#39;away&#39;)]</tt>
                                       </td>
                                       </tr>
                                       </table>
@@ -7050,7 +7050,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-ed&sol;-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>With</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.55">6.55</a>).</p>
 
 <dl><dt>(<a name="ex6.55">6.55</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','With'), w('PRO;_genm_','their'), w('N','load'), w('P-ROLE','of'), w('NS','bombs'), w('VVN',';~I','gone'), w('PUNC',','), w('D','the'), w('NS','planes'), w('VBD',';~Ip','moved'), w('ADV','swiftly'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','With'), w('PRO;_genm_','their'), w('N','load'), w('P-ROLE','of'), w('NS','bombs'), w('VVN',';~I','gone'), w('PUNC',','), w('D','the'), w('NS','planes'), w('VBD',';~I','moved'), w('ADV','swiftly'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;With)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL3&nbsp;(NP-SBJ&nbsp;(NP-GENV&nbsp;(PRO;_genm_&nbsp;their))</tt><br>
@@ -7061,8 +7061,8 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;planes))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ip&nbsp;moved)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;swiftly))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~I&nbsp;moved)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;swiftly))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -7594,13 +7594,13 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>verb <small><b>finite</b></small>&nbsp;<small><b>;~Ip</b></small></tt>
+                      <tt>verb <small><b>finite</b></small>&nbsp;<small><b>;~I</b></small></tt>
                       </td>
                       </tr>
                       <tr>
                       <td>
                           <br>
-                          <tt>[w(&#39;VBD&#39;,&#39;;~Ip&#39;,&#39;moved&#39;)]</tt>
+                          <tt>[w(&#39;VBD&#39;,&#39;;~I&#39;,&#39;moved&#39;)]</tt>
                       </td>
                       </tr>
                       </table>
@@ -7608,8 +7608,8 @@
                   <td>
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
-                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>verb_complements_top_layer <small><b>;~Ip</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                      <td colspan="2" style="text-align: center; vertical-align: middle;">
+                      <tt>verb_complements_top_layer <small><b>;~I</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -7617,7 +7617,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>verb_complements_by_code <small><b>;~Ip</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                          <tt>verb_complements_top_layer <small><b>;~I</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -7625,7 +7625,33 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adverb_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>verb_complements_by_code <small><b>;~I</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <br>
+                                  <tt>[]</tt>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          </tr>
+                          </table>
+                      </td>
+                      <td>
+                          <table cellpadding="5px" style="border:2px solid;">
+                          <tr>
+                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                          <tt>adverbial</tt>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
                               </td>
                               </tr>
                               <tr>
