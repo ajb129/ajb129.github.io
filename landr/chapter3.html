@@ -2037,9 +2037,9 @@
 
 <li>[rule 2] an adverb phrase</li>
 
-<li>[rule 3] a participle clause with control inheritance</li>
+<li>[rule 3] a present participle (<i>-ing</i>) clause with control inheritance</li>
 
-<li>[rule 4] a participle clause with an unfilled subject</li>
+<li>[rule 4] a present participle (<i>-ing</i>) clause with an unfilled subject</li>
 
 <li>[rule 5] an embedded question</li>
 
@@ -2054,10 +2054,10 @@
 <tt>&nbsp;&nbsp;adverb_phrase('',general,L1,L0).</tt><br>
 <tt>preposition_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(L,[node('IP-PPL2;IP-PPL',IL)|L0]),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_sbj,IL,[]).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_sbj,ing_participle,IL,[]).</tt><br>
 <tt>preposition_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(L,[node('IP-PPL3',IL)|L0]),</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_sbj,IL,[]).</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_sbj,ing_participle,IL,[]).</tt><br>
 <tt>preposition_phrase_layer(general,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;cp_embedded_que('',[],L1,L0).</tt><br>
