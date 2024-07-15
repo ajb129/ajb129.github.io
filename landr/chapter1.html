@@ -90,7 +90,7 @@
     <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>np_sbj</tt></td></tr>
     <tr>
      <td>
-       <table cellpadding="5px" style="border:2px solid;">
+       <table cellpadding="5px">
         <tr><td><tt>[he]</tt></td></tr>
        </table>
      </td>
@@ -106,7 +106,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>vp</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[smiles]</tt></td></tr>
            </table>
          </td>
@@ -114,7 +114,7 @@
        </table>
      </td>
      <td>
-       <table cellpadding="5px" style="border:2px solid;">
+       <table cellpadding="5px">
         <tr><td><tt>[and]</tt></td></tr>
        </table>
      </td>
@@ -123,7 +123,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>vp</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[smiles]</tt></td></tr>
            </table>
          </td>
@@ -153,7 +153,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>np_sbj</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[he]</tt></td></tr>
            </table>
          </td>
@@ -165,7 +165,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>vp</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[smiles]</tt></td></tr>
            </table>
          </td>
@@ -176,7 +176,7 @@
    </table>
  </td>
  <td>
-   <table cellpadding="5px" style="border:2px solid;">
+   <table cellpadding="5px">
     <tr><td><tt>[and]</tt></td></tr>
    </table>
  </td>
@@ -189,7 +189,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>np_sbj</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[he]</tt></td></tr>
            </table>
          </td>
@@ -201,7 +201,7 @@
         <tr><td colspan="1" style="text-align: center; vertical-align: middle;"><tt>vp</tt></td></tr>
         <tr>
          <td>
-           <table cellpadding="5px" style="border:2px solid;">
+           <table cellpadding="5px">
             <tr><td><tt>[smiles]</tt></td></tr>
            </table>
          </td>
@@ -366,9 +366,9 @@
 <tt>&nbsp;&nbsp;punc(final_question,IL1,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) will create a <tt>node</tt> structure with a list <tt>IL</tt> for the layer content of the node and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, rule 1 needs content to parse that involves a list of items where all but the last item satisfies one of the <tt>clause_top_layer</tt> phrase structure rules (see section <a href="chapter5.html#sec5.2">5.2</a>) and where the last list item is an instance of final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
+<p align="justify">Rule 1 of (<a href="chapter1.html#ex1.6">1.6</a>) will create a <tt>node</tt> structure with a list <tt>IL</tt> for the layer content of the node and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, rule 1 needs content to parse that involves a list of items where all but the last item is content for a <tt>clause_top_layer</tt> phrase structure rule (see section <a href="chapter5.html#sec5.2">5.2</a>) and where the last list item is an instance of final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In (<a href="chapter1.html#ex1.7">1.7</a>), two Prolog calls are made. The first call has <tt>tphrase_set_string</tt> to store a list of word items to parse. Let's call this the <b>word list</b>. The second call has <tt>parse</tt> to question whether the stored word list has content to satisfy a call of <tt>sentence</tt>. Note that the parameter of <tt>sentence</tt> for accumulating parse structure is hidden internally to the <tt>parse</tt> call. If <tt>parse</tt> succeeds, then all parse results are presented as bracketed tree output.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Prolog query of (<a href="chapter1.html#ex1.7">1.7</a>) has two calls. The first call to <tt>tphrase_set_string</tt> stores a list of word items to parse. Let's call this the <b>word list</b>. The second call to <tt>parse</tt> (see the Appendix for its definition) questions whether the stored word list can be word input content for a <tt>sentence</tt> rule. Note that the parameters of <tt>sentence</tt> visible in (<a href="chapter1.html#ex1.6">1.6</a>) are hidden by the <tt>parse</tt> call. These parameters accumulate discovered <tt>node</tt> structure and if <tt>parse</tt> succeeds, then all <tt>node</tt> structure results are presented as bracketed tree output.</p>
 
 <dl><dt>(<a name="ex1.7">1.7</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -397,9 +397,9 @@
 
 <ul>
 
-<li><tt>statement_order</tt> for rule 1</li>
+<li>[rule 1] <tt>statement_order</tt></li>
 
-<li><tt>imperative_clause</tt> for rule 2</li>
+<li>[rule 2] <tt>imperative_clause</tt></li>
 
 </ul>
 
@@ -508,11 +508,13 @@
 
 <li>[rule 3] an adverbial from an <tt>initial_adverbial</tt> call (see section <a href="chapter2.html#sec2.10">2.10</a>)</li>
 
-<li>[rule 4] a <i>to</i>-infinite clause (see section <a href="chapter6.html#sec6.4.2">6.4.2</a>)</li>
+<li>[rule 4] an adverbial from an <tt>adverbial</tt> call (see section <a href="chapter4.html#sec4.1">4.1</a>)</li>
 
-<li>[rule 5] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.6.3">6.6.3</a>)</li>
+<li>[rule 5] a <i>to</i>-infinite clause (see section <a href="chapter6.html#sec6.4.2">6.4.2</a>)</li>
 
-<li>[rule 6] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.6.3">6.6.3</a>)</li>
+<li>[rule 6] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.6.3">6.6.3</a>)</li>
+
+<li>[rule 7] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.6.3">6.6.3</a>)</li>
 
 </ul>
 
@@ -520,12 +522,17 @@
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',_,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('',_,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[catenative,non_interrogative,interrogative,relative])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',Type,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;initial_adverbial(L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverbial(L,L0).</tt><br>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('',[],L,L0).</tt><br>
-<tt>fragment_layer([node('IP-PPL2;IP-PPL',IL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>fragment_layer([node('IP-PPL',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Infl,[hag_participle,en_participle,ing_participle])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
@@ -537,28 +544,14 @@
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_sbj,Infl,IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">For rule 3 of (<a href="chapter1.html#ex1.16">1.16</a>), an adverbial (see section <a href="chapter2.html#sec2.10">2.10</a> for the <tt>adverbial</tt> rules) can be:</p>
-
-<ul>
-
-<li>a clause level word (but not a verb word, negation or infinitival <i>to</i>)</li>
-
-<li>an adverb phrase</li>
-
-<li>a preposition phrase</li>
-
-<li>a clause introduced by subordinate conjunction</li>
-
-</ul>
-
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.17">1.17</a>) calls the rules of (<a href="chapter1.html#ex1.18">1.18</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4 of (<a href="chapter1.html#ex1.18">1.18</a>)]. The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2 of (<a href="chapter1.html#ex1.18">1.18</a>)].</p>
 
 <dl><dt>(<a name="ex1.17">1.17</a>)</dt><dd>
 <tt>utterance(Ext,[node(Label,UL)|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;utterance_collect(UL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('utterance',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;utterance_collect(UL,[]).</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex1.18">1.18</a>)</dt><dd>
