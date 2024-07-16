@@ -27,7 +27,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i>-clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>ILYR</tt> (clause intermediate) layer constructed with rule 2 of (<a href="chapter6.html#ex6.1">6.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="chapter6.html#ex6.2">6.2</a>), which, through additional calls of <tt>clause_that_layer</tt>, picks up from the word list the content for conjuncts that occur after the first conjunct.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i>-clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>ILYR</tt> (clause internal) layer constructed with rule 2 of (<a href="chapter6.html#ex6.1">6.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="chapter6.html#ex6.2">6.2</a>), which, through additional calls of <tt>clause_that_layer</tt>, picks up from the word list the content for conjuncts that occur after the first conjunct.</p>
 
 <dl><dt>(<a name="ex6.1">6.1</a>)</dt><dd>
 <tt>cp_that(Ext,Type,Store,[node(Label,[node('IP-SUB',IL)])|L],L)&nbsp;--&gt;</tt><br>
