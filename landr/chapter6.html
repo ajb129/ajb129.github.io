@@ -27,20 +27,20 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i>-clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>ILYR</tt> (clause intermediate) layer constructed with rule 2 of (<a href="chapter6.html#ex6.1">6.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="chapter6.html#ex6.2">6.2</a>), which, through additional calls of <tt>clause_that_layer</tt>, picks up from the word list the content for conjuncts that occur after the first conjunct.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i>-clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>ILYR</tt> (clause internal) layer constructed with rule 2 of (<a href="chapter6.html#ex6.1">6.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="chapter6.html#ex6.2">6.2</a>), which, through additional calls of <tt>clause_that_layer</tt>, picks up from the word list the content for conjuncts that occur after the first conjunct.</p>
 
 <dl><dt>(<a name="ex6.1">6.1</a>)</dt><dd>
 <tt>cp_that(Ext,Type,Store,[node(Label,[node('IP-SUB',IL)])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_that_layer(Type,Store,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-THT',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_that_layer(Type,Store,IL,[]).</tt><br>
 <tt>cp_that(Ext,Type,Store,[node(Label,[node('IP-SUB',[node('ILYR',[node('ILYR',IL)|CL])])])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_that_layer(Type,Store,IL,[]),</tt><br>
-<tt>&nbsp;&nbsp;cp_that_tail(Type,Store,CL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-THT',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_that_layer(Type,Store,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;cp_that_tail(Type,Store,CL,[]).</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex6.2">6.2</a>)</dt><dd>
@@ -547,27 +547,27 @@
 
 <dl><dt>(<a name="ex6.8">6.8</a>)</dt><dd>
 <tt>cp_embedded_que(Ext,Store,[node(Label,[node('IP-SUB',IL)])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_embedded_que_finite_top_layer(Store,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_embedded_que_finite_top_layer(Store,IL,[]).</tt><br>
 <tt>cp_embedded_que(Ext,Store,[node(Label,[node('IP-SUB',[node('ILYR',[node('ILYR',IL)|CL])])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;clause_embedded_que_finite_top_layer(Store,IL,[]),</tt><br>
-<tt>&nbsp;&nbsp;cp_embedded_que_finite_tail(Store,CL,[]),</tt><br>
-<tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;cp_embedded_que_finite_tail(Store,CL,[]).</tt><br>
 <tt>cp_embedded_que(Ext,Store,[node(Label,[node('IP-INF',IL)])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_embedded_que_to_inf_top_layer(Store,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_embedded_que_to_inf_top_layer(Store,IL,[]).</tt><br>
 <tt>cp_embedded_que(Ext,Store,[node(Label,[node('IP-INF',[node('ILYR',[node('ILYR',IL)|CL])])])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_embedded_que_to_inf_top_layer(Store,IL,[]),</tt><br>
-<tt>&nbsp;&nbsp;cp_embedded_que_to_inf_tail(Store,CL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('CP-QUE',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_embedded_que_to_inf_top_layer(Store,IL,[]),</tt><br>
+<tt>&nbsp;&nbsp;cp_embedded_que_to_inf_tail(Store,CL,[]).</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex6.9">6.9</a>)</dt><dd>
@@ -773,7 +773,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>noun_phrase <small><b>-OB2</b></small>&nbsp;<small><b>general</b></small></tt>
+                      <tt>noun_phrase <small><b>-OB2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -781,7 +781,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -789,7 +789,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>noun_head_full <small><b>general</b></small></tt>
+                              <tt>noun_head_full <small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -1489,7 +1489,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a preposition complement that is an embedded question finite clause with statement word order, consider (<a href="chapter6.html#ex6.21">6.21</a>).</p>
 
 <dl><dt>(<a name="ex6.21">6.21</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','concerned'), w('P-ROLE','with'), w('WADV','how'), w('PRO','we'), w('MD',';~cat_Vi','can'), w('VB',';~Tn','save'), w('NS','hedgehogs')]),&nbsp;parse(adjective_phrase('-PRD2',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','concerned'), w('P-ROLE','with'), w('WADV','how'), w('PRO','we'), w('MD',';~cat_Vi','can'), w('VB',';~Tn','save'), w('NS','hedgehogs')]),&nbsp;parse(adjective_phrase('-PRD2',non_privileged)).</tt><br>
 <br>
 <tt>(ADJP-PRD2&nbsp;(ADJ&nbsp;concerned)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;with)</tt><br>
@@ -1508,7 +1508,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>general</b></small></tt>
+  <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -1516,7 +1516,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="2" style="text-align: center; vertical-align: middle;">
-      <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+      <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -1524,7 +1524,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="1" style="text-align: center; vertical-align: middle;">
-          <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+          <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -1532,7 +1532,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>adj <small><b>general</b></small></tt>
+              <tt>adj <small><b>non_interrogative</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -1550,7 +1550,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="1" style="text-align: center; vertical-align: middle;">
-          <tt>preposition_phrase <small><b>general</b></small></tt>
+          <tt>preposition_phrase <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -1558,7 +1558,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="2" style="text-align: center; vertical-align: middle;">
-              <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+              <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -1794,7 +1794,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -1802,7 +1802,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -1810,7 +1810,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -1904,7 +1904,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a preposition complement that is an embedded question <i>to</i>-infinitive clause, consider (<a href="chapter6.html#ex6.23">6.23</a>).</p>
 
 <dl><dt>(<a name="ex6.23">6.23</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','choice'), w('P-ROLE','of'), w('WADV','where'), w('TO','to'), w('VB',';~Tn','buy'), w('PRO;_genm_','my'), w('N','home')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','choice'), w('P-ROLE','of'), w('WADV','where'), w('TO','to'), w('VB',';~Tn','buy'), w('PRO;_genm_','my'), w('N','home')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;choice)</tt><br>
@@ -1924,7 +1924,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -1932,7 +1932,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -1940,7 +1940,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -1948,7 +1948,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -1956,7 +1956,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -2019,7 +2019,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>preposition_phrase <small><b>general</b></small></tt>
+                  <tt>preposition_phrase <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -2027,7 +2027,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                      <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                      <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -2165,7 +2165,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                  <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -2173,7 +2173,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -2181,7 +2181,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -2189,7 +2189,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>determiner_layer <small><b>general</b></small></tt>
+                                                              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -2197,7 +2197,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>noun_phrase_genm_layer <small><b>general</b></small></tt>
+                                                                  <tt>noun_phrase_genm_layer <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -2205,7 +2205,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>pronoun_genm <small><b>general</b></small></tt>
+                                                                      <tt>pronoun_genm <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -2460,7 +2460,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>general</b></small></tt>
+                          <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -2468,7 +2468,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                              <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -2476,7 +2476,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adj <small><b>general</b></small></tt>
+                                  <tt>adj <small><b>non_interrogative</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -2734,10 +2734,10 @@
 
 <dl><dt>(<a name="ex6.29">6.29</a>)</dt><dd>
 <tt>ip_to_inf(Ext,Store,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;to_inf_top_layer(Store,VL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-INF',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;to_inf_top_layer(Store,VL,[]).</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex6.30">6.30</a>)</dt><dd>
@@ -2822,7 +2822,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
+              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -2830,7 +2830,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                  <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -2838,7 +2838,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>adv <small><b>general</b></small></tt>
+                      <tt>adv <small><b>non_privileged</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -2922,7 +2922,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase <small><b>-OB2</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>noun_phrase <small><b>-OB2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -2930,7 +2930,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -2938,7 +2938,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_head_full <small><b>general</b></small></tt>
+                                              <tt>noun_head_full <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -2959,7 +2959,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -2967,7 +2967,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -2975,7 +2975,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -2983,7 +2983,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>determiner_layer <small><b>general</b></small></tt>
+                                                  <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -2991,7 +2991,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>det <small><b>general</b></small></tt>
+                                                      <tt>det <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -3069,7 +3069,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
+                                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -3077,7 +3077,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                      <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -3085,7 +3085,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adv <small><b>general</b></small></tt>
+                                          <tt>adv <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -3198,7 +3198,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -3206,7 +3206,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -3214,7 +3214,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_head_full <small><b>general</b></small></tt>
+                                                              <tt>noun_head_full <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -3505,7 +3505,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -3513,7 +3513,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                                  <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -3521,7 +3521,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adj <small><b>general</b></small></tt>
+                                      <tt>adj <small><b>non_interrogative</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4079,7 +4079,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4087,7 +4087,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                                          <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -4095,7 +4095,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>adj <small><b>general</b></small></tt>
+                                              <tt>adj <small><b>non_interrogative</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -4145,7 +4145,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>noun_phrase <small><b>-LGS</b></small>&nbsp;<small><b>general</b></small></tt>
+                                  <tt>noun_phrase <small><b>-LGS</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -4153,7 +4153,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4161,7 +4161,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -4169,7 +4169,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>determiner_layer <small><b>general</b></small></tt>
+                                              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -4177,7 +4177,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>det <small><b>general</b></small></tt>
+                                                  <tt>det <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -4538,7 +4538,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -4546,7 +4546,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                                  <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -4554,7 +4554,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adj <small><b>general</b></small></tt>
+                                      <tt>adj <small><b>non_interrogative</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4643,7 +4643,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>noun_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4651,7 +4651,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -4659,7 +4659,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -4667,7 +4667,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>determiner_layer <small><b>general</b></small></tt>
+                                                  <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -4675,7 +4675,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>det <small><b>general</b></small></tt>
+                                                      <tt>det <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -4701,7 +4701,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>adjective_phrase <small><b>general</b></small></tt>
+                                                      <tt>adjective_phrase <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -4709,7 +4709,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                                                          <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -4717,7 +4717,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>adj</tt>
+                                                              <tt>adj <small><b>non_interrogative</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -4828,6 +4828,8 @@
 </dd></dl>
 
 <br><h4>Question</h4>
+
+<p align="justify">Consider (<a href="chapter6.html#ex6.41">6.41</a>) and (<a href="chapter6.html#ex6.42">6.42</a>). What are the parse results, if any? Do the results reflect your expectations? Can you describe the cause of any parse failure?</p>
 
 <dl><dt>(<a name="ex6.41">6.41</a>)</dt><dd>
 <tt>[w('PRO;_provisional_','It'), w('BEP',';~La','is'), w('ADJ','likely'), w('P-CONN','for'), w('D','the'), w('N','spacecraft'), w('TO','to'), w('VB',';~I','survive'), w('PUNC','.')]</tt><br>
@@ -5007,7 +5009,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
+                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -5015,7 +5017,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                      <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -5023,7 +5025,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>adv <small><b>general</b></small></tt>
+                          <tt>adv <small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -5184,7 +5186,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -5192,7 +5194,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                          <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                          <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -5215,7 +5217,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase <small><b>general</b></small></tt>
+                                              <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -5223,7 +5225,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                  <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -5231,7 +5233,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                      <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -5239,7 +5241,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>determiner_layer <small><b>general</b></small></tt>
+                                                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -5247,7 +5249,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_phrase_genm_layer <small><b>general</b></small></tt>
+                                                              <tt>noun_phrase_genm_layer <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -5255,7 +5257,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>pronoun_genm <small><b>general</b></small></tt>
+                                                                  <tt>pronoun_genm <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -5604,7 +5606,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                          <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -5612,7 +5614,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                              <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -5620,7 +5622,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                  <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -5628,7 +5630,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>determiner_layer <small><b>general</b></small></tt>
+                                                                      <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -5636,7 +5638,7 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>noun_phrase_genm_layer <small><b>general</b></small></tt>
+                                                                          <tt>noun_phrase_genm_layer <small><b>non_privileged</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
@@ -5644,7 +5646,7 @@
                                                                               <table cellpadding="5px" style="border:2px solid;">
                                                                               <tr>
                                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                              <tt>pronoun_genm <small><b>general</b></small></tt>
+                                                                              <tt>pronoun_genm <small><b>non_privileged</b></small></tt>
                                                                               </td>
                                                                               </tr>
                                                                               <tr>
@@ -6686,7 +6688,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
+                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -6694,7 +6696,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                      <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -6702,7 +6704,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>adv <small><b>general</b></small></tt>
+                          <tt>adv <small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -6917,7 +6919,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -6925,7 +6927,7 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
@@ -6933,7 +6935,7 @@
                                                                               <table cellpadding="5px" style="border:2px solid;">
                                                                               <tr>
                                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                              <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                               </td>
                                                                               </tr>
                                                                               <tr>
@@ -7173,7 +7175,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_genm_layer <small><b>general</b></small></tt>
+                                          <tt>noun_phrase_genm_layer <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -7181,7 +7183,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>pronoun_genm <small><b>general</b></small></tt>
+                                              <tt>pronoun_genm <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -7247,7 +7249,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>preposition_phrase <small><b>general</b></small></tt>
+                                          <tt>preposition_phrase <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -7255,7 +7257,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                              <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                              <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -7278,7 +7280,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase <small><b>general</b></small></tt>
+                                                  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -7286,7 +7288,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -7294,7 +7296,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -7655,7 +7657,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>general</b></small></tt>
+                              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -7663,7 +7665,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase_layer <small><b>general</b></small></tt>
+                                  <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -7671,7 +7673,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adv <small><b>general</b></small></tt>
+                                      <tt>adv <small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -8079,7 +8081,7 @@
 
 <br><h2><a name="sec6.7">6.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Present participle clauses as preposition complements</h2>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is possible for a present participle (<i>-ing</i>) clause to be the selected complement of a preposition. This follows from the <tt>preposition_phrase_layer</tt> rule of section <a href="chapter3.html#sec3.5">3.5</a>. As an example, consider (<a href="chapter6.html#ex6.62">6.62</a>).</p>
+<p align="justify">It is possible for a present participle (<i>-ing</i>) clause to be the selected complement of a preposition. This follows from the <tt>preposition_phrase_layer</tt> rule of section <a href="chapter3.html#sec3.5">3.5</a>. As an example, consider (<a href="chapter6.html#ex6.62">6.62</a>).</p>
 
 <dl><dt>(<a name="ex6.62">6.62</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','It'), w('VBD',';~Ipr','sounded'), w('P-ROLE','like'), w('D','a'), w('N','man'), w('VAG',';~Tn','kicking'), w('D','a'), w('N','melon'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -8224,7 +8226,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                          <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -8232,7 +8234,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                              <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                              <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -8721,7 +8723,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>that</i> creating a non-subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.68">6.68</a>).</p>
 
 <dl><dt>(<a name="ex6.68">6.68</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('RPRO','that'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('RPRO','that'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fence)</tt><br>
@@ -8741,7 +8743,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -8749,7 +8751,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -8757,7 +8759,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -8765,7 +8767,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -8773,7 +8775,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -9111,7 +9113,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.70">6.70</a>).</p>
 
 <dl><dt>(<a name="ex6.70">6.70</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('P-ROLE','over'), w('RPRO','which'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('P-ROLE','over'), w('RPRO','which'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fence)</tt><br>
@@ -9131,7 +9133,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -9139,7 +9141,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -9147,7 +9149,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -9155,7 +9157,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -9527,7 +9529,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with genitive relative pronoun (<tt>RPRO;_genm_</tt>) <i>whose</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.72">6.72</a>).</p>
 
 <dl><dt>(<a name="ex6.72">6.72</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','gardener'), w('P-ROLE','over'), w('RPRO;_genm_','whose'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','gardener'), w('P-ROLE','over'), w('RPRO;_genm_','whose'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;gardener)</tt><br>
@@ -9548,7 +9550,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -9556,7 +9558,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -9564,7 +9566,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -9572,7 +9574,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -10014,7 +10016,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a non-subject dependency internal to a relative clause without a relative pronoun, consider (<a href="chapter6.html#ex6.74">6.74</a>).</p>
 
 <dl><dt>(<a name="ex6.74">6.74</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fence)</tt><br>
@@ -10033,7 +10035,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -10041,7 +10043,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -10049,7 +10051,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -10057,7 +10059,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -10065,7 +10067,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -10355,7 +10357,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> creating a subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.76">6.76</a>).</p>
 
 <dl><dt>(<a name="ex6.76">6.76</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('RPRO','which'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('RPRO','which'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;horse)</tt><br>
@@ -10377,7 +10379,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -10385,7 +10387,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -10393,7 +10395,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -10401,7 +10403,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -10634,7 +10636,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                          <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -10642,7 +10644,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                              <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                                              <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -10665,7 +10667,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>noun_phrase <small><b>general</b></small></tt>
+                                                                  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -10673,7 +10675,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                                      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -10681,7 +10683,7 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
@@ -10689,7 +10691,7 @@
                                                                               <table cellpadding="5px" style="border:2px solid;">
                                                                               <tr>
                                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                              <tt>determiner_layer <small><b>general</b></small></tt>
+                                                                              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                               </td>
                                                                               </tr>
                                                                               <tr>
@@ -10697,7 +10699,7 @@
                                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                                   <tr>
                                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                                  <tt>det <small><b>general</b></small></tt>
+                                                                                  <tt>det <small><b>non_privileged</b></small></tt>
                                                                                   </td>
                                                                                   </tr>
                                                                                   <tr>
@@ -10890,7 +10892,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="chapter6.html#ex6.84">6.84</a>).</p>
 
 <dl><dt>(<a name="ex6.84">6.84</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('P-CONN','for'), w('PRO','me'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('P-CONN','for'), w('PRO','me'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;horse)</tt><br>
@@ -10912,7 +10914,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -10920,7 +10922,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -10928,7 +10930,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -10936,7 +10938,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -10944,7 +10946,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -11153,7 +11155,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                  <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -11161,7 +11163,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                      <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                                      <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -11184,7 +11186,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase <small><b>general</b></small></tt>
+                                                          <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -11192,7 +11194,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                              <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -11200,7 +11202,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                  <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -11208,7 +11210,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>determiner_layer <small><b>general</b></small></tt>
+                                                                      <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -11216,7 +11218,7 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>det <small><b>general</b></small></tt>
+                                                                          <tt>det <small><b>non_privileged</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
@@ -11323,7 +11325,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As word list content for a noun modifier that is a <i>to</i>-infinitive clause without an internal <i>for</i> introduced subject and without a non-subject selected internal dependency, consider (<a href="chapter6.html#ex6.86">6.86</a>).</p>
 
 <dl><dt>(<a name="ex6.86">6.86</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','intention&sol;time&sol;person'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('D','a'), w('N','horse'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','intention&sol;time&sol;person'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('D','a'), w('N','horse'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;the)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;intention&sol;time&sol;person)</tt><br>
@@ -11389,7 +11391,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a present participle clause, consider (<a href="chapter6.html#ex6.89">6.89</a>).</p>
 
 <dl><dt>(<a name="ex6.89">6.89</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VAG',';~Ipr','jumping'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VAG',';~Ipr','jumping'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;horse)</tt><br>
@@ -11407,7 +11409,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -11415,7 +11417,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -11423,7 +11425,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -11431,7 +11433,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -11439,7 +11441,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -11557,7 +11559,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -11565,7 +11567,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                          <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                          <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -11588,7 +11590,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase <small><b>general</b></small></tt>
+                                              <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -11596,7 +11598,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                  <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -11604,7 +11606,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                      <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -11612,7 +11614,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>determiner_layer <small><b>general</b></small></tt>
+                                                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -11620,7 +11622,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>det <small><b>general</b></small></tt>
+                                                              <tt>det <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -11722,7 +11724,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle clause, consider (<a href="chapter6.html#ex6.91">6.91</a>).</p>
 
 <dl><dt>(<a name="ex6.91">6.91</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',general)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;horse)</tt><br>
@@ -11741,7 +11743,7 @@
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
-  <tt>noun_phrase <small><b>general</b></small></tt>
+  <tt>noun_phrase <small><b>non_privileged</b></small></tt>
   </td>
   </tr>
   <tr>
@@ -11749,7 +11751,7 @@
       <table cellpadding="5px" style="border:2px solid;">
       <tr>
       <td colspan="1" style="text-align: center; vertical-align: middle;">
-      <tt>noun_phrase_top <small><b>general</b></small></tt>
+      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
       </td>
       </tr>
       <tr>
@@ -11757,7 +11759,7 @@
           <table cellpadding="5px" style="border:2px solid;">
           <tr>
           <td colspan="2" style="text-align: center; vertical-align: middle;">
-          <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
           </td>
           </tr>
           <tr>
@@ -11765,7 +11767,7 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>determiner_layer <small><b>general</b></small></tt>
+              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
               </td>
               </tr>
               <tr>
@@ -11773,7 +11775,7 @@
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>det <small><b>general</b></small></tt>
+                  <tt>det <small><b>non_privileged</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -11891,7 +11893,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>general</b></small></tt>
+                                      <tt>preposition_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -11899,7 +11901,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                          <tt>preposition_phrase_layer <small><b>general</b></small></tt>
+                                          <tt>preposition_phrase_layer <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -11922,7 +11924,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase <small><b>general</b></small></tt>
+                                              <tt>noun_phrase <small><b>non_privileged</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -11930,7 +11932,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                  <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -11938,7 +11940,7 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                      <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -11946,7 +11948,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>determiner_layer <small><b>general</b></small></tt>
+                                                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -11954,7 +11956,7 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>det <small><b>general</b></small></tt>
+                                                              <tt>det <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -12058,7 +12060,7 @@
 <tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_by_code(Code,Store,cleft_sbj,active,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~cleft_Vn',[],cleft_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-FOC',general,L,[node('IP-CLF',IL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-FOC',non_privileged,L,[node('IP-CLF',IL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
 <tt>verb_complements_by_code(';~cleft_Vn',[np(ICH)],cleft_sbj,active,[node('NP-FOC',[ICH]),node('IP-CLF',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
@@ -12180,7 +12182,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>noun_phrase <small><b>-FOC</b></small>&nbsp;<small><b>general</b></small></tt>
+                          <tt>noun_phrase <small><b>-FOC</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -12188,7 +12190,7 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>noun_phrase_top <small><b>general</b></small></tt>
+                              <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                               </td>
                               </tr>
                               <tr>
@@ -12196,7 +12198,7 @@
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                  <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                  <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -12204,7 +12206,7 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>determiner_layer <small><b>general</b></small></tt>
+                                      <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -12212,7 +12214,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>det <small><b>general</b></small></tt>
+                                          <tt>det <small><b>non_privileged</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -12238,7 +12240,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adjective_phrase <small><b>general</b></small></tt>
+                                          <tt>adjective_phrase <small><b>non_interrogative</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -12246,7 +12248,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>adjective_phrase_layer <small><b>general</b></small></tt>
+                                              <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -12254,7 +12256,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>adj</tt>
+                                                  <tt>adj <small><b>non_interrogative</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -12805,7 +12807,7 @@
                                                                               <table cellpadding="5px" style="border:2px solid;">
                                                                               <tr>
                                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                              <tt>noun_phrase <small><b>-ESBJ</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                                              <tt>noun_phrase <small><b>-ESBJ</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                                               </td>
                                                                               </tr>
                                                                               <tr>
@@ -12813,7 +12815,7 @@
                                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                                   <tr>
                                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                                  <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                                                  <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                                                   </td>
                                                                                   </tr>
                                                                                   <tr>
@@ -12821,7 +12823,7 @@
                                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                                       <tr>
                                                                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                                      <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                                      <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                                       </td>
                                                                                       </tr>
                                                                                       <tr>
@@ -12829,7 +12831,7 @@
                                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                                           <tr>
                                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                                          <tt>determiner_layer <small><b>general</b></small></tt>
+                                                                                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                                           </td>
                                                                                           </tr>
                                                                                           <tr>
@@ -13261,7 +13263,7 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>noun_phrase <small><b>-ESBJ</b></small>&nbsp;<small><b>general</b></small></tt>
+                                                                          <tt>noun_phrase <small><b>-ESBJ</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
@@ -13269,7 +13271,7 @@
                                                                               <table cellpadding="5px" style="border:2px solid;">
                                                                               <tr>
                                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                              <tt>noun_phrase_top <small><b>general</b></small></tt>
+                                                                              <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                                               </td>
                                                                               </tr>
                                                                               <tr>
@@ -13277,7 +13279,7 @@
                                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                                   <tr>
                                                                                   <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                                                  <tt>noun_phrase_initial_layer <small><b>general</b></small></tt>
+                                                                                  <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                                                   </td>
                                                                                   </tr>
                                                                                   <tr>
@@ -13285,7 +13287,7 @@
                                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                                       <tr>
                                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                                      <tt>determiner_layer <small><b>general</b></small></tt>
+                                                                                      <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                                       </td>
                                                                                       </tr>
                                                                                       <tr>
