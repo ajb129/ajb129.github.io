@@ -7,15 +7,15 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) establish the initial elements of a clause. All have a <tt>Store</tt> parameter for a list value of index information for identified structure that has yet to integrate with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
+<p align="justify">The <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) establish the initial elements of a clause. All have a <tt>Store</tt> parameter to list index information for already identified structure that has yet to integrate with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For [rule 2], with the clause <tt>Type</tt> parameter set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For [rule 2], with the clause <tt>Type</tt> set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to:</p>
 
 <ul>
 
 <li>[rules 1 and 3&ndash;6] find a noun phrase or subject indicating content with a call of <tt>subject</tt> (from section <a href="chapter2.html#sec2.5">2.5</a>)</li>
 
-<li>[rule 7] satisfy the subject condition with a stored <tt>np(ICH)</tt> index for a clause with its <tt>Type</tt> parameter set to <tt>matrix_constituent_interrogative</tt></li>
+<li>[rule 7] satisfy the subject condition with a stored <tt>np(ICH)</tt> index for a clause with its <tt>Type</tt> set to <tt>matrix_constituent_interrogative</tt></li>
 
 </ul>
 
@@ -23,11 +23,11 @@
 
 <ul>
 
-<li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list for a clause with its <tt>Type</tt> parameter set to <tt>statement_order</tt></li>
+<li>[rule 1] the <tt>subject</tt> call finds its content as an initial portion of the word list for a clause with its <tt>Type</tt> set to <tt>statement_order</tt></li>
 
-<li>[rules 3 and 4] the content identified with <tt>subject</tt> has final position in the word list, coming immediately after content identified with <tt>do_operator_layer</tt> [rule 3] or <tt>have_be_or_md_finite_layer</tt> [rule 4] for a clause with its <tt>Type</tt> parameter set to <tt>tag_question</tt></li>
+<li>[rules 3 and 4] with a clause <tt>Type</tt> setting of <tt>tag_question</tt>, the content identified with <tt>subject</tt> has final position in the word list, coming immediately after content identified with either <tt>do_operator_layer</tt> [rule 3] or <tt>have_be_or_md_finite_layer</tt> [rule 4]</li>
 
-<li>[rules 5 and 6] the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after content identified with <tt>do_operator_layer</tt> [rule 5] or <tt>have_be_or_md_finite_layer</tt> [rule 6] and immediately before content identified with <tt>verb_phrase_layer</tt> [rule 5] or <tt>verb_complements_top_layer</tt> [rule 6] for a clause with its <tt>Type</tt> parameter set to <tt>matrix_interrogative</tt> or <tt>matrix_constituent_interrogative</tt></li>
+<li>[rules 5 and 6] with a clause <tt>Type</tt> setting of either <tt>matrix_interrogative</tt> or <tt>matrix_constituent_interrogative</tt>, the <tt>subject</tt> call finds its content as a portion of the word list that is immediately after content identified with either <tt>do_operator_layer</tt> [rule 5] or <tt>have_be_or_md_finite_layer</tt> [rule 6] and immediately before content identified with either <tt>verb_phrase_layer</tt> [rule 5] or <tt>verb_complements_top_layer</tt> [rule 6]</li>
 
 </ul>
 
@@ -35,15 +35,15 @@
 
 <ul>
 
-<li><tt>filled_sbj</tt> for rule 2</li>
+<li><tt>filled_sbj</tt> for [rule 2]</li>
 
-<li><tt>filled_sbj</tt> or <tt>expletive_sbj</tt> for rules 3 or 4</li>
+<li><tt>filled_sbj</tt> or <tt>expletive_sbj</tt> for [rules 3 or 4]</li>
 
-<li><tt>filled_sbj</tt> or <tt>derived_sbj</tt> for rule 7</li>
+<li><tt>filled_sbj</tt> or <tt>derived_sbj</tt> for [rule 7]</li>
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there is clause inflection parameter information, occurring with calls to <tt>verb_phrase_layer</tt>, this varies:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there is clause <tt>Infl</tt> (inflection) information, occurring with calls to <tt>verb_phrase_layer</tt>, this varies:</p>
 
 <ul>
 
@@ -53,7 +53,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there is clause voice parameter information, occurring with calls to <tt>verb_phrase_layer</tt> [rules 2 and 5] or <tt>verb_complements_top_layer</tt> [rule 6], this is always <tt>active</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When there is clause <tt>Voice</tt> information, occurring with calls to <tt>verb_phrase_layer</tt> [rules 2 and 5] or <tt>verb_complements_top_layer</tt> [rule 6], this is always <tt>active</tt>.</p>
 
 <dl><dt>(<a name="ex5.1">5.1</a>)</dt><dd>
 <tt>clause_top_layer(statement_order,Store,L,L0)&nbsp;--&gt;</tt><br>
@@ -1325,7 +1325,7 @@
 
 <br><h3><a name="sec5.4.2">5.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verbs with to-infinitive complements</h3>
 
-<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Vt</tt> involves selection of a <i>to</i>-infinitive clause as its complement by picking up from the word list an initial <tt>to</tt> word (see section <a href="chapter2.html#sec2.10">2.10</a>) and then the remainder of the infinitive clause with a call of <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>) above with the clause type set to <tt>infinitive</tt> and voice parameter kept as <tt>active</tt>.</p>
+<p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Vt</tt> involves selection of a <i>to</i>-infinitive clause as its complement by picking up from the word list an initial <tt>to</tt> word (see section <a href="chapter2.html#sec2.10">2.10</a>) and then the remainder of the infinitive clause with a call of <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>) above with the clause <tt>Type</tt> set to <tt>infinitive</tt> and <tt>Voice</tt> kept as <tt>active</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a <i>to</i>-infinitive clause as the complement of a modal verb, consider (<a href="chapter5.html#ex5.18">5.18</a>).</p>
 
@@ -1572,7 +1572,7 @@
 
 <p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Ve</tt> involves selection of an active past participle (<i>-ed&sol;-en</i>) clause as its complement. This occurs when the word class tag is a form of <small style="font-size: 75%">HAVE</small> (either <tt>HVP</tt>, <tt>HVD</tt>, <tt>HV</tt>, <tt>HAG</tt> or <tt>HVN</tt>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_ppl_active</tt> rule of (<a href="chapter5.html#ex5.20">5.20</a>) finds an active participle clause for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> that sets the clause state to being <tt>active</tt>. To find a past participle the <tt>Infl</tt> parameter is set to the value of <tt>en_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_ppl_active</tt> rule of (<a href="chapter5.html#ex5.20">5.20</a>) finds an active participle clause for overall structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> with an <tt>active</tt> setting for <tt>Voice</tt>. A past participle clause follows when <tt>Infl</tt> is set to <tt>en_participle</tt>.</p>
 
 <dl><dt>(<a name="ex5.20">5.20</a>)</dt><dd>
 <tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
@@ -1776,7 +1776,7 @@
 
 <p align="justify">The <tt>verb_complements_by_code</tt> rule of section <a href="chapter4.html#sec4.10">4.10</a> for code <tt>;~cat_Vg</tt> involves selection of a present participle (<i>-ing</i>) clause as its complement.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find a present participle (<i>-ing</i>) clause, the <tt>Infl</tt> parameter for a call to <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.20">5.20</a>) is set to the value of <tt>ing_participle</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To find a present participle (<i>-ing</i>) clause, the <tt>Infl</tt> parameter for a call to <tt>ip_ppl_active</tt> of (<a href="chapter5.html#ex5.20">5.20</a>) is set to <tt>ing_participle</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a present participle (<i>-ing</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.23">5.23</a>).</p>
 
@@ -3322,7 +3322,7 @@
 
 <br><h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Existential there</h2>
 
-<p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb with an existential verb code by setting the clause <tt>SbjType</tt> parameter to <tt>there_sbj</tt>. The existential verb licensed by this <tt>SbjType</tt> parameter setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt> or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt> or <tt>;~ex_cat_Ve_passive_</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
+<p align="justify">An existential <i>there</i> (tagged <tt>EX</tt>) starts the ripple effect of needing a locally present verb with an existential verb code by setting the clause <tt>SbjType</tt> parameter to <tt>there_sbj</tt>. The existential verb licensed by this <tt>SbjType</tt> setting might be the main verb (with code <tt>;~ex_V</tt>, <tt>;~ex_Vp</tt> or <tt>;~ex_Vpr</tt>) or a catenative verb (with code <tt>;~ex_cat_Vt</tt>, <tt>;~ex_cat_Vg</tt> or <tt>;~ex_cat_Ve_passive_</tt>). Either way, this verb itself gives rise to the additional need for an existential subject (<tt>NP-ESBJ</tt>) as one of its selected complements.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="chapter5.html#ex5.52">5.52</a>).</p>
 
@@ -3515,7 +3515,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the clause <tt>SbjType</tt> parameter to <tt>there_sbj</tt> and the occurrence of the existential verb that needs this parameter setting, provided this happens in the same clause and the <tt>there_sbj</tt> setting of the <tt>SbjType</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="chapter5.html#ex5.54">5.54</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the clause <tt>SbjType</tt> to <tt>there_sbj</tt> and the occurrence of the existential verb that needs this setting, provided this happens in the same clause and the <tt>there_sbj</tt> setting of the <tt>SbjType</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="chapter5.html#ex5.54">5.54</a>).</p>
 
 <dl><dt>(<a name="ex5.54">5.54</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('EX','there'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('HV',';~cat_Ve','have'), w('BEN',';~ex_V','been'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(statement_order,[])).</tt><br>

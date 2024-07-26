@@ -339,7 +339,7 @@
 
 <br><h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
 
-<p align="justify">Except when the clause type parameter is set to <tt>imperative_clause</tt>, there is always the requirement that a finite clause should include a subject. The rules of (<a href="chapter2.html#ex2.25">2.25</a>) integrate the subject requirement, provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
+<p align="justify">Except when the clause <tt>Type</tt> setting is <tt>imperative_clause</tt>, there is always the requirement that a finite clause should include a subject. The rules of (<a href="chapter2.html#ex2.25">2.25</a>) integrate the subject requirement, provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
 
 <dl><dt>(<a name="ex2.25">2.25</a>)</dt><dd>
 <tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -939,11 +939,11 @@
 <tt>&nbsp;&nbsp;[w('PURQ','&lt;rdquo&gt;')].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional punctuation follows from (<a href="chapter2.html#ex2.37">2.37</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional non-final punctuation follows from (<a href="chapter2.html#ex2.37">2.37</a>).</p>
 
 <dl><dt>(<a name="ex2.37">2.37</a>)</dt><dd>
 <tt>optional_punc_non_final(L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;punc(Type,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,L,L0).</tt><br>
 <tt>optional_punc_non_final(L,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>

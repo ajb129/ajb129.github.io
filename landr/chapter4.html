@@ -14,11 +14,11 @@
 
 <ul>
 
-<li>[rule 1] integrate as a clause final element a notional subject when the <tt>SbjType</tt> parameter is set to <tt>provisional_sbj</tt>, discussed in section <a href="chapter6.html#sec6.5">6.5</a></li>
+<li>[rule 1] integrate as a clause final element a notional subject when the <tt>SbjType</tt> setting is <tt>provisional_sbj</tt>, discussed in section <a href="chapter6.html#sec6.5">6.5</a></li>
 
-<li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> parameter is set to <tt>;~La</tt> and the <tt>SbjType</tt> parameter is set to <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
+<li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
 
-<li>[rule 3] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with active voice when the <tt>Code</tt> parameter is set to <tt>;~La</tt> and the <tt>SbjType</tt> parameter is set to <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
+<li>[rule 3] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with active voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
 
 <li>[rule 4] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
 
@@ -101,7 +101,7 @@
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
-<p align="justify">Both rules of (<a href="chapter4.html#ex4.4">4.4</a>) require <tt>filled_sbj</tt> and <tt>active</tt> parameter settings.</p>
+<p align="justify">Both rules of (<a href="chapter4.html#ex4.4">4.4</a>) require <tt>filled_sbj</tt> and <tt>active</tt> settings.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.5">4.5</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.6">4.6</a>) that succeeds under [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>).</p>
 
@@ -152,7 +152,7 @@
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
-<p align="justify">Both rules of (<a href="chapter4.html#ex4.9">4.9</a>) require <tt>filled_sbj</tt> and <tt>active</tt> parameter settings.</p>
+<p align="justify">Both rules of (<a href="chapter4.html#ex4.9">4.9</a>) require <tt>filled_sbj</tt> and <tt>active</tt> settings.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.10">4.10</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.11">4.11</a>) that succeeds under [rule 1] of (<a href="chapter4.html#ex4.9">4.9</a>).</p>
 
@@ -219,7 +219,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Because there is content in (<a href="chapter4.html#ex4.15">4.15</a>) for a contentful subject (<tt>[w('PRO','He')]</tt>), the subject parameter is set to <tt>filled_sbj</tt> in (<a href="chapter4.html#ex4.16">4.16</a>) for success under [rule 1] of (<a href="chapter4.html#ex4.14">4.14</a>). Also, note how the result of (<a href="chapter4.html#ex4.16">4.16</a>) reflects an absence of any tree structure being created.</p>
+<p align="justify">Because there is content in (<a href="chapter4.html#ex4.15">4.15</a>) for a contentful subject (<tt>[w('PRO','He')]</tt>), the <tt>SbjType</tt> setting is <tt>filled_sbj</tt> in (<a href="chapter4.html#ex4.16">4.16</a>) for success under [rule 1] of (<a href="chapter4.html#ex4.14">4.14</a>). Also, note how the result of (<a href="chapter4.html#ex4.16">4.16</a>) reflects an absence of any tree structure being created.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.17">4.17</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.18">4.18</a>) where the word list is empty.</p>
 
@@ -233,7 +233,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Because there is content in (<a href="chapter4.html#ex4.17">4.17</a>) for an expletive subject (<tt>[w('PRO;_expletive_','It')]</tt>), the subject parameter is set to <tt>expletive_sbj</tt> in (<a href="chapter4.html#ex4.18">4.18</a>) for success under [rule 2] of (<a href="chapter4.html#ex4.14">4.14</a>).</p>
+<p align="justify">Because there is content in (<a href="chapter4.html#ex4.17">4.17</a>) for an expletive subject (<tt>[w('PRO;_expletive_','It')]</tt>), the <tt>SbjType</tt> setting is <tt>expletive_sbj</tt> in (<a href="chapter4.html#ex4.18">4.18</a>) for success under [rule 2] of (<a href="chapter4.html#ex4.14">4.14</a>).</p>
 
 <br><h4>Question</h4>
 
@@ -304,7 +304,7 @@
 
 <li>[rule 3] the word list should be empty and there should be <tt>pp(ICH)</tt> information for a stored preposition phrase index</li>
 
-<li>[rule 4] the word list should only have content for a preposition and the voice parameter should be set to the <tt>passive</tt> value</li>
+<li>[rule 4] the word list should only have content for a preposition and the <tt>Voice</tt> setting should be <tt>passive</tt></li>
 
 </ul>
 
@@ -475,7 +475,7 @@
 
 <br><h3><a name="sec4.4.1">4.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn</h3>
 
-<p align="justify">Code <tt>;~Tn</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.44">4.44</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, the object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Tn</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.44">4.44</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, the object noun phrase can occur either:</p>
 
 <ul>
 
@@ -485,7 +485,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -544,7 +544,7 @@
 
 <br><h3><a name="sec4.4.2">4.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.p</h3>
 
-<p align="justify">Code <tt>;~Tn.p</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase with a function closely related to the verb meaning (<tt>ADVP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.51">4.51</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Tn.p</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase with a function closely related to the verb meaning (<tt>ADVP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.51">4.51</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -558,7 +558,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>, either:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
 
@@ -693,7 +693,7 @@
 
 <br><h3><a name="sec4.4.3">4.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.pr</h3>
 
-<p align="justify">Code <tt>;~Tn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with a function closely related to the verb meaning (<tt>PP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.66">4.66</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Tn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with a function closely related to the verb meaning (<tt>PP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.66">4.66</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -711,7 +711,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>, either:</p>
+<p align="justify">When <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
 
@@ -1049,7 +1049,7 @@
 
 <br><h3><a name="sec4.4.8">4.4.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Tnt</h3>
 
-<p align="justify">Code <tt>;~Tnt</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.101">4.101</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Tnt</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.101">4.101</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -1061,7 +1061,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1261,7 +1261,7 @@
 
 <br><h3><a name="sec4.4.11">4.4.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Tng</h3>
 
-<p align="justify">Code <tt>;~Tng</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.120">4.120</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the participle clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Tng</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.120">4.120</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the participle clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -1271,7 +1271,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1289,7 +1289,7 @@
 <tt>&nbsp;&nbsp;ip_ppl_active('-OB1',[],filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">Note that <tt>ip_ppl_active</tt> (see section <a href="chapter5.html#sec5.4.3">5.4.3</a>) in all of the rules of (<a href="chapter4.html#ex4.120">4.120</a>) takes the <tt>filled_sbj</tt> parameter value. This ensure no disruption of control inheritance from the derived object (/subject when passive).</p>
+<p align="justify">Note that <tt>ip_ppl_active</tt> (see section <a href="chapter5.html#sec5.4.3">5.4.3</a>) in all of the rules of (<a href="chapter4.html#ex4.120">4.120</a>) takes the <tt>filled_sbj</tt> setting. This ensure no disruption of control inheritance from the derived object (/subject when passive).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.121">4.121</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.122">4.122</a>).</p>
 
@@ -1341,7 +1341,7 @@
 
 <br><h3><a name="sec4.4.12">4.4.12</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsg</h3>
 
-<p align="justify">Code <tt>;~Tsg</tt> selects a noun phrase that is the internal subject (<tt>-SBJ</tt>) of a selected present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.127">4.127</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, content for the noun phrase and the participle clause comes from the word list, with the internal form of noun phrase being either:</p>
+<p align="justify">Code <tt>;~Tsg</tt> selects a noun phrase that is the internal subject (<tt>-SBJ</tt>) of a selected present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.127">4.127</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, content for the noun phrase and the participle clause comes from the word list, with the internal form of noun phrase being either:</p>
 
 <ul>
 
@@ -1398,7 +1398,7 @@
 
 <br><h3><a name="sec4.5.1">4.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.n</h3>
 
-<p align="justify">Code <tt>;~Dn.n</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.132">4.132</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Dn.n</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.132">4.132</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -1410,7 +1410,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>, either:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
 
@@ -1520,7 +1520,7 @@
 
 <br><h3><a name="sec4.5.2">4.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.f</h3>
 
-<p align="justify">Code <tt>;~Dn.f</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.143">4.143</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.f</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.143">4.143</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -1528,7 +1528,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1586,7 +1586,7 @@
 
 <br><h3><a name="sec4.5.3">4.5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.w</h3>
 
-<p align="justify">Code <tt>;~Dn.w</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.148">4.148</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.w</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.148">4.148</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -1594,7 +1594,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1657,7 +1657,7 @@
 
 <br><h3><a name="sec4.5.4">4.5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.r</h3>
 
-<p align="justify">Code <tt>;~Dn.r</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.153">4.153</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.r</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.153">4.153</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -1665,7 +1665,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1730,7 +1730,7 @@
 
 <br><h3><a name="sec4.5.5">4.5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.t</h3>
 
-<p align="justify">Code <tt>;~Dn.t</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.158">4.158</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Dn.t</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.158">4.158</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -1738,7 +1738,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1815,7 +1815,7 @@
 
 <br><h3><a name="sec4.5.7">4.5.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.n</h3>
 
-<p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.166">4.166</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.166">4.166</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -1829,7 +1829,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -1989,7 +1989,7 @@
 
 <br><h3><a name="sec4.6.1">4.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.a</h3>
 
-<p align="justify">Code <tt>;~Cn.a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.181">4.181</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Cn.a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.181">4.181</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -2007,7 +2007,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -2178,7 +2178,7 @@
 
 <br><h3><a name="sec4.6.2">4.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n</h3>
 
-<p align="justify">Code <tt>;~Cn.n</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.198">4.198</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, either:</p>
+<p align="justify">Code <tt>;~Cn.n</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.198">4.198</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 
@@ -2190,7 +2190,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>, either:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
 
@@ -2295,7 +2295,7 @@
 
 <br><h3><a name="sec4.6.3">4.6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n/a</h3>
 
-<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.209">4.209</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.209">4.209</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -2303,7 +2303,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -2356,7 +2356,7 @@
 
 <br><h3><a name="sec4.6.4">4.6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.pr</h3>
 
-<p align="justify">Code <tt>;~Cn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.214">4.214</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.214">4.214</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -2364,7 +2364,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -2416,7 +2416,7 @@
 
 <br><h3><a name="sec4.6.5">4.6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.t</h3>
 
-<p align="justify">Code <tt>;~Cn.t</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.219">4.219</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
+<p align="justify">Code <tt>;~Cn.t</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.219">4.219</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
 
@@ -2426,7 +2426,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -2526,7 +2526,7 @@
 
 <br><h3><a name="sec4.6.7">4.6.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.g</h3>
 
-<p align="justify">Code <tt>;~Cn.g</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.229">4.229</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~Cn.g</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.229">4.229</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -2534,7 +2534,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
@@ -2587,7 +2587,7 @@
 
 <br><h3><a name="sec4.7.1">4.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24A</h3>
 
-<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.234">4.234</a>) with <tt>filled_sbj</tt> and <tt>active</tt> parameter settings:</p>
+<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.234">4.234</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 
@@ -2595,7 +2595,7 @@
 
 </ul>
 
-<p align="justify">When the voice parameter is set to <tt>passive</tt>:</p>
+<p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
 
