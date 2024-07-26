@@ -114,7 +114,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Section <a href="chapter2.html#sec2.4">2.4</a> below will introduce other words that lead to genitive case marked noun phrases, with the difference that the projected genitive noun pharses will themselves need to occur inside noun phrases where there is head content to modify.</p>
+<p align="justify">Section <a href="chapter2.html#sec2.4">2.4</a> below will introduce other words that lead to genitive case marked noun phrases, with the difference that the projected genitive noun phrases will themselves need to occur inside noun phrases where there is head content to modify.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) are of four types that depend on the value of the first parameter:</p>
 
@@ -379,7 +379,7 @@
 <tr><td><tt>PRO;_provisional_</tt></td><td>provisional <tt>it</tt> occuring with extraposition (<i>it bothered her that she probably would never know</i>)</td></tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with rule 5 of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with [rule 5] of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
 
 <ul>
 
@@ -387,7 +387,7 @@
 
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.5">6.5</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.6">6.6</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
 
 <ul>
 
@@ -501,7 +501,7 @@
 
 <p align="justify">Once matched and licensed, the verb word information goes into the parse tree information accumulated with <tt>L</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section recognises verb classes with tags that further distingish verb form (section <a href="chapter2.html#sec2.8.1">2.8.1</a>), and establishes the grammatical codes that are compatible with combinations of verb classes and inflection information (section <a href="chapter2.html#sec2.8.2">2.8.2</a>). Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section recognises verb classes with tags that further distinguish verb form (section <a href="chapter2.html#sec2.8.1">2.8.1</a>), and establishes the grammatical codes that are compatible with combinations of verb classes and inflection information (section <a href="chapter2.html#sec2.8.2">2.8.2</a>). Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
 
 <br><h3><a name="sec2.8.1">2.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb classes</h3>
 
@@ -594,7 +594,7 @@
 <tt>verb_tag(en_participle,['VVN','DON','HVN','BEN']).</tt><br>
 </dd></dl>
 
-<p align="justify">When seeking to match a verb word together with tag and verb code from the word list, the <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) above calls the <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) to ensure that the tag is compatible with the inflection inhertied from the <tt>Infl</tt> parameter.</p>
+<p align="justify">When seeking to match a verb word together with tag and verb code from the word list, the <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) above calls the <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) to ensure that the tag is compatible with the inflection inherited from the <tt>Infl</tt> parameter.</p>
 
 <br><h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb codes</h3>
 
@@ -942,9 +942,9 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional punctuation follows from (<a href="chapter2.html#ex2.37">2.37</a>).</p>
 
 <dl><dt>(<a name="ex2.37">2.37</a>)</dt><dd>
-<tt>optional_punc(Type,L,L0)&nbsp;--&gt;</tt><br>
+<tt>optional_punc_non_final(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(Type,L,L0).</tt><br>
-<tt>optional_punc(_,L,L)&nbsp;--&gt;</tt><br>
+<tt>optional_punc_non_final(L,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 

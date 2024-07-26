@@ -413,7 +413,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The recursion seen with the call structure of (<a href="chapter3.html#ex3.9">3.9</a>) when parsing conjunction is not the only opportunity for recursion created by calling <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>). Calls can also be recursive so that the parse is able to pick up on the left edge of the noun phrase modifiers that are either preposition phrases (discussed in section <a href="chapter3.html#sec3.5">3.5</a>) or relative clauses (discussed in section <a href="chapter6.html#sec6.8">6.8</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The recursion seen with the call structure of (<a href="chapter3.html#ex3.9">3.9</a>) when parsing conjunction is not the only opportunity for recursion created by calling <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>). Calls can also be recursive so that the parse is able to pick up on the left edge of the noun phrase modifiers that are either preposition phrases (discussed in section <a href="chapter3.html#sec3.5">3.5</a>) or relative clauses (discussed in section <a href="chapter6.html#sec6.9">6.9</a>).</p>
 
 <br><h4>Question</h4>
 
@@ -556,11 +556,11 @@
 
 <ul>
 
-<li>[rule 5] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.4.2">6.4.2</a></li>
+<li>[rule 5] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.5.2">6.5.2</a></li>
 
 <li>[rule 6] a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> found with <tt>cp_that</tt> of section <a href="chapter6.html#sec6.2">6.2</a> called with its type parameter set to <tt>with_c</tt></li>
 
-<li>[rule 7] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.3">6.3</a></li>
+<li>[rule 7] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.4">6.4</a></li>
 
 </ul>
 
@@ -689,7 +689,7 @@
 
 <br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Nouns as noun modifiers</h3>
 
-<p align="justify">As a demonstration of how the rules for creating lower internal noun phrase structre of (<a href="chapter3.html#ex3.16">3.16</a>) above allow for nouns to act as modifiers for subsequent nouns, consider (<a href="chapter3.html#ex3.20">3.20</a>). The results show five alternative structures, ranging from a completely flat structure with the first result to a structure with multiple <tt>NLYR</tt> (noun phrase internal layer) embeddings with the last result.</p>
+<p align="justify">As a demonstration of how the rules for creating lower internal noun phrase structure of (<a href="chapter3.html#ex3.16">3.16</a>) above allow for nouns to act as modifiers for subsequent nouns, consider (<a href="chapter3.html#ex3.20">3.20</a>). The results show five alternative structures, ranging from a completely flat structure with the first result to a structure with multiple <tt>NLYR</tt> (noun phrase internal layer) embeddings with the last result.</p>
 
 <dl><dt>(<a name="ex3.20">3.20</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('N','phone'), w('N','card'), w('N','payment'), w('N','system')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
@@ -1880,7 +1880,7 @@
 <tt>&nbsp;&nbsp;adverb_phrase_tail(Type,CL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also [rule 6], which is compatible with all type information values, to start a conjunction structure where <tt>adverb_phrase</tt> adds all conjuncts and calls to <tt>adverb_phrase_tail</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) gather non-initial conjuncts.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also [rule 6], which is compatible with all type information values, to start a conjunction structure where <tt>adverb_phrase</tt> adds all conjuncts with calls to <tt>adverb_phrase_tail</tt> of (<a href="chapter3.html#ex3.34">3.34</a>) gathering non-initial conjuncts.</p>
 
 <dl><dt>(<a name="ex3.34">3.34</a>)</dt><dd>
 <tt>adverb_phrase_tail(Type,[node('CONJP',[CONJ,ADVP])|L],L)&nbsp;--&gt;</tt><br>
@@ -1932,7 +1932,7 @@
 
 <ul>
 
-<li>[rule 1], when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information passes on to calls of <tt>adverb_phrase</tt> [see rule 6 of (<a href="chapter3.html#ex3.36">3.36</a>)] whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>non_privileged</tt></li>
+<li>[rule 1], when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information passes on to calls of <tt>adverb_phrase</tt> (see [rule 6] of (<a href="chapter3.html#ex3.36">3.36</a>)) whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>non_privileged</tt></li>
 
 <li>[rule 2], with a <tt>Type</tt> parameter setting of <tt>catenative</tt>, brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
 
@@ -1988,7 +1988,7 @@
 <tt>&nbsp;&nbsp;adjective_phrase_tail(Type,CL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also [rule 9], which is compatible with all type information values, to start a conjunction structure where <tt>adjective_phrase</tt> adds all conjuncts and calls to <tt>adjective_phrase_tail</tt> of (<a href="chapter3.html#ex3.37">3.37</a>) gather non-initial conjuncts.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also [rule 9], which is compatible with all type information values, to start a conjunction structure where <tt>adjective_phrase</tt> adds all conjuncts with calls to <tt>adjective_phrase_tail</tt> of (<a href="chapter3.html#ex3.37">3.37</a>) gathering non-initial conjuncts.</p>
 
 <dl><dt>(<a name="ex3.37">3.37</a>)</dt><dd>
 <tt>adjective_phrase_tail(Type,[node('CONJP',[CONJ,ADJP])|L],L)&nbsp;--&gt;</tt><br>
@@ -2339,7 +2339,7 @@
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,[],IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. Rule 2 of (<a href="chapter3.html#ex3.40">3.40</a>) is a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="chapter3.html#ex3.42">3.42</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Conjunction is also possible at the top level of preposition phrase structure. [Rule 2] of (<a href="chapter3.html#ex3.40">3.40</a>) is a recursive rule for picking up conjuncts, with non-initial conjuncts gathered by calls to <tt>preposition_phrase_tail</tt> of (<a href="chapter3.html#ex3.42">3.42</a>).</p>
 
 <dl><dt>(<a name="ex3.42">3.42</a>)</dt><dd>
 <tt>preposition_phrase_tail(Type,[node('CONJP',[CONJ,PP])|L],L)&nbsp;--&gt;</tt><br>
