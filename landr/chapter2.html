@@ -101,7 +101,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how rules 4 and 5 of (<a href="chapter2.html#ex2.4">2.4</a>) involve the word class together with code information of <tt>PRO;_ppge_</tt> that results in the projection of a genitive case marked noun phrase (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rules 4 and 5] of (<a href="chapter2.html#ex2.4">2.4</a>) involve the word class together with code information of <tt>PRO;_ppge_</tt> that results in the projection of a genitive case marked noun phrase (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
 
 <dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -742,10 +742,12 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
 <tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,ing_participle,en_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~ex_V',';~ex_Vp',';~ex_Vpr']).</tt><br>
+<tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vg',</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~ex_V',';~ex_Vp',';~ex_Vpr',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~ex_cat_Vt',';~ex_cat_Vt_passive_',';~ex_cat_Vg',';~ex_cat_Ve_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cleft_Vn'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>

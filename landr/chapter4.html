@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec4.1">4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">In order to parse a verb, after having matched a verb class tag and a compatible verb code with a call of <tt>verb</tt> from section <a href="chapter2.html#sec2.8">2.8</a>, we next need to establish the complement consequences for the verb. This is begun with <tt>verb_complements_top_layer</tt>, which has the non-recursive rule of (<a href="chapter4.html#ex4.1">4.1</a>) to call <tt>verb_complements_by_code</tt>:</p>
+<p align="justify">In order to parse a verb, after having matched a verb class tag and a compatible verb code with a call of <tt>verb</tt> from section <a href="chapter2.html#sec2.8">2.8</a>, we next need to establish the complement consequences for the verb. This starts with <tt>verb_complements_top_layer</tt>, which has the non-recursive rule of (<a href="chapter4.html#ex4.1">4.1</a>) to call <tt>verb_complements_by_code</tt>:</p>
 
 <dl><dt>(<a name="ex4.1">4.1</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
@@ -52,7 +52,7 @@
 <tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With rules 5 and 6 of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With [rules 5 and 6] of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
 
 <ul>
 
