@@ -1576,10 +1576,10 @@
 
 <dl><dt>(<a name="ex5.20">5.20</a>)</dt><dd>
 <tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,active,VL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-PPL',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,active,VL,[]).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">HAVE</small>, consider (<a href="chapter5.html#ex5.21">5.21</a>).</p>
@@ -1976,10 +1976,10 @@
 
 <dl><dt>(<a name="ex5.25">5.25</a>)</dt><dd>
 <tt>ip_ppl_passive(Ext,Store,SbjType,Infl,[node(Label,[node('NP-LGS',[node('*',[])])|VL])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,passive,VL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-PPL',Ext,Label)</tt><br>
-<tt>&nbsp;&nbsp;}.</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,passive,VL,[]).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example involving selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.26">5.26</a>).</p>
@@ -2181,9 +2181,9 @@
 
 <ul>
 
-<li>[rule 1] call <tt>verb_phrase_layer</tt> after adding the information that the clause has <tt>finite</tt></li>
+<li>[rule 1] call <tt>verb_phrase_layer</tt> after adding <tt>finite</tt> clause information</li>
 
-<li>[rule 2] integrate <tt>do_operator_layer</tt> so that this will occur after the subject and before a subsequent call of <tt>verb_phrase_layer</tt> given <tt>do_supported_infinitive</tt> clause information</li>
+<li>[rule 2] integrate <tt>do_operator_layer</tt> so that this will occur after the subject and before a subsequent call of <tt>verb_phrase_layer</tt> with <tt>do_supported_infinitive</tt> clause information</li>
 
 <li>[rule 3] integrate <tt>have_be_or_md_finite_layer</tt> so that this will occur after the subject and before a call of <tt>verb_complements_top_layer</tt></li>
 
