@@ -20,11 +20,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 1] of (<a href="chapter6.html#ex6.1">6.1</a>) will construct a <tt>CP-THT</tt> that has as its only element a finite clause layer (<tt>IP-SUB</tt>), which in turn contains all the clause content gathered with a <tt>clause_that_layer</tt> rule of (<a href="chapter6.html#ex6.3">6.3</a>), including any clause initial complementizer. Presence or absence of an initial complementizer can depend on the <tt>Type</tt> parameter, which is set to either:</p>
 
 <ul>
-
 <li><tt>with_c</tt></li>
-
 <li><tt>without_c</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If there is conjunction at the highest level of a <i>that</i>-clause, then this happens inside the <tt>IP-SUB</tt> layer within an <tt>ILYR</tt> (clause internal) layer constructed with [rule 2] of (<a href="chapter6.html#ex6.1">6.1</a>), which in turn calls recursive <tt>cp_that_tail</tt> of (<a href="chapter6.html#ex6.2">6.2</a>), which, through additional calls of <tt>clause_that_layer</tt>, picks up from the word list the content for conjuncts that occur after the first conjunct.</p>
@@ -56,13 +53,9 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The internal content for (a conjunct of) a <i>that</i>-clause follows from the <tt>clause_that_layer</tt> rules of (<a href="chapter6.html#ex6.3">6.3</a>). The exact rule called can depend on:</p>
 
 <ul>
-
 <li>the setting of the <tt>Type</tt> parameter, which is either <tt>with_c</tt> or <tt>without_c</tt></li>
-
 <li>what is the content of the <tt>Store</tt> parameter</li>
-
 <li>what is the content of the word list</li>
-
 </ul>
 
 <p align="justify">[Rule 1] applies if the word list has no <i>that</i>-complementizer and no clause subject and there is a noun phrase to inherit from the <tt>Store</tt> parameter. [Rule 2] applies if there is a <i>that</i>-complementizer and content from the word list for a clause with subject. [Rule 3] applies if there is no <i>that</i>-complementizer but there is content from the word list for a clause with subject.</p>
@@ -493,7 +486,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;More examples where a <i>that</i>-clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.4">4.4.4</a> (with code <tt>;~Tf</tt>), <a href="chapter4.html#sec4.5.2">4.5.2</a> (with code <tt>;~Dn.f</tt>) and <a href="chapter4.html#sec4.5.8">4.5.8</a> (with code <tt>;~Dpr.f</tt>).</p>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Example (<a href="chapter6.html#ex6.6">6.6</a>) differs from (<a href="chapter6.html#ex6.4">6.4</a>) above by including a complementizer (<tt>w('C','that')</tt>) with the consequence that parsing fails. (This is an example of the so-called <i>that</i>-trace effect.) In contrast, parsing succeeds for (<a href="chapter6.html#ex6.7">6.7</a>) despite the inclusion of a complementizer. Why does this contrast occur?</p>
 
@@ -512,23 +505,16 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <i>to</i>-infinitive clause can be created with the rules of <tt>to_inf_layer</tt> in (<a href="chapter6.html#ex6.8">6.8</a>). The first three rules of <tt>to_inf_layer</tt> are non-recursive and pick up from the word list an initial <i>to</i> word. These three rules differ as follows:</p>
 
 <ul>
-
 <li>[rule 1] for an <tt>active</tt> clause, calls <tt>verb_phrase_layer</tt> with the clause as <tt>infinitive</tt> and <tt>active</tt></li>
-
 <li>[rule 2] for a <tt>passive</tt> clause, adds a zero logical subject (<tt>node('NP-LGS',[node('*',[])])</tt>) to the collected parse information and calls <tt>verb_phrase_layer</tt> with the clause as <tt>infinitive</tt> and <tt>passive</tt></li>
-
 <li>[rule 3] for a <tt>lgs_passive</tt> clause, calls <tt>verb_phrase_layer</tt> with the clause as <tt>infinitive</tt> and <tt>passive</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are two rules to enable introduction of a clause initial connective particle (which is always <tt>for</tt>) followed by content for a subject element from which the <tt>SbjType</tt> replaces an inherited <tt>unfilled_sbj</tt> value. These two rules differ as follows:</p>
 
 <ul>
-
 <li>[rule 4] for an <tt>active</tt> clause, marks the subject element as being the grammatical subject (<tt>-SBJ</tt>)</li>
-
 <li>[rule 5] for a <tt>passive</tt> clause, marks the subject element as being the logical subject (<tt>-LGS</tt>) and sets the clause type parameter to <tt>lgs_passive</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also [rule 6] to start a conjunction structure where <tt>to_inf_layer</tt> adds all conjuncts with calls to <tt>to_inf_tail</tt> of (<a href="chapter6.html#ex6.9">6.9</a>) gathering non-initial conjuncts.</p>
@@ -588,41 +574,29 @@
 <p align="justify">An embedded question clause is formed by having an initial clause component that is either:</p>
 
 <dl>
-
 <dt>(i)</dt><dd>an embedded question clause marker tagged <tt>WQ</tt>, which is either <tt>whether</tt> or <tt>if</tt></dd>
-
 <dt>(ii)</dt><dd>a phrase with <tt>interrogative</tt> type information</dd>
-
 </dl>
 
 <p align="justify">A clause with (i) is an embedded yes/no question. A clause with (ii) is a constituent question. The internal clause can be missing a selected item when case (ii) holds. In addition to the possibilities of (i) and (ii), internally an embedded question clause can be either:</p>
 
 <ul>
-
 <li>a finite clause with statement word order (<tt>IP-SUB</tt>)</li>
-
 <li>a <i>to</i>-infinitive clause (<tt>IP-INF</tt>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The maximal constituent of an embedded question clause has the <tt>CP-QUE</tt> tag, together with any extension from the <tt>Ext</tt> parameter taken by <tt>cp_embedded_que</tt> of (<a href="chapter6.html#ex6.10">6.10</a>). A <tt>cp_embedded_que</tt> call can involve a subsequent call of <tt>clause_embedded_que_finite_top_layer</tt> to gather under an immediately embedded <tt>IP-SUB</tt> projection the content of either:</p>
 
 <ul>
-
 <li>[rule 1] a finite clause with statement word order</li>
-
 <li>[rule 2] the first conjunct of a conjunction that is a finite clause with statement word order followed by a recursive call to <tt>cp_embedded_que_finite_tail</tt> to pick up subsequent conjuncts that are finite clauses with statement word order</li>
-
 </ul>
 
 <p align="justify">A <tt>cp_embedded_que</tt> call can also involve a subsequent call of <tt>clause_embedded_que_to_inf_top_layer</tt> to gather under an immediately embedded <tt>IP-INF</tt> projection the content of either:</p>
 
 <ul>
-
 <li>[rule 3] a <i>to</i>-infinitive clause</li>
-
 <li>[rule 4] the first conjunct of a conjunction of <i>to</i>-infinitive clauses with a recursive call to <tt>cp_embedded_que_to_inf_tail</tt> to pick up subsequent conjuncts</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.10">6.10</a>)</dt><dd>
@@ -670,20 +644,15 @@
 <tt>&nbsp;&nbsp;cp_embedded_que_to_inf_tail(Store,L,L0).</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.4.1">6.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded question clauses that are finite clauses with statement word order</h3>
+<h3><a name="sec6.4.1">6.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded question clauses that are finite clauses with statement word order</h3>
 
 <p align="justify">The <tt>clause_embedded_que_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.13">6.13</a>) collect the content of an embedded question clause that is a finite clause with statement word order. This gives rules that differ in how the embedded question is introduced:</p>
 
 <ul>
-
 <li>[rule 1] picks up with <tt>comp_wq</tt> an initial embedded question clause marker before finding the remaining clause content with <tt>clause_top_layer</tt>, which receives <tt>statement_order</tt> as the value for its clause <tt>Type</tt> parameter.</li>
-
 <li>[rule 2] picks up a stored noun phrase with <tt>interrogative</tt> type information which receives an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that goes into the <tt>Store</tt> parameter passed to <tt>clause_embedded_que_finite_lower_layer</tt> of (<a href="chapter6.html#ex6.14">6.14</a>), which finds the remaining clause content</li>
-
 <li>[rule 3] picks up an adverb phrase with <tt>interrogative</tt> type information which receives an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that goes into the <tt>Store</tt> parameter passed to <tt>clause_top_layer</tt>, which receives <tt>statement_order</tt> as the value for its clause <tt>Type</tt> parameter to find the the remaining clause content</li>
-
 <li>[rule 4] picks up an adverb phrase with <tt>interrogative</tt> type information before finding the the remaining clause content with <tt>clause_top_layer</tt>, which receives <tt>statement_order</tt> as the value for its clause <tt>Type</tt> parameter</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.13">6.13</a>)</dt><dd>
@@ -712,11 +681,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>clause_embedded_que_finite_lower_layer</tt> of (<a href="chapter6.html#ex6.14">6.14</a>) differ in their treatment of the stored noun phrase index of the embedded question:</p>
 
 <ul>
-
 <li>[rule 1] immediately integrates the stored noun phrase index as the clause subject before a subsequent call of <tt>clause_middle_layer</tt> (see section <a href="chapter5.html#sec5.5">5.5</a>)</li>
-
 <li>[rule 2] does not commit to how the stored noun phrase index will integrate as a non-subject item by finding the clause content with <tt>clause_top_layer</tt>, which receives <tt>statement_order</tt> as the value for its clause <tt>Type</tt> parameter</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.14">6.14</a>)</dt><dd>
@@ -1173,7 +1139,7 @@
 
 </dd></dl>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Why do the success and failure results of (<a href="chapter6.html#ex6.17">6.17</a>)&ndash;(<a href="chapter6.html#ex6.19">6.19</a>) obtain?</p>
 
@@ -1212,20 +1178,15 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.4.2">6.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded question clauses that are to-infinitive clauses</h3>
+<h3><a name="sec6.4.2">6.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded question clauses that are to-infinitive clauses</h3>
 
 <p align="justify">The <tt>clause_embedded_que_to_inf_top_layer</tt> rules of (<a href="chapter6.html#ex6.20">6.20</a>) collect the content of an embedded question clause that is a <i>to</i>-infinitive clause. These rules find clause content with <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> but differ in how they introduce the embedded question:</p>
 
 <ul>
-
 <li>[rule 1] picks up with <tt>comp_wq</tt> an initial embedded question clause marker</li>
-
 <li>[rule 2] picks up a stored noun phrase with <tt>interrogative</tt> type information which receives an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that goes into the <tt>Store</tt> parameter</li>
-
 <li>[rule 3] picks up an adverb phrase with <tt>interrogative</tt> type information which receives an index coindexed with an <tt>*ICH*</tt> (interpret constituent here marker) that goes into the <tt>Store</tt> parameter</li>
-
 <li>[rule 4] picks up an adverb phrase with <tt>interrogative</tt> type information</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.20">6.20</a>)</dt><dd>
@@ -1552,16 +1513,13 @@
 
 </dd></dl>
 
-<br><h3><a name="sec6.4.3">6.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded questions as preposition complements</h3>
+<h3><a name="sec6.4.3">6.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded questions as preposition complements</h3>
 
 <p align="justify">We have seen that there are:</p>
 
 <dl>
-
 <li>embedded question clauses that are finite clauses with statement word order</li>
-
 <li>embedded question clauses that are <i>to</i>-infinitive clauses.</li>
-
 </dl>
 
 <p align="justify">Both types can be preposition complements.</p>
@@ -2399,15 +2357,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call to <tt>notional_item</tt> of (<a href="chapter6.html#ex6.28">6.28</a>) finds a notional subject, which will be a clause with an <tt>-NSBJ</tt> extension that is either:</p>
 
 <ul>
-
 <li>[rule 1] a <i>that</i>-clause (<tt>CP-THT-NSBJ</tt>)</li>
-
 <li>[rule 2] an embedded question clause (<tt>CP-QUE-NSBJ</tt>)</li>
-
 <li>[rule 3] a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>), which may or may not have a <i>for</i> introduced internal subject</li>
-
 <li>[rule 4] a present participle (<i>-ing</i>) clause (<tt>IP-PPL-NSBJ</tt>)</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.28">6.28</a>)</dt><dd>
@@ -2421,7 +2374,7 @@
 <tt>&nbsp;&nbsp;ip_ppl_active(Ext,[],filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.5.1">6.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The notional subject as a that-clause</h3>
+<h3><a name="sec6.5.1">6.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The notional subject as a that-clause</h3>
 
 <p align="justify">As an example with the combination of a provisional <i>it</i> and a <i>that</i>-clause notional subject, consider (<a href="chapter6.html#ex6.29">6.29</a>).</p>
 
@@ -2808,7 +2761,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec6.5.2">6.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The notional subject as a to-infinitive clause</h3>
+<h3><a name="sec6.5.2">6.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The notional subject as a to-infinitive clause</h3>
 
 <p align="justify">[Rule 3] for <tt>notional_item</tt> of (<a href="chapter6.html#ex6.28">6.28</a>) above calls the <tt>ip_to_inf</tt> rule of (<a href="chapter6.html#ex6.31">6.31</a>), which subsequently finds content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_top_layer</tt> of (<a href="chapter6.html#ex6.32">6.32</a>). This gives overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>Ext</tt> parameter.</p>
 
@@ -2830,11 +2783,8 @@
 <p align="justify">Both rules of <tt>to_inf_top_layer</tt> call <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a>. They differ in the values taken by the <tt>SbjType</tt> parameter:</p>
 
 <dl>
-
 <li><tt>unfilled_sbj</tt></li>
-
 <li><tt>filled_sbj</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with the combination of a provisional <i>it</i> and a <i>to</i>-infinitive clause notional subject, consider (<a href="chapter6.html#ex6.29">6.29</a>).</p>
@@ -3393,11 +3343,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules need to find a notional subject that comes after the selected complement of a linking verb with code <tt>;~La</tt>, which will be an adjective phrase with subject predicative function. Also, for both rules, the notional subject is a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a>. The rules differ with respect to the internal content of their <i>to</i>-infinitive clause:</p>
 
 <ul>
-
 <li>for (<a href="chapter6.html#ex6.35">6.35</a>), internally to the <i>to</i>-infinitive clause, the <tt>Voice</tt> setting is <tt>passive</tt>, while the <tt>SbjType</tt> sets to either <tt>filled_sbj</tt> or <tt>unfilled_sbj</tt></li>
-
 <li>for (<a href="chapter6.html#ex6.36">6.36</a>), internally to the <i>to</i>-infinitive clause, the <tt>Voice</tt> setting is <tt>active</tt> and the <tt>SbjType</tt> setting is <tt>filled_sbj</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a derived subject to trigger a tough-construction that leads to a <i>to</i>-infinitive clause notional subject where the <tt>Voice</tt> setting is <tt>passive</tt> and the <tt>SbjType</tt> sets to <tt>unfilled_sbj</tt>, consider (<a href="chapter6.html#ex6.37">6.37</a>).</p>
@@ -4279,7 +4226,7 @@
 
 </dd></dl>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Consider (<a href="chapter6.html#ex6.41">6.41</a>) and (<a href="chapter6.html#ex6.42">6.42</a>). What are the parse results, if any? Do the results reflect your expectations? Can you describe the cause of any parse failure?</p>
 
@@ -4298,23 +4245,16 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.43">6.43</a>) differ in regard to the type of the subordinate clause contained, that is, either:</p>
 
 <ul>
-
 <li>[rule 1] a finite clause (<tt>IP-ADV</tt>)</li>
-
 <li>[rule 2] a <i>to</i>-infinitive clause (either <tt>IP-INF2</tt> for control from only an external subject or <tt>IP-INF</tt> for general control)</li>
-
 <li>[rule 3] a participle clause with control inheritance (either <tt>IP-PPL2</tt> for control from only an external subject or <tt>IP-PPL</tt> for general control)</li>
-
 <li>[rule 4] a participle clause with an unfilled subject (<tt>IP-PPL3</tt> which blocks control)</li>
-
 </ul>
 
 <p align="justify">There is also:</p>
 
 <ul>
-
 <li>[rule 5] coordination at the topmost level of a subordinate conjunction, with a recursive call to <tt>scon_clause_tail</tt> of (<a href="chapter6.html#ex6.44">6.44</a>) for collecting subsequent conjuncts.</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.43">6.43</a>)</dt><dd>
@@ -4351,7 +4291,7 @@
 <tt>&nbsp;&nbsp;scon_clause_tail(L,L0).</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.7.1">6.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with finite adverbial clauses</h3>
+<h3><a name="sec6.7.1">6.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with finite adverbial clauses</h3>
 
 <p align="justify">As an example with a finite adverbial clause (<tt>IP-ADV</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>because</i>, consider (<a href="chapter6.html#ex6.45">6.45</a>).</p>
 
@@ -4822,7 +4762,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec6.7.2">6.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with to-infinitive clauses</h3>
+<h3><a name="sec6.7.2">6.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with to-infinitive clauses</h3>
 
 <p align="justify">As an example with a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>in_order</i>, consider (<a href="chapter6.html#ex6.47">6.47</a>).</p>
 
@@ -5472,18 +5412,15 @@
 
 </dd></dl>
 
-<br><h3><a name="sec6.7.3">6.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with participle clauses</h3>
+<h3><a name="sec6.7.3">6.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with participle clauses</h3>
 
 <p align="justify">The <tt>ip_ppl_active</tt> rule from section <a href="chapter5.html#sec5.4.3">5.4.3</a> creates complements for catenative verbs (<tt>IP-PPL-CAT</tt>), notional subjects (<tt>IP-PPL-NSBJ</tt>) and objects (<tt>IP-PPL-OB1</tt>). But subordinate conjunction offers an opportunity for more content to be part of a participle clause.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The possibilities for extra content arise with the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="chapter6.html#ex6.49">6.49</a>). These rules add the possibility of:</p>
 
 <ul>
-
 <li>[rule 1] a subject being included into the participle clause should the <tt>SbjType</tt> parameter be initially set to <tt>unfilled_sbj</tt></li>
-
 <li>[rule 2] having <i>having</i> as a catenative verb that selects a past participle (<i>-ed&sol;-en</i>) clause as its complement, which is not otherwise possible</li>
-
 </ul>
 
 <p align="justify">[Rule 2] can only be called if the <tt>Infl</tt> setting is <tt>hag_participle</tt>, which is only possible with subordinate conjunction.</p>
@@ -5491,11 +5428,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in addition to the participle clause being a present participle clause with [rule 3], there is also the possibility for the participle clause to be:</p>
 
 <ul>
-
 <li>[rule 4] a past participle (<i>-ed&sol;-en</i>) clause with active voice</li>
-
 <li>[rule 5] a past participle (<i>-ed&sol;-en</i>) clause with passive voice</li>
-
 </ul>
 
 <p align="justify">Finally, rules 1&ndash;5 can enter into coordination with one another through [rule 6], with non-initial conjuncts gathered by calls to <tt>ip_ppl_adverbial_tail</tt> of (<a href="chapter6.html#ex6.50">6.50</a>).</p>
@@ -7491,7 +7425,7 @@
 
 </dd></dl>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Why do the success and failure results of (<a href="chapter6.html#ex6.59">6.59</a>)&ndash;(<a href="chapter6.html#ex6.61">6.61</a>) obtain?</p>
 
@@ -8026,15 +7960,10 @@
 <p align="justify">A relative clause occurs inside a noun phrase alongside but after the noun phrase head for which it acts as a modifier, with the noun phrase head contributing a role within the relative clause. This necessitates the wherewithal to integrate the role inside the relative clause with the external noun phrase head. Ways of integration provided by the rules of (<a href="chapter6.html#ex6.64">6.64</a>) are:</p>
 
 <ul>
-
 <li>[rule 1] as a finite clause</li>
-
 <li>[rule 2] as a <i>to</i>-infinitive clause</li>
-
 <li>[rule 3] as a present participle (<i>-ing</i>) clause</li>
-
 <li>[rule 4] a past participle (<i>-ed&sol;-en</i>) clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex6.64">6.64</a>)</dt><dd>
@@ -8048,32 +7977,23 @@
 <tt>&nbsp;&nbsp;ip_ppl_passive('',[],filled_sbj,en_participle,L,L0).</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.9.1">6.9.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are finite clauses</h3>
+<h3><a name="sec6.9.1">6.9.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are finite clauses</h3>
 
 <p align="justify">A relative clause that is a finite clause introduced with [rule 2] of (<a href="chapter6.html#ex6.64">6.64</a>) above will, with the rules of (<a href="chapter6.html#ex6.65">6.65</a>), establish its internal link to the head of the external noun phrase either:</p>
 
 <ul>
-
 <li>[rule 2] with a clause initial preposition phrase that has <tt>relative</tt> type and that is a stored item</li>
-
 <li>[rule 3] with a clause initial preposition phrase that has <tt>relative</tt> type and that has a <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 4] with a clause initial adverb phrase that has <tt>relative</tt> type and that is a stored item</li>
-
 <li>[rule 5] with a clause initial adverb phrase that has <tt>relative</tt> type and that has a <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 6] with a noun phrase trace (<tt>*T*</tt>) that is a stored item</li>
-
 <li>[rule 7] with a noun phrase trace (<tt>*T*</tt>) that immediately integrates with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 </ul>
 
 <p align="justify">There is also:</p>
 
 <ul>
-
 <li>[rule 8] coordination at the topmost relative clause level</li>
-
 </ul>
 
 <p align="justify">With the coordination of [rule 7], each conjunct is itself a finite clause with its own way from the rules of (<a href="chapter6.html#ex6.65">6.65</a>) for establishing its internal link to the head of the external noun phrase.</p>
@@ -8081,37 +8001,25 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It follows that a relative clause that is a finite clause has either:</p>
 
 <ul>
-
 <li>an initial phrase of type <tt>relative</tt></li>
-
 <li>complete absence of a nevertheless selected element internal to the relative clause, represented in the output parse with a trace (<tt>*T*</tt>).</li>
-
 </ul>
 
 <p align="justify">An initial phrase of type <tt>relative</tt> will contain a relative word of which there are different kinds (see section <a href="chapter2.html#sec2.2">2.2</a>):</p>
 
 <ul>
-
 <li><tt>RPRO</tt> (relative pronoun; e.g., <tt>which</tt>, <tt>who</tt>, <tt>whom</tt>, <tt>that</tt>)</li>
-
 <li><tt>RD</tt> (relative determiner; e.g., <tt>what</tt>, <tt>whatever</tt>)</li>
-
 <li><tt>RPRO;_genm_</tt> (relative genitive pronoun; <tt>whose</tt>)</li>
-
 <li><tt>RADV</tt> (relative adverb; e.g., <tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>whereby</tt>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.65">6.65</a>) collect content for a relative clause that either:</p>
 
 <dl>
-
 <li>has a relative word [rules 1&ndash;4]</li>
-
 <li>involves a trace [rule 5]</li>
-
 <li>contains coordination [rule 6]</li>
-
 </dl>
 
 <dl><dt>(<a name="ex6.65">6.65</a>)</dt><dd>
@@ -10261,7 +10169,7 @@
 
 </dd></dl>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Consider (<a href="chapter6.html#ex6.78">6.78</a>)&ndash;(<a href="chapter6.html#ex6.81">6.81</a>) taken from Gazdar et al (1985, p.&nbsp;178). (Examples (<a href="chapter6.html#ex6.78">6.78</a>)&ndash;(<a href="chapter6.html#ex6.80">6.80</a>) are from Williams (1978, p.&nbsp;34), with (<a href="chapter6.html#ex6.81">6.81</a>) attributed to Paul Hirshbuhler.) What are the parse results, if any? Do the results reflect your expectations? Can you describe how they arise?</p>
 
@@ -10281,30 +10189,22 @@
 <tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Mary'), w('VBP',';~Tn','likes'), w('CONJ','and'), w('VBP',';~Tf','hopes'), w('MD',';~cat_Vi','will'), w('VB',';~I','win'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.9.2">6.9.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are to-infinitive clauses</h3>
+<h3><a name="sec6.9.2">6.9.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are to-infinitive clauses</h3>
 
 <p align="justify">A relative clause that is a <i>to</i>-infinitive clause introduced with [rule 2] of (<a href="chapter6.html#ex6.64">6.64</a>) above will, with the rules of (<a href="chapter6.html#ex6.82">6.82</a>), establish its internal link to the head of the external noun phrase either:</p>
 
 <ul>
-
 <li>[rule 1] with a clause initial preposition phrase that has <tt>relative</tt> type and that is a stored item</li>
-
 <li>[rule 2] with a clause initial preposition phrase that has <tt>relative</tt> type and that has a <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 3] with a noun phrase trace (<tt>*T*</tt>) that is a stored item</li>
-
 <li>[rule 4] with a noun phrase trace (<tt>*T*</tt>) that immediately integrates with subject function</li>
-
 <li>[rule 5] with a noun phrase trace (<tt>*T*</tt>) that immediately integrates with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 </ul>
 
 <p align="justify">There is also:</p>
 
 <ul>
-
 <li>[rule 6] coordination at the topmost relative clause level</li>
-
 </ul>
 
 <p align="justify">With the coordination of [rule 5], each conjunct is itself a <i>to</i>-infinitive clause with its own way from the rules of (<a href="chapter6.html#ex6.82">6.82</a>) for establishing its internal link to the head of the external noun phrase.</p>
@@ -10815,16 +10715,12 @@
 <p align="justify">There are three parse structures in the results of (<a href="chapter6.html#ex6.86">6.86</a>), differing in the structure and content of the <i>to</i>-infinitive clause, which is either:</p>
 
 <ul>
-
 <li>a noun complement (appropriate for <tt>intention</tt>)</li>
-
 <li>a relative clause with a noun phrase trace (<tt>*T*</tt>) integrated with <tt>-NIM</tt> (unselected adverbial) function (appropriate for <tt>time</tt>)</li>
-
 <li>a relative clause with a noun phrase trace (<tt>*T*</tt>) integrated with subject function (appropriate for <tt>person</tt>)</li>
-
 </ul>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Zandvoort (1969, p.&nbsp;56) points out that the passive infinitive may vary with the active infinitive when functioning as a relative clause, especially after <i>there is</i> and <i>there was</i>. With parse results for (<a href="chapter6.html#ex6.87">6.87</a>) and (<a href="chapter6.html#ex6.88">6.88</a>), say why this is so.</p>
 
@@ -10836,7 +10732,7 @@
 <tt>[w('EX','There'), w('BED',';~ex_V','was'), w('Q','no'), w('N','time'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','lost'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec6.9.3">6.9.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are present participle clauses</h3>
+<h3><a name="sec6.9.3">6.9.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are present participle clauses</h3>
 
 <p align="justify">Reduced relative clauses can have the form of present participle clauses occurring directly inside a noun phrase whose noun head is modified, so that inside the relative clause there is a present participle (<i>-ing</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
@@ -11169,7 +11065,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec6.9.4">6.9.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are past participle clauses</h3>
+<h3><a name="sec6.9.4">6.9.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are past participle clauses</h3>
 
 <p align="justify">In addition to being present participle clauses, reduced relative clauses can also have the form of past participle clauses occurring directly inside a noun phrase whose noun head is modified, so that inside the relative clause there is a past participle (<i>-ed&sol;-en</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
@@ -11518,11 +11414,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.93">6.93</a>) require the verb code <tt>;~cleft_Vn</tt>, selecting as complements:</p>
 
 <ul>
-
 <li>a noun phrase as the focus (<tt>-FOC</tt>)</li>
-
 <li>a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause.</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of (<a href="chapter6.html#ex6.93">6.93</a>) require the clause <tt>SbjType</tt> parameter to be set to the value of <tt>cleft_sbj</tt>. This <tt>SbjType</tt> setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>

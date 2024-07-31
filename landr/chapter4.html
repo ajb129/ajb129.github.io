@@ -13,19 +13,12 @@
 <p align="justify">There are also the recursive rules of (<a href="chapter4.html#ex4.2">4.2</a>) to:</p>
 
 <ul>
-
 <li>[rule 1] integrate as a clause final element a notional subject when the <tt>SbjType</tt> setting is <tt>provisional_sbj</tt>, discussed in section <a href="chapter6.html#sec6.5">6.5</a></li>
-
 <li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
-
 <li>[rule 3] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with active voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
-
 <li>[rule 4] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
-
 <li>[rule 5] include an adverbial prior to the verb complements</li>
-
 <li>[rule 6] include an adverbial after the verb complements</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.2">4.2</a>)</dt><dd>
@@ -55,13 +48,9 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With [rules 5 and 6] of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
 
 <ul>
-
 <li>[rule 1] adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 2] preposition phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 3] the subordinate component of a subordinate conjunction</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.3">4.3</a>)</dt><dd>
@@ -79,16 +68,13 @@
 
 <p align="justify">This section establishes selection criteria for linking verbs.</p>
 
-<br><h3><a name="sec4.2.1">4.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;La</h3>
+<h3><a name="sec4.2.1">4.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;La</h3>
 
 <p align="justify">Code <tt>;~La</tt> selects an adjective phrase with subject predicative function (<tt>ADJP-PRD2</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.4">4.4</a>), either:</p>
 
 <ul>
-
 <li>[rule 1] the word list should only have content for an adjective phrase</li>
-
 <li>[rule 2] the word list should be empty and there should be <tt>adj(ICH)</tt> information for a stored adjective phrase index</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.4">4.4</a>)</dt><dd>
@@ -103,7 +89,7 @@
 
 <p align="justify">Both rules of (<a href="chapter4.html#ex4.4">4.4</a>) require <tt>filled_sbj</tt> and <tt>active</tt> settings.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.5">4.5</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.6">4.6</a>) that succeeds under [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.5">4.5</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.6">4.6</a>).</p>
 
 <dl><dt>(<a name="ex4.5">4.5</a>)</dt><dd>
 <tt>[w('PRO','He'), w('VBD',';~La','appeared'), w('ADJ','tall'), w('PUNC','.')]</tt><br>
@@ -116,6 +102,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">Word list content remaining for (<a href="chapter4.html#ex4.6">4.6</a>) is the adjective word <tt>w('ADJ','tall')</tt>. This is material for an adjective phrase when <tt>Type</tt> information is set to <tt>non_privileged</tt>, and so success is possible with [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.7">4.7</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.8">4.8</a>).</p>
 
@@ -133,16 +121,13 @@
 
 <p align="justify">With (<a href="chapter4.html#ex4.8">4.8</a>), the word list is empty, yet <tt>[w('WADV','How'),w('ADJ','annoying')]</tt> of (<a href="chapter4.html#ex4.7">4.7</a>) brings about a stored adjective phrase index (<tt>adjp(node('*ICH*-122',[]))</tt>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 2] of (<a href="chapter4.html#ex4.4">4.4</a>).</p>
 
-<br><h3><a name="sec4.2.2">4.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Ln</h3>
+<h3><a name="sec4.2.2">4.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Ln</h3>
 
 <p align="justify">Code <tt>;~Ln</tt> selects a noun phrase with subject predicative function (<tt>NP-PRD2</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.9">4.9</a>), either:</p>
 
 <ul>
-
 <li>[rule 1] the word list should only have content for a noun phrase</li>
-
 <li>[rule 2] the word list should be empty and there should be <tt>np(ICH)</tt> information for a stored noun phrase index</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.9">4.9</a>)</dt><dd>
@@ -154,7 +139,7 @@
 
 <p align="justify">Both rules of (<a href="chapter4.html#ex4.9">4.9</a>) require <tt>filled_sbj</tt> and <tt>active</tt> settings.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.10">4.10</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.11">4.11</a>) that succeeds under [rule 1] of (<a href="chapter4.html#ex4.9">4.9</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.10">4.10</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.11">4.11</a>).</p>
 
 <dl><dt>(<a name="ex4.10">4.10</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBD',';~Tf','thought'), w('PRO','you'), w('BED',';~Ln','were'), w('D','the'), w('NPR','Egyptian'), w('PUNC','.')]</tt><br>
@@ -167,6 +152,8 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Egyptian))</tt><br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">There is a determiner word followed by a noun word as word list content remaining for (<a href="chapter4.html#ex4.11">4.11</a>). This is material for a noun phrase, and so success is possible with [rule 1] of (<a href="chapter4.html#ex4.9">4.9</a>) with its <tt>noun_phrase</tt> call.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.12">4.12</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.13">4.13</a>).</p>
 
@@ -182,22 +169,19 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">With (<a href="chapter4.html#ex4.13">4.13</a>), the word list is empty, yet there is information about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.9">6.9</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 2] of (<a href="chapter4.html#ex4.9">4.9</a>).</p>
+<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.13">4.13</a>), yet information is stored about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.9">6.9</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 2] of (<a href="chapter4.html#ex4.9">4.9</a>).</p>
 
 <br><h2><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Intransitive verbs</h2>
 
 <p align="justify">This section establishes selection criteria for intransitive verbs.</p>
 
-<br><h3><a name="sec4.3.1">4.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;I</h3>
+<h3><a name="sec4.3.1">4.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;I</h3>
 
 <p align="justify">With code <tt>;~I</tt>, there are no selected complement elements. Both rules of (<a href="chapter4.html#ex4.14">4.14</a>) expect an empty word list and no stored information (<tt>[]</tt>). They both return the content of <tt>L</tt> (gathered content of the clause layer) without change. They differ in the setting of the subject parameter:</p>
 
 <ul>
-
 <li>[rule 1] <tt>filled_sbj</tt></li>
-
 <li>[rule 2] <tt>expletive_sbj</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.14">4.14</a>)</dt><dd>
@@ -235,7 +219,7 @@
 
 <p align="justify">Because there is content in (<a href="chapter4.html#ex4.17">4.17</a>) for an expletive subject (<tt>[w('PRO;_expletive_','It')]</tt>), the <tt>SbjType</tt> setting is <tt>expletive_sbj</tt> in (<a href="chapter4.html#ex4.18">4.18</a>) for success under [rule 2] of (<a href="chapter4.html#ex4.14">4.14</a>).</p>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Why does query (<a href="chapter4.html#ex4.19">4.19</a>) fail?</p>
 
@@ -245,24 +229,21 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.3.2">4.3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Ip</h3>
+<h3><a name="sec4.3.2">4.3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Ip</h3>
 
 <p align="justify">Code <tt>;~Ip</tt> selects an adverbial particle that is the head of an adverb phrase with a function closely related to the meaning of the verb (<tt>ADVP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.20">4.20</a>), either:</p>
 
 <ul>
-
 <li>[rule 1] the word list should only have content for an adverb phrase</li>
-
 <li>[rule 2] the word list should be empty and there should be <tt>advp(ICH)</tt> information for a stored adverb phrase index</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.20">4.20</a>)</dt><dd>
-</dd></dl>
 <tt>verb_complements_by_code(';~Ip',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('-CLR',particle,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~Ip',[advp(ICH)],filled_sbj,active,[node('ADVP-CLR',[ICH])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.21">4.21</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.22">4.22</a>).</p>
 
@@ -278,6 +259,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The only remaining content of the word list for (<a href="chapter4.html#ex4.22">4.22</a>) is an adverbial particle, and so success happens with [rule 1] of (<a href="chapter4.html#ex4.20">4.20</a>) that consists of an <tt>adverb_phrase</tt> call with <tt>Type</tt> set to <tt>particle</tt>.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.23">4.23</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.24">4.24</a>).</p>
 
 <dl><dt>(<a name="ex4.23">4.23</a>)</dt><dd>
@@ -292,20 +275,17 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.3.3">4.3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Ipr</h3>
+<p align="justify">There is no remaining word list information for (<a href="chapter4.html#ex4.24">4.24</a>) but there is <tt>Store</tt> information for an adverb phrase that has yet to integrate with the overall parse structure, and so success is possible with [rule 2] of (<a href="chapter4.html#ex4.20">4.20</a>).</p>
+
+<h3><a name="sec4.3.3">4.3.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Ipr</h3>
 
 <p align="justify">Code <tt>;~Ipr</tt> selects a preposition phrase with a function closely related to the meaning of the verb (<tt>PP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.25">4.25</a>), either:</p>
 
 <ul>
-
 <li>[rule 1] the word list should only have content for a preposition phrase</li>
-
 <li>[rule 2] the word list should only have content for a preposition and there should be <tt>np(ICH)</tt> information for a stored noun phrase index</li>
-
 <li>[rule 3] the word list should be empty and there should be <tt>pp(ICH)</tt> information for a stored preposition phrase index</li>
-
 <li>[rule 4] the word list should only have content for a preposition and the <tt>Voice</tt> setting should be <tt>passive</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.25">4.25</a>)</dt><dd>
@@ -334,6 +314,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The word list for (<a href="chapter4.html#ex4.27">4.27</a>) is left with a preposition word and a following noun word, so content to identify a preposition phrase. Consequently, success happens with [rule 1] of (<a href="chapter4.html#ex4.25">4.25</a>) with its <tt>preposition_phrase</tt> call.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.28">4.28</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.29">4.29</a>).</p>
 
 <dl><dt>(<a name="ex4.28">4.28</a>)</dt><dd>
@@ -349,6 +331,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The only remaining content of the word list for (<a href="chapter4.html#ex4.29">4.29</a>) is a preposition word. Because there is also <tt>Store</tt> information for a noun phrase that has yet to integrate with the overall parse structure, success is possible with [rule 2] of (<a href="chapter4.html#ex4.25">4.25</a>) that has only a <tt>role</tt> call for identifying a preposition word.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.30">4.30</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.31">4.31</a>).</p>
 
 <dl><dt>(<a name="ex4.30">4.30</a>)</dt><dd>
@@ -362,6 +346,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">While the word list is empty for (<a href="chapter4.html#ex4.24">4.24</a>), there is <tt>Store</tt> information for a preposition phrase that has yet to integrate with the overall parse structure. Consequently, success is possible with [rule 3] of (<a href="chapter4.html#ex4.25">4.25</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.32">4.32</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.33">4.33</a>).</p>
 
@@ -377,16 +363,15 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.3.4">4.3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;In/pr</h3>
+<p align="justify">The only remaining content of the word list for (<a href="chapter4.html#ex4.33">4.33</a>) is a preposition word. Although the <tt>Store</tt> information is empty, the clause <tt>Type</tt> information is set to <tt>passive</tt>, and so success is possible with [rule 4] of (<a href="chapter4.html#ex4.25">4.25</a>).</p>
+
+<h3><a name="sec4.3.4">4.3.4</a>&nbsp;&nbsp;&nbsp;&nbsp;In/pr</h3>
 
 <p align="justify">Code <tt>;~In/pr</tt> selects either a noun phrase (<tt>NP-CLR</tt>) or a preposition phrase (<tt>PP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.34">4.34</a>), either:</p>
 
 <ul>
-
 <li>[rule 1] the word list should only have content for a noun phrase</li>
-
 <li>[rule 2] the word list should only have content for a preposition phrase</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.34">4.34</a>)</dt><dd>
@@ -411,6 +396,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The word list for (<a href="chapter4.html#ex4.36">4.36</a>) is left with a determiner word and a following noun word, so content to identify a noun phrase. Consequently, success happens with [rule 1] of (<a href="chapter4.html#ex4.34">4.34</a>) with its <tt>noun_phrase</tt> call.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.37">4.37</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.38">4.38</a>).</p>
 
 <dl><dt>(<a name="ex4.37">4.37</a>)</dt><dd>
@@ -427,7 +414,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.3.5">4.3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;It</h3>
+<p align="justify">The word list for (<a href="chapter4.html#ex4.38">4.38</a>) is left with a preposition word, a determiner word and a noun word, so content to identify a preposition phrase. Consequently, success happens with [rule 2] of (<a href="chapter4.html#ex4.34">4.34</a>) with its <tt>preposition_phrase</tt> call.</p>
+
+<h3><a name="sec4.3.5">4.3.5</a>&nbsp;&nbsp;&nbsp;&nbsp;It</h3>
 
 <p align="justify">Code <tt>;~It</tt> selects a <i>to</i>-infinitive clause (<tt>IP-INF-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.39">4.39</a>), the word list should only have content for a <i>to</i>-infinitive clause.</p>
 
@@ -452,6 +441,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The word list for (<a href="chapter4.html#ex4.41">4.41</a>) is left with content to identify a <i>to</i>-infinitive clause. Consequently, success happens with (<a href="chapter4.html#ex4.39">4.39</a>) with its <tt>ip_to_inf</tt> call.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.42">4.42</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.43">4.43</a>).</p>
 
 <dl><dt>(<a name="ex4.42">4.42</a>)</dt><dd>
@@ -469,28 +460,25 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The word list for (<a href="chapter4.html#ex4.43">4.43</a>) is left with content to identify a <i>to</i>-infinitive clause with a clause initial <i>for</i> connective word and material for a subject noun phrase prior to the <i>to</i> word. Consequently, success happens with (<a href="chapter4.html#ex4.39">4.39</a>) with its <tt>ip_to_inf</tt> call.</p>
+
 <br><h2><a name="sec4.4">4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Mono-transitive verbs</h2>
 
 <p align="justify">This section establishes selection criteria for mono-transitive verbs.</p>
 
-<br><h3><a name="sec4.4.1">4.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn</h3>
+<h3><a name="sec4.4.1">4.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn</h3>
 
 <p align="justify">Code <tt>;~Tn</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.44">4.44</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, the object noun phrase can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list</li>
-
 <li>[rule 2] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 3] there is only the <tt>filled_sbj</tt> requirement, so displacement and word lists have to be empty</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.44">4.44</a>)</dt><dd>
@@ -516,6 +504,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The word list for (<a href="chapter4.html#ex4.46">4.46</a>) is left with a proper noun word, so content to identify a noun phrase. Consequently, success happens with [rule 1] of (<a href="chapter4.html#ex4.44">4.44</a>) with its <tt>noun_phrase</tt> call.</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.47">4.47</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.48">4.48</a>).</p>
 
 <dl><dt>(<a name="ex4.47">4.47</a>)</dt><dd>
@@ -530,6 +520,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">While the word list is empty for (<a href="chapter4.html#ex4.48">4.48</a>), there is <tt>Store</tt> information for a noun phrase that has yet to integrate with the overall parse structure. Consequently, success happens with [rule 2] of (<a href="chapter4.html#ex4.44">4.44</a>)</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.49">4.49</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.50">4.50</a>).</p>
 
 <dl><dt>(<a name="ex4.49">4.49</a>)</dt><dd>
@@ -542,30 +534,24 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.2">4.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.p</h3>
+<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.50">4.50</a>). Although the <tt>Store</tt> information is also empty, the clause <tt>Type</tt> information is set to <tt>passive</tt>, and so success is possible with [rule 3] of (<a href="chapter4.html#ex4.44">4.44</a>).</p>
+
+<h3><a name="sec4.4.2">4.4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.p</h3>
 
 <p align="justify">Code <tt>;~Tn.p</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adverbial particle that is the head of an adverb phrase with a function closely related to the verb meaning (<tt>ADVP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.51">4.51</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before the adverbial particle in the word list</li>
-
 <li>[rule 2] content for the object noun phrase occurs after the adverbial particle in the word list</li>
-
 <li>[rule 3] the word list has only the adverbial particle, while the object noun phrase occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 4] the word list has only content for the object noun phrase, while a stored adverb phrase <tt>advp(ICH)</tt> achieves the adverbial particle requirement</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
-
 <li>[rule 5] there is the <tt>filled_sbj</tt> requirement and the word list has only content for the adverbial particle</li>
-
 <li>[rule 6] there is the <tt>filled_sbj</tt> requirement and a stored adverb phrase <tt>advp(ICH)</tt> achieves the adverbial particle requirement</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.51">4.51</a>)</dt><dd>
@@ -601,6 +587,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.53">4.53</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.54">4.54</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.55">4.55</a>).</p>
 
 <dl><dt>(<a name="ex4.54">4.54</a>)</dt><dd>
@@ -617,6 +605,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.55">4.55</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.56">4.56</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.57">4.57</a>).</p>
 
 <dl><dt>(<a name="ex4.56">4.56</a>)</dt><dd>
@@ -631,6 +621,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.57">4.57</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.58">4.58</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.59">4.59</a>).</p>
 
@@ -648,6 +640,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.59">4.59</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.60">4.60</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.61">4.61</a>).</p>
 
 <dl><dt>(<a name="ex4.60">4.60</a>)</dt><dd>
@@ -662,6 +656,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.61">4.61</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.62">4.62</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.63">4.63</a>).</p>
 
 <dl><dt>(<a name="ex4.62">4.62</a>)</dt><dd>
@@ -675,6 +671,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.63">4.63</a>) is possible with [rule 6] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.64">4.64</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.65">4.65</a>).</p>
 
@@ -691,36 +689,27 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.3">4.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.pr</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.65">4.65</a>) is possible with [rule 7] of (<a href="chapter4.html#ex4.51">4.51</a>).</p>
+
+<h3><a name="sec4.4.3">4.4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Tn.pr</h3>
 
 <p align="justify">Code <tt>;~Tn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with a function closely related to the verb meaning (<tt>PP-CLR</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.66">4.66</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the preposition phrase in the word list</li>
-
 <li>[rule 2] content for the object noun phrase occurs after content for the preposition phrase in the word list</li>
-
 <li>[rule 3] the word list first has a provisional <tt>it</tt> pronoun as the object noun phrase followed by content for the preposition phrase followed by content for a notional object (<tt>-NOB1</tt>)</li>
-
 <li>[rule 4] the word list has content for the object noun phrase followed by a preposition word for the preposition phrase whose complement occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 5] the word list has content for the object noun phrase only, while the preposition phrase occurs as a stored <tt>pp(ICH)</tt></li>
-
 <li>[rule 6] the word list has content for the preposition phrase only, while the object noun phrase occurs as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
-
 <li>[rule 7] there is the <tt>filled_sbj</tt> requirement and the word list has only content for the preposition phrase</li>
-
 <li>[rule 8] there is the <tt>filled_sbj</tt> requirement and the word list has only content for a preposition of a preposition phrase whose complement occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 9] there is the <tt>filled_sbj</tt> requirement and the preposition phrase occurs as a stored <tt>pp(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.66">4.66</a>)</dt><dd>
@@ -763,6 +752,8 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;fear))))</tt><br>
 <br>
 <tt>yes</tt><br>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.68">4.68</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.69">4.69</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.70">4.70</a>).</p>
@@ -783,6 +774,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.70">4.70</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.71">4.71</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.72">4.72</a>).</p>
 
 <dl><dt>(<a name="ex4.71">4.71</a>)</dt><dd>
@@ -801,6 +794,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.72">4.72</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.73">4.73</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.74">4.74</a>).</p>
 
 <dl><dt>(<a name="ex4.73">4.73</a>)</dt><dd>
@@ -817,6 +812,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.74">4.74</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.75">4.75</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.76">4.76</a>).</p>
 
 <dl><dt>(<a name="ex4.75">4.75</a>)</dt><dd>
@@ -831,6 +828,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.76">4.76</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.77">4.77</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.78">4.78</a>).</p>
 
@@ -849,6 +848,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.78">4.78</a>) is possible with [rule 6] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.79">4.79</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.80">4.80</a>).</p>
 
 <dl><dt>(<a name="ex4.79">4.79</a>)</dt><dd>
@@ -865,6 +866,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.80">4.80</a>) is possible with [rule 7] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.81">4.81</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.82">4.82</a>).</p>
 
 <dl><dt>(<a name="ex4.81">4.81</a>)</dt><dd>
@@ -880,6 +883,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.82">4.82</a>) is possible with [rule 8] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.83">4.83</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.84">4.84</a>).</p>
 
 <dl><dt>(<a name="ex4.83">4.83</a>)</dt><dd>
@@ -894,7 +899,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.4">4.4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Tf</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.84">4.84</a>) is possible with [rule 9] of (<a href="chapter4.html#ex4.66">4.66</a>).</p>
+
+<h3><a name="sec4.4.4">4.4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Tf</h3>
 
 <p align="justify">Code <tt>;~Tf</tt> selects a <i>that</i>-clause with object function (<tt>CP-THT-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.85">4.85</a>), there has to be content from the word list for a <i>that</i>-clause.</p>
 
@@ -922,7 +929,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.5">4.4.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Tw</h3>
+<h3><a name="sec4.4.5">4.4.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Tw</h3>
 
 <p align="justify">Code <tt>;~Tw</tt> selects an embedded question clause with object function (<tt>CP-QUE-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.88">4.88</a>), there has to be content from the word list for an embedded question clause.</p>
 
@@ -966,16 +973,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.6">4.4.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Tr</h3>
+<h3><a name="sec4.4.6">4.4.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Tr</h3>
 
 <p align="justify">Code <tt>;~Tr</tt> selects an utterance that is reported speech with object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.93">4.93</a>), the object utterance can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list, preceded and followed by quotation punctuation</li>
-
 <li>[rule 2] as a stored <tt>utterance(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.93">4.93</a>)</dt><dd>
@@ -1009,6 +1013,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.95">4.95</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.93">4.93</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.96">4.96</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.97">4.97</a>).</p>
 
 <dl><dt>(<a name="ex4.96">4.96</a>)</dt><dd>
@@ -1023,7 +1029,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.7">4.4.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Tt</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.97">4.97</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.93">4.93</a>).</p>
+
+<h3><a name="sec4.4.7">4.4.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Tt</h3>
 
 <p align="justify">Code <tt>;~Tt</tt> selects a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.98">4.98</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
 
@@ -1047,34 +1055,26 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.8">4.4.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Tnt</h3>
+<h3><a name="sec4.4.8">4.4.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Tnt</h3>
 
 <p align="justify">Code <tt>;~Tnt</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a <i>to</i>-infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.101">4.101</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list before the content of the <i>to</i>-infinitive clause</li>
-
 <li>[rule 2] as word <tt>w('PRO;_expletive_',Word)</tt> of the word list before the content of the <i>to</i>-infinitive clause</li>
-
 <li>[rule 3] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 4] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the <i>to</i>-infinitive clause</li>
-
 </ul>
 
 <p align="justify">There is also the possibility of a provisional object:</p>
 
 <ul>
-
 <li>[rule 5] the derived object noun phrase occurs as content from the word list for a provisional <i>it</i> noun phrase followed by the content of the <i>to</i>-infinitive clause followed by content for a notional object</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.101">4.101</a>)</dt><dd>
@@ -1112,6 +1112,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.103">4.103</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.101">4.101</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.104">4.104</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.105">4.105</a>).</p>
 
 <dl><dt>(<a name="ex4.104">4.104</a>)</dt><dd>
@@ -1127,6 +1129,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.105">4.105</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.101">4.101</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.106">4.106</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.107">4.107</a>).</p>
 
@@ -1145,6 +1149,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.107">4.107</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.101">4.101</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.108">4.108</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.109">4.109</a>).</p>
 
 <dl><dt>(<a name="ex4.108">4.108</a>)</dt><dd>
@@ -1159,6 +1165,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.109">4.109</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.101">4.101</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.110">4.110</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.111">4.111</a>).</p>
 
@@ -1180,16 +1188,15 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.9">4.4.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Tni</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.111">4.111</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.101">4.101</a>).</p>
+
+<h3><a name="sec4.4.9">4.4.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Tni</h3>
 
 <p align="justify">Code <tt>;~Tni</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a bare infinitive clause with object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.112">4.112</a>), while content for the bare infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list that is before the content for the bare infinitive clause</li>
-
 <li>[rule 2] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.112">4.112</a>)</dt><dd>
@@ -1219,6 +1226,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.114">4.114</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.112">4.112</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.115">4.115</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.116">4.116</a>).</p>
 
 <dl><dt>(<a name="ex4.115">4.115</a>)</dt><dd>
@@ -1236,7 +1245,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.10">4.4.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Tg</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.116">4.116</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.112">4.112</a>).</p>
+
+<h3><a name="sec4.4.10">4.4.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Tg</h3>
 
 <p align="justify">Code <tt>;~Tg</tt> selects a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.117">4.117</a>), there has to be content from the word list for a present participle (<i>-ing</i>) clause.</p>
 
@@ -1259,24 +1270,19 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.11">4.4.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Tng</h3>
+<h3><a name="sec4.4.11">4.4.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Tng</h3>
 
 <p align="justify">Code <tt>;~Tng</tt> selects a noun phrase with derived object function (<tt>NP-DOB1</tt>) and a present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.120">4.120</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the participle clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list that is before the content for the participle clause</li>
-
 <li>[rule 2] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 3] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the participle clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.120">4.120</a>)</dt><dd>
@@ -1306,6 +1312,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.122">4.122</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.120">4.120</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.123">4.123</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.124">4.124</a>).</p>
 
 <dl><dt>(<a name="ex4.123">4.123</a>)</dt><dd>
@@ -1321,6 +1329,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.124">4.124</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.120">4.120</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.125">4.125</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.126">4.126</a>).</p>
 
@@ -1339,16 +1349,15 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.4.12">4.4.12</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsg</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.126">4.126</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.120">4.120</a>).</p>
+
+<h3><a name="sec4.4.12">4.4.12</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsg</h3>
 
 <p align="justify">Code <tt>;~Tsg</tt> selects a noun phrase that is the internal subject (<tt>-SBJ</tt>) of a selected present participle (<i>-ing</i>) clause with object function (<tt>IP-PPL-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.127">4.127</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, content for the noun phrase and the participle clause comes from the word list, with the internal form of noun phrase being either:</p>
 
 <ul>
-
 <li>[rule 1] a genitive noun phrase with content found by <tt>noun_phrase_genm_layer</tt> of section <a href="chapter2.html#sec2.4">2.4</a></li>
-
 <li>[rule 2] an ordinary noun phrase with content found by <tt>noun_phrase_top</tt> of section <a href="chapter3.html#sec3.2">3.2</a></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.127">4.127</a>)</dt><dd>
@@ -1376,6 +1385,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.129">4.129</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.127">4.127</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.130">4.130</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.131">4.131</a>).</p>
 
 <dl><dt>(<a name="ex4.130">4.130</a>)</dt><dd>
@@ -1392,32 +1403,27 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.131">4.131</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.127">4.127</a>).</p>
+
 <br><h2><a name="sec4.5">4.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Ditransitive verbs</h2>
 
 <p align="justify">This section establishes selection criteria for ditransitive verbs.</p>
 
-<br><h3><a name="sec4.5.1">4.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.n</h3>
+<h3><a name="sec4.5.1">4.5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.n</h3>
 
 <p align="justify">Code <tt>;~Dn.n</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.132">4.132</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both objects, the indirect object content occurring first</li>
-
 <li>[rule 2] the word list has only content for a single noun phrase as the indirect object, while the direct object occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 3] the word list has only content for a single noun phrase as the direct object, while the indirect object occurs as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
-
 <li>[rule 4] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for a single noun phrase as the direct object</li>
-
 <li>[rule 5] there is the <tt>filled_sbj</tt> requirement and a stored <tt>np(ICH)</tt> provides the direct object noun phrase</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.132">4.132</a>)</dt><dd>
@@ -1451,6 +1457,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.134">4.134</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.132">4.132</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.135">4.135</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.136">4.136</a>).</p>
 
 <dl><dt>(<a name="ex4.135">4.135</a>)</dt><dd>
@@ -1468,6 +1476,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.136">4.136</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.132">4.132</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.137">4.137</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.138">4.138</a>).</p>
 
@@ -1489,6 +1499,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.138">4.138</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.132">4.132</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.139">4.139</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.140">4.140</a>).</p>
 
 <dl><dt>(<a name="ex4.139">4.139</a>)</dt><dd>
@@ -1504,6 +1516,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.140">4.140</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.132">4.132</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.141">4.141</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.142">4.142</a>).</p>
 
 <dl><dt>(<a name="ex4.141">4.141</a>)</dt><dd>
@@ -1518,22 +1532,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.2">4.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.f</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.142">4.142</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.132">4.132</a>).</p>
+
+<h3><a name="sec4.5.2">4.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.f</h3>
 
 <p align="justify">Code <tt>;~Dn.f</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>CP-THT-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.143">4.143</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both the indirect object noun phrase and the direct object <i>that</i>-clause, the indirect object content occurring first</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the direct object <i>that</i>-clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.143">4.143</a>)</dt><dd>
@@ -1564,6 +1576,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.145">4.145</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.143">4.143</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.146">4.146</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.147">4.147</a>).</p>
 
 <dl><dt>(<a name="ex4.146">4.146</a>)</dt><dd>
@@ -1584,22 +1598,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.3">4.5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.w</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.147">4.147</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.143">4.143</a>).</p>
+
+<h3><a name="sec4.5.3">4.5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.w</h3>
 
 <p align="justify">Code <tt>;~Dn.w</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an embedded question clause with direct object function (<tt>CP-QUE-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.148">4.148</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both the indirect object noun phrase and the direct object embedded question clause, the indirect object content occurring first</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the direct object embedded question clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.148">4.148</a>)</dt><dd>
@@ -1631,6 +1643,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.150">4.150</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.148">4.148</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.151">4.151</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.152">4.152</a>).</p>
 
 <dl><dt>(<a name="ex4.151">4.151</a>)</dt><dd>
@@ -1655,22 +1669,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.4">4.5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.r</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.152">4.152</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.148">4.148</a>).</p>
+
+<h3><a name="sec4.5.4">4.5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.r</h3>
 
 <p align="justify">Code <tt>;~Dn.r</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.153">4.153</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both the indirect object noun phrase and the direct object utterance, the indirect object content occurring first and the utterance preceded and followed by quotation punctuation</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the direct object utterance preceded and followed by quotation punctuation</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.153">4.153</a>)</dt><dd>
@@ -1709,6 +1721,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.155">4.155</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.153">4.153</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.156">4.156</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.157">4.157</a>).</p>
 
 <dl><dt>(<a name="ex4.156">4.156</a>)</dt><dd>
@@ -1728,22 +1742,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.5">4.5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.t</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.157">4.157</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.153">4.153</a>).</p>
+
+<h3><a name="sec4.5.5">4.5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.t</h3>
 
 <p align="justify">Code <tt>;~Dn.t</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and a <i>to</i>-infinitive clause with direct object function (<tt>IP-INF-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.158">4.158</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both the indirect object noun phrase and the direct object <i>to</i>-infinitive clause, the indirect object content occurring first</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the direct object <i>to</i>-infinitive clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.158">4.158</a>)</dt><dd>
@@ -1774,6 +1786,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.160">4.160</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.158">4.158</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.161">4.161</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.162">4.162</a>).</p>
 
 <dl><dt>(<a name="ex4.161">4.161</a>)</dt><dd>
@@ -1790,7 +1804,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.6">4.5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.*</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.162">4.162</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.158">4.158</a>).</p>
+
+<h3><a name="sec4.5.6">4.5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.*</h3>
 
 <p align="justify">Code <tt>;~Dn.*</tt> selects a noun phrase with indirect object function (<tt>NP-OB2</tt>) and there is no element with direct object function. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.163">4.163</a>), there has to be content from the word list for a noun phrase.</p>
 
@@ -1813,28 +1829,21 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.7">4.5.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.n</h3>
+<h3><a name="sec4.5.7">4.5.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.n</h3>
 
 <p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.166">4.166</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] the word list consists of content for both objects, the direct object noun phrase content occurring before the indirect object preposition phrase</li>
-
 <li>[rule 2] the word list consists of content for both objects, the direct object noun phrase content occurring after the indirect object preposition phrase</li>
-
 <li>[rule 3] the word list has only content for a preposition phrase as the indirect object, while the direct object occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 4] the word list has only content for a noun phrase as the direct object, while the indirect object occurs as a stored <tt>pp(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 5] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for a preposition phrase as the indirect object</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.166">4.166</a>)</dt><dd>
@@ -1870,6 +1879,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.168">4.168</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.166">4.166</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.169">4.169</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.170">4.170</a>).</p>
 
 <dl><dt>(<a name="ex4.169">4.169</a>)</dt><dd>
@@ -1885,6 +1896,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.170">4.170</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.166">4.166</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.171">4.171</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.172">4.172</a>).</p>
 
@@ -1903,6 +1916,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.172">4.172</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.166">4.166</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.173">4.173</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.174">4.174</a>).</p>
 
 <dl><dt>(<a name="ex4.173">4.173</a>)</dt><dd>
@@ -1919,7 +1934,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.8">4.5.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.f</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.174">4.174</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.166">4.166</a>).</p>
+
+<h3><a name="sec4.5.8">4.5.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.f</h3>
 
 <p align="justify">Code <tt>;~Dpr.f</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a <i>that</i>-clause with direct object function (<tt>NP-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.175">4.175</a>), there has to be content from the word list for a preposition phrase followed by a <i>that</i>-clause.</p>
 
@@ -1949,7 +1966,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.5.9">4.5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.r</h3>
+<h3><a name="sec4.5.9">4.5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.r</h3>
 
 <p align="justify">Code <tt>;~Dpr.r</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and an utterance that is reported speech with direct object function (<tt>utterance-OB1</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.178">4.178</a>), there has to be content from the word list for a preposition followed by left quotation punctuation followed by an utterance followed by right quotation punctuation.</p>
 
@@ -1987,34 +2004,24 @@
 
 <p align="justify">This section establishes selection criteria for complex-transitive verbs.</p>
 
-<br><h3><a name="sec4.6.1">4.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.a</h3>
+<h3><a name="sec4.6.1">4.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.a</h3>
 
 <p align="justify">Code <tt>;~Cn.a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and an adjective phrase with object predicative function (<tt>ADJP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.181">4.181</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative adjective phrase in the word list</li>
-
 <li>[rule 2] content for the object noun phrase occurs after content for the object predicative adjective phrase in the word list</li>
-
 <li>[rule 3] the word list has only content for a single adjective phrase as the object predicative, while the object occurs as a stored <tt>np(ICH)</tt></li>
-
 <li>[rule 4] the word list first has a provisional <tt>it</tt> pronoun as the object noun phrase followed by content for an adjective phrase as the object predicative followed by content for a notional object (<tt>-NOB1</tt>)</li>
-
 <li>[rule 5] the word list first has noun phrase content for a derived object followed by content for an adjective phrase as the object predicative followed by content for a notional object (<tt>-NOB1</tt>)</li>
-
 <li>[rule 6] the word list first has content for an adjective phrase as the object predicative followed by content for a notional object (<tt>-NOB1</tt>), while a derived object occurs as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 7] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for a single preposition phrase as the object predicative</li>
-
 <li>[rule 8] there is the <tt>filled_sbj</tt> requirement and the word list should has content for an adjective phrase as the object predicative followed by content for a notional object (<tt>-NOB1</tt>).</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.181">4.181</a>)</dt><dd>
@@ -2061,6 +2068,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.183">4.183</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.184">4.184</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.185">4.185</a>).</p>
 
 <dl><dt>(<a name="ex4.184">4.184</a>)</dt><dd>
@@ -2077,6 +2086,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.185">4.185</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.186">4.186</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.187">4.187</a>).</p>
 
 <dl><dt>(<a name="ex4.186">4.186</a>)</dt><dd>
@@ -2091,6 +2102,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.187">4.187</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.188">4.188</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.189">4.189</a>).</p>
 
@@ -2108,6 +2121,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.189">4.189</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.190">4.190</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.191">4.191</a>).</p>
 
@@ -2127,6 +2142,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.191">4.191</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.192">4.192</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.193">4.193</a>).</p>
 
 <dl><dt>(<a name="ex4.192">4.192</a>)</dt><dd>
@@ -2145,6 +2162,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.193">4.193</a>) is possible with [rule 6] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.194">4.194</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.195">4.195</a>).</p>
 
 <dl><dt>(<a name="ex4.194">4.194</a>)</dt><dd>
@@ -2158,6 +2177,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.195">4.195</a>) is possible with [rule 7] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.196">4.196</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.197">4.197</a>).</p>
 
@@ -2176,28 +2197,23 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.2">4.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.197">4.197</a>) is possible with [rule 8] of (<a href="chapter4.html#ex4.181">4.181</a>).</p>
+
+<h3><a name="sec4.6.2">4.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n</h3>
 
 <p align="justify">Code <tt>;~Cn.n</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a noun phrase with object predicative function (<tt>NP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.198">4.198</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative noun phrase in the word list</li>
-
 <li>[rule 2] the word list first has a provisional <tt>it</tt> pronoun as the object noun phrase followed by content for a noun phrase as the object predicative followed by content for a notional object (<tt>-NOB1</tt>)</li>
-
 <li>[rule 3] the word list has only content for a single noun phrase as the object predicative, while the object occurs as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>, either:</p>
 
 <ul>
-
 <li>[rule 4] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for a single noun phrase as the object predicative</li>
-
 <li>[rule 5] there is the <tt>filled_sbj</tt> requirement and the word list is empty while the object predicative occurs as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.198">4.198</a>)</dt><dd>
@@ -2231,6 +2247,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.200">4.200</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.198">4.198</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.201">4.201</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.202">4.202</a>).</p>
 
 <dl><dt>(<a name="ex4.201">4.201</a>)</dt><dd>
@@ -2250,6 +2268,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.202">4.202</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.198">4.198</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.203">4.203</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.204">4.204</a>).</p>
 
 <dl><dt>(<a name="ex4.203">4.203</a>)</dt><dd>
@@ -2265,6 +2285,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.204">4.204</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.198">4.198</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.205">4.205</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.206">4.206</a>).</p>
 
 <dl><dt>(<a name="ex4.205">4.205</a>)</dt><dd>
@@ -2278,6 +2300,8 @@
 <br>
 <tt>yes</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.206">4.206</a>) is possible with [rule 4] of (<a href="chapter4.html#ex4.198">4.198</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.207">4.207</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.208">4.208</a>).</p>
 
@@ -2293,22 +2317,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.3">4.6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n/a</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.208">4.208</a>) is possible with [rule 5] of (<a href="chapter4.html#ex4.198">4.198</a>).</p>
+
+<h3><a name="sec4.6.3">4.6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n/a</h3>
 
 <p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.209">4.209</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative preposition phrase in the word list</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the object predicative preposition phrase</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.209">4.209</a>)</dt><dd>
@@ -2335,7 +2357,10 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;thing))))</tt><br>
 <br>
 <tt>yes</tt><br>
+<tt>verb_complements_by_code</tt><br>
 </dd></dl>
+
+<p align="justify">The success of (<a href="chapter4.html#ex4.211">4.211</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.209">4.209</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.212">4.212</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.213">4.213</a>).</p>
 
@@ -2354,22 +2379,20 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.4">4.6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.pr</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.213">4.213</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.209">4.209</a>).</p>
+
+<h3><a name="sec4.6.4">4.6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.pr</h3>
 
 <p align="justify">Code <tt>;~Cn.pr</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.214">4.214</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative preposition phrase in the word list</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the object predicative preposition phrase</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.214">4.214</a>)</dt><dd>
@@ -2398,6 +2421,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.216">4.216</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.214">4.214</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.217">4.217</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.218">4.218</a>).</p>
 
 <dl><dt>(<a name="ex4.217">4.217</a>)</dt><dd>
@@ -2414,24 +2439,21 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.5">4.6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.t</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.218">4.218</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.214">4.214</a>).</p>
+
+<h3><a name="sec4.6.5">4.6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.t</h3>
 
 <p align="justify">Code <tt>;~Cn.t</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a <i>to</i>-infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.219">4.219</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, while content for the <i>to</i>-infinitive clause comes from the word list, the derived object noun phrase can occur either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list before the content of the <i>to</i>-infinitive clause</li>
-
 <li>[rule 2] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 3] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the <i>to</i>-infinitive clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.219">4.219</a>)</dt><dd>
@@ -2462,6 +2484,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.221">4.221</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.219">4.219</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.222">4.222</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.223">4.223</a>).</p>
 
 <dl><dt>(<a name="ex4.222">4.222</a>)</dt><dd>
@@ -2481,6 +2505,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.223">4.223</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.219">4.219</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.224">4.224</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.225">4.225</a>).</p>
 
 <dl><dt>(<a name="ex4.224">4.224</a>)</dt><dd>
@@ -2497,7 +2523,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.6">4.6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.i</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.225">4.225</a>) is possible with [rule 3] of (<a href="chapter4.html#ex4.219">4.219</a>).</p>
+
+<h3><a name="sec4.6.6">4.6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.i</h3>
 
 <p align="justify">Code <tt>;~Cn.i</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a bare infinitive clause with object predicative function (<tt>IP-INF-PRD</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.226">4.226</a>), there has to be content from the word list for a noun phrase followed by a bare infinitive clause.</p>
 
@@ -2524,22 +2552,18 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.6.7">4.6.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.g</h3>
+<h3><a name="sec4.6.7">4.6.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.g</h3>
 
 <p align="justify">Code <tt>;~Cn.g</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a present participle (<i>-ing</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.229">4.229</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative participle clause in the word list</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the object predicative predicative clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.229">4.229</a>)</dt><dd>
@@ -2567,6 +2591,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.231">4.231</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.229">4.229</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.232">4.232</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.233">4.233</a>).</p>
 
 <dl><dt>(<a name="ex4.232">4.232</a>)</dt><dd>
@@ -2581,26 +2607,24 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.233">4.233</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.229">4.229</a>).</p>
+
 <br><h2><a name="sec4.7">4.7</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24 verbs</h2>
 
 <p align="justify">This section details VP24 codes from Hornby (1975).</p>
 
-<br><h3><a name="sec4.7.1">4.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24A</h3>
+<h3><a name="sec4.7.1">4.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24A</h3>
 
 <p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.234">4.234</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
-
 <li>[rule 1] content for the object noun phrase occurs before content for the passive voice past participle clause in the word list</li>
-
 </ul>
 
 <p align="justify">When the <tt>Voice</tt> setting is <tt>passive</tt>:</p>
 
 <ul>
-
 <li>[rule 2] there is the <tt>filled_sbj</tt> requirement and the word list should only have content for the passive voice past participle clause</li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.234">4.234</a>)</dt><dd>
@@ -2629,6 +2653,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.236">4.236</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.234">4.234</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.237">4.237</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.238">4.238</a>).</p>
 
 <dl><dt>(<a name="ex4.237">4.237</a>)</dt><dd>
@@ -2645,7 +2671,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.7.2">4.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24B</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.238">4.238</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.234">4.234</a>).</p>
+
+<h3><a name="sec4.7.2">4.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24B</h3>
 
 <p align="justify">Code <tt>;~VP24B</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24B</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> indicating what its subject experiences, undergoes or suffers. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.239">4.239</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
 
@@ -2672,7 +2700,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.7.3">4.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24C</h3>
+<h3><a name="sec4.7.3">4.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24C</h3>
 
 <p align="justify">Code <tt>;~VP24C</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24C</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">GET</small> meaning &lsquo;cause to be&rsquo;. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.242">4.242</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
 
@@ -2703,16 +2731,13 @@
 
 <p align="justify">This section establishes selection criteria for existential verbs.</p>
 
-<br><h3><a name="sec4.8.1">4.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_V</h3>
+<h3><a name="sec4.8.1">4.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_V</h3>
 
 <p align="justify">Code <tt>;~ex_V</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.245">4.245</a>), the selected noun phrase occurs either:</p>
 
 <ul>
-
 <li>[rule 1] as content from the word list</li>
-
 <li>[rule 2] as a stored <tt>np(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.245">4.245</a>)</dt><dd>
@@ -2737,6 +2762,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.247">4.247</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.245">4.245</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.248">4.248</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.249">4.249</a>).</p>
 
 <dl><dt>(<a name="ex4.248">4.248</a>)</dt><dd>
@@ -2751,16 +2778,15 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.2">4.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vp</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.249">4.249</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.245">4.245</a>).</p>
 
-<p align="justify">Code <tt>;~ex_Vp</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.250">4.250</a>), while the adverbial particle has to come from an adverb phrase of the word list, the noun phrase can occur either:</p>
+<h3><a name="sec4.8.2">4.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vp</h3>
+
+<p align="justify">Code <tt>;~ex_Vp</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and an adverbial particle that is the head of an adverb phrase (<tt>ADVP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.250">4.250</a>), while content for the adverb phrase has to come from the word list as an adverbial particle, the noun phrase can occur either:</p>
 
 <ul>
-
-<li>[rule 1] as content from the word list</li>
-
+<li>[rule 1] as initial content of the word list</li>
 <li>[rule 2] as a stored noun phrase <tt>np(ICH)</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex4.250">4.250</a>)</dt><dd>
@@ -2786,6 +2812,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.252">4.252</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.250">4.250</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.253">4.253</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.254">4.254</a>).</p>
 
 <dl><dt>(<a name="ex4.253">4.253</a>)</dt><dd>
@@ -2801,7 +2829,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.3">4.8.3</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vpr</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.254">4.254</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.250">4.250</a>).</p>
+
+<h3><a name="sec4.8.3">4.8.3</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_Vpr</h3>
 
 <p align="justify">Code <tt>;~ex_Vpr</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a preposition phrase (<tt>PP-CLR</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.255">4.255</a>), there has to be content from the word list for a noun phrase followed by a preposition phrase.</p>
 
@@ -2829,9 +2859,14 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.4">4.8.4</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt</h3>
+<h3><a name="sec4.8.4">4.8.4</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt</h3>
 
-<p align="justify">Code <tt>;~ex_cat_Vt</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.258">4.258</a>), there has to be content from the word list for a noun phrase followed by a <i>to</i>-infinitive clause.</p>
+<p align="justify">Code <tt>;~ex_cat_Vt</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.258">4.258</a>), while content for the <i>to</i>-infinitive clause has to come from the word list, the noun phrase can occur either:</p>
+
+<ul>
+<li>[rule 1] as initial content of the word list</li>
+<li>[rule 2] as a stored noun phrase <tt>np(ICH)</tt></li>
+</ul>
 
 <dl><dt>(<a name="ex4.258">4.258</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -2865,9 +2900,16 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.5">4.8.5</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt_passive_</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.260">4.260</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.258">4.258</a>).</p>
 
-<p align="justify">Code <tt>;~ex_cat_Vt_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a passive voice <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.261">4.261</a>), there has to be content from the word list for a noun phrase followed by a passive voice <i>to</i>-infinitive clause.</p>
+<h3><a name="sec4.8.5">4.8.5</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vt_passive_</h3>
+
+<p align="justify">Code <tt>;~ex_cat_Vt_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a passive voice <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.261">4.261</a>), while content for the <i>to</i>-infinitive clause has to come from the word list, the noun phrase can occur either:</p>
+
+<ul>
+<li>[rule 1] as initial content of the word list</li>
+<li>[rule 2] as a stored noun phrase <tt>np(ICH)</tt></li>
+</ul>
 
 <dl><dt>(<a name="ex4.261">4.261</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -2901,9 +2943,16 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.6">4.8.6</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vg</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.263">4.263</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.261">4.261</a>).</p>
 
-<p align="justify">Code <tt>;~ex_cat_Vg</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.264">4.264</a>), there has to be content from the word list for a noun phrase followed by a participle clause.</p>
+<h3><a name="sec4.8.6">4.8.6</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Vg</h3>
+
+<p align="justify">Code <tt>;~ex_cat_Vg</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.264">4.264</a>), while content for the participle clause has to come from the word list, the noun phrase can occur either:</p>
+
+<ul>
+<li>[rule 1] as initial content of the word list</li>
+<li>[rule 2] as a stored noun phrase <tt>np(ICH)</tt></li>
+</ul>
 
 <dl><dt>(<a name="ex4.264">4.264</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vg',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -2932,9 +2981,16 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.8.7">4.8.7</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Ve_passive_</h3>
+<p align="justify">The success of (<a href="chapter4.html#ex4.266">4.266</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.264">4.264</a>).</p>
 
-<p align="justify">Code <tt>;~ex_cat_Ve_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and Xi a passive voice past participle (<i>-ed&sol;-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.267">4.267</a>), there has to be content from the word list for a noun phrase followed by a passive voice participle clause.</p>
+<h3><a name="sec4.8.7">4.8.7</a>&nbsp;&nbsp;&nbsp;&nbsp;ex_cat_Ve_passive_</h3>
+
+<p align="justify">Code <tt>;~ex_cat_Ve_passive_</tt> selects a noun phrase with existential subject function (<tt>NP-ESBJ</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.267">4.267</a>), while content for the participle clause has to come from the word list, the noun phrase can occur either:</p>
+
+<ul>
+<li>[rule 1] as initial content of the word list</li>
+<li>[rule 2] as a stored noun phrase <tt>np(ICH)</tt></li>
+</ul>
 
 <dl><dt>(<a name="ex4.267">4.267</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Ve_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -2962,11 +3018,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.269">4.269</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.267">4.267</a>).</p>
+
 <br><h2><a name="sec4.9">4.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Equative verbs</h2>
 
 <p align="justify">This section establishes selection criteria for equative verbs.</p>
 
-<br><h3><a name="sec4.9.1">4.9.1</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vf</h3>
+<h3><a name="sec4.9.1">4.9.1</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vf</h3>
 
 <p align="justify">Code <tt>;~equ_Vf</tt> selects a <i>that</i>-clause with subject predicative function (<tt>CP-THT-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.270">4.270</a>), there has to be content from the word list for a <i>that</i>-clause.</p>
 
@@ -2995,7 +3053,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.9.2">4.9.2</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vw</h3>
+<h3><a name="sec4.9.2">4.9.2</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vw</h3>
 
 <p align="justify">Code <tt>;~equ_Vw</tt> selects an embedded question clause with subject predicative function (<tt>CP-QUE-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.273">4.273</a>), there has to be content from the word list for an embedded question clause.</p>
 
@@ -3041,7 +3099,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.9.3">4.9.3</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vt</h3>
+<h3><a name="sec4.9.3">4.9.3</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vt</h3>
 
 <p align="justify">Code <tt>;~equ_Vt</tt> selects a <i>to</i>-infinitive clause with subject predicative function (<tt>IP-INF-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.278">4.278</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
 
@@ -3070,7 +3128,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.9.4">4.9.4</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vg</h3>
+<h3><a name="sec4.9.4">4.9.4</a>&nbsp;&nbsp;&nbsp;&nbsp;equ_Vg</h3>
 
 <p align="justify">Code <tt>;~equ_Vg</tt> selects a present participle (<i>-ing</i>) clause with subject predicative function (<tt>IP-PPL-PRD2</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.281">4.281</a>), there has to be content from the word list for a participle clause.</p>
 
@@ -3099,6 +3157,8 @@
 <tt>yes</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.283">4.283</a>) is possible with [rule 1] of (<a href="chapter4.html#ex4.281">4.281</a>).</p>
+
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.284">4.284</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.285">4.285</a>).</p>
 
 <dl><dt>(<a name="ex4.284">4.284</a>)</dt><dd>
@@ -3114,11 +3174,13 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(NS&nbsp;onions)))</tt><br>
 </dd></dl>
 
+<p align="justify">The success of (<a href="chapter4.html#ex4.285">4.285</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.281">4.281</a>).</p>
+
 <br><h2><a name="sec4.10">4.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Catenative verbs</h2>
 
 <p align="justify">This section establishes selection criteria for catenative verbs.</p>
 
-<br><h3><a name="sec4.10.1">4.10.1</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt</h3>
+<h3><a name="sec4.10.1">4.10.1</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt</h3>
 
 <p align="justify">Code <tt>;~cat_Vt</tt> selects a <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.286">4.286</a>), there has to be content from the word list for a <i>to</i>-infinitive clause.</p>
 
@@ -3143,7 +3205,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.2">4.10.2</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt_passive_</h3>
+<h3><a name="sec4.10.2">4.10.2</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vt_passive_</h3>
 
 <p align="justify">Code <tt>;~cat_Vt_passive_</tt> selects a passive voice <i>to</i>-infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.289">4.289</a>), there has to be content from the word list for a passive voice <i>to</i>-infinitive clause.</p>
 
@@ -3187,7 +3249,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.3">4.10.3</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vi</h3>
+<h3><a name="sec4.10.3">4.10.3</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vi</h3>
 
 <p align="justify">Code <tt>;~cat_Vi</tt> selects a bare infinitive clause with catenative complement function (<tt>IP-INF-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.294">4.294</a>), there has to be content from the word list for a bare infinitive clause.</p>
 
@@ -3212,7 +3274,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.4">4.10.4</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg</h3>
+<h3><a name="sec4.10.4">4.10.4</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg</h3>
 
 <p align="justify">Code <tt>;~cat_Vg</tt> selects a present participle (<i>-ing</i>) clause with active voice and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.297">4.297</a>), there has to be content from the word list for a participle clause.</p>
 
@@ -3235,7 +3297,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.5">4.10.5</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg_passive_</h3>
+<h3><a name="sec4.10.5">4.10.5</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Vg_passive_</h3>
 
 <p align="justify">Code <tt>;~cat_Vg_passive_</tt> selects a passive voice present participle (<i>-ing</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.300">4.300</a>), there has to be content from the word list for a passive voice participle clause.</p>
 
@@ -3259,7 +3321,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.6">4.10.6</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve</h3>
+<h3><a name="sec4.10.6">4.10.6</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve</h3>
 
 <p align="justify">Code <tt>;~cat_Ve</tt> selects a participle (<i>-ed&sol;-en</i>) clause with active past and catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.306">4.306</a>), the participle clause should form the content of the word list.</p>
 
@@ -3282,7 +3344,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec4.10.7">4.10.7</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve_passive_</h3>
+<h3><a name="sec4.10.7">4.10.7</a>&nbsp;&nbsp;&nbsp;&nbsp;cat_Ve_passive_</h3>
 
 <p align="justify">Code <tt>;~cat_Ve_passive_</tt> selects a passive voice past participle (<i>-ed&sol;-en</i>) clause with catenative complement function (<tt>IP-PPL-CAT</tt>). For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.306">4.306</a>), the passive voice participle clause should form the content of the word list.</p>
 
@@ -3306,7 +3368,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">In contrast to (<a href="chapter4.html#ex4.305">4.305</a>) and (<a href="chapter4.html#ex4.308">4.308</a>) above, why do the queries of (<a href="chapter4.html#ex4.309">4.309</a>) and (<a href="chapter4.html#ex4.310">4.310</a>) fail?</p>
 

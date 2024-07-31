@@ -6,15 +6,10 @@
 <p align="justify">This chapter considers phrase layers. These are intermediate levels of organisation between a word and the clause. Each phrase is made up of a HEAD word and any DEPENDENTs. The head word is the word that the phrase is required to have in order to exist and may be the only element of the phrase. A phrase is named after the word class of the head word. There are four phrase types:</p>
 
 <ul>
-
 <li><b>noun phrases</b> &mdash; with a <b>noun</b> head word (section <a href="chapter3.html#sec3.2">3.2</a>)</li>
-
 <li><b>adverb phrases</b> &mdash; with an <b>adverb</b> head word (section <a href="chapter3.html#sec3.3">3.3</a>)</li>
-
 <li><b>adjective phrases</b> &mdash; with an <b>adjective</b> head word (section <a href="chapter3.html#sec3.4">3.4</a>)</li>
-
 <li><b>preposition phrases</b> &mdash; with a <b>preposition</b> head word (section <a href="chapter3.html#sec3.5">3.5</a>)</li>
-
 </ul>
 
 <br><h2><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Noun phrases</h2>
@@ -32,39 +27,27 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additional to the <tt>Ext</tt> parameter, there is a <tt>Type</tt> parameter whose value goes through to the <tt>noun_phrase_top</tt> call. This type information will determine noun phrase use as reflected by distribution. There are four possible values:</p>
 
 <ul>
-
 <li><tt>non_privileged</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
 <p align="justify">Ultimately, this type information has to match the type information of internal elements:</p>
 
 <ul>
-
 <li>head nouns that can have no modifiers (see section <a href="chapter2.html#sec2.2">2.2</a>)</li>
-
 <li>determiners (see section <a href="chapter2.html#sec2.3">2.3</a>)</li>
-
 <li>genitive pronouns (see section <a href="chapter2.html#sec2.4">2.4</a>)</li>
-
 </ul>
 
-<br><h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The noun phrase top rule</h3>
+<h3><a name="sec3.2.1">3.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The noun phrase top rule</h3>
 
 <p align="justify">A call of the <tt>noun_phrase_top</tt> rule (<a href="chapter3.html#ex3.2">3.2</a>) gathers content for a noun phrase with either:</p>
 
 <ul>
-
 <li>[rule 1] a call of <tt>noun_head_full</tt> (from section <a href="chapter2.html#sec2.2">2.2</a>) which will identify a word that essentially contributes a full noun phrase by itself</li>
-
 <li>[rule 2] a call of <tt>noun_phrase_initial_layer</tt> (from section <a href="chapter3.html#sec3.2.2">3.2.2</a> below)</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.2">3.2</a>)</dt><dd>
@@ -133,18 +116,15 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
+<h3><a name="sec3.2.2">3.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Initial noun phrase layers</h3>
 
 <p align="justify">With (<a href="chapter3.html#ex3.3">3.3</a>), we have seen the simplest form for a noun phrase, which involves a single word that contributes content for <tt>noun_head_full</tt>. This section delves slightly deeper into possible noun phrase structure by considering what a <tt>noun_phrase_initial_layer</tt> call of (<a href="chapter3.html#ex3.6">3.6</a>) may return.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Among other things, a <tt>noun_phrase_initial_layer</tt> call opens the possibility of having coordinate structures at the top level of the noun phrase. With (<a href="chapter3.html#ex3.6">3.6</a>), there are two ways to achieve this highest level of noun phrase coordination:</p>
 
 <ul>
-
 <li>[rule 5] with structure involving an initial conjunct word followed by a first conjunct noun phrase followed by another conjunct word followed by a second conjunct noun phrase</li>
-
 <li>[rule 6] with a call of <tt>noun_phrase</tt> that introduces the first noun phrase conjunct along with a subsequent call to <tt>noun_phrase_initial_tail</tt> of (<a href="chapter3.html#ex3.7">3.7</a>) that begins a recursive accumulation of further conjuncts</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.6">3.6</a>)</dt><dd>
@@ -415,7 +395,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The recursion seen with the call structure of (<a href="chapter3.html#ex3.9">3.9</a>) when parsing conjunction is not the only opportunity for recursion created by calling <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>). Calls can also be recursive so that the parse is able to pick up on the left edge of the noun phrase modifiers that are either preposition phrases (discussed in section <a href="chapter3.html#sec3.5">3.5</a>) or relative clauses (discussed in section <a href="chapter6.html#sec6.9">6.9</a>).</p>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">[This question repeats an exercise from Borsley (1996, p.&nbsp;23).] There are three parse results for the parse list of (<a href="chapter3.html#ex3.10">3.10</a>), one for (<a href="chapter3.html#ex3.12">3.12</a>) and none for (<a href="chapter3.html#ex3.11">3.11</a>) and (<a href="chapter3.html#ex3.13">3.13</a>). Do these results and failures match your expectations? Why do they arise?</p>
 
@@ -471,26 +451,19 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<br><h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
+<h3><a name="sec3.2.3">3.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Internal noun phrase layers</h3>
 
 <p align="justify">In addition to allowing at the highest levels of noun phrase structure for recursive calls that establish coordination or add post-head modifiers, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) can also be preparation for delving deeper into noun phase structure, in particular, by allowing for subsequent calls to the <tt>internal_np_higher_layer</tt> rules of (<a href="chapter3.html#ex3.14">3.14</a>) that lead through to calls of the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion with <tt>internal_np_higher_layer</tt> rules of (<a href="chapter3.html#ex3.14">3.14</a>) allows for:</p>
 
 <ul>
-
 <li>[rule 1] adjective phrases with <tt>non_privileged</tt> type information as pre-head modifiers</li>
-
 <li>[rule 2] single word present participle (<i>-ing</i>) clauses as pre-head modifiers</li>
-
 <li>[rule 3] single word passive participle (<i>-ed&sol;-en</i>) clauses as pre-head modifiers</li>
-
 <li>[rule 5] preposition phrases as post-head modifiers</li>
-
 <li>[rule 6] relative clauses as post-head modifiers</li>
-
 <li>[rule 7] the integration of coordination</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.14">3.14</a>)</dt><dd>
@@ -531,37 +504,25 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Recursion is also possible with the <tt>internal_np_lower_layer</tt> rules of (<a href="chapter3.html#ex3.16">3.16</a>) to integrate:</p>
 
 <ul>
-
 <li>[rule 2] a noun that is a noun modifier</li>
-
 <li>[rule 3] content for an <tt>internal_np_higher_layer</tt> that is a noun modifier</li>
-
 <li>[rule 4] content for conjoined <tt>internal_np_higher_layer</tt> structure that is a noun modifier</li>
-
 <li>[rule 8] coordinations of <tt>internal_np_lower_layer</tt> structure</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive calls of <tt>internal_np_lower_tail</tt> all involve finding a noun that will be the head noun, either:</p>
 
 <ul>
-
 <li>[rule 1] without a complement</li>
-
 <li>[rules 5&ndash;7] with a complement</li>
-
 </ul>
 
 <p align="justify">A complement can be either:</p>
 
 <ul>
-
 <li>[rule 5] a <i>to</i>-infinitive clause found with <tt>ip_to_inf</tt> of section <a href="chapter6.html#sec6.5.2">6.5.2</a></li>
-
 <li>[rule 6] a finite <i>that</i>-clause with an overt instance of the complementiser word <i>that</i> found with <tt>cp_that</tt> of section <a href="chapter6.html#sec6.2">6.2</a> called with its <tt>Type</tt> set to <tt>with_c</tt></li>
-
 <li>[rule 7] an embedded question clause found with <tt>cp_embedded_que</tt> of section <a href="chapter6.html#sec6.4">6.4</a></li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.16">3.16</a>)</dt><dd>
@@ -687,7 +648,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Nouns as noun modifiers</h3>
+<h3><a name="sec3.2.4">3.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Nouns as noun modifiers</h3>
 
 <p align="justify">As a demonstration of how the rules for creating lower internal noun phrase structure of (<a href="chapter3.html#ex3.16">3.16</a>) above allow for nouns to act as modifiers for subsequent nouns, consider (<a href="chapter3.html#ex3.20">3.20</a>). The results show five alternative structures, ranging from a completely flat structure with the first result to a structure with multiple <tt>NLYR</tt> (noun phrase internal layer) embeddings with the last result.</p>
 
@@ -918,7 +879,7 @@
 
 </dd></dl>
 
-<br><h3><a name="sec3.2.5">3.2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
+<h3><a name="sec3.2.5">3.2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner layer</h3>
 
 <p align="justify">The call structures revealed by (<a href="chapter3.html#ex3.19">3.19</a>) and (<a href="chapter3.html#ex3.21">3.21</a>) above allow for elements around the noun words of a noun phrase. Notably, a call to <tt>noun_phrase_initial_layer</tt> of (<a href="chapter3.html#ex3.6">3.6</a>) allows for placement of a determiner layer before the noun phrase head word. The <tt>determiner_layer</tt> rules of (<a href="chapter3.html#ex3.22">3.22</a>) create determiner layers which are sensitive to the type information carried by the calling noun phrase.</p>
 
@@ -1610,16 +1571,13 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the query of (<a href="chapter3.html#ex3.26">3.26</a>) had instead followed the call structure of (<a href="chapter3.html#ex3.25">3.25</a>), then <tt>internal_np_higher_layer</tt> calls would occur from where there is no way to integrate the determiner for the second conjunct.</p>
 
-<br><h3><a name="sec3.2.6">3.2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
+<h3><a name="sec3.2.6">3.2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive noun phrase layers</h3>
 
 <p align="justify">The second <tt>determiner_layer</tt> rule of (<a href="chapter3.html#ex3.22">3.22</a>) leads to calling the <tt>noun_phrase_genm_layer</tt> rules of (<a href="chapter3.html#ex3.28">3.28</a>) to establish structure for a distinct internal noun phrase with genitive case role. The non-recursive rules of <tt>noun_phrase_genm_layer</tt> involves either:</p>
 
 <ul>
-
 <li>picking up a genitive pronoun with <tt>pronoun_genm</tt> (from section <a href="chapter2.html#sec2.4">2.4</a>)</li>
-
 <li>finding content for a noun phrase followed by a genitive marker, identified with <tt>genm</tt> of (from section <a href="chapter2.html#sec2.4">2.4</a>)</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.28">3.28</a>)</dt><dd>
@@ -1815,15 +1773,10 @@
 <p align="justify">The two <tt>adverb_phrase</tt> rules of (<a href="chapter3.html#ex3.32">3.32</a>) differ in their <tt>Type</tt> setting. For [rule 1], the <tt>Type</tt> parameter can have either of the following values:</p>
 
 <ul>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 <li><tt>particle</tt></li>
-
 </ul>
 
 <p align="justify">For [rule 2], the <tt>Type</tt> setting is <tt>non_privileged</tt>, with the consequence that the adverb phrase is built in accordance to having either <tt>non_interrogative</tt> or <tt>interrogative</tt> type information.</p>
@@ -1849,15 +1802,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The only non-recursive rule of (<a href="chapter3.html#ex3.33">3.33</a>) [rule 1] establishes the head word as a word found with calls of <tt>adv</tt> (see section <a href="chapter2.html#sec2.6">2.6</a>). Provided the <tt>Type</tt> setting is <tt>non_interrogative</tt>, recursive calls to <tt>adverb_phrase_layer</tt> of (<a href="chapter3.html#ex3.33">3.33</a>) are possible, allowing the parse to:</p>
 
 <ul>
-
 <li>[rule 2] pick up pre-head modifier noun phrases</li>
-
 <li>[rule 3] pick up pre-head negation</li>
-
 <li>[rule 4] pick up pre-head modifier adverb phrases</li>
-
 <li>[rule 5] pick up post-head modifier preposition phrases</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.33">3.33</a>)</dt><dd>
@@ -1897,15 +1845,10 @@
 <p align="justify">The two <tt>adjective_phrase</tt> rules of (<a href="chapter3.html#ex3.35">3.35</a>) differ in their <tt>Type</tt> setting. For [rule 1], the <tt>Type</tt> parameter can have either of the following values:</p>
 
 <ul>
-
 <li><tt>catenative</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
 <p align="justify">For [rule 2], the <tt>Type</tt> setting is <tt>non_privileged</tt>, with the consequence that the adjective phrase is built in accordance to having either <tt>non_interrogative</tt> or <tt>interrogative</tt> type information.</p>
@@ -1931,29 +1874,19 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter3.html#ex3.36">3.36</a>) [rules 1&ndash;3], establish the head word as a word found with a call of <tt>adj</tt> (see section <a href="chapter2.html#sec2.7">2.7</a>):</p>
 
 <ul>
-
 <li>[rule 1], when the <tt>Type</tt> is <tt>interrogative</tt> or <tt>relative</tt>, this information passes on to calls of <tt>adverb_phrase</tt> (see [rule 6] of (<a href="chapter3.html#ex3.36">3.36</a>)) whereupon the <tt>Type</tt> information for the rest of the adjective phrase becomes <tt>non_privileged</tt></li>
-
 <li>[rule 2], with a <tt>Type</tt> setting of <tt>catenative</tt>, brings the additional need for word list content that will support a call of <tt>ip_to_inf</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
-
 <li>[rule 3], with a <tt>Type</tt> setting of <tt>non_interrogative</tt>, requires a word list that contains only an adjective word</li>
-
 <li>[rule 4], with a <tt>Type</tt> setting of <tt>non_interrogative</tt>, brings the additional need for word list content that will support a call of <tt>cp_that</tt> called with its <tt>Type</tt> set to <tt>with_c</tt> (see section <a href="chapter5.html#sec5.4.2">5.4.2</a>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to <tt>adjective_phrase_layer</tt> of (<a href="chapter3.html#ex3.36">3.36</a>) can also be recursive, allowing, when the <tt>Type</tt> setting is <tt>non_interrogative</tt>, the parse to either:</p>
 
 <ul>
-
 <li>[rule 5] pick up pre-head modifier noun phrases</li>
-
 <li>[rule 6] pick up pre-head negation</li>
-
 <li>[rule 7] pick up pre-head modifier adverb phrases</li>
-
 <li>[rule 8] pick up post-head modifier preposition phrases</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.36">3.36</a>)</dt><dd>
@@ -2263,15 +2196,10 @@
 <p align="justify">The first rule of (<a href="chapter3.html#ex3.40">3.40</a>) builds a preposition phrase by calling <tt>preposition_phrase_layer</tt> of (<a href="chapter3.html#ex3.41">3.41</a>) to create list content (<tt>PL</tt>) to place under a <tt>PP</tt> labelled structure, possibly with a label extension as role/function/indexing information. There is an <tt>Ext</tt> parameter to provide any tag label extension and a <tt>Type</tt> parameter for type information:</p>
 
 <ul>
-
 <li><tt>non_privileged</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.40">3.40</a>)</dt><dd>
@@ -2293,17 +2221,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is only one <tt>preposition_phrase_layer</tt> rule in (<a href="chapter3.html#ex3.41">3.41</a>), requiring a word list that has an initial preposition word found with <tt>role</tt> (from section <a href="chapter2.html#sec2.11">2.11</a>). The preposition word needs to occur immediately before content for:</p>
 
 <ul>
-
 <li>[rule 1] a noun phrase</li>
-
 <li>[rule 2] an adverb phrase</li>
-
 <li>[rule 3] a present participle (<i>-ing</i>) clause with control inheritance</li>
-
 <li>[rule 4] a present participle (<i>-ing</i>) clause with an unfilled subject</li>
-
 <li>[rule 5] an embedded question</li>
-
 </ul>
 
 <dl><dt>(<a name="ex3.41">3.41</a>)</dt><dd>

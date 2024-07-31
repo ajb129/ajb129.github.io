@@ -4,31 +4,20 @@
 <p align="justify">We have now reached the end of the presentation of Definite Clause Grammar (DCG) definitions in this book. When taken together, they provide a system for parsing contemporary English with a wide coverage. However, keeping the phrase structure rules straightforward and restricting the amount of structural ambiguity encountered with results placed limits on the coverage. Here, we note some limitations.</p>
 
 <ul>
-
 <li>Phrase heads need to always be present in the word list. Note that representation as a zero head is possible, e.g., <tt>w('P-CONN','_*_')</tt>.</li>
-
 <li>There is no mechanism to capture extrapositioning, e.g., rightward displacements of relative clauses, <i>that</i>-clauses and <i>to</i>-infinitive clauses.</li>
-
 <li>There is no support for parentheticals.</li>
-
 <li>The support for punctuation is limited.</li>
-
 </ul>
 
 <p align="justify">In regard to limitations on punctuation:</p>
 
 <ul>
-
 <li>There is no support for punctuation internal to phrase layers.</li>
-
 <li>Commas have to occur between conjuncts, except between the penultimate and last conjunct which must have a represented conjunction word (<tt>CONJ</tt>) instead.</li>
-
 <li>Commas can occur optionally after adverbials with a clause initial placement or before adverbials with a clause final placement when attached at the highest layer of clause structure.</li>
-
 <li>A full stop or exclamation mark (<tt>final</tt> punctuation) with a final position is required for a declarative or imperative sentence.</li>
-
 <li>A question mark (<tt>final_question</tt> punctuation) with a final position is required for an interrogative sentence.</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Some limited coverage of extrapositioning is possible when the extraposed element is a noun phrase, as examples (<a href="chapter7.html#ex7.1">7.1</a>) and (<a href="chapter7.html#ex7.2">7.2</a>) illustrate.</p>

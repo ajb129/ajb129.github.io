@@ -22,11 +22,8 @@
 <p align="justify">The action of <b>parsing</b> amounts to:</p>
 
 <ul>
-
 <li>pealing back layers to reach internal elements</li>
-
 <li>placing everything back together again</li>
-
 </ul>
 
 <p align="justify">An innermost element is either the head word of a phrase layer or the verb of a clause layer.</p>
@@ -60,11 +57,8 @@
 <p align="justify">Phrase structure rules are a way to build labelled layers around embedded elements. A phrase structure rule has:</p>
 
 <ul>
-
 <li>a left-hand side that is the label for the layer</li>
-
 <li>a right-hand side made of one, two or more embedded elements, where an embedded element can be either the label of a layer or a terminal element</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, the five rules of (<a href="chapter1.html#ex1.1">1.1</a>) involve labelled layers: <tt>vp</tt>, <tt>np_sbj</tt> and <tt>ip</tt>; and terminal elements: <tt>[smiles]</tt>, <tt>[and]</tt> and <tt>[he]</tt>.</p>
@@ -214,7 +208,7 @@
 </tr>
 </table>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Applying the phrase structure rules of (<a href="chapter1.html#ex1.1">1.1</a>), how many different <tt>ip</tt> structures can you make?</p>
 
@@ -233,15 +227,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The annotation approach is an attempt to consolidate alternative annotation schemes for English:</p>
 
 <ul>
-
 <li>The SUSANNE Corpus and Analytic Scheme (Sampson 1995)</li>
-
 <li>The ICE Parsing Scheme (Nelson, Wallis and Aarts 2002)</li>
-
 <li>The Penn Treebank Scheme (Marcus, Santorini and Marcinkiewicz 1993)</li>
-
 <li>The Penn Historical Parsed Corpora Scheme (Santorini 2016)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;From the SUSANNE scheme, there is adoption of form and function information, such that the analysis of the TSPC scheme most closely matches the SUSANNE scheme. The SUSANNE scheme is closely related to the English grammars of Quirk et al.&nbsp;(1972, 1985).</p>
@@ -251,13 +240,9 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Penn Historical Corpora scheme, which itself draws on the bracketed approach of the Penn Treebank scheme, has informed the &lsquo;look&rsquo; of the annotation. This includes:</p>
 
 <ul>
-
 <li>the tag labelling: <tt>CP</tt> and <tt>IP</tt> for clause layers; <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt> and <tt>PP</tt> for phrase layers</li>
-
 <li>that label extensions occur after <tt>CP</tt>, <tt>IP</tt>, <tt>ADJP</tt>, <tt>ADVP</tt>, <tt>NP</tt> and <tt>PP</tt> to indicate function</li>
-
 <li>the presentation of conjunction structure with <tt>CONJP</tt> layers</li>
-
 </ul>
 
 <p align="justify">However, labels aside, the tag set of the TSPC scheme is most compatible with the SUSANNE scheme, especially with regard to function marking. Moreover, word class tags closely overlap with the Lancaster word class tagging systems, especially the UCREL CLAWS5 tag set used for the British National Corpus (BNC Consortium 2005).</p>
@@ -265,15 +250,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The TSPC scheme also contains plenty that is innovative. Most notably, there is normalisation of structure, achieved with internal layers at:</p>
 
 <ul>
-
 <li>clause levels (<tt>ILYR</tt>)</li>
-
 <li>noun phrase levels (<tt>NLYR</tt>)</li>
-
 <li>adjective phrase levels (<tt>AJLYR</tt>)</li>
-
 <li>adverb phrase levels (<tt>AVLYR</tt>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs; cf.&nbsp;Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and structure internal to the clause annotation (<tt>IP-PPL-CAT</tt>) further supports this type of verb. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
@@ -285,9 +265,7 @@
 <p align="justify">When parsing, we will accumulate layers with <tt>node</tt> structures. These structures have the form:</p>
 
 <ul>
-
 <li><tt>node(Label,NodeList)</tt></li>
-
 </ul>
 
 <p align="justify">where <tt>Label</tt> is a label for the layer and <tt>NodeList</tt> is a list of <tt>node</tt> structures that are the content for the layer.</p>
@@ -295,17 +273,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Prolog, lists are written with square bracket notation:</p>
 
 <ul>
-
 <li><tt>[a1, ..., aN]</tt></li>
-
 </ul>
 
 <p align="justify">where <tt>a1</tt> through to <tt>aN</tt> are the list items. The list that contains no items (<tt>[]</tt>) is the empty list. A terminal layer of structure has the form:</p>
 
 <ul>
-
 <li><tt>node(Word,[])</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With this background, consider (<a href="chapter1.html#ex1.4">1.4</a>) as an example of encircling layers gathered with <tt>node</tt> structures.</p>
@@ -396,11 +370,8 @@
 <p align="justify">The output from (<a href="chapter1.html#ex1.8">1.8</a>) is structure with <tt>IP-IMP</tt> (imperative clause) as the topmost node: [Rule 1] of (<a href="chapter1.html#ex1.6">1.6</a>) fails, but [rule 2] succeeds. [Rules 1 and 2] are similar. Both rules call <tt>clause_top_layer</tt>, but they do so with different clause type settings:</p>
 
 <ul>
-
 <li>[rule 1] <tt>statement_order</tt></li>
-
 <li>[rule 2] <tt>imperative_clause</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As with (<a href="chapter1.html#ex1.8">1.8</a>), an imperative clause should have no subject and an initial verb with imperative form (a word with <tt>VB</tt>, <tt>DO</tt>, <tt>HV</tt> or <tt>BE</tt> word class information). If we try (<a href="chapter1.html#ex1.9">1.9</a>), which is unsuitable as a statement sentence because of the lack of content for a subject but then also unsuitable as an imperative sentence because the verb has <tt>VBP</tt> (present tense) word class, then there can be no parse result, as (<a href="chapter1.html#ex1.9">1.9</a>) shows.</p>
@@ -448,18 +419,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To sum up, this section has shown how to query whether a word list contains content for an English sentence. With success, returned structure tells us about the kind of sentence:</p>
 
 <ul>
-
 <li>statement matrix sentence (<tt>IP-MAT</tt>)</li>
-
 <li>imperative sentence (<tt>IP-IMP</tt>)</li>
-
 <li>interrogative sentence (<tt>CP-QUE</tt>)</li>
-
 <li>statement matrix sentence with sentence ending tag question</li>
-
 </ul>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">Why do the failure and success results of (<a href="chapter1.html#ex1.12">1.12</a>)&ndash;(<a href="chapter1.html#ex1.14">1.14</a>) obtain? (Also, note the result of (<a href="chapter1.html#ex1.10">1.10</a>) above.)</p>
 
@@ -501,21 +467,13 @@
 <p align="justify">Calls of (<a href="chapter1.html#ex1.16">1.16</a>) find fragment layer content as:</p>
 
 <ul>
-
 <li>[rule 1] a noun phrase (see section <a href="chapter3.html#sec3.2">3.2</a>)</li>
-
 <li>[rule 2] an adjective phrase (see section <a href="chapter3.html#sec3.4">3.4</a>)</li>
-
 <li>[rule 3] an adverbial from an <tt>initial_adverbial</tt> call (see section <a href="chapter2.html#sec2.10">2.10</a>)</li>
-
 <li>[rule 4] an adverbial from an <tt>adverbial</tt> call (see section <a href="chapter4.html#sec4.1">4.1</a>)</li>
-
 <li>[rule 5] a <i>to</i>-infinite clause (see section <a href="chapter6.html#sec6.5.2">6.5.2</a>)</li>
-
 <li>[rule 6] a participle clause that has no internal subject (see section <a href="chapter6.html#sec6.7.3">6.7.3</a>)</li>
-
 <li>[rule 7] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.7.3">6.7.3</a>)</li>
-
 </ul>
 
 <dl><dt>(<a name="ex1.16">1.16</a>)</dt><dd>

@@ -44,11 +44,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When we connect the <tt>noun</tt> rules of (<a href="chapter2.html#ex2.1">2.1</a>) to rules for parsing the internal content of noun phrases in section <a href="chapter3.html#sec3.2">3.2</a>, we will find that they contribute nouns which can have a role within the wider noun phrase that makes them either:</p>
 
 <ul>
-
 <li>the head for the noun phrase</li>
-
 <li>a noun modifier of the noun phrase head</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="chapter2.html#table2.2">2.2</a> that are noun phrase head words that cannot have premodifiers. The <tt>noun_head</tt> rules of (<a href="chapter2.html#ex2.3">2.3</a>) distinguish this kind of word at the rule level.</p>
@@ -119,18 +116,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
-
 <li><tt>non_privileged</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">What do the results of (<a href="chapter2.html#ex2.6">2.6</a>)&ndash;(<a href="chapter2.html#ex2.21">2.21</a>) tell us about where words with the different word classes of Table <a href="chapter2.html#table2.3">2.3</a> can occur?</p>
 
@@ -279,15 +271,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
-
 <li><tt>non_privileged</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
 <br><h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive markers</h2>
@@ -326,15 +313,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) are of four types that depend on the value of the first parameter:</p>
 
 <ul>
-
 <li><tt>non_privileged</tt></li>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 </ul>
 
 <br><h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
@@ -359,15 +341,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first four rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
 
 <ul>
-
 <li>[rule 1] <tt>there_sbj</tt></li>
-
 <li>[rule 2] <tt>cleft_sbj</tt></li>
-
 <li>[rule 3] <tt>expletive_sbj</tt></li>
-
 <li>[rule 4] <tt>provisional_sbj</tt></li>
-
 </ul>
 
 <p><a name="table2.6">Table 2.6: Tags for subject indicating words</a></p>
@@ -382,17 +359,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with [rule 5] of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
 
 <ul>
-
 <li>[rule 5] <tt>filled_sbj</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.6">6.6</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
 
 <ul>
-
 <li>[rule 6] <tt>derived_sbj</tt></li>
-
 </ul>
 
 <br><h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb words</h2>
@@ -428,15 +401,10 @@
 <p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) are of five types that depend on the value of the first parameter:</p>
 
 <ul>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>interrogative</tt></li>
-
 <li><tt>relative</tt></li>
-
 <li><tt>particle</tt></li>
-
 </ul>
 
 <br><h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective words</h2>
@@ -466,11 +434,8 @@
 <p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) are of two types that depend on the value of the first parameter:</p>
 
 <ul>
-
 <li><tt>non_interrogative</tt></li>
-
 <li><tt>catenative</tt></li>
-
 </ul>
 
 <br><h2><a name="sec2.8">2.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb words</h2>
@@ -492,47 +457,33 @@
 <p align="justify">The collected information is checked for consistency:</p>
 
 <ul>
-
 <li><tt>Tag</tt> needs to be a member of <tt>Tag_list</tt>, which is a list of candidate tags obtained with a call to <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>) below restricted by the inflection information of <tt>Infl</tt> inherited from the clause context</li>
-
 <li><tt>Code</tt> needs to be a code licensed by a call to <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) below restricted by the first character of <tt>Tag</tt> and the local clause inflection information</li>
-
 </ul>
 
 <p align="justify">Once matched and licensed, the verb word information goes into the parse tree information accumulated with <tt>L</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section recognises verb classes with tags that further distinguish verb form (section <a href="chapter2.html#sec2.8.1">2.8.1</a>), and establishes the grammatical codes that are compatible with combinations of verb classes and inflection information (section <a href="chapter2.html#sec2.8.2">2.8.2</a>). Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
 
-<br><h3><a name="sec2.8.1">2.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb classes</h3>
+<h3><a name="sec2.8.1">2.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb classes</h3>
 
 <p align="justify">The aim of this section is to provide tags to distinguish the following classes of verb words:</p>
 
 <ul>
-
 <li>lexical verb words</li>
-
 <li><small style="font-size: 75%">DO</small> verb words</li>
-
 <li><small style="font-size: 75%">HAVE</small> verb words</li>
-
 <li><small style="font-size: 75%">BE</small> verb words</li>
-
 </ul>
 
 <p align="justify">Tags of the same class will have the same initial letter (<tt>V</tt>, <tt>D</tt>, <tt>H</tt> or <tt>B</tt>) and then vary to distinguish form:</p>
 
 <ul>
-
 <li>present tense form</li>
-
 <li>past tense form</li>
-
 <li>infinitive form</li>
-
 <li>present participle (&lcub;ing&rcub;) form</li>
-
 <li>past participle (&lcub;ed&rcub;&sol;&lcub;en&rcub;) form</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.9">2.9</a> gives tags for the different forms of lexical verbs.</p>
@@ -596,18 +547,15 @@
 
 <p align="justify">When seeking to match a verb word together with tag and verb code from the word list, the <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) above calls the <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) to ensure that the tag is compatible with the inflection inherited from the <tt>Infl</tt> parameter.</p>
 
-<br><h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb codes</h3>
+<h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb codes</h3>
 
 <p align="justify">This section outlines verb codes as tag label extensions. The codes allow for a distinction of verbs to reflect the selection criteria each verb has for its complements, detailed in chapter <a href="chapter4.html#ch4">4</a>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To form a handle on the complement information for main verbs, we adopt the verb code system from the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). In this dictionary, there is matching of verb codes to word sense definitions. The system is a mnemonic based reworking of the earlier system of Hornby (1975). A code from the system has:</p>
 
 <ul>
-
 <li>a capital letter (<tt>L</tt>, <tt>I</tt>, <tt>T</tt>, <tt>C</tt> or <tt>D</tt>; see Table <a href="chapter2.html#table2.13">2.13</a>) to signal the number and function of clause elements required by the main verb</li>
-
 <li>zero or more lower case letters (<tt>a</tt>, <tt>n</tt>, <tt>p</tt>, <tt>pr</tt>, <tt>n&sol;pr</tt>, <tt>n&sol;a</tt>, <tt>t</tt>, <tt>f</tt>, <tt>w</tt>, <tt>g</tt>, <tt>i</tt> and <tt>r</tt>; see Table <a href="chapter2.html#table2.14">2.14</a>), possibly separated by the dot (&lsquo;<tt>.</tt>&rsquo;) character, to represent information about the form of the required elements</li>
-
 </ul>
 
 <p align="justify">For example, the <tt>La</tt> code marks clause structure (<tt>L</tt>) with a linking verb + a subject predicative constituent that is an adjective phrase (<tt>a</tt>). As an example with the dot character, the <tt>Cn.a</tt> code marks a complex-transitive verb in clause structure (<tt>C</tt>) with the complex-transitive verb + a direct object constituent that is a noun phrase (<tt>n</tt>) + an object predicative constituent that is an adjective phrase (<tt>a</tt>).</p>
@@ -663,41 +611,27 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, we source three codes directly from Hornby (1975):</p>
 
 <ul>
-
 <li><tt>VP24A</tt></li>
-
 <li><tt>VP24B</tt></li>
-
 <li><tt>VP24C</tt></li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to Cowie (1989) and Hornby (1975) codes, further verb codes distinguish:</p>
 
 <ul>
-
 <li>catenative verbs (prefixed <tt>cat_</tt>)</li>
-
 <li>existential verbs (prefixed <tt>ex_</tt>)</li>
-
 <li>equative verbs (prefixed <tt>equ_</tt>)</li>
-
 <li>cleft verbs (prefixed <tt>cleft_</tt>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Different verb classes allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify verb class:</p>
 
 <ul>
-
 <li><tt>V</tt> for lexical verbs</li>
-
 <li><tt>D</tt> for <small style="font-size: 75%">DO</small> verbs</li>
-
 <li><tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs</li>
-
 <li><tt>B</tt> for <small style="font-size: 75%">BE</small> verbs</li>
-
 </ul>
 
 <p align="justify">A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
@@ -755,7 +689,7 @@
 
 <p align="justify">Note how returned codes sometimes depend on inflection information from the <tt>Infl</tt> parameter.</p>
 
-<br><h4>Question</h4>
+<h4>Question</h4>
 
 <p align="justify">What does the Prolog query of (<a href="chapter2.html#ex2.31">2.31</a>) achieve?</p>
 
@@ -840,27 +774,18 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As single word content, <tt>initial_adverbial</tt> calls can pick up:</p>
 
 <ul>
-
 <li>[rule 1] discourse coordination words (e.g., <i>And</i>, <i>But</i>)</li>
-
 <li>[rule 2] clause level interjection (e.g., <i>aah</i>, <i>eh</i>, <i>ummmmm</i>)</li>
-
 <li>[rule 3] reaction signals (e.g., <i>good_grief</i>, <i>really</i>, <i>yes</i>, <i>wow</i>)</li>
-
 <li>[rule 4] formulaic expressions (e.g., <i>good_afternoon</i>, <i>you_see</i>, <i>thank_you</i>)</li>
-
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>initial_adverbial</tt> calls can also pick up:</p>
 
 <ul>
-
 <li>[rule 5] non-interrogative adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 6] non-interrogative preposition phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
-
 <li>[rule 7] the subordinate component of a subordinate conjunction</li>
-
 </ul>
 
 <br><h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Connective words</h2>
@@ -909,17 +834,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="chapter2.html#ex2.36">2.36</a>) give support for the integration of punctuation, with an initial parameter to distinguish types:</p>
 
 <ul>
-
 <li><tt>final</tt></li>
-
 <li><tt>final_question</tt></li>
-
 <li><tt>non_final</tt></li>
-
 <li><tt>left_quotation_mark</tt></li>
-
 <li><tt>right_quotation_mark</tt></li>
-
 </ul>
 
 <dl><dt>(<a name="ex2.36">2.36</a>)</dt><dd>
