@@ -3,13 +3,23 @@
 
 <br><h2><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for building clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> looks at matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> covers ripple effects in the clause that existential <i>there</i> starts.</p>
+<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for identifying clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> looks at matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> covers ripple effects in the clause that existential <i>there</i> starts.</p>
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">The <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) and (<a href="chapter5.html#ex5.2">5.2</a>) establish the initial elements of a clause. All have a <tt>Store</tt> parameter to list index information for already identified structure that has yet to integrate with the overall parse structure. Also, all have a clause <tt>Type</tt> parameter.</p>
+<p align="justify">This section provides rules for identifying clause structure content, from initial elements through to the subject and then onwards to the start of the verb with its complements. Notably, the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) in section <a href="chapter5.html#sec5.2.1">5.2.1</a> and (<a href="chapter5.html#ex5.2">5.2</a>) in section <a href="chapter5.html#sec5.2.2">5.2.2</a> will establish initial elements up to and including the clause subject. All have a <tt>Store</tt> parameter to list index information associated with clause elements that will have been identified and yet await being integrated with the overall structure of the clause. Also, all have a clause <tt>Type</tt> parameter, which can be set to:</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter5.html#ex5.1">5.1</a>), all of which are non-recursive, each have something to say about the clause subject. For [rule 2], with the clause <tt>Type</tt> set to <tt>imperative_clause</tt>, there can be no subject. The other rules need to:</p>
+<ul>
+<li><tt>statement_order</tt></li>
+<li><tt>imperative_clause</tt></li>
+<li><tt>tag_question</tt></li>
+<li><tt>matrix_interrogative</tt></li>
+<li><tt>matrix_constituent_interrogative</tt></li>
+</ul>
+
+<h3><a name="sec5.2.1">5.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Non-recursive clause top rules</h3>
+
+<p align="justify">The <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) are non-recursive, with each saying something about the clause subject. For [rule 2], with its clause <tt>Type</tt> setting of <tt>imperative_clause</tt>, there can be no subject. The other rules need to:</p>
 
 <ul>
 <li>[rules 1 and 3&ndash;6] find a noun phrase or subject indicating content with a call of <tt>subject</tt> (from section <a href="chapter2.html#sec2.5">2.5</a>)</li>
@@ -80,7 +90,9 @@
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition to the rules of (<a href="chapter5.html#ex5.1">5.1</a>), there are also the rules of (<a href="chapter5.html#ex5.2">5.2</a>), all of which are recursive, to enable:</p>
+<h3><a name="sec5.2.2">5.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Recursive clause top rules</h3>
+
+<p align="justify">In addition to the rules of (<a href="chapter5.html#ex5.1">5.1</a>), there are also the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.2">5.2</a>), all of which are recursive, to enable:</p>
 
 <ul>
 <li>[rule 1] a clause initial adverbial, possibly followed by <tt>non_final</tt> punctuation</li>
@@ -198,7 +210,9 @@
 <li>the subordinate component of a subordinate conjunction</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 2] for <tt>clause_top_layer</tt> of (<a href="chapter5.html#ex5.1">5.1</a>) calls <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>). This subsequent rule layer ensures there is a place for introducing inflection and voice information before the verb and its complements are encountered. Having the clause type value <tt>imperative_clause</tt>, [rule 2] of (<a href="chapter5.html#ex5.1">5.1</a>) gives the values of <tt>imperative</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
+<h3><a name="sec5.2.3">5.2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb phrase layer rules</h3>
+
+<p align="justify">[Rule 2] for <tt>clause_top_layer</tt> of (<a href="chapter5.html#ex5.1">5.1</a>) calls <tt>verb_phrase_layer</tt> of (<a href="chapter5.html#ex5.4">5.4</a>). This subsequent rule layer ensures there is a place for introducing inflection and voice information before the verb and its complements are encountered. Having the clause type value <tt>imperative_clause</tt>, [rule 2] of (<a href="chapter5.html#ex5.1">5.1</a>) gives the values of <tt>imperative</tt> for the <tt>Infl</tt> (inflection) parameter and <tt>active</tt> for the <tt>Voice</tt> parameter.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The full range of options for the <tt>Infl</tt> parameter are:</p>
 
