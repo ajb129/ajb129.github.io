@@ -3,7 +3,7 @@
 
 <br><h2><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for identifying clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> looks at matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> covers ripple effects in the clause that existential <i>there</i> starts.</p>
+<p align="justify">This chapter introduces clause (<tt>IP</tt>) layers. Section <a href="chapter5.html#sec5.2">5.2</a> has rules for identifying clause structure. Section <a href="chapter5.html#sec5.3">5.3</a> focuses on examples of matrix interrogative clauses where the subject is not under question. Section <a href="chapter5.html#sec5.4">5.4</a> sees an expansion of potential for clause structure with catenative verbs. Section <a href="chapter5.html#sec5.5">5.5</a> adds rules to join up clause content for statement word order. Section <a href="chapter5.html#sec5.6">5.6</a> covers ripple effects in the clause that existential <i>there</i> starts.</p>
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
@@ -276,7 +276,9 @@
 <tt>&nbsp;&nbsp;verb_phrase_tail(Store,SbjType,Infl,Voice,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Query (<a href="chapter5.html#ex5.6">5.6</a>) illustrates how a word list can have content for the top layer of a resulting clause, placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
+<h3><a name="sec5.2.4">5.2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;An example with full clause structure</h3>
+
+<p align="justify">Query (<a href="chapter5.html#ex5.6">5.6</a>) illustrates how a word list can have content for the top layer of a resulting clause, placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
 
 <dl><dt>(<a name="ex5.6">5.6</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('FRM','Please'), w('VB',';~I','smile')]),&nbsp;parse(clause_top_layer(imperative_clause,[])).</tt><br>
@@ -287,7 +289,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.6">5.6</a>) follow (<a href="chapter5.html#ex5.7">5.7</a>). Notably, <tt>verb_complements_by_code</tt> succeeds because it receives the empty word list.</p>
+<p align="justify">Calls to reach the output of (<a href="chapter5.html#ex5.6">5.6</a>) follow (<a href="chapter5.html#ex5.7">5.7</a>).</p>
 
 <dl><dt>(<a name="ex5.7">5.7</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -395,9 +397,19 @@
 
 </dd></dl>
 
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Notably, once <tt>verb_phrase_layer</tt> is reached in (<a href="chapter5.html#ex5.7">5.7</a>), the clause information established has:</p>
+
+<ul>
+<li>the <tt>SbjType</tt> parameter set to <tt>filled_sbj</tt></li>
+<li>the <tt>Infl</tt> parameter set to <tt>imperative</tt></li>
+<li>the <tt>Voice</tt> parameter set to <tt>active</tt></li>
+</ul>
+
+<p align="justify">These clause settings have the consequence that <tt>verb_complements_by_code</tt> can succeed with the empty word list as the complement information for the intransitive verb (verb with code <tt>;~I</tt>).</p>
+
 <br><h2><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Matrix interrogatives</h2>
 
-<p align="justify">This section considers matrix interrogative clauses where the subject is not under question. Prior to its non-interrogative subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small> or a modal verb, any of which the contracted form of negation (<i>n't</i>) can follow. This section adds rules to match these pre-subject components, so that a parse can integrate them with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
+<p align="justify">This section focuses on examples of matrix interrogative clauses where the subject is not under question. Prior to its non-interrogative subject, such a clause will have either a finite <small style="font-size: 75%">DO</small>, a finite <small style="font-size: 75%">HAVE</small>, a finite <small style="font-size: 75%">BE</small> or a modal verb, any of which the contracted form of negation (<i>n't</i>) can follow. This section adds rules to match these pre-subject components, so that a parse can integrate them with calls of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> above.</p>
 
 <h3><a name="sec5.3.1">5.3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;DO operator layer</h3>
 
