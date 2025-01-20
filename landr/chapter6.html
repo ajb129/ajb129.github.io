@@ -62,7 +62,10 @@
 
 <dl><dt>(<a name="ex6.3">6.3</a>)</dt><dd>
 <tt>clause_that_layer(without_c,[np(ICH)|Store],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_middle_layer(Store,filled_sbj,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,derived_sbj])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L,L0).</tt><br>
 <tt>clause_that_layer(with_c,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;comp(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Store,L1,L0).</tt><br>
@@ -687,7 +690,10 @@
 
 <dl><dt>(<a name="ex6.14">6.14</a>)</dt><dd>
 <tt>clause_embedded_que_finite_lower_layer([np(ICH)|Store],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_middle_layer(Store,filled_sbj,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,derived_sbj])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L,L0).</tt><br>
 <tt>clause_embedded_que_finite_lower_layer(Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Store,L,L0).</tt><br>
 </dd></dl>
@@ -8075,7 +8081,10 @@
 
 <dl><dt>(<a name="ex6.67">6.67</a>)</dt><dd>
 <tt>relative_clause_finite_inside([np(ICH)],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;clause_middle_layer([],filled_sbj,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,derived_sbj])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;clause_middle_layer([],SbjType,L,L0).</tt><br>
 <tt>relative_clause_finite_inside(Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Store,L,L0).</tt><br>
 </dd></dl>
