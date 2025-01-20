@@ -20,7 +20,7 @@
 
 <h1>Book examples</h1>
 
-<p align="justify">Representing layered structure (<a href="chapter1.html#sec1.5" target="_blank">section 1.5</a>)</p>
+<h3>Representing layered structure (<a href="chapter1.html#sec1.5" target="_blank">section 1.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -28,7 +28,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] smiles[VBP;~I] and[CONJ] smiles[VBP;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">Sentences (<a href="chapter1.html#sec1.7" target="_blank">section 1.7</a>)</p>
+<h3>Sentences (<a href="chapter1.html#sec1.7" target="_blank">section 1.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -60,7 +60,27 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] smiles[VBP;~I] and[CONJ] so[ADV] does[DOP] she[PRO] .[PUNC]"/>
 </form>
 
-<p align="justify">Noun words (<a href="chapter2.html#sec2.2" target="_blank">section 2.2</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Did[DOD] he[PRO] smile[VB;~I] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="he[PRO] did[DOD] smile[VB;~I] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="he[PRO] did[DOD] smile[VB;~I] ?[PUNC]"/>
+</form>
+
+<h3>Noun words (<a href="chapter2.html#sec2.2" target="_blank">section 2.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -68,7 +88,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Theirs[PRO;_ppge_] is[BEP;~La] large[ADJ] .[PUNC]"/>
 </form>
 
-<p align="justify">The noun phrase top rule (<a href="chapter3.html#sec3.2.1" target="_blank">section 3.2.1</a>)</p>
+<h3>The noun phrase top rule (<a href="chapter3.html#sec3.2.1" target="_blank">section 3.2.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -76,7 +96,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="him[PRO]"/>
 </form>
 
-<p align="justify">Initial noun phrase layers (<a href="chapter3.html#sec3.2.2" target="_blank">section 3.2.2</a>)</p>
+<h3>Initial noun phrase layers (<a href="chapter3.html#sec3.2.2" target="_blank">section 3.2.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -84,7 +104,33 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="you[PRO] ,[PUNC] he[PRO] and[CONJ] I[PRO]"/>
 </form>
 
-<p align="justify">Internal noun phrase layers (<a href="chapter3.html#sec3.2.3" target="_blank">section 3.2.3</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="both[CONJ] you[PRO] and[CONJ] he[PRO] and[CONJ] I[PRO]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="both[CONJ] you[PRO] ,[PUNC] he[PRO] and[CONJ] I[PRO]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="you[PRO] and[CONJ] both[CONJ] he[PRO] and[CONJ] I[PRO]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="you[PRO] ,[PUNC] both[CONJ] he[PRO] and[CONJ] I[PRO]"/>
+</form>
+
+<h3>Internal noun phrase layers (<a href="chapter3.html#sec3.2.3" target="_blank">section 3.2.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -92,7 +138,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="boys[NS]"/>
 </form>
 
-<p align="justify">Nouns as noun modifiers (<a href="chapter3.html#sec3.2.4" target="_blank">section 3.2.4</a>)</p>
+<h3>Nouns as noun modifiers (<a href="chapter3.html#sec3.2.4" target="_blank">section 3.2.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -100,7 +146,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="phone[N] card[N] payment[N] system[N]"/>
 </form>
 
-<p align="justify">Determiner layer (<a href="chapter3.html#sec3.2.5" target="_blank">section 3.2.5</a>)</p>
+<h3>Determiner layer (<a href="chapter3.html#sec3.2.5" target="_blank">section 3.2.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -114,7 +160,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] application[N] and[CONJ] a[D] result[N]"/>
 </form>
 
-<p align="justify">Genitive noun phrase layers (<a href="chapter3.html#sec3.2.6" target="_blank">section 3.2.6</a>)</p>
+<h3>Genitive noun phrase layers (<a href="chapter3.html#sec3.2.6" target="_blank">section 3.2.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -122,7 +168,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="someone[D;_nphd_] <apos>s[GENM] cash[N] offer[N]"/>
 </form>
 
-<p align="justify">Adjective phrases (<a href="chapter3.html#sec3.4" target="_blank">section 3.4</a>)</p>
+<h3>Adjective phrases (<a href="chapter3.html#sec3.4" target="_blank">section 3.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -130,7 +176,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="one[D] especially[ADV] important[ADJ] difficult[ADJ] area[N]"/>
 </form>
 
-<p align="justify">Preposition phrases (<a href="chapter3.html#sec3.5" target="_blank">section 3.5</a>)</p>
+<h3>Preposition phrases (<a href="chapter3.html#sec3.5" target="_blank">section 3.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -138,7 +184,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] ascent[N] of[P-ROLE] a[D] human[ADJ] figure[N] from[P-ROLE] the[D] direction[N] of[P-ROLE] the[D] distant[ADJ] town[N]"/>
 </form>
 
-<p align="justify">La (<a href="chapter4.html#sec4.2.1" target="_blank">section 4.2.1</a>)</p>
+<h3>La (<a href="chapter4.html#sec4.2.1" target="_blank">section 4.2.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -164,7 +210,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="How[WADV] annoying[ADJ] would[MD;~cat_Vi] that[D;_nphd_] be[BE;~La] ?[PUNC]"/>
 </form>
 
-<p align="justify">Ln (<a href="chapter4.html#sec4.2.2" target="_blank">section 4.2.2</a>)</p>
+<h3>Ln (<a href="chapter4.html#sec4.2.2" target="_blank">section 4.2.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -184,7 +230,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] man[N] I[PRO] thought[VBD;~Tf] you[PRO] were[BED;~Ln]"/>
 </form>
 
-<p align="justify">I (<a href="chapter4.html#sec4.3.1" target="_blank">section 4.3.1</a>)</p>
+<h3>I (<a href="chapter4.html#sec4.3.1" target="_blank">section 4.3.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -198,7 +244,15 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_expletive_] rained[VBD;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">Ip (<a href="chapter4.html#sec4.3.2" target="_blank">section 4.3.2</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] rained[VBD;~I] .[PUNC]"/>
+</form>
+
+<h3>Ip (<a href="chapter4.html#sec4.3.2" target="_blank">section 4.3.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -212,7 +266,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] place[N] where[RADV] you[PRO] are[BEP;~cat_Vg] standing[VAG;~Ip]"/>
 </form>
 
-<p align="justify">Ipr (<a href="chapter4.html#sec4.3.3" target="_blank">section 4.3.3</a>)</p>
+<h3>Ipr (<a href="chapter4.html#sec4.3.3" target="_blank">section 4.3.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -238,7 +292,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="These[D;_nphd_] are[BEP;~cat_Ve_passive_] looked[VVN;~Ipr] after[P-ROLE] by[P-ROLE] us[PRO] .[PUNC]"/>
 </form>
 
-<p align="justify">In/pr (<a href="chapter4.html#sec4.3.4" target="_blank">section 4.3.4</a>)</p>
+<h3>In/pr (<a href="chapter4.html#sec4.3.4" target="_blank">section 4.3.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -252,7 +306,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="We[PRO] stayed[VBD;~In/pr] for[P-ROLE] a[D] fortnight[N] .[PUNC]"/>
 </form>
 
-<p align="justify">It (<a href="chapter4.html#sec4.3.5" target="_blank">section 4.3.5</a>)</p>
+<h3>It (<a href="chapter4.html#sec4.3.5" target="_blank">section 4.3.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -266,7 +320,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="We[PRO] waited[VBD;~It] for[P-CONN] it[PRO] to[TO] start[VB;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">Tn (<a href="chapter4.html#sec4.4.1" target="_blank">section 4.4.1</a>)</p>
+<h3>Tn (<a href="chapter4.html#sec4.4.1" target="_blank">section 4.4.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -286,7 +340,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] was[BED;~cat_Ve_passive_] scolded[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Tn.p (<a href="chapter4.html#sec4.4.2" target="_blank">section 4.4.2</a>)</p>
+<h3>Tn.p (<a href="chapter4.html#sec4.4.2" target="_blank">section 4.4.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -324,7 +378,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] wonder[VBP;~Tw] where[WADV] the[D] dogs[NS] were[BED;~cat_Ve_passive_] put[VVN;~Tn.p] .[PUNC]"/>
 </form>
 
-<p align="justify">Tn.pr (<a href="chapter4.html#sec4.4.3" target="_blank">section 4.4.3</a>)</p>
+<h3>Tn.pr (<a href="chapter4.html#sec4.4.3" target="_blank">section 4.4.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -380,7 +434,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] place[N] on[P-ROLE] which[RPRO] he[PRO] was[BED;~cat_Ve_passive_] put[VVN;~Tn.pr]"/>
 </form>
 
-<p align="justify">Tf (<a href="chapter4.html#sec4.4.4" target="_blank">section 4.4.4</a>)</p>
+<h3>Tf (<a href="chapter4.html#sec4.4.4" target="_blank">section 4.4.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -388,7 +442,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="What[WPRO] do[DOP] you[PRO] suppose[VB;~Tf] an[D] exploring[N] party[N] would[MD;~cat_Vi] find[VB;~Tn] ?[PUNC]"/>
 </form>
 
-<p align="justify">Tw (<a href="chapter4.html#sec4.4.5" target="_blank">section 4.4.5</a>)</p>
+<h3>Tw (<a href="chapter4.html#sec4.4.5" target="_blank">section 4.4.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -402,7 +456,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG;_clitic_] know[VB;~Tw] what[WPRO] to[TO] do[DO;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Tr (<a href="chapter4.html#sec4.4.6" target="_blank">section 4.4.6</a>)</p>
+<h3>Tr (<a href="chapter4.html#sec4.4.6" target="_blank">section 4.4.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -416,7 +470,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="<ldquo>[PULQ] A[D] paradox[N] .[PUNC] <rdquo>[PURQ] ,[PUNC] Nasha[NPR] said[VBD;~Tr] .[PUNC]"/>
 </form>
 
-<p align="justify">Tt (<a href="chapter4.html#sec4.4.7" target="_blank">section 4.4.7</a>)</p>
+<h3>Tt (<a href="chapter4.html#sec4.4.7" target="_blank">section 4.4.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -424,7 +478,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="We[PRO] had[HVD;~cat_Ve] planned[VVN;~Tt] to[TO] meet[VB;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">Tnt (<a href="chapter4.html#sec4.4.8" target="_blank">section 4.4.8</a>)</p>
+<h3>Tnt (<a href="chapter4.html#sec4.4.8" target="_blank">section 4.4.8</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -456,7 +510,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Kim[NPR] expected[VBD;~Tnt] it[PRO;_provisional_] to[TO] be[BE;~La] easy[ADJ] to[TO] impress[VB;~Tn] Sandy[NPR] .[PUNC]"/>
 </form>
 
-<p align="justify">Tni (<a href="chapter4.html#sec4.4.9" target="_blank">section 4.4.9</a>)</p>
+<h3>Tni (<a href="chapter4.html#sec4.4.9" target="_blank">section 4.4.9</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -470,7 +524,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] is[BEP;~ex_V] someone[D;_nphd_] whom[RPRO] Helen[NPR] saw[VBD;~Tni] answer[VB;~Tn] the[D] phone[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Tg (<a href="chapter4.html#sec4.4.10" target="_blank">section 4.4.10</a>)</p>
+<h3>Tg (<a href="chapter4.html#sec4.4.10" target="_blank">section 4.4.10</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -478,7 +532,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Stop[VB;~Tg] shouting[VAG;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">Tng (<a href="chapter4.html#sec4.4.11" target="_blank">section 4.4.11</a>)</p>
+<h3>Tng (<a href="chapter4.html#sec4.4.11" target="_blank">section 4.4.11</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -498,7 +552,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] raiders[NS] can[MD;~cat_Vi] be[BE;~cat_Ve_passive_] seen[VVN;~Tng] hovering[VAG;~Ipr] around[P-ROLE] the[D] surface[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Tsg (<a href="chapter4.html#sec4.4.12" target="_blank">section 4.4.12</a>)</p>
+<h3>Tsg (<a href="chapter4.html#sec4.4.12" target="_blank">section 4.4.12</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -512,7 +566,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Do[DOP] n<apos>t[NEG;_clitic_] you[PRO] remember[VB;~Tsg] me[PRO] telling[VAG;~Dn.*] you[PRO] ?[PUNC]"/>
 </form>
 
-<p align="justify">Dn.n (<a href="chapter4.html#sec4.5.1" target="_blank">section 4.5.1</a>)</p>
+<h3>Dn.n (<a href="chapter4.html#sec4.5.1" target="_blank">section 4.5.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -544,7 +598,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="everything[Q;_nphd_] everyone[Q;_nphd_] has[HVP;~cat_Ve] been[BEN;~cat_Ve_passive_] taught[VVN;~Dn.n]"/>
 </form>
 
-<p align="justify">Dn.f (<a href="chapter4.html#sec4.5.2" target="_blank">section 4.5.2</a>)</p>
+<h3>Dn.f (<a href="chapter4.html#sec4.5.2" target="_blank">section 4.5.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -558,7 +612,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="We[PRO] got[VBD;~cat_Ve_passive_] told[VVN;~Dn.f] that[C] that[D] laser[N] can[MD;~cat_Vi] cut[VB;~Ipr] through[P-ROLE] concrete[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Dn.w (<a href="chapter4.html#sec4.5.3" target="_blank">section 4.5.3</a>)</p>
+<h3>Dn.w (<a href="chapter4.html#sec4.5.3" target="_blank">section 4.5.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -572,7 +626,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] were[BED;~cat_Ve_passive_] asked[VVN;~Dn.w] if[WQ] they[PRO] believed[VBD;~Tf] Windows_98[NPR] was[BED;~Ln] the[D] correct[ADJ] system[N] to[TO] have[HV;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Dn.r (<a href="chapter4.html#sec4.5.4" target="_blank">section 4.5.4</a>)</p>
+<h3>Dn.r (<a href="chapter4.html#sec4.5.4" target="_blank">section 4.5.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -586,7 +640,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] Prime[NPR] Minister[NPR] was[BED;~cat_Ve_passive_] asked[VVN;~Dn.r] <ldquo>[PULQ] Is[BEP;~La] it[PRO] true[ADJ] ?[PUNC] <rdquo>[PURQ] .[PUNC]"/>
 </form>
 
-<p align="justify">Dn.t (<a href="chapter4.html#sec4.5.5" target="_blank">section 4.5.5</a>)</p>
+<h3>Dn.t (<a href="chapter4.html#sec4.5.5" target="_blank">section 4.5.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -600,7 +654,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] have[HVP;~cat_Ve] now[ADV] been[BEN;~cat_Ve_passive_] forbidden[VVN;~Dn.t] to[TO] make[VB;~Tn] anything[D;_nphd_] .[PUNC]"/>
 </form>
 
-<p align="justify">Dn.* (<a href="chapter4.html#sec4.5.6" target="_blank">section 4.5.6</a>)</p>
+<h3>Dn.* (<a href="chapter4.html#sec4.5.6" target="_blank">section 4.5.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -608,7 +662,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="You[PRO] did[DOD] tell[VB;~Dn.*] me[PRO] .[PUNC]"/>
 </form>
 
-<p align="justify">Dpr.n (<a href="chapter4.html#sec4.5.7" target="_blank">section 4.5.7</a>)</p>
+<h3>Dpr.n (<a href="chapter4.html#sec4.5.7" target="_blank">section 4.5.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -634,7 +688,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Details[NS] of[P-ROLE] all[Q] negotiations[NS] are[BEP;~cat_Ve_passive_] sent[VVN;~Dpr.n] to[P-ROLE] Head[N] Office[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Dpr.f (<a href="chapter4.html#sec4.5.8" target="_blank">section 4.5.8</a>)</p>
+<h3>Dpr.f (<a href="chapter4.html#sec4.5.8" target="_blank">section 4.5.8</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -642,7 +696,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] did[DOD] n<apos>t[NEG;_clitic_] say[VB;~Dpr.f] to[P-ROLE] the[D] man[N] that[C] they[PRO] were[BED;~La] sorry[ADJ] .[PUNC]"/>
 </form>
 
-<p align="justify">Dpr.r (<a href="chapter4.html#sec4.5.9" target="_blank">section 4.5.9</a>)</p>
+<h3>Dpr.r (<a href="chapter4.html#sec4.5.9" target="_blank">section 4.5.9</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -650,7 +704,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="She[PRO] said[VBD;~Dpr.r] to[P-ROLE] me[PRO] <ldquo>[PULQ] are[BEP;~cat_Vg] you[PRO] going[VAG;~I] ?[PUNC] <rdquo>[PURQ] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.a (<a href="chapter4.html#sec4.6.1" target="_blank">section 4.6.1</a>)</p>
+<h3>Cn.a (<a href="chapter4.html#sec4.6.1" target="_blank">section 4.6.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -700,7 +754,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="This[D;_nphd_] was[BED;~cat_Ve_passive_] found[VVN;~Cn.a] difficult[ADJ] to[TO] believe[VB;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.n (<a href="chapter4.html#sec4.6.2" target="_blank">section 4.6.2</a>)</p>
+<h3>Cn.n (<a href="chapter4.html#sec4.6.2" target="_blank">section 4.6.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -732,7 +786,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="What[WPRO] was[BED;~cat_Ve_passive_] the[D] city[N] called[VVN;~Cn.n] ?[PUNC]"/>
 </form>
 
-<p align="justify">Cn.n/a (<a href="chapter4.html#sec4.6.3" target="_blank">section 4.6.3</a>)</p>
+<h3>Cn.n/a (<a href="chapter4.html#sec4.6.3" target="_blank">section 4.6.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -746,7 +800,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] alliance[N] became[VBD;~cat_Ve_passive_] known[VVN;~Cn.n/a] as[P-ROLE] the[D] Delian[NPR] League[NPR] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.pr (<a href="chapter4.html#sec4.6.4" target="_blank">section 4.6.4</a>)</p>
+<h3>Cn.pr (<a href="chapter4.html#sec4.6.4" target="_blank">section 4.6.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -760,7 +814,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Thorn[NPR] is[BEP;~cat_Ve_passive_] involved[VVN;~Cn.pr] in[P-ROLE] parallel[ADJ] computing[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.t (<a href="chapter4.html#sec4.6.5" target="_blank">section 4.6.5</a>)</p>
+<h3>Cn.t (<a href="chapter4.html#sec4.6.5" target="_blank">section 4.6.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -780,7 +834,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Such[ADJ] receptors[NS] are[BEP;~cat_Ve_passive_] thought[VVN;~Cn.t] to[TO] be[BE;~Ln] neurons[NS] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.i (<a href="chapter4.html#sec4.6.6" target="_blank">section 4.6.6</a>)</p>
+<h3>Cn.i (<a href="chapter4.html#sec4.6.6" target="_blank">section 4.6.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -788,7 +842,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Let[VB;~Cn.i] me[PRO] have[HV;~Tn] a[D] go[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Cn.g (<a href="chapter4.html#sec4.6.7" target="_blank">section 4.6.7</a>)</p>
+<h3>Cn.g (<a href="chapter4.html#sec4.6.7" target="_blank">section 4.6.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -802,7 +856,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] unit[N] was[BED;~cat_Ve_passive_] assumed[VVN;~Cn.g] working[VAG;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">VP24A (<a href="chapter4.html#sec4.7.1" target="_blank">section 4.7.1</a>)</p>
+<h3>VP24A (<a href="chapter4.html#sec4.7.1" target="_blank">section 4.7.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -816,7 +870,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] prominent[ADJ] journalist[N] was[BED;~cat_Ve_passive_] found[VVN;~VP24A] shot[VVN;~Cn.a] dead[ADJ] .[PUNC]"/>
 </form>
 
-<p align="justify">VP24B (<a href="chapter4.html#sec4.7.2" target="_blank">section 4.7.2</a>)</p>
+<h3>VP24B (<a href="chapter4.html#sec4.7.2" target="_blank">section 4.7.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -824,7 +878,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] <apos>d[HVD;~cat_Ve] had[HVN;~VP24B] a[D] novel[N] published[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">VP24C (<a href="chapter4.html#sec4.7.3" target="_blank">section 4.7.3</a>)</p>
+<h3>VP24C (<a href="chapter4.html#sec4.7.3" target="_blank">section 4.7.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -832,7 +886,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="She[PRO] <apos>s[HVP;~cat_Ve] got[VVN;~VP24C] her[PRO;_genm_] hair[N] cut[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">ex_V (<a href="chapter4.html#sec4.8.1" target="_blank">section 4.8.1</a>)</p>
+<h3>ex_V (<a href="chapter4.html#sec4.8.1" target="_blank">section 4.8.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -846,7 +900,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="How[WADV] many[ADJ] flats[NS] are[BEP;~ex_V] there[EX] ?[PUNC]"/>
 </form>
 
-<p align="justify">ex_Vp (<a href="chapter4.html#sec4.8.2" target="_blank">section 4.8.2</a>)</p>
+<h3>ex_Vp (<a href="chapter4.html#sec4.8.2" target="_blank">section 4.8.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -860,7 +914,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="How[WADV] many[ADJ] flats[NS] are[BEP;~ex_Vp] there[EX] here[ADV] ?[PUNC]"/>
 </form>
 
-<p align="justify">ex_Vpr (<a href="chapter4.html#sec4.8.3" target="_blank">section 4.8.3</a>)</p>
+<h3>ex_Vpr (<a href="chapter4.html#sec4.8.3" target="_blank">section 4.8.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -868,7 +922,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~ex_Vpr] open[ADJ] mockery[N] in[P-ROLE] his[PRO;_genm_] tone[N] .[PUNC]"/>
 </form>
 
-<p align="justify">ex_cat_Vt (<a href="chapter4.html#sec4.8.4" target="_blank">section 4.8.4</a>)</p>
+<h3>ex_cat_Vt (<a href="chapter4.html#sec4.8.4" target="_blank">section 4.8.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -876,7 +930,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] is[BEP;~ex_cat_Vt] no[Q] evidence[N] to[TO] prove[VB;~Tf] Hollis[NPR] was[BED;~Ln] a[D] Russian[ADJ] mole[N] .[PUNC]"/>
 </form>
 
-<p align="justify">ex_cat_Vt_passive_ (<a href="chapter4.html#sec4.8.5" target="_blank">section 4.8.5</a>)</p>
+<h3>ex_cat_Vt_passive_ (<a href="chapter4.html#sec4.8.5" target="_blank">section 4.8.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -884,7 +938,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="What[WPRO] is[BEP;~ex_cat_Vt_passive_] there[EX] for[P-CONN] her[PRO] to[TO] do[DO;~Tn] ?[PUNC]"/>
 </form>
 
-<p align="justify">ex_cat_Vg (<a href="chapter4.html#sec4.8.6" target="_blank">section 4.8.6</a>)</p>
+<h3>ex_cat_Vg (<a href="chapter4.html#sec4.8.6" target="_blank">section 4.8.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -892,7 +946,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] <apos>s[BEP;~ex_cat_Vg] a[D] bear[N] sitting[VAG;~Ipr] in[P-ROLE] the[D] corner[N] .[PUNC]"/>
 </form>
 
-<p align="justify">ex_cat_Ve_passive_ (<a href="chapter4.html#sec4.8.7" target="_blank">section 4.8.7</a>)</p>
+<h3>ex_cat_Ve_passive_ (<a href="chapter4.html#sec4.8.7" target="_blank">section 4.8.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -900,7 +954,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] <apos>s[BEP;~ex_cat_Ve_passive_] something[D;_nphd_] inscribed[VVN;~Tn.pr] on[P-ROLE] this[D;_nphd_] .[PUNC]"/>
 </form>
 
-<p align="justify">equ_Vf (<a href="chapter4.html#sec4.9.1" target="_blank">section 4.9.1</a>)</p>
+<h3>equ_Vf (<a href="chapter4.html#sec4.9.1" target="_blank">section 4.9.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -908,7 +962,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="My[PRO;_genm_] excuse[N] was[BED;~equ_Vf] that[C] I[PRO] had[HVD;~Tn] lessons[NS] to[TO] prepare[VB;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">equ_Vw (<a href="chapter4.html#sec4.9.2" target="_blank">section 4.9.2</a>)</p>
+<h3>equ_Vw (<a href="chapter4.html#sec4.9.2" target="_blank">section 4.9.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -922,7 +976,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Is[BEP;~equ_Vw] that[D;_nphd_] what[WPRO] to[TO] say[VB;~Tn.pr] to[P-ROLE] people[N] ?[PUNC]"/>
 </form>
 
-<p align="justify">equ_Vt (<a href="chapter4.html#sec4.9.3" target="_blank">section 4.9.3</a>)</p>
+<h3>equ_Vt (<a href="chapter4.html#sec4.9.3" target="_blank">section 4.9.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -930,7 +984,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="This[D;_nphd_] is[BEP;~equ_Vt] to[TO] give[VB;~Dn.n] the[D] application[N] an[D] iconbar[N] menu[N] .[PUNC]"/>
 </form>
 
-<p align="justify">equ_Vg (<a href="chapter4.html#sec4.9.4" target="_blank">section 4.9.4</a>)</p>
+<h3>equ_Vg (<a href="chapter4.html#sec4.9.4" target="_blank">section 4.9.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -944,7 +998,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="The[D] first[ADJ] thing[N] he[PRO] saw[VBD;~Tn] was[BED;~equ_Vg] Mr.[N] McGregor[NPR] hoeing[VAG;~Tn] onions[NS] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Vt (<a href="chapter4.html#sec4.10.1" target="_blank">section 4.10.1</a>)</p>
+<h3>cat_Vt (<a href="chapter4.html#sec4.10.1" target="_blank">section 4.10.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -952,7 +1006,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] had[HVD;~cat_Vt] to[TO] sink[VB;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Vt_passive_ (<a href="chapter4.html#sec4.10.2" target="_blank">section 4.10.2</a>)</p>
+<h3>cat_Vt_passive_ (<a href="chapter4.html#sec4.10.2" target="_blank">section 4.10.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -966,7 +1020,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="One[D;_nphd_] is[BEP;~cat_Vt_passive_] for[P-CONN] them[PRO] to[TO] sign[VB;~Tn] and[CONJ] send[VB;~Tn.p] back[RP] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Vi (<a href="chapter4.html#sec4.10.3" target="_blank">section 4.10.3</a>)</p>
+<h3>cat_Vi (<a href="chapter4.html#sec4.10.3" target="_blank">section 4.10.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -974,7 +1028,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO] helped[VBD;~cat_Vi] cut[VB;~Tn] the[D] cost[N] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Vg (<a href="chapter4.html#sec4.10.4" target="_blank">section 4.10.4</a>)</p>
+<h3>cat_Vg (<a href="chapter4.html#sec4.10.4" target="_blank">section 4.10.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -982,7 +1036,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] was[BED;~cat_Vg] sinking[VAG;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Vg_passive_ (<a href="chapter4.html#sec4.10.5" target="_blank">section 4.10.5</a>)</p>
+<h3>cat_Vg_passive_ (<a href="chapter4.html#sec4.10.5" target="_blank">section 4.10.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -990,7 +1044,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="His[PRO;_genm_] wounds[NS] need[VBP;~cat_Vg_passive_] dressing[VAG;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Ve (<a href="chapter4.html#sec4.10.6" target="_blank">section 4.10.6</a>)</p>
+<h3>cat_Ve (<a href="chapter4.html#sec4.10.6" target="_blank">section 4.10.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -998,7 +1052,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] had[HVD;~cat_Ve] sunk[VVN;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">cat_Ve_passive_ (<a href="chapter4.html#sec4.10.7" target="_blank">section 4.10.7</a>)</p>
+<h3>cat_Ve_passive_ (<a href="chapter4.html#sec4.10.7" target="_blank">section 4.10.7</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1006,7 +1060,21 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] was[BED;~cat_Ve_passive_] sunk[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">An example with full clause structure (<a href="chapter5.html#sec5.2.4" target="_blank">section 5.2.4</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] had[HVD;~cat_Ve] sunk[VVN;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] was[BED;~cat_Ve_passive_] sunk[VVN;~I] .[PUNC]"/>
+</form>
+
+<h3>An example with full clause structure (<a href="chapter5.html#sec5.2.4" target="_blank">section 5.2.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1014,7 +1082,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Please[FRM] smile[VB;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">DO operator layer (<a href="chapter5.html#sec5.3.1" target="_blank">section 5.3.1</a>)</p>
+<h3>DO operator layer (<a href="chapter5.html#sec5.3.1" target="_blank">section 5.3.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1022,7 +1090,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Why[WADV] did[DOD] n<apos>t[NEG;_clitic_] you[PRO] go;~I[VB] ?[PUNC]"/>
 </form>
 
-<p align="justify">HAVE, BE or modal verb finite layers (<a href="chapter5.html#sec5.3.2" target="_blank">section 5.3.2</a>)</p>
+<h3>HAVE, BE or modal verb finite layers (<a href="chapter5.html#sec5.3.2" target="_blank">section 5.3.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1036,7 +1104,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="What[WPRO] is[BEP;~Ln] he[PRO] ?[PUNC]"/>
 </form>
 
-<p align="justify">Catenative verbs with bare infinitive complements (<a href="chapter5.html#sec5.4.1" target="_blank">section 5.4.1</a>)</p>
+<h3>Catenative verbs with bare infinitive complements (<a href="chapter5.html#sec5.4.1" target="_blank">section 5.4.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1044,7 +1112,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Can[MD;~cat_Vi] I[PRO] help[VB;~I] ?[PUNC]"/>
 </form>
 
-<p align="justify">Catenative verbs with to-infinitive complements (<a href="chapter5.html#sec5.4.2" target="_blank">section 5.4.2</a>)</p>
+<h3>Catenative verbs with to-infinitive complements (<a href="chapter5.html#sec5.4.2" target="_blank">section 5.4.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1052,7 +1120,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Ought[MD;~cat_Vt] n<apos>t[NEG;_clitic_] he[PRO] to[TO] stand[VB;~Ip] up[RP] ?[PUNC]"/>
 </form>
 
-<p align="justify">Catenative verbs with active voice past participle clause complements (<a href="chapter5.html#sec5.4.3" target="_blank">section 5.4.3</a>)</p>
+<h3>Catenative verbs with active voice past participle clause complements (<a href="chapter5.html#sec5.4.3" target="_blank">section 5.4.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1060,7 +1128,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Has[HVP;~cat_Ve] he[PRO] gone[VVN;~I] ?[PUNC]"/>
 </form>
 
-<p align="justify">Catenative verbs with active voice present participle clause complements (<a href="chapter5.html#sec5.4.4" target="_blank">section 5.4.4</a>)</p>
+<h3>Catenative verbs with active voice present participle clause complements (<a href="chapter5.html#sec5.4.4" target="_blank">section 5.4.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1068,7 +1136,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Is[BEP;~cat_Vg] he[PRO] going[VAG;~I] ?[PUNC]"/>
 </form>
 
-<p align="justify">Catenative verb with passive voice past participle clause complements (<a href="chapter5.html#sec5.4.5" target="_blank">section 5.4.5</a>)</p>
+<h3>Catenative verb with passive voice past participle clause complements (<a href="chapter5.html#sec5.4.5" target="_blank">section 5.4.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1076,7 +1144,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Was[BED;~cat_Ve_passive_] he[PRO] scolded[VVN;~Tn] ?[PUNC]"/>
 </form>
 
-<p align="justify">Statement word order with clause middle layers (<a href="chapter5.html#sec5.5" target="_blank">section 5.5</a>)</p>
+<h3>Statement word order with clause middle layers (<a href="chapter5.html#sec5.5" target="_blank">section 5.5</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1096,7 +1164,111 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="A[D] ship[N] may[MD;~cat_Vi] have[HV;~cat_Ve] been[BEN;~cat_Vg] being[BAG;~cat_Ve_passive_] sunk[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Existential there (<a href="chapter5.html#sec5.6" target="_blank">section 5.6</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] saw[VBD;~Tn] who[WPRO] ?[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] who[WPRO] saw[VBD;~Tn] ?[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] did[DOD] John[NPR] see[VB;~Tn] ?[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] did[DOD] who[WPRO] see[VB;~Tn] ?[PUNC]"/>
+</form>
+
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] had[HVD;~cat_Ve] had[HVN;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] had[HVD;~cat_Ve] had[HVN;~cat_Ve] had[HVN;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] had[HVD;~cat_Ve] had[HVN;~cat_Vt] to[TO] have[HV;~cat_Ve] had[HVN;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Do[DO] n<apos>t[NEG;_clitic_] be[BE;~La] shy[ADJ] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG;_clitic_] be[BE;~La] shy[ADJ] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] have[HVP;~cat_Ve] been[BEN;~La] busy[ADJ] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG;_clitic_] have[HV;~cat_Ve] been[BEN;~La] busy[ADJ] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] do[DOP] n<apos>t[NEG;_clitic_] have[HV;~Tn] any[D] money[N] .[PUNC]"/>
+</form>
+
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Phones[NS] were[BED;~cat_Vg] being[BAG;~cat_Ve_passive_] tapped[VVN;~Tn] and[CONJ] put[VVN;~Tn.pr] out_of[P-ROLE] action[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Phones[NS] were[BED;~cat_Vg] being[BAG;~cat_Ve_passive_] tapped[VVN;~Tn] and[CONJ] going[VAG;~Ipr] out_of[P-ROLE] action[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Phones[NS] were[BED;~cat_Vg] being[BAG;~cat_Ve_passive_] tapped[VVN;~Tn] and[CONJ] went[VBD;~Ipr] out_of[P-ROLE] action[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Phones[NS] were[BED;~cat_Vg] being[BAG;~cat_Ve_passive_] tapped[VVN;~Tn] and[CONJ] computers[NS] went[VBD;~Ipr] out_of[P-ROLE] action[N] .[PUNC]"/>
+</form>
+
+<h3>Existential there (<a href="chapter5.html#sec5.6" target="_blank">section 5.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1116,7 +1288,27 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Is[BEP;~ex_cat_Vg] there[EX] nobody_else[Q;_nphd_] coming[VAG;~I] ?[PUNC]"/>
 </form>
 
-<p align="justify">CP-THT (that-clause) (<a href="chapter6.html#sec6.2" target="_blank">section 6.2</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~ex_cat_Vg] a[D] man[N] being[BAG;~cat_Ve_passive_] interrogated[VVN;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~cat_Vg] being[BAG;~ex_cat_Ve_passive_] a[D] man[N] interrogated[VVN;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~cat_Vt] to[TO] have[HV;~cat_Ve] been[BEN;~ex_cat_Ve_passive_] a[D] man[N] interrogated[VVN;~Tn] .[PUNC]"/>
+</form>
+
+<h3>CP-THT (that-clause) (<a href="chapter6.html#sec6.2" target="_blank">section 6.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1124,7 +1316,21 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] do[DOP] you[PRO] think[VB;~Tf] will[MD;~cat_Vi] arrive[VB;~Ip] early[RP] ?[PUNC]"/>
 </form>
 
-<p align="justify">Embedded question clauses that are finite clauses with statement word order (<a href="chapter6.html#sec6.4.1" target="_blank">section 6.4.1</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] do[DOP] you[PRO] think[VB;~Tf] that[C] will[MD;~cat_Vi] arrive[VB;~Ip] early[RP] ?[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Who[WPRO] do[DOP] you[PRO] think[VB;~Tf] that[C] you[PRO] will[MD;~cat_Vi] see[VB;~Tni] arrive[VB;~Ip] early[RP] ?[PUNC]"/>
+</form>
+
+<h3>Embedded question clauses that are finite clauses with statement word order (<a href="chapter6.html#sec6.4.1" target="_blank">section 6.4.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1132,7 +1338,27 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="He[PRO] asked[VBD;~Dn.w] her[PRO] whether[WQ] she[PRO] would[MD;~cat_Vi] arrive[VB;~Ip] early[RP] .[PUNC]"/>
 </form>
 
-<p align="justify">Embedded question clauses that are to-infinitive clauses (<a href="chapter6.html#sec6.4.2" target="_blank">section 6.4.2</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] know[VBP;~Tw] who[WPRO] they[PRO] should[MD;~cat_Vi] invite[VB;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] know[VBP;~Tw] who[WPRO] who[WPRO] should[MD;~cat_Vi] invite[VB;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="They[PRO] know[VBP;~Tw] who[WPRO] should[MD;~cat_Vi] invite[VB;~Tn] who[WPRO] .[PUNC]"/>
+</form>
+
+<h3>Embedded question clauses that are to-infinitive clauses (<a href="chapter6.html#sec6.4.2" target="_blank">section 6.4.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1140,7 +1366,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="She[PRO] wondered[VBD;~Tw] what[WPRO] to[TO] do[DO;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Embedded questions as preposition complements (<a href="chapter6.html#sec6.4.3" target="_blank">section 6.4.3</a>)</p>
+<h3>Embedded questions as preposition complements (<a href="chapter6.html#sec6.4.3" target="_blank">section 6.4.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1154,7 +1380,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] choice[N] of[P-ROLE] where[WADV] to[TO] buy[VB;~Tn] my[PRO;_genm_] next[ADJ] home[N]"/>
 </form>
 
-<p align="justify">The notional subject as a that-clause (<a href="chapter6.html#sec6.5.1" target="_blank">section 6.5.1</a>)</p>
+<h3>The notional subject as a that-clause (<a href="chapter6.html#sec6.5.1" target="_blank">section 6.5.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1162,7 +1388,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_provisional_] was[BED;~La] good[ADJ] that[C] he[PRO] did[DOD] n<apos>t[NEG;_clitic_] come[VB;~I] .[PUNC]"/>
 </form>
 
-<p align="justify">The tough-construction (<a href="chapter6.html#sec6.6" target="_blank">section 6.6</a>)</p>
+<h3>The tough-construction (<a href="chapter6.html#sec6.6" target="_blank">section 6.6</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1176,7 +1402,21 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Voyager[NPR] is[BEP;~La] likely[ADJ] to[TO] survive[VB;~In/pr] a[D] billion[ADJ] years[NS] .[PUNC]"/>
 </form>
 
-<p align="justify">Subordinate conjunction with finite adverbial clauses (<a href="chapter6.html#sec6.7.1" target="_blank">section 6.7.1</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_provisional_] is[BEP;~La] likely[ADJ] for[P-CONN] the[D] spacecraft[N] to[TO] survive[VB;~I] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="Voyager[NPR] is[BEP;~La] likely[ADJ] for[P-CONN] the[D] spacecraft[N] to[TO] survive[VB;~I] .[PUNC]"/>
+</form>
+
+<h3>Subordinate conjunction with finite adverbial clauses (<a href="chapter6.html#sec6.7.1" target="_blank">section 6.7.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1184,7 +1424,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Tread[VB;~I] softly[ADV] because[P-CONN] you[PRO] tread[VBP;~Ipr] on[P-ROLE] my[PRO;_genm_] dreams[NS] .[PUNC]"/>
 </form>
 
-<p align="justify">Subordinate conjunction with to-infinitive clauses (<a href="chapter6.html#sec6.7.2" target="_blank">section 6.7.2</a>)</p>
+<h3>Subordinate conjunction with to-infinitive clauses (<a href="chapter6.html#sec6.7.2" target="_blank">section 6.7.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1192,7 +1432,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] need[VBP;~Tt] to[TO] spread[VB;~Tn] my[PRO;_genm_] wings[NS] and[CONJ] fly[VB;~I] ,[PUNC] in_order[P-CONN] to[TO] come[VB;~Ip] back[RP] .[PUNC]"/>
 </form>
 
-<p align="justify">Subordinate conjunction with participle clauses (<a href="chapter6.html#sec6.7.3" target="_blank">section 6.7.3</a>)</p>
+<h3>Subordinate conjunction with participle clauses (<a href="chapter6.html#sec6.7.3" target="_blank">section 6.7.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1218,7 +1458,27 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="Jones[NPR] sighed[VBD;~I] as_if[P-CONN] relieved[VVN;~Tn] .[PUNC]"/>
 </form>
 
-<p align="justify">Present participle clauses as preposition complements (<a href="chapter6.html#sec6.8" target="_blank">section 6.8</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] was[BED;~cat_Vg] having[HAG;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] was[BED;~cat_Vg] having[HAG;~cat_Ve] been[BEN;~cat_Vg] having[HAG;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="John[NPR] was[BED;~La] happy[ADJ] _*_[P-CONN] having[HAG;~cat_Ve] been[BEN;~cat_Vg] having[HAG;~Tn] some[D] tea[N] .[PUNC]"/>
+</form>
+
+<h3>Present participle clauses as preposition complements (<a href="chapter6.html#sec6.8" target="_blank">section 6.8</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1226,7 +1486,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO] sounded[VBD;~Ipr] like[P-ROLE] a[D] man[N] kicking[VAG;~Tn] a[D] melon[N] .[PUNC]"/>
 </form>
 
-<p align="justify">Relative clauses that are finite clauses (<a href="chapter6.html#sec6.9.1" target="_blank">section 6.9.1</a>)</p>
+<h3>Relative clauses that are finite clauses (<a href="chapter6.html#sec6.9.1" target="_blank">section 6.9.1</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1258,7 +1518,33 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] horse[N] which[RPRO] was[BED;~cat_Ve_passive_] jumped[VVN;~Tn.pr] over[P-ROLE] a[D] fence[N]"/>
 </form>
 
-<p align="justify">Relative clauses that are to-infinitive clauses (<a href="chapter6.html#sec6.9.2" target="_blank">section 6.9.2</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] know[VBP;~Tn] a[D] man[N] who[RPRO] Bill[NPR] saw[VBD;~Tn] and[CONJ] Mary[NPR] liked[VBD;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] know[VBP;~Tn] a[D] man[N] who[RPRO] saw[VBD;~Tn] Bill[NPR] and[CONJ] liked[VBD;~Tn] Mary[NPR] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] know[VBP;~Tn] a[D] man[N] who[RPRO] Bill[NPR] saw[VBD;~Tn] and[CONJ] liked[VBD;~Tn] Mary[NPR] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="I[PRO] know[VBP;~Tn] a[D] man[N] who[RPRO] Mary[NPR] likes[VBP;~Tn] and[CONJ] hopes[VBP;~Tf] will[MD;~cat_Vi] win[VB;~I] .[PUNC]"/>
+</form>
+
+<h3>Relative clauses that are to-infinitive clauses (<a href="chapter6.html#sec6.9.2" target="_blank">section 6.9.2</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1272,7 +1558,21 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="the[D] intention/time/person[N] to[TO] jump[VB;~Tn.pr] a[D] horse[N] over[P-ROLE] a[D] fence[N]"/>
 </form>
 
-<p align="justify">Reduced relative clauses that are present participle clauses (<a href="chapter6.html#sec6.9.3" target="_blank">section 6.9.3</a>)</p>
+<p align="justify"><b>Question</b></p>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~ex_V] no[Q] time[N] to[TO] lose[VB;~Tn] .[PUNC]"/>
+</form>
+
+<form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
+  <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
+  <input type="hidden" name="MODE" value="graph"/>
+  <input type="text" name="DATA" size="110" spellcheck="false" value="There[EX] was[BED;~ex_V] no[Q] time[N] to[TO] be[BE;~cat_Ve_passive_] lost[VVN;~Tn] .[PUNC]"/>
+</form>
+
+<h3>Reduced relative clauses that are present participle clauses (<a href="chapter6.html#sec6.9.3" target="_blank">section 6.9.3</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1280,7 +1580,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] horse[N] jumping[VAG;~Ipr] over[P-ROLE] a[D] fence[N]"/>
 </form>
 
-<p align="justify">Reduced relative clauses that are past participle clauses (<a href="chapter6.html#sec6.9.4" target="_blank">section 6.9.4</a>)</p>
+<h3>Reduced relative clauses that are past participle clauses (<a href="chapter6.html#sec6.9.4" target="_blank">section 6.9.4</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1288,7 +1588,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="a[D] horse[N] jumped[VVN;~Tn.pr] over[P-ROLE] a[D] fence[N]"/>
 </form>
 
-<p align="justify">Cleft constructions (<a href="chapter6.html#sec6.10" target="_blank">section 6.10</a>)</p>
+<h3>Cleft constructions (<a href="chapter6.html#sec6.10" target="_blank">section 6.10</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
@@ -1302,7 +1602,7 @@
   <input type="text" name="DATA" size="110" spellcheck="false" value="It[PRO;_cleft_] is[BEP;~cleft_Vn] him[PRO] that[RPRO] I[PRO] get[VBP;~Tn.pr] my[PRO;_genm_] sport[N] feelings[NS] from[P-ROLE] .[PUNC]"/>
 </form>
 
-<p align="justify">V_as_though/as_if/like-construction (<a href="chapter6.html#sec6.11" target="_blank">section 6.11</a>)</p>
+<h3>V_as_though/as_if/like-construction (<a href="chapter6.html#sec6.11" target="_blank">section 6.11</a>)</h3>
 
 <form target="_blank" action="https://oncoj.orinst.ox.ac.uk/cgi-bin/parse_dcg.sh" method="post">
   <button type="submit" name="submit_param" value="submit_value" class="btn-link">Parse</button>
