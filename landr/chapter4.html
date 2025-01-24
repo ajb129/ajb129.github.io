@@ -15,25 +15,27 @@
 <ul>
 <li>[rule 1] integrate as a clause final element a notional subject when the <tt>SbjType</tt> setting is <tt>provisional_sbj</tt>, discussed in section <a href="chapter6.html#sec6.5">6.5</a></li>
 <li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
-<li>[rule 3] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with active voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
-<li>[rule 4] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
-<li>[rule 5] include an adverbial prior to the verb complements</li>
-<li>[rule 6] include an adverbial after the verb complements</li>
+<li>[rule 3] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
+<li>[rule 4] include an adverbial prior to the verb complements</li>
+<li>[rule 5] include an adverbial after the verb complements</li>
 </ul>
 
 <dl><dt>(<a name="ex4.2">4.2</a>)</dt><dd>
-<tt>verb_complements_top_layer(Code,Store,provisional_sbj,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;provisional_sbj</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,filled_sbj,Voice,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NSBJ',L1,L0).</tt><br>
-<tt>verb_complements_top_layer(';~La',Store,derived_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_complements_top_layer(';~La',[],filled_sbj,active,L,[node('IP-INF-NSBJ',VL)|L0]),</tt><br>
+<tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,unfilled_sbj])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Code&nbsp;=&nbsp;';~La',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;derived_sbj,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Voice&nbsp;=&nbsp;active,</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType1,[filled_sbj,unfilled_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType,passive,VL,[]).</tt><br>
-<tt>verb_complements_top_layer(';~La',Store,derived_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_complements_top_layer(';~La',[],filled_sbj,active,L,[node('IP-INF-NSBJ',VL)|L0]),</tt><br>
-<tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,[],filled_sbj,Voice,L,[node('IP-INF-NSBJ',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType1,passive,VL,[]).</tt><br>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;neg(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,SbjType,Voice,L1,L0).</tt><br>
@@ -45,7 +47,7 @@
 <tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With [rules 5 and 6] of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With [rules 4 and 5] of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
 
 <ul>
 <li>[rule 1] adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
@@ -234,7 +236,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.19">4.19</a>), yet information is stored about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.9">6.9</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 3] of (<a href="chapter4.html#ex4.13">4.13</a>).</p>
+<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.19">4.19</a>), yet information is stored about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.10">6.10</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 3] of (<a href="chapter4.html#ex4.13">4.13</a>).</p>
 
 <br><h2><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Intransitive verbs</h2>
 
@@ -2097,10 +2099,10 @@
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NOB1',L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-DOB1',non_privileged,L,L2),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L2,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,passive,VL,[]).</tt><br>
-<tt>verb_complements_by_code(';~Cn.a',[np(ICH)],filled_sbj,active,[node('NP-DOB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Cn.a',[np(ICH)],filled_sbj,active,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_sbj,passive,VL,[]).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,passive,L,L0)&nbsp;--&gt;</tt><br>
@@ -2192,7 +2194,7 @@
 <dl><dt>(<a name="ex4.197">4.197</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D;_nphd_','this'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-DOB1&nbsp;(D;_nphd_&nbsp;this))</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;(D;_nphd_&nbsp;this))</tt><br>
 <tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;difficult))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(TO&nbsp;to)</tt><br>
@@ -2212,7 +2214,7 @@
 <dl><dt>(<a name="ex4.199">4.199</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[np(node('*ICH*-311',[]))],filled_sbj,active)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-311)</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;*ICH*-311)</tt><br>
 <tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;difficult))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(TO&nbsp;to)</tt><br>
