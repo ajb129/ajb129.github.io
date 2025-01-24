@@ -71,6 +71,7 @@
 <table border="1" cellpadding="10px">
 <tr><td><tt>PNX</tt></td><td>reflexive pronoun (e.g., <tt>myself</tt>, <tt>yourself</tt>, <tt>itself</tt>, <tt>ourselves</tt>) or reciprocal pronoun (<tt>each&lowbar;other</tt>, <tt>one&lowbar;another</tt>)</td></tr>
 <tr><td><tt>PRO</tt></td><td>personal pronoun (e.g., <tt>I</tt>, <tt>you</tt>, <tt>them</tt>, <tt>us</tt>)</td></tr>
+<tr><td><tt>PRO;_expletive_</tt></td><td>expletive <tt>it</tt> e.g., occuring in a weather construction (<i>it's raining</i>)</td></tr>
 <tr><td><tt>PRO;_ppge_</tt></td><td>nominal possessive personal pronoun (e.g., <tt>mine</tt>, <tt>yours</tt>, <tt>ours</tt>)</td></tr>
 <tr><td><tt>WPRO</tt></td><td>wh-pronoun (<tt>what</tt>, <tt>who</tt>, <tt>whom</tt>)</td></tr>
 <tr><td><tt>RPRO</tt></td><td>relative pronoun (<tt>which</tt>, <tt>who</tt>, <tt>whom</tt>, <tt>that</tt>)</td></tr>
@@ -84,6 +85,11 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO',Word)].</tt><br>
+<tt>noun_head_full(Type,[node('PRO;_expletive_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
 <tt>noun_head_full(Type,[node('NP-GENV',[node('PRO;_ppge_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
@@ -98,7 +104,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rules 4 and 5] of (<a href="chapter2.html#ex2.4">2.4</a>) involve the word class together with code information of <tt>PRO;_ppge_</tt> that results in the projection of a genitive case marked noun phrase (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rule 4] of (<a href="chapter2.html#ex2.4">2.4</a>) involves the word class with code <tt>PRO;_ppge_</tt> that results in the projection of a genitive case marked noun phrase (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
 
 <dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -328,8 +334,6 @@
 <tt>&nbsp;&nbsp;[w('EX',Word)].</tt><br>
 <tt>subject(cleft_sbj,[node('NP-SBJ',[node('PRO;_cleft_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_cleft_',Word)].</tt><br>
-<tt>subject(expletive_sbj,[node('NP-SBJ',[node('PRO;_expletive_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
 <tt>subject(provisional_sbj,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
 <tt>subject(filled_sbj,L,L0)&nbsp;--&gt;</tt><br>
@@ -338,13 +342,12 @@
 <tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first four rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first three rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
 
 <ul>
 <li>[rule 1] <tt>there_sbj</tt></li>
 <li>[rule 2] <tt>cleft_sbj</tt></li>
-<li>[rule 3] <tt>expletive_sbj</tt></li>
-<li>[rule 4] <tt>provisional_sbj</tt></li>
+<li>[rule 3] <tt>provisional_sbj</tt></li>
 </ul>
 
 <p><a name="table2.6">Table 2.6: Tags for subject indicating words</a></p>
@@ -352,20 +355,19 @@
 <table border="1" cellpadding="10px">
 <tr><td><tt>EX</tt></td><td>existential <tt>there</tt>, i.e., <i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
 <tr><td><tt>PRO;_cleft_</tt></td><td>cleft <tt>it</tt> occuring as part of a cleft construction (<i>so it was you that got them together</i>)</td></tr>
-<tr><td><tt>PRO;_expletive_</tt></td><td>expletive <tt>it</tt> e.g., occuring in a weather construction (<i>it's raining</i>)</td></tr>
 <tr><td><tt>PRO;_provisional_</tt></td><td>provisional <tt>it</tt> occuring with extraposition (<i>it bothered her that she probably would never know</i>)</td></tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with [rule 5] of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with [rule 4] of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
 
 <ul>
-<li>[rule 5] <tt>filled_sbj</tt></li>
+<li>[rule 4] <tt>filled_sbj</tt></li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.6">6.6</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
 
 <ul>
-<li>[rule 6] <tt>derived_sbj</tt></li>
+<li>[rule 5] <tt>derived_sbj</tt></li>
 </ul>
 
 <br><h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb words</h2>

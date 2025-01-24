@@ -37,8 +37,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rules 2&ndash;4 and 7 restrict how the clause <tt>SbjType</tt> parameter is set:</p>
 
 <ul>
-<li><tt>filled_sbj</tt> for [rule 2]</li>
-<li><tt>filled_sbj</tt> or <tt>expletive_sbj</tt> for [rules 3 or 4]</li>
+<li><tt>filled_sbj</tt> for [rules 2&ndash;4]</li>
 <li><tt>filled_sbj</tt> or <tt>derived_sbj</tt> for [rule 7]</li>
 </ul>
 
@@ -59,16 +58,10 @@
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,filled_sbj,imperative,active,L,L0).</tt><br>
 <tt>clause_top_layer(tag_question,[],L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L1),</tt><br>
-<tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,expletive_sbj])</tt><br>
-<tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;subject(SbjType,L1,L0).</tt><br>
+<tt>&nbsp;&nbsp;subject(filled_sbj,L1,L0).</tt><br>
 <tt>clause_top_layer(tag_question,[],L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_finite_layer(_,L,L1),</tt><br>
-<tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,expletive_sbj])</tt><br>
-<tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;subject(SbjType,L1,L0).</tt><br>
+<tt>&nbsp;&nbsp;subject(filled_sbj,L1,L0).</tt><br>
 <tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative])</tt><br>
