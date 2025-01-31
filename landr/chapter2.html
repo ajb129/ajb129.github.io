@@ -285,7 +285,7 @@
 
 <br><h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive markers</h2>
 
-<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head is signalled by the presence of either a genitive marker or genitive pronoun word from Table <a href="chapter2.html#table2.5">2.5</a>. Phrase structure integration follows from <tt>genm</tt> of (<a href="chapter2.html#ex2.23">2.23</a>) and <tt>pronoun_genm</tt> of (<a href="chapter2.html#ex2.24">2.24</a>).</p>
+<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head follows from presence of either a genitive marker or genitive pronoun word from Table <a href="chapter2.html#table2.5">2.5</a>. Phrase structure integration occurs with <tt>genm</tt> of (<a href="chapter2.html#ex2.23">2.23</a>) and <tt>pronoun_genm</tt> of (<a href="chapter2.html#ex2.24">2.24</a>).</p>
 
 <p><a name="table2.5">Table 2.5: Tags for genitive markers</a></p>
 
@@ -358,7 +358,7 @@
 <tr><td><tt>PRO;_provisional_</tt></td><td>provisional <tt>it</tt> occuring with extraposition (<i>it bothered her that she probably would never know</i>)</td></tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. Such a typical noun phrase subject is identified with [rule 4] of (<a href="chapter2.html#ex2.25">2.25</a>), which will also set the clause <tt>SbjType</tt> parameter to the value of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase, where this noun phrase will correspond to the &lsquo;do-er&rsquo;, &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the verb. [rule 4] of (<a href="chapter2.html#ex2.25">2.25</a>) identifies such a noun phrase while also setting the clause <tt>SbjType</tt> parameter to the value of:</p>
 
 <ul>
 <li>[rule 4] <tt>filled_sbj</tt></li>
@@ -456,11 +456,11 @@
 <tt>&nbsp;&nbsp;}.</tt><br>
 </dd></dl>
 
-<p align="justify">The collected information is checked for consistency:</p>
+<p align="justify">There is a check of collected word information:</p>
 
 <ul>
-<li><tt>Tag</tt> needs to be a member of <tt>Tag_list</tt>, which is a list of candidate tags obtained with a call to <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>) below restricted by the inflection information of <tt>Infl</tt> inherited from the clause context</li>
-<li><tt>Code</tt> needs to be a code licensed by a call to <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) below restricted by the first character of <tt>Tag</tt> and the local clause inflection information</li>
+<li><tt>Tag</tt> has to be a member of <tt>Tag_list</tt>, which is a list of candidate tags obtained with a call to <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>) below restricted by the inflection information of <tt>Infl</tt> inherited from the clause context</li>
+<li><tt>Code</tt> has to be a code licensed by a call to <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) below restricted by the first character of <tt>Tag</tt> and the local clause inflection information</li>
 </ul>
 
 <p align="justify">Once matched and licensed, the verb word information goes into the parse tree information accumulated with <tt>L</tt>.</p>

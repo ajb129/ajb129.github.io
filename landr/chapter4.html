@@ -47,7 +47,7 @@
 <tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With [rules 4 and 5] of (<a href="chapter4.html#ex4.2">4.2</a>), an adverbial is included with a call to an <tt>adverbial</tt> rule of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rules 4 and 5] of (<a href="chapter4.html#ex4.2">4.2</a>) include an adverbial item with <tt>adverbial</tt> of (<a href="chapter4.html#ex4.3">4.3</a>), which can pick up:</p>
 
 <ul>
 <li>[rule 1] adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
@@ -72,19 +72,19 @@
 
 <h3><a name="sec4.2.1">4.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;La</h3>
 
-<p align="justify">Code <tt>;~La</tt> has <tt>filled_sbj</tt> as its <tt>SbjType</tt> setting and <tt>active</tt> as its <tt>Voice</tt> setting and selects an adjective phrase with subject predicative function (<tt>ADJP-PRD2</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.4">4.4</a>), either:</p>
+<p align="justify">Code <tt>;~La</tt> has <tt>active</tt> as its <tt>Voice</tt> setting and selects an adjective phrase with subject predicative function (<tt>ADJP-PRD2</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.4">4.4</a>), either:</p>
 
 <ul>
-<li>[rule 1] the word list should only have content for an adjective phrase</li>
-<li>[rule 2] the word list should be empty and there should be <tt>adj(ICH)</tt> information for a stored adjective phrase index</li>
+<li>[rule 1] the word list should only have content for an adjective phrase that is not a catenative adjective phrase</li>
+<li>[rule 2] the word list should only have content for a catenative adjective phrase</li>
+<li>[rule 3] the word list should be empty and there should be <tt>adj(ICH)</tt> information for a stored adjective phrase index</li>
 </ul>
 
 <dl><dt>(<a name="ex4.4">4.4</a>)</dt><dd>
 <tt>verb_complements_by_code(';~La',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[catenative,non_privileged])</tt><br>
-<tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD2',Type,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD2',[],non_privileged,L,L0).</tt><br>
+<tt>verb_complements_by_code(';~La',Store,SbjType,active,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD2',Store,SbjType,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~La',[adjp(ICH)],filled_sbj,active,[node('ADJP-PRD2',[ICH])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
@@ -108,10 +108,26 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.7">4.7</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.8">4.8</a>).</p>
 
 <dl><dt>(<a name="ex4.7">4.7</a>)</dt><dd>
-<tt>[w('PRO','He'), w('BED',';~La','was'), w('ADJ;_cat_','unable'), w('TO','to'), w('VB',';~I','move'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO;_expletive_','It'), w('BEP',';~La','is'), w('ADJ','cold'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.8">4.8</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','cold')]),&nbsp;parse(verb_complements_by_code(';~La',[],filled_sbj,active)).</tt><br>
+<br>
+<tt>(ADJP-PRD2&nbsp;(ADJ&nbsp;cold))</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<p align="justify">There is an adjective as word list content for (<a href="chapter4.html#ex4.8">4.8</a>), making success possible under [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.9">4.9</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.10">4.10</a>).</p>
+
+<dl><dt>(<a name="ex4.9">4.9</a>)</dt><dd>
+<tt>[w('PRO','He'), w('BED',';~La','was'), w('ADJ;_cat_','unable'), w('TO','to'), w('VB',';~I','move'), w('PUNC','.')]</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex4.10">4.10</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ;_cat_','unable'), w('TO','to'), w('VB',';~I','move')]),&nbsp;parse(verb_complements_by_code(';~La',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(ADJP-PRD2&nbsp;(ADJ;_cat_&nbsp;unable)</tt><br>
@@ -121,23 +137,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Word list content for (<a href="chapter4.html#ex4.8">4.8</a>) is the adjective <tt>w('ADJ;_cat_','unable')</tt> together with following material for a <i>to</i>-infinitive clause. This is material for an adjective phrase when <tt>Type</tt> information is set to <tt>catenative</tt>, and so success is possible under [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.9">4.9</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.10">4.10</a>).</p>
-
-<dl><dt>(<a name="ex4.9">4.9</a>)</dt><dd>
-<tt>[w('PRO;_expletive_','It'), w('BEP',';~La','is'), w('ADJ','cold'), w('PUNC','.')]</tt><br>
-</dd></dl>
-
-<dl><dt>(<a name="ex4.10">4.10</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','cold')]),&nbsp;parse(verb_complements_by_code(';~La',[],filled_sbj,active)).</tt><br>
-<br>
-<tt>(ADJP-PRD2&nbsp;(ADJ&nbsp;cold))</tt><br>
-<br>
-<tt>yes</tt><br>
-</dd></dl>
-
-<p align="justify">There is an adjective as word list content for (<a href="chapter4.html#ex4.10">4.10</a>), making success possible under [rule 1] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
+<p align="justify">Word list content for (<a href="chapter4.html#ex4.10">4.10</a>) is the adjective <tt>w('ADJ;_cat_','unable')</tt> together with following material for a <i>to</i>-infinitive clause. This is material for an adjective phrase when <tt>Type</tt> information is set to the value from a subject type setting (so either: <tt>filled_sbj</tt>, <tt>there_sbj</tt>, <tt>cleft_sbj</tt>, <tt>provisional_sbj</tt>, or <tt>derived_sbj</tt>) and so success is possible under [rule 2] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.11">4.11</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.12">4.12</a>).</p>
 
@@ -218,7 +218,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.19">4.19</a>), yet information is stored about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.10">6.10</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 2] of (<a href="chapter4.html#ex4.13">4.13</a>).</p>
+<p align="justify">The word list is empty for (<a href="chapter4.html#ex4.19">4.19</a>), yet there is information about a relative clause trace (<tt>np(node('*T*',[]))</tt>) (see section <a href="chapter6.html#sec6.10">6.10</a>), allowing the <tt>verb_complements_by_code</tt> call to succeed under [rule 2] of (<a href="chapter4.html#ex4.13">4.13</a>).</p>
 
 <br><h2><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Intransitive verbs</h2>
 
@@ -1153,16 +1153,16 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.110">4.110</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.111">4.111</a>).</p>
 
 <dl><dt>(<a name="ex4.110">4.110</a>)</dt><dd>
-<tt>[w('D;_nphd_','something'), w('RPRO','that'), w('PRO','he'), w('VBP',';~Tnt','beileves'), w('TO','to'), w('BE',';~La','be'), w('ADJ','true')]</tt><br>
+<tt>[w('D;_nphd_','something'), w('RPRO','that'), w('PRO','he'), w('VBP',';~Tnt','believes'), w('TO','to'), w('BE',';~La','be'), w('ADJ','correct')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.111">4.111</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~La','be'), w('ADJ','true')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[np(node('*ICH*-243',[]))],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~La','be'), w('ADJ','correct')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[np(node('*ICH*-243',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;*ICH*-243)</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~La&nbsp;be)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-PRD2&nbsp;(ADJ&nbsp;true))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-PRD2&nbsp;(ADJ&nbsp;correct))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2056,27 +2056,27 @@
 <dl><dt>(<a name="ex4.187">4.187</a>)</dt><dd>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,L1),</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L1,L0).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[np(ICH)],filled_sbj,active,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,active,[node('NP-OB1',[node('PRO;_provisional_',[node(Word,[])])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)],</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item3('-NOB1',L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,L2),</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L2,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L2,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,passive,VL,[]).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[np(ICH)],filled_sbj,active,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_sbj,passive,VL,[]).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,passive,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~Cn.a',[],filled_sbj,passive,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('-PRD',non_privileged,L,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('-PRD',[],non_privileged,L,[node('IP-INF-NOB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer([],filled_sbj,passive,VL,[]).</tt><br>
 </dd></dl>
 
@@ -2352,7 +2352,7 @@
 
 <h3><a name="sec4.6.3">4.6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Cn.n/a</h3>
 
-<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>) that is headed by the preposition <i>as</i> and that contains either a noun phrase or an adjective phrase. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.215">4.215</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
+<p align="justify">Code <tt>;~Cn.n/a</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a preposition phrase with object predicative function (<tt>PP-PRD</tt>) headed by the preposition <i>as</i> and containing a complement that is either a noun phrase or an adjective phrase. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.215">4.215</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 <li>[rule 1] content for the object noun phrase occurs before content for the object predicative preposition phrase with internal noun phrase in the word list</li>
@@ -2374,13 +2374,13 @@
 <tt>verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,[node('PP-PRD',[node('P-ROLE',[node('as',[])]),ADJP])|L0]),</tt><br>
 <tt>&nbsp;&nbsp;[w('P-ROLE','as')],</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('',non_privileged,[ADJP],[]).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',[],non_privileged,[ADJP],[]).</tt><br>
 <tt>verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,passive,[node('PP-PRD',[node('P-ROLE',[node('as',[])]),NP])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('P-ROLE','as')],</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',non_privileged,[NP],[]).</tt><br>
 <tt>verb_complements_by_code(';~Cn.n&sol;a',[],filled_sbj,passive,[node('PP-PRD',[node('P-ROLE',[node('as',[])]),ADJP])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('P-ROLE','as')],</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('',non_privileged,[ADJP],[]).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',[],non_privileged,[ADJP],[]).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.216">4.216</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.217">4.217</a>).</p>
@@ -2695,7 +2695,7 @@
 
 <h3><a name="sec4.7.1">4.7.1</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24A</h3>
 
-<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code is used when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.244">4.244</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
+<p align="justify">Code <tt>;~VP24A</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with object predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24A</tt> code applies when the verb is neither <small style="font-size: 75%">GET</small> with the <tt>;~VP24C</tt> meaning nor <small style="font-size: 75%">HAVE</small>. For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.244">4.244</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings:</p>
 
 <ul>
 <li>[rule 1] content for the object noun phrase occurs before content for the passive voice past participle clause in the word list</li>
@@ -2755,7 +2755,7 @@
 
 <h3><a name="sec4.7.2">4.7.2</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24B</h3>
 
-<p align="justify">Code <tt>;~VP24B</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24B</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> indicating what its subject experiences, undergoes or suffers. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.249">4.249</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
+<p align="justify">Code <tt>;~VP24B</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24B</tt> code applies when the main verb is <small style="font-size: 75%">HAVE</small> indicating what its subject experiences, undergoes or suffers. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.249">4.249</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
 
 <dl><dt>(<a name="ex4.249">4.249</a>)</dt><dd>
 <tt>verb_complements_by_code(';~VP24B',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
@@ -2782,7 +2782,7 @@
 
 <h3><a name="sec4.7.3">4.7.3</a>&nbsp;&nbsp;&nbsp;&nbsp;VP24C</h3>
 
-<p align="justify">Code <tt>;~VP24C</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24C</tt> code is used when the main verb is <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">GET</small> meaning &lsquo;cause to be&rsquo;. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.252">4.252</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
+<p align="justify">Code <tt>;~VP24C</tt> selects a noun phrase with object function (<tt>NP-OB1</tt>) and a passive voice past participle (<i>-ed&sol;-en</i>) clause with predicative function (<tt>IP-PPL-PRD</tt>). The <tt>;~VP24C</tt> code applies when the main verb is <small style="font-size: 75%">HAVE</small> or <small style="font-size: 75%">GET</small> meaning &lsquo;cause to be&rsquo;. For a call of the <tt>verb_complements_by_code</tt> rule of (<a href="chapter4.html#ex4.252">4.252</a>), there has to be content from the word list for a noun phrase followed by a passive voice past participle clause.</p>
 
 <dl><dt>(<a name="ex4.252">4.252</a>)</dt><dd>
 <tt>verb_complements_by_code(';~VP24C',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>

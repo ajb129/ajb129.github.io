@@ -218,7 +218,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Matthews (1998), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG) and Head-driven Phrase Structure Grammar (HPSG).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to include phrase structure grammar rules with left recursion, like [rules 2 and 5] of (<a href="chapter1.html#ex1.1">1.1</a>) above. When there is left recursion, avoiding infinite loops from rule calls requires remembering what has already been evaluated. This is possible with a technique called tabling introduced by Swift and Warren (1994). Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022). Christiansen and Dahl (2018) discuss the evolution of natural language processing as it relates to Logic Programming, with particular focus on DCGs and tabling.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We will want to include phrase structure grammar rules with left recursion, like [rules 2 and 5] of (<a href="chapter1.html#ex1.1">1.1</a>) above. When there is left recursion, avoiding infinite loops from rule calls requires remembering results. This is possible with a technique called tabling introduced by Swift and Warren (1994). Tabling is a feature of some Prolog systems, notably, the XSB Tabling Prolog system (Swift and Warren 2022). Christiansen and Dahl (2018) discuss the evolution of natural language processing as it relates to Logic Programming, with particular focus on DCGs and tabling.</p>
 
 <br><h2><a name="sec1.4">1.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Structural analysis and labelling in this book</h2>
 
@@ -504,9 +504,9 @@
 <tt>&nbsp;&nbsp;noun_phrase('',_,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[catenative,non_interrogative,interrogative,relative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative,interrogative,relative,filled_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase('',Type,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase('',[],Type,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;initial_adverbial(L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>

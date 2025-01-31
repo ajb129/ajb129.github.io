@@ -3,15 +3,17 @@
 
 <br><h2><a name="sec6.1">6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">This chapter is about integrating clause subordination into a parse. A clause can be subordinate in virtue of being an argument for a containing clause, such as providing an object. Rules for clause arguments are discussed in section <a href="chapter6.html#sec6.2">6.2</a> (for <i>that</i>-clauses), section <a href="chapter6.html#sec6.3">6.3</a> (for <i>to</i>-infinitive clauses) and section <a href="chapter6.html#sec6.4">6.4</a> (for embedded questions). Section <a href="chapter6.html#sec6.4">6.4</a> also notes the possibility for embedded questions to serve as the complement component of preposition phrases.</p>
+<p align="justify">This chapter details cases of clause subordination.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a subordinate clause has a subject role within the containing clause, it will often occur as a notional subject extraposed to the right edge of the containing clause and in co-occurrence with a provisional subject <i>it</i> of the containing clause. Section <a href="chapter6.html#sec6.5">6.5</a> notes how parsing can capture the ripple effect connecting a provisional subject <i>it</i> and an extraposed notional subject. Similarly, section <a href="chapter6.html#sec6.6">6.6</a> shows the <i>tough</i>-construction with its ripple effect connecting a derived subject noun phrase and an extraposed notional subject that is a <i>to</i>-infinitive clause.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a clause provides the argument content for a containing clause, such as being the direct object, it is subordinate. Rules for clause arguments are discussed in section <a href="chapter6.html#sec6.2">6.2</a> (for <i>that</i>-clauses), section <a href="chapter6.html#sec6.3">6.3</a> (for <i>to</i>-infinitive clauses) and section <a href="chapter6.html#sec6.4">6.4</a> (for embedded questions). Section <a href="chapter6.html#sec6.4">6.4</a> also notes the possibility for embedded questions to serve as the complement component of preposition phrases.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a subordinate clause has a subject role within the containing clause, it will often occur as a notional subject extraposed to the right edge of the containing clause and in co-occurrence with a provisional subject <i>it</i> of the containing clause. Section <a href="chapter6.html#sec6.5">6.5</a> notes how parsing captures this co-occurrence as a ripple effect. Similarly, section <a href="chapter6.html#sec6.6">6.6</a> shows the <i>tough</i>-construction, where a derived subject noun phrase co-occurs with an extraposed notional subject that is a <i>to</i>-infinitive clause with passive voice.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a contrast to having embedded <i>to</i>-infinitive clauses that are extraposed notional subjects, section <a href="chapter6.html#sec6.7">6.7</a> looks at the catenative adjective construction, where an embedded <i>to</i>-infinitive clause acts to extend the embedding clause.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A clause can also be the subordinate component of a subordinate conjunction, which is covered in section <a href="chapter6.html#sec6.8">6.8</a>. Section <a href="chapter6.html#sec6.9">6.9</a> includes the possibility of having a participle clause as the selected complement of a preposition to give a preposition phrase.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A clause can also be the subordinate component of a subordinate conjunction, as section <a href="chapter6.html#sec6.8">6.8</a> shows. Section <a href="chapter6.html#sec6.9">6.9</a> includes the possibility of having a participle clause as the selected complement of a preposition to give a preposition phrase.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In section <a href="chapter6.html#sec6.10">6.10</a>, subordination is also seen to occur with relative clauses, where a clause possibly with an initial relative pronoun and with an absence elsewhere of a selected clause item acts as a modifier. Section <a href="chapter6.html#sec6.11">6.11</a> adds support for cleft constructions.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In section <a href="chapter6.html#sec6.10">6.10</a>, clause subordination is also seen to occur with relative clauses, where a clause acts as a noun phrase internal modifier with an internal absence of a selected clause item and possibly with an initial phrase containing a relative pronoun. Section <a href="chapter6.html#sec6.11">6.11</a> adds support for cleft constructions.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The chapter ends with a look at the <i>V_as_though&sol;as_if&sol;like</i>-construction in section <a href="chapter6.html#sec6.12">6.12</a>.</p>
 
@@ -93,7 +95,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The calls of (<a href="chapter6.html#ex6.5">6.5</a>) show <tt>cp_that</tt> taking <tt>-OB1</tt> function information as an extension to the <tt>CP-THT</tt> tag and inheriting a <tt>Store</tt> parameter that contains <tt>np(node('*ICH*-163',[]))</tt>. This inherited <tt>np(node('*ICH*-163',[]))</tt> is then removed from the <tt>Store</tt> parameter so that it can function as the subject of the <i>that</i>-clause through a call of [rule 1] of <tt>clause_that_layer</tt>, which goes on to call <tt>clause_middle_layer</tt>.</p>
+<p align="justify">The calls of (<a href="chapter6.html#ex6.5">6.5</a>) show <tt>cp_that</tt> taking <tt>-OB1</tt> function information as an extension to the <tt>CP-THT</tt> tag and inheriting a <tt>Store</tt> parameter that contains <tt>np(node('*ICH*-163',[]))</tt>. A call of [rule 1] of <tt>clause_that_layer</tt> removes <tt>np(node('*ICH*-163',[]))</tt> from the <tt>Store</tt> parameter so that it can function as the subject of the <i>that</i>-clause followed by a <tt>clause_middle_layer</tt> call.</p>
 
 <dl><dt>(<a name="ex6.5">6.5</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -507,7 +509,7 @@
 
 <p align="justify">A <i>to</i>-infinitive clause is a non-finite clause with a <i>to</i> word (see section <a href="chapter2.html#sec2.10">2.10</a>) and a following verb in the infinitive form. In addition to being able to extend the same clause as part of a catenative construction (as seen in section <a href="chapter5.html#sec5.4.2">5.4.2</a>), a <i>to</i>-infinitive clause can also form a distinct clause that is an argument for a containing clause. Examples where a <i>to</i>-infinitive clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.7">4.4.7</a> (with code <tt>;~Tt</tt>), <a href="chapter4.html#sec4.4.8">4.4.8</a> (with code <tt>;~Tnt</tt>), <a href="chapter4.html#sec4.5.7">4.5.7</a> (with code <tt>;~Dn.t</tt>) and <a href="chapter4.html#sec4.6.1">4.6.1</a> (with code <tt>;~Cn.a</tt> when there is a provisional object <i>it</i>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <i>to</i>-infinitive clause can be created with the rules of <tt>to_inf_layer</tt> in (<a href="chapter6.html#ex6.8">6.8</a>). The first three rules of <tt>to_inf_layer</tt> are non-recursive and pick up from the word list an initial <i>to</i> word. These three rules differ as follows:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of <tt>to_inf_layer</tt> in (<a href="chapter6.html#ex6.8">6.8</a>) create <i>to</i>-infinitive clauses. The first three rules are non-recursive and pick up from the word list an initial <i>to</i> word. These three rules differ as follows:</p>
 
 <ul>
 <li>[rule 1] for an <tt>active</tt> clause, calls <tt>verb_phrase_layer</tt> with the clause as <tt>infinitive</tt> and <tt>active</tt></li>
@@ -576,7 +578,7 @@
 
 <br><h2><a name="sec6.4">6.4</a>&nbsp;&nbsp;&nbsp;&nbsp;CP-QUE projections that are embedded question clauses</h2>
 
-<p align="justify">An embedded question clause is formed by having an initial clause component that is either:</p>
+<p align="justify">An embedded question clause has an initial clause component that is either:</p>
 
 <dl>
 <dt>(i)</dt><dd>an embedded question clause marker tagged <tt>WQ</tt>, which is either <tt>whether</tt> or <tt>if</tt></dd>
@@ -649,7 +651,7 @@
 <tt>&nbsp;&nbsp;cp_embedded_que_to_inf_tail(Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a variation of <tt>cp_embedded_que</tt>, there is also <tt>cp_embedded_que3</tt> of (<a href="chapter6.html#ex6.13">6.13</a>). This creates an embedded question where control is blocked when the embedded question is a <i>to</i>-infinitive clause.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a variation of <tt>cp_embedded_que</tt>, there is also <tt>cp_embedded_que3</tt> of (<a href="chapter6.html#ex6.13">6.13</a>). This creates an embedded question with control always blocked, including when the embedded question is a <i>to</i>-infinitive clause.</p>
 
 <dl><dt>(<a name="ex6.13">6.13</a>)</dt><dd>
 <tt>cp_embedded_que3(Ext,Store,[node(Label,[node('IP-SUB',IL)])|L],L)&nbsp;--&gt;</tt><br>
@@ -678,7 +680,7 @@
 
 <h3><a name="sec6.4.1">6.4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Embedded question clauses that are finite clauses with statement word order</h3>
 
-<p align="justify">The <tt>clause_embedded_que_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.14">6.14</a>) collect the content of an embedded question clause that is a finite clause with statement word order. This gives rules that differ in how the embedded question is introduced:</p>
+<p align="justify">The <tt>clause_embedded_que_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.14">6.14</a>) collect the content of an embedded question clause that is a finite clause with statement word order. This gives rules that differ in how they introduce the embedded question:</p>
 
 <ul>
 <li>[rule 1] picks up with <tt>comp_wq</tt> an initial embedded question clause marker before finding the remaining clause content with <tt>clause_top_layer</tt>, which receives <tt>statement_order</tt> as the value for its clause <tt>Type</tt> parameter.</li>
@@ -1562,7 +1564,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a preposition complement that is an embedded question finite clause with statement word order, consider (<a href="chapter6.html#ex6.24">6.24</a>).</p>
 
 <dl><dt>(<a name="ex6.24">6.24</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','concerned'), w('P-ROLE','with'), w('WADV','how'), w('PRO','we'), w('MD',';~cat_Vi','can'), w('VB',';~Tn','save'), w('NS','hedgehogs')]),&nbsp;parse(adjective_phrase('-PRD2',non_privileged)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('ADJ','concerned'), w('P-ROLE','with'), w('WADV','how'), w('PRO','we'), w('MD',';~cat_Vi','can'), w('VB',';~Tn','save'), w('NS','hedgehogs')]),&nbsp;parse(adjective_phrase('-PRD2',[],non_privileged)).</tt><br>
 <br>
 <tt>(ADJP-PRD2&nbsp;(ADJ&nbsp;concerned)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;with)</tt><br>
@@ -2409,7 +2411,7 @@
 <tt>&nbsp;&nbsp;ip_ppl_active(Ext,[],filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a variation of <tt>notional_item</tt>, there is also <tt>notional_item3</tt> of (<a href="chapter6.html#ex6.30">6.30</a>) that creates a notional item where control into the clause of the notional item is blocked. Such a notional item occurs when the notional item is an object in calls of <tt>verb_complements_by_code</tt> when the verb code is <tt>';~Cn.a'</tt> (see section <a href="chapter4.html#sec4.6.1">4.6.1</a>) and when the verb code is <tt>';~Cn.n'</tt> (see section <a href="chapter4.html#sec4.6.2">4.6.2</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a variation of <tt>notional_item</tt>, there is also <tt>notional_item3</tt> of (<a href="chapter6.html#ex6.30">6.30</a>). This creates a notional item as an object in calls of <tt>verb_complements_by_code</tt> with verb code <tt>';~Cn.a'</tt> (see section <a href="chapter4.html#sec4.6.1">4.6.1</a>) or <tt>';~Cn.n'</tt> (see section <a href="chapter4.html#sec4.6.2">4.6.2</a>).</p>
 
 <dl><dt>(<a name="ex6.30">6.30</a>)</dt><dd>
 <tt>notional_item3(Ext,L,L0)&nbsp;--&gt;</tt><br>
@@ -3986,16 +3988,16 @@
                           <td>
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
-                              <td colspan="2" style="text-align: center; vertical-align: middle;">
-                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>catenative</b></small></tt>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>adjective_phrase <small><b>-PRD2</b></small>&nbsp;<small><b>filled_sbj</b></small></tt>
                               </td>
                               </tr>
                               <tr>
                               <td>
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
-                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adjective_phrase_layer <small><b>catenative</b></small></tt>
+                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                  <tt>adjective_phrase_layer <small><b>filled_sbj</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -4014,37 +4016,11 @@
                                       </tr>
                                       </table>
                                   </td>
-                                  </tr>
-                                  </table>
-                              </td>
-                              <td>
-                                  <table cellpadding="5px" style="border:2px solid;">
-                                  <tr>
-                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                  <tt>to_inf_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
-                                  </td>
-                                  </tr>
-                                  <tr>
-                                  <td>
-                                      <table cellpadding="5px" style="border:2px solid;">
-                                      <tr>
-                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>to</tt>
-                                      </td>
-                                      </tr>
-                                      <tr>
-                                      <td>
-                                          <br>
-                                          <tt>[w(&#39;TO&#39;,&#39;to&#39;)]</tt>
-                                      </td>
-                                      </tr>
-                                      </table>
-                                  </td>
                                   <td>
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                      <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>infinitive</b></small>&nbsp;<small><b>active</b></small></tt>
+                                      <tt>to_inf_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -4052,13 +4028,13 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>verb <small><b>infinitive</b></small>&nbsp;<small><b>;~In/pr</b></small></tt>
+                                          <tt>to</tt>
                                           </td>
                                           </tr>
                                           <tr>
                                           <td>
                                               <br>
-                                              <tt>[w(&#39;VB&#39;,&#39;;~In/pr&#39;,&#39;survive&#39;)]</tt>
+                                              <tt>[w(&#39;TO&#39;,&#39;to&#39;)]</tt>
                                           </td>
                                           </tr>
                                           </table>
@@ -4066,8 +4042,8 @@
                                       <td>
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
-                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>verb_complements_top_layer <small><b>;~In/pr</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                          <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                          <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>infinitive</b></small>&nbsp;<small><b>active</b></small></tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -4075,7 +4051,22 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>verb_complements_by_code <small><b>;~In/pr</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                              <tt>verb <small><b>infinitive</b></small>&nbsp;<small><b>;~In/pr</b></small></tt>
+                                              </td>
+                                              </tr>
+                                              <tr>
+                                              <td>
+                                                  <br>
+                                                  <tt>[w(&#39;VB&#39;,&#39;;~In/pr&#39;,&#39;survive&#39;)]</tt>
+                                              </td>
+                                              </tr>
+                                              </table>
+                                          </td>
+                                          <td>
+                                              <table cellpadding="5px" style="border:2px solid;">
+                                              <tr>
+                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                              <tt>verb_complements_top_layer <small><b>;~In/pr</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -4083,7 +4074,7 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
+                                                  <tt>verb_complements_by_code <small><b>;~In/pr</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -4091,49 +4082,23 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
+                                                      <tt>noun_phrase <small><b>-CLR</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
                                                       <td>
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
-                                                          <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
+                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
                                                           <td>
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
-                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>determiner_layer <small><b>non_privileged</b></small></tt>
-                                                              </td>
-                                                              </tr>
-                                                              <tr>
-                                                              <td>
-                                                                  <table cellpadding="5px" style="border:2px solid;">
-                                                                  <tr>
-                                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>det <small><b>non_privileged</b></small></tt>
-                                                                  </td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                  <td>
-                                                                      <br>
-                                                                      <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
-                                                                  </td>
-                                                                  </tr>
-                                                                  </table>
-                                                              </td>
-                                                              </tr>
-                                                              </table>
-                                                          </td>
-                                                          <td>
-                                                              <table cellpadding="5px" style="border:2px solid;">
-                                                              <tr>
                                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                              <tt>internal_np_higher_layer</tt>
+                                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
@@ -4141,7 +4106,7 @@
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
                                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                  <tt>adjective_phrase <small><b>non_privileged</b></small></tt>
+                                                                  <tt>determiner_layer <small><b>non_privileged</b></small></tt>
                                                                   </td>
                                                                   </tr>
                                                                   <tr>
@@ -4149,24 +4114,13 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
+                                                                      <tt>det <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
                                                                       <td>
-                                                                          <table cellpadding="5px" style="border:2px solid;">
-                                                                          <tr>
-                                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>adj <small><b>non_interrogative</b></small></tt>
-                                                                          </td>
-                                                                          </tr>
-                                                                          <tr>
-                                                                          <td>
-                                                                              <br>
-                                                                              <tt>[w(&#39;ADJ&#39;,&#39;billion&#39;)]</tt>
-                                                                          </td>
-                                                                          </tr>
-                                                                          </table>
+                                                                          <br>
+                                                                          <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
                                                                       </td>
                                                                       </tr>
                                                                       </table>
@@ -4177,7 +4131,7 @@
                                                               <td>
                                                                   <table cellpadding="5px" style="border:2px solid;">
                                                                   <tr>
-                                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
                                                                   <tt>internal_np_higher_layer</tt>
                                                                   </td>
                                                                   </tr>
@@ -4186,7 +4140,7 @@
                                                                       <table cellpadding="5px" style="border:2px solid;">
                                                                       <tr>
                                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                      <tt>internal_np_lower_layer</tt>
+                                                                      <tt>adjective_phrase <small><b>non_privileged</b></small></tt>
                                                                       </td>
                                                                       </tr>
                                                                       <tr>
@@ -4194,13 +4148,61 @@
                                                                           <table cellpadding="5px" style="border:2px solid;">
                                                                           <tr>
                                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                                          <tt>noun</tt>
+                                                                          <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
                                                                           </td>
                                                                           </tr>
                                                                           <tr>
                                                                           <td>
-                                                                              <br>
-                                                                              <tt>[w(&#39;NS&#39;,&#39;years&#39;)]</tt>
+                                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                                              <tr>
+                                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                              <tt>adj <small><b>non_interrogative</b></small></tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                              <td>
+                                                                                  <br>
+                                                                                  <tt>[w(&#39;ADJ&#39;,&#39;billion&#39;)]</tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              </table>
+                                                                          </td>
+                                                                          </tr>
+                                                                          </table>
+                                                                      </td>
+                                                                      </tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  <td>
+                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                      <tr>
+                                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                      <tt>internal_np_higher_layer</tt>
+                                                                      </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                      <td>
+                                                                          <table cellpadding="5px" style="border:2px solid;">
+                                                                          <tr>
+                                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                          <tt>internal_np_lower_layer</tt>
+                                                                          </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                          <td>
+                                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                                              <tr>
+                                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                              <tt>noun</tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                              <td>
+                                                                                  <br>
+                                                                                  <tt>[w(&#39;NS&#39;,&#39;years&#39;)]</tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              </table>
                                                                           </td>
                                                                           </tr>
                                                                           </table>
@@ -4294,7 +4296,7 @@
 
 <br><h2><a name="sec6.8">6.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction</h2>
 
-<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where preposition phrases with an adverbial function role and adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens while the content of the containing clause is identified with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="chapter5.html#sec5.2">5.2</a>) that subsequently call <tt>adverbial</tt> from section <a href="chapter2.html#sec2.10">2.10</a>. To detect the subordinate clause of a subordinate conjunction, <tt>adverbial</tt> calls the <tt>scon_clause</tt> rules of (<a href="chapter6.html#ex6.45">6.45</a>).</p>
+<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where preposition phrases with an adverbial function role and adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="chapter5.html#sec5.2">5.2</a>) that subsequently call <tt>adverbial</tt> from section <a href="chapter2.html#sec2.10">2.10</a>. To detect the subordinate clause of a subordinate conjunction, <tt>adverbial</tt> calls the <tt>scon_clause</tt> rules of (<a href="chapter6.html#ex6.45">6.45</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.45">6.45</a>) differ in regard to the type of the subordinate clause contained, that is, either:</p>
 
@@ -5477,7 +5479,7 @@
 <li>[rule 2] having <i>having</i> as a catenative verb that selects a past participle (<i>-ed&sol;-en</i>) clause as its complement, which is not otherwise possible</li>
 </ul>
 
-<p align="justify">[Rule 2] can only be called if the <tt>Infl</tt> setting is <tt>hag_participle</tt>, which is only possible with subordinate conjunction.</p>
+<p align="justify">[Rule 2] requires a <tt>hag_participle</tt> setting for the <tt>Infl</tt> parameter, which is only possible with subordinate conjunction.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in addition to the participle clause being a present participle clause with [rule 3], there is also the possibility for the participle clause to be:</p>
 
@@ -8007,7 +8009,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second result of (<a href="chapter6.html#ex6.64">6.64</a>) comes from an alternative analysis where the present participle clause is a reduced relative clause. The next section introduces rule support for reduced relative clauses.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second result of (<a href="chapter6.html#ex6.64">6.64</a>) comes from an alternative analysis where the present participle clause is a reduced relative clause. The next section includes rule support for reduced relative clauses.</p>
 
 <br><h2><a name="sec6.10">6.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses</h2>
 
@@ -10791,7 +10793,7 @@
 
 <h3><a name="sec6.10.3">6.10.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are present participle clauses</h3>
 
-<p align="justify">Reduced relative clauses can have the form of present participle clauses occurring directly inside a noun phrase whose noun head is modified, so that inside the relative clause there is a present participle (<i>-ing</i>) verb and its complements, but no finite verb and no clause subject.</p>
+<p align="justify">Reduced relative clauses can have the form of present participle clauses occurring directly inside a noun phrase as a modifier of the noun head. Inside the reduced relative clause there is a present participle (<i>-ing</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a present participle clause, consider (<a href="chapter6.html#ex6.91">6.91</a>).</p>
 
@@ -11124,7 +11126,7 @@
 
 <h3><a name="sec6.10.4">6.10.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Reduced relative clauses that are past participle clauses</h3>
 
-<p align="justify">In addition to being present participle clauses, reduced relative clauses can also have the form of past participle clauses occurring directly inside a noun phrase whose noun head is modified, so that inside the relative clause there is a past participle (<i>-ed&sol;-en</i>) verb and its complements, but no finite verb and no clause subject.</p>
+<p align="justify">In addition to being present participle clauses, reduced relative clauses can also have the form of past participle clauses occurring directly inside a noun phrase as a modifier of the noun head. Inside the reduced relative clause there is a past participle (<i>-ed&sol;-en</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle clause, consider (<a href="chapter6.html#ex6.93">6.93</a>).</p>
 

@@ -7,7 +7,7 @@
 
 <br><h2><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Clause structure</h2>
 
-<p align="justify">This section provides rules for identifying clause structure content, from initial elements through to the subject and then onwards to the start of the verb with its complements. Notably, the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) in section <a href="chapter5.html#sec5.2.1">5.2.1</a> and (<a href="chapter5.html#ex5.2">5.2</a>) in section <a href="chapter5.html#sec5.2.2">5.2.2</a> will establish initial elements up to and including the clause subject. All have a <tt>Store</tt> parameter to list index information associated with clause elements that will have been identified and yet await being integrated with the overall structure of the clause. Also, all have a clause <tt>Type</tt> parameter, which can be set to:</p>
+<p align="justify">This section provides rules for identifying clause structure content, from initial elements through to the subject and then onwards to the start of the verb with its complements. Notably, the <tt>clause_top_layer</tt> rules of (<a href="chapter5.html#ex5.1">5.1</a>) in section <a href="chapter5.html#sec5.2.1">5.2.1</a> and (<a href="chapter5.html#ex5.2">5.2</a>) in section <a href="chapter5.html#sec5.2.2">5.2.2</a> will establish initial elements up to and including the clause subject. All have a <tt>Store</tt> parameter to list index information associated with identified clause elements that await integratation into the clause. Also, all have a clause <tt>Type</tt> parameter, which can be set to:</p>
 
 <ul>
 <li><tt>statement_order</tt></li>
@@ -129,7 +129,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;adjective_phrase(Index,interrogative,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;adjective_phrase(Index,[],interrogative,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(matrix_constituent_interrogative,[adjp(node(ICH,[]))|Store],L1,L0).</tt><br>
 <tt>clause_top_layer(matrix_interrogative,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
@@ -390,7 +390,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Notably, once <tt>verb_phrase_layer</tt> is reached in (<a href="chapter5.html#ex5.7">5.7</a>), the clause information established has:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Notably, once (<a href="chapter5.html#ex5.7">5.7</a>) reaches <tt>verb_phrase_layer</tt>, the clause information has:</p>
 
 <ul>
 <li>the <tt>SbjType</tt> parameter set to <tt>filled_sbj</tt></li>
@@ -431,7 +431,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Note how operator <small style="font-size: 75%">DO</small>, as seen in (<a href="chapter5.html#ex5.9">5.9</a>), is distinguished by having no verb code with its word list contribution (<tt>w('DOP','','do')</tt>) and so occurring with only its word class tag (<tt>DOP</tt>) in the tree structure.</p>
+<p align="justify">Note how operator <small style="font-size: 75%">DO</small>, as seen in (<a href="chapter5.html#ex5.9">5.9</a>), has no verb code with its word list contribution (<tt>w('DOP','','do')</tt>) and so occurs with only its word class tag (<tt>DOP</tt>) in the tree structure.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Calls to reach the output of (<a href="chapter5.html#ex5.9">5.9</a>) follow (<a href="chapter5.html#ex5.10">5.10</a>).</p>
 
@@ -2135,7 +2135,7 @@
 
 <br><h2><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Statement word order with clause middle layers</h2>
 
-<p align="justify">So far, we have only seen subjects from a <tt>subject</tt> call form the subject of a matrix interrogative. Statement word order, which also has to include a subject, is accomplished by a non-recursive call of <tt>clause_top_layer</tt> [rule 1] of (<a href="chapter5.html#ex5.1">5.1</a>) that first finds the subject with a <tt>subject</tt> call and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.28">5.28</a>). Similarly, there are [rules 9 and 10] of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an inherited <tt>interrogative</tt> noun phrase, which also go on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.28">5.28</a>).</p>
+<p align="justify">So far, we have only seen subjects from a <tt>subject</tt> call creating the subject of a matrix interrogative. Statement word order, which also has to include a subject, happens with <tt>clause_top_layer</tt> [rule 1] of (<a href="chapter5.html#ex5.1">5.1</a>) that first calls <tt>subject</tt> and then goes on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.28">5.28</a>). Similarly, there are [rules 9 and 10] of (<a href="chapter5.html#ex5.1">5.1</a>) for parsing matrix interrogatives where the subject is an inherited <tt>interrogative</tt> noun phrase, which also go on to call <tt>clause_middle_layer</tt> of (<a href="chapter5.html#ex5.28">5.28</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The non-recursive rules of (<a href="chapter5.html#ex5.28">5.28</a>) set the clause voice parameter to <tt>active</tt>. They will also either:</p>
 
