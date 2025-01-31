@@ -2383,7 +2383,7 @@
 
 <br><h2><a name="sec6.5">6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a provisional it and a notional subject</h2>
 
-<p align="justify">[Rule 4] of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_provisional_</tt> which can only be an instance of <i>it</i>. In doing so, the <tt>SbjType</tt> gets the <tt>provisional_sbj</tt> setting. This begins a ripple effect, with <tt>provisional_sbj</tt> needing to change to <tt>filled_sbj</tt>. This change is made by [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.28">6.28</a>), which needs to find a notional subject (<tt>-NSBJ</tt>) to the right of all the other selected complements of the verb.</p>
+<p align="justify">[Rule 4] of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_provisional_</tt> which can only be an instance of <i>it</i>. In doing so, the <tt>SbjType</tt> gets the <tt>provisional_sbj</tt> setting. This starts a ripple effect, with <tt>provisional_sbj</tt> needing to change to <tt>filled_sbj</tt>. This change is made by [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.28">6.28</a>), which needs to find a notional subject (<tt>-NSBJ</tt>) to the right of all the other selected complements of the verb.</p>
 
 <dl><dt>(<a name="ex6.28">6.28</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,provisional_sbj,Voice,L-L0)&nbsp;--&gt;</tt><br>
@@ -7526,32 +7526,21 @@
 <p align="justify">It is possible for a present participle (<i>-ing</i>) clause to be the selected complement of a preposition. This follows from the <tt>preposition_phrase_layer</tt> rule of section <a href="chapter3.html#sec3.5">3.5</a>. As an example, consider (<a href="chapter6.html#ex6.64">6.64</a>).</p>
 
 <dl><dt>(<a name="ex6.64">6.64</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','It'), w('VBD',';~Ipr','sounded'), w('P-ROLE','like'), w('D','a'), w('N','man'), w('VAG',';~Tn','kicking'), w('D','a'), w('N','melon'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','It'), w('VBD',';~Ipr','sounded'), w('P-ROLE','like'), w('PRO','him'), w('VAG',';~Tn','kicking'), w('D','a'), w('N','melon'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ipr&nbsp;sounded)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;like)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL3&nbsp;(NP-SBJ&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL3&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;him))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VAG;~Tn&nbsp;kicking)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;melon))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
-<tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;It))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Ipr&nbsp;sounded)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;like)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL&nbsp;(VAG;~Tn&nbsp;kicking)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;melon)))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are two results in (<a href="chapter6.html#ex6.64">6.64</a>). It is the first that illustrates a present participle (<i>-ing</i>) clause as the selected complement of a preposition and with an internal subject. Calls to reach this first output follow (<a href="chapter6.html#ex6.65">6.65</a>).</p>
+<p align="justify">The present participle (<i>-ing</i>) clause is the selected complement of a preposition and has an internal subject. Calls to reach the output follow (<a href="chapter6.html#ex6.65">6.65</a>).</p>
 
 <dl><dt>(<a name="ex6.65">6.65</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -7730,73 +7719,14 @@
                                               <td>
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
-                                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                                  <tt>noun_phrase_initial_layer <small><b>non_interrogative</b></small></tt>
+                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                  <tt>noun_head_full <small><b>non_interrogative</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
                                                   <td>
-                                                      <table cellpadding="5px" style="border:2px solid;">
-                                                      <tr>
-                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>determiner_layer <small><b>non_interrogative</b></small></tt>
-                                                      </td>
-                                                      </tr>
-                                                      <tr>
-                                                      <td>
-                                                          <table cellpadding="5px" style="border:2px solid;">
-                                                          <tr>
-                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>det <small><b>non_interrogative</b></small></tt>
-                                                          </td>
-                                                          </tr>
-                                                          <tr>
-                                                          <td>
-                                                              <br>
-                                                              <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
-                                                          </td>
-                                                          </tr>
-                                                          </table>
-                                                      </td>
-                                                      </tr>
-                                                      </table>
-                                                  </td>
-                                                  <td>
-                                                      <table cellpadding="5px" style="border:2px solid;">
-                                                      <tr>
-                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>internal_np_higher_layer</tt>
-                                                      </td>
-                                                      </tr>
-                                                      <tr>
-                                                      <td>
-                                                          <table cellpadding="5px" style="border:2px solid;">
-                                                          <tr>
-                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>internal_np_lower_layer</tt>
-                                                          </td>
-                                                          </tr>
-                                                          <tr>
-                                                          <td>
-                                                              <table cellpadding="5px" style="border:2px solid;">
-                                                              <tr>
-                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun</tt>
-                                                              </td>
-                                                              </tr>
-                                                              <tr>
-                                                              <td>
-                                                                  <br>
-                                                                  <tt>[w(&#39;N&#39;,&#39;man&#39;)]</tt>
-                                                              </td>
-                                                              </tr>
-                                                              </table>
-                                                          </td>
-                                                          </tr>
-                                                          </table>
-                                                      </td>
-                                                      </tr>
-                                                      </table>
+                                                      <br>
+                                                      <tt>[w(&#39;PRO&#39;,&#39;him&#39;)]</tt>
                                                   </td>
                                                   </tr>
                                                   </table>
@@ -8008,8 +7938,6 @@
   </table>
 
 </dd></dl>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second result of (<a href="chapter6.html#ex6.64">6.64</a>) comes from an alternative analysis where the present participle clause is a reduced relative clause. The next section includes rule support for reduced relative clauses.</p>
 
 <br><h2><a name="sec6.10">6.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses</h2>
 
