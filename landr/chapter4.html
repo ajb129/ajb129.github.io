@@ -137,7 +137,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Word list content for (<a href="chapter4.html#ex4.10">4.10</a>) is the adjective <tt>w('ADJ;_cat_','unable')</tt> together with following material for a <i>to</i>-infinitive clause. This is material for an adjective phrase when <tt>Type</tt> information is set to the value from a subject type setting (so either: <tt>filled_sbj</tt>, <tt>there_sbj</tt>, <tt>cleft_sbj</tt>, <tt>provisional_sbj</tt>, or <tt>derived_sbj</tt>) and so success is possible under [rule 2] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
+<p align="justify">Word list content for (<a href="chapter4.html#ex4.10">4.10</a>) is the adjective <tt>w('ADJ;_cat_','unable')</tt> together with following material for a <i>to</i>-infinitive clause. This is material for an adjective phrase when <tt>Type</tt> information is set to a subject type setting (so either: <tt>filled_sbj</tt>, <tt>there_sbj</tt>, <tt>cleft_sbj</tt>, <tt>provisional_sbj</tt> or <tt>derived_sbj</tt>) and so success is possible under [rule 2] of (<a href="chapter4.html#ex4.4">4.4</a>) with its <tt>adjective_phrase</tt> call.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.11">4.11</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.12">4.12</a>).</p>
 
@@ -2158,17 +2158,18 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.196">4.196</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.197">4.197</a>).</p>
 
 <dl><dt>(<a name="ex4.196">4.196</a>)</dt><dd>
-<tt>[w('PRO','I'), w('VBP',';~Cn.a','find'), w('D;_nphd_','this'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe'), w('PUNC','.')]</tt><br>
+<tt>[w('D','A'), w('N','map'), w('VBP',';~Cn.a','makes'), w('PRO;_genm_','your'), w('N','way'), w('ADJR','easier'), w('TO','to'), w('VB',';~Tn','find'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.197">4.197</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D;_nphd_','this'), w('ADJ','difficult'), w('TO','to'), w('VB',';~Tn','believe')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_genm_','your'), w('N','way'), w('ADJR','easier'), w('TO','to'), w('VB',';~Tn','find')]),&nbsp;parse(verb_complements_by_code(';~Cn.a',[],filled_sbj,active)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-OB1&nbsp;(D;_nphd_&nbsp;this))</tt><br>
-<tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;difficult))</tt><br>
+<tt>(&nbsp;(NP-OB1&nbsp;(NP-GENV&nbsp;(PRO;_genm_&nbsp;your))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;way))</tt><br>
+<tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJR&nbsp;easier))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-NOB1&nbsp;(NP-LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(TO&nbsp;to)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;believe)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;find)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
