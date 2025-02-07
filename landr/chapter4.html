@@ -1792,7 +1792,7 @@
 <tt>verb_complements_by_code(';~Dn.t',Store,filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB2',non_privileged,L,[node('IP-INF-OB1',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
-<tt>verb_complements_by_code(';~Dn.t',Store,filled_sbj,passive,[node('IP-INF-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.t',Store,filled_sbj,passive,[node('IP-INF2-OB1',VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
 </dd></dl>
 
@@ -1827,9 +1827,9 @@
 <dl><dt>(<a name="ex4.168">4.168</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~Tn','make'), w('D;_nphd_','anything')]),&nbsp;parse(verb_complements_by_code(';~Dn.t',[],filled_sbj,passive)).</tt><br>
 <br>
-<tt>(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;make)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D;_nphd_&nbsp;anything)))</tt><br>
+<tt>(IP-INF2-OB1&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;make)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D;_nphd_&nbsp;anything)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1859,9 +1859,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<h3><a name="sec4.5.9">4.5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Dpr.n</h3>
+<h3><a name="sec4.5.9">4.5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Dn.pr</h3>
 
-<p align="justify">Code <tt>;~Dpr.n</tt> selects a preposition phrase with indirect object function (<tt>PP-OB2</tt>) and a noun phrase with direct object function (<tt>NP-OB1</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.172">4.172</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
+<p align="justify">Code <tt>;~Dn.pr</tt> selects a noun phrase with direct object function (<tt>NP-OB1</tt>) and a preposition phrase with indirect object function (<tt>PP-OB2</tt>). For calls of the <tt>verb_complements_by_code</tt> rules of (<a href="chapter4.html#ex4.172">4.172</a>) with <tt>filled_sbj</tt> and <tt>active</tt> settings, either:</p>
 
 <ul>
 <li>[rule 1] the word list consists of content for both objects, the direct object noun phrase content occurring before the indirect object preposition phrase</li>
@@ -1877,28 +1877,28 @@
 </ul>
 
 <dl><dt>(<a name="ex4.172">4.172</a>)</dt><dd>
-<tt>verb_complements_by_code(';~Dpr.n',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.pr',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',non_privileged,L1,L0).</tt><br>
-<tt>verb_complements_by_code(';~Dpr.n',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.pr',[],filled_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L1,L0).</tt><br>
-<tt>verb_complements_by_code(';~Dpr.n',[np(ICH)],filled_sbj,active,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.pr',[np(ICH)],filled_sbj,active,[node('NP-OB1',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',non_privileged,L,L0).</tt><br>
-<tt>verb_complements_by_code(';~Dpr.n',[pp(ICH)],filled_sbj,active,[node('PP-OB2',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.pr',[pp(ICH)],filled_sbj,active,[node('PP-OB2',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-OB1',non_privileged,L,L0).</tt><br>
-<tt>verb_complements_by_code(';~Dpr.n',[],filled_sbj,passive,L,L0)&nbsp;--&gt;</tt><br>
+<tt>verb_complements_by_code(';~Dn.pr',[],filled_sbj,passive,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-OB2',non_privileged,L,L0).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.173">4.173</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.174">4.174</a>).</p>
 
 <dl><dt>(<a name="ex4.173">4.173</a>)</dt><dd>
-<tt>[w('N','Daddy'), w('VBD',';~Dpr.n','bought'), w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me'), w('PUNC','.')]</tt><br>
+<tt>[w('N','Daddy'), w('VBD',';~Dn.pr','bought'), w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.174">4.174</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('ADJ','new'), w('N','bike'), w('P-ROLE','for'), w('PRO','me')]),&nbsp;parse(verb_complements_by_code(';~Dn.pr',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;new))</tt><br>
@@ -1914,11 +1914,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.175">4.175</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.176">4.176</a>).</p>
 
 <dl><dt>(<a name="ex4.175">4.175</a>)</dt><dd>
-<tt>[w('PRO','I'), w('VBP',';~Tt','want'), w('TO','to'), w('VB',';~Dpr.n','say'), w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','I'), w('VBP',';~Tt','want'), w('TO','to'), w('VB',';~Dn.pr','say'), w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.176">4.176</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('PRO','you'), w('D;_nphd_','something')]),&nbsp;parse(verb_complements_by_code(';~Dn.pr',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRO&nbsp;you)))</tt><br>
@@ -1932,11 +1932,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.177">4.177</a>) as a noun phrase leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.178">4.178</a>).</p>
 
 <dl><dt>(<a name="ex4.177">4.177</a>)</dt><dd>
-<tt>[w('D','the'), w('ADJ','maximum'), w('N','loan'), w('RPRO','that'), w('D','the'), w('N','state'), w('MD',';~cat_Vi','could'), w('VB',';~Dpr.n','make'), w('P-ROLE','to'), w('D','a'), w('N','project')]</tt><br>
+<tt>[w('D','the'), w('ADJ','maximum'), w('N','loan'), w('RPRO','that'), w('D','the'), w('N','state'), w('MD',';~cat_Vi','could'), w('VB',';~Dn.pr','make'), w('P-ROLE','to'), w('D','a'), w('N','project')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.178">4.178</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('D','a'), w('N','project')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[np(node('*ICH*-283',[]))],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('D','a'), w('N','project')]),&nbsp;parse(verb_complements_by_code(';~Dn.pr',[np(node('*ICH*-283',[]))],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-OB1&nbsp;*ICH*-283)</tt><br>
 <tt>&nbsp;&nbsp;(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
@@ -1951,11 +1951,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.179">4.179</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.180">4.180</a>).</p>
 
 <dl><dt>(<a name="ex4.179">4.179</a>)</dt><dd>
-<tt>[w('NS','Details'), w('P-ROLE','of'), w('Q','all'), w('NS','negotiations'), w('BEP',';~cat_Ve_passive_','are'), w('VVN',';~Dpr.n','sent'), w('P-ROLE','to'), w('N','Head'), w('N','Office'), w('PUNC','.')]</tt><br>
+<tt>[w('NS','Details'), w('P-ROLE','of'), w('Q','all'), w('NS','negotiations'), w('BEP',';~cat_Ve_passive_','are'), w('VVN',';~Dn.pr','sent'), w('P-ROLE','to'), w('N','Head'), w('N','Office'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.180">4.180</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('N','Head'), w('N','Office')]),&nbsp;parse(verb_complements_by_code(';~Dpr.n',[],filled_sbj,passive)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','to'), w('N','Head'), w('N','Office')]),&nbsp;parse(verb_complements_by_code(';~Dn.pr',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(PP-OB2&nbsp;(P-ROLE&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Head)</tt><br>
