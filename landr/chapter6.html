@@ -7,7 +7,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a clause provides the argument content for a containing clause, such as being the direct object, it is subordinate. Rules for clause arguments are discussed in section <a href="chapter6.html#sec6.2">6.2</a> (<i>that</i>-clauses), section <a href="chapter6.html#sec6.3">6.3</a> (<i>to</i>-infinitive clauses) and section <a href="chapter6.html#sec6.4">6.4</a> (embedded questions). Section <a href="chapter6.html#sec6.4">6.4</a> also notes the possibility for embedded questions to serve as the complement component of preposition phrases.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a subordinate clause has a subject role within the containing clause, it will often occur as a notional subject extraposed to the right edge of the containing clause and in co-occurrence with a provisional subject <i>it</i> of the containing clause. Section <a href="chapter6.html#sec6.5">6.5</a> notes how parsing captures this co-occurrence as a ripple effect. Similarly, section <a href="chapter6.html#sec6.6">6.6</a> shows the <i>tough</i>-construction, where a derived subject noun phrase co-occurs with an extraposed notional subject that is a <i>to</i>-infinitive clause with passive voice.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When a subordinate clause has a subject role within the containing clause, it will often occur as a notional subject extraposed to the right edge of the containing clause and in co-occurrence with a provisional subject <i>it</i> of the containing clause. Section <a href="chapter6.html#sec6.5">6.5</a> notes how parsing captures this co-occurrence as a ripple effect. Similarly, section <a href="chapter6.html#sec6.6.2">6.6.2</a> shows the <i>tough</i>-construction, where a derived subject noun phrase co-occurs with an extraposed notional subject that is a <i>to</i>-infinitive clause with passive voice.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a contrast to having embedded <i>to</i>-infinitive clauses that are extraposed notional subjects, section <a href="chapter6.html#sec6.7">6.7</a> looks at the catenative adjective construction, where an embedded <i>to</i>-infinitive clause acts to extend the embedding clause.</p>
 
@@ -2383,13 +2383,19 @@
 
 <br><h2><a name="sec6.5">6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a provisional it and a notional subject</h2>
 
-<p align="justify">[Rule 4] of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up a word with word class <tt>PRO;_provisional_</tt> which can only be an instance of <i>it</i>. In doing so, the <tt>SbjType</tt> gets the <tt>provisional_sbj</tt> setting. This starts a ripple effect, with <tt>provisional_sbj</tt> needing to change to <tt>filled_sbj</tt>. This change is made by [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.28">6.28</a>), which needs to find a notional subject (<tt>-NSBJ</tt>) to the right of all the other selected complements of the verb.</p>
+<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [Rule 4] to pick up an instance of <i>it</i> as a <tt>PRO;_provisional_</tt> word. In doing so, <tt>SbjType</tt> for the clause becomes <tt>provisional_sbj</tt>. This starts a ripple effect, with <tt>provisional_sbj</tt> having to become <tt>filled_sbj</tt>. This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.28">6.28</a>).</p>
 
 <dl><dt>(<a name="ex6.28">6.28</a>)</dt><dd>
-<tt>verb_complements_top_layer(Code,Store,provisional_sbj,Voice,L-L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,filled_sbj,Voice,L-L1),</tt><br>
-<tt>&nbsp;&nbsp;notional_item('-NSBJ',L1-L0).</tt><br>
+<tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&#92;+&nbsp;sub_atom(Code,0,6,_,';~cat_'),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;provisional_sbj</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,filled_sbj,Voice,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;notional_item('-NSBJ',L1,L0).</tt><br>
 </dd></dl>
+
+<p align="justify">A call of (<a href="chapter6.html#ex6.28">6.28</a>) needs to find a notional subject (<tt>-NSBJ</tt>) to the right of a (non-catenative) verb together with all its other complements.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call to <tt>notional_item</tt> of (<a href="chapter6.html#ex6.29">6.29</a>) finds a notional subject, which will be a clause with an <tt>-NSBJ</tt> extension that is either:</p>
 
@@ -2843,21 +2849,20 @@
 <li><tt>filled_sbj</tt></li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with the combination of a provisional <i>it</i> and a <i>to</i>-infinitive clause notional subject, consider (<a href="chapter6.html#ex6.31">6.31</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with the combination of a provisional <i>it</i> and a <i>to</i>-infinitive clause notional subject, consider (<a href="chapter6.html#ex6.35">6.35</a>).</p>
 
 <dl><dt>(<a name="ex6.35">6.35</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','It'), w('ADV','always'), w('VBP',';~Dn.n','gives'), w('PRO','me'), w('D','a'), w('N','twist'), w('ADV','inside'), w('TO','to'), w('VB',';~Tn','hear'), w('PRO','it'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_provisional_','It'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','attempted'), w('TO','to'), w('VB',';~Tn','form'), w('D','a'), w('ADJ','new'), w('N','plan'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO;_provisional_&nbsp;It))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;always))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;~Dn.n&nbsp;gives)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB2&nbsp;(PRO&nbsp;me))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;twist))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;inside))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-NSBJ&nbsp;(TO&nbsp;to)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;hear)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(PRO&nbsp;it)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BED;~cat_Ve_passive_&nbsp;was)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;attempted)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-NSBJ&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;form)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;new))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;plan))))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -2907,33 +2912,26 @@
           <td>
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
-              <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
+              <td colspan="2" style="text-align: center; vertical-align: middle;">
+              <tt>have_be_or_md_finite_layer <small><b>;~cat_Ve_passive_</b></small></tt>
               </td>
               </tr>
               <tr>
               <td>
+                      <br>
+                      <tt>[w(&#39;BED&#39;,&#39;;~cat_Ve_passive_&#39;,&#39;was&#39;)]</tt>
+              </td>
+              <td>
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                  <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
+                  <tt>optional_clitic_negation</tt>
                   </td>
                   </tr>
                   <tr>
                   <td>
-                      <table cellpadding="5px" style="border:2px solid;">
-                      <tr>
-                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>adv <small><b>non_privileged</b></small></tt>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td>
-                          <br>
-                          <tt>[w(&#39;ADV&#39;,&#39;always&#39;)]</tt>
-                      </td>
-                      </tr>
-                      </table>
+                      <br>
+                      <tt>[]</tt>
                   </td>
                   </tr>
                   </table>
@@ -2945,15 +2943,15 @@
               <table cellpadding="5px" style="border:2px solid;">
               <tr>
               <td colspan="1" style="text-align: center; vertical-align: middle;">
-              <tt>clause_middle_layer <small><b>provisional</b></small></tt>
+              <tt>verb_complements_top_layer <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_provisional</b></small>&nbsp;<small><b>active</b></small></tt>
               </td>
               </tr>
               <tr>
               <td>
                   <table cellpadding="5px" style="border:2px solid;">
                   <tr>
-                  <td colspan="2" style="text-align: center; vertical-align: middle;">
-                  <tt>verb_phrase_layer <small><b>_provisional</b></small>&nbsp;<small><b>finite</b></small>&nbsp;<small><b>active</b></small></tt>
+                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                  <tt>verb_complements_by_code <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_provisional</b></small>&nbsp;<small><b>active</b></small></tt>
                   </td>
                   </tr>
                   <tr>
@@ -2961,22 +2959,7 @@
                       <table cellpadding="5px" style="border:2px solid;">
                       <tr>
                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                      <tt>verb <small><b>finite</b></small>&nbsp;<small><b>;~Dn.n</b></small></tt>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td>
-                          <br>
-                          <tt>[w(&#39;VBP&#39;,&#39;;~Dn.n&#39;,&#39;gives&#39;)]</tt>
-                      </td>
-                      </tr>
-                      </table>
-                  </td>
-                  <td>
-                      <table cellpadding="5px" style="border:2px solid;">
-                      <tr>
-                      <td colspan="2" style="text-align: center; vertical-align: middle;">
-                      <tt>verb_complements_top_layer <small><b>;~Dn.n</b></small>&nbsp;<small><b>provisional</b></small>&nbsp;<small><b>active</b></small></tt>
+                      <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>provisional</b></small>&nbsp;<small><b>en_participle</b></small></tt>
                       </td>
                       </tr>
                       <tr>
@@ -2984,7 +2967,7 @@
                           <table cellpadding="5px" style="border:2px solid;">
                           <tr>
                           <td colspan="2" style="text-align: center; vertical-align: middle;">
-                          <tt>verb_complements_top_layer <small><b>;~Dn.n</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                          <tt>verb_phrase_layer <small><b>provisional</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
                           </td>
                           </tr>
                           <tr>
@@ -2992,15 +2975,30 @@
                               <table cellpadding="5px" style="border:2px solid;">
                               <tr>
                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>verb_complements_top_layer <small><b>;~Dn.n</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                              <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <br>
+                                  <tt>[w(&#39;VVN&#39;,&#39;;~Tn&#39;,&#39;attempted&#39;)]</tt>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="2" style="text-align: center; vertical-align: middle;">
+                              <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>provisional</b></small>&nbsp;<small><b>passive</b></small></tt>
                               </td>
                               </tr>
                               <tr>
                               <td>
                                   <table cellpadding="5px" style="border:2px solid;">
                                   <tr>
-                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                  <tt>verb_complements_by_code <small><b>;~Dn.n</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
                                   </td>
                                   </tr>
                                   <tr>
@@ -3008,44 +3006,33 @@
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase <small><b>-OB2</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
+                                      <tt>verb_complements_by_code <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
                                       <td>
-                                          <table cellpadding="5px" style="border:2px solid;">
-                                          <tr>
-                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
-                                          </td>
-                                          </tr>
-                                          <tr>
-                                          <td>
-                                              <table cellpadding="5px" style="border:2px solid;">
-                                              <tr>
-                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_head_full <small><b>non_privileged</b></small></tt>
-                                              </td>
-                                              </tr>
-                                              <tr>
-                                              <td>
-                                                  <br>
-                                                  <tt>[w(&#39;PRO&#39;,&#39;me&#39;)]</tt>
-                                              </td>
-                                              </tr>
-                                              </table>
-                                          </td>
-                                          </tr>
-                                          </table>
+                                          <br>
+                                          <tt>[]</tt>
                                       </td>
                                       </tr>
                                       </table>
                                   </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                              <td>
+                                  <table cellpadding="5px" style="border:2px solid;">
+                                  <tr>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>notional_item <small><b>-NSBJ</b></small></tt>
+                                  </td>
+                                  </tr>
+                                  <tr>
                                   <td>
                                       <table cellpadding="5px" style="border:2px solid;">
                                       <tr>
                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
+                                      <tt>ip_to_inf <small><b>-NSBJ</b></small></tt>
                                       </td>
                                       </tr>
                                       <tr>
@@ -3053,7 +3040,7 @@
                                           <table cellpadding="5px" style="border:2px solid;">
                                           <tr>
                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
+                                          <tt>to_inf_top_layer</tt>
                                           </td>
                                           </tr>
                                           <tr>
@@ -3061,7 +3048,7 @@
                                               <table cellpadding="5px" style="border:2px solid;">
                                               <tr>
                                               <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                              <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
+                                              <tt>to_inf_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                               </td>
                                               </tr>
                                               <tr>
@@ -3069,7 +3056,22 @@
                                                   <table cellpadding="5px" style="border:2px solid;">
                                                   <tr>
                                                   <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>determiner_layer <small><b>non_privileged</b></small></tt>
+                                                  <tt>to</tt>
+                                                  </td>
+                                                  </tr>
+                                                  <tr>
+                                                  <td>
+                                                      <br>
+                                                      <tt>[w(&#39;TO&#39;,&#39;to&#39;)]</tt>
+                                                  </td>
+                                                  </tr>
+                                                  </table>
+                                              </td>
+                                              <td>
+                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                  <tr>
+                                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>infinitive</b></small>&nbsp;<small><b>active</b></small></tt>
                                                   </td>
                                                   </tr>
                                                   <tr>
@@ -3077,33 +3079,22 @@
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>det <small><b>non_privileged</b></small></tt>
+                                                      <tt>verb <small><b>infinitive</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
                                                       <td>
                                                           <br>
-                                                          <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
+                                                          <tt>[w(&#39;VB&#39;,&#39;;~Tn&#39;,&#39;form&#39;)]</tt>
                                                       </td>
                                                       </tr>
                                                       </table>
                                                   </td>
-                                                  </tr>
-                                                  </table>
-                                              </td>
-                                              <td>
-                                                  <table cellpadding="5px" style="border:2px solid;">
-                                                  <tr>
-                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>internal_np_higher_layer</tt>
-                                                  </td>
-                                                  </tr>
-                                                  <tr>
                                                   <td>
                                                       <table cellpadding="5px" style="border:2px solid;">
                                                       <tr>
                                                       <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>internal_np_lower_layer</tt>
+                                                      <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                                       </td>
                                                       </tr>
                                                       <tr>
@@ -3111,188 +3102,7 @@
                                                           <table cellpadding="5px" style="border:2px solid;">
                                                           <tr>
                                                           <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun</tt>
-                                                          </td>
-                                                          </tr>
-                                                          <tr>
-                                                          <td>
-                                                              <br>
-                                                              <tt>[w(&#39;N&#39;,&#39;twist&#39;)]</tt>
-                                                          </td>
-                                                          </tr>
-                                                          </table>
-                                                      </td>
-                                                      </tr>
-                                                      </table>
-                                                  </td>
-                                                  </tr>
-                                                  </table>
-                                              </td>
-                                              </tr>
-                                              </table>
-                                          </td>
-                                          </tr>
-                                          </table>
-                                      </td>
-                                      </tr>
-                                      </table>
-                                  </td>
-                                  </tr>
-                                  </table>
-                              </td>
-                              </tr>
-                              </table>
-                          </td>
-                          <td>
-                              <table cellpadding="5px" style="border:2px solid;">
-                              <tr>
-                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>adverbial</tt>
-                              </td>
-                              </tr>
-                              <tr>
-                              <td>
-                                  <table cellpadding="5px" style="border:2px solid;">
-                                  <tr>
-                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>adverb_phrase <small><b>-NIM</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
-                                  </td>
-                                  </tr>
-                                  <tr>
-                                  <td>
-                                      <table cellpadding="5px" style="border:2px solid;">
-                                      <tr>
-                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                      <tt>adverb_phrase_layer <small><b>non_privileged</b></small></tt>
-                                      </td>
-                                      </tr>
-                                      <tr>
-                                      <td>
-                                          <table cellpadding="5px" style="border:2px solid;">
-                                          <tr>
-                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>adv <small><b>non_privileged</b></small></tt>
-                                          </td>
-                                          </tr>
-                                          <tr>
-                                          <td>
-                                              <br>
-                                              <tt>[w(&#39;ADV&#39;,&#39;inside&#39;)]</tt>
-                                          </td>
-                                          </tr>
-                                          </table>
-                                      </td>
-                                      </tr>
-                                      </table>
-                                  </td>
-                                  </tr>
-                                  </table>
-                              </td>
-                              </tr>
-                              </table>
-                          </td>
-                          </tr>
-                          </table>
-                      </td>
-                      <td>
-                          <table cellpadding="5px" style="border:2px solid;">
-                          <tr>
-                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                          <tt>notional_item <small><b>-NSBJ</b></small></tt>
-                          </td>
-                          </tr>
-                          <tr>
-                          <td>
-                              <table cellpadding="5px" style="border:2px solid;">
-                              <tr>
-                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                              <tt>ip_to_inf <small><b>-NSBJ</b></small></tt>
-                              </td>
-                              </tr>
-                              <tr>
-                              <td>
-                                  <table cellpadding="5px" style="border:2px solid;">
-                                  <tr>
-                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                  <tt>to_inf_top_layer</tt>
-                                  </td>
-                                  </tr>
-                                  <tr>
-                                  <td>
-                                      <table cellpadding="5px" style="border:2px solid;">
-                                      <tr>
-                                      <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                      <tt>to_inf_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
-                                      </td>
-                                      </tr>
-                                      <tr>
-                                      <td>
-                                          <table cellpadding="5px" style="border:2px solid;">
-                                          <tr>
-                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                          <tt>to</tt>
-                                          </td>
-                                          </tr>
-                                          <tr>
-                                          <td>
-                                              <br>
-                                              <tt>[w(&#39;TO&#39;,&#39;to&#39;)]</tt>
-                                          </td>
-                                          </tr>
-                                          </table>
-                                      </td>
-                                      <td>
-                                          <table cellpadding="5px" style="border:2px solid;">
-                                          <tr>
-                                          <td colspan="2" style="text-align: center; vertical-align: middle;">
-                                          <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>infinitive</b></small>&nbsp;<small><b>active</b></small></tt>
-                                          </td>
-                                          </tr>
-                                          <tr>
-                                          <td>
-                                              <table cellpadding="5px" style="border:2px solid;">
-                                              <tr>
-                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>verb <small><b>infinitive</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
-                                              </td>
-                                              </tr>
-                                              <tr>
-                                              <td>
-                                                  <br>
-                                                  <tt>[w(&#39;VB&#39;,&#39;;~Tn&#39;,&#39;hear&#39;)]</tt>
-                                              </td>
-                                              </tr>
-                                              </table>
-                                          </td>
-                                          <td>
-                                              <table cellpadding="5px" style="border:2px solid;">
-                                              <tr>
-                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                              <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
-                                              </td>
-                                              </tr>
-                                              <tr>
-                                              <td>
-                                                  <table cellpadding="5px" style="border:2px solid;">
-                                                  <tr>
-                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                  <tt>verb_complements_by_code <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
-                                                  </td>
-                                                  </tr>
-                                                  <tr>
-                                                  <td>
-                                                      <table cellpadding="5px" style="border:2px solid;">
-                                                      <tr>
-                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                      <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
-                                                      </td>
-                                                      </tr>
-                                                      <tr>
-                                                      <td>
-                                                          <table cellpadding="5px" style="border:2px solid;">
-                                                          <tr>
-                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                          <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
+                                                          <tt>verb_complements_by_code <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
                                                           </td>
                                                           </tr>
                                                           <tr>
@@ -3300,13 +3110,142 @@
                                                               <table cellpadding="5px" style="border:2px solid;">
                                                               <tr>
                                                               <td colspan="1" style="text-align: center; vertical-align: middle;">
-                                                              <tt>noun_head_full <small><b>non_privileged</b></small></tt>
+                                                              <tt>noun_phrase <small><b>-OB1</b></small>&nbsp;<small><b>non_privileged</b></small></tt>
                                                               </td>
                                                               </tr>
                                                               <tr>
                                                               <td>
-                                                                  <br>
-                                                                  <tt>[w(&#39;PUNC&#39;,&#39;.&#39;)]</tt>
+                                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                                  <tr>
+                                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                  <tt>noun_phrase_top <small><b>non_privileged</b></small></tt>
+                                                                  </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                  <td>
+                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                      <tr>
+                                                                      <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                                                      <tt>noun_phrase_initial_layer <small><b>non_privileged</b></small></tt>
+                                                                      </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                      <td>
+                                                                          <table cellpadding="5px" style="border:2px solid;">
+                                                                          <tr>
+                                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
+                                                                          </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                          <td>
+                                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                                              <tr>
+                                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                              <tt>det <small><b>non_privileged</b></small></tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                              <td>
+                                                                                  <br>
+                                                                                  <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              </table>
+                                                                          </td>
+                                                                          </tr>
+                                                                          </table>
+                                                                      </td>
+                                                                      <td>
+                                                                          <table cellpadding="5px" style="border:2px solid;">
+                                                                          <tr>
+                                                                          <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                                                          <tt>internal_np_higher_layer</tt>
+                                                                          </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                          <td>
+                                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                                              <tr>
+                                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                              <tt>adjective_phrase <small><b>non_interrogative</b></small></tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                              <td>
+                                                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                                                  <tr>
+                                                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                                  <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
+                                                                                  </td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                  <td>
+                                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                                      <tr>
+                                                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                                      <tt>adj <small><b>non_interrogative</b></small></tt>
+                                                                                      </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                      <td>
+                                                                                          <br>
+                                                                                          <tt>[w(&#39;ADJ&#39;,&#39;new&#39;)]</tt>
+                                                                                      </td>
+                                                                                      </tr>
+                                                                                      </table>
+                                                                                  </td>
+                                                                                  </tr>
+                                                                                  </table>
+                                                                              </td>
+                                                                              </tr>
+                                                                              </table>
+                                                                          </td>
+                                                                          <td>
+                                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                                              <tr>
+                                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                              <tt>internal_np_higher_layer</tt>
+                                                                              </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                              <td>
+                                                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                                                  <tr>
+                                                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                                  <tt>internal_np_lower_layer</tt>
+                                                                                  </td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                  <td>
+                                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                                      <tr>
+                                                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                                      <tt>noun</tt>
+                                                                                      </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                      <td>
+                                                                                          <br>
+                                                                                          <tt>[w(&#39;N&#39;,&#39;plan&#39;)]</tt>
+                                                                                      </td>
+                                                                                      </tr>
+                                                                                      </table>
+                                                                                  </td>
+                                                                                  </tr>
+                                                                                  </table>
+                                                                              </td>
+                                                                              </tr>
+                                                                              </table>
+                                                                          </td>
+                                                                          </tr>
+                                                                          </table>
+                                                                      </td>
+                                                                      </tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  </tr>
+                                                                  </table>
                                                               </td>
                                                               </tr>
                                                               </table>
@@ -3373,15 +3312,554 @@
 
 </dd></dl>
 
-<br><h2><a name="sec6.6">6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h2>
+<br><h2><a name="sec6.6">6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a derived subject and an infinitive clause notional subject</h2>
 
-<p align="justify">[Rule 6] of the <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> picks up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, the <tt>SbjType</tt> gets the <tt>derived_sbj</tt> setting. This <tt>SbjType</tt> setting also occurs with [rule 10] of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for a derived subject that is an <tt>interrogative</tt> noun phrase.</p>
+<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [Rule 6] to pick up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, <tt>SbjType</tt> for the clause becomes <tt>derived_sbj</tt>. This <tt>SbjType</tt> setting also occurs with [rule 10] of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for a derived subject that is an <tt>interrogative</tt> noun phrase. Once there is the <tt>derived_sbj</tt> setting, there is the start of a ripple effect, with <tt>derived_sbj</tt> having to become <tt>filled_sbj</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A <tt>derived_sbj</tt> setting for the clause <tt>SbjType</tt> parameter begins a ripple effect that leads to a <i>tough</i>-construction, with the <tt>derived_sbj</tt> setting needing to change to the <tt>filled_sbj</tt> setting.</p>
+<h3><a name="sec6.6.1">6.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;A double passive</h3>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The change from <tt>derived_sbj</tt> to <tt>filled_sbj</tt> is made by [rule 2] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated here as (<a href="chapter6.html#ex6.37">6.37</a>).</p>
+<p align="justify">Change from <tt>derived_sbj</tt> to <tt>filled_sbj</tt> can happen with [rule 2] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.37">6.37</a>).</p>
 
 <dl><dt>(<a name="ex6.37">6.37</a>)</dt><dd>
+<tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Code&nbsp;=&nbsp;';~cat_Ve_passive_',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;derived_sbj</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,[],filled_sbj,Voice,L,[node('IP-INF-NSBJ',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rule of (<a href="chapter6.html#ex6.37">6.37</a>) needs to find a notional subject that comes after a catenative verb and its passive complement. The notional subject has to be a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>active</tt> as the <tt>Voice</tt> setting and <tt>filled_sbj</tt> as the <tt>SbjType</tt> setting.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
+
+<dl><dt>(<a name="ex6.38">6.38</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('ADJ','new'), w('N','plan'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','attempted'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','formed'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<br>
+<tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;A)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;new))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;plan))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BED;~cat_Ve_passive_&nbsp;was)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;attempted))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-NSBJ&nbsp;(TO&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;formed)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.38">6.38</a>) follow (<a href="chapter6.html#ex6.39">6.39</a>).</p>
+
+<dl><dt>(<a name="ex6.39">6.39</a>)</dt><dd>
+  <table cellpadding="5px" style="border:2px solid;">
+  <tr>
+  <td colspan="2" style="text-align: center; vertical-align: middle;">
+  <tt>sentence</tt>
+  </td>
+  </tr>
+  <tr>
+  <td>
+      <table cellpadding="5px" style="border:2px solid;">
+      <tr>
+      <td colspan="2" style="text-align: center; vertical-align: middle;">
+      <tt>clause_top_layer <small><b>statement_order</b></small></tt>
+      </td>
+      </tr>
+      <tr>
+      <td>
+          <table cellpadding="5px" style="border:2px solid;">
+          <tr>
+          <td colspan="1" style="text-align: center; vertical-align: middle;">
+          <tt>subject <small><b>derived_sbj</b></small></tt>
+          </td>
+          </tr>
+          <tr>
+          <td>
+              <table cellpadding="5px" style="border:2px solid;">
+              <tr>
+              <td colspan="1" style="text-align: center; vertical-align: middle;">
+              <tt>noun_phrase <small><b>-SBJ</b></small>&nbsp;<small><b>non_interrogative</b></small></tt>
+              </td>
+              </tr>
+              <tr>
+              <td>
+                  <table cellpadding="5px" style="border:2px solid;">
+                  <tr>
+                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                  <tt>noun_phrase_top <small><b>non_interrogative</b></small></tt>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td>
+                      <table cellpadding="5px" style="border:2px solid;">
+                      <tr>
+                      <td colspan="2" style="text-align: center; vertical-align: middle;">
+                      <tt>noun_phrase_initial_layer <small><b>non_interrogative</b></small></tt>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                          <table cellpadding="5px" style="border:2px solid;">
+                          <tr>
+                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                          <tt>determiner_layer <small><b>non_privileged</b></small></tt>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>det <small><b>non_privileged</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <br>
+                                  <tt>[w(&#39;D&#39;,&#39;a&#39;)]</tt>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          </tr>
+                          </table>
+                      </td>
+                      <td>
+                          <table cellpadding="5px" style="border:2px solid;">
+                          <tr>
+                          <td colspan="2" style="text-align: center; vertical-align: middle;">
+                          <tt>internal_np_higher_layer</tt>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>adjective_phrase <small><b>non_interrogative</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <table cellpadding="5px" style="border:2px solid;">
+                                  <tr>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>adjective_phrase_layer <small><b>non_interrogative</b></small></tt>
+                                  </td>
+                                  </tr>
+                                  <tr>
+                                  <td>
+                                      <table cellpadding="5px" style="border:2px solid;">
+                                      <tr>
+                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                      <tt>adj <small><b>non_interrogative</b></small></tt>
+                                      </td>
+                                      </tr>
+                                      <tr>
+                                      <td>
+                                          <br>
+                                          <tt>[w(&#39;ADJ&#39;,&#39;new&#39;)]</tt>
+                                      </td>
+                                      </tr>
+                                      </table>
+                                  </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>internal_np_higher_layer</tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <table cellpadding="5px" style="border:2px solid;">
+                                  <tr>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>internal_np_lower_layer</tt>
+                                  </td>
+                                  </tr>
+                                  <tr>
+                                  <td>
+                                      <table cellpadding="5px" style="border:2px solid;">
+                                      <tr>
+                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                      <tt>noun</tt>
+                                      </td>
+                                      </tr>
+                                      <tr>
+                                      <td>
+                                          <br>
+                                          <tt>[w(&#39;N&#39;,&#39;plan&#39;)]</tt>
+                                      </td>
+                                      </tr>
+                                      </table>
+                                  </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          </tr>
+                          </table>
+                      </td>
+                      </tr>
+                      </table>
+                  </td>
+                  </tr>
+                  </table>
+              </td>
+              </tr>
+              </table>
+          </td>
+          </tr>
+          </table>
+      </td>
+      <td>
+          <table cellpadding="5px" style="border:2px solid;">
+          <tr>
+          <td colspan="2" style="text-align: center; vertical-align: middle;">
+          <tt>clause_middle_layer <small><b>derived_sbj</b></small></tt>
+          </td>
+          </tr>
+          <tr>
+          <td>
+              <table cellpadding="5px" style="border:2px solid;">
+              <tr>
+              <td colspan="2" style="text-align: center; vertical-align: middle;">
+              <tt>have_be_or_md_finite_layer <small><b>;~cat_Ve_passive_</b></small></tt>
+              </td>
+              </tr>
+              <tr>
+              <td>
+                      <br>
+                      <tt>[w(&#39;BED&#39;,&#39;;~cat_Ve_passive_&#39;,&#39;was&#39;)]</tt>
+              </td>
+              <td>
+                  <table cellpadding="5px" style="border:2px solid;">
+                  <tr>
+                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                  <tt>optional_clitic_negation</tt>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td>
+                      <br>
+                      <tt>[]</tt>
+                  </td>
+                  </tr>
+                  </table>
+              </td>
+              </tr>
+              </table>
+          </td>
+          <td>
+              <table cellpadding="5px" style="border:2px solid;">
+              <tr>
+              <td colspan="1" style="text-align: center; vertical-align: middle;">
+              <tt>verb_complements_top_layer <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_derived_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+              </td>
+              </tr>
+              <tr>
+              <td>
+                  <table cellpadding="5px" style="border:2px solid;">
+                  <tr>
+                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                  <tt>verb_complements_by_code <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_derived_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td>
+                      <table cellpadding="5px" style="border:2px solid;">
+                      <tr>
+                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                      <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>derived_sbj</b></small>&nbsp;<small><b>en_participle</b></small></tt>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                          <table cellpadding="5px" style="border:2px solid;">
+                          <tr>
+                          <td colspan="2" style="text-align: center; vertical-align: middle;">
+                          <tt>verb_phrase_layer <small><b>derived_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                              <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <br>
+                                  <tt>[w(&#39;VVN&#39;,&#39;;~Tn&#39;,&#39;attempted&#39;)]</tt>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          <td>
+                              <table cellpadding="5px" style="border:2px solid;">
+                              <tr>
+                              <td colspan="2" style="text-align: center; vertical-align: middle;">
+                              <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>derived_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
+                              </td>
+                              </tr>
+                              <tr>
+                              <td>
+                                  <table cellpadding="5px" style="border:2px solid;">
+                                  <tr>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                  </td>
+                                  </tr>
+                                  <tr>
+                                  <td>
+                                      <table cellpadding="5px" style="border:2px solid;">
+                                      <tr>
+                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                      <tt>verb_complements_by_code <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                      </td>
+                                      </tr>
+                                      <tr>
+                                      <td>
+                                          <br>
+                                          <tt>[]</tt>
+                                      </td>
+                                      </tr>
+                                      </table>
+                                  </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                              <td>
+                                  <table cellpadding="5px" style="border:2px solid;">
+                                  <tr>
+                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                  <tt>notional_item <small><b>-NSBJ</b></small></tt>
+                                  </td>
+                                  </tr>
+                                  <tr>
+                                  <td>
+                                      <table cellpadding="5px" style="border:2px solid;">
+                                      <tr>
+                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                      <tt>ip_to_inf <small><b>-NSBJ</b></small></tt>
+                                      </td>
+                                      </tr>
+                                      <tr>
+                                      <td>
+                                          <table cellpadding="5px" style="border:2px solid;">
+                                          <tr>
+                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                          <tt>to_inf_top_layer</tt>
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                              <table cellpadding="5px" style="border:2px solid;">
+                                              <tr>
+                                              <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                              <tt>to_inf_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                              </td>
+                                              </tr>
+                                              <tr>
+                                              <td>
+                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                  <tr>
+                                                  <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                  <tt>to</tt>
+                                                  </td>
+                                                  </tr>
+                                                  <tr>
+                                                  <td>
+                                                      <br>
+                                                      <tt>[w(&#39;TO&#39;,&#39;to&#39;)]</tt>
+                                                  </td>
+                                                  </tr>
+                                                  </table>
+                                              </td>
+                                              <td>
+                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                  <tr>
+                                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>infinitive</b></small>&nbsp;<small><b>active</b></small></tt>
+                                                  </td>
+                                                  </tr>
+                                                  <tr>
+                                                  <td>
+                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                      <tr>
+                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                      <tt>verb <small><b>infinitive</b></small>&nbsp;<small><b>;~cat_Ve_passive_</b></small></tt>
+                                                      </td>
+                                                      </tr>
+                                                      <tr>
+                                                      <td>
+                                                          <br>
+                                                          <tt>[w(&#39;BE&#39;,&#39;;~cat_Ve_passive_&#39;,&#39;be&#39;)]</tt>
+                                                      </td>
+                                                      </tr>
+                                                      </table>
+                                                  </td>
+                                                  <td>
+                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                      <tr>
+                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                      <tt>verb_complements_top_layer <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                                      </td>
+                                                      </tr>
+                                                      <tr>
+                                                      <td>
+                                                          <table cellpadding="5px" style="border:2px solid;">
+                                                          <tr>
+                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                          <tt>verb_complements_by_code <small><b>;~cat_Ve_passive</b></small>&nbsp;<small><b>_filled_sbj</b></small>&nbsp;<small><b>active</b></small></tt>
+                                                          </td>
+                                                          </tr>
+                                                          <tr>
+                                                          <td>
+                                                              <table cellpadding="5px" style="border:2px solid;">
+                                                              <tr>
+                                                              <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                              <tt>ip_ppl_passive <small><b>-CAT</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small></tt>
+                                                              </td>
+                                                              </tr>
+                                                              <tr>
+                                                              <td>
+                                                                  <table cellpadding="5px" style="border:2px solid;">
+                                                                  <tr>
+                                                                  <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                                                  <tt>verb_phrase_layer <small><b>filled_sbj</b></small>&nbsp;<small><b>en_participle</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                                                  </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                  <td>
+                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                      <tr>
+                                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                      <tt>verb <small><b>en_participle</b></small>&nbsp;<small><b>;~Tn</b></small></tt>
+                                                                      </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                      <td>
+                                                                          <br>
+                                                                          <tt>[w(&#39;VVN&#39;,&#39;;~Tn&#39;,&#39;formed&#39;)]</tt>
+                                                                      </td>
+                                                                      </tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  <td>
+                                                                      <table cellpadding="5px" style="border:2px solid;">
+                                                                      <tr>
+                                                                      <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                      <tt>verb_complements_top_layer <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                                                      </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                      <td>
+                                                                          <table cellpadding="5px" style="border:2px solid;">
+                                                                          <tr>
+                                                                          <td colspan="1" style="text-align: center; vertical-align: middle;">
+                                                                          <tt>verb_complements_by_code <small><b>;~Tn</b></small>&nbsp;<small><b>filled_sbj</b></small>&nbsp;<small><b>passive</b></small></tt>
+                                                                          </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                          <td>
+                                                                              <br>
+                                                                              <tt>[]</tt>
+                                                                          </td>
+                                                                          </tr>
+                                                                          </table>
+                                                                      </td>
+                                                                      </tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  </tr>
+                                                                  </table>
+                                                              </td>
+                                                              </tr>
+                                                              </table>
+                                                          </td>
+                                                          </tr>
+                                                          </table>
+                                                      </td>
+                                                      </tr>
+                                                      </table>
+                                                  </td>
+                                                  </tr>
+                                                  </table>
+                                              </td>
+                                              </tr>
+                                              </table>
+                                          </td>
+                                          </tr>
+                                          </table>
+                                      </td>
+                                      </tr>
+                                      </table>
+                                  </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                              </tr>
+                              </table>
+                          </td>
+                          </tr>
+                          </table>
+                      </td>
+                      </tr>
+                      </table>
+                  </td>
+                  </tr>
+                  </table>
+              </td>
+              </tr>
+              </table>
+          </td>
+          </tr>
+          </table>
+      </td>
+      </tr>
+      </table>
+  </td>
+  <td>
+      <table cellpadding="5px" style="border:2px solid;">
+      <tr>
+      <td colspan="1" style="text-align: center; vertical-align: middle;">
+      <tt>punc <small><b>final</b></small></tt>
+      </td>
+      </tr>
+      <tr>
+      <td>
+          <br>
+          <tt>[w(&#39;PUNC&#39;,&#39;.&#39;)]</tt>
+      </td>
+      </tr>
+      </table>
+  </td>
+  </tr>
+  </table>
+
+</dd></dl>
+
+<h3><a name="sec6.6.2">6.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h3>
+
+<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction. This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
+
+<dl><dt>(<a name="ex6.40">6.40</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;Code&nbsp;=&nbsp;';~La',</tt><br>
@@ -3393,11 +3871,11 @@
 <tt>&nbsp;&nbsp;to_inf_layer(Store,SbjType1,passive,VL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This rule needs to find a notional subject that comes after the selected complement of a linking verb with code <tt>;~La</tt>, which will be an adjective phrase with subject predicative function. Also, the notional subject is a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>passive</tt> as the <tt>Voice</tt> setting while the <tt>SbjType</tt> sets to either <tt>filled_sbj</tt> or <tt>unfilled_sbj</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rule of (<a href="chapter6.html#ex6.40">6.40</a>) needs to find a notional subject that comes after the selected complement of a linking verb with code <tt>;~La</tt>, which will be an adjective phrase with subject predicative function. Also, the notional subject is a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>passive</tt> as the <tt>Voice</tt> setting while the <tt>SbjType</tt> sets to either <tt>filled_sbj</tt> or <tt>unfilled_sbj</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a derived subject to trigger a tough-construction that leads to a <i>to</i>-infinitive clause notional subject where the <tt>Voice</tt> setting is <tt>passive</tt> and the <tt>SbjType</tt> sets to <tt>unfilled_sbj</tt>, consider (<a href="chapter6.html#ex6.38">6.38</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a derived subject triggering a tough-construction that leads to a <i>to</i>-infinitive clause notional subject where the <tt>Voice</tt> setting is <tt>passive</tt> and the <tt>SbjType</tt> sets to <tt>unfilled_sbj</tt>, consider (<a href="chapter6.html#ex6.41">6.41</a>).</p>
 
-<dl><dt>(<a name="ex6.38">6.38</a>)</dt><dd>
+<dl><dt>(<a name="ex6.41">6.41</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string(&nbsp;[w('D','The'), w('N','breaststroke'), w('BEP',';~La','is'), w('ADJ','hard'), w('P-CONN','for'), w('PRO','me'), w('TO','to'), w('VB',';~Tn','explain'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;The)</tt><br>
@@ -3413,9 +3891,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.38">6.38</a>) follow (<a href="chapter6.html#ex6.39">6.39</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.41">6.41</a>) follow (<a href="chapter6.html#ex6.42">6.42</a>).</p>
 
-<dl><dt>(<a name="ex6.39">6.39</a>)</dt><dd>
+<dl><dt>(<a name="ex6.42">6.42</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -3813,9 +4291,9 @@
 
 <p align="justify">This section looks at the catenative adjective construction. Here, there is an embedded <i>to</i>-infinitive clause that is not an extraposed notional subject but rather serves to extend the embedding clause in a way analogous to the extension of clause structure seen with catenative verbs in section <a href="chapter5.html#sec5.4">5.4</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.40">6.40</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.43">6.43</a>).</p>
 
-<dl><dt>(<a name="ex6.40">6.40</a>)</dt><dd>
+<dl><dt>(<a name="ex6.43">6.43</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','Voyager'), w('BEP',';~La','is'), w('ADJ;_cat_','likely'), w('TO','to'), w('VB',';~In&sol;pr','survive'), w('D','a'), w('ADJ','billion'), w('NS','years'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Voyager))</tt><br>
@@ -3831,9 +4309,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.40">6.40</a>) follow (<a href="chapter6.html#ex6.41">6.41</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.43">6.43</a>) follow (<a href="chapter6.html#ex6.44">6.44</a>).</p>
 
-<dl><dt>(<a name="ex6.41">6.41</a>)</dt><dd>
+<dl><dt>(<a name="ex6.44">6.44</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -4280,25 +4758,25 @@
 
 <h4>Question</h4>
 
-<p align="justify">Consider (<a href="chapter6.html#ex6.42">6.42</a>)&ndash;(<a href="chapter6.html#ex6.44">6.44</a>). What are the parse results, if any? Can you describe the cause of any parse failure?</p>
+<p align="justify">Consider (<a href="chapter6.html#ex6.45">6.45</a>)&ndash;(<a href="chapter6.html#ex6.47">6.47</a>). What are the parse results, if any? Can you describe the cause of any parse failure?</p>
 
-<dl><dt>(<a name="ex6.42">6.42</a>)</dt><dd>
+<dl><dt>(<a name="ex6.45">6.45</a>)</dt><dd>
 <tt>[w('PRO;_provisional_','It'), w('BEP',';~La','is'), w('ADJ','likely'), w('P-CONN','for'), w('D','the'), w('N','spacecraft'), w('TO','to'), w('VB',';~I','survive'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.43">6.43</a>)</dt><dd>
+<dl><dt>(<a name="ex6.46">6.46</a>)</dt><dd>
 <tt>[w('NPR','Voyager'), w('BEP',';~La','is'), w('ADJ','likely'), w('P-CONN','for'), w('D','the'), w('N','spacecraft'), w('TO','to'), w('VB',';~I','survive'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.44">6.44</a>)</dt><dd>
+<dl><dt>(<a name="ex6.47">6.47</a>)</dt><dd>
 <tt>[w('NPR','Voyager'), w('BEP',';~La','is'), w('ADJ;_cat_','likely'), w('P-CONN','for'), w('D','the'), w('N','spacecraft'), w('TO','to'), w('VB',';~I','survive'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec6.8">6.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction</h2>
 
-<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where preposition phrases with an adverbial function role and adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="chapter5.html#sec5.2">5.2</a>) that subsequently call <tt>adverbial</tt> from section <a href="chapter2.html#sec2.10">2.10</a>. To detect the subordinate clause of a subordinate conjunction, <tt>adverbial</tt> calls the <tt>scon_clause</tt> rules of (<a href="chapter6.html#ex6.45">6.45</a>).</p>
+<p align="justify">This section focuses on rules able to integrate the subordinate clause component of subordinate conjunctions. These subordinate clauses can reside in containing clauses at locations where preposition phrases with an adverbial function role and adverb phrases are also able to occur, which are typically clause initial or clause final positions. Integration from a containing clause happens with <tt>clause_top_layer</tt> or <tt>verb_phrase_layer</tt> rules (both from section <a href="chapter5.html#sec5.2">5.2</a>) that subsequently call <tt>adverbial</tt> from section <a href="chapter2.html#sec2.10">2.10</a>. To detect the subordinate clause of a subordinate conjunction, <tt>adverbial</tt> calls the <tt>scon_clause</tt> rules of (<a href="chapter6.html#ex6.48">6.48</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.45">6.45</a>) differ in regard to the type of the subordinate clause contained, that is, either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.48">6.48</a>) differ in regard to the type of the subordinate clause contained, that is, either:</p>
 
 <ul>
 <li>[rule 1] a finite clause (<tt>IP-ADV</tt>)</li>
@@ -4310,10 +4788,10 @@
 <p align="justify">There is also:</p>
 
 <ul>
-<li>[rule 5] coordination at the topmost level of a subordinate conjunction, with a recursive call to <tt>scon_clause_tail</tt> of (<a href="chapter6.html#ex6.46">6.46</a>) for collecting subsequent conjuncts.</li>
+<li>[rule 5] coordination at the topmost level of a subordinate conjunction, with a recursive call to <tt>scon_clause_tail</tt> of (<a href="chapter6.html#ex6.49">6.49</a>) for collecting subsequent conjuncts.</li>
 </ul>
 
-<dl><dt>(<a name="ex6.45">6.45</a>)</dt><dd>
+<dl><dt>(<a name="ex6.48">6.48</a>)</dt><dd>
 <tt>scon_clause([node('PP-SCON',PL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conn(PL,[node('IP-ADV',IL)]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,[],IL,[]).</tt><br>
@@ -4337,7 +4815,7 @@
 <tt>&nbsp;&nbsp;scon_clause_tail(CL,[]).</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.46">6.46</a>)</dt><dd>
+<dl><dt>(<a name="ex6.49">6.49</a>)</dt><dd>
 <tt>scon_clause_tail([node('CONJP',[CONJ,PP])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;scon_clause([PP],[]).</tt><br>
@@ -4349,9 +4827,9 @@
 
 <h3><a name="sec6.8.1">6.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with finite adverbial clauses</h3>
 
-<p align="justify">As an example with a finite adverbial clause (<tt>IP-ADV</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>because</i>, consider (<a href="chapter6.html#ex6.47">6.47</a>).</p>
+<p align="justify">As an example with a finite adverbial clause (<tt>IP-ADV</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>because</i>, consider (<a href="chapter6.html#ex6.50">6.50</a>).</p>
 
-<dl><dt>(<a name="ex6.47">6.47</a>)</dt><dd>
+<dl><dt>(<a name="ex6.50">6.50</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~I','Tread'), w('ADV','softly'), w('P-CONN','because'), w('PRO','you'), w('VBP',';~Ipr','tread'), w('P-ROLE','on'), w('PRO;_genm_','my'), w('NS','dreams'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-IMP&nbsp;(VB;~I&nbsp;Tread)</tt><br>
@@ -4367,9 +4845,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the result of (<a href="chapter6.html#ex6.47">6.47</a>) follow (<a href="chapter6.html#ex6.48">6.48</a>).</p>
+<p align="justify">Calls to reach the result of (<a href="chapter6.html#ex6.50">6.50</a>) follow (<a href="chapter6.html#ex6.51">6.51</a>).</p>
 
-<dl><dt>(<a name="ex6.48">6.48</a>)</dt><dd>
+<dl><dt>(<a name="ex6.51">6.51</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -4820,9 +5298,9 @@
 
 <h3><a name="sec6.8.2">6.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Subordinate conjunction with to-infinitive clauses</h3>
 
-<p align="justify">As an example with a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>in_order</i>, consider (<a href="chapter6.html#ex6.49">6.49</a>).</p>
+<p align="justify">As an example with a <i>to</i>-infinitive clause (<tt>IP-INF</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>in_order</i>, consider (<a href="chapter6.html#ex6.52">6.52</a>).</p>
 
-<dl><dt>(<a name="ex6.49">6.49</a>)</dt><dd>
+<dl><dt>(<a name="ex6.52">6.52</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('VBP',';~Tt','need'), w('TO','to'), w('VB',';~Tn','spread'), w('PRO;_genm_','my'), w('NS','wings'), w('CONJ','and'), w('VB',';~I','fly'), w('PUNC',','), w('P-CONN','in_order'), w('TO','to'), w('VB',';~Ip','come'), w('RP','back'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
@@ -4843,9 +5321,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.49">6.49</a>) follow (<a href="chapter6.html#ex6.50">6.50</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.52">6.52</a>) follow (<a href="chapter6.html#ex6.53">6.53</a>).</p>
 
-<dl><dt>(<a name="ex6.50">6.50</a>)</dt><dd>
+<dl><dt>(<a name="ex6.53">6.53</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -5472,7 +5950,7 @@
 
 <p align="justify">The <tt>ip_ppl_active</tt> rule from section <a href="chapter5.html#sec5.4.3">5.4.3</a> creates complements for catenative verbs (<tt>IP-PPL-CAT</tt>), notional subjects (<tt>IP-PPL-NSBJ</tt>) and objects (<tt>IP-PPL-OB1</tt>). But subordinate conjunction offers an opportunity for more content to be part of a participle clause.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The possibilities for extra content arise with the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="chapter6.html#ex6.51">6.51</a>). These rules add the possibility of:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The possibilities for extra content arise with the <tt>ip_ppl_adverbial_layer</tt> rules of (<a href="chapter6.html#ex6.54">6.54</a>). These rules add the possibility of:</p>
 
 <ul>
 <li>[rule 1] a subject being included into the participle clause should the <tt>SbjType</tt> parameter be initially set to <tt>unfilled_sbj</tt></li>
@@ -5488,9 +5966,9 @@
 <li>[rule 5] a past participle (<i>-ed&sol;-en</i>) clause with passive voice</li>
 </ul>
 
-<p align="justify">Finally, rules 1&ndash;5 can enter into coordination with one another through [rule 6], with non-initial conjuncts gathered by calls to <tt>ip_ppl_adverbial_tail</tt> of (<a href="chapter6.html#ex6.52">6.52</a>).</p>
+<p align="justify">Finally, rules 1&ndash;5 can enter into coordination with one another through [rule 6], with non-initial conjuncts gathered by calls to <tt>ip_ppl_adverbial_tail</tt> of (<a href="chapter6.html#ex6.55">6.55</a>).</p>
 
-<dl><dt>(<a name="ex6.51">6.51</a>)</dt><dd>
+<dl><dt>(<a name="ex6.54">6.54</a>)</dt><dd>
 <tt>ip_ppl_adverbial_layer(SbjType0,Infl,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType0&nbsp;==&nbsp;unfilled_sbj</tt><br>
@@ -5523,7 +6001,7 @@
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_tail(SbjType,Infl,CL,[]).</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.52">6.52</a>)</dt><dd>
+<dl><dt>(<a name="ex6.55">6.55</a>)</dt><dd>
 <tt>ip_ppl_adverbial_tail(SbjType,Infl,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(SbjType,Infl,IL,[]).</tt><br>
@@ -5533,9 +6011,9 @@
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_tail(SbjType,Infl,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>without</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.53">6.53</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>without</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.56">6.56</a>).</p>
 
-<dl><dt>(<a name="ex6.53">6.53</a>)</dt><dd>
+<dl><dt>(<a name="ex6.56">6.56</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','Without'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','told'), w('PUNC',','), w('D','the'), w('N','chauffeur'), w('VBD',';~Ip','drove'), w('RP','away'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;Without)</tt><br>
@@ -5552,9 +6030,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.53">6.53</a>) follow (<a href="chapter6.html#ex6.54">6.54</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.56">6.56</a>) follow (<a href="chapter6.html#ex6.57">6.57</a>).</p>
 
-<dl><dt>(<a name="ex6.54">6.54</a>)</dt><dd>
+<dl><dt>(<a name="ex6.57">6.57</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -5992,9 +6470,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>after</i> from a sentence final position, consider (<a href="chapter6.html#ex6.55">6.55</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a present participle (<i>-ing</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>after</i> from a sentence final position, consider (<a href="chapter6.html#ex6.58">6.58</a>).</p>
 
-<dl><dt>(<a name="ex6.55">6.55</a>)</dt><dd>
+<dl><dt>(<a name="ex6.58">6.58</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('NPR','Blunt'), w('ADV','finally'), w('VBD',';~I','confessed'), w('P-CONN','after'), w('HAG',';~cat_Ve','having'), w('BEN',';~cat_Ve_passive_','been'), w('VVN',';~Dn.n','granted'), w('N','immunity'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Blunt))</tt><br>
@@ -6011,9 +6489,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.55">6.55</a>) follow (<a href="chapter6.html#ex6.56">6.56</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.58">6.58</a>) follow (<a href="chapter6.html#ex6.59">6.59</a>).</p>
 
-<dl><dt>(<a name="ex6.56">6.56</a>)</dt><dd>
+<dl><dt>(<a name="ex6.59">6.59</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -6495,9 +6973,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-ed&sol;-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>With</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.57">6.57</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-ed&sol;-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>With</i> from a sentence initial position, consider (<a href="chapter6.html#ex6.60">6.60</a>).</p>
 
-<dl><dt>(<a name="ex6.57">6.57</a>)</dt><dd>
+<dl><dt>(<a name="ex6.60">6.60</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('P-CONN','With'), w('PRO;_genm_','their'), w('N','load'), w('P-ROLE','of'), w('NS','bombs'), w('VVN',';~I','gone'), w('PUNC',','), w('D','the'), w('NS','planes'), w('VBD',';~I','moved'), w('ADV','swiftly'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(PP-SCON&nbsp;(P-CONN&nbsp;With)</tt><br>
@@ -6516,9 +6994,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.57">6.57</a>) follow (<a href="chapter6.html#ex6.58">6.58</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.60">6.60</a>) follow (<a href="chapter6.html#ex6.61">6.61</a>).</p>
 
-<dl><dt>(<a name="ex6.58">6.58</a>)</dt><dd>
+<dl><dt>(<a name="ex6.61">6.61</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -7170,9 +7648,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-ed&sol;-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>as_if</i> from a sentence final position, consider (<a href="chapter6.html#ex6.59">6.59</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a past participle (<i>-ed&sol;-en</i>) clause (<tt>IP-PPL</tt>) introduced by the subordinate conjunction word (<tt>P-CONN</tt>) <i>as_if</i> from a sentence final position, consider (<a href="chapter6.html#ex6.62">6.62</a>).</p>
 
-<dl><dt>(<a name="ex6.59">6.59</a>)</dt><dd>
+<dl><dt>(<a name="ex6.62">6.62</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('NPR','Jones'), w('VBD',';~I','sighed'), w('P-CONN','as_if'), w('VVN',';~Tn','relieved'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Jones))</tt><br>
@@ -7185,9 +7663,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.59">6.59</a>) follow (<a href="chapter6.html#ex6.60">6.60</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.62">6.62</a>) follow (<a href="chapter6.html#ex6.63">6.63</a>).</p>
 
-<dl><dt>(<a name="ex6.60">6.60</a>)</dt><dd>
+<dl><dt>(<a name="ex6.63">6.63</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -7483,9 +7961,9 @@
 
 <h4>Question</h4>
 
-<p align="justify">Why do the success and failure results of (<a href="chapter6.html#ex6.61">6.61</a>)&ndash;(<a href="chapter6.html#ex6.63">6.63</a>) obtain?</p>
+<p align="justify">Why do the success and failure results of (<a href="chapter6.html#ex6.64">6.64</a>)&ndash;(<a href="chapter6.html#ex6.66">6.66</a>) obtain?</p>
 
-<dl><dt>(<a name="ex6.61">6.61</a>)</dt><dd>
+<dl><dt>(<a name="ex6.64">6.64</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('BED',';~cat_Vg','was'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;John))</tt><br>
@@ -7498,13 +7976,13 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.62">6.62</a>)</dt><dd>
+<dl><dt>(<a name="ex6.65">6.65</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('BED',';~cat_Vg','was'), w('HAG',';~cat_Ve','having'), w('BEN',';~cat_Vg','been'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.63">6.63</a>)</dt><dd>
+<dl><dt>(<a name="ex6.66">6.66</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('BED',';~La','was'), w('ADJ','happy'), w('P-CONN','_*_'), w('HAG',';~cat_Ve','having'), w('BEN',';~cat_Vg','been'), w('HAG',';~Tn','having'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;John))</tt><br>
@@ -7523,9 +8001,9 @@
 
 <br><h2><a name="sec6.9">6.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Present participle clauses as preposition complements</h2>
 
-<p align="justify">It is possible for a present participle (<i>-ing</i>) clause to be the selected complement of a preposition. This follows from the <tt>preposition_phrase_layer</tt> rule of section <a href="chapter3.html#sec3.5">3.5</a>. As an example, consider (<a href="chapter6.html#ex6.64">6.64</a>).</p>
+<p align="justify">It is possible for a present participle (<i>-ing</i>) clause to be the selected complement of a preposition. This follows from the <tt>preposition_phrase_layer</tt> rule of section <a href="chapter3.html#sec3.5">3.5</a>. As an example, consider (<a href="chapter6.html#ex6.67">6.67</a>).</p>
 
-<dl><dt>(<a name="ex6.64">6.64</a>)</dt><dd>
+<dl><dt>(<a name="ex6.67">6.67</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('VBD',';~I','arrived'), w('P-ROLE','without'), w('PRO','her'), w('VAG',';~Tn','noticing'), w('PRO','me'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
@@ -7539,9 +8017,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The present participle (<i>-ing</i>) clause is the selected complement of a preposition and has an internal subject. Calls to reach the output follow (<a href="chapter6.html#ex6.65">6.65</a>).</p>
+<p align="justify">The present participle (<i>-ing</i>) clause is the selected complement of a preposition and has an internal subject. Calls to reach the output follow (<a href="chapter6.html#ex6.68">6.68</a>).</p>
 
-<dl><dt>(<a name="ex6.65">6.65</a>)</dt><dd>
+<dl><dt>(<a name="ex6.68">6.68</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -7907,7 +8385,7 @@
 
 <br><h2><a name="sec6.10">6.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses</h2>
 
-<p align="justify">A relative clause occurs inside a noun phrase alongside but after the noun phrase head for which it acts as a modifier, with the noun phrase head contributing a role within the relative clause. This necessitates the wherewithal to integrate the role inside the relative clause with the external noun phrase head. Ways of integration provided by the rules of (<a href="chapter6.html#ex6.66">6.66</a>) are:</p>
+<p align="justify">A relative clause occurs inside a noun phrase alongside but after the noun phrase head for which it acts as a modifier, with the noun phrase head contributing a role within the relative clause. This necessitates the wherewithal to integrate the role inside the relative clause with the external noun phrase head. Ways of integration provided by the rules of (<a href="chapter6.html#ex6.69">6.69</a>) are:</p>
 
 <ul>
 <li>[rule 1] as a finite clause</li>
@@ -7916,7 +8394,7 @@
 <li>[rule 4] a past participle (<i>-ed&sol;-en</i>) clause</li>
 </ul>
 
-<dl><dt>(<a name="ex6.66">6.66</a>)</dt><dd>
+<dl><dt>(<a name="ex6.69">6.69</a>)</dt><dd>
 <tt>relative_clause([node('IP-REL',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
 <tt>relative_clause([node('IP-INF-REL',IL)|L],L)&nbsp;--&gt;</tt><br>
@@ -7929,7 +8407,7 @@
 
 <h3><a name="sec6.10.1">6.10.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are finite clauses</h3>
 
-<p align="justify">A relative clause that is a finite clause introduced with [rule 2] of (<a href="chapter6.html#ex6.66">6.66</a>) above will, with the rules of (<a href="chapter6.html#ex6.67">6.67</a>), establish its internal link to the head of the external noun phrase either:</p>
+<p align="justify">A relative clause that is a finite clause introduced with [rule 2] of (<a href="chapter6.html#ex6.69">6.69</a>) above will, with the rules of (<a href="chapter6.html#ex6.70">6.70</a>), establish its internal link to the head of the external noun phrase either:</p>
 
 <ul>
 <li>[rule 2] with a clause initial preposition phrase that has <tt>relative</tt> type and that is a stored item</li>
@@ -7946,7 +8424,7 @@
 <li>[rule 8] coordination at the topmost relative clause level</li>
 </ul>
 
-<p align="justify">With the coordination of [rule 7], each conjunct is itself a finite clause with its own way from the rules of (<a href="chapter6.html#ex6.67">6.67</a>) for establishing its internal link to the head of the external noun phrase.</p>
+<p align="justify">With the coordination of [rule 7], each conjunct is itself a finite clause with its own way from the rules of (<a href="chapter6.html#ex6.70">6.70</a>) for establishing its internal link to the head of the external noun phrase.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It follows that a relative clause that is a finite clause has either:</p>
 
@@ -7964,7 +8442,7 @@
 <li><tt>RADV</tt> (relative adverb; e.g., <tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>whereby</tt>)</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.67">6.67</a>) collect content for a relative clause that either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>relative_clause_finite_top_layer</tt> rules of (<a href="chapter6.html#ex6.70">6.70</a>) collect content for a relative clause that either:</p>
 
 <dl>
 <li>has a relative word [rules 1&ndash;4]</li>
@@ -7972,7 +8450,7 @@
 <li>contains coordination [rule 6]</li>
 </dl>
 
-<dl><dt>(<a name="ex6.67">6.67</a>)</dt><dd>
+<dl><dt>(<a name="ex6.70">6.70</a>)</dt><dd>
 <tt>relative_clause_finite_top_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
@@ -8009,9 +8487,9 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_tail(CL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Coordination with [rule 6] of (<a href="chapter6.html#ex6.67">6.67</a>) involves recursive calls to <tt>relative_clause_finite_top_tail</tt> of (<a href="chapter6.html#ex6.68">6.68</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Coordination with [rule 6] of (<a href="chapter6.html#ex6.70">6.70</a>) involves recursive calls to <tt>relative_clause_finite_top_tail</tt> of (<a href="chapter6.html#ex6.71">6.71</a>) to pick up subsequent conjuncts, where each conjunct has internally either its own relative pronoun or its own trace.</p>
 
-<dl><dt>(<a name="ex6.68">6.68</a>)</dt><dd>
+<dl><dt>(<a name="ex6.71">6.71</a>)</dt><dd>
 <tt>relative_clause_finite_top_tail([node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
@@ -8021,9 +8499,9 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_tail(L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 1] of (<a href="chapter6.html#ex6.67">6.67</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that goes as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.69">6.69</a>) to inherit as the subject for the relative clause [rule 1] or as a non-subject [rule 2].</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 1] of (<a href="chapter6.html#ex6.70">6.70</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that goes as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.72">6.72</a>) to inherit as the subject for the relative clause [rule 1] or as a non-subject [rule 2].</p>
 
-<dl><dt>(<a name="ex6.69">6.69</a>)</dt><dd>
+<dl><dt>(<a name="ex6.72">6.72</a>)</dt><dd>
 <tt>relative_clause_finite_inside([np(ICH)],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,derived_sbj])</tt><br>
@@ -8033,9 +8511,9 @@
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Store,L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>that</i> creating a non-subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.70">6.70</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>that</i> creating a non-subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.73">6.73</a>).</p>
 
-<dl><dt>(<a name="ex6.70">6.70</a>)</dt><dd>
+<dl><dt>(<a name="ex6.73">6.73</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('RPRO','that'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -8050,9 +8528,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.70">6.70</a>) follow (<a href="chapter6.html#ex6.71">6.71</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.73">6.73</a>) follow (<a href="chapter6.html#ex6.74">6.74</a>).</p>
 
-<dl><dt>(<a name="ex6.71">6.71</a>)</dt><dd>
+<dl><dt>(<a name="ex6.74">6.74</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -8423,9 +8901,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.72">6.72</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.75">6.75</a>).</p>
 
-<dl><dt>(<a name="ex6.72">6.72</a>)</dt><dd>
+<dl><dt>(<a name="ex6.75">6.75</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('P-ROLE','over'), w('RPRO','which'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -8440,9 +8918,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.72">6.72</a>) follow (<a href="chapter6.html#ex6.73">6.73</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.75">6.75</a>) follow (<a href="chapter6.html#ex6.76">6.76</a>).</p>
 
-<dl><dt>(<a name="ex6.73">6.73</a>)</dt><dd>
+<dl><dt>(<a name="ex6.76">6.76</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -8839,9 +9317,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with genitive relative pronoun (<tt>RPRO;_genm_</tt>) <i>whose</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.74">6.74</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with genitive relative pronoun (<tt>RPRO;_genm_</tt>) <i>whose</i> as part of a preposition phrase with an initial placement inside the relative clause, consider (<a href="chapter6.html#ex6.77">6.77</a>).</p>
 
-<dl><dt>(<a name="ex6.74">6.74</a>)</dt><dd>
+<dl><dt>(<a name="ex6.77">6.77</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','gardener'), w('P-ROLE','over'), w('RPRO;_genm_','whose'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;the)</tt><br>
@@ -8857,9 +9335,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.74">6.74</a>) follow (<a href="chapter6.html#ex6.75">6.75</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.77">6.77</a>) follow (<a href="chapter6.html#ex6.78">6.78</a>).</p>
 
-<dl><dt>(<a name="ex6.75">6.75</a>)</dt><dd>
+<dl><dt>(<a name="ex6.78">6.78</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -9326,9 +9804,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a non-subject dependency internal to a relative clause without a relative pronoun, consider (<a href="chapter6.html#ex6.76">6.76</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a non-subject dependency internal to a relative clause without a relative pronoun, consider (<a href="chapter6.html#ex6.79">6.79</a>).</p>
 
-<dl><dt>(<a name="ex6.76">6.76</a>)</dt><dd>
+<dl><dt>(<a name="ex6.79">6.79</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','fence'), w('D','a'), w('N','horse'), w('VBD',';~Ipr','jumped'), w('P-ROLE','over')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -9342,9 +9820,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.76">6.76</a>) follow (<a href="chapter6.html#ex6.77">6.77</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.79">6.79</a>) follow (<a href="chapter6.html#ex6.80">6.80</a>).</p>
 
-<dl><dt>(<a name="ex6.77">6.77</a>)</dt><dd>
+<dl><dt>(<a name="ex6.80">6.80</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -9667,9 +10145,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> creating a subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.78">6.78</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with relative pronoun (<tt>RPRO</tt>) <i>which</i> creating a subject dependency internally to a relative clause, consider (<a href="chapter6.html#ex6.81">6.81</a>).</p>
 
-<dl><dt>(<a name="ex6.78">6.78</a>)</dt><dd>
+<dl><dt>(<a name="ex6.81">6.81</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('RPRO','which'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -9686,9 +10164,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.78">6.78</a>) follow (<a href="chapter6.html#ex6.79">6.79</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.81">6.81</a>) follow (<a href="chapter6.html#ex6.82">6.82</a>).</p>
 
-<dl><dt>(<a name="ex6.79">6.79</a>)</dt><dd>
+<dl><dt>(<a name="ex6.82">6.82</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -10124,27 +10602,27 @@
 
 <h4>Question</h4>
 
-<p align="justify">Consider (<a href="chapter6.html#ex6.80">6.80</a>)&ndash;(<a href="chapter6.html#ex6.83">6.83</a>) taken from Gazdar et al (1985, p.&nbsp;178). (Examples (<a href="chapter6.html#ex6.80">6.80</a>)&ndash;(<a href="chapter6.html#ex6.82">6.82</a>) are from Williams (1978, p.&nbsp;34), with (<a href="chapter6.html#ex6.83">6.83</a>) attributed to Paul Hirshbuhler.) What are the parse results, if any? Do the results reflect your expectations? Can you describe how they arise?</p>
+<p align="justify">Consider (<a href="chapter6.html#ex6.83">6.83</a>)&ndash;(<a href="chapter6.html#ex6.86">6.86</a>) taken from Gazdar et al (1985, p.&nbsp;178). (Examples (<a href="chapter6.html#ex6.83">6.83</a>)&ndash;(<a href="chapter6.html#ex6.85">6.85</a>) are from Williams (1978, p.&nbsp;34), with (<a href="chapter6.html#ex6.86">6.86</a>) attributed to Paul Hirshbuhler.) What are the parse results, if any? Do the results reflect your expectations? Can you describe how they arise?</p>
 
-<dl><dt>(<a name="ex6.80">6.80</a>)</dt><dd>
+<dl><dt>(<a name="ex6.83">6.83</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('NPR','Mary'), w('VBD',';~Tn','liked'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.81">6.81</a>)</dt><dd>
+<dl><dt>(<a name="ex6.84">6.84</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('VBD',';~Tn','saw'), w('NPR','Bill'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.82">6.82</a>)</dt><dd>
+<dl><dt>(<a name="ex6.85">6.85</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Bill'), w('VBD',';~Tn','saw'), w('CONJ','and'), w('VBD',';~Tn','liked'), w('NPR','Mary'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.83">6.83</a>)</dt><dd>
+<dl><dt>(<a name="ex6.86">6.86</a>)</dt><dd>
 <tt>[w('PRO','I'), w('VBP',';~Tn','know'), w('D','a'), w('N','man'), w('RPRO','who'), w('NPR','Mary'), w('VBP',';~Tn','likes'), w('CONJ','and'), w('VBP',';~Tf','hopes'), w('MD',';~cat_Vi','will'), w('VB',';~I','win'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <h3><a name="sec6.10.2">6.10.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Relative clauses that are to-infinitive clauses</h3>
 
-<p align="justify">A relative clause that is a <i>to</i>-infinitive clause introduced with [rule 2] of (<a href="chapter6.html#ex6.66">6.66</a>) above will, with the rules of (<a href="chapter6.html#ex6.84">6.84</a>), establish its internal link to the head of the external noun phrase either:</p>
+<p align="justify">A relative clause that is a <i>to</i>-infinitive clause introduced with [rule 2] of (<a href="chapter6.html#ex6.69">6.69</a>) above will, with the rules of (<a href="chapter6.html#ex6.87">6.87</a>), establish its internal link to the head of the external noun phrase either:</p>
 
 <ul>
 <li>[rule 1] with a clause initial preposition phrase that has <tt>relative</tt> type and that is a stored item</li>
@@ -10160,9 +10638,9 @@
 <li>[rule 6] coordination at the topmost relative clause level</li>
 </ul>
 
-<p align="justify">With the coordination of [rule 5], each conjunct is itself a <i>to</i>-infinitive clause with its own way from the rules of (<a href="chapter6.html#ex6.84">6.84</a>) for establishing its internal link to the head of the external noun phrase.</p>
+<p align="justify">With the coordination of [rule 5], each conjunct is itself a <i>to</i>-infinitive clause with its own way from the rules of (<a href="chapter6.html#ex6.87">6.87</a>) for establishing its internal link to the head of the external noun phrase.</p>
 
-<dl><dt>(<a name="ex6.84">6.84</a>)</dt><dd>
+<dl><dt>(<a name="ex6.87">6.87</a>)</dt><dd>
 <tt>relative_clause_to_inf_top_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
@@ -10184,7 +10662,7 @@
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_tail(CL,[]).</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.85">6.85</a>)</dt><dd>
+<dl><dt>(<a name="ex6.88">6.88</a>)</dt><dd>
 <tt>relative_clause_to_inf_top_tail([node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_layer(IL,[]).</tt><br>
@@ -10194,9 +10672,9 @@
 <tt>&nbsp;&nbsp;relative_clause_to_inf_top_tail(L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="chapter6.html#ex6.86">6.86</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a relative clause that is a <i>to</i>-infinitive clause with a non-subject internal dependency and with an internal <i>for</i> introduced subject, consider (<a href="chapter6.html#ex6.89">6.89</a>).</p>
 
-<dl><dt>(<a name="ex6.86">6.86</a>)</dt><dd>
+<dl><dt>(<a name="ex6.89">6.89</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('P-CONN','for'), w('PRO','me'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -10213,9 +10691,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.86">6.86</a>) follow (<a href="chapter6.html#ex6.87">6.87</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.89">6.89</a>) follow (<a href="chapter6.html#ex6.90">6.90</a>).</p>
 
-<dl><dt>(<a name="ex6.87">6.87</a>)</dt><dd>
+<dl><dt>(<a name="ex6.90">6.90</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -10627,9 +11105,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As word list content for a noun modifier that is a <i>to</i>-infinitive clause without an internal <i>for</i> introduced subject and without a non-subject selected internal dependency, consider (<a href="chapter6.html#ex6.88">6.88</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As word list content for a noun modifier that is a <i>to</i>-infinitive clause without an internal <i>for</i> introduced subject and without a non-subject selected internal dependency, consider (<a href="chapter6.html#ex6.91">6.91</a>).</p>
 
-<dl><dt>(<a name="ex6.88">6.88</a>)</dt><dd>
+<dl><dt>(<a name="ex6.91">6.91</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','the'), w('N','intention&sol;time&sol;person'), w('TO','to'), w('VB',';~Tn.pr','jump'), w('D','a'), w('N','horse'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;the)</tt><br>
@@ -10665,7 +11143,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">There are three parse structures in the results of (<a href="chapter6.html#ex6.88">6.88</a>), differing in the structure and content of the <i>to</i>-infinitive clause, which is either:</p>
+<p align="justify">There are three parse structures in the results of (<a href="chapter6.html#ex6.91">6.91</a>), differing in the structure and content of the <i>to</i>-infinitive clause, which is either:</p>
 
 <ul>
 <li>a noun complement (appropriate for <tt>intention</tt>)</li>
@@ -10675,13 +11153,13 @@
 
 <h4>Question</h4>
 
-<p align="justify">Zandvoort (1969, p.&nbsp;56) points out that the passive infinitive may vary with the active infinitive when functioning as a relative clause, especially after <i>there is</i> and <i>there was</i>. With parse results for (<a href="chapter6.html#ex6.89">6.89</a>) and (<a href="chapter6.html#ex6.90">6.90</a>), say why this is so.</p>
+<p align="justify">Zandvoort (1969, p.&nbsp;56) points out that the passive infinitive may vary with the active infinitive when functioning as a relative clause, especially after <i>there is</i> and <i>there was</i>. With parse results for (<a href="chapter6.html#ex6.92">6.92</a>) and (<a href="chapter6.html#ex6.93">6.93</a>), say why this is so.</p>
 
-<dl><dt>(<a name="ex6.89">6.89</a>)</dt><dd>
+<dl><dt>(<a name="ex6.92">6.92</a>)</dt><dd>
 <tt>[w('EX','There'), w('BED',';~ex_V','was'), w('Q','no'), w('N','time'), w('TO','to'), w('VB',';~Tn','lose'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex6.90">6.90</a>)</dt><dd>
+<dl><dt>(<a name="ex6.93">6.93</a>)</dt><dd>
 <tt>[w('EX','There'), w('BED',';~ex_V','was'), w('Q','no'), w('N','time'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','lost'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
@@ -10689,9 +11167,9 @@
 
 <p align="justify">Reduced relative clauses can have the form of present participle clauses occurring directly inside a noun phrase as a modifier of the noun head. Inside the reduced relative clause there is a present participle (<i>-ing</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a present participle clause, consider (<a href="chapter6.html#ex6.91">6.91</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a present participle clause, consider (<a href="chapter6.html#ex6.94">6.94</a>).</p>
 
-<dl><dt>(<a name="ex6.91">6.91</a>)</dt><dd>
+<dl><dt>(<a name="ex6.94">6.94</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VAG',';~Ipr','jumping'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -10704,9 +11182,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.91">6.91</a>) follow (<a href="chapter6.html#ex6.92">6.92</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.94">6.94</a>) follow (<a href="chapter6.html#ex6.95">6.95</a>).</p>
 
-<dl><dt>(<a name="ex6.92">6.92</a>)</dt><dd>
+<dl><dt>(<a name="ex6.95">6.95</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -11022,9 +11500,9 @@
 
 <p align="justify">In addition to being present participle clauses, reduced relative clauses can also have the form of past participle clauses occurring directly inside a noun phrase as a modifier of the noun head. Inside the reduced relative clause there is a past participle (<i>-ed&sol;-en</i>) verb and its complements, but no finite verb and no clause subject.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle clause, consider (<a href="chapter6.html#ex6.93">6.93</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a reduced relative clause consisting of a past participle clause, consider (<a href="chapter6.html#ex6.96">6.96</a>).</p>
 
-<dl><dt>(<a name="ex6.93">6.93</a>)</dt><dd>
+<dl><dt>(<a name="ex6.96">6.96</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','a'), w('N','horse'), w('VVN',';~Tn.pr','jumped'), w('P-ROLE','over'), w('D','a'), w('N','fence')]),&nbsp;parse(noun_phrase('',non_privileged)).</tt><br>
 <br>
 <tt>(NP&nbsp;(D&nbsp;a)</tt><br>
@@ -11038,9 +11516,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.93">6.93</a>) follow (<a href="chapter6.html#ex6.94">6.94</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.96">6.96</a>) follow (<a href="chapter6.html#ex6.97">6.97</a>).</p>
 
-<dl><dt>(<a name="ex6.94">6.94</a>)</dt><dd>
+<dl><dt>(<a name="ex6.97">6.97</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="1" style="text-align: center; vertical-align: middle;">
@@ -11354,9 +11832,9 @@
 
 <br><h2><a name="sec6.11">6.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Cleft constructions</h2>
 
-<p align="justify">The extra <tt>verb_complements_by_code</tt> rules of (<a href="chapter6.html#ex6.95">6.95</a>) allow coverage of cleft constructions.</p>
+<p align="justify">The extra <tt>verb_complements_by_code</tt> rules of (<a href="chapter6.html#ex6.98">6.98</a>) allow coverage of cleft constructions.</p>
 
-<dl><dt>(<a name="ex6.95">6.95</a>)</dt><dd>
+<dl><dt>(<a name="ex6.98">6.98</a>)</dt><dd>
 <tt>verb_complements_by_code(';~cleft_Vn',[],cleft_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('-FOC',non_privileged,L,[node('IP-CLF',IL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
@@ -11364,18 +11842,18 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_layer(IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.95">6.95</a>) require the verb code <tt>;~cleft_Vn</tt>, selecting as complements:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of (<a href="chapter6.html#ex6.98">6.98</a>) require the verb code <tt>;~cleft_Vn</tt>, selecting as complements:</p>
 
 <ul>
 <li>a noun phrase as the focus (<tt>-FOC</tt>)</li>
 <li>a cleft clause (<tt>IP-CLF</tt>) that has the internal structure of a finite relative clause.</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of (<a href="chapter6.html#ex6.95">6.95</a>) require the clause <tt>SbjType</tt> parameter to be set to the value of <tt>cleft_sbj</tt>. This <tt>SbjType</tt> setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of (<a href="chapter6.html#ex6.98">6.98</a>) require the clause <tt>SbjType</tt> parameter to be set to the value of <tt>cleft_sbj</tt>. This <tt>SbjType</tt> setting is possible with the first <tt>subject</tt> rule in section <a href="chapter2.html#sec2.5">2.5</a> picking up a word with word class <tt>PRO;_cleft_</tt>, which can only ever be an instance of <i>it</i>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="chapter6.html#ex6.96">6.96</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with a cleft construction, consider (<a href="chapter6.html#ex6.99">6.99</a>).</p>
 
-<dl><dt>(<a name="ex6.96">6.96</a>)</dt><dd>
+<dl><dt>(<a name="ex6.99">6.99</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_cleft_','It'), w('BED',';~cleft_Vn','was'), w('D','an'), w('ADJ','atomic'), w('N','fission'), w('PRO','we'), w('VBD',';~Tn','saw'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO;_cleft_&nbsp;It))</tt><br>
@@ -11391,9 +11869,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.96">6.96</a>) follow (<a href="chapter6.html#ex6.97">6.97</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.99">6.99</a>) follow (<a href="chapter6.html#ex6.100">6.100</a>).</p>
 
-<dl><dt>(<a name="ex6.97">6.97</a>)</dt><dd>
+<dl><dt>(<a name="ex6.100">6.100</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -11789,7 +12267,7 @@
 
 <p align="justify">Code <tt>;~V_as_though&sol;as_if&sol;like</tt> selects an adverbial clause (<tt>PP-SCON-MNR</tt>) introduced by a subordinating conjunction word (<tt>P-CONN</tt>), e.g., <i>as_though</i>&sol;<i>as_if</i>&sol;<i>like</i>.</p>
 
-<dl><dt>(<a name="ex6.98">6.98</a>)</dt><dd>
+<dl><dt>(<a name="ex6.101">6.101</a>)</dt><dd>
 <tt>verb_complements_by_code(';~V_as_though&sol;as_if&sol;like',Store,there_sbj,active,[node('PP-CLR',PL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;role(PL,[node('IP-ADV',IL)]),</tt><br>
 <tt>&nbsp;&nbsp;subject(there_sbj,IL,L1),</tt><br>
@@ -11799,9 +12277,9 @@
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,Store,IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.99">6.99</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example, consider (<a href="chapter6.html#ex6.102">6.102</a>).</p>
 
-<dl><dt>(<a name="ex6.99">6.99</a>)</dt><dd>
+<dl><dt>(<a name="ex6.102">6.102</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_expletive_','It'), w('VBP',';~V_as_though&sol;as_if&sol;like','looks'), w('P-ROLE','like'), w('EX','there'), w('BEP',';~cat_Vg','is'), w('VAG',';~cat_Vt','going'), w('TO','to'), w('BE',';~ex_V','be'), w('D','a'), w('N','storm'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO;_expletive_&nbsp;It))</tt><br>
@@ -11819,9 +12297,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.99">6.99</a>) follow (<a href="chapter6.html#ex6.100">6.100</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.102">6.102</a>) follow (<a href="chapter6.html#ex6.103">6.103</a>).</p>
 
-<dl><dt>(<a name="ex6.100">6.100</a>)</dt><dd>
+<dl><dt>(<a name="ex6.103">6.103</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">
@@ -12263,9 +12741,9 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider (<a href="chapter6.html#ex6.101">6.101</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example, consider (<a href="chapter6.html#ex6.104">6.104</a>).</p>
 
-<dl><dt>(<a name="ex6.101">6.101</a>)</dt><dd>
+<dl><dt>(<a name="ex6.104">6.104</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('EX','There'), w('VBP',';~V_as_though&sol;as_if&sol;like','looks'), w('P-ROLE','like'), w('EX','there'), w('BEP',';~cat_Vg','is'), w('VAG',';~cat_Vt','going'), w('TO','to'), w('BE',';~ex_V','be'), w('D','a'), w('N','storm'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>(IP-MAT&nbsp;(EX&nbsp;There)</tt><br>
@@ -12283,9 +12761,9 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.101">6.101</a>) follow (<a href="chapter6.html#ex6.102">6.102</a>).</p>
+<p align="justify">Calls to reach the output of (<a href="chapter6.html#ex6.104">6.104</a>) follow (<a href="chapter6.html#ex6.105">6.105</a>).</p>
 
-<dl><dt>(<a name="ex6.102">6.102</a>)</dt><dd>
+<dl><dt>(<a name="ex6.105">6.105</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
   <tr>
   <td colspan="2" style="text-align: center; vertical-align: middle;">

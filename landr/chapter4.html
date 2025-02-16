@@ -14,19 +14,28 @@
 
 <ul>
 <li>[rule 1] integrate as a clause final element a notional subject when the <tt>SbjType</tt> setting is <tt>provisional_sbj</tt>, discussed in section <a href="chapter6.html#sec6.5">6.5</a></li>
-<li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6">6.6</a></li>
-<li>[rule 3] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
-<li>[rule 4] include an adverbial prior to the verb complements</li>
-<li>[rule 5] include an adverbial after the verb complements</li>
+<li>[rule 2] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with active voice and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6.1">6.6.1</a></li>
+<li>[rule 3] integrate as a clause final element a notional subject that is a <i>to</i>-infinitive clause with passive voice when the <tt>Code</tt> setting is <tt>;~La</tt> and the <tt>SbjType</tt> setting is <tt>derived_sbj</tt>, discussed in section <a href="chapter6.html#sec6.6.2">6.6.2</a></li>
+<li>[rule 4] include negation with <tt>neg</tt> (from section <a href="chapter2.html#sec2.10">2.10</a>)</li>
+<li>[rule 5] include an adverbial prior to the verb complements</li>
+<li>[rule 6] include an adverbial after the verb complements</li>
 </ul>
 
 <dl><dt>(<a name="ex4.2">4.2</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&#92;+&nbsp;sub_atom(Code,0,6,_,';~cat_'),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;provisional_sbj</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,filled_sbj,Voice,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;notional_item('-NSBJ',L1,L0).</tt><br>
+<tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;Code&nbsp;=&nbsp;';~cat_Ve_passive_',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;=&nbsp;derived_sbj</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;verb_complements_top_layer(Code,[],filled_sbj,Voice,L,[node('IP-INF-NSBJ',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;to_inf_layer(Store,filled_sbj,active,VL,[]).</tt><br>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;Code&nbsp;=&nbsp;';~La',</tt><br>
@@ -1117,15 +1126,18 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.106">4.106</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.107">4.107</a>).</p>
 
 <dl><dt>(<a name="ex4.106">4.106</a>)</dt><dd>
-<tt>[w('PRO','We'), w('VBP',';~Tnt','want'), w('PRO','you'), w('TO','to'), w('VB',';~I','know'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','They'), w('VBD',';~Tnt','allowed'), w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.107">4.107</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','you'), w('TO','to'), w('VB',';~I','know')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
 <br>
-<tt>(&nbsp;(NP-DOB1&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>(&nbsp;(NP-DOB1&nbsp;(Q&nbsp;no)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;building))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;know)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;errected))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1169,17 +1181,19 @@
 
 <p align="justify">The success of (<a href="chapter4.html#ex4.111">4.111</a>) is possible with [rule 2] of (<a href="chapter4.html#ex4.105">4.105</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.112">4.112</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.113">4.113</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list (<a href="chapter4.html#ex4.112">4.112</a>) gives an example of a double passive from Kruisinga (1931, p.333). An alternative construction with a double passive is seen in section <a href="chapter6.html#sec6.6.1">6.6.1</a>. Parsing (<a href="chapter4.html#ex4.112">4.112</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.113">4.113</a>).</p>
 
 <dl><dt>(<a name="ex4.112">4.112</a>)</dt><dd>
-<tt>[w('PRO','We'), w('BED',';~cat_Ve_passive_','were'), w('VVN',';~Tnt','allowed'), w('TO','to'), w('VB',';~I','go'), w('PUNC','.')]</tt><br>
+<tt>[w('Q','No'), w('N','building'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tnt','allowed'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.113">4.113</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('VB',';~I','go')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,passive)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;go))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;errected)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
