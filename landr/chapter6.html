@@ -21,7 +21,7 @@
 
 <p align="justify">A <i>that</i>-clause is an embedded clause with a finite verb. This may have the complementizer <i>that</i> (tagged <tt>C</tt>) as the clause initial word. A <i>that</i>-clause has a maximal constituent with the <tt>CP-THT</tt> tag that can take function information as a tag extension from the <tt>Ext</tt> parameter of the <tt>cp_that</tt> rules of (<a href="chapter6.html#ex6.1">6.1</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 1] of (<a href="chapter6.html#ex6.1">6.1</a>) will construct a <tt>CP-THT</tt> that has as its only element a finite clause layer (<tt>IP-SUB</tt>), which in turn contains all the clause content gathered with a <tt>clause_that_layer</tt> rule of (<a href="chapter6.html#ex6.3">6.3</a>), including any clause initial complementizer. Presence or absence of an initial complementizer can depend on the <tt>Type</tt> parameter, which is set to either:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 1] of (<a href="chapter6.html#ex6.1">6.1</a>) will construct a <tt>CP-THT</tt> that has as its only element a finite clause layer (<tt>IP-SUB</tt>), which in turn contains all the clause content gathered with a <tt>clause_that_layer</tt> rule of (<a href="chapter6.html#ex6.3">6.3</a>), including any clause initial complementizer. Presence or absence of an initial complementizer can depend on the <tt>Type</tt> parameter, which is set to either:</p>
 
 <ul>
 <li><tt>with_c</tt></li>
@@ -62,7 +62,7 @@
 <li>what is the content of the word list</li>
 </ul>
 
-<p align="justify">[Rule 1] applies if the word list has no <i>that</i>-complementizer and no clause subject and there is a noun phrase to inherit from the <tt>Store</tt> parameter. [Rule 2] applies if there is a <i>that</i>-complementizer and content from the word list for a clause with subject. [Rule 3] applies if there is no <i>that</i>-complementizer but there is content from the word list for a clause with subject.</p>
+<p align="justify">[rule 1] applies if the word list has no <i>that</i>-complementizer and no clause subject and there is a noun phrase to inherit from the <tt>Store</tt> parameter. [rule 2] applies if there is a <i>that</i>-complementizer and content from the word list for a clause with subject. [rule 3] applies if there is no <i>that</i>-complementizer but there is content from the word list for a clause with subject.</p>
 
 <dl><dt>(<a name="ex6.3">6.3</a>)</dt><dd>
 <tt>clause_that_layer(without_c,[np(ICH)|Store],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
@@ -491,7 +491,7 @@
 
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;More examples where a <i>that</i>-clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.4">4.4.4</a> (with code <tt>;~Tf</tt>), <a href="chapter4.html#sec4.5.4">4.5.4</a> (with code <tt>;~Dn.f</tt>) and <a href="chapter4.html#sec4.5.10">4.5.10</a> (with code <tt>;~Dpr.f</tt>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;More examples where a <i>that</i>-clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.4">4.4.4</a> (with code <tt>;~Tf</tt>), <a href="chapter4.html#sec4.5.2">4.5.2</a> (with code <tt>;~Dn.f</tt>) and <a href="chapter4.html#sec4.5.8">4.5.8</a> (with code <tt>;~Dpr.f</tt>).</p>
 
 <h4>Question</h4>
 
@@ -507,7 +507,7 @@
 
 <br><h2><a name="sec6.3">6.3</a>&nbsp;&nbsp;&nbsp;&nbsp;IP-INF with to inside (to-infinitive clause)</h2>
 
-<p align="justify">A <i>to</i>-infinitive clause is a non-finite clause with a <i>to</i> word (see section <a href="chapter2.html#sec2.10">2.10</a>) and a following verb in the infinitive form. In addition to being able to extend the same clause as part of a catenative construction (as seen in section <a href="chapter5.html#sec5.4.2">5.4.2</a>), a <i>to</i>-infinitive clause can also form a distinct clause that is an argument for a containing clause. Examples where a <i>to</i>-infinitive clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.7">4.4.7</a> (with code <tt>;~Tt</tt>), <a href="chapter4.html#sec4.4.8">4.4.8</a> (with code <tt>;~Tnt</tt>), <a href="chapter4.html#sec4.5.7">4.5.7</a> (with code <tt>;~Dn.t</tt>) and <a href="chapter4.html#sec4.6.1">4.6.1</a> (with code <tt>;~Cn.a</tt> when there is a provisional object <i>it</i>).</p>
+<p align="justify">A <i>to</i>-infinitive clause is a non-finite clause with a <i>to</i> word (see section <a href="chapter2.html#sec2.10">2.10</a>) and a following verb in the infinitive form. In addition to being able to extend the same clause as part of a catenative construction (as seen in section <a href="chapter5.html#sec5.4.2">5.4.2</a>), a <i>to</i>-infinitive clause can also form a distinct clause that is an argument for a containing clause. Examples where a <i>to</i>-infinitive clause is an object argument are seen in sections <a href="chapter4.html#sec4.4.7">4.4.7</a> (with code <tt>;~Tt</tt>), <a href="chapter4.html#sec4.4.8">4.4.8</a> (with code <tt>;~Tnt</tt>), <a href="chapter4.html#sec4.5.5">4.5.5</a> (with code <tt>;~Dn.t</tt>) and <a href="chapter4.html#sec4.6.1">4.6.1</a> (with code <tt>;~Cn.a</tt> when there is a provisional object <i>it</i>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rules of <tt>to_inf_layer</tt> in (<a href="chapter6.html#ex6.8">6.8</a>) create <i>to</i>-infinitive clauses. The first three rules are non-recursive and pick up from the word list an initial <i>to</i> word. These three rules differ as follows:</p>
 
@@ -2383,7 +2383,7 @@
 
 <br><h2><a name="sec6.5">6.5</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a provisional it and a notional subject</h2>
 
-<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [Rule 4] to pick up an instance of <i>it</i> as a <tt>PRO;_provisional_</tt> word. In doing so, <tt>SbjType</tt> for the clause becomes <tt>provisional_sbj</tt>. This starts a ripple effect, with <tt>provisional_sbj</tt> having to become <tt>filled_sbj</tt>. This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.28">6.28</a>).</p>
+<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [rule 4] to pick up an instance of <i>it</i> as a <tt>PRO;_provisional_</tt> word. In doing so, <tt>SbjType</tt> for the clause becomes <tt>provisional_sbj</tt>. This starts a ripple effect, with <tt>provisional_sbj</tt> having to become <tt>filled_sbj</tt>. This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.28">6.28</a>).</p>
 
 <dl><dt>(<a name="ex6.28">6.28</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
@@ -2395,7 +2395,7 @@
 <tt>&nbsp;&nbsp;notional_item('-NSBJ',L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">A call of (<a href="chapter6.html#ex6.28">6.28</a>) needs to find a notional subject (<tt>-NSBJ</tt>) to the right of a (non-catenative) verb together with all its other complements.</p>
+<p align="justify">A call of (<a href="chapter6.html#ex6.28">6.28</a>) needs to find a notional subject (<tt>-NSBJ</tt>) to the right of a non-catenative verb together with all its other complements.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A call to <tt>notional_item</tt> of (<a href="chapter6.html#ex6.29">6.29</a>) finds a notional subject, which will be a clause with an <tt>-NSBJ</tt> extension that is either:</p>
 
@@ -2825,7 +2825,7 @@
 
 <h3><a name="sec6.5.2">6.5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The notional subject as a to-infinitive clause</h3>
 
-<p align="justify">[Rule 3] for <tt>notional_item</tt> of (<a href="chapter6.html#ex6.29">6.29</a>) above calls the <tt>ip_to_inf</tt> rule of (<a href="chapter6.html#ex6.33">6.33</a>), which subsequently finds content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_top_layer</tt> of (<a href="chapter6.html#ex6.34">6.34</a>). This gives overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>Ext</tt> parameter.</p>
+<p align="justify">[rule 3] for <tt>notional_item</tt> of (<a href="chapter6.html#ex6.29">6.29</a>) above calls the <tt>ip_to_inf</tt> rule of (<a href="chapter6.html#ex6.33">6.33</a>), which subsequently finds content for a <i>to</i>-infinitive clause with a call to <tt>to_inf_top_layer</tt> of (<a href="chapter6.html#ex6.34">6.34</a>). This gives overall structure labelled <tt>IP-INF</tt>, together with any extension from the <tt>Ext</tt> parameter.</p>
 
 <dl><dt>(<a name="ex6.33">6.33</a>)</dt><dd>
 <tt>ip_to_inf(Ext,Store,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
@@ -3314,7 +3314,7 @@
 
 <br><h2><a name="sec6.6">6.6</a>&nbsp;&nbsp;&nbsp;&nbsp;The combination of a derived subject and an infinitive clause notional subject</h2>
 
-<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [Rule 6] to pick up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, <tt>SbjType</tt> for the clause becomes <tt>derived_sbj</tt>. This <tt>SbjType</tt> setting also occurs with [rule 10] of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for a derived subject that is an <tt>interrogative</tt> noun phrase. Once there is the <tt>derived_sbj</tt> setting, there is the start of a ripple effect, with <tt>derived_sbj</tt> having to become <tt>filled_sbj</tt>.</p>
+<p align="justify">The <tt>subject</tt> definition from section <a href="chapter2.html#sec2.5">2.5</a> has [rule 6] to pick up content for a <tt>non_interrogative</tt> noun phrase with subject function information (<tt>NP-SBJ</tt>). In doing so, <tt>SbjType</tt> for the clause becomes <tt>derived_sbj</tt>. This <tt>SbjType</tt> setting also occurs with [rule 10] of <tt>clause_top_layer</tt> from section <a href="chapter5.html#sec5.2">5.2</a> for a derived subject that is an <tt>interrogative</tt> noun phrase. Once there is the <tt>derived_sbj</tt> setting, there is the start of a ripple effect, with <tt>derived_sbj</tt> having to become <tt>filled_sbj</tt>.</p>
 
 <h3><a name="sec6.6.1">6.6.1</a>&nbsp;&nbsp;&nbsp;&nbsp;A double passive</h3>
 
@@ -3332,7 +3332,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rule of (<a href="chapter6.html#ex6.37">6.37</a>) needs to find a notional subject that comes after a catenative verb and its passive complement. The notional subject has to be a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>active</tt> as the <tt>Voice</tt> setting and <tt>filled_sbj</tt> as the <tt>SbjType</tt> setting.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also p.462[Poutsma-1926]). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
 
 <dl><dt>(<a name="ex6.38">6.38</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('ADJ','new'), w('N','plan'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','attempted'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','formed'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -3857,7 +3857,7 @@
 
 <h3><a name="sec6.6.2">6.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h3>
 
-<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction. This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
+<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction (see p.363,457[Poutsma-1926]). This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
 
 <dl><dt>(<a name="ex6.40">6.40</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
@@ -5957,7 +5957,7 @@
 <li>[rule 2] having <i>having</i> as a catenative verb that selects a past participle (<i>-ed&sol;-en</i>) clause as its complement, which is not otherwise possible</li>
 </ul>
 
-<p align="justify">[Rule 2] requires a <tt>hag_participle</tt> setting for the <tt>Infl</tt> parameter, which is only possible with subordinate conjunction.</p>
+<p align="justify">[rule 2] requires a <tt>hag_participle</tt> setting for the <tt>Infl</tt> parameter, which is only possible with subordinate conjunction.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in addition to the participle clause being a present participle clause with [rule 3], there is also the possibility for the participle clause to be:</p>
 
@@ -8499,7 +8499,7 @@
 <tt>&nbsp;&nbsp;relative_clause_finite_top_tail(L,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[Rule 1] of (<a href="chapter6.html#ex6.70">6.70</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that goes as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.72">6.72</a>) to inherit as the subject for the relative clause [rule 1] or as a non-subject [rule 2].</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 1] of (<a href="chapter6.html#ex6.70">6.70</a>) gives the option of a noun phrase with <tt>relative</tt> type information and so with a relative word inside. Then there is creation of an index that goes as <tt>np(ICH)</tt> into the list of inherited stored items for the call to <tt>relative_clause_finite_inside</tt> of (<a href="chapter6.html#ex6.72">6.72</a>) to inherit as the subject for the relative clause [rule 1] or as a non-subject [rule 2].</p>
 
 <dl><dt>(<a name="ex6.72">6.72</a>)</dt><dd>
 <tt>relative_clause_finite_inside([np(ICH)],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
