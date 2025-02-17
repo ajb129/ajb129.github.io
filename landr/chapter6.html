@@ -2845,8 +2845,8 @@
 <p align="justify">Both rules of <tt>to_inf_top_layer</tt> call <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a>. They differ in the values taken by the <tt>SbjType</tt> parameter:</p>
 
 <dl>
-<li><tt>unfilled_sbj</tt></li>
-<li><tt>filled_sbj</tt></li>
+<li>[rule 1] <tt>unfilled_sbj</tt></li>
+<li>[rule 2] <tt>filled_sbj</tt></li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with the combination of a provisional <i>it</i> and a <i>to</i>-infinitive clause notional subject, consider (<a href="chapter6.html#ex6.35">6.35</a>).</p>
@@ -3332,7 +3332,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rule of (<a href="chapter6.html#ex6.37">6.37</a>) needs to find a notional subject that comes after a catenative verb and its passive complement. The notional subject has to be a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>active</tt> as the <tt>Voice</tt> setting and <tt>filled_sbj</tt> as the <tt>SbjType</tt> setting.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also p.462[Poutsma-1926]). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also Poutsma 1926, p.462). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
 
 <dl><dt>(<a name="ex6.38">6.38</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('ADJ','new'), w('N','plan'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','attempted'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','formed'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -3857,7 +3857,7 @@
 
 <h3><a name="sec6.6.2">6.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h3>
 
-<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction (see p.363,457[Poutsma-1926]). This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
+<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction (see Poutsma 1926, p.363,457). This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
 
 <dl><dt>(<a name="ex6.40">6.40</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
