@@ -13,7 +13,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A clause can also be the subordinate component of a subordinate conjunction, as section <a href="chapter6.html#sec6.8">6.8</a> shows. Section <a href="chapter6.html#sec6.9">6.9</a> includes the possibility of having a participle clause as the selected complement of a preposition to give a preposition phrase.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In section <a href="chapter6.html#sec6.10">6.10</a>, clause subordination is also seen to occur with relative clauses, where a clause acts as a noun phrase internal modifier with an internal absence of a selected clause item and possibly with an initial phrase containing a relative pronoun. Section <a href="chapter6.html#sec6.11">6.11</a> adds support for cleft constructions.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Section <a href="chapter6.html#sec6.10">6.10</a> covers clause subordination with relative clauses, where a clause acts as a noun phrase internal modifier with an internal absence of a selected clause item and possibly with an initial phrase containing a relative pronoun. Section <a href="chapter6.html#sec6.11">6.11</a> adds support for cleft constructions.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The chapter ends with a look at the <i>V_as_though&sol;as_if&sol;like</i>-construction in section <a href="chapter6.html#sec6.12">6.12</a>.</p>
 
@@ -62,7 +62,13 @@
 <li>what is the content of the word list</li>
 </ul>
 
-<p align="justify">[rule 1] applies if the word list has no <i>that</i>-complementizer and no clause subject and there is a noun phrase to inherit from the <tt>Store</tt> parameter. [rule 2] applies if there is a <i>that</i>-complementizer and content from the word list for a clause with subject. [rule 3] applies if there is no <i>that</i>-complementizer but there is content from the word list for a clause with subject.</p>
+<p align="justify">The rules of (<a href="chapter6.html#ex6.3">6.3</a>) apply is follows:</p>
+
+<ul>
+<li>[rule 1] applies if the word list has no <i>that</i>-complementizer and no clause subject and there is a noun phrase to inherit from the <tt>Store</tt> parameter</li>
+<li>[rule 2] applies if there is a <i>that</i>-complementizer and content from the word list for a clause with subject</li>
+<li>[rule 3] applies if there is no <i>that</i>-complementizer but there is content from the word list for a clause with subject</li>
+</ul>
 
 <dl><dt>(<a name="ex6.3">6.3</a>)</dt><dd>
 <tt>clause_that_layer(without_c,[np(ICH)|Store],[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
@@ -86,7 +92,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DOP&nbsp;do)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;you))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tf&nbsp;think)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(NP-SBJ&nbsp;*ICH*-588)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CP-THT-OB1&nbsp;(IP-SUB&nbsp;(NP-SBJ&nbsp;*ICH*-163)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;will)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Ip&nbsp;arrive)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;early))))))</tt><br>
@@ -95,7 +101,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The calls of (<a href="chapter6.html#ex6.5">6.5</a>) show <tt>cp_that</tt> taking <tt>-OB1</tt> function information as an extension to the <tt>CP-THT</tt> tag and inheriting a <tt>Store</tt> parameter that contains <tt>np(node('*ICH*-163',[]))</tt>. A call of [rule 1] of <tt>clause_that_layer</tt> removes <tt>np(node('*ICH*-163',[]))</tt> from the <tt>Store</tt> parameter so that it can function as the subject of the <i>that</i>-clause followed by a <tt>clause_middle_layer</tt> call.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The calls of (<a href="chapter6.html#ex6.5">6.5</a>) show <tt>cp_that</tt> taking <tt>-OB1</tt> function information as an extension to the <tt>CP-THT</tt> tag and inheriting a <tt>Store</tt> parameter that contains <tt>np(node('*ICH*-163',[]))</tt>. A call of [rule 1] of <tt>clause_that_layer</tt> removes <tt>np(node('*ICH*-163',[]))</tt> from the <tt>Store</tt> parameter so that it can function as the subject of the <i>that</i>-clause followed by a <tt>clause_middle_layer</tt> call.</p>
 
 <dl><dt>(<a name="ex6.5">6.5</a>)</dt><dd>
   <table cellpadding="5px" style="border:2px solid;">
@@ -2845,8 +2851,8 @@
 <p align="justify">Both rules of <tt>to_inf_top_layer</tt> call <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a>. They differ in the values taken by the <tt>SbjType</tt> parameter:</p>
 
 <dl>
-<li><tt>unfilled_sbj</tt></li>
-<li><tt>filled_sbj</tt></li>
+<li>[rule 1] <tt>unfilled_sbj</tt></li>
+<li>[rule 2] <tt>filled_sbj</tt></li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with the combination of a provisional <i>it</i> and a <i>to</i>-infinitive clause notional subject, consider (<a href="chapter6.html#ex6.35">6.35</a>).</p>
@@ -3332,7 +3338,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The rule of (<a href="chapter6.html#ex6.37">6.37</a>) needs to find a notional subject that comes after a catenative verb and its passive complement. The notional subject has to be a <i>to</i>-infinitive clause (<tt>IP-INF-NSBJ</tt>) with internal content found by calling <tt>to_inf_layer</tt> of section <a href="chapter6.html#sec6.3">6.3</a> with <tt>active</tt> as the <tt>Voice</tt> setting and <tt>filled_sbj</tt> as the <tt>SbjType</tt> setting.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also p.462[Poutsma-1926]). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list of (<a href="chapter6.html#ex6.38">6.38</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also Poutsma 1926, p.462). An alternative construction with a double passive is seen in section <a href="chapter4.html#sec4.4.8">4.4.8</a>.</p>
 
 <dl><dt>(<a name="ex6.38">6.38</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('ADJ','new'), w('N','plan'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','attempted'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','formed'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -3857,7 +3863,7 @@
 
 <h3><a name="sec6.6.2">6.6.2</a>&nbsp;&nbsp;&nbsp;&nbsp;The tough-construction</h3>
 
-<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction (see p.363,457[Poutsma-1926]). This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
+<p align="justify">A <tt>derived_sbj</tt> setting having to become a <tt>filled_sbj</tt> setting can also start the ripple effect of a <i>tough</i>-construction (see Poutsma 1926, p.363,457). This happens with [rule 3] of <tt>verb_complements_top_layer</tt> from section <a href="chapter4.html#sec4.1">4.1</a>, repeated as (<a href="chapter6.html#ex6.40">6.40</a>).</p>
 
 <dl><dt>(<a name="ex6.40">6.40</a>)</dt><dd>
 <tt>verb_complements_top_layer(Code,Store,SbjType,Voice,L,L0)&nbsp;--&gt;</tt><br>
