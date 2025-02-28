@@ -30,7 +30,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;While placing everything back together again, we can add labels called <b>annotations</b>. This preserves a record of what pealing back the layers uncovered. Subsequently, these labels act as handles that we can query in order to access the structural analysis that parsing revealed.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Furthering the onion analogy, the kind of layering seen in Figure <a href="#figure1.2">1.2</a> occurs when there is coordination, with each conjunct having to conform to whatever is possible at the same layer.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Furthering the onion analogy, the kind of layering seen in Figure <a href="#figure1.2">1.2</a> occurs when there is coordination, with each conjunct having to conform to the same layer requisites.</p>
 
 <p><a name="fig1.2">Figure 1.2: Parallel layers</a></p>
 
@@ -214,7 +214,7 @@
 
 <br><h2><a name="sec1.3">1.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Computer parsing in this book</h2>
 
-<p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers can take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems. With DCG notation, we can write phrase structure rules (like (<a href="chapter1.html#ex1.1">1.1</a>) above) and then we have an executable Prolog program.</p>
+<p align="justify">Computer parsing in this book will use Definite Clause Grammar notation (DCG; Pereira and Warren 1980). This is a notation for writing phrase structure grammar rules in which labels for layers can take attributes with values unified by Prolog-style term unification. DCG notation is a feature of virtually all Prolog systems (see Neumerkel 2019). With DCG notation, we can write phrase structure rules (like (<a href="chapter1.html#ex1.1">1.1</a>) above) and then we have an executable Prolog program.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Prolog and DCGs are discussed in introductory textbooks by Clocksin and Mellish (1981), Pereira and Shieber (1987), Covington (1994), Matthews (1998), Blackburn, Bos and Striegnitz (2006), among others. Shieber (1986) contains discussion of how DCGs relate to other formalisms for encoding natural language grammars, including Categorial Grammar, Lexical Functional Grammar (LFG), Generalized Phrase Structure Grammar (GPSG) and Head-driven Phrase Structure Grammar (HPSG).</p>
 
@@ -256,7 +256,7 @@
 <li>adverb phrase levels (<tt>AVLYR</tt>)</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs; cf.&nbsp;Huddleston (1988, p.63) and Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and internal structure with <tt>IP-PPL-CAT</tt> labelled layers is included with the clause annotation to support this verb type. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs following Huddleston (1988, p.63) and Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and internal structure with <tt>IP-PPL-CAT</tt> labelled layers is included with the clause annotation to support this verb type. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The most innovative aspect of the annotation gives the TSPC its name: The Treebank Semantics system can evaluate it. Treebank Semantics (Butler 2021) processes constituency tree annotations and returns logic-based meaning representations. While the annotation seldom includes indexing, results from Treebank Semantics can resolve both inter and intra clause dependencies, including cross sentential anaphoric dependencies.</p>
 
@@ -504,7 +504,7 @@
 <tt>&nbsp;&nbsp;noun_phrase('',_,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_interrogative,interrogative,relative,filled_sbj])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[established,interrogative,relative,filled_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('',[],Type,L,L0).</tt><br>
 <tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>

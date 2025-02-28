@@ -82,17 +82,17 @@
 <tt>&nbsp;&nbsp;[w('PNX',Word)].</tt><br>
 <tt>noun_head_full(Type,[node('PRO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO',Word)].</tt><br>
 <tt>noun_head_full(Type,[node('PRO;_expletive_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
 <tt>noun_head_full(Type,[node('NP-GENV',[node('PRO;_ppge_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_ppge_',Word)].</tt><br>
 <tt>noun_head_full(Type,[node('WPRO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -123,7 +123,7 @@
 
 <ul>
 <li><tt>non_privileged</tt></li>
-<li><tt>non_interrogative</tt></li>
+<li><tt>established</tt></li>
 <li><tt>interrogative</tt></li>
 <li><tt>relative</tt></li>
 </ul>
@@ -141,7 +141,7 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.7">2.7</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(non_interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
@@ -167,7 +167,7 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.11">2.11</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(non_interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>(PRO&nbsp;it)</tt><br>
 <br>
@@ -195,7 +195,7 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.15">2.15</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(non_interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
@@ -221,7 +221,7 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.19">2.19</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(non_interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
@@ -257,12 +257,12 @@
 <dl><dt>(<a name="ex2.22">2.22</a>)</dt><dd>
 <tt>det(Type,[node('Q',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('Q',Word)].</tt><br>
 <tt>det(Type,[node('D',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('D',Word)].</tt><br>
 <tt>det(Type,[node('WD',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -278,7 +278,7 @@
 
 <ul>
 <li><tt>non_privileged</tt></li>
-<li><tt>non_interrogative</tt></li>
+<li><tt>established</tt></li>
 <li><tt>interrogative</tt></li>
 <li><tt>relative</tt></li>
 </ul>
@@ -304,7 +304,7 @@
 <dl><dt>(<a name="ex2.24">2.24</a>)</dt><dd>
 <tt>pronoun_genm(Type,[node('PRO;_genm_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,non_interrogative])</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_genm_',Word)].</tt><br>
 <tt>pronoun_genm(Type,[node('WPRO;_genm_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
@@ -320,7 +320,7 @@
 
 <ul>
 <li><tt>non_privileged</tt></li>
-<li><tt>non_interrogative</tt></li>
+<li><tt>established</tt></li>
 <li><tt>interrogative</tt></li>
 <li><tt>relative</tt></li>
 </ul>
@@ -337,9 +337,9 @@
 <tt>subject(provisional_sbj,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
 <tt>subject(filled_sbj,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',established,L,L0).</tt><br>
 <tt>subject(derived_sbj,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-SBJ',non_interrogative,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',established,L,L0).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first three rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
@@ -386,11 +386,11 @@
 </table>
 
 <dl><dt>(<a name="ex2.26">2.26</a>)</dt><dd>
-<tt>adv(non_interrogative,[node('ADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adv(established,[node('ADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADV',Word)].</tt><br>
-<tt>adv(non_interrogative,[node('ADVR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adv(established,[node('ADVR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADVR',Word)].</tt><br>
-<tt>adv(non_interrogative,[node('ADVS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adv(established,[node('ADVS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADVS',Word)].</tt><br>
 <tt>adv(interrogative,[node('WADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('WADV',Word)].</tt><br>
@@ -403,7 +403,7 @@
 <p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) are of five types that depend on the value of the first parameter:</p>
 
 <ul>
-<li><tt>non_interrogative</tt></li>
+<li><tt>established</tt></li>
 <li><tt>interrogative</tt></li>
 <li><tt>relative</tt></li>
 <li><tt>particle</tt></li>
@@ -423,11 +423,11 @@
 </table>
 
 <dl><dt>(<a name="ex2.27">2.27</a>)</dt><dd>
-<tt>adj(non_interrogative,[node('ADJ',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adj(established,[node('ADJ',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJ',Word)].</tt><br>
-<tt>adj(non_interrogative,[node('ADJR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adj(established,[node('ADJR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJR',Word)].</tt><br>
-<tt>adj(non_interrogative,[node('ADJS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>adj(established,[node('ADJS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJS',Word)].</tt><br>
 <tt>adj(catenative,[node('ADJ;_cat_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJ;_cat_',Word)].</tt><br>
@@ -436,7 +436,7 @@
 <p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) are of two types that depend on the value of the first parameter:</p>
 
 <ul>
-<li><tt>non_interrogative</tt></li>
+<li><tt>established</tt></li>
 <li><tt>catenative</tt></li>
 </ul>
 
@@ -766,9 +766,9 @@
 <tt>initial_adverbial([node('FRM',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('FRM',Word)].</tt><br>
 <tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverb_phrase('-NIM',non_interrogative,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',established,L,L0).</tt><br>
 <tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;preposition_phrase('-NIM',non_interrogative,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('-NIM',established,L,L0).</tt><br>
 <tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;scon_clause(L,L0).</tt><br>
 </dd></dl>

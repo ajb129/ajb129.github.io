@@ -1126,18 +1126,18 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Parsing word list (<a href="chapter4.html#ex4.106">4.106</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.107">4.107</a>).</p>
 
 <dl><dt>(<a name="ex4.106">4.106</a>)</dt><dd>
-<tt>[w('PRO','They'), w('VBD',';~Tnt','allowed'), w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected'), w('PUNC','.')]</tt><br>
+<tt>[w('PRO','They'), w('VBD',';~Tnt','allowed'), w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','erected'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.107">4.107</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('Q','no'), w('N','building'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','erected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,active)).</tt><br>
 <br>
 <tt>(&nbsp;(NP-DOB1&nbsp;(Q&nbsp;no)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;building))</tt><br>
 <tt>&nbsp;&nbsp;(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;errected))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;erected))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1184,16 +1184,16 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The word list (<a href="chapter4.html#ex4.112">4.112</a>) gives an example of a double passive from Kruisinga (1931, p.333) (see also Poutsma 1926, p.462). An alternative construction with a double passive is seen in section <a href="chapter6.html#sec6.6.1">6.6.1</a>. Parsing (<a href="chapter4.html#ex4.112">4.112</a>) as a sentence leads to the <tt>verb_complements_by_code</tt> call seen with (<a href="chapter4.html#ex4.113">4.113</a>).</p>
 
 <dl><dt>(<a name="ex4.112">4.112</a>)</dt><dd>
-<tt>[w('Q','No'), w('N','building'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tnt','allowed'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected'), w('PUNC','.')]</tt><br>
+<tt>[w('Q','No'), w('N','building'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tnt','allowed'), w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','erected'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex4.113">4.113</a>)</dt><dd>
-<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','errected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,passive)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('TO','to'), w('BE',';~cat_Ve_passive_','be'), w('VVN',';~Tn','erected')]),&nbsp;parse(verb_complements_by_code(';~Tnt',[],filled_sbj,passive)).</tt><br>
 <br>
 <tt>(IP-INF-OB1&nbsp;(TO&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;errected)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;erected)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2869,7 +2869,7 @@
 
 <dl><dt>(<a name="ex4.259">4.259</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_V',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,L0).</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,L0).</tt><br>
 <tt>verb_complements_by_code(';~ex_V',[np(ICH)],there_sbj,active,[node('NP-ESBJ',[ICH])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
@@ -2918,7 +2918,7 @@
 
 <dl><dt>(<a name="ex4.264">4.264</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_Vp',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('-CLR',particle,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~ex_Vp',[np(ICH)],there_sbj,active,[node('NP-ESBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase('-CLR',particle,L,L0).</tt><br>
@@ -2964,7 +2964,7 @@
 
 <dl><dt>(<a name="ex4.269">4.269</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_Vpr',[],there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase('-CLR',non_privileged,L1,L0).</tt><br>
 </dd></dl>
 
@@ -2997,7 +2997,7 @@
 
 <dl><dt>(<a name="ex4.272">4.272</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;to(VL,VL1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,filled_sbj,infinitive,active,VL1,[]).</tt><br>
 <tt>verb_complements_by_code(';~ex_cat_Vt',[np(ICH)|Store],there_sbj,active,[node('NP-ESBJ',[ICH]),node('IP-INF-CAT',VL)|L],L)&nbsp;--&gt;</tt><br>
@@ -3040,7 +3040,7 @@
 
 <dl><dt>(<a name="ex4.275">4.275</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vt_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,[node('IP-INF-CAT',VL)|L0]),</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,unfilled_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
@@ -3083,7 +3083,7 @@
 
 <dl><dt>(<a name="ex4.278">4.278</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Vg',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,filled_sbj,ing_participle,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~ex_cat_Vg',[np(ICH)|Store],there_sbj,active,[node('NP-ESBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active('-CAT',Store,filled_sbj,ing_participle,L,L0).</tt><br>
@@ -3121,7 +3121,7 @@
 
 <dl><dt>(<a name="ex4.281">4.281</a>)</dt><dd>
 <tt>verb_complements_by_code(';~ex_cat_Ve_passive_',Store,there_sbj,active,L,L0)&nbsp;--&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',non_privileged,L,L1),</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-ESBJ',established,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,filled_sbj,en_participle,L1,L0).</tt><br>
 <tt>verb_complements_by_code(';~ex_cat_Ve_passive_',[np(ICH)|Store],there_sbj,active,[node('NP-ESBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('-CAT',Store,filled_sbj,en_participle,L,L0).</tt><br>
