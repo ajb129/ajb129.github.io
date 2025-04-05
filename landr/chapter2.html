@@ -5,7 +5,7 @@
 
 <p align="justify">This chapter presents all the types of words we will aim to distinguish. We will do this by introducing <b>word classes</b> to which words belong. Also, some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="chapter1.html#sec1.7">1.7</a>, we capture the parse consequences for a word by having it as an item in a word list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)/word pairing in a word list.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="chapter1.html#sec1.7">1.7</a>, we capture parse consequences for a word by having it as an item in a word list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)/word pairing in a word list.</p>
 
 <br><h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Noun words</h2>
 
@@ -47,7 +47,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When we connect the <tt>noun</tt> rules of (<a href="chapter2.html#ex2.1">2.1</a>) to rules for parsing the internal content of noun phrases in section <a href="chapter3.html#sec3.2">3.2</a>, we will find that they contribute nouns that can be either:</p>
 
 <ul>
-<li>the head word for the noun phrase</li>
+<li>the head word for a noun phrase</li>
 <li>a noun modifier of another noun word</li>
 </ul>
 
@@ -70,7 +70,7 @@
 <tt>&nbsp;&nbsp;[w('D;_nphd_',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the noun phrase head words of Table <a href="chapter2.html#table2.3">2.3</a> that give full content for noun phrases that cannot have modifiers of the noun head. In order to distinguish this kind of head word, there are the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the head words of Table <a href="chapter2.html#table2.3">2.3</a>. These give full noun phrase content, leaving no place for modifiers. We distinguish them with the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>).</p>
 
 <center>
 <table border="1" cellpadding="10px">
@@ -113,7 +113,7 @@
 <tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rule 4] of (<a href="chapter2.html#ex2.4">2.4</a>) involves the word class with code <tt>PRO;_ppge_</tt> that results in the creation of a genitive case marked noun phrase layer (<tt>NP-GENV</tt>) that goes on to be the only element of a containing noun phrase layer, as seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rule 4] of (<a href="chapter2.html#ex2.4">2.4</a>) involves the word class with code <tt>PRO;_ppge_</tt>. This results in the creation of a genitive case marked noun phrase layer (<tt>NP-GENV</tt>) which goes on to be the only element of a containing noun phrase layer. This is seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
 
 <dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
 <tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
@@ -126,7 +126,7 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">Section <a href="chapter2.html#sec2.4">2.4</a> below will introduce other words that lead to genitive case marked noun phrases, with the difference that the created genitive noun phrase layer will itself need to occur inside a noun phrase layer where there is a noun phrase head word to modify.</p>
+<p align="justify">Section <a href="chapter2.html#sec2.4">2.4</a> below will introduce other words that lead to genitive case marked noun phrases, with the difference that the created genitive noun phrase layer will need to occur inside a noun phrase layer where there is a head word to modify.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) are of four types that depend on the value of the first parameter:</p>
 
