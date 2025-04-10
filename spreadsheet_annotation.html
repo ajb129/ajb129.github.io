@@ -6,17 +6,17 @@
   <meta name="Content-Style" content="text/css">
   <title>Building tree annotation with a spreadsheet</title>
   <style>
-body {
-        background-color: #FFFFFF;
-        color: #111111;
-        margin: 15px auto;
-        padding: 0 10px;
-}
-@media (min-width: 800px) {
-        body {
-                max-width: 85%;
-        }
-}
+  body {
+    background-color: #FFFFFF;
+    color: #111111;
+    margin: 15px auto;
+    padding: 0 10px;
+  }
+  @media (min-width: 800px) {
+    body {
+      max-width: 85%;
+    }
+  }
   </style>
 </head>
 <body>
@@ -24,19 +24,22 @@ body {
 <center><h1>Building tree annotation with a spreadsheet</h1></center>
 <center><h2>Alastair Butler</h2></center>
 <center><h3>Hirosaki University</h3></center>
+<br>
+<br>
 
 <br>
 <br>
 
-<p align="justify">A spreadsheet consists of a table of cells arranged into columns and rows. The columns are normally represented by letters, &ldquo;A&rdquo;, &ldquo;B&rdquo;, &ldquo;C&rdquo;, etc., while the rows are normally represented by numbers, &ldquo;1&rdquo;, &ldquo;2&rdquo;, &ldquo;3&rdquo;, etc. A single cell can be referenced by its column and row (A5 would represent the cell containing the value <e>jumps</e> in table (<a href="#ex2">2</a>) below). Additionally, spreadsheets have the concept of a range, a group of cells, normally contiguous. For example, the first ten cells in the first column of (<a href="#ex2">2</a>) form the range &ldquo;A1:A10&rdquo;, which is filled with the words of the example sentence (<a href="#ex1">1</a>). Punctuation is treated like a word, where each consecutive word fills a single cell of a distinct consecutive row. Cell B11 contains an ID for the sentence, with there needing to be at least one completely blank row (row 12 in (<a href="#ex2">2</a>)) following the row of an ID cell.</p>
+<p align="justify">A spreadsheet consists of a table of cells arranged into columns and rows. The columns are normally represented by letters, &ldquo;<tt>A</tt>&rdquo;, &ldquo;<tt>B</tt>&rdquo;, &ldquo;<tt>C</tt>&rdquo;, etc., while the rows are normally represented by numbers, &ldquo;<tt>1</tt>&rdquo;, &ldquo;<tt>2</tt>&rdquo;, &ldquo;<tt>3</tt>&rdquo;, etc. A single cell can be referenced by its column and row. For example, <tt>A5</tt> represents the cell containing the value <i>jumps</i> in table (<a href="#ex2">2</a>) below.</p>
 
-<dl>
-  <dt>(<a name="ex1">1</a>)</dt><dd>The quick brown fox jumps over the lazy dog.</dd>
-</dl>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, spreadsheets have the concept of a range as a grouping of cells. For example, the first ten cells in the first column of (<a href="#ex2">2</a>) form the range &ldquo;<tt>A1:A10</tt>&rdquo;, which is filled with the words of the example sentence (<a href="#ex1">1</a>). Note that each consecutive word fills a single cell of a distinct consecutive row. Also, note that punctuation is treated like a word. Finally, there is cell <tt>A11</tt> to tell us that cell <tt>B11</tt> contains an ID for the sentence.</p>
 
-<dl>
-  <dt>(<a name="ex2">2</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex1">1</a>)</dt><dd>
+The quick brown fox jumps over the lazy dog.
+</dd></dl>
+
+<dl><dt>(<a name="ex2">2</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -80,11 +83,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We need to add word class tag information to the words of (<a href="#ex2">2</a>). We first insert cells to the left of A1:A10, so that the contents of A1:A10 become B1:B10, and A1:A10 become empty cells, as in (<a href="#ex3">3</a>). There is now room for adding word class tags.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We need to add word class tag information to the words of (<a href="#ex2">2</a>). We first insert cells to the left of <tt>A1:A10</tt>, so that the contents of <tt>A1:A10</tt> become <tt>B1:B10</tt>, and <tt>A1:A10</tt> become empty cells, as in (<a href="#ex3">3</a>). There is now room for adding word class tags.</p>
 
-<dl>
-  <dt>(<a name="ex3">3</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex3">3</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -128,11 +130,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We add word class tags to the cells of A1:A10, resulting in (<a href="#ex4">4</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We add word class tags to the cells of <tt>A1:A10</tt>, resulting in (<a href="#ex4">4</a>).</p>
 
-<dl>
-  <dt>(<a name="ex4">4</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex4">4</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -151,7 +152,7 @@ body {
     <th style="background-color:#D3D3D3">4</th><td>N</td><td>fox</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -176,11 +177,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now that every word has a word class tag, we can start projecting phrase structure. In particular, let's start by projecting ADJP structures. This requires that we first insert cells to the left of the ADJ word tags, resulting in (<a href="#ex5">5</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now that every word has a word class tag, we can start creating phrase structure. In particular, let's start by adding <tt>ADJP</tt> structures. This requires that we first insert cells to the left of the <tt>ADJ</tt> word tags, resulting in (<a href="#ex5">5</a>).</p>
 
-<dl>
-  <dt>(<a name="ex5">5</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex5">5</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -199,7 +199,7 @@ body {
     <th style="background-color:#D3D3D3">4</th><td>N</td><td>fox</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -224,11 +224,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can now fill the empty cells created in (<a href="#ex5">5</a>) with the ADJP tag, resulting in (<a href="#ex6">6</a>). Note that two instances of ADJP are given indexes &ldquo;;&#64;2&rdquo; and &ldquo;;&#64;3&ldquo;. This is because these ADJP instances occur consecutively and yet they need to be distinct ADJP projections. Aside from making consecutive projections distinct, the chosen numbering is not important.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can now fill the empty cells created in (<a href="#ex5">5</a>) with the <tt>ADJP</tt> tag, resulting in (<a href="#ex6">6</a>). Note that the second instance of <tt>ADJP</tt> is given an index (&ldquo;<tt>;&#64;2</tt>&ldquo;). This is because two <tt>ADJP</tt> instances are occurring consecutively that need to be distinct. Aside from ensuring distinctness, the chosen numbering is not important.</p>
 
-<dl>
-  <dt>(<a name="ex6">6</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex6">6</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -238,16 +237,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>D</td><td>The</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>N</td><td>fox</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -274,9 +273,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a subject noun phrase, resulting in (<a href="#ex7">7</a>).</p>
 
-<dl>
-  <dt>(<a name="ex7">7</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex7">7</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -286,16 +284,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td style="background-color:F5F5DC"></td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td style="background-color:F5F5DC"></td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td style="background-color:F5F5DC"></td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td style="background-color:F5F5DC"></td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td style="background-color:F5F5DC"></td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td style="background-color:F5F5DC"></td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -320,11 +318,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the subject noun phrase cell structure created in (<a href="#ex7">7</a>) with the NP-SBJ tag, resulting in (<a href="#ex8">8</a>). There is no indexing with NP-SBJ because all consecutive instances of NP-SBJ (A1:A4) are the same NP-SBJ projection.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the subject noun phrase cell structure created in (<a href="#ex7">7</a>) with the <tt>NP-SBJ</tt> tag, resulting in (<a href="#ex8">8</a>). There is no indexing with <tt>NP-SBJ</tt> because all consecutive instances of <tt>NP-SBJ</tt> (<tt>A1:A4</tt>) belong to the same phrase.</p>
 
-<dl>
-  <dt>(<a name="ex8">8</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex8">8</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -334,16 +331,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -370,9 +367,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a second noun phrase, resulting in (<a href="#ex9">9</a>).</p>
 
-<dl>
-  <dt>(<a name="ex9">9</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex9">9</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -382,16 +378,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -416,11 +412,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the noun phrase cell structure created in (<a href="#ex9">9</a>) with the NP tag, resulting in (<a href="#ex10">10</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the noun phrase cell structure created in (<a href="#ex9">9</a>) with the <tt>NP</tt> tag, resulting in (<a href="#ex10">10</a>).</p>
 
-<dl>
-  <dt>(<a name="ex10">10</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex10">10</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -430,16 +425,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td><td></td>
@@ -466,9 +461,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a preposition phrase, resulting in (<a href="#ex11">11</a>).</p>
 
-<dl>
-  <dt>(<a name="ex11">11</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex11">11</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -478,16 +472,16 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">6</th><td style="background-color:F5F5DC"></td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td>
@@ -512,11 +506,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the preposition phrase cell structure created in (<a href="#ex11">11</a>) with the PP-DIR tag, resulting in (<a href="#ex12">12</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the preposition phrase cell structure created in (<a href="#ex11">11</a>) with the <tt>PP-CLR-DIR</tt> tag, resulting in (<a href="#ex12">12</a>).</p>
 
-<dl>
-  <dt>(<a name="ex12">12</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex12">12</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -526,28 +519,28 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">6</th><td>PP-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">6</th><td>PP-CLR-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">7</th><td>PP-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">7</th><td>PP-CLR-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">8</th><td>PP-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">8</th><td>PP-CLR-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">9</th><td>PP-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">9</th><td>PP-CLR-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">10</th><td>PUNC</td><td>.</td><td></td><td></td><td></td><td></td><td></td>
@@ -562,9 +555,8 @@ body {
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a matrix clause, resulting in (<a href="#ex13">13</a>).</p>
 
-<dl>
-  <dt>(<a name="ex13">13</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex13">13</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -574,28 +566,28 @@ body {
     <th style="background-color:#D3D3D3">1</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td style="background-color:F5F5DC"></td><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td style="background-color:F5F5DC"></td><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td style="background-color:F5F5DC"></td><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">6</th><td style="background-color:F5F5DC"></td><td>PP-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">6</th><td style="background-color:F5F5DC"></td><td>PP-CLR-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">7</th><td style="background-color:F5F5DC"></td><td>PP-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">7</th><td style="background-color:F5F5DC"></td><td>PP-CLR-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">8</th><td style="background-color:F5F5DC"></td><td>PP-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td>
+    <th style="background-color:#D3D3D3">8</th><td style="background-color:F5F5DC"></td><td>PP-CLR-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">9</th><td style="background-color:F5F5DC"></td><td>PP-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">9</th><td style="background-color:F5F5DC"></td><td>PP-CLR-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">10</th><td style="background-color:F5F5DC"></td><td>PUNC</td><td>.</td><td></td><td></td><td></td><td></td>
@@ -608,11 +600,10 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the matrix clause cell structure created in (<a href="#ex13">13</a>) with the IP-MAT tag, resulting in the completed tree information of (<a href="#ex14">14</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the matrix clause cell structure created in (<a href="#ex13">13</a>) with the <tt>IP-MAT</tt> tag, resulting in the completed tree information of (<a href="#ex14">14</a>).</p>
 
-<dl>
-  <dt>(<a name="ex14">14</a>)</dt><dd></dd>
-</dl>
+<dl><dt>(<a name="ex14">14</a>)</dt><dd>
+</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -622,28 +613,28 @@ body {
     <th style="background-color:#D3D3D3">1</th><td>IP-MAT</td><td>NP-SBJ</td><td>D</td><td>The</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">2</th><td>IP-MAT</td><td>NP-SBJ</td><td>ADJP;@2</td><td>ADJ</td><td>quick</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">2</th><td>IP-MAT</td><td>NP-SBJ</td><td>ADJP</td><td>ADJ</td><td>quick</td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">3</th><td>IP-MAT</td><td>NP-SBJ</td><td>ADJP;@3</td><td>ADJ</td><td>brown</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">3</th><td>IP-MAT</td><td>NP-SBJ</td><td>ADJP;&#64;2</td><td>ADJ</td><td>brown</td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">4</th><td>IP-MAT</td><td>NP-SBJ</td><td>N</td><td>fox</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">5</th><td>IP-MAT</td><td>VBP</td><td>jumps</td><td></td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">5</th><td>IP-MAT</td><td>VBP;~Ipr</td><td>jumps</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">6</th><td>IP-MAT</td><td>PP-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td>
+    <th style="background-color:#D3D3D3">6</th><td>IP-MAT</td><td>PP-CLR-DIR</td><td>P-ROLE</td><td>over</td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">7</th><td>IP-MAT</td><td>PP-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">7</th><td>IP-MAT</td><td>PP-CLR-DIR</td><td>NP</td><td>D</td><td>the</td><td></td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">8</th><td>IP-MAT</td><td>PP-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td>
+    <th style="background-color:#D3D3D3">8</th><td>IP-MAT</td><td>PP-CLR-DIR</td><td>NP</td><td>ADJP</td><td>ADJ</td><td>lazy</td><td></td>
   </tr>
   <tr>
-    <th style="background-color:#D3D3D3">9</th><td>IP-MAT</td><td>PP-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td>
+    <th style="background-color:#D3D3D3">9</th><td>IP-MAT</td><td>PP-CLR-DIR</td><td>NP</td><td>N</td><td>dog</td><td></td><td></td>
   </tr>
   <tr>
     <th style="background-color:#D3D3D3">10</th><td>IP-MAT</td><td>PUNC</td><td>.</td><td></td><td></td><td></td><td></td>
@@ -656,85 +647,83 @@ body {
   </tr>
 </table>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The completed tree information of (<a href="#ex14">14</a>) can be represented in traditional bracketed (Penn&sol;CorpusSearch) format as (<a href="#ex15">15</a>). Note that the bracketing keeps consecutive constituents with the same node tag distinct, so that the node indexing introduced in (<a href="#ex6">6</a>) is no longer required.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The completed tree information of (<a href="#ex14">14</a>) in traditional bracketed (Penn/CorpusSearch) format is (<a href="#ex15">15</a>). Note that the bracketing keeps consecutive constituents with the same node tag distinct, so that the node indexing introduced in (<a href="#ex6">6</a>) is no longer required.</p>
 
-<dl>
-  <dt>(<a name="ex15">15</a>)</dt><dd></dd>
-</dl>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;The)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;quick))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;brown))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fox))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;jumps)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-DIR&nbsp;(P-ROLE&nbsp;over)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;lazy))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;dog)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<dl><dt>(<a name="ex15">15</a>)</dt><dd>
+
+<tt>(&nbsp;(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;The)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;quick))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;brown))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;fox))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;jumps)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR-DIR&nbsp;(P-ROLE&nbsp;over)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;lazy))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;dog)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <tt>&nbsp;&nbsp;(ID&nbsp;example))</tt><br>
+</dd></dl>
 
 <p align="justify">The completed tree information of (<a href="#ex14">14</a>) can be represented as the graphical tree (<a href="#ex16">16</a>).</p>
 
-<dl>
-  <dt>(<a name="ex16">16</a>)</dt><dd></dd>
-</dl>
-
-<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:exslt="http://exslt.org/common" width="623.04" height="357" viewBox="-16.5 17.5 819.72 465">
-  <text x="393.36" y="55" text-anchor="middle">IP-MAT</text>
-  <line x1="393.36" y1="70" x2="155.76" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="393.36" y1="70" x2="354.42" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="393.36" y1="70" x2="553.08" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="393.36" y1="70" x2="747.78" y2="100" style="stroke:#000000;stroke-width:2;"/>
-  <text x="155.76" y="125" text-anchor="middle">NP-SBJ</text>
-  <line x1="155.76" y1="140" x2="34.98" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="155.76" y1="140" x2="112.86" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="155.76" y1="140" x2="198.66" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="155.76" y1="140" x2="276.54" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="34.98" y="195" text-anchor="middle">D</text>
-  <line x1="34.98" y1="210" x2="34.98" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="34.98" y="265" text-anchor="middle">The</text>
-  <text x="112.86" y="195" text-anchor="middle">ADJP</text>
-  <line x1="112.86" y1="210" x2="112.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="112.86" y="265" text-anchor="middle">ADJ</text>
-  <line x1="112.86" y1="280" x2="112.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="112.86" y="335" text-anchor="middle">quick</text>
-  <text x="198.66" y="195" text-anchor="middle">ADJP</text>
-  <line x1="198.66" y1="210" x2="198.66" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="198.66" y="265" text-anchor="middle">ADJ</text>
-  <line x1="198.66" y1="280" x2="198.66" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="198.66" y="335" text-anchor="middle">brown</text>
-  <text x="276.54" y="195" text-anchor="middle">N</text>
-  <line x1="276.54" y1="210" x2="276.54" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="276.54" y="265" text-anchor="middle">fox</text>
-  <text x="354.42" y="125" text-anchor="middle">VBP</text>
-  <line x1="354.42" y1="140" x2="354.42" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="354.42" y="195" text-anchor="middle">jumps</text>
-  <text x="553.08" y="125" text-anchor="middle">PP-DIR</text>
-  <line x1="553.08" y1="140" x2="444.18" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="553.08" y1="140" x2="599.94" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="444.18" y="195" text-anchor="middle">P-ROLE</text>
-  <line x1="444.18" y1="210" x2="444.18" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="444.18" y="265" text-anchor="middle">over</text>
-  <text x="599.94" y="195" text-anchor="middle">NP</text>
-  <line x1="599.94" y1="210" x2="526.02" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="599.94" y1="210" x2="599.94" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <line x1="599.94" y1="210" x2="673.86" y2="240" style="stroke:#000000;stroke-width:2;"/>
-  <text x="526.02" y="265" text-anchor="middle">D</text>
-  <line x1="526.02" y1="280" x2="526.02" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="526.02" y="335" text-anchor="middle">the</text>
-  <text x="599.94" y="265" text-anchor="middle">ADJP</text>
-  <line x1="599.94" y1="280" x2="599.94" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="599.94" y="335" text-anchor="middle">ADJ</text>
-  <line x1="599.94" y1="350" x2="599.94" y2="380" style="stroke:#000000;stroke-width:2;"/>
-  <text x="599.94" y="405" text-anchor="middle">lazy</text>
-  <text x="673.86" y="265" text-anchor="middle">N</text>
-  <line x1="673.86" y1="280" x2="673.86" y2="310" style="stroke:#000000;stroke-width:2;"/>
-  <text x="673.86" y="335" text-anchor="middle">dog</text>
-  <text x="747.78" y="125" text-anchor="middle">PUNC</text>
-  <line x1="747.78" y1="140" x2="747.78" y2="170" style="stroke:#000000;stroke-width:2;"/>
-  <text x="747.78" y="195" text-anchor="middle">.</text>
+<dl><dt>(<a name="ex16">16</a>)</dt><dd>
+<svg xmlns="http://www.w3.org/2000/svg" width="561" height="330" viewBox="-5.61 -1.650 673.2 396.0">
+<text x="280.5" y="45" text-anchor="middle">IP-MAT</text>
+<text x="110" y="100" text-anchor="middle">NP-SBJ</text>
+<text x="27.5" y="155" text-anchor="middle">D</text>
+<text x="27.5" y="210" text-anchor="middle">The</text>
+<line x1="27.5" y1="165" x2="27.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="110" y1="110" x2="27.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<text x="82.5" y="155" text-anchor="middle">ADJP</text>
+<text x="82.5" y="210" text-anchor="middle">ADJ</text>
+<text x="82.5" y="265" text-anchor="middle">quick</text>
+<line x1="82.5" y1="220" x2="82.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="110" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<text x="137.5" y="155" text-anchor="middle">ADJP</text>
+<text x="137.5" y="210" text-anchor="middle">ADJ</text>
+<text x="137.5" y="265" text-anchor="middle">brown</text>
+<line x1="137.5" y1="220" x2="137.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="137.5" y1="165" x2="137.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="110" y1="110" x2="137.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<text x="192.5" y="155" text-anchor="middle">N</text>
+<text x="192.5" y="210" text-anchor="middle">fox</text>
+<line x1="192.5" y1="165" x2="192.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="110" y1="110" x2="192.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="280.5" y1="55" x2="110" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="247.5" y="100" text-anchor="middle">VBP</text>
+<text x="247.5" y="155" text-anchor="middle">jumps</text>
+<line x1="247.5" y1="110" x2="247.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="280.5" y1="55" x2="247.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="390.5" y="100" text-anchor="middle">PP-CLR-DIR</text>
+<text x="308" y="155" text-anchor="middle">P-ROLE</text>
+<text x="308" y="210" text-anchor="middle">over</text>
+<line x1="308" y1="165" x2="308" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="390.5" y1="110" x2="308" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<text x="423.5" y="155" text-anchor="middle">NP</text>
+<text x="368.5" y="210" text-anchor="middle">D</text>
+<text x="368.5" y="265" text-anchor="middle">the</text>
+<line x1="368.5" y1="220" x2="368.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="423.5" y1="165" x2="368.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="423.5" y="210" text-anchor="middle">ADJP</text>
+<text x="423.5" y="265" text-anchor="middle">ADJ</text>
+<text x="423.5" y="320" text-anchor="middle">lazy</text>
+<line x1="423.5" y1="275" x2="423.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="423.5" y1="220" x2="423.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="423.5" y1="165" x2="423.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="478.5" y="210" text-anchor="middle">N</text>
+<text x="478.5" y="265" text-anchor="middle">dog</text>
+<line x1="478.5" y1="220" x2="478.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="423.5" y1="165" x2="478.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="390.5" y1="110" x2="423.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="280.5" y1="55" x2="390.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="533.5" y="100" text-anchor="middle">PUNC</text>
+<text x="533.5" y="155" text-anchor="middle">.</text>
+<line x1="533.5" y1="110" x2="533.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="280.5" y1="55" x2="533.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
-
+</dd></dl>
 <br>
 <br>
 <br>
