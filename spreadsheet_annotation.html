@@ -39,7 +39,6 @@ The quick brown fox jumps over the lazy dog.
 </dd></dl>
 
 <dl><dt>(<a name="ex2">2</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -82,11 +81,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We need to add word class tag information to the words of (<a href="#ex2">2</a>). We first insert cells to the left of <tt>A1:A10</tt>, so that the contents of <tt>A1:A10</tt> become <tt>B1:B10</tt>, and <tt>A1:A10</tt> become empty cells, as in (<a href="#ex3">3</a>). There is now room for adding word class tags.</p>
 
 <dl><dt>(<a name="ex3">3</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -129,11 +128,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We add word class tags to the cells of <tt>A1:A10</tt>, resulting in (<a href="#ex4">4</a>).</p>
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -176,11 +175,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now that every word has a word class tag, we can start creating phrase structure. In particular, let's start by adding <tt>ADJP</tt> structures. This requires that we first insert cells to the left of the <tt>ADJ</tt> word tags, resulting in (<a href="#ex5">5</a>).</p>
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -223,11 +222,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can now fill the empty cells created in (<a href="#ex5">5</a>) with the <tt>ADJP</tt> tag, resulting in (<a href="#ex6">6</a>). Note that the second instance of <tt>ADJP</tt> is given an index (&ldquo;<tt>;&#64;2</tt>&ldquo;). This is because two <tt>ADJP</tt> instances are occurring consecutively that need to be distinct. Aside from ensuring distinctness, the chosen numbering is not important.</p>
 
 <dl><dt>(<a name="ex6">6</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -270,11 +269,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a subject noun phrase, resulting in (<a href="#ex7">7</a>).</p>
 
 <dl><dt>(<a name="ex7">7</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -317,11 +316,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the subject noun phrase cell structure created in (<a href="#ex7">7</a>) with the <tt>NP-SBJ</tt> tag, resulting in (<a href="#ex8">8</a>). There is no indexing with <tt>NP-SBJ</tt> because all consecutive instances of <tt>NP-SBJ</tt> (<tt>A1:A4</tt>) belong to the same phrase.</p>
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -364,11 +363,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a second noun phrase, resulting in (<a href="#ex9">9</a>).</p>
 
 <dl><dt>(<a name="ex9">9</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -411,11 +410,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the noun phrase cell structure created in (<a href="#ex9">9</a>) with the <tt>NP</tt> tag, resulting in (<a href="#ex10">10</a>).</p>
 
 <dl><dt>(<a name="ex10">10</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -458,11 +457,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a preposition phrase, resulting in (<a href="#ex11">11</a>).</p>
 
 <dl><dt>(<a name="ex11">11</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -505,11 +504,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the preposition phrase cell structure created in (<a href="#ex11">11</a>) with the <tt>PP-CLR-DIR</tt> tag, resulting in (<a href="#ex12">12</a>).</p>
 
 <dl><dt>(<a name="ex12">12</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -552,11 +551,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next insert cell structure for a matrix clause, resulting in (<a href="#ex13">13</a>).</p>
 
 <dl><dt>(<a name="ex13">13</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -599,11 +598,11 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We next fill the matrix clause cell structure created in (<a href="#ex13">13</a>) with the <tt>IP-MAT</tt> tag, resulting in the completed tree information of (<a href="#ex14">14</a>).</p>
 
 <dl><dt>(<a name="ex14">14</a>)</dt><dd>
-</dd></dl>
 
 <table border=1 cellpadding="3px">
   <tr>
@@ -646,6 +645,7 @@ The quick brown fox jumps over the lazy dog.
     <th style="background-color:#D3D3D3">12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   </tr>
 </table>
+</dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The completed tree information of (<a href="#ex14">14</a>) in traditional bracketed (Penn/CorpusSearch) format is (<a href="#ex15">15</a>). Note that the bracketing keeps consecutive constituents with the same node tag distinct, so that the node indexing introduced in (<a href="#ex6">6</a>) is no longer required.</p>
 
