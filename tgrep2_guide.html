@@ -17,34 +17,49 @@
       max-width: 85%;
     }
   }
+  mark {
+    background-color: palegreen;
+  }
+  highlight {
+    background-color: wheat;
+  }
   </style>
 </head>
 <body>
-<br>
-<center><h1>TGrep2 and Tregex queries</h1></center>
-<center><h2>Alastair Butler</h2></center>
-<center><h3>Hirosaki University</h3></center>
-<br>
-<br>
-<center><h3>Abstract</h3></center>
+<br><br>
+<center>
+<h1>TGrep2 and Tregex queries</h1>
+<h3>Alastair Butler<br>Hirosaki University</h3>
+</center>
+<br><br>
 
+<center><h3>Abstract</h3></center>
 <p align="justify">TGrep2 and Tregex are tools for searching syntax trees. This guide introduces their shared query language.</p>
 
 <br><h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify"><b>TGrep</b> (Pito 1994) was the original tree-matching command-line program that came with the Penn Treebank. <b>TGrep2</b> (Rohde 2005) is a TGrep-like implementation that adds extensions to the query language. <b>Tregex</b> (Levy and Andrew 2006) is another TGrep-like implementation that replicates much of the extended search functionality of TGrep2 together with its own extensions. Tregex also offers a desktop application for directly browsing source trees in traditional bracketed (Penn) treebank notation and even offers ways to manipulate trees with its Tsurgeon component. This guide aims to provide an introduction to the extended query language shared by both TGrep2 and Tregex.</p>
+<p align="justify">This guide introduces the query language shared by the tree-matching programs <b>TGrep2</b> (Rohde 2005) and <b>Tregex</b> (Levy and Andrew 2006).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search queries are expressed as patterns that consist of node descriptions to match nodes and relationships establishing links or negated links to other nodes. Notably:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<b>TGrep</b> (Pito 1994) was the original command-line program for tree-matching distributed with the first release of the Penn Treebank. TGrep2 is a TGrep-like implementation that adds extensions to the query language. Tregex is another TGrep-like implementation that replicates much of the extended search functionality of TGrep2 together with its own extensions. Tregex also offers a desktop application for directly browsing source trees in traditional bracketed (Penn) treebank notation and even offers ways to manipulate trees with its Tsurgeon component.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Search queries are expressed as patterns that consist of:</p>
 
 <ul>
-<li>Nodes of searched trees are matched by node descriptions (see section <a href="#sec2">2</a>).</li>
-<li>Relationships combine node descriptions (see section <a href="#sec3">3</a>).</li>
-<li>Search patterns also allow Boolean expressions of relationships to form complex relationships (see section <a href="#sec4">4</a>).</li>
-<li>Nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (see section <a href="#sec5">5</a>).</li>
-<li>Patterns can be broken into multiple segments (see section <a href="#sec6">6</a>).</li>
+<li>node descriptions to match nodes</li>
+<li>relationships to establish links or negated links to other nodes</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Typically, spaces are optional in patterns. But for readability, it is usually best to place spaces between relationships and node expressions.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This guide is structured to show how:</p>
+
+<ul>
+<li>nodes of searched trees are matched by node descriptions (section <a href="#sec2">2</a>)</li>
+<li>relationships combine node descriptions (section <a href="#sec3">3</a>)</li>
+<li>search patterns allow Boolean expressions of relationships to form complex relationships (section <a href="#sec4">4</a>)</li>
+<li>nodes can be assigned labels and may be referred to elsewhere in the pattern by those labels (section <a href="#sec5">5</a>)</li>
+<li>patterns can be broken into multiple segments (section <a href="#sec6">6</a>)</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Spaces and newlines are typically optional in patterns. It is usual to place spaces between relationships and node expressions for readability.</p>
 
 <br><h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;&nbsp;Node descriptions</h2>
 
@@ -84,7 +99,7 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note, care is needed when writing regular expressions that end with dollar signs. This is because you are forced to predict what the end content of a node could be. For example, suppose you wished for a node description that would match all noun phrase nodes that lack functional extensions (so don't contain subject marking <tt>-SBJ</tt>, temporal marking <tt>-TMP</tt>, etc.). In addition to matching nodes that are simply <tt>NP</tt>, you will also want to match nodes like <tt>NP;{BOY}</tt>. However, you will not want to match either <tt>NP-SBJ</tt> or <tt>NP-SBJ;{BOY}</tt>, since these have subject marking. The regular expression we need is (<a href="#ex4">4</a>).</p>
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
-<tt>&sol;^NP(;.+)?$&sol;</tt><br>
+<tt>&sol;^NP(;&#8288;.+)?$&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">Note how (<a href="#ex4">4</a>) contains a capturing group that ends with a question mark symbol (<tt>?</tt>) saying to match its preceding element (the capturing group) one or zero times. Also note how the capturing group contains a dot symbol (<tt>.</tt>) that is a character wildcard to match any character and a plus symbol (<tt>+</tt>) saying to match its preceding element (any character) one or more times. In contrast, the semi-colon character (<tt>;</tt>) will only match itself.</p>
@@ -114,17 +129,15 @@
 <p align="justify">Relationships establish connections between nodes matched by node descriptions. There is a complete pairing of relationships with counterparts, allowing for flexibility choosing the initial node of the pattern when constructing complex relationships (see section <a href="#sec4">4</a>). Notable relationships can be pictured as in Figure <a href="#figure1">1</a>.</p>
 
 <center>
-
 <img src="notable.png" alt="Notable relationships between nodes" height="550">
 <br>
 <br>
-<a name="fig1"><b>Figure 1</b>: Notable relationships between nodes</a>
+<a name="figure1"><b>Figure 1</b>: Notable relationships between nodes</a>
 </center>
 
 <p align="justify">The relationships pictured in Figure <a href="#figure1">1</a> are described in (<a href="#ex8">8</a>). The instances of <tt>A</tt> and <tt>A'</tt> in (<a href="#ex8">8</a>) are node descriptions able to match the node labelled <tt>A</tt> in Figure <a href="#figure1">1</a>. The instances of <tt>B</tt> in (<a href="#ex8">8</a>) are node descriptions able to match nodes labelled <tt>B</tt> in Figure <a href="#figure1">1</a>.</p>
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
-
 <tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;a&nbsp;descendant&nbsp;of)&nbsp;B</tt><br>
 <tt>A&nbsp;,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;follows&nbsp;B</tt><br>
 <tt>A&nbsp;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
@@ -137,8 +150,8 @@
 <tt>A&nbsp;$&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;not&nbsp;equal&nbsp;to&nbsp;B</tt><br>
 <tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
 <tt>A&nbsp;$..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&nbsp;also&nbsp;expressed&nbsp;as&nbsp;B&nbsp;&gt;i&nbsp;A</tt><br>
-<tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&nbsp;also&nbsp;expressed&nbsp;as&nbsp;A&nbsp;&gt;-i&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&#8288;&nbsp;also&nbsp;expressed&nbsp;as&nbsp;B&nbsp;&gt;i&nbsp;A</tt><br>
+<tt>A&nbsp;&lt;-&#8288;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-&#8288;to-&#8288;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&#8288;&nbsp;also&nbsp;expressed&nbsp;as&nbsp;A&nbsp;&gt;-&#8288;i&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;dominates&nbsp;(is&nbsp;the&nbsp;parent&nbsp;of)&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
 </dd></dl>
@@ -150,16 +163,15 @@
 <p align="justify">As a demonstration of paired relations <b>immediately dominates</b> or <b>is immediately dominated by</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex9">9</a>) match any node that is immediately under a node labelled <tt>IP-INF2</tt>.</p>
 
 <dl><dt>(<a name="ex9">9</a>)</dt><dd>
-
-<tt>IP-INF2&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;dominates&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&nbsp;IP-INF2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
+<tt>IP-&#8288;INF2&nbsp;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;dominates&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;parent&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&nbsp;IP-&#8288;INF2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;immediately&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;the&nbsp;child&nbsp;of)</tt><br>
 </dd></dl>
 
 <p align="justify">Tree (<a href="#ex10">10</a>) has a node labelled <tt>IP-INF2</tt>. The wildcards of (<a href="#ex9">9</a>) match any of the marked nodes in (<a href="#ex10">10</a>) (one match for each search hit) that are not <tt>IP-INF2</tt>, all of which are situated immediately below <tt>IP-INF2</tt>, but not any lower.</p>
 
 <dl><dt>(<a name="ex10">10</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1012" height="440" viewBox="-10.12 -2.200 1214.4 528.0">
-<text x="506" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="968" height="440" viewBox="-9.68 -2.200 1161.6 528.0">
+<text x="484" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -169,69 +181,69 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="572" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="572" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="484" y="265" text-anchor="middle">flows</text>
-<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="616" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="566.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="566.5" y="320" text-anchor="middle">through</text>
-<line x1="566.5" y1="275" x2="566.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="566.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="654.5" y="265" text-anchor="middle">NP</text>
-<text x="654.5" y="320" text-anchor="middle">N</text>
-<text x="654.5" y="375" text-anchor="middle">structure</text>
-<line x1="654.5" y1="330" x2="654.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="275" x2="654.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="654.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="616" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="830.5" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<rect x="815.5" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="830.5" y="265" text-anchor="middle">IP-INF2</text>
-<rect x="716.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="731.5" y="320" text-anchor="middle">TO</text>
-<text x="731.5" y="375" text-anchor="middle">to</text>
-<line x1="731.5" y1="330" x2="731.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="830.5" y1="275" x2="731.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="793.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="808.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="808.5" y="375" text-anchor="middle">compose</text>
-<line x1="808.5" y1="330" x2="808.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="830.5" y1="275" x2="808.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="892.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="907.5" y="320" text-anchor="middle">NP-OB1</text>
-<text x="907.5" y="375" text-anchor="middle">NS</text>
-<text x="907.5" y="430" text-anchor="middle">meanings</text>
-<line x1="907.5" y1="385" x2="907.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="907.5" y1="330" x2="907.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="830.5" y1="275" x2="907.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="830.5" y1="220" x2="830.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="830.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="110" x2="572" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="572" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="984.5" y="100" text-anchor="middle">PUNC</text>
-<text x="984.5" y="155" text-anchor="middle">.</text>
-<line x1="984.5" y1="110" x2="984.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="984.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="550" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="550" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="440" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="440" y="265" text-anchor="middle">flows</text>
+<line x1="440" y1="220" x2="440" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="440" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="572" y="210" text-anchor="middle">PP-CLR</text>
+<text x="522.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="522.5" y="320" text-anchor="middle">through</text>
+<line x1="522.5" y1="275" x2="522.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="522.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="610.5" y="265" text-anchor="middle">NP</text>
+<text x="610.5" y="320" text-anchor="middle">N</text>
+<text x="610.5" y="375" text-anchor="middle">structure</text>
+<line x1="610.5" y1="330" x2="610.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="610.5" y1="275" x2="610.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="610.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="572" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="786.5" y="210" text-anchor="middle">PP-SCON</text>
+<rect x="771.5" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="786.5" y="265" text-anchor="middle">IP-INF2</text>
+<rect x="672.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="687.5" y="320" text-anchor="middle">TO</text>
+<text x="687.5" y="375" text-anchor="middle">to</text>
+<line x1="687.5" y1="330" x2="687.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="786.5" y1="275" x2="687.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="749.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="764.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="764.5" y="375" text-anchor="middle">compose</text>
+<line x1="764.5" y1="330" x2="764.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="786.5" y1="275" x2="764.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="848.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="863.5" y="320" text-anchor="middle">NP-OB1</text>
+<text x="863.5" y="375" text-anchor="middle">NS</text>
+<text x="863.5" y="430" text-anchor="middle">meanings</text>
+<line x1="863.5" y1="385" x2="863.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="863.5" y1="330" x2="863.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="786.5" y1="275" x2="863.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="786.5" y1="220" x2="786.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="786.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="110" x2="550" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="550" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="940.5" y="100" text-anchor="middle">PUNC</text>
+<text x="940.5" y="155" text-anchor="middle">.</text>
+<line x1="940.5" y1="110" x2="940.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="940.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -240,16 +252,15 @@
 <p align="justify">As a demonstration of paired relations <b>dominates</b> or <b>is dominated by</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex11">11</a>) match any node that is under a node labelled <tt>IP-INF2</tt>.</p>
 
 <dl><dt>(<a name="ex11">11</a>)</dt><dd>
-
-<tt>IP-INF2&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
-<tt>__&nbsp;&gt;&gt;&nbsp;IP-INF2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
+<tt>IP-&#8288;INF2&nbsp;&lt;&lt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
+<tt>__&nbsp;&gt;&gt;&nbsp;IP-&#8288;INF2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
 </dd></dl>
 
 <p align="justify">Tree (<a href="#ex12">12</a>) has a node labelled <tt>IP-INF2</tt>. The wildcards of (<a href="#ex11">11</a>) match any of the marked nodes in (<a href="#ex12">12</a>) (one match for each search hit) that are not <tt>IP-INF2</tt>, all of which are situated below <tt>IP-INF2</tt>.</p>
 
 <dl><dt>(<a name="ex12">12</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1045" height="440" viewBox="-10.45 -2.200 1254.0 528.0">
-<text x="522.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1001" height="440" viewBox="-10.01 -2.200 1201.2 528.0">
+<text x="500.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -259,80 +270,79 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="522.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="500.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="522.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="588.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="588.5" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="484" y="265" text-anchor="middle">flows</text>
-<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="616" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="566.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="566.5" y="320" text-anchor="middle">through</text>
-<line x1="566.5" y1="275" x2="566.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="566.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="654.5" y="265" text-anchor="middle">NP</text>
-<text x="654.5" y="320" text-anchor="middle">N</text>
-<text x="654.5" y="375" text-anchor="middle">structure</text>
-<line x1="654.5" y1="330" x2="654.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="275" x2="654.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="654.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="165" x2="616" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="847" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<rect x="832" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="847" y="265" text-anchor="middle">IP-INF2</text>
-<rect x="716.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="731.5" y="320" text-anchor="middle">TO</text>
-<rect x="716.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="731.5" y="375" text-anchor="middle">to</text>
-<line x1="731.5" y1="330" x2="731.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="731.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="799" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="814" y="320" text-anchor="middle">VB;~Tn</text>
-<rect x="799" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="814" y="375" text-anchor="middle">compose</text>
-<line x1="814" y1="330" x2="814" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="814" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="914.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="929.5" y="320" text-anchor="middle">NP-OB1</text>
-<rect x="914.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="929.5" y="375" text-anchor="middle">NS</text>
-<rect x="914.5" y="410" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="929.5" y="430" text-anchor="middle">meanings</text>
-<line x1="929.5" y1="385" x2="929.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="929.5" y1="330" x2="929.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="929.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="220" x2="847" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="165" x2="847" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="588.5" y1="110" x2="588.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="522.5" y1="55" x2="588.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="1017.5" y="100" text-anchor="middle">PUNC</text>
-<text x="1017.5" y="155" text-anchor="middle">.</text>
-<line x1="1017.5" y1="110" x2="1017.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="522.5" y1="55" x2="1017.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="500.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="566.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="566.5" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="440" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="440" y="265" text-anchor="middle">flows</text>
+<line x1="440" y1="220" x2="440" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="165" x2="440" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="572" y="210" text-anchor="middle">PP-CLR</text>
+<text x="522.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="522.5" y="320" text-anchor="middle">through</text>
+<line x1="522.5" y1="275" x2="522.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="522.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="610.5" y="265" text-anchor="middle">NP</text>
+<text x="610.5" y="320" text-anchor="middle">N</text>
+<text x="610.5" y="375" text-anchor="middle">structure</text>
+<line x1="610.5" y1="330" x2="610.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="610.5" y1="275" x2="610.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="610.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="165" x2="572" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="803" y="210" text-anchor="middle">PP-SCON</text>
+<rect x="788" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="803" y="265" text-anchor="middle">IP-INF2</text>
+<rect x="672.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="687.5" y="320" text-anchor="middle">TO</text>
+<rect x="672.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="687.5" y="375" text-anchor="middle">to</text>
+<line x1="687.5" y1="330" x2="687.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="687.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="755" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="770" y="320" text-anchor="middle">VB;~Tn</text>
+<rect x="755" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="770" y="375" text-anchor="middle">compose</text>
+<line x1="770" y1="330" x2="770" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="770" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="870.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="885.5" y="320" text-anchor="middle">NP-OB1</text>
+<rect x="870.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="885.5" y="375" text-anchor="middle">NS</text>
+<rect x="870.5" y="410" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="885.5" y="430" text-anchor="middle">meanings</text>
+<line x1="885.5" y1="385" x2="885.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="885.5" y1="330" x2="885.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="885.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="220" x2="803" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="165" x2="803" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="566.5" y1="110" x2="566.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="500.5" y1="55" x2="566.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="973.5" y="100" text-anchor="middle">PUNC</text>
+<text x="973.5" y="155" text-anchor="middle">.</text>
+<line x1="973.5" y1="110" x2="973.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="500.5" y1="55" x2="973.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another demonstration of paired relations <b>dominates</b> or <b>is dominated by</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex13">13</a>) match any node that dominates a node labelled <tt>TO</tt>.</p>
 
 <dl><dt>(<a name="ex13">13</a>)</dt><dd>
-
 <tt>TO&nbsp;&gt;&gt;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(is&nbsp;dominated&nbsp;by&nbsp;&sol;&nbsp;is&nbsp;a&nbsp;descendant&nbsp;of)</tt><br>
 <tt>__&nbsp;&lt;&lt;&nbsp;TO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dominates&nbsp;&sol;&nbsp;is&nbsp;an&nbsp;ancestor&nbsp;of)</tt><br>
 </dd></dl>
@@ -340,9 +350,9 @@
 <p align="justify">Tree (<a href="#ex14">14</a>) has a node labelled <tt>TO</tt>. The wildcards of (<a href="#ex13">13</a>) match any of the marked nodes in (<a href="#ex14">14</a>) (one match for each search hit) that are not <tt>TO</tt>, all of which are situated above <tt>TO</tt>.</p>
 
 <dl><dt>(<a name="ex14">14</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="979" height="440" viewBox="-9.79 -2.200 1174.8 528.0">
-<rect x="474.5" y="25" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="489.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="935" height="440" viewBox="-9.35 -2.200 1122.0 528.0">
+<rect x="452.5" y="25" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="467.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -352,70 +362,70 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="489.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="467.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="489.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<rect x="540.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="555.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<rect x="540.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="555.5" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="484" y="265" text-anchor="middle">flows</text>
-<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="616" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="566.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="566.5" y="320" text-anchor="middle">through</text>
-<line x1="566.5" y1="275" x2="566.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="566.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="654.5" y="265" text-anchor="middle">NP</text>
-<text x="654.5" y="320" text-anchor="middle">N</text>
-<text x="654.5" y="375" text-anchor="middle">structure</text>
-<line x1="654.5" y1="330" x2="654.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="275" x2="654.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="616" y1="220" x2="654.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="165" x2="616" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="799" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="814" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<rect x="799" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="814" y="265" text-anchor="middle">IP-INF2</text>
-<rect x="716.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="731.5" y="320" text-anchor="middle">TO</text>
-<text x="731.5" y="375" text-anchor="middle">to</text>
-<line x1="731.5" y1="330" x2="731.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="814" y1="275" x2="731.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="797.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="797.5" y="375" text-anchor="middle">compose</text>
-<line x1="797.5" y1="330" x2="797.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="814" y1="275" x2="797.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="880" y="320" text-anchor="middle">NP-OB1</text>
-<text x="880" y="375" text-anchor="middle">NS</text>
-<text x="880" y="430" text-anchor="middle">meanings</text>
-<line x1="880" y1="385" x2="880" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="880" y1="330" x2="880" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="814" y1="275" x2="880" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="814" y1="220" x2="814" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="165" x2="814" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="110" x2="555.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="489.5" y1="55" x2="555.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="951.5" y="100" text-anchor="middle">PUNC</text>
-<text x="951.5" y="155" text-anchor="middle">.</text>
-<line x1="951.5" y1="110" x2="951.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="489.5" y1="55" x2="951.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="467.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<rect x="518.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="533.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<rect x="518.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="533.5" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="440" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="440" y="265" text-anchor="middle">flows</text>
+<line x1="440" y1="220" x2="440" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="165" x2="440" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="572" y="210" text-anchor="middle">PP-CLR</text>
+<text x="522.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="522.5" y="320" text-anchor="middle">through</text>
+<line x1="522.5" y1="275" x2="522.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="522.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="610.5" y="265" text-anchor="middle">NP</text>
+<text x="610.5" y="320" text-anchor="middle">N</text>
+<text x="610.5" y="375" text-anchor="middle">structure</text>
+<line x1="610.5" y1="330" x2="610.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="610.5" y1="275" x2="610.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="572" y1="220" x2="610.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="165" x2="572" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="755" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="770" y="210" text-anchor="middle">PP-SCON</text>
+<rect x="755" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="770" y="265" text-anchor="middle">IP-INF2</text>
+<rect x="672.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="687.5" y="320" text-anchor="middle">TO</text>
+<text x="687.5" y="375" text-anchor="middle">to</text>
+<line x1="687.5" y1="330" x2="687.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="770" y1="275" x2="687.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="753.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="753.5" y="375" text-anchor="middle">compose</text>
+<line x1="753.5" y1="330" x2="753.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="770" y1="275" x2="753.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="836" y="320" text-anchor="middle">NP-OB1</text>
+<text x="836" y="375" text-anchor="middle">NS</text>
+<text x="836" y="430" text-anchor="middle">meanings</text>
+<line x1="836" y1="385" x2="836" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="836" y1="330" x2="836" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="770" y1="275" x2="836" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="770" y1="220" x2="770" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="165" x2="770" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="110" x2="533.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="467.5" y1="55" x2="533.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="907.5" y="100" text-anchor="middle">PUNC</text>
+<text x="907.5" y="155" text-anchor="middle">.</text>
+<line x1="907.5" y1="110" x2="907.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="467.5" y1="55" x2="907.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -424,7 +434,6 @@
 <p align="justify">As a demonstration of paired relations <b>precedes</b> or <b>follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex15">15</a>) match any node that is preceded by a node labelled <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex15">15</a>)</dt><dd>
-
 <tt>flows&nbsp;..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
 <tt>__&nbsp;,,&nbsp;flows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
 </dd></dl>
@@ -432,8 +441,8 @@
 <p align="justify">Tree (<a href="#ex16">16</a>) has a node labelled <tt>flows</tt>. The wildcards of (<a href="#ex15">15</a>) match any of the marked nodes in (<a href="#ex16">16</a>) (one match for each search hit) that are not <tt>flows</tt>, all of which occur after <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex16">16</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1133" height="440" viewBox="-11.33 -2.200 1359.6 528.0">
-<text x="566.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1089" height="440" viewBox="-10.89 -2.200 1306.8 528.0">
+<text x="544.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -443,90 +452,89 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="621.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="621.5" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
-<rect x="469" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="484" y="265" text-anchor="middle">flows</text>
-<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="634" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="649" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<rect x="568" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="583" y="265" text-anchor="middle">P-ROLE</text>
-<rect x="568" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="583" y="320" text-anchor="middle">through</text>
-<line x1="583" y1="275" x2="583" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="649" y1="220" x2="583" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<rect x="689" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="704" y="265" text-anchor="middle">NP</text>
-<rect x="689" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="704" y="320" text-anchor="middle">N</text>
-<rect x="689" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="704" y="375" text-anchor="middle">structure</text>
-<line x1="704" y1="330" x2="704" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="704" y1="275" x2="704" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="649" y1="220" x2="704" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="165" x2="649" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="898" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="913" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<rect x="898" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="913" y="265" text-anchor="middle">IP-INF2</text>
-<rect x="782.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="797.5" y="320" text-anchor="middle">TO</text>
-<rect x="782.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="797.5" y="375" text-anchor="middle">to</text>
-<line x1="797.5" y1="330" x2="797.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="275" x2="797.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="865" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="880" y="320" text-anchor="middle">VB;~Tn</text>
-<rect x="865" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="880" y="375" text-anchor="middle">compose</text>
-<line x1="880" y1="330" x2="880" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="275" x2="880" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<rect x="980.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="995.5" y="320" text-anchor="middle">NP-OB1</text>
-<rect x="980.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="995.5" y="375" text-anchor="middle">NS</text>
-<rect x="980.5" y="410" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="995.5" y="430" text-anchor="middle">meanings</text>
-<line x1="995.5" y1="385" x2="995.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="995.5" y1="330" x2="995.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="275" x2="995.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="220" x2="913" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="165" x2="913" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="621.5" y1="110" x2="621.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="55" x2="621.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<rect x="1079.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="1094.5" y="100" text-anchor="middle">PUNC</text>
-<rect x="1079.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="1094.5" y="155" text-anchor="middle">.</text>
-<line x1="1094.5" y1="110" x2="1094.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="55" x2="1094.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="599.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="599.5" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="440" y="210" text-anchor="middle">VBP;~Ipr</text>
+<rect x="425" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="440" y="265" text-anchor="middle">flows</text>
+<line x1="440" y1="220" x2="440" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="165" x2="440" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="590" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="605" y="210" text-anchor="middle">PP-CLR</text>
+<rect x="524" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="539" y="265" text-anchor="middle">P-ROLE</text>
+<rect x="524" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="539" y="320" text-anchor="middle">through</text>
+<line x1="539" y1="275" x2="539" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="605" y1="220" x2="539" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<rect x="645" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="660" y="265" text-anchor="middle">NP</text>
+<rect x="645" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="660" y="320" text-anchor="middle">N</text>
+<rect x="645" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="660" y="375" text-anchor="middle">structure</text>
+<line x1="660" y1="330" x2="660" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="660" y1="275" x2="660" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="605" y1="220" x2="660" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="165" x2="605" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="854" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="869" y="210" text-anchor="middle">PP-SCON</text>
+<rect x="854" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="869" y="265" text-anchor="middle">IP-INF2</text>
+<rect x="738.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="753.5" y="320" text-anchor="middle">TO</text>
+<rect x="738.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="753.5" y="375" text-anchor="middle">to</text>
+<line x1="753.5" y1="330" x2="753.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="275" x2="753.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="821" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="836" y="320" text-anchor="middle">VB;~Tn</text>
+<rect x="821" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="836" y="375" text-anchor="middle">compose</text>
+<line x1="836" y1="330" x2="836" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="275" x2="836" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<rect x="936.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="951.5" y="320" text-anchor="middle">NP-OB1</text>
+<rect x="936.5" y="355" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="951.5" y="375" text-anchor="middle">NS</text>
+<rect x="936.5" y="410" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="951.5" y="430" text-anchor="middle">meanings</text>
+<line x1="951.5" y1="385" x2="951.5" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="951.5" y1="330" x2="951.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="275" x2="951.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="220" x2="869" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="165" x2="869" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="599.5" y1="110" x2="599.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="55" x2="599.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<rect x="1035.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="1050.5" y="100" text-anchor="middle">PUNC</text>
+<rect x="1035.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="1050.5" y="155" text-anchor="middle">.</text>
+<line x1="1050.5" y1="110" x2="1050.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="55" x2="1050.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another demonstration of paired relations <b>precedes</b> or <b>follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex17">17</a>) match any node that is followed by a node labelled <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex17">17</a>)</dt><dd>
-
 <tt>flows&nbsp;,,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(follows)</tt><br>
 <tt>__&nbsp;..&nbsp;flows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(precedes)</tt><br>
 </dd></dl>
@@ -534,90 +542,90 @@
 <p align="justify">Tree (<a href="#ex18">18</a>) has a node labelled <tt>flows</tt>. The wildcards of (<a href="#ex17">17</a>) match any of the marked nodes in (<a href="#ex18">18</a>) (one match for each search hit) that are not <tt>flows</tt>, all of which occur before <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex18">18</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1111" height="440" viewBox="-11.11 -2.200 1333.2 528.0">
-<text x="555.5" y="45" text-anchor="middle">IP-MAT</text>
-<rect x="56.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1067" height="440" viewBox="-10.67 -2.200 1280.4 528.0">
+<text x="533.5" y="45" text-anchor="middle">IP-MAT</text>
+<rect x="56.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="71.5" y="100" text-anchor="middle">NP-SBJ</text>
-<rect x="12.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<rect x="12.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="27.5" y="155" text-anchor="middle">D</text>
-<rect x="12.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<rect x="12.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="27.5" y="210" text-anchor="middle">A</text>
 <line x1="27.5" y1="165" x2="27.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="71.5" y1="110" x2="27.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<rect x="84" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<rect x="84" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="99" y="155" text-anchor="middle">N</text>
-<rect x="84" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<rect x="84" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="99" y="210" text-anchor="middle">parse</text>
 <line x1="99" y1="165" x2="99" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="71.5" y1="110" x2="99" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="55" x2="71.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<rect x="183" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<line x1="533.5" y1="55" x2="71.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<rect x="183" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="198" y="100" text-anchor="middle">VBP;~Tw</text>
-<rect x="183" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<rect x="183" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="198" y="155" text-anchor="middle">tells</text>
 <line x1="198" y1="110" x2="198" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="55" x2="198" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="654.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="654.5" y="155" text-anchor="middle">IP-SUB</text>
-<rect x="320.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="335.5" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<rect x="320.5" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="335.5" y="265" text-anchor="middle">WADV</text>
-<rect x="320.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="335.5" y="320" text-anchor="middle">how</text>
-<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="480" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="495" y="210" text-anchor="middle">NP-SBJ</text>
-<rect x="480" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="495" y="265" text-anchor="middle">N</text>
-<rect x="480" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="495" y="320" text-anchor="middle">information</text>
-<line x1="495" y1="275" x2="495" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="495" y1="220" x2="495" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="165" x2="495" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="616" y="210" text-anchor="middle">VBP;~Ipr</text>
-<rect x="601" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="616" y="265" text-anchor="middle">flows</text>
-<line x1="616" y1="220" x2="616" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="165" x2="616" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="748" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="698.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="698.5" y="320" text-anchor="middle">through</text>
-<line x1="698.5" y1="275" x2="698.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="748" y1="220" x2="698.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="786.5" y="265" text-anchor="middle">NP</text>
-<text x="786.5" y="320" text-anchor="middle">N</text>
-<text x="786.5" y="375" text-anchor="middle">structure</text>
-<line x1="786.5" y1="330" x2="786.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="786.5" y1="275" x2="786.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="748" y1="220" x2="786.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="165" x2="748" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="946" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="946" y="265" text-anchor="middle">IP-INF2</text>
-<text x="863.5" y="320" text-anchor="middle">TO</text>
-<text x="863.5" y="375" text-anchor="middle">to</text>
-<line x1="863.5" y1="330" x2="863.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="946" y1="275" x2="863.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="929.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="929.5" y="375" text-anchor="middle">compose</text>
-<line x1="929.5" y1="330" x2="929.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="946" y1="275" x2="929.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="1012" y="320" text-anchor="middle">NP-OB1</text>
-<text x="1012" y="375" text-anchor="middle">NS</text>
-<text x="1012" y="430" text-anchor="middle">meanings</text>
-<line x1="1012" y1="385" x2="1012" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="1012" y1="330" x2="1012" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="946" y1="275" x2="1012" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="946" y1="220" x2="946" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="165" x2="946" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="654.5" y1="110" x2="654.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="55" x2="654.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="1083.5" y="100" text-anchor="middle">PUNC</text>
-<text x="1083.5" y="155" text-anchor="middle">.</text>
-<line x1="1083.5" y1="110" x2="1083.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="555.5" y1="55" x2="1083.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="55" x2="198" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="632.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="632.5" y="155" text-anchor="middle">IP-SUB</text>
+<rect x="298.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="313.5" y="210" text-anchor="middle">ADVP-NIM</text>
+<rect x="298.5" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="313.5" y="265" text-anchor="middle">WADV</text>
+<rect x="298.5" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="313.5" y="320" text-anchor="middle">how</text>
+<line x1="313.5" y1="275" x2="313.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="313.5" y1="220" x2="313.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="165" x2="313.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="436" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="451" y="210" text-anchor="middle">NP-SBJ</text>
+<rect x="436" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="451" y="265" text-anchor="middle">N</text>
+<rect x="436" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="451" y="320" text-anchor="middle">information</text>
+<line x1="451" y1="275" x2="451" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="451" y1="220" x2="451" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="165" x2="451" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="572" y="210" text-anchor="middle">VBP;~Ipr</text>
+<rect x="557" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="572" y="265" text-anchor="middle">flows</text>
+<line x1="572" y1="220" x2="572" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="165" x2="572" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="704" y="210" text-anchor="middle">PP-CLR</text>
+<text x="654.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="654.5" y="320" text-anchor="middle">through</text>
+<line x1="654.5" y1="275" x2="654.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="704" y1="220" x2="654.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="742.5" y="265" text-anchor="middle">NP</text>
+<text x="742.5" y="320" text-anchor="middle">N</text>
+<text x="742.5" y="375" text-anchor="middle">structure</text>
+<line x1="742.5" y1="330" x2="742.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="742.5" y1="275" x2="742.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="704" y1="220" x2="742.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="165" x2="704" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="902" y="210" text-anchor="middle">PP-SCON</text>
+<text x="902" y="265" text-anchor="middle">IP-INF2</text>
+<text x="819.5" y="320" text-anchor="middle">TO</text>
+<text x="819.5" y="375" text-anchor="middle">to</text>
+<line x1="819.5" y1="330" x2="819.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="902" y1="275" x2="819.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="885.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="885.5" y="375" text-anchor="middle">compose</text>
+<line x1="885.5" y1="330" x2="885.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="902" y1="275" x2="885.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="968" y="320" text-anchor="middle">NP-OB1</text>
+<text x="968" y="375" text-anchor="middle">NS</text>
+<text x="968" y="430" text-anchor="middle">meanings</text>
+<line x1="968" y1="385" x2="968" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="968" y1="330" x2="968" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="902" y1="275" x2="968" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="902" y1="220" x2="902" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="165" x2="902" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="110" x2="632.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="55" x2="632.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="1039.5" y="100" text-anchor="middle">PUNC</text>
+<text x="1039.5" y="155" text-anchor="middle">.</text>
+<line x1="1039.5" y1="110" x2="1039.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="533.5" y1="55" x2="1039.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -626,7 +634,6 @@
 <p align="justify">As a demonstration of paired relations <b>immediately precedes</b> or <b>immediately follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex19">19</a>) match any node that is immediately preceded by a node labelled <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex19">19</a>)</dt><dd>
-
 <tt>flows&nbsp;.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
 <tt>__&nbsp;,&nbsp;flows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
 </dd></dl>
@@ -634,8 +641,8 @@
 <p align="justify">Tree (<a href="#ex20">20</a>) has a node labelled <tt>flows</tt>. The wildcards of (<a href="#ex19">19</a>) match any of the marked nodes in (<a href="#ex20">20</a>) (one match for each search hit) that are not <tt>flows</tt>, all of which occur immediately after <tt>flows</tt> and no later.</p>
 
 <dl><dt>(<a name="ex20">20</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1012" height="440" viewBox="-10.12 -2.200 1214.4 528.0">
-<text x="506" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="968" height="440" viewBox="-9.68 -2.200 1161.6 528.0">
+<text x="484" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -645,76 +652,75 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="572" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="572" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
-<rect x="469" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="484" y="265" text-anchor="middle">flows</text>
-<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="617.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="632.5" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<rect x="568" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="583" y="265" text-anchor="middle">P-ROLE</text>
-<rect x="568" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="583" y="320" text-anchor="middle">through</text>
-<line x1="583" y1="275" x2="583" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="632.5" y1="220" x2="583" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="687.5" y="265" text-anchor="middle">NP</text>
-<text x="687.5" y="320" text-anchor="middle">N</text>
-<text x="687.5" y="375" text-anchor="middle">structure</text>
-<line x1="687.5" y1="330" x2="687.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="687.5" y1="275" x2="687.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="632.5" y1="220" x2="687.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="632.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="847" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="847" y="265" text-anchor="middle">IP-INF2</text>
-<text x="764.5" y="320" text-anchor="middle">TO</text>
-<text x="764.5" y="375" text-anchor="middle">to</text>
-<line x1="764.5" y1="330" x2="764.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="764.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="830.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="830.5" y="375" text-anchor="middle">compose</text>
-<line x1="830.5" y1="330" x2="830.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="830.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="913" y="320" text-anchor="middle">NP-OB1</text>
-<text x="913" y="375" text-anchor="middle">NS</text>
-<text x="913" y="430" text-anchor="middle">meanings</text>
-<line x1="913" y1="385" x2="913" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="330" x2="913" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="913" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="220" x2="847" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="847" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="110" x2="572" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="572" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="984.5" y="100" text-anchor="middle">PUNC</text>
-<text x="984.5" y="155" text-anchor="middle">.</text>
-<line x1="984.5" y1="110" x2="984.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="984.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="550" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="550" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="440" y="210" text-anchor="middle">VBP;~Ipr</text>
+<rect x="425" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="440" y="265" text-anchor="middle">flows</text>
+<line x1="440" y1="220" x2="440" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="440" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="573.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="588.5" y="210" text-anchor="middle">PP-CLR</text>
+<rect x="524" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="539" y="265" text-anchor="middle">P-ROLE</text>
+<rect x="524" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="539" y="320" text-anchor="middle">through</text>
+<line x1="539" y1="275" x2="539" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="588.5" y1="220" x2="539" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="643.5" y="265" text-anchor="middle">NP</text>
+<text x="643.5" y="320" text-anchor="middle">N</text>
+<text x="643.5" y="375" text-anchor="middle">structure</text>
+<line x1="643.5" y1="330" x2="643.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="643.5" y1="275" x2="643.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="588.5" y1="220" x2="643.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="588.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="803" y="210" text-anchor="middle">PP-SCON</text>
+<text x="803" y="265" text-anchor="middle">IP-INF2</text>
+<text x="720.5" y="320" text-anchor="middle">TO</text>
+<text x="720.5" y="375" text-anchor="middle">to</text>
+<line x1="720.5" y1="330" x2="720.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="720.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="786.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="786.5" y="375" text-anchor="middle">compose</text>
+<line x1="786.5" y1="330" x2="786.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="786.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="869" y="320" text-anchor="middle">NP-OB1</text>
+<text x="869" y="375" text-anchor="middle">NS</text>
+<text x="869" y="430" text-anchor="middle">meanings</text>
+<line x1="869" y1="385" x2="869" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="330" x2="869" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="869" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="220" x2="803" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="803" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="110" x2="550" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="550" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="940.5" y="100" text-anchor="middle">PUNC</text>
+<text x="940.5" y="155" text-anchor="middle">.</text>
+<line x1="940.5" y1="110" x2="940.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="940.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another demonstration of the paired relations <b>immediately precedes</b> or <b>immediately follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex21">21</a>) match any node that is immediately followed by a node labelled <tt>flows</tt>.</p>
 
 <dl><dt>(<a name="ex21">21</a>)</dt><dd>
-
 <tt>flows&nbsp;,&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;follows)</tt><br>
 <tt>__&nbsp;.&nbsp;flows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(immediately&nbsp;precedes)</tt><br>
 </dd></dl>
@@ -722,8 +728,8 @@
 <p align="justify">Tree (<a href="#ex22">22</a>) has a node labelled <tt>flows</tt>. The wildcards of (<a href="#ex21">21</a>) match any of the marked nodes in (<a href="#ex22">22</a>) (one match for each search hit) that are not <tt>flows</tt>, all of which occur immediately before <tt>flows</tt> and no earlier.</p>
 
 <dl><dt>(<a name="ex22">22</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1012" height="440" viewBox="-10.12 -2.200 1214.4 528.0">
-<text x="506" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="968" height="440" viewBox="-9.68 -2.200 1161.6 528.0">
+<text x="484" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -733,69 +739,69 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="572" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="572" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="381" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="396" y="210" text-anchor="middle">NP-SBJ</text>
-<rect x="381" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="396" y="265" text-anchor="middle">N</text>
-<rect x="381" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="396" y="320" text-anchor="middle">information</text>
-<line x1="396" y1="275" x2="396" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="396" y1="220" x2="396" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="396" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="517" y="210" text-anchor="middle">VBP;~Ipr</text>
-<rect x="502" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="517" y="265" text-anchor="middle">flows</text>
-<line x1="517" y1="220" x2="517" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="517" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="649" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="599.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="599.5" y="320" text-anchor="middle">through</text>
-<line x1="599.5" y1="275" x2="599.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="649" y1="220" x2="599.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="687.5" y="265" text-anchor="middle">NP</text>
-<text x="687.5" y="320" text-anchor="middle">N</text>
-<text x="687.5" y="375" text-anchor="middle">structure</text>
-<line x1="687.5" y1="330" x2="687.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="687.5" y1="275" x2="687.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="649" y1="220" x2="687.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="649" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="847" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="847" y="265" text-anchor="middle">IP-INF2</text>
-<text x="764.5" y="320" text-anchor="middle">TO</text>
-<text x="764.5" y="375" text-anchor="middle">to</text>
-<line x1="764.5" y1="330" x2="764.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="764.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="830.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="830.5" y="375" text-anchor="middle">compose</text>
-<line x1="830.5" y1="330" x2="830.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="830.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="913" y="320" text-anchor="middle">NP-OB1</text>
-<text x="913" y="375" text-anchor="middle">NS</text>
-<text x="913" y="430" text-anchor="middle">meanings</text>
-<line x1="913" y1="385" x2="913" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="913" y1="330" x2="913" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="275" x2="913" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="847" y1="220" x2="847" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="165" x2="847" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="572" y1="110" x2="572" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="572" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="984.5" y="100" text-anchor="middle">PUNC</text>
-<text x="984.5" y="155" text-anchor="middle">.</text>
-<line x1="984.5" y1="110" x2="984.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="506" y1="55" x2="984.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="550" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="550" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="337" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="352" y="210" text-anchor="middle">NP-SBJ</text>
+<rect x="337" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="352" y="265" text-anchor="middle">N</text>
+<rect x="337" y="300" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="352" y="320" text-anchor="middle">information</text>
+<line x1="352" y1="275" x2="352" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="352" y1="220" x2="352" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="352" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="473" y="210" text-anchor="middle">VBP;~Ipr</text>
+<rect x="458" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="473" y="265" text-anchor="middle">flows</text>
+<line x1="473" y1="220" x2="473" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="473" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="605" y="210" text-anchor="middle">PP-CLR</text>
+<text x="555.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="555.5" y="320" text-anchor="middle">through</text>
+<line x1="555.5" y1="275" x2="555.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="605" y1="220" x2="555.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="643.5" y="265" text-anchor="middle">NP</text>
+<text x="643.5" y="320" text-anchor="middle">N</text>
+<text x="643.5" y="375" text-anchor="middle">structure</text>
+<line x1="643.5" y1="330" x2="643.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="643.5" y1="275" x2="643.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="605" y1="220" x2="643.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="605" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="803" y="210" text-anchor="middle">PP-SCON</text>
+<text x="803" y="265" text-anchor="middle">IP-INF2</text>
+<text x="720.5" y="320" text-anchor="middle">TO</text>
+<text x="720.5" y="375" text-anchor="middle">to</text>
+<line x1="720.5" y1="330" x2="720.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="720.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="786.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="786.5" y="375" text-anchor="middle">compose</text>
+<line x1="786.5" y1="330" x2="786.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="786.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="869" y="320" text-anchor="middle">NP-OB1</text>
+<text x="869" y="375" text-anchor="middle">NS</text>
+<text x="869" y="430" text-anchor="middle">meanings</text>
+<line x1="869" y1="385" x2="869" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="869" y1="330" x2="869" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="275" x2="869" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="803" y1="220" x2="803" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="165" x2="803" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="550" y1="110" x2="550" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="550" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="940.5" y="100" text-anchor="middle">PUNC</text>
+<text x="940.5" y="155" text-anchor="middle">.</text>
+<line x1="940.5" y1="110" x2="940.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="484" y1="55" x2="940.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -804,16 +810,15 @@
 <p align="justify">As a demonstration of the <b>sister</b> relation, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex23">23</a>) match any node that is a sister of a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> can match.</p>
 
 <dl><dt>(<a name="ex23">23</a>)</dt><dd>
-
-<tt>&sol;VBP;~Ipr&sol;&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
-<tt>__&nbsp;$&nbsp;&sol;VBP;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
+<tt>&sol;VBP;&#8288;~Ipr&sol;&nbsp;$&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
+<tt>__&nbsp;$&nbsp;&sol;VBP;&#8288;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister)</tt><br>
 </dd></dl>
 
 <p align="justify">Tree (<a href="#ex24">24</a>) has a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> can match. The wildcards of (<a href="#ex23">23</a>) match any of the marked nodes in (<a href="#ex24">24</a>) (one match for each search hit) that are not <tt>&sol;VBP;~Ipr&sol;</tt> matches, all of which occur at the same level in the tree structure as the <tt>&sol;VBP;~Ipr&sol;</tt> match.</p>
 
 <dl><dt>(<a name="ex24">24</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1034" height="440" viewBox="-10.34 -2.200 1240.8 528.0">
-<text x="517" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="990" height="440" viewBox="-9.90 -2.200 1188.0 528.0">
+<text x="495" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -823,70 +828,70 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="517" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="495" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="517" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="583" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="583" y="155" text-anchor="middle">IP-SUB</text>
-<rect x="254.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="269.5" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="269.5" y="265" text-anchor="middle">WADV</text>
-<text x="269.5" y="320" text-anchor="middle">how</text>
-<line x1="269.5" y1="275" x2="269.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="269.5" y1="220" x2="269.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="165" x2="269.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="397.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="412.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="412.5" y="265" text-anchor="middle">N</text>
-<text x="412.5" y="320" text-anchor="middle">information</text>
-<line x1="412.5" y1="275" x2="412.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="412.5" y1="220" x2="412.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="165" x2="412.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="513" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="528" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="528" y="265" text-anchor="middle">flows</text>
-<line x1="528" y1="220" x2="528" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="165" x2="528" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="656" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="671" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="621.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="621.5" y="320" text-anchor="middle">through</text>
-<line x1="621.5" y1="275" x2="621.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="671" y1="220" x2="621.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="709.5" y="265" text-anchor="middle">NP</text>
-<text x="709.5" y="320" text-anchor="middle">N</text>
-<text x="709.5" y="375" text-anchor="middle">structure</text>
-<line x1="709.5" y1="330" x2="709.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="709.5" y1="275" x2="709.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="671" y1="220" x2="709.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="165" x2="671" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="854" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="869" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="869" y="265" text-anchor="middle">IP-INF2</text>
-<text x="786.5" y="320" text-anchor="middle">TO</text>
-<text x="786.5" y="375" text-anchor="middle">to</text>
-<line x1="786.5" y1="330" x2="786.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="869" y1="275" x2="786.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="852.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="852.5" y="375" text-anchor="middle">compose</text>
-<line x1="852.5" y1="330" x2="852.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="869" y1="275" x2="852.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="935" y="320" text-anchor="middle">NP-OB1</text>
-<text x="935" y="375" text-anchor="middle">NS</text>
-<text x="935" y="430" text-anchor="middle">meanings</text>
-<line x1="935" y1="385" x2="935" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="935" y1="330" x2="935" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="869" y1="275" x2="935" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="869" y1="220" x2="869" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="165" x2="869" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="583" y1="110" x2="583" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="517" y1="55" x2="583" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="1006.5" y="100" text-anchor="middle">PUNC</text>
-<text x="1006.5" y="155" text-anchor="middle">.</text>
-<line x1="1006.5" y1="110" x2="1006.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="517" y1="55" x2="1006.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="495" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="561" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="561" y="155" text-anchor="middle">IP-SUB</text>
+<rect x="232.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="247.5" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="247.5" y="265" text-anchor="middle">WADV</text>
+<text x="247.5" y="320" text-anchor="middle">how</text>
+<line x1="247.5" y1="275" x2="247.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="247.5" y1="220" x2="247.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="165" x2="247.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="353.5" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="368.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="368.5" y="265" text-anchor="middle">N</text>
+<text x="368.5" y="320" text-anchor="middle">information</text>
+<line x1="368.5" y1="275" x2="368.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="368.5" y1="220" x2="368.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="165" x2="368.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="469" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="484" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="484" y="265" text-anchor="middle">flows</text>
+<line x1="484" y1="220" x2="484" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="165" x2="484" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="612" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="627" y="210" text-anchor="middle">PP-CLR</text>
+<text x="577.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="577.5" y="320" text-anchor="middle">through</text>
+<line x1="577.5" y1="275" x2="577.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="627" y1="220" x2="577.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="665.5" y="265" text-anchor="middle">NP</text>
+<text x="665.5" y="320" text-anchor="middle">N</text>
+<text x="665.5" y="375" text-anchor="middle">structure</text>
+<line x1="665.5" y1="330" x2="665.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="665.5" y1="275" x2="665.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="627" y1="220" x2="665.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="165" x2="627" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="810" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="825" y="210" text-anchor="middle">PP-SCON</text>
+<text x="825" y="265" text-anchor="middle">IP-INF2</text>
+<text x="742.5" y="320" text-anchor="middle">TO</text>
+<text x="742.5" y="375" text-anchor="middle">to</text>
+<line x1="742.5" y1="330" x2="742.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="825" y1="275" x2="742.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="808.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="808.5" y="375" text-anchor="middle">compose</text>
+<line x1="808.5" y1="330" x2="808.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="825" y1="275" x2="808.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="891" y="320" text-anchor="middle">NP-OB1</text>
+<text x="891" y="375" text-anchor="middle">NS</text>
+<text x="891" y="430" text-anchor="middle">meanings</text>
+<line x1="891" y1="385" x2="891" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="891" y1="330" x2="891" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="825" y1="275" x2="891" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="825" y1="220" x2="825" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="165" x2="825" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="110" x2="561" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="495" y1="55" x2="561" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="962.5" y="100" text-anchor="middle">PUNC</text>
+<text x="962.5" y="155" text-anchor="middle">.</text>
+<line x1="962.5" y1="110" x2="962.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="495" y1="55" x2="962.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -895,16 +900,15 @@
 <p align="justify">As a demonstration of paired relations <b>sister and precedes</b> or <b>sister and follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex25">25</a>) match any node where a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> matches is a preceding sister.</p>
 
 <dl><dt>(<a name="ex25">25</a>)</dt><dd>
-
-<tt>&sol;VBP;~Ipr&sol;&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,,&nbsp;&sol;VBP;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
+<tt>&sol;VBP;&#8288;~Ipr&sol;&nbsp;$..&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,,&nbsp;&sol;VBP;&#8288;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;follows)</tt><br>
 </dd></dl>
 
 <p align="justify">Tree (<a href="#ex26">26</a>) has a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> can match. The wildcards of (<a href="#ex25">25</a>) match any of the marked nodes in (<a href="#ex26">26</a>) (one match for each search hit) that are not <tt>&sol;VBP;~Ipr&sol;</tt> matches, both of which occur at the same level in the tree structure as the <tt>&sol;VBP;~Ipr&sol;</tt> match and occur after the <tt>&sol;VBP;~Ipr&sol;</tt> match.</p>
 
 <dl><dt>(<a name="ex26">26</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1001" height="440" viewBox="-10.01 -2.200 1201.2 528.0">
-<text x="500.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="957" height="440" viewBox="-9.57 -2.200 1148.4 528.0">
+<text x="478.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -914,68 +918,68 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="566.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="566.5" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="480" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="495" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="495" y="265" text-anchor="middle">flows</text>
-<line x1="495" y1="220" x2="495" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="495" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="623" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="638" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="588.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="588.5" y="320" text-anchor="middle">through</text>
-<line x1="588.5" y1="275" x2="588.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="638" y1="220" x2="588.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="676.5" y="265" text-anchor="middle">NP</text>
-<text x="676.5" y="320" text-anchor="middle">N</text>
-<text x="676.5" y="375" text-anchor="middle">structure</text>
-<line x1="676.5" y1="330" x2="676.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="676.5" y1="275" x2="676.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="638" y1="220" x2="676.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="638" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="821" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="836" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="836" y="265" text-anchor="middle">IP-INF2</text>
-<text x="753.5" y="320" text-anchor="middle">TO</text>
-<text x="753.5" y="375" text-anchor="middle">to</text>
-<line x1="753.5" y1="330" x2="753.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="753.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="819.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="819.5" y="375" text-anchor="middle">compose</text>
-<line x1="819.5" y1="330" x2="819.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="819.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="902" y="320" text-anchor="middle">NP-OB1</text>
-<text x="902" y="375" text-anchor="middle">NS</text>
-<text x="902" y="430" text-anchor="middle">meanings</text>
-<line x1="902" y1="385" x2="902" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="902" y1="330" x2="902" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="902" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="220" x2="836" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="836" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="110" x2="566.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="566.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="973.5" y="100" text-anchor="middle">PUNC</text>
-<text x="973.5" y="155" text-anchor="middle">.</text>
-<line x1="973.5" y1="110" x2="973.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="973.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="544.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="544.5" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="436" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="451" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="451" y="265" text-anchor="middle">flows</text>
+<line x1="451" y1="220" x2="451" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="451" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="579" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="594" y="210" text-anchor="middle">PP-CLR</text>
+<text x="544.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="544.5" y="320" text-anchor="middle">through</text>
+<line x1="544.5" y1="275" x2="544.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="594" y1="220" x2="544.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="632.5" y="265" text-anchor="middle">NP</text>
+<text x="632.5" y="320" text-anchor="middle">N</text>
+<text x="632.5" y="375" text-anchor="middle">structure</text>
+<line x1="632.5" y1="330" x2="632.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="275" x2="632.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="594" y1="220" x2="632.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="594" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="777" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="792" y="210" text-anchor="middle">PP-SCON</text>
+<text x="792" y="265" text-anchor="middle">IP-INF2</text>
+<text x="709.5" y="320" text-anchor="middle">TO</text>
+<text x="709.5" y="375" text-anchor="middle">to</text>
+<line x1="709.5" y1="330" x2="709.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="709.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="775.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="775.5" y="375" text-anchor="middle">compose</text>
+<line x1="775.5" y1="330" x2="775.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="775.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="858" y="320" text-anchor="middle">NP-OB1</text>
+<text x="858" y="375" text-anchor="middle">NS</text>
+<text x="858" y="430" text-anchor="middle">meanings</text>
+<line x1="858" y1="385" x2="858" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="858" y1="330" x2="858" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="858" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="220" x2="792" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="792" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="110" x2="544.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="544.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="929.5" y="100" text-anchor="middle">PUNC</text>
+<text x="929.5" y="155" text-anchor="middle">.</text>
+<line x1="929.5" y1="110" x2="929.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="929.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -984,16 +988,15 @@
 <p align="justify">As a demonstration of paired relations <b>sister and immediately precedes</b> or <b>sister and immediately follows</b>, the wildcard node descriptions (<tt>__</tt>) in (<a href="#ex27">27</a>) match the node where a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> matches is the immediately preceding sister.</p>
 
 <dl><dt>(<a name="ex27">27</a>)</dt><dd>
-
-<tt>&sol;VBP;~Ipr&sol;&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
-<tt>__&nbsp;$,&nbsp;&sol;VBP;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
+<tt>&sol;VBP;&#8288;~Ipr&sol;&nbsp;$.&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;precedes)</tt><br>
+<tt>__&nbsp;$,&nbsp;&sol;VBP;&#8288;~Ipr&sol;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sister&nbsp;and&nbsp;immediately&nbsp;follows)</tt><br>
 </dd></dl>
 
-<p align="justify">Tree (<a href="#ex28">28</a>) has a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> can match. The wildcards of (<a href="#ex27">27</a>) match the <tt>PP-CLR-DIR</tt> node in (<a href="#ex28">28</a>), which occurs at the same level in the tree structure as the <tt>&sol;VBP;~Ipr&sol;</tt> match and comes immediately after the <tt>&sol;VBP;~Ipr&sol;</tt> match.</p>
+<p align="justify">Tree (<a href="#ex28">28</a>) has a node with a label that <tt>&sol;VBP;~Ipr&sol;</tt> can match. The wildcards of (<a href="#ex27">27</a>) match the <tt>PP-CLR</tt> node in (<a href="#ex28">28</a>), which occurs at the same level in the tree structure as the <tt>&sol;VBP;~Ipr&sol;</tt> match and comes immediately after the <tt>&sol;VBP;~Ipr&sol;</tt> match.</p>
 
 <dl><dt>(<a name="ex28">28</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="1001" height="440" viewBox="-10.01 -2.200 1201.2 528.0">
-<text x="500.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="957" height="440" viewBox="-9.57 -2.200 1148.4 528.0">
+<text x="478.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="55" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="27.5" y="155" text-anchor="middle">D</text>
 <text x="27.5" y="210" text-anchor="middle">A</text>
@@ -1003,67 +1006,67 @@
 <text x="82.5" y="210" text-anchor="middle">parse</text>
 <line x1="82.5" y1="165" x2="82.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="55" y1="110" x2="82.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="55" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="148.5" y="100" text-anchor="middle">VBP;~Tw</text>
 <text x="148.5" y="155" text-anchor="middle">tells</text>
 <line x1="148.5" y1="110" x2="148.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="566.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
-<text x="566.5" y="155" text-anchor="middle">IP-SUB</text>
-<text x="253" y="210" text-anchor="middle">ADVP-NIM-MNR</text>
-<text x="253" y="265" text-anchor="middle">WADV</text>
-<text x="253" y="320" text-anchor="middle">how</text>
-<line x1="253" y1="275" x2="253" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="253" y1="220" x2="253" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="253" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="379.5" y="210" text-anchor="middle">NP-SBJ</text>
-<text x="379.5" y="265" text-anchor="middle">N</text>
-<text x="379.5" y="320" text-anchor="middle">information</text>
-<line x1="379.5" y1="275" x2="379.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="379.5" y1="220" x2="379.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="379.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="480" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="495" y="210" text-anchor="middle">VBP;~Ipr</text>
-<text x="495" y="265" text-anchor="middle">flows</text>
-<line x1="495" y1="220" x2="495" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="495" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<rect x="623" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="638" y="210" text-anchor="middle">PP-CLR-DIR</text>
-<text x="588.5" y="265" text-anchor="middle">P-ROLE</text>
-<text x="588.5" y="320" text-anchor="middle">through</text>
-<line x1="588.5" y1="275" x2="588.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="638" y1="220" x2="588.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="676.5" y="265" text-anchor="middle">NP</text>
-<text x="676.5" y="320" text-anchor="middle">N</text>
-<text x="676.5" y="375" text-anchor="middle">structure</text>
-<line x1="676.5" y1="330" x2="676.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="676.5" y1="275" x2="676.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="638" y1="220" x2="676.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="638" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<text x="836" y="210" text-anchor="middle">PP-SCON-CNT</text>
-<text x="836" y="265" text-anchor="middle">IP-INF2</text>
-<text x="753.5" y="320" text-anchor="middle">TO</text>
-<text x="753.5" y="375" text-anchor="middle">to</text>
-<line x1="753.5" y1="330" x2="753.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="753.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="819.5" y="320" text-anchor="middle">VB;~Tn</text>
-<text x="819.5" y="375" text-anchor="middle">compose</text>
-<line x1="819.5" y1="330" x2="819.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="819.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<text x="902" y="320" text-anchor="middle">NP-OB1</text>
-<text x="902" y="375" text-anchor="middle">NS</text>
-<text x="902" y="430" text-anchor="middle">meanings</text>
-<line x1="902" y1="385" x2="902" y2="410" style="stroke:#000000;stroke-width:2;"/>
-<line x1="902" y1="330" x2="902" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="275" x2="902" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="836" y1="220" x2="836" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="165" x2="836" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="566.5" y1="110" x2="566.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="566.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="973.5" y="100" text-anchor="middle">PUNC</text>
-<text x="973.5" y="155" text-anchor="middle">.</text>
-<line x1="973.5" y1="110" x2="973.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="500.5" y1="55" x2="973.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="148.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="544.5" y="100" text-anchor="middle">CP-QUE-OB1</text>
+<text x="544.5" y="155" text-anchor="middle">IP-SUB</text>
+<text x="231" y="210" text-anchor="middle">ADVP-NIM</text>
+<text x="231" y="265" text-anchor="middle">WADV</text>
+<text x="231" y="320" text-anchor="middle">how</text>
+<line x1="231" y1="275" x2="231" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="231" y1="220" x2="231" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="231" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="335.5" y="210" text-anchor="middle">NP-SBJ</text>
+<text x="335.5" y="265" text-anchor="middle">N</text>
+<text x="335.5" y="320" text-anchor="middle">information</text>
+<line x1="335.5" y1="275" x2="335.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="335.5" y1="220" x2="335.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="335.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="436" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="451" y="210" text-anchor="middle">VBP;~Ipr</text>
+<text x="451" y="265" text-anchor="middle">flows</text>
+<line x1="451" y1="220" x2="451" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="451" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<rect x="579" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="594" y="210" text-anchor="middle">PP-CLR</text>
+<text x="544.5" y="265" text-anchor="middle">P-ROLE</text>
+<text x="544.5" y="320" text-anchor="middle">through</text>
+<line x1="544.5" y1="275" x2="544.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="594" y1="220" x2="544.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="632.5" y="265" text-anchor="middle">NP</text>
+<text x="632.5" y="320" text-anchor="middle">N</text>
+<text x="632.5" y="375" text-anchor="middle">structure</text>
+<line x1="632.5" y1="330" x2="632.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="632.5" y1="275" x2="632.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="594" y1="220" x2="632.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="594" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<text x="792" y="210" text-anchor="middle">PP-SCON</text>
+<text x="792" y="265" text-anchor="middle">IP-INF2</text>
+<text x="709.5" y="320" text-anchor="middle">TO</text>
+<text x="709.5" y="375" text-anchor="middle">to</text>
+<line x1="709.5" y1="330" x2="709.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="709.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="775.5" y="320" text-anchor="middle">VB;~Tn</text>
+<text x="775.5" y="375" text-anchor="middle">compose</text>
+<line x1="775.5" y1="330" x2="775.5" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="775.5" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<text x="858" y="320" text-anchor="middle">NP-OB1</text>
+<text x="858" y="375" text-anchor="middle">NS</text>
+<text x="858" y="430" text-anchor="middle">meanings</text>
+<line x1="858" y1="385" x2="858" y2="410" style="stroke:#000000;stroke-width:2;"/>
+<line x1="858" y1="330" x2="858" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="275" x2="858" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="792" y1="220" x2="792" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="165" x2="792" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="544.5" y1="110" x2="544.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="544.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="929.5" y="100" text-anchor="middle">PUNC</text>
+<text x="929.5" y="155" text-anchor="middle">.</text>
+<line x1="929.5" y1="110" x2="929.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="478.5" y1="55" x2="929.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 
@@ -1078,19 +1081,19 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="#ex30">30</a>) finds <tt>NP</tt> nodes where the last child is a <tt>PRN</tt>.</p>
 
 <dl><dt>(<a name="ex30">30</a>)</dt><dd>
-<tt>&sol;^NP&#92;b&sol;&nbsp;&lt;-1&nbsp;&sol;^PRN&#92;b&sol;</tt><br>
+<tt>&sol;^NP&#92;b&sol;&nbsp;&lt;-&#8288;1&nbsp;&sol;^PRN&#92;b&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Pattern (<a href="#ex31">31</a>) finds <tt>IP-INF-REL</tt> nodes which have less than four children. That is, every <tt>IP-INF-REL</tt> which has four or more children will have <i>something</i> as its fourth child to make matching with (<a href="#ex31">31</a>) fail.</p>
 
 <dl><dt>(<a name="ex31">31</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;!&lt;4&nbsp;__</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;!&lt;4&nbsp;__</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To match nodes with specific numbers of children, specify both positive and negative <tt>i</tt>-th child relationships. For example, pattern (<a href="#ex32">32</a>) finds <tt>IP-INF-REL</tt> nodes which dominate between two and three children.</p>
 
 <dl><dt>(<a name="ex32">32</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;2&nbsp;__&nbsp;!&lt;4&nbsp;__</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;2&nbsp;__&nbsp;!&lt;4&nbsp;__</tt><br>
 </dd></dl>
 
 <h3><a name="sec3.9">3.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Other relationships</h3>
@@ -1098,15 +1101,14 @@
 <p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex8">8</a>), are given in (<a href="#ex33">33</a>):</p>
 
 <dl><dt>(<a name="ex33">33</a>)</dt><dd>
-
 <tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
-<tt>A&nbsp;&lt;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
+<tt>A&nbsp;&lt;&lt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
 <tt>A&nbsp;&gt;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
-<tt>A&nbsp;&gt;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
+<tt>A&nbsp;&gt;&gt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;1&nbsp;B)</tt><br>
 <tt>A&nbsp;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;1&nbsp;B)</tt><br>
-<tt>A&nbsp;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-1&nbsp;B)</tt><br>
-<tt>A&nbsp;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-1&nbsp;B)</tt><br>
+<tt>A&nbsp;&lt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-&#8288;1&nbsp;B)</tt><br>
+<tt>A&nbsp;&gt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-&#8288;1&nbsp;B)</tt><br>
 <tt>A&nbsp;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;A</tt><br>
 <tt>A&nbsp;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
@@ -1118,49 +1120,49 @@
 <p align="justify">Complex Tregex patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (<tt>&</tt>). Thus, patterns (<a href="#ex34">34</a>) and (<a href="#ex35">35</a>) both match an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> node which immediately dominates a <tt>&sol;^PP&#92;b&sol;</tt> node <i>and</i> which dominates an <tt>&sol;^IP&#92;b&sol;</tt> node.</p>
 
 <dl><dt>(<a name="ex34">34</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex35">35</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">The second relationship &lsquo;<tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt>&rsquo; refers to the matched <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> node and not to the matched <tt>&sol;^PP&#92;b&sol;</tt> node, and is equivalent to (<a href="#ex36">36</a>).</p>
 
 <dl><dt>(<a name="ex36">36</a>)</dt><dd>
-<tt>(&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>(&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex37">37</a>) will match an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> which immediately dominates a <tt>&sol;^PP&#92;b&sol;</tt> which in turn dominates some <tt>&sol;^IP&#92;b&sol;</tt>.</p>
 
 <dl><dt>(<a name="ex37">37</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (<tt>|</tt>) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex38">38</a>) will find an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> node which immediately dominates a <tt>&sol;^PP&#92;b&sol;</tt> node or dominates an <tt>&sol;^IP&#92;b&sol;</tt> node.</p>
 
 <dl><dt>(<a name="ex38">38</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
-<p align="justify">The (possibly implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex39">39</a>) will find an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> node that has <tt>&sol;^BE&#92;b&sol;</tt> and <tt>&sol;^IP-PPL-CAT&#92;b&sol;</tt> children or that has <tt>&sol;^BE&#92;b&sol;</tt> and <tt>&sol;^NP-PRD2&#92;b&sol;</tt> children.</p>
+<p align="justify">The (possibly implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex39">39</a>) will find an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> node that has <tt>&sol;^BE&#92;b&sol;</tt> and <tt>&sol;^IP-PPL-CAT&#92;b&sol;</tt> children or that has <tt>&sol;^BE&#92;b&sol;</tt> and <tt>&sol;^NP-PRD&#92;b&sol;</tt> children.</p>
 
 <dl><dt>(<a name="ex39">39</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^IP-PPL-CAT&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;^BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^NP-PRD2&#92;b&sol;</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^IP-&#8288;PPL-&#8288;CAT&#92;b&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;^BE&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^NP-&#8288;PRD&#92;b&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (<tt>[</tt>, <tt>]</tt>) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex40">40</a>) finds an <tt>&sol;^IP-INF-REL&#92;b&sol;</tt> that has a <tt>&sol;PRD&sol;</tt> or <tt>&sol;CAT&sol;</tt> child, and that precedes a <tt>&sol;^PP&#92;b&sol;</tt> sister or follows an <tt>&sol;^ADJP&#92;b&sol;</tt> sister.</p>
 
 <dl><dt>(<a name="ex40">40</a>)</dt><dd>
-<tt>&sol;^IP-INF-REL&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;PRD&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;CAT&sol;&nbsp;]&nbsp;[&nbsp;$..&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;$,,&nbsp;&sol;^ADJP&#92;b&sol;&nbsp;]</tt><br>
+<tt>&sol;^IP-&#8288;INF-&#8288;REL&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;&sol;PRD&sol;&nbsp;|&nbsp;&lt;&nbsp;&sol;CAT&sol;&nbsp;]&nbsp;[&nbsp;$..&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;$,,&nbsp;&sol;^ADJP&#92;b&sol;&nbsp;]</tt><br>
 </dd></dl>
 
 <p align="justify">Because a square bracketed expression itself acts as a complex relationship connecting to a node, an open square bracket must immediately precede a relationship or another open square bracket that itself starts a complex relationship.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Any relationship, including a square bracketed one, can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>). Thus, pattern (<a href="#ex41">41</a>) will find <tt>&sol;^IP-REL&#92;b&sol;</tt> nodes that have a <tt>&sol;^BEP&#92;b&sol;</tt> child while having neither a <tt>&sol;CAT&sol;</tt> child nor simultaneously <tt>&sol;SBJ&sol;</tt> and <tt>&sol;PRD2&sol;</tt> children.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Any relationship, including a square bracketed one, can be negated by immediately preceding it with an exclamation mark (<tt>!</tt>). Thus, pattern (<a href="#ex41">41</a>) will find <tt>&sol;^IP-REL&#92;b&sol;</tt> nodes that have a <tt>&sol;^BEP&#92;b&sol;</tt> child while having neither a <tt>&sol;CAT&sol;</tt> child nor simultaneously <tt>&sol;SBJ&sol;</tt> and <tt>&sol;PRD&sol;</tt> children.</p>
 
 <dl><dt>(<a name="ex41">41</a>)</dt><dd>
-<tt>&sol;^IP-REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^BEP&#92;b&sol;&nbsp;!&lt;&nbsp;&sol;CAT&sol;&nbsp;![&nbsp;&lt;&nbsp;&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;PRD2&sol;&nbsp;]</tt><br>
+<tt>&sol;^IP-&#8288;REL&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^BEP&#92;b&sol;&nbsp;!&lt;&nbsp;&sol;CAT&sol;&nbsp;![&nbsp;&lt;&nbsp;&sol;SBJ&sol;&nbsp;&lt;&nbsp;&sol;PRD&sol;&nbsp;]</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;&nbsp;Labeled nodes and back links</h2>
@@ -1180,78 +1182,78 @@
 <p align="justify">Search patterns can be split into multiple segments, which are separated by colons (<tt>:</tt>). Segments following the first have to include a reference to a labelled node that is introduced in a previous segment. Thus, pattern (<a href="#ex43">43</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
 
 <dl><dt>(<a name="ex43">43</a>)</dt><dd>
-<tt>&sol;^NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;^CP-THT&#92;b&sol;</tt><br>
+<tt>&sol;^NP&#92;b&sol;=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;&sol;^CP-&#8288;THT&#92;b&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. Pattern (<a href="#ex44">44</a>) without segments and pattern (<a href="#ex45">45</a>) with segments match identical structure. For example, they will find the tree of (<a href="#ex46">46</a>).</p>
 
 <dl><dt>(<a name="ex44">44</a>)</dt><dd>
-<tt>&sol;^NP&#92;b&sol;&nbsp;&lt;&nbsp;N&nbsp;&lt;&nbsp;(&sol;^CP-THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^IP-SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^VBD&#92;b&sol;)))</tt><br>
+<tt>&sol;^NP&#92;b&sol;&nbsp;&lt;&nbsp;N&nbsp;&lt;&nbsp;(&sol;^CP-&#8288;THT&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^IP-&#8288;SUB&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^VBD&#92;b&sol;)))</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex45">45</a>)</dt><dd>
-<tt>&sol;^NP&#92;b&sol;=np&nbsp;:&nbsp;(=np&nbsp;&lt;&nbsp;N)&nbsp;:&nbsp;(=np&nbsp;&lt;&nbsp;&sol;^CP-THT&#92;b&sol;=cptht)&nbsp;:</tt><br>
-<tt>(=cptht&nbsp;&lt;&nbsp;&sol;^IP-SUB&#92;b&sol;=ipsub)&nbsp;:&nbsp;(=ipsub&nbsp;&lt;&nbsp;&sol;^VBD&#92;b&sol;)</tt><br>
+<tt>&sol;^NP&#92;b&sol;=np&nbsp;:&nbsp;(=np&nbsp;&lt;&nbsp;N)&nbsp;:&nbsp;(=np&nbsp;&lt;&nbsp;&sol;^CP-&#8288;THT&#92;b&sol;=cptht)&nbsp;:</tt><br>
+<tt>(=cptht&nbsp;&lt;&nbsp;&sol;^IP-&#8288;SUB&#92;b&sol;=ipsub)&nbsp;:&nbsp;(=ipsub&nbsp;&lt;&nbsp;&sol;^VBD&#92;b&sol;)</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex46">46</a>)</dt><dd>
-<svg xmlns="http://www.w3.org/2000/svg" width="605" height="385" viewBox="-6.05 -1.925 726.0 462.0">
-<text x="302.5" y="45" text-anchor="middle">IP-MAT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="649" height="385" viewBox="-6.49 -1.925 778.8 462.0">
+<text x="324.5" y="45" text-anchor="middle">IP-MAT</text>
 <text x="44" y="100" text-anchor="middle">NP-SBJ</text>
 <text x="44" y="155" text-anchor="middle">D;_nphd_</text>
 <text x="44" y="210" text-anchor="middle">That</text>
 <line x1="44" y1="165" x2="44" y2="190" style="stroke:#000000;stroke-width:2;"/>
 <line x1="44" y1="110" x2="44" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="302.5" y1="55" x2="44" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="324.5" y1="55" x2="44" y2="80" style="stroke:#000000;stroke-width:2;"/>
 <text x="126.5" y="100" text-anchor="middle">BEP;~Ln</text>
 <text x="126.5" y="155" text-anchor="middle">is</text>
 <line x1="126.5" y1="110" x2="126.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="302.5" y1="55" x2="126.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<rect x="342.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
-<text x="357.5" y="100" text-anchor="middle">NP-PRD2</text>
+<line x1="324.5" y1="55" x2="126.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<rect x="364.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
+<text x="379.5" y="100" text-anchor="middle">NP-PRD</text>
 <text x="203.5" y="155" text-anchor="middle">ADVP</text>
 <text x="203.5" y="210" text-anchor="middle">ADV</text>
 <text x="203.5" y="265" text-anchor="middle">exactly</text>
 <line x1="203.5" y1="220" x2="203.5" y2="245" style="stroke:#000000;stroke-width:2;"/>
 <line x1="203.5" y1="165" x2="203.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="357.5" y1="110" x2="203.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="379.5" y1="110" x2="203.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
 <text x="269.5" y="155" text-anchor="middle">D</text>
 <text x="269.5" y="210" text-anchor="middle">the</text>
 <line x1="269.5" y1="165" x2="269.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="357.5" y1="110" x2="269.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<rect x="309.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
+<line x1="379.5" y1="110" x2="269.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<rect x="309.5" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
 <text x="324.5" y="155" text-anchor="middle">N</text>
 <text x="324.5" y="210" text-anchor="middle">way</text>
 <line x1="324.5" y1="165" x2="324.5" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="357.5" y1="110" x2="324.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<rect x="436" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="451" y="155" text-anchor="middle">CP-THT</text>
-<rect x="436" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="451" y="210" text-anchor="middle">IP-SUB</text>
+<line x1="379.5" y1="110" x2="324.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<rect x="458" y="135" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="473" y="155" text-anchor="middle">CP-THT</text>
+<rect x="458" y="190" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="473" y="210" text-anchor="middle">IP-SUB</text>
 <text x="385" y="265" text-anchor="middle">NP-SBJ</text>
 <text x="385" y="320" text-anchor="middle">PRO</text>
 <text x="385" y="375" text-anchor="middle">I</text>
 <line x1="385" y1="330" x2="385" y2="355" style="stroke:#000000;stroke-width:2;"/>
 <line x1="385" y1="275" x2="385" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="451" y1="220" x2="385" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<rect x="436" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: MediumSpringGreen; stroke-width: 10;"/>
-<text x="451" y="265" text-anchor="middle">VBD</text>
-<text x="451" y="320" text-anchor="middle">wanted</text>
-<line x1="451" y1="275" x2="451" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="451" y1="220" x2="451" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<text x="517" y="265" text-anchor="middle">NP-OB1</text>
-<text x="517" y="320" text-anchor="middle">PRO</text>
-<text x="517" y="375" text-anchor="middle">it</text>
-<line x1="517" y1="330" x2="517" y2="355" style="stroke:#000000;stroke-width:2;"/>
-<line x1="517" y1="275" x2="517" y2="300" style="stroke:#000000;stroke-width:2;"/>
-<line x1="451" y1="220" x2="517" y2="245" style="stroke:#000000;stroke-width:2;"/>
-<line x1="451" y1="165" x2="451" y2="190" style="stroke:#000000;stroke-width:2;"/>
-<line x1="357.5" y1="110" x2="451" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="302.5" y1="55" x2="357.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
-<text x="577.5" y="100" text-anchor="middle">PUNC</text>
-<text x="577.5" y="155" text-anchor="middle">!</text>
-<line x1="577.5" y1="110" x2="577.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
-<line x1="302.5" y1="55" x2="577.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<line x1="473" y1="220" x2="385" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<rect x="458" y="245" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: wheat; stroke-width: 10;"/>
+<text x="473" y="265" text-anchor="middle">VBD;~Tn</text>
+<text x="473" y="320" text-anchor="middle">wanted</text>
+<line x1="473" y1="275" x2="473" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="473" y1="220" x2="473" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<text x="561" y="265" text-anchor="middle">NP-OB1</text>
+<text x="561" y="320" text-anchor="middle">PRO</text>
+<text x="561" y="375" text-anchor="middle">it</text>
+<line x1="561" y1="330" x2="561" y2="355" style="stroke:#000000;stroke-width:2;"/>
+<line x1="561" y1="275" x2="561" y2="300" style="stroke:#000000;stroke-width:2;"/>
+<line x1="473" y1="220" x2="561" y2="245" style="stroke:#000000;stroke-width:2;"/>
+<line x1="473" y1="165" x2="473" y2="190" style="stroke:#000000;stroke-width:2;"/>
+<line x1="379.5" y1="110" x2="473" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="324.5" y1="55" x2="379.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
+<text x="621.5" y="100" text-anchor="middle">PUNC</text>
+<text x="621.5" y="155" text-anchor="middle">!</text>
+<line x1="621.5" y1="110" x2="621.5" y2="135" style="stroke:#000000;stroke-width:2;"/>
+<line x1="324.5" y1="55" x2="621.5" y2="80" style="stroke:#000000;stroke-width:2;"/>
 </svg>
 </dd></dl>
 <br>

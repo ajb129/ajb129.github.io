@@ -17,15 +17,21 @@
       max-width: 85%;
     }
   }
+  mark {
+    background-color: palegreen;
+  }
+  highlight {
+    background-color: wheat;
+  }
   </style>
 </head>
 <body>
-<br>
-<center><h1>About English Puzzle Graphs</h1></center>
-<center><h2>Alastair Butler</h2></center>
-<center><h3>Hirosaki University</h3></center>
-<br>
-<br>
+<br><br>
+<center>
+<h1>About English Puzzle Graphs</h1>
+<h3>Alastair Butler<br>Hirosaki University</h3>
+</center>
+<br><br>
 
 <br><h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;&nbsp;Aims</h2>
 
@@ -33,10 +39,10 @@
 
 <ul>
 <li>to get a feeling for how words interact with each other (word dependencies)</li>
-<li>to learn about the components that go into building up connected sentences; this includes complex sentences, which are sentences with multiple clauses</li>
+<li>to learn about the components that go into building up connected sentences; this includes complex sentences, which are sentences with multiple clauses, and when sentences occur one after another</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Each puzzle takes the form of a graph of words with labelled arrows that connect the graph nodes. The labelled arrows are clues for building sentence components. The puzzle task is to turn the graph of words with connecting clues into &lsquo;solutions&rsquo; that are either a sentence fragment, a single sentence or multiple sentences of English. You can check your success by seeing if your solution matches the suggested answer.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A puzzle takes the form of a graph of words with labelled arrows that connect the graph nodes. The labelled arrows are clues for building sentence components. The puzzle task is to turn each graph of words with its clues into a &lsquo;solution&rsquo; that is a sentence fragment, a single sentence (that is possibly complex) or multiple sentences (each of which can be complex). You can check your success by seeing if your solution matches the suggested answer.</p>
 
 <br><h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;&nbsp;How to read a puzzle graph</h2>
 
@@ -67,7 +73,6 @@
 <li>the <b>connective particle</b> <i>for</i> placed before the grammatical subject of a <i>to</i>-infinitive clause (<i>Mr.&nbsp;McGregor hung up the little jacket and the shoes <u>for</u> a scare-crow to frighten the blackbirds</i>, <i>no room <u>for</u> a fat little rabbit to squeeze underneath</i>)</li>
 <li>the <b>existential marker</b> <i>there</i> used to signal a <i>there</i> construction (<i><u>there</u> were four Rabbits</i>)</li>
 <li><b>dummy</b> <i>it</i>, e.g., in extraposition constructions (<i>Peter thought <u>it</u> best to go away</i>), cleft constructions (<i><u>It</u> was the second jacket that Peter had lost</i>) and weather reports (<i><u>it</u> is raining</i>)</li>
-<li><b>dummy</b> <i>do</i>, e.g., with questions (<i><u>Do</u> you remember?</i>, <i>What <u>did</u> you say?</i>) and when offering support for contracted negation <i>n't</i> (<i>I <u>do</u>n't care</i>, <u>Do</u>n't go into Mr.&nbsp;McGregor's garden)</li>
 </ul>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;It is also possible for a node to have as its content the underscore character (&lsquo;_&rsquo;) and nothing else. This indicates an absence from a puzzle solution that we are nevertheless able to associate to a meaning, as will be illustrated with the discussion of ellipsis in section <a href="#sec3.2">3.2</a> below.</p>
@@ -86,7 +91,7 @@
 <img src="clausetherewerepic.png">
 <br>
 <br>
-<a name="fig1"><b>Figure 1</b>: Puzzle graph for a single clause</a>
+<a name="figure1"><b>Figure 1</b>: Puzzle graph for a single clause</a>
 </center>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When the main verb of a clause is a form of the verb <small style="font-size: 75%">BE</small> (like <i>were</i>) and there is no predicative connection (<tt>[prd]</tt>, as in Figure <a href="#figure2">2</a> below), then a typical clause will have existential marker <i>there</i> as its initial word followed by a <small style="font-size: 75%">BE</small> verb followed by an <tt>[arg0]</tt> dependent. With this knowledge, we can construct (<a href="#ex1">1</a>).</p>
@@ -103,7 +108,7 @@ there were four Rabbits
 there were four little Rabbits
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#figure1">1</a> also has an arrow labelled <tt>[nim][tmp]</tt> (optional unselected adverbial with temporal function) that has the main verb as its governor node and that points to the complex adverb <tt>Once_upon_a_time</tt>. Connecting these words gives the final puzzle solution for Figure <a href="#figure1">1</a> of (<a href="#ex3">3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#figure1">1</a> also has an arrow labelled <tt>[nim]</tt> (unselected adverbial function) that has the main verb as its governor node and that points to the complex adverb <tt>Once_upon_a_time</tt>. Connecting these words gives the final puzzle solution for Figure <a href="#figure1">1</a> of (<a href="#ex3">3</a>).</p>
 
 <dl><dt>(<a name="ex3">3</a>)</dt><dd>
 Once upon a time there were four little Rabbits
@@ -115,10 +120,10 @@ Once upon a time there were four little Rabbits
 <img src="clausenameswerepic.png">
 <br>
 <br>
-<a name="fig2"><b>Figure 2</b>: Puzzle graph for another single clause</a>
+<a name="figure2"><b>Figure 2</b>: Puzzle graph for another single clause</a>
 </center>
 
-<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find <i>were</i> once again as the main verb of the clause. The &lsquo;be-er&rsquo; (logical subject) of the clause is <tt>names</tt>, which itself has an arrow labelled <tt>[genv]</tt> (genitive), which takes us to the genitive pronoun <tt>their</tt>. There is also an arrow labelled <tt>[prd]</tt> (predicative), which provides name content with dependent <tt>and</tt>, which in turn has four dependent conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all this into an English sentence gives (<a href="#ex4">4</a>).</p>
+<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find <i>were</i> once again as the main verb of the clause. The &lsquo;be-er&rsquo; (logical subject) of the clause is <tt>names</tt>, which itself has an arrow labelled <tt>[gen]</tt> (genitive), which takes us to the genitive pronoun <tt>their</tt>. There is also an arrow labelled <tt>[prd]</tt> (predicative), which provides name content with dependent <tt>and</tt>, which in turn has four dependent conjuncts. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all this into an English sentence gives (<a href="#ex4">4</a>).</p>
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
 their names were Flopsy, Mopsy, Cotton-tail, and Peter
@@ -130,14 +135,14 @@ their names were Flopsy, Mopsy, Cotton-tail, and Peter
 <img src="twoconjoinedclausespic.png">
 <br>
 <br>
-<a name="fig3"><b>Figure 3</b>: Puzzle graph combining Figures <a href="#figure1">1</a> and <a href="#figure2">2</a></a>
+<a name="figure3"><b>Figure 3</b>: Puzzle graph combining Figures <a href="#figure1">1</a> and <a href="#figure2">2</a></a>
 </center>
 
 <p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and</tt>. Nodes corresponding to the main verb nodes of the two earlier graphs form the dependent nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a puzzle solution that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex4">4</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow labelled <tt>[genv]</tt> of Figure <a href="#figure3">3</a> does not have a node with content <i>their</i> as its dependent like in Figure <a href="#figure2">2</a>, but rather takes as its dependent <tt>four_Rabbits</tt>, which corresponds to the <tt>four_Rabbits</tt> of Figure <a href="#figure1">1</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow labelled <tt>[gen]</tt> of Figure <a href="#figure3">3</a> does not have a node with content <i>their</i> as its dependent like in Figure <a href="#figure2">2</a>, but rather takes as its dependent <tt>four_Rabbits</tt>, which corresponds to the <tt>four_Rabbits</tt> of Figure <a href="#figure1">1</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can interpret the <tt>[genv]</tt> labelled arrow as having an &lsquo;invisible&rsquo; instance of <i>their</i> as its dependent. This absence of <i>their</i> from the puzzle graph occurs because presence of <i>their</i> in the solution sentence is instead captured in the graph as a direct arrow connection (referential link) to the already graph present <tt>four_Rabbits</tt>. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex4">4</a>)&rsquo; &mdash; namely (<a href="#ex5">5</a>) &mdash; to be the overall puzzle solution for the graph of Figure <a href="#figure3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can interpret the <tt>[gen]</tt> labelled arrow as having an &lsquo;invisible&rsquo; instance of <i>their</i> as its dependent. This absence of <i>their</i> from the puzzle graph occurs because presence of <i>their</i> in the solution sentence is instead captured in the graph as a direct arrow connection (referential link) to the already graph present <tt>four_Rabbits</tt>. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex4">4</a>)&rsquo; &mdash; namely (<a href="#ex5">5</a>) &mdash; to be the overall puzzle solution for the graph of Figure <a href="#figure3">3</a>.</p>
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
 Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.
@@ -151,7 +156,7 @@ Once upon a time there were four little Rabbits, and their names were Flopsy, Mo
 <img src="withellipsispic.png">
 <br>
 <br>
-<a name="fig4"><b>Figure 4</b>: Puzzle graph with ellipsis</a>
+<a name="figure4"><b>Figure 4</b>: Puzzle graph with ellipsis</a>
 </center>
 
 <p align="justify">Following all the links of Figure <a href="#figure4">4</a>, we can arrive at puzzle solution (<a href="#ex6">6</a>).</p>
@@ -170,10 +175,10 @@ He lost one of his shoes among the cabbages, and the other shoe amongst the pota
 <img src="handsandkneespic.png">
 <br>
 <br>
-<a name="fig5"><b>Figure 5</b>: Puzzle graph for a single clause</a>
+<a name="figure5"><b>Figure 5</b>: Puzzle graph for a single clause</a>
 </center>
 
-<p align="justify">By finding <tt>[arg0]</tt>, we can identify <tt>was</tt> as the main verb, and <tt>Mr._McGregor</tt> as the &lsquo;be-er&rsquo; (logical subject). One other arrow extends from <tt>was</tt>. This is labelled with the preposition word <tt>on</tt> and the functional information <tt>[prd]</tt> (predicative) and connects to <tt>and</tt>, which takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <tt>hands</tt> and <tt>[conj2]</tt> leading to <tt>knees</tt>. One more connection, labelled <tt>[genv]</tt> (genitive/possessive), originates from <tt>and</tt> and leads to <tt>Mr._McGregor</tt> to capture the information that the <tt>hands</tt> and <tt>knees</tt> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive/possessive connection, we can reach (<a href="#ex7">7</a>) as the puzzle solution.</p>
+<p align="justify">By finding <tt>[arg0]</tt>, we can identify <tt>was_on</tt> as a predicate with <tt>Mr._McGregor</tt> as the &lsquo;be-er&rsquo; (logical subject). One other arrow extends from <tt>was_on</tt>. This is labelled <tt>[arg1]</tt> and connects to <tt>and</tt>, which takes us to two conjuncts via the labelled connections <tt>[conj1]</tt> leading to <tt>hands</tt> and <tt>[conj2]</tt> leading to <tt>knees</tt>. One more connection, labelled <tt>[gen]</tt> (genitive/possessive), originates from <tt>and</tt> and leads to <tt>Mr._McGregor</tt> to capture the information that the <tt>hands</tt> and <tt>knees</tt> are those of <i>Mr.&nbsp;McGregor</i>. By following these connections and including <i>his</i> to capture the genitive/possessive connection, we can reach (<a href="#ex7">7</a>) as the puzzle solution.</p>
 
 <dl><dt>(<a name="ex7">7</a>)</dt><dd>
 Mr.&nbsp;McGregor was on his hands and knees
@@ -185,10 +190,10 @@ Mr.&nbsp;McGregor was on his hands and knees
 <img src="plantingpic.png">
 <br>
 <br>
-<a name="fig6"><b>Figure 6</b>: Puzzle content for a participle clause</a>
+<a name="figure6"><b>Figure 6</b>: Puzzle content for a participle clause</a>
 </center>
 
-<p align="justify">An arrow labelled <tt>[arg1]</tt> (logical object) extends to <tt>cabbages</tt> having started from <tt>planting</tt> with its <tt>[clr][dir]</tt> (closely related directional) modifier <tt>out</tt>. In turn, <tt>cabbages</tt> leads via an <tt>[attrib]</tt> (attribute) labelled arrow to <tt>young</tt>. By following these connections of the graph, we reach the sentence fragment (<a href="#ex8">8</a>).</p>
+<p align="justify">An arrow labelled <tt>[arg1]</tt> (logical object) extends to <tt>cabbages</tt> having started from <tt>planting_out</tt>. In turn, <tt>cabbages</tt> leads via an <tt>[attrib]</tt> (attribute) labelled arrow to <tt>young</tt>. By following these connections of the graph, we reach the sentence fragment (<a href="#ex8">8</a>).</p>
 
 <dl><dt>(<a name="ex8">8</a>)</dt><dd>
 planting out young cabbages
@@ -200,10 +205,10 @@ planting out young cabbages
 <img src="handsandkneesandplantingpic.png">
 <br>
 <br>
-<a name="fig7"><b>Figure 7</b>: Puzzle graph combining Figures <a href="#figure5">5</a> and <a href="#figure6">6</a></a>
+<a name="figure7"><b>Figure 7</b>: Puzzle graph combining Figures <a href="#figure5">5</a> and <a href="#figure6">6</a></a>
 </center>
 
-<p align="justify">Figure <a href="#figure7">7</a> has connections to bring together node content from Figures <a href="#figure5">5</a> and <a href="#figure6">6</a>. There is a <tt>[cnt]</tt> node (continuative subordinate conjunction) to state that <tt>planting</tt> acts as a restriction on the content from <tt>was</tt>. There is also an <tt>[arg0]</tt> connection from <tt>planting</tt> to <tt>Mr._McGregor</tt>, the &lsquo;be-er&rsquo; (logical subject) of the main clause. A puzzle solution that meets these new criteria of Figure <a href="#figure7">7</a> is (<a href="#ex9">9</a>).</p>
+<p align="justify">Figure <a href="#figure7">7</a> has connections to bring together node content from Figures <a href="#figure5">5</a> and <a href="#figure6">6</a>. There is a <tt>[cnt]</tt> node (continuative subordinate conjunction) to state that <tt>planting_out</tt> acts as a restriction on the content from <tt>was_on</tt>. There is also an <tt>[arg0]</tt> connection from <tt>planting_out</tt> to <tt>Mr._McGregor</tt>, the &lsquo;be-er&rsquo; (logical subject) of the main clause. A puzzle solution that meets these new criteria of Figure <a href="#figure7">7</a> is (<a href="#ex9">9</a>).</p>
 
 <dl><dt>(<a name="ex9">9</a>)</dt><dd>
 Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages
@@ -215,10 +220,10 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages
 <img src="jumpeduppic.png">
 <br>
 <br>
-<a name="fig8"><b>Figure 8</b>: Puzzle graph for a single clause</a>
+<a name="figure8"><b>Figure 8</b>: Puzzle graph for a single clause</a>
 </center>
 
-<p align="justify">Looking at <tt>jumped</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> labelled arrow, and to <tt>up</tt> with a <tt>[clr][dir]</tt> (closely related directional) arrow. Therefore, we can identify <i>jumped</i> as the main verb, <i>he</i> as the &lsquo;do-er&rsquo; (logical subject), and <i>up</i> as an adverbial modifier, to derive the simple sentence of (<a href="#ex10">10</a>).</p>
+<p align="justify">Looking at <tt>jumped_up</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> labelled arrow. Therefore, we can identify <i>jumped_up</i> as a predicate with <i>he</i> as its &lsquo;do-er&rsquo; (logical subject), to derive the simple sentence of (<a href="#ex10">10</a>).</p>
 
 <dl><dt>(<a name="ex10">10</a>)</dt><dd>
 he jumped up
@@ -230,10 +235,10 @@ he jumped up
 <img src="ranafterpic.png">
 <br>
 <br>
-<a name="fig9"><b>Figure 9</b>: Puzzle graph for another single clause</a>
+<a name="figure9"><b>Figure 9</b>: Puzzle graph for another single clause</a>
 </center>
 
-<p align="justify">Looking at <tt>ran</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> labelled arrow. Also, <tt>ran</tt> is linked to <tt>Peter</tt> with an arrow that contains the preposition word <tt>after</tt> and the function information <tt>[clr][dir]</tt> (closely related direction). With these words and connections, we can derive the puzzle solution (<a href="#ex11">11</a>).</p>
+<p align="justify">Looking at <tt>ran_after</tt>, this is linked to <tt>he</tt> with an <tt>[arg0]</tt> labelled arrow. Also, <tt>ran_after</tt> is linked to <tt>Peter</tt> with an <tt>[arg1]</tt> labelled arrow. With these words and connections, we can derive the puzzle solution (<a href="#ex11">11</a>).</p>
 
 <dl><dt>(<a name="ex11">11</a>)</dt><dd>
 he ran after Peter
@@ -245,10 +250,10 @@ he ran after Peter
 <img src="jumpedupranafterpic.png">
 <br>
 <br>
-<a name="fig10"><b>Figure 10</b>: Puzzle graph combining Figures <a href="#figure8">8</a> and <a href="#figure9">9</a></a>
+<a name="figure10"><b>Figure 10</b>: Puzzle graph combining Figures <a href="#figure8">8</a> and <a href="#figure9">9</a></a>
 </center>
 
-<p align="justify">This combines Figures <a href="#figure8">8</a> and <a href="#figure9">9</a>, with <tt>and</tt> to connect <tt>jumped</tt> and <tt>ran</tt>. Note how the single <tt>he</tt> connects as the &lsquo;do-er&rsquo; (logical subject) to both verbs. A puzzle solution is (<a href="#ex12">12</a>).</p>
+<p align="justify">This combines Figures <a href="#figure8">8</a> and <a href="#figure9">9</a>, with <tt>and</tt> to connect <tt>jumped_up</tt> and <tt>ran_after</tt>. Note how the single <tt>he</tt> connects as the &lsquo;do-er&rsquo; (logical subject) to both predicates. A puzzle solution is (<a href="#ex12">12</a>).</p>
 
 <dl><dt>(<a name="ex12">12</a>)</dt><dd>
 he jumped up and ran after Peter
@@ -260,7 +265,7 @@ he jumped up and ran after Peter
 <img src="wavingpic.png">
 <br>
 <br>
-<a name="fig11"><b>Figure 11</b>: Puzzle graph for a participle clause</a>
+<a name="figure11"><b>Figure 11</b>: Puzzle graph for a participle clause</a>
 </center>
 
 <p align="justify">We can see <tt>waving</tt> is connected to <tt>rake</tt> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (logical object) arrow. A puzzle solution is (<a href="#ex13">13</a>).</p>
@@ -275,7 +280,7 @@ waving a rake
 <img src="stopthiefpic.png">
 <br>
 <br>
-<a name="fig12"><b>Figure 12</b>: Puzzle graph for an imperative clause</a>
+<a name="figure12"><b>Figure 12</b>: Puzzle graph for an imperative clause</a>
 </center>
 
 <p align="justify">An imperative is an order or instruction for an unmentioned &lsquo;do-er&rsquo; to do something, but also the &lsquo;do-er&rsquo; can be addressed with a <tt>[voc]</tt> (vocative) connection. A vocative can occur either at the front or end of an imperative, making (<a href="#ex14">14</a>) a possible puzzle solution.</p>
@@ -290,10 +295,10 @@ Stop thief!
 <img src="callingpic.png">
 <br>
 <br>
-<a name="fig13"><b>Figure 13</b>: Puzzle graph for a clause with an embedding that is the content of Figure <a href="#figure12">12</a></a>
+<a name="figure13"><b>Figure 13</b>: Puzzle graph for a clause with Figure <a href="#figure12">12</a> as an embedding</a>
 </center>
 
-<p align="justify">This is the puzzle graph for a clause with an embedding with the content of Figure <a href="#figure12">12</a>. This embedding is connected by an <tt>[arg1]</tt> (logical object) arrow to the verb content <tt>calling</tt> with its <tt>[clr][dir]</tt> (closely related directional) modifier <tt>out</tt>. A puzzle solution is (<a href="#ex15">15</a>).</p>
+<p align="justify">This is the puzzle graph for a clause with an embedding with the content of Figure <a href="#figure12">12</a>. This embedding is connected by an <tt>[arg1]</tt> (logical object) arrow to the content <tt>calling_out</tt>. A puzzle solution is (<a href="#ex15">15</a>).</p>
 
 <dl><dt>(<a name="ex15">15</a>)</dt><dd>
 calling out, &lsquo;Stop thief!&rsquo;
@@ -305,10 +310,10 @@ calling out, &lsquo;Stop thief!&rsquo;
 <img src="wavingandcallingpic.png">
 <br>
 <br>
-<a name="fig14"><b>Figure 14</b>: Puzzle graph combining Figures <a href="#figure11">11</a> and <a href="#figure13">13</a></a>
+<a name="figure14"><b>Figure 14</b>: Puzzle graph combining Figures <a href="#figure11">11</a> and <a href="#figure13">13</a></a>
 </center>
 
-<p align="justify">Figure <a href="#figure14">14</a> results from combining Figure <a href="#figure11">11</a> and <a href="#figure13">13</a>. Here, <tt>and</tt> has conjuncts <tt>waving</tt> and <tt>calling</tt>. A puzzle solution is (<a href="#ex16">16</a>).</p>
+<p align="justify">Figure <a href="#figure14">14</a> results from combining Figure <a href="#figure11">11</a> and <a href="#figure13">13</a>. Here, <tt>and</tt> has conjuncts <tt>waving</tt> and <tt>calling_out</tt>. A puzzle solution is (<a href="#ex16">16</a>).</p>
 
 <dl><dt>(<a name="ex16">16</a>)</dt><dd>
 waving a rake and calling out, &lsquo;Stop thief!&rsquo;
@@ -320,10 +325,10 @@ waving a rake and calling out, &lsquo;Stop thief!&rsquo;
 <img src="jumpedupranafterwavingandcallingpic.png">
 <br>
 <br>
-<a name="fig15"><b>Figure 15</b>: Puzzle graph combining Figures <a href="#figure10">10</a> and <a href="#figure14">14</a></a>
+<a name="figure15"><b>Figure 15</b>: Puzzle graph combining Figures <a href="#figure10">10</a> and <a href="#figure14">14</a></a>
 </center>
 
-<p align="justify">Figure <a href="#figure15">15</a> has a <tt>[cnt]</tt> (continuative subordinate conjunction) node to combine Figures <a href="#figure10">10</a> and <a href="#figure14">14</a>, much like we saw happen with Figure <a href="#figure7">7</a>. Note how the verbs <tt>jumped</tt>, <tt>ran</tt>, <tt>waving</tt>, and <tt>calling</tt> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (logical subject) arrows that connect to the same <tt>he</tt>. A puzzle solution is (<a href="#ex17">17</a>).</p>
+<p align="justify">Figure <a href="#figure15">15</a> has a <tt>[cnt]</tt> (continuative subordinate conjunction) node to combine Figures <a href="#figure10">10</a> and <a href="#figure14">14</a>, much like we saw happen with Figure <a href="#figure7">7</a>. Note how the verbs <tt>jumped_up</tt>, <tt>ran_after</tt>, <tt>waving</tt>, and <tt>calling_out</tt> all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (logical subject) arrows that connect to the same <tt>he</tt>. A puzzle solution is (<a href="#ex17">17</a>).</p>
 
 <dl><dt>(<a name="ex17">17</a>)</dt><dd>
 he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
@@ -335,10 +340,10 @@ he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thi
 <img src="handscallingpic.png">
 <br>
 <br>
-<a name="fig16"><b>Figure 16</b>: Puzzle graph combining Figures <a href="#figure7">7</a> and <a href="#figure15">15</a></a>
+<a name="figure16"><b>Figure 16</b>: Puzzle graph combining Figures <a href="#figure7">7</a> and <a href="#figure15">15</a></a>
 </center>
 
-<p align="justify">This has <tt>but</tt> to combine Figures <a href="#figure7">7</a> and <a href="#figure15">15</a>. Note how the verbs <tt>was</tt>, <tt>planting</tt>, <tt>jumped</tt>, <tt>ran</tt>, <tt>waving</tt>, and <tt>calling</tt> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (logical subject) arrows that connect to the same instance of <tt>Mr._McGregor</tt>. An overall puzzle solution for Figure <a href="#figure16">16</a> is (<a href="#ex18">18</a>).</p>
+<p align="justify">This has <tt>but</tt> to combine Figures <a href="#figure7">7</a> and <a href="#figure15">15</a>. Note how the verbs <tt>was_on</tt>, <tt>planting_out</tt>, <tt>jumped_up</tt>, <tt>ran_after</tt>, <tt>waving</tt>, and <tt>calling_out</tt> all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (logical subject) arrows that connect to the same instance of <tt>Mr._McGregor</tt>. An overall puzzle solution for Figure <a href="#figure16">16</a> is (<a href="#ex18">18</a>).</p>
 
 <dl><dt>(<a name="ex18">18</a>)</dt><dd>
 Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
@@ -351,46 +356,45 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he
 <h3><a name="sec4.1">4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;For relation labels</h3>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[attrib]</tt></td><td>attribute</td></tr>
-<tr><td><tt>[genv]</tt></td><td>genitive</td></tr>
+<tr><td><tt>[gen]</tt></td><td>genitive</td></tr>
 <tr><td><tt>[modifier]</tt></td><td>modifier</td></tr>
 <tr><td><tt>[qual]</tt></td><td>qualifier</td></tr>
 </table>
 <br>
 <a name="table1"><b>Table 1</b>: modifiers</a>
 </center>
+<br>
 
 <dl><dt>(<a name="ex19">19</a>)</dt><dd>
 
 <p align="justify">four little Rabbits</p>
-<img src="attribex1pic.png">
+<img src="attribex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex20">20</a>)</dt><dd>
 
 <p align="justify">Mr. McGregor's garden</p>
-<img src="genvex1pic.png">
+<img src="genex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex21">21</a>)</dt><dd>
 
 <p align="justify">twenty years later</p>
-<img src="modifierex1pic.png">
+<img src="modifierex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex22">22</a>)</dt><dd>
 
 <p align="justify">very big</p>
-<img src="qualex1pic.png">
+<img src="qualex1graph.png">
 </dd></dl>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[arg0]</tt></td><td>logical subject</td></tr>
 <tr><td><tt>[arg1]</tt></td><td>logical direct object</td></tr>
 <tr><td><tt>[arg2]</tt></td><td>logical indirect object</td></tr>
@@ -399,287 +403,162 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he
 <br>
 <a name="table2"><b>Table 2</b>: clause arguments/complements</a>
 </center>
+<br>
 
 <dl><dt>(<a name="ex23">23</a>)</dt><dd>
 
-<p align="justify">The village was founded by Baroness Burdet Coutts.</p>
-<img src="arg1ex1pic.png">
+<p align="justify">Baroness Burdet Coutts founded the village.</p>
+<img src="arg1ex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex24">24</a>)</dt><dd>
 
-<p align="justify">Peter asked her the way.</p>
-<img src="arg2ex1pic.png">
+<p align="justify">The village was founded by Baroness Burdet Coutts.</p>
+<img src="arg1ex2graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex25">25</a>)</dt><dd>
 
-<p align="justify">It was a hoax.</p>
-<img src="prdex1pic.png">
+<p align="justify">He was put in a pie.</p>
+<img src="clrex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex26">26</a>)</dt><dd>
 
-<p align="justify">I find this interesting.</p>
-<img src="prdex2pic.png">
+<p align="justify">Peter asked her the way.</p>
+<img src="arg2ex1graph.png">
 </dd></dl>
-
-<center>
-
-<table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
-<tr><td><tt>[clr]</tt></td><td>closely related adverbial (verb selected)</td></tr>
-<tr><td><tt>[nim]</tt></td><td>optional unselected adverbial</td></tr>
-</table>
-<br>
-<a name="table3"><b>Table 3</b>: adverbials</a>
-</center>
 
 <dl><dt>(<a name="ex27">27</a>)</dt><dd>
 
-<p align="justify">He was put in a pie.</p>
-<img src="clrex1pic.png">
+<p align="justify">It was a hoax.</p>
+<img src="prdex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex28">28</a>)</dt><dd>
 
-<p align="justify">He was safe in the wood.</p>
-<img src="nimex1pic.png">
+<p align="justify">I find this interesting.</p>
+<img src="prdex2graph.png">
 </dd></dl>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
+<tr><td>label</td><td>description</td></tr>
+<tr><td><tt>[clr]</tt></td><td>closely related, obligatory function</td></tr>
+<tr><td><tt>[nim]</tt></td><td>not important, non-obligatory adverbial function</td></tr>
+</table>
+<br>
+<a name="table3"><b>Table 3</b>: adverbial functions</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex29">29</a>)</dt><dd>
+
+<p align="justify">They went to late-night movies, and then on_to parties.</p>
+<img src="clrex2graph.png">
+</dd></dl>
+
+<dl><dt>(<a name="ex30">30</a>)</dt><dd>
+
+<p align="justify">They went to late-night movies, and then they went on_to parties.</p>
+<img src="clrex3graph.png">
+</dd></dl>
+
+<dl><dt>(<a name="ex31">31</a>)</dt><dd>
+
+<p align="justify">He was safe in the wood.</p>
+<img src="nimex1graph.png">
+</dd></dl>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[rfl]</tt></td><td>reflexive</td></tr>
 <tr><td><tt>[voc]</tt></td><td>vocative</td></tr>
 </table>
 <br>
 <a name="table4"><b>Table 4</b>: extra clause relations</a>
 </center>
+<br>
 
-<dl><dt>(<a name="ex29">29</a>)</dt><dd>
+<dl><dt>(<a name="ex32">32</a>)</dt><dd>
 
 <p align="justify">The 1401 does the work itself.</p>
-<img src="rflex1pic.png">
+<img src="rflex1graph.png">
+</dd></dl>
+
+<dl><dt>(<a name="ex33">33</a>)</dt><dd>
+
+<p align="justify">what's up El?</p>
+<img src="vocex1graph.png">
 </dd></dl>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[emb]</tt></td><td>embedding</td></tr>
 </table>
 <br>
 <a name="table5"><b>Table 5</b>: embedding marking</a>
 </center>
+<br>
 
-<dl><dt>(<a name="ex30">30</a>)</dt><dd>
+<dl><dt>(<a name="ex34">34</a>)</dt><dd>
 
 <p align="justify">the idea to go</p>
-<img src="embex1pic.png">
-</dd></dl>
-
-<center>
-
-<table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
-<tr><td><tt>[prn]</tt></td><td>parenthetical</td></tr>
-<tr><td><tt>[prn_comment]</tt></td><td>parenthetical comment</td></tr>
-</table>
-<br>
-<a name="table6"><b>Table 6</b>: parenthetical marking</a>
-</center>
-
-<dl><dt>(<a name="ex31">31</a>)</dt><dd>
-
-<p align="justify">George, a fireman</p>
-<img src="prnex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex32">32</a>)</dt><dd>
-
-<p align="justify">Peter sneezed, Kertyschoo.</p>
-<img src="prncommentex1pic.png">
+<img src="embex1graph.png">
 </dd></dl>
 
 <h3><a name="sec4.2">4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;For conjunction</h3>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[conj</tt><i>n</i><tt>]</tt></td><td><i>n</i>-th conjunct</td></tr>
 <tr><td><tt>[part</tt><i>n</i><tt>]</tt></td><td><i>n</i>-th utterance part</td></tr>
 <tr><td><tt>[utterance]</tt></td><td>utterance</td></tr>
 </table>
 <br>
-<a name="table7"><b>Table 7</b>: conjunct marking</a>
+<a name="table6"><b>Table 6</b>: conjunct marking</a>
 </center>
+<br>
+
+<dl><dt>(<a name="ex35">35</a>)</dt><dd>
+
+<p align="justify">Janet was praised by Rodney, criticized by Sidney and ignored by Gregory.</p>
+<img src="conjex1graph.png">
+</dd></dl>
+
+<dl><dt>(<a name="ex36">36</a>)</dt><dd>
+
+<p align="justify">He said &ldquo;Beware! His eyes flash!&rdquo;</p>
+<img src="utteranceex1graph.png">
+</dd></dl>
 
 <h3><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;For quantification</h3>
 
 <center>
-
 <table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
-<tr><td><tt>[cnd]</tt></td><td>conditional</td></tr>
+<tr><td>label</td><td>description</td></tr>
 <tr><td><tt>[quant]</tt></td><td>quantification</td></tr>
 <tr><td><tt>[restriction]</tt></td><td>restriction of an operation</td></tr>
 <tr><td><tt>[scope]</tt></td><td>scope of an operation</td></tr>
 </table>
 <br>
-<a name="table8"><b>Table 8</b>: scope operations</a>
+<a name="table7"><b>Table 7</b>: scope operations</a>
 </center>
-
-<dl><dt>(<a name="ex33">33</a>)</dt><dd>
-
-<p align="justify">You win if you reach the mousehole.</p>
-<img src="cndex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex34">34</a>)</dt><dd>
-
-<p align="justify">Merchandise orders came from every client.</p>
-<img src="quantex1pic.png">
-</dd></dl>
-
-<h3><a name="sec4.4">4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;For subordinate conjunction functions</h3>
-
-<center>
-
-<table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
-<tr><td><tt>[abs]</tt></td><td>absolute</td></tr>
-<tr><td><tt>[cnt]</tt></td><td>contingency</td></tr>
-<tr><td><tt>[loc]</tt></td><td>locative</td></tr>
-<tr><td><tt>[mnr]</tt></td><td>manner/degree</td></tr>
-<tr><td><tt>[mod]</tt></td><td>modality</td></tr>
-<tr><td><tt>[rst]</tt></td><td>respect</td></tr>
-<tr><td><tt>[tmp]</tt></td><td>temporal</td></tr>
-</table>
 <br>
-<a name="table9"><b>Table 9</b>: subordinate conjunction functions</a>
-</center>
-
-<dl><dt>(<a name="ex35">35</a>)</dt><dd>
-
-<p align="justify">He was damp with sitting in that can.</p>
-<img src="absex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex36">36</a>)</dt><dd>
-
-<p align="justify">He was out of breath trembling with fright.</p>
-<img src="absex2pic.png">
-</dd></dl>
 
 <dl><dt>(<a name="ex37">37</a>)</dt><dd>
 
-<p align="justify">Employers need them in order to compete internationally.</p>
-<img src="cntex1pic.png">
+<p align="justify">Merchandise orders came from every client.</p>
+<img src="quantex1graph.png">
 </dd></dl>
 
 <dl><dt>(<a name="ex38">38</a>)</dt><dd>
 
-<p align="justify">Peter sat down to rest.</p>
-<img src="cntex2pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex39">39</a>)</dt><dd>
-
-<p align="justify">Julie Carney carries a quartz crystal wherever she go.</p>
-<img src="locex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex40">40</a>)</dt><dd>
-
-<p align="justify">The tip of her tail twitched as if it were alive.</p>
-<img src="mnrex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex41">41</a>)</dt><dd>
-
-<p align="justify">We have fun roaming the woods.</p>
-<img src="mnrex2pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex42">42</a>)</dt><dd>
-
-<p align="justify">It is like kicking except you are more graceful.</p>
-<img src="modex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex43">43</a>)</dt><dd>
-
-<p align="justify">He was through playing baseball.</p>
-<img src="rstex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex44">44</a>)</dt><dd>
-
-<p align="justify">Alresford feels like home when I return.</p>
-<img src="tmpex1pic.png">
-</dd></dl>
-
-<h3><a name="sec4.5">4.5</a>&nbsp;&nbsp;&nbsp;&nbsp;For adverbial functions</h3>
-
-<center>
-
-<table border="1" cellpadding="10px">
-<tr><th>label</th><th>description</th></tr>
-<tr><td><tt>[com]</tt></td><td>comitative</td></tr>
-<tr><td><tt>[dir]</tt></td><td>directional</td></tr>
-<tr><td><tt>[loc]</tt></td><td>locative</td></tr>
-<tr><td><tt>[mnr]</tt></td><td>manner/degree</td></tr>
-<tr><td><tt>[mod]</tt></td><td>modality</td></tr>
-<tr><td><tt>[rst]</tt></td><td>respect</td></tr>
-<tr><td><tt>[tmp]</tt></td><td>temporal</td></tr>
-</table>
-<br>
-<a name="table10"><b>Table 10</b>: adverbial functions</a>
-</center>
-
-<dl><dt>(<a name="ex45">45</a>)</dt><dd>
-
-<p align="justify">They lived with their Mother in a sand-bank.</p>
-<img src="comadverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex46">46</a>)</dt><dd>
-
-<p align="justify">She shook her head at him.</p>
-<img src="diradverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex47">47</a>)</dt><dd>
-
-<p align="justify">Peter gave himself up for lost.</p>
-<img src="mnradverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex48">48</a>)</dt><dd>
-
-<p align="justify">Mr. McGregor caught sight of him at the corner.</p>
-<img src="locadverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex49">49</a>)</dt><dd>
-
-<p align="justify">Whom should he meet but Mr. McGregor!</p>
-<img src="modadverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex50">50</a>)</dt><dd>
-
-<p align="justify">The window was too small for Mr. McGregor.</p>
-<img src="rstadverbialex1pic.png">
-</dd></dl>
-
-<dl><dt>(<a name="ex51">51</a>)</dt><dd>
-
-<p align="justify">Peter was not very well during the evening.</p>
-<img src="tmpadverbialex1pic.png">
+<p align="justify">A player wins if they reach the mousehole.</p>
+<img src="cndex1graph.png">
 </dd></dl>
 <br>
 <br>

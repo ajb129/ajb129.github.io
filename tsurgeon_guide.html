@@ -17,28 +17,34 @@
       max-width: 85%;
     }
   }
+  mark {
+    background-color: palegreen;
+  }
+  highlight {
+    background-color: wheat;
+  }
   </style>
 </head>
 <body>
-<br>
-<center><h1>A guide to changing trees with Tsurgeon</h1></center>
-<center><h2>Alastair Butler</h2></center>
-<center><h3>Hirosaki University</h3></center>
-<br>
-<br>
-<center><h3>Abstract</h3></center>
+<br><br>
+<center>
+<h1>A guide to changing trees with Tsurgeon</h1>
+<h3>Alastair Butler<br>Hirosaki University</h3>
+</center>
+<br><br>
 
-<p align="justify">Tsurgeon (Levy and Andrew 2006) is a software tool for changing bracketed (Penn) style trees with tree search patterns paired to tree editing actions. This guide shows how to write tree changing programs with examples of basic and advanced use. Explanatory detail comes from README-tsurgeon.txt, which is part of the Tregex distribution that includes Tsurgeon. For the discussion of Tregex patterns, there is also inclusion of explanation from the TGrep2 manual that accompanies the TGrep2 (Rohde 2005) search tool.</p>
+<center><h3>Abstract</h3></center>
+<p align="justify">Tsurgeon (Levy and Andrew 2006) is a software tool for changing round bracketed (Penn) style trees with tree search patterns paired to tree editing actions. This guide shows how to write tree changing programs with examples of basic and advanced use. Explanatory detail comes from README-tsurgeon.txt, which is part of the Tregex distribution that includes Tsurgeon. For the discussion of Tregex patterns, there is also inclusion of explanation from the TGrep2 manual that accompanies the TGrep2 (Rohde 2005) search tool.</p>
 
 <br><h2><a name="sec1">1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
 
-<p align="justify">Tsurgeon (Levy and Andrew 2006) is a software tool for changing bracketed (Penn) style trees. It follows directions of a program written as a series of pairings of a <b>Tregex pattern</b> for matching tree structure with tree editing <b>Tsurgeon action(s)</b>. It works by taking trees specified with round bracketed notation as input. With each input tree, it tries to match Tregex patterns to the tree. For each successful pattern match, it applies editing actions until the activating match no longer holds true. Resulting trees are printed as a final output after all pattern and action pairings have been applied in turn to each input tree.</p>
+<p align="justify">Tsurgeon (Levy and Andrew 2006) is a software tool for changing round bracketed (Penn) style trees. It follows directions of a program written as a series of pairings of a <b>Tregex pattern</b> for matching tree structure with tree editing <b>Tsurgeon action</b>(s). It works by taking trees specified with round bracketed notation as input. With each input tree, it tries to match Tregex patterns to the tree. For each successful pattern match, it applies editing actions until the activating match no longer holds true. Resulting trees are printed as a final output after all pattern and action pairings have been applied in turn to each input tree.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;This guide is structured as follows. Section <a href="#sec2">2</a> details the required format for Tsurgeon programs that consist of one or perhaps many pairings of a Tregex pattern with Tsurgeon action(s). Section <a href="#sec3">3</a> sketches the workings of a full example. Section <a href="#sec4">4</a> details Tregex patterns. Section <a href="#sec5">5</a> demonstrates in turn each of the available Tsurgeon actions. Section <a href="#sec6">6</a> presents an extended example.</p>
 
 <br><h2><a name="sec2">2</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsurgeon program format</h2>
 
-<p align="justify">Tsurgeon programs are a combination of a Tregex pattern to match input trees and a series of Tsurgeon actions to perform on matched trees. The Tsurgeon program is unforgiving about the required line formatting of a program, because this is how Tregex patterns are distinguished from Tsurgeon actions. In particular:</p>
+<p align="justify">A Tsurgeon program involves pairings of a Tregex pattern to match input trees with one or more Tsurgeon actions to change matched trees. The Tsurgeon program is unforgiving about the required line formatting of a program, because this is how Tregex patterns are distinguished from Tsurgeon actions. In particular:</p>
 
 <ul>
 <li>The Tregex pattern should form one or more lines without intervening blank lines that is either the first uncommented text of the program or has at least one blank line to separate off any prior pairing of Tregex pattern with Tsurgeon action(s).</li>
@@ -47,23 +53,19 @@
 <li>The character <tt>%</tt> introduces a comment that extends to the end of the line. Non-comment uses of <tt>%</tt> must be escaped as <tt>&#92;%</tt>.</li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program1">1</a> is an example of a correctly formatted program:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex1">1</a>) is an example of a correctly formatted program:</p>
 
-<h3><a name="sec__exremoveterminals__">Program 1</h3>
-<hr/>
-
-<tt>&nbsp;%&nbsp;change&nbsp;all&nbsp;words&nbsp;into&nbsp;the&nbsp;string&nbsp;WORD</tt><br>
-<tt>&nbsp;!&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^(ID$|PU)&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;WORD</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;%&nbsp;remove&nbsp;all&nbsp;instances&nbsp;of&nbsp;WORD</tt><br>
-<tt>&nbsp;WORD=x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;delete&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex1">1</a>)</dt><dd>
+<tt>%&nbsp;change&nbsp;words&nbsp;into&nbsp;the&nbsp;string&nbsp;WORD</tt><br>
+<tt>!&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^PU&sol;</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;WORD</tt><br>
+<br>
+<tt>%&nbsp;remove&nbsp;instances&nbsp;of&nbsp;WORD</tt><br>
+<tt>WORD=x</tt><br>
+<br>
+<tt>delete&nbsp;x</tt><br>
+</dd></dl>
 
 <br><h2><a name="sec3">3</a>&nbsp;&nbsp;&nbsp;&nbsp;Pattern-action based programming</h2>
 
@@ -71,100 +73,91 @@
 
 <h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Program behaviour</h3>
 
-<p align="justify">To see program behaviour, consider Program <a href="#program1">1</a> of section <a href="#sec2">2</a>. The first noncomment line, repeated as (<a href="#ex1">1</a>), specifies with a Tregex pattern the initial tree structure looked for.</p>
-
-<dl><dt>(<a name="ex1">1</a>)</dt><dd>
-
-<tt>!&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^(ID$|PU)&sol;</tt><br>
-</dd></dl>
-
-<p align="justify">See section <a href="#sec4">4</a> for details about Tregex patterns. Here it is enough to know that (<a href="#ex1">1</a>) finds trees when there is a node such that it:</p>
-
-<dl>
-<dt>1.</dt><dd>is not <tt>WORD</tt>,</dd>
-<dt>2.</dt><dd>does not start with &lsquo;<tt>*</tt>&rsquo;,</dd>
-<dt>3.</dt><dd>does not dominate any other node, and</dd>
-<dt>4.</dt><dd>is not dominated by a node that is <tt>ID</tt> or starts with <tt>PU</tt>.</dd>
-</dl>
-
-<p align="justify">For example, tree (<a href="#ex2">2</a>) is matched:</p>
+<p align="justify">To see program behaviour, consider Program (<a href="#ex1">1</a>) of section <a href="#sec2">2</a>. The first noncomment line, repeated as (<a href="#ex2">2</a>), specifies with a Tregex pattern the initial tree structure looked for.</p>
 
 <dl><dt>(<a name="ex2">2</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;These)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;must)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;observed)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;16_a_johnson_letter))</tt><br>
+<tt>!&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^PU&sol;</tt><br>
+</dd></dl>
+
+<p align="justify">See section <a href="#sec4">4</a> for details about Tregex patterns. Here it is enough to know that (<a href="#ex2">2</a>) finds trees when there is a node such that it:</p>
+
+<ul>
+<li>is not <tt>WORD</tt></li>
+<li>does not start with &lsquo;<tt>*</tt>&rsquo;</li>
+<li>does not immediately dominate any other node (and so is a terminal node)</li>
+<li>is not immediately dominated by a node that starts with <tt>PU</tt></li>
+</ul>
+
+<p align="justify">For example, tree (<a href="#ex3">3</a>) is matched:</p>
+
+<dl><dt>(<a name="ex3">3</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(D&nbsp;These)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;&#8288;~cat_Vi&nbsp;must)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(BE;&#8288;~cat_Ve_passive_&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;observed)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Nodes of a found tree are named when &lsquo;<tt>=<name></tt>&rsquo; is appended to the expression for finding a node label. That name can be referred to by subsequent Tsurgeon actions triggered by the same match. With the first line pattern, found nodes can be referred to with &lsquo;<tt>x</tt>&rsquo;.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Tsurgeon action for the first Tregex pattern, repeated as (<a href="#ex3">3</a>), is given on the third line of the program, which follows an empty line.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Tsurgeon action for the first Tregex pattern, repeated as (<a href="#ex4">4</a>), is given on the third line of the program, which follows an empty line.</p>
 
-<dl><dt>(<a name="ex3">3</a>)</dt><dd>
-
+<dl><dt>(<a name="ex4">4</a>)</dt><dd>
 <tt>relabel&nbsp;x&nbsp;WORD</tt><br>
 </dd></dl>
 
-<p align="justify">This tree transforming action brings about a relabelling to <tt>WORD</tt> of the node referred to with &lsquo;<tt>x</tt>&rsquo; following the match with pattern (<a href="#ex1">1</a>). The combination of this initial Tregex pattern and Tsurgeon action is to transform the example matched tree (<a href="#ex2">2</a>) into (<a href="#ex4">4</a>).</p>
-
-<dl><dt>(<a name="ex4">4</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;WORD)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;WORD))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;WORD)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(BE;~cat_Ve_passive_&nbsp;WORD)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;WORD)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;16_a_johnson_letter))</tt><br>
-</dd></dl>
-
-<p align="justify">Note how (<a href="#ex4">4</a>) is reached by action (<a href="#ex3">3</a>) being applied twice, after which pattern (<a href="#ex1">1</a>) is no longer able to find a match.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Following action (<a href="#ex3">3</a>), there are then two empty lines in Program <a href="#program1">1</a>, making line 6 that follows a new pattern to find trees that contain a node name that matches the simple string pattern <tt>WORD</tt> which can thereafter be referred to with &lsquo;<tt>x</tt>&rsquo;. There is then another empty line, making line 8 that follows a Tsurgeon action to remove the node referred to with &lsquo;<tt>x</tt>&rsquo;, resulting in (<a href="#ex5">5</a>) as the overall output from running the program of Program <a href="#program1">1</a> on the input tree (<a href="#ex2">2</a>).</p>
+<p align="justify">This tree transforming action brings about a relabelling to <tt>WORD</tt> of the node referred to with &lsquo;<tt>x</tt>&rsquo; following the match with pattern (<a href="#ex2">2</a>). The combination of this initial Tregex pattern and Tsurgeon action is to transform the example matched tree (<a href="#ex3">3</a>) into (<a href="#ex5">5</a>).</p>
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;D</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NS)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MD;~cat_Vi</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;BE;~cat_Ve_passive_</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VVN;~Tn))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;16_a_johnson_letter))</tt><br>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(D&nbsp;WORD)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;WORD))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;&#8288;~cat_Vi&nbsp;WORD)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(BE;&#8288;~cat_Ve_passive_&nbsp;WORD)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;WORD)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+</dd></dl>
+
+<p align="justify">Note how (<a href="#ex5">5</a>) is reached by action (<a href="#ex4">4</a>) being applied twice, after which pattern (<a href="#ex2">2</a>) is no longer able to find a match.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Following action (<a href="#ex4">4</a>), there is then an empty line in Program (<a href="#ex1">1</a>), making line 6 that follows a new pattern to find trees that contain a node name that matches the simple string pattern <tt>WORD</tt> which can thereafter be referred to with &lsquo;<tt>x</tt>&rsquo;. There is then another empty line, making line 8 that follows a Tsurgeon action to remove the node referred to with &lsquo;<tt>x</tt>&rsquo;, resulting in (<a href="#ex6">6</a>) as the overall output from running the program of Program (<a href="#ex1">1</a>) on the input tree (<a href="#ex3">3</a>).</p>
+
+<dl><dt>(<a name="ex6">6</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;D</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NS)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MD;&#8288;~cat_Vi</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;BE;&#8288;~cat_Ve_passive_</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VVN;&#8288;~Tn))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <h3><a name="sec3.2">3.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Beware of infinite loops</h3>
 
-<p align="justify">By first changing all words to <tt>WORD</tt> and then removing all <tt>WORD</tt> instances, Program <a href="#program1">1</a> demonstrates how the match of a Tregex pattern with Tsurgeon action(s) will apply repeatedly until no further match is possible. Attractive consequences of this runtime behaviour are that trees may match Tregex patterns multiple times, and earlier Tsurgeon actions may enable subsequent matches of the active Tregex pattern for further Tsurgeon actions. But with such power comes responsibility: Extra special care is needed to avoid starting an infinite loop. For example, consider missing the initial &lsquo;<tt>!</tt>&rsquo; (negation) sign from the first pattern of Program <a href="#program1">1</a>, to give Program <a href="#program2">2</a>:</p>
+<p align="justify">By first changing all words to <tt>WORD</tt> and then removing all <tt>WORD</tt> instances, Program (<a href="#ex1">1</a>) demonstrates how the match of a Tregex pattern with Tsurgeon action(s) will apply repeatedly until no further match is possible. Attractive consequences of this runtime behaviour are that trees may match Tregex patterns multiple times, and earlier Tsurgeon actions may enable subsequent matches of the active Tregex pattern for further Tsurgeon actions. But with such power comes responsibility: Extra special care is needed to avoid starting an infinite loop. For example, consider missing the initial &lsquo;<tt>!</tt>&rsquo; (negation) sign from the first pattern of Program (<a href="#ex1">1</a>), to give Program (<a href="#ex7">7</a>):</p>
 
-<h3><a name="sec__exremoveterminalsinf__">Program 2</h3>
-<hr/>
-
-<tt>&nbsp;%&nbsp;a&nbsp;pattern-action&nbsp;combination&nbsp;that&nbsp;goes&nbsp;into&nbsp;an&nbsp;infinite&nbsp;loop</tt><br>
-<tt>&nbsp;&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^(ID$|PU)&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;WORD</tt><br>
-
-<hr/>
-
-<p align="justify">The changed pattern will find terminal nodes that are not dominated by nodes beginning with <tt>PU</tt>, and that are either <tt>WORD</tt> or character strings that begin with &lsquo;<tt>*</tt>&rsquo;. This pattern will match the same tree (<a href="#ex2">2</a>) as seen with the discussion of Program <a href="#program1">1</a>, while now it is the occurrence of <tt>*</tt> that is changed to <tt>WORD</tt>, resulting in (<a href="#ex6">6</a>).</p>
-
-<dl><dt>(<a name="ex6">6</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(D&nbsp;These)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;must)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(BE;~cat_Ve_passive_&nbsp;be)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;WORD)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;observed)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;16_a_johnson_letter))</tt><br>
+<dl><dt>(<a name="ex7">7</a>)</dt><dd>
+<tt>%&nbsp;a&nbsp;pattern-&#8288;action&nbsp;combination&nbsp;that&nbsp;goes&nbsp;into&nbsp;an&nbsp;infinite&nbsp;loop</tt><br>
+<tt>&sol;^(WORD$|&#92;*)&sol;=x&nbsp;!&lt;&nbsp;__&nbsp;!&gt;&nbsp;&sol;^PU&sol;</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;WORD</tt><br>
 </dd></dl>
 
-<p align="justify">The transformed tree of (<a href="#ex6">6</a>) continues to match the triggering pattern because of the presence of <tt>WORD</tt> resulting in the replacement of <tt>WORD</tt> for <tt>WORD</tt>, which continues to match, and so the loop of changing <tt>WORD</tt> into <tt>WORD</tt> continues with no termination prospect.</p>
+<p align="justify">The changed pattern will find a terminal node that is not dominated by a node beginning with <tt>PU</tt> and that either is <tt>WORD</tt> or begins with &lsquo;<tt>*</tt>&rsquo;. This pattern will match the same tree (<a href="#ex3">3</a>) as seen with the discussion of Program (<a href="#ex1">1</a>), while now it is the occurrence of <tt>*</tt> that is changed to <tt>WORD</tt>, resulting in (<a href="#ex8">8</a>).</p>
+
+<dl><dt>(<a name="ex8">8</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(D&nbsp;These)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;&#8288;~cat_Vi&nbsp;must)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(BE;&#8288;~cat_Ve_passive_&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;WORD)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;observed)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+</dd></dl>
+
+<p align="justify">The transformed tree of (<a href="#ex8">8</a>) continues to match the triggering pattern because of the presence of <tt>WORD</tt> resulting in the replacement of <tt>WORD</tt> for <tt>WORD</tt>, which continues to match, and so the loop of changing <tt>WORD</tt> into <tt>WORD</tt> continues with no termination prospect.</p>
 
 <br><h2><a name="sec4">4</a>&nbsp;&nbsp;&nbsp;&nbsp;Tregex patterns</h2>
 
@@ -187,7 +180,7 @@
 <li>A wildcard, specified by two underscores (&lsquo;<tt>__</tt>&rsquo;), matches any node.</li>
 <li>A simple character string, such as <tt>IP-ADV</tt>, <tt>NP</tt>, <tt>ADV</tt>, <tt>Taro</tt>, etc., matches if it is the full content of the matched node.</li>
 <li>A pattern can be built from simple character strings separated by pipes (&lsquo;<tt>|</tt>&rsquo;) with no spaces. Such a pattern will match a node if any of its components match the node's full content. For example, <tt>NP|PP</tt> will identify <tt>NP</tt> or <tt>PP</tt> nodes.</li>
-<li>A regular expression, indicated by surrounding slashes (&lsquo;<tt>&sol;</tt>&rsquo;), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a deprogramion to match nodes which possibly differ in their full content.</li>
+<li>A regular expression, indicated by surrounding slashes (&lsquo;<tt>&sol;</tt>&rsquo;), such as <tt>&sol;^NP&#92;b&sol;</tt>, can be used as a description to match nodes which possibly differ in their full content.</li>
 <li>If a simple character string or regular expression begins with &lsquo;<tt>!</tt>&rsquo;, the matching process will be complemented. That is, matches will turn into non-matches, and vice-versa. For example, <tt>!VB</tt> will match all nodes that are not <tt>VB</tt>, and <tt>!&sol;^I&sol;</tt> will match any node that does not start with <tt>I</tt>.</li>
 </ul>
 
@@ -197,7 +190,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Specified as a string, a regular expression matches a node if there is a part of the node that is matched. For example, <tt>&sol;[PCV]P&sol;</tt> matches <tt>PP</tt>, <tt>CP-THT</tt>, <tt>ADVP</tt>, etc.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The caret (&lsquo;<tt>^</tt>&rsquo;) anchors the regular expression to the beginning of a matched node. So, <tt>&sol;^[PCV]P&sol;</tt> will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>. A dollar sign (&lsquo;<tt>&dollar;</tt>&rsquo;) as the last character will anchor the regular expression to the end of a matched node. For example, <tt>&sol;PRD&dollar;&sol;</tt> will not match <tt>NP-PRD2</tt> but will match <tt>NP-PRD</tt>. Use of both the caret and dollar-sign in <tt>&sol;^[NP]P&dollar;&sol;</tt> constrains the match to only <tt>NP</tt> and <tt>PP</tt>. A regular expression can also be constrained with &lsquo;<tt>&#92;b</tt>&rsquo; to mark a word boundary. Thus, <tt>&sol;^NP&#92;b&sol;</tt> will match <tt>NP</tt> and <tt>NP-PRD</tt> but will not match <tt>NPR</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The caret (&lsquo;<tt>^</tt>&rsquo;) anchors the regular expression to the beginning of a matched node. So, <tt>&sol;^[PCV]P&sol;</tt> will not match <tt>ADVP</tt> but will match <tt>PP</tt> and <tt>CP-THT</tt>. A dollar sign (&lsquo;<tt>&dollar;</tt>&rsquo;) as the last character will anchor the regular expression to the end of a matched node. For example, <tt>&sol;PRD&dollar;&sol;</tt> will not match <tt>NP-PRD</tt> but will match <tt>NP-PRD</tt>. Use of both the caret and dollar-sign in <tt>&sol;^[NP]P&dollar;&sol;</tt> constrains the match to only <tt>NP</tt> and <tt>PP</tt>. A regular expression can also be constrained with &lsquo;<tt>&#92;b</tt>&rsquo; to mark a word boundary. Thus, <tt>&sol;^NP&#92;b&sol;</tt> will match <tt>NP</tt> and <tt>NP-PRD</tt> but will not match <tt>NPR</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;By default, regular expressions are case sensitive and so <tt>&sol;^The&dollar;&sol;</tt> and <tt>&sol;^the&dollar;&sol;</tt> match different nodes. Case insensitivity can be turned on by including the flag <tt>(?i)</tt> and then everything to the right will be case-insensitive, e.g., <tt>&sol;^(?i)the&dollar;&sol;</tt> matches: <tt>THE</tt>, <tt>The</tt>, <tt>the</tt>, <tt>tHE</tt>, etc. Having turned case insensitivity on, it is possible to turn case insensitivity off with the flag <tt>(?-i)</tt> to become case sensitive again, e.g., <tt>&sol;^t(?i)h(?-i)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>tHe</tt>. It is also possible to limit the region of case insensitivity to a given variable group (see section <a href="#sec4.5">4.5</a>), e.g., while <tt>&sol;^t(h)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>&sol;^t(?i:h)e&dollar;&sol;</tt> matches: <tt>the</tt>, <tt>tHe</tt>.</p>
 
@@ -206,17 +199,15 @@
 <p align="justify">Relationships define connections between nodes. There is a complete pairing of relationships with counterparts, allowing for flexibility when constructing complex relationships (see section <a href="#sec4.3">4.3</a>). Notable relationships can be pictured as in Figure <a href="#figure1">1</a>.</p>
 
 <center>
-
 <img src="notable.png" alt="Notable relationships between nodes" height="600">
 <br>
 <br>
-<a name="fig1"><b>Figure 1</b>: Notable relationships between nodes</a>
+<a name="figure1"><b>Figure 1</b>: Notable relationships between nodes</a>
 </center>
 
-<p align="justify">The relationships pictured in Figure <a href="#figure1">1</a> are described in (<a href="#ex7">7</a>).</p>
+<p align="justify">The relationships pictured in Figure <a href="#figure1">1</a> are described in (<a href="#ex9">9</a>).</p>
 
-<dl><dt>(<a name="ex7">7</a>)</dt><dd>
-
+<dl><dt>(<a name="ex9">9</a>)</dt><dd>
 <tt>A&nbsp;&gt;&gt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;dominated&nbsp;by&nbsp;(is&nbsp;a&nbsp;descendant&nbsp;of)&nbsp;B</tt><br>
 <tt>A&nbsp;,,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;follows&nbsp;B</tt><br>
 <tt>A&nbsp;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;follows&nbsp;B</tt><br>
@@ -229,56 +220,51 @@
 <tt>A&nbsp;$&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;not&nbsp;equal&nbsp;to&nbsp;B</tt><br>
 <tt>A&nbsp;$.&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;immediately&nbsp;precedes&nbsp;B</tt><br>
 <tt>A&nbsp;$..&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;sister&nbsp;of&nbsp;and&nbsp;precedes&nbsp;B</tt><br>
-<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&nbsp;also&nbsp;expressed&nbsp;as&nbsp;B&nbsp;&gt;i&nbsp;A</tt><br>
-<tt>A&nbsp;&lt;-i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-to-last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&nbsp;also&nbsp;expressed&nbsp;as&nbsp;A&nbsp;&gt;-i&nbsp;B</tt><br>
+<tt>A&nbsp;&lt;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&#8288;&nbsp;also&nbsp;expressed&nbsp;as&nbsp;B&nbsp;&gt;i&nbsp;A</tt><br>
+<tt>A&nbsp;&lt;-&#8288;i&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;ith-&#8288;to-&#8288;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(i&nbsp;&gt;&nbsp;0);&#8288;&nbsp;also&nbsp;expressed&nbsp;as&nbsp;A&nbsp;&gt;-&#8288;i&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;immediately&nbsp;dominates&nbsp;(is&nbsp;the&nbsp;parent&nbsp;of)&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&lt;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;(is&nbsp;an&nbsp;ancestor&nbsp;of)&nbsp;B</tt><br>
 </dd></dl>
 
 <h4><a name="sec4.2.1">4.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;The <tt>i</tt>-th child relationships</h4>
 
-<p align="justify">To specify the exact child position which a node must (or must not) occupy, use the <tt>i</tt>-th child relationships (<tt>&lt;i</tt>, <tt>&lt;-i</tt>, <tt>!&lt;i</tt>, and <tt>!&lt;-i</tt>; also expressed with <tt>&gt;i</tt>, <tt>&gt;-i</tt>, <tt>!&gt;i</tt>, and <tt>!&gt;-i</tt>). In these relationships, <tt>i</tt> represents a number indicating which child &lsquo;slot&rsquo; is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex8">8</a>) finds instances of <tt>NP</tt> where the second child is a <tt>PP</tt>.</p>
+<p align="justify">To specify the exact child position which a node must (or must not) occupy, use the <tt>i</tt>-th child relationships (<tt>&lt;i</tt>, <tt>&lt;-i</tt>, <tt>!&lt;i</tt>, and <tt>!&lt;-i</tt>; also expressed with <tt>&gt;i</tt>, <tt>&gt;-i</tt>, <tt>!&gt;i</tt>, and <tt>!&gt;-i</tt>). In these relationships, <tt>i</tt> represents a number indicating which child &lsquo;slot&rsquo; is to be considered. Positive numbers are counts from the left edge, while negative numbers are counts from the right edge. For example, (<a href="#ex10">10</a>) finds instances of <tt>NP</tt> where the second child is a <tt>PP</tt>.</p>
 
-<dl><dt>(<a name="ex8">8</a>)</dt><dd>
-
+<dl><dt>(<a name="ex10">10</a>)</dt><dd>
 <tt>NP&nbsp;&lt;2&nbsp;PP</tt><br>
 </dd></dl>
 
-<p align="justify">Pattern (<a href="#ex9">9</a>) finds instances of <tt>NP</tt> where the last child is a <tt>PP</tt>.</p>
+<p align="justify">Pattern (<a href="#ex11">11</a>) finds instances of <tt>NP</tt> where the last child is a <tt>PP</tt>.</p>
 
-<dl><dt>(<a name="ex9">9</a>)</dt><dd>
-
-<tt>NP&nbsp;&lt;-1&nbsp;PP</tt><br>
+<dl><dt>(<a name="ex11">11</a>)</dt><dd>
+<tt>NP&nbsp;&lt;-&#8288;1&nbsp;PP</tt><br>
 </dd></dl>
 
-<p align="justify">Pattern (<a href="#ex10">10</a>) finds instances of <tt>NP</tt> which have less than three children. That is, every <tt>NP</tt> which has three or more children will have <i>something</i> as its third child to make matching with (<a href="#ex10">10</a>) fail.</p>
+<p align="justify">Pattern (<a href="#ex12">12</a>) finds instances of <tt>NP</tt> which have less than three children. That is, every <tt>NP</tt> which has three or more children will have <i>something</i> as its third child to make matching with (<a href="#ex12">12</a>) fail.</p>
 
-<dl><dt>(<a name="ex10">10</a>)</dt><dd>
-
+<dl><dt>(<a name="ex12">12</a>)</dt><dd>
 <tt>NP&nbsp;!&lt;3&nbsp;__</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either two or three children you would use pattern (<a href="#ex11">11</a>):</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To select nodes with specific numbers of children you can use a positive and negative <tt>i</tt>-th child relationship. For example, to find <tt>NP</tt> nodes which dominate either two or three children you would use pattern (<a href="#ex13">13</a>):</p>
 
-<dl><dt>(<a name="ex11">11</a>)</dt><dd>
-
+<dl><dt>(<a name="ex13">13</a>)</dt><dd>
 <tt>NP&nbsp;&lt;2&nbsp;__&nbsp;!&lt;4&nbsp;__</tt><br>
 </dd></dl>
 
 <h4><a name="sec4.2.2">4.2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Other relationships</h4>
 
-<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex7">7</a>), are given in (<a href="#ex12">12</a>):</p>
+<p align="justify">Other available relationships between nodes, additional to those given above in (<a href="#ex9">9</a>), are given in (<a href="#ex14">14</a>):</p>
 
-<dl><dt>(<a name="ex12">12</a>)</dt><dd>
-
+<dl><dt>(<a name="ex14">14</a>)</dt><dd>
 <tt>A&nbsp;&lt;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
-<tt>A&nbsp;&lt;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
+<tt>A&nbsp;&lt;&lt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;A</tt><br>
 <tt>A&nbsp;&gt;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;leftmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
-<tt>A&nbsp;&gt;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
+<tt>A&nbsp;&gt;&gt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;a&nbsp;rightmost&nbsp;descendant&nbsp;of&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;1&nbsp;B)</tt><br>
 <tt>A&nbsp;&gt;,&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;first&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;1&nbsp;B)</tt><br>
-<tt>A&nbsp;&lt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-1&nbsp;B)</tt><br>
-<tt>A&nbsp;&gt;-&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-1&nbsp;B)</tt><br>
+<tt>A&nbsp;&lt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;A&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&lt;-&#8288;1&nbsp;B)</tt><br>
+<tt>A&nbsp;&gt;-&#8288;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;last&nbsp;child&nbsp;of&nbsp;B&nbsp;(synonymous&nbsp;with&nbsp;A&nbsp;&gt;-&#8288;1&nbsp;B)</tt><br>
 <tt>A&nbsp;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;A</tt><br>
 <tt>A&nbsp;&gt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;is&nbsp;the&nbsp;only&nbsp;child&nbsp;of&nbsp;B</tt><br>
 <tt>A&nbsp;&lt;&lt;:&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dominates&nbsp;B&nbsp;via&nbsp;an&nbsp;unbroken&nbsp;chain&nbsp;(length&nbsp;&gt;&nbsp;0)&nbsp;of&nbsp;unary&nbsp;local&nbsp;trees</tt><br>
@@ -287,79 +273,69 @@
 
 <h3><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Boolean expressions for building complex patterns</h3>
 
-<p align="justify">Complex Tregex patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (&lsquo;<tt>&</tt>&rsquo;). Thus, patterns (<a href="#ex13">13</a>) and (<a href="#ex14">14</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
+<p align="justify">Complex Tregex patterns can be constructed by specifying Boolean expressions of relationships that connect to a node. If no operator is placed between two relationships, they are assumed to be connected by an <i>and</i>, which can be specified for clarity with an ampersand (&lsquo;<tt>&</tt>&rsquo;). Thus, patterns (<a href="#ex15">15</a>) and (<a href="#ex16">16</a>) both match an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node <i>and</i> which dominates an <tt>IP</tt> node.</p>
 
-<dl><dt>(<a name="ex13">13</a>)</dt><dd>
-
+<dl><dt>(<a name="ex15">15</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex14">14</a>)</dt><dd>
-
+<dl><dt>(<a name="ex16">16</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;&amp;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
-<p align="justify">The second relationship &lsquo;<tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt>&rsquo; refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex15">15</a>).</p>
+<p align="justify">The second relationship &lsquo;<tt>&lt;&lt; &sol;^IP&#92;b&sol;</tt>&rsquo; refers to the first <tt>IP</tt> and not to the <tt>PP</tt>, and is equivalent to (<a href="#ex17">17</a>).</p>
 
-<dl><dt>(<a name="ex15">15</a>)</dt><dd>
-
+<dl><dt>(<a name="ex17">17</a>)</dt><dd>
 <tt>(&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;)&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
-<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex16">16</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
+<p align="justify">The placement of parenthesis can be used to group a node with its relationship(s), so that (<a href="#ex18">18</a>) will match an <tt>IP</tt> which immediately dominates a <tt>PP</tt> which in turn dominates some <tt>IP</tt>.</p>
 
-<dl><dt>(<a name="ex16">16</a>)</dt><dd>
-
+<dl><dt>(<a name="ex18">18</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;)</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (&lsquo;<tt>|</tt>&rsquo;) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex17">17</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If a pipe (&lsquo;<tt>|</tt>&rsquo;) is placed between two relationships, only one of the relationships must be satisfied. Pattern (<a href="#ex19">19</a>) will find an <tt>IP</tt> node which immediately dominates a <tt>PP</tt> node or dominates an <tt>IP</tt> node:</p>
 
-<dl><dt>(<a name="ex17">17</a>)</dt><dd>
-
+<dl><dt>(<a name="ex19">19</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;|&nbsp;&lt;&lt;&nbsp;&sol;^IP&#92;b&sol;</tt><br>
 </dd></dl>
 
-<p align="justify">The (possibly implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex18">18</a>) will find an <tt>IP</tt> node that has <tt>VB</tt> and <tt>VB2</tt> children or that has <tt>NP-PRD</tt> and <tt>AX</tt> children.</p>
+<p align="justify">The (possibly implicit) <i>and</i> binds tighter than the <i>or</i>. So pattern (<a href="#ex20">20</a>) will find an <tt>IP</tt> node that has <tt>VB</tt> and <tt>VB2</tt> children or that has <tt>NP-PRD</tt> and <tt>AX</tt> children.</p>
 
-<dl><dt>(<a name="ex18">18</a>)</dt><dd>
-
-<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;VB&nbsp;&lt;&nbsp;VB2&nbsp;|&nbsp;&lt;&nbsp;NP-PRD&nbsp;&lt;&nbsp;AX</tt><br>
+<dl><dt>(<a name="ex20">20</a>)</dt><dd>
+<tt>&sol;^IP&#92;b&sol;&nbsp;&lt;&nbsp;VB&nbsp;&lt;&nbsp;VB2&nbsp;|&nbsp;&lt;&nbsp;NP-&#8288;PRD&nbsp;&lt;&nbsp;AX</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (&lsquo;<tt>[]</tt>&rsquo;) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex19">19</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that precedes a subject sister or follows an <tt>ADVP</tt> sister.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To create more complex expressions, square brackets (&lsquo;<tt>[]</tt>&rsquo;) can be used to group relationships to form a complex relationship. Thus, pattern (<a href="#ex21">21</a>) finds an <tt>IP</tt> that has a <tt>VB</tt> or <tt>NP-PRD</tt> child, and that precedes a subject sister or follows an <tt>ADVP</tt> sister.</p>
 
-<dl><dt>(<a name="ex19">19</a>)</dt><dd>
-
-<tt>&sol;^IP&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;VB&nbsp;|&nbsp;&lt;&nbsp;NP-PRD&nbsp;]&nbsp;[&nbsp;$..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;$,,&nbsp;ADVP&nbsp;]</tt><br>
+<dl><dt>(<a name="ex21">21</a>)</dt><dd>
+<tt>&sol;^IP&#92;b&sol;&nbsp;[&nbsp;&lt;&nbsp;VB&nbsp;|&nbsp;&lt;&nbsp;NP-&#8288;PRD&nbsp;]&nbsp;[&nbsp;$..&nbsp;&sol;SBJ&sol;&nbsp;|&nbsp;$,,&nbsp;ADVP&nbsp;]</tt><br>
 </dd></dl>
 
 <p align="justify">Because a square bracketed expression itself acts as a complex relationship connecting to a node, an open square bracket must immediately precede a relationship or another open square bracket that itself starts a complex relationship.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Any relationship, including a square bracketed one, can be negated by immediately preceding it with an exclamation mark (&lsquo;<tt>!</tt>&rsquo;). Thus, pattern (<a href="#ex20">20</a>) will find <tt>IP</tt> nodes that do not simultaneously have <tt>NP</tt> and <tt>PP</tt> children.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Any relationship, including a square bracketed one, can be negated by immediately preceding it with an exclamation mark (&lsquo;<tt>!</tt>&rsquo;). Thus, pattern (<a href="#ex22">22</a>) will find <tt>IP</tt> nodes that do not simultaneously have <tt>NP</tt> and <tt>PP</tt> children.</p>
 
-<dl><dt>(<a name="ex20">20</a>)</dt><dd>
-
+<dl><dt>(<a name="ex22">22</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;&nbsp;!&nbsp;[&nbsp;&lt;&nbsp;&sol;^NP&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^PP&#92;b&sol;&nbsp;]</tt><br>
 </dd></dl>
 
 <h3><a name="sec4.4">4.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Labeled nodes and back links</h3>
 
-<p align="justify">As seen with the deprogramion in section <a href="#sec3">3</a> of Program <a href="#program1">1</a>, Tregex patterns allow for a matched node to be given a unique label with an equal sign (&lsquo;<tt>=</tt>&rsquo;) and then referred to by that label when Tsurgeon actions are triggered. It is also possible to use labels to refer to other nodes from within the Tregex pattern. Such a &lsquo;back link&rsquo; is accomplished when the node name only consists of an equal sign and a label, with the label serving to refer to the node that has been assigned to that name elsewhere in the pattern. It is only possible to express patterns in which the labeled node comes prior in the connected structure of the pattern that leads to a back link.</p>
+<p align="justify">With Program (<a href="#ex1">1</a>) of section <a href="#sec3">3</a>, we can seen how Tregex patterns allow for a matched node to be given a unique label with an equal sign (&lsquo;<tt>=</tt>&rsquo;) and then referred to by that label when Tsurgeon actions are triggered. It is also possible to use labels to refer to other nodes from within the Tregex pattern. Such a &lsquo;back link&rsquo; is accomplished when the node name only consists of an equal sign and a label, with the label serving to refer to the node that has been assigned to that name elsewhere in the pattern. It is only possible to express patterns in which the labeled node comes prior in the connected structure of the pattern that leads to a back link.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we wanted to find a clause node, <tt>&sol;^IP&#92;b&sol;</tt>, that dominates a clausal complement, <tt>&sol;THT&sol;</tt>, and a <tt>&sol;^PP&#92;b&sol;</tt>, such that the <tt>&sol;THT&sol;</tt> precedes the <tt>&sol;^PP&#92;b&sol;</tt>. This requires stating relationships between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;THT&sol;</tt>, between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>, and between the <tt>&sol;THT&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>. With access to labels, the query can be written as (<a href="#ex21">21</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Having back links leads to the creation of patterns with cycles in the link structure. For example, imagine we wanted to find a clause node, <tt>&sol;^IP&#92;b&sol;</tt>, that dominates a clausal complement, <tt>&sol;THT&sol;</tt>, and a <tt>&sol;^PP&#92;b&sol;</tt>, such that the <tt>&sol;THT&sol;</tt> precedes the <tt>&sol;^PP&#92;b&sol;</tt>. This requires stating relationships between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;THT&sol;</tt>, between the <tt>&sol;^IP&#92;b&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>, and between the <tt>&sol;THT&sol;</tt> and the <tt>&sol;^PP&#92;b&sol;</tt>. With access to labels, the query can be written as (<a href="#ex23">23</a>).</p>
 
-<dl><dt>(<a name="ex21">21</a>)</dt><dd>
-
+<dl><dt>(<a name="ex23">23</a>)</dt><dd>
 <tt>&sol;^IP&#92;b&sol;=foo&nbsp;&lt;&lt;&nbsp;(&sol;THT&sol;&nbsp;..&nbsp;(&sol;^PP&#92;b&sol;&nbsp;&gt;&gt;&nbsp;=foo))</tt><br>
 </dd></dl>
 
-<p align="justify">The <tt>&sol;^IP/=foo</tt> matches any tree node whose name begins with <tt>IP</tt>. Furthermore, when a matching tree node is found, it is given the label <tt>foo</tt>. Later, &lsquo;<tt>&sol;^PP&#92;b&sol; &gt;&gt; =foo</tt>&rsquo; indicates that the <tt>PP</tt> must be dominated by that very same node, not just any <tt>IP</tt>.</p>
+<p align="justify">The <tt>&sol;^IP/=foo</tt> matches any tree node whose name begins with <tt>IP</tt> followed by a word boundary. Furthermore, when a matching tree node is found, it is given the label <tt>foo</tt>. Later, &lsquo;<tt>&sol;^PP&#92;b&sol; &gt;&gt; =foo</tt>&rsquo; indicates that the <tt>PP</tt> must be dominated by that very same node, not just any <tt>IP</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (&lsquo;<tt>&lt;&lt; (&sol;OB1&sol; < &sol;&#92;*T&#92;*&sol;)</tt>&rsquo;). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario with a back link, resulting in (<a href="#ex22">22</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of how back links are useful, consider the task of finding relative clauses with object traces. An object trace might be embedded arbitrarily deeply inside its relative clause, which is captured with the dominates relation (&lsquo;<tt>&lt;&lt; (&sol;OB1&sol; < &sol;&#92;*T&#92;*&sol;)</tt>&rsquo;). However, without further qualification, this is too liberal, as it will also allow the return of a relative clause that itself has no object trace but contains a relative clause with an object trace. We can add the extra qualification to prohibit the unwelcome scenario with a back link, resulting in (<a href="#ex24">24</a>).</p>
 
-<dl><dt>(<a name="ex22">22</a>)</dt><dd>
-
+<dl><dt>(<a name="ex24">24</a>)</dt><dd>
 <tt>&sol;REL&sol;=p&nbsp;&lt;&lt;&nbsp;(&sol;OB1&sol;&nbsp;&lt;&nbsp;&sol;&#92;*T&#92;*&sol;&nbsp;!&gt;&gt;&nbsp;(&sol;REL&sol;&nbsp;&gt;&gt;&nbsp;=p))</tt><br>
 </dd></dl>
 
@@ -367,39 +343,36 @@
 
 <h3><a name="sec4.5">4.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Variable groups</h3>
 
-<p align="justify">If you write a node deprogramion using a regular expression, you can assign its matching groups, established with round brackets internal to the regular expression, to variable names. The syntax is:</p>
+<p align="justify">If you write a node description using a regular expression, you can assign its matching groups, established with round brackets internal to the regular expression, to variable names. The syntax is:</p>
 
-<dl><dt>(<a name="ex23">23</a>)</dt><dd>
-
-<tt>&sol;regular-expression&sol;#group-number&#92;%variable-name</tt><br>
+<dl><dt>(<a name="ex25">25</a>)</dt><dd>
+<tt>&sol;regular-&#8288;expression&sol;#group-&#8288;number&#92;%variable-&#8288;name</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If more than one node has a group assigned to the same variable name, then matching will only occur when all such groups capture the same string. For example, pattern (<a href="#ex24">24</a>) will find identical adjacent terminal nodes (reduplicated words).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If more than one node has a group assigned to the same variable name, then matching will only occur when all such groups capture the same string. For example, pattern (<a href="#ex26">26</a>) will find identical adjacent terminal nodes (reduplicated words).</p>
 
-<dl><dt>(<a name="ex24">24</a>)</dt><dd>
-
+<dl><dt>(<a name="ex26">26</a>)</dt><dd>
 <tt>&sol;^(.+)$&sol;#1&#92;%word&nbsp;!&lt;&nbsp;__&nbsp;.&nbsp;(&sol;^(.+)$&sol;#1&#92;%word&nbsp;!&lt;&nbsp;__)</tt><br>
 </dd></dl>
 
-<p align="justify">Nodes matched with (<a href="#ex24">24</a>) have to be terminal because of the &lsquo;<tt>!&lt; __</tt>&rsquo; conditions that state how there can be no children, and adjacent because of the dot (&lsquo;<tt>.</tt>&rsquo;). With &lsquo;<tt>#1</tt>&rsquo;, <tt>word</tt> takes its value to be the first group in the regular expression, which is the word that needs to have occurred twice in a row.</p>
+<p align="justify">Nodes matched with (<a href="#ex26">26</a>) have to be terminal because of the &lsquo;<tt>!&lt; __</tt>&rsquo; conditions that state how there can be no children, and adjacent because of the dot (&lsquo;<tt>.</tt>&rsquo;). With &lsquo;<tt>#1</tt>&rsquo;, <tt>word</tt> takes its value to be the first group in the regular expression, which is the word that needs to have occurred twice in a row.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A major use of naming variable groups is to carry over named content into the <tt>relabel</tt> Tsurgeon action that is used to relabel node content (see section <a href="#sec5.4">5.4</a>).</p>
 
 <h3><a name="sec4.6">4.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Segmented patterns</h3>
 
-<p align="justify">Tregex patterns can be split into multiple segments, which are separated by colons (&lsquo;<tt>:</tt>&rsquo;). Segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex25">25</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
+<p align="justify">Tregex patterns can be split into multiple segments, which are separated by colons (&lsquo;<tt>:</tt>&rsquo;). Segments following the first can begin with a reference to a labeled node that is defined in a previous segment. Thus, pattern (<a href="#ex27">27</a>) will find trees where an <tt>NP</tt> immediately dominates a <tt>CP-THT</tt>.</p>
 
-<dl><dt>(<a name="ex25">25</a>)</dt><dd>
-
-<tt>NP=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;CP-THT</tt><br>
+<dl><dt>(<a name="ex27">27</a>)</dt><dd>
+<tt>NP=x&nbsp;:&nbsp;=x&nbsp;&lt;&nbsp;CP-&#8288;THT</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex26">26</a>) is matched by pattern (<a href="#ex27">27</a>) without segments as well as pattern (<a href="#ex28">28</a>) with segments.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With labeling of complex nodes, segments can entirely replace patterns that otherwise require embedded relationships. For example, tree fragment (<a href="#ex28">28</a>) is matched by pattern (<a href="#ex29">29</a>) without segments as well as pattern (<a href="#ex30">30</a>) with segments.</p>
 
-<dl><dt>(<a name="ex26">26</a>)</dt><dd>
+<dl><dt>(<a name="ex28">28</a>)</dt><dd>
 <svg xmlns="http://www.w3.org/2000/svg" width="121" height="275" viewBox="-1.21 -1.375 145.2 330.0">
 <text x="60.5" y="45" text-anchor="middle">PP</text>
-<rect x="45.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: SandyBrown; stroke-width: 10;"/>
+<rect x="45.5" y="80" width="30" height="30" rx="10" ry="10" style="fill: none; stroke: palegreen; stroke-width: 10;"/>
 <text x="60.5" y="100" text-anchor="middle">NP</text>
 <text x="27.5" y="155" text-anchor="middle">N</text>
 <text x="27.5" y="210" text-anchor="middle">idea</text>
@@ -415,283 +388,269 @@
 </svg>
 </dd></dl>
 
-<dl><dt>(<a name="ex27">27</a>)</dt><dd>
-
-<tt>NP&nbsp;&lt;&nbsp;(N&nbsp;&lt;&nbsp;idea)&nbsp;&lt;&nbsp;(CP-THT&nbsp;&lt;&nbsp;(C&nbsp;&lt;&nbsp;that))&nbsp;&gt;&nbsp;PP</tt><br>
+<dl><dt>(<a name="ex29">29</a>)</dt><dd>
+<tt>NP&nbsp;&lt;&nbsp;(N&nbsp;&lt;&nbsp;idea)&nbsp;&lt;&nbsp;(CP-&#8288;THT&nbsp;&lt;&nbsp;(C&nbsp;&lt;&nbsp;that))&nbsp;&gt;&nbsp;PP</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex28">28</a>)</dt><dd>
-
-<tt>NP=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;N=n)&nbsp;:&nbsp;(=n&nbsp;&lt;&nbsp;idea)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;CP-THT=y)&nbsp;:&nbsp;(=y&nbsp;&lt;&nbsp;C=c)&nbsp;:</tt><br>
+<dl><dt>(<a name="ex30">30</a>)</dt><dd>
+<tt>NP=x&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;N=n)&nbsp;:&nbsp;(=n&nbsp;&lt;&nbsp;idea)&nbsp;:&nbsp;(=x&nbsp;&lt;&nbsp;CP-&#8288;THT=y)&nbsp;:&nbsp;(=y&nbsp;&lt;&nbsp;C=c)&nbsp;:</tt><br>
 <tt>(=c&nbsp;&lt;&nbsp;that)&nbsp;:&nbsp;(=x&nbsp;&gt;&nbsp;PP)</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Segments can make patterns easier to read and debug. Segments can also assist with pattern reuse. Patterns can frequently be mostly the same while differing in only one region. For such cases, the region that changes can be placed in its own segment, so that full patterns are built when a unique segment is appended to a common base, or vice versa.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Segments need not be related. Thus pattern (<a href="#ex29">29</a>) finds trees with an <tt>IP-ADV</tt> and <tt>IP-SUB</tt>, without other requirements for how these nodes relate to one another.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Segments need not be related. Thus pattern (<a href="#ex31">31</a>) finds trees with an <tt>IP-ADV</tt> and <tt>IP-SUB</tt>, without other requirements for how these nodes relate to one another.</p>
 
-<dl><dt>(<a name="ex29">29</a>)</dt><dd>
-
-<tt>IP-ADV&nbsp;:&nbsp;IP-SUB</tt><br>
+<dl><dt>(<a name="ex31">31</a>)</dt><dd>
+<tt>IP-&#8288;ADV&nbsp;:&nbsp;IP-&#8288;SUB</tt><br>
 </dd></dl>
 
-<p align="justify">Note that the colon has a low precedence, so that (<a href="#ex30">30</a>) matches trees with an <tt>IP-SUB</tt> that does not immediately dominate a <tt>VBP</tt> and an <tt>IP-ADV</tt> that does immediately dominate a <tt>VBP</tt>.</p>
+<p align="justify">Note that the colon has a low precedence, so that (<a href="#ex32">32</a>) matches trees with an <tt>IP-SUB</tt> that does not immediately dominate a <tt>VBP</tt> and an <tt>IP-ADV</tt> that does immediately dominate a <tt>VBP</tt>.</p>
 
-<dl><dt>(<a name="ex30">30</a>)</dt><dd>
-
-<tt>IP-ADV&nbsp;:&nbsp;(IP-SUB&nbsp;!&lt;&nbsp;VBP)&nbsp;&lt;&nbsp;VBP</tt><br>
+<dl><dt>(<a name="ex32">32</a>)</dt><dd>
+<tt>IP-&#8288;ADV&nbsp;:&nbsp;(IP-&#8288;SUB&nbsp;!&lt;&nbsp;VBP)&nbsp;&lt;&nbsp;VBP</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec5">5</a>&nbsp;&nbsp;&nbsp;&nbsp;Tsurgeon actions</h2>
 
-<p align="justify">With the previous section describing Tregex patterns, the current section turns to considering the range of Tsurgeon actions that Tregex patterns can invoke. Legal Tsurgeon actions are as follows:</p>
+<p align="justify">With the previous section describing Tregex patterns, the current section turns to considering the range of Tsurgeon actions that Tregex patterns can invoke. Legal Tsurgeon actions are as listed in (<a href="#ex33):">33):</a></p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>delete</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>prune</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>excise</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>relabel</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>move</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>replace</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>insert</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>createSubtree</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoin</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoinH</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoinF</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>coindex</tt><br>
+<dl><dt>(<a name="ex33">33</a>)</dt><dd>
+<tt>delete</tt><br>
+<tt>prune</tt><br>
+<tt>excise</tt><br>
+<tt>relabel</tt><br>
+<tt>move</tt><br>
+<tt>replace</tt><br>
+<tt>insert</tt><br>
+<tt>createSubtree</tt><br>
+<tt>adjoin</tt><br>
+<tt>adjoinH</tt><br>
+<tt>adjoinF</tt><br>
+<tt>coindex</tt><br>
+</dd></dl>
 
-<p align="justify">We will look at these Tsurgeon actions in turn, with a deprogramion and example(s) for each.</p>
+<p align="justify">We will look at these Tsurgeon actions in turn, with a program and example(s) for each.</p>
 
 <h3><a name="sec5.1">5.1</a>&nbsp;&nbsp;&nbsp;&nbsp;delete</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>delete&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+<p align="justify">Action (<a href="#ex34">34</a>), for each <tt>&lt;name_i&gt;</tt>, deletes the node it names and everything below it.</p>
 
-<p align="justify">for each <tt>&lt;name_i&gt;</tt>, deletes the node it names and everything below it.</p>
+<dl><dt>(<a name="ex34">34</a>)</dt><dd>
+<tt>delete&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program 3 consists of a pattern to find nodes whose label starts with &lsquo;<tt>*</tt>&rsquo; and that do not dominate any other node. This pattern is paired with an action that deletes any matched node.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex35">35</a>) consists of a pattern to find nodes whose label starts with &lsquo;<tt>*</tt>&rsquo; and that do not dominate any other node. This pattern is paired with an action that deletes any matched node.</p>
 
-<h3><a name="sec__exdelete__">Program 3</h3>
-<hr/>
-
-<tt>&nbsp;&sol;^&#92;*&sol;=x&nbsp;!&lt;&nbsp;__</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;delete&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex35">35</a>)</dt><dd>
+<tt>&sol;^&#92;*&sol;=x&nbsp;!&lt;&nbsp;__</tt><br>
+<br>
+<tt>delete&nbsp;x</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex31">31</a>)</dt><dd>
-<tt>(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;observed))</tt><br>
+<dl><dt>(<a name="ex36">36</a>)</dt><dd>
+<tt>(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;observed))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex32">32</a>)</dt><dd>
-<tt>(IP-PPL-CAT&nbsp;NP-LGS</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;observed))</tt><br>
+<dl><dt>(<a name="ex37">37</a>)</dt><dd>
+<tt>(IP-&#8288;PPL-&#8288;CAT&nbsp;NP-&#8288;LGS</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;observed))</tt><br>
 </dd></dl>
 
 <p align="justify">Note that only the matched node, <tt>*</tt>, is removed, to leave <tt>NP-LGS</tt> with no child.</p>
 
 <h3><a name="sec5.2">5.2</a>&nbsp;&nbsp;&nbsp;&nbsp;prune</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>prune&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+<p align="justify">Action (<a href="#ex39">39</a>), for each <tt>&lt;name_i&gt;</tt>, prunes out the named node.</p>
 
-<p align="justify">for each <tt>&lt;name_i&gt;</tt>, prunes out the named node. Pruning differs from deletion in that if pruning a node causes its parent to have no children, then the parent is in turn pruned too.</p>
+<dl><dt>(<a name="ex38">38</a>)</dt><dd>
+<tt>prune&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program4">4</a> has the same pattern as seen with Program <a href="#program3">3</a>, but differs in terms of the action being <tt>prune</tt>.</p>
+<p align="justify">Pruning differs from deletion in that if pruning a node causes its parent to have no children, then the parent is in turn pruned too.</p>
 
-<h3><a name="sec__exprune__">Program 4</h3>
-<hr/>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex39">39</a>) has the same pattern as seen with Program (<a href="#ex35">35</a>), but differs in terms of the action being <tt>prune</tt>.</p>
 
-<tt>&nbsp;&sol;^&#92;*&sol;=x&nbsp;!&lt;&nbsp;__</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;prune&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex39">39</a>)</dt><dd>
+<tt>&sol;^&#92;*&sol;=x&nbsp;!&lt;&nbsp;__</tt><br>
+<br>
+<tt>prune&nbsp;x</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex33">33</a>)</dt><dd>
-<tt>(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;~Tn&nbsp;observed))</tt><br>
+<dl><dt>(<a name="ex40">40</a>)</dt><dd>
+<tt>(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN;&#8288;~Tn&nbsp;observed))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex34">34</a>)</dt><dd>
-<tt>(IP-PPL-CAT&nbsp;(VVN;~Tn&nbsp;observed))</tt><br>
+<dl><dt>(<a name="ex41">41</a>)</dt><dd>
+<tt>(IP-&#8288;PPL-&#8288;CAT&nbsp;(VVN;&#8288;~Tn&nbsp;observed))</tt><br>
 </dd></dl>
 
 <p align="justify">The <tt>*</tt> node is removed, and since this results in the <tt>NP-LGS</tt> above it having no terminal children, the <tt>NP-LGS</tt> node is deleted as well.</p>
 
 <h3><a name="sec5.3">5.3</a>&nbsp;&nbsp;&nbsp;&nbsp;excise</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>excise&nbsp;&lt;name1&gt;&nbsp;&lt;name2&gt;</tt><br>
+<p align="justify">For action (42), the <tt>&lt;name1&gt;</tt> node should either dominate or be the same as the <tt>&lt;name2&gt;</tt> node. This excises out everything from <tt>&lt;name1&gt;</tt> to <tt>&lt;name2&gt;</tt>. All the children of <tt>&lt;name2&gt;</tt> go into the parent of <tt>&lt;name1&gt;</tt>, where <tt>&lt;name1&gt;</tt> was.</p>
 
-<p align="justify">The <tt>&lt;name1&gt;</tt> node should either dominate or be the same as the <tt>&lt;name2&gt;</tt> node. This excises out everything from <tt>&lt;name1&gt;</tt> to <tt>&lt;name2&gt;</tt>. All the children of <tt>&lt;name2&gt;</tt> go into the parent of <tt>&lt;name1&gt;</tt>, where <tt>&lt;name1&gt;</tt> was.</p>
+<dl><dt>(<a name="ex42">42</a>)</dt><dd>
+<tt>excise&nbsp;&lt;name1&gt;&nbsp;&lt;name2&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program5">5</a> begins with the wild card pattern to identify a node that will dominate another node that is picked out with the <tt>x</tt> name and that will itself dominate at least one node that is dominating another node. The pattern is paired with an <tt>excise</tt> action that will remove nodes that can be named <tt>x</tt> from the tree.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex43">43</a>) begins with the wild card pattern to identify a node that will dominate another node that is picked out with the <tt>x</tt> name and that will itself dominate at least one node that is dominating another node. The pattern is paired with an <tt>excise</tt> action that will remove nodes that can be named <tt>x</tt> from the tree.</p>
 
-<h3><a name="sec__exexcise__">Program 5</h3>
-<hr/>
-
-<tt>&nbsp;%&nbsp;remove&nbsp;non&nbsp;terminal&nbsp;nodes,&nbsp;but&nbsp;not&nbsp;the&nbsp;root&nbsp;node</tt><br>
-<tt>&nbsp;__&nbsp;&lt;&nbsp;(__=x&nbsp;&lt;&nbsp;(__&nbsp;&lt;&nbsp;__))</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;excise&nbsp;x&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex43">43</a>)</dt><dd>
+<tt>%&nbsp;remove&nbsp;non&nbsp;terminal&nbsp;nodes,&nbsp;but&nbsp;not&nbsp;the&nbsp;root&nbsp;node</tt><br>
+<tt>__&nbsp;&lt;&nbsp;(__=x&nbsp;&lt;&nbsp;(__&nbsp;&lt;&nbsp;__))</tt><br>
+<br>
+<tt>excise&nbsp;x&nbsp;x</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex35">35</a>)</dt><dd>
-<tt>(NP-OB1&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(ADJP&nbsp;(ADJ&nbsp;personal))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))))))</tt><br>
+<dl><dt>(<a name="ex44">44</a>)</dt><dd>
+<tt>(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(ADJP&nbsp;(ADJ&nbsp;personal))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))))))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex36">36</a>)</dt><dd>
-<tt>(NP-OB1&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;of)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;of)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJ&nbsp;personal)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))</tt><br>
+<dl><dt>(<a name="ex45">45</a>)</dt><dd>
+<tt>(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADJ&nbsp;personal)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))</tt><br>
 </dd></dl>
 
 <p align="justify">This example has illustrated returning a flattened version of the input tree, with all non-root non-preterminal and non-terminal level nodes removed.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With Program <a href="#program5">5</a>, an action to excise a single node was repeatedly applied. Program <a href="#program6">6</a> illustrates excision of multiple nodes, with all inbetween material also being removed.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With Program (<a href="#ex43">43</a>), an action to excise a single node was repeatedly applied. Program (<a href="#ex46">46</a>) illustrates excision of multiple nodes, with all inbetween material also being removed.</p>
 
-<h3><a name="sec__exciseconjp__">Program 6</h3>
-<hr/>
+<dl><dt>(<a name="ex46">46</a>)</dt><dd>
+<tt>PP=x&nbsp;&lt;&nbsp;NP=y</tt><br>
+<br>
+<tt>excise&nbsp;x&nbsp;y</tt><br>
+</dd></dl>
 
-<tt>&nbsp;PP=x&nbsp;&lt;&nbsp;NP=y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;excise&nbsp;x&nbsp;y</tt><br>
+<p align="justify">With (<a href="#ex44">44</a>) as input, there is output:</p>
 
-<hr/>
-
-<p align="justify">With (<a href="#ex35">35</a>) as input, there is output:</p>
-
-<dl><dt>(<a name="ex37">37</a>)</dt><dd>
-<tt>(NP-OB1&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;personal))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))</tt><br>
+<dl><dt>(<a name="ex47">47</a>)</dt><dd>
+<tt>(NP&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;promotion)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;protection)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;personal))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;information))</tt><br>
 </dd></dl>
 
 <p align="justify">From the input, there is repeated elimination of both a <tt>PP</tt> node and its dominated <tt>NP</tt> node, as well as all inbetween material, namely, the instances of:</p>
 
-<dl><dt>(<a name="ex38">38</a>)</dt><dd>
-<tt>(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;NP)</tt><br>
+<dl><dt>(<a name="ex48">48</a>)</dt><dd>
+<tt>(PP&nbsp;(P-&#8288;ROLE&nbsp;of)&nbsp;NP)</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.4">5.4</a>&nbsp;&nbsp;&nbsp;&nbsp;relabel</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>relabel&nbsp;&lt;name&gt;&nbsp;&lt;new-label&gt;</tt><br>
+<p align="justify">Action (49) relabels the node <tt>&lt;name&gt;</tt> to have a new label <tt>&lt;new-label&gt;</tt>.</p>
 
-<p align="justify">relabels the node <tt>&lt;name&gt;</tt> to have a new label <tt>&lt;new-label&gt;</tt>. There are three possible forms for a relabelling instruction to take. The first form, illustrated with (<a href="#ex39">39</a>), is used for changing a node label (namely, <tt>nodeX</tt>) to an alphanumeric string (namely, <tt>NP</tt>).</p>
+<dl><dt>(<a name="ex49">49</a>)</dt><dd>
+<tt>relabel&nbsp;&lt;name&gt;&nbsp;&lt;new-&#8288;label&gt;</tt><br>
+</dd></dl>
 
-<dl><dt>(<a name="ex39">39</a>)</dt><dd>
+<p align="justify">There are three possible forms for a relabelling instruction to take. The first form, illustrated with (<a href="#ex50">50</a>), is used for changing a node label (namely, <tt>nodeX</tt>) to an alphanumeric string (namely, <tt>NP</tt>).</p>
 
+<dl><dt>(<a name="ex50">50</a>)</dt><dd>
 <tt>relabel&nbsp;nodeX&nbsp;NP</tt><br>
 </dd></dl>
 
-<p align="justify">The second form, illustrated with (<a href="#ex40">40</a>), is used for relabeling a node to something that isn't a valid identifier without quoting.</p>
+<p align="justify">The second form, illustrated with (<a href="#ex51">51</a>), is used for relabeling a node to something that isn't a valid identifier without quoting.</p>
 
-<dl><dt>(<a name="ex40">40</a>)</dt><dd>
-
+<dl><dt>(<a name="ex51">51</a>)</dt><dd>
 <tt>relabel&nbsp;nodeX&nbsp;&sol;''&sol;</tt><br>
 </dd></dl>
 
-<p align="justify">The third form, illustrated with (<a href="#ex41">41</a>), is used for regular expression based relabeling.</p>
+<p align="justify">The third form, illustrated with (<a href="#ex52">52</a>), is used for regular expression based relabeling.</p>
 
-<dl><dt>(<a name="ex41">41</a>)</dt><dd>
-
+<dl><dt>(<a name="ex52">52</a>)</dt><dd>
 <tt>relabel&nbsp;nodeX&nbsp;&sol;^VB(.*)$&sol;verb&#92;&sol;$1&sol;</tt><br>
 </dd></dl>
 
 <p align="justify">The third form lets you make a new label that is an arbitrary String function of the original label and additional characters that you supply. In this last case, all matches of the regular expression against the node label are replaced with the replacement String. This has the semantics of Java/Perl's <tt>replaceAll</tt>: you may use capturing groups and put them in replacements with <tt>&dollar;n</tt>. For example, if the pattern is <tt>/foo/bar/</tt> and the node matched is <tt>foofoo</tt>, the <tt>replaceAll</tt> semantics results in <tt>barbar</tt>. If the pattern is <tt>/^foo(.*)&dollar;/bar&dollar;1/</tt> and the node matched is <tt>foofoo</tt>, relabel will result in <tt>barfoo</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When using the regex replacement method, the form of the regex is limited to literal character strings, the wild card character (&lsquo;<tt>.</tt>&rsquo;), the Kleene star (&lsquo;<tt>*</tt>&rsquo;), the string initial marker (&lsquo;<tt>^</tt>&rsquo;), and the string final marker (&lsquo;<tt>&dollar;</tt>&rsquo;). In order to utilise a more complex regex for use as replacement content, you can use the sequence <tt>&#92;%&lcub;var&rcub;</tt> in the replacement string to supply the content of a matched variable group (see section <a href="#sec4.5">4.5</a>). You can also use the sequence <tt>=&lcub;node&rcub;</tt> in the replacement string to use captured nodes in the replacement string (see Program <a href="#program8">8</a> below). To get a &lsquo;<tt>%</tt>&rsquo; or an &lsquo;<tt>=</tt>&rsquo; or a slash in the replacement, escaping with &lsquo;<tt>&#92;</tt>&rsquo; is necessary, so: &lsquo;<tt>&#92;%</tt>&rsquo;, &lsquo;<tt>&#92;=</tt>&rsquo;, &lsquo;<tt>&#92;/</tt>&rsquo;, and &lsquo;<tt>&#92;</tt>&rsquo;.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When using the regex replacement method, the form of the regex is limited to literal character strings, the wild card character (&lsquo;<tt>.</tt>&rsquo;), the Kleene star (&lsquo;<tt>*</tt>&rsquo;), the string initial marker (&lsquo;<tt>^</tt>&rsquo;), and the string final marker (&lsquo;<tt>&dollar;</tt>&rsquo;). In order to utilise a more complex regex for use as replacement content, you can use the sequence <tt>&#92;%&lcub;var&rcub;</tt> in the replacement string to supply the content of a matched variable group (see section <a href="#sec4.5">4.5</a>). You can also use the sequence <tt>=&lcub;node&rcub;</tt> in the replacement string to use captured nodes in the replacement string (see Program (<a href="#ex56">56</a>) below). To get a &lsquo;<tt>%</tt>&rsquo; or an &lsquo;<tt>=</tt>&rsquo; or a slash in the replacement, escaping with &lsquo;<tt>&#92;</tt>&rsquo; is necessary, so: &lsquo;<tt>&#92;%</tt>&rsquo;, &lsquo;<tt>&#92;=</tt>&rsquo;, &lsquo;<tt>&#92;/</tt>&rsquo;, and &lsquo;<tt>&#92;</tt>&rsquo;.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program <a href="#program7">7</a> will look for a non-terminal node that contains a non-empty substring that is either <tt>-TPC</tt> or <tt>-EPD</tt> and that should be preceded by a non-empty substring whose content is captured by the variable group name <tt>start</tt> and that is followed by a possibly empty substring whose content is captured by the variable group name <tt>end</tt>. There follows an action that changes the label of the found node so that only the content of <tt>start</tt> and <tt>end</tt> remain. Note that &lsquo;<tt>^.*&dollar;</tt>&rsquo; (match all string content) of the <tt>relabel</tt> action is necessary to make sure the regex pattern only matches and replaces once on the entire node label.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program (<a href="#ex53">53</a>) will look for a non-terminal node that contains a non-empty substring that is either <tt>-TPC</tt> or <tt>-EPD</tt> and that should be preceded by a non-empty substring whose content is captured by the variable group name <tt>start</tt> and that is followed by a possibly empty substring whose content is captured by the variable group name <tt>end</tt>. There follows an action that changes the label of the found node so that only the content of <tt>start</tt> and <tt>end</tt> remain. Note that &lsquo;<tt>^.*&dollar;</tt>&rsquo; (match all string content) of the <tt>relabel</tt> action is necessary to make sure the regex pattern only matches and replaces once on the entire node label.</p>
 
-<h3><a name="sec__exrelabel__">Program 7</h3>
-<hr/>
-
-<tt>&nbsp;&sol;^(.+)-(TPC|EPD)&#92;b(.*)$&sol;#1&#92;%start#3&#92;%end=x&nbsp;&lt;&nbsp;__</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;&#92;%{start}&#92;%{end}&sol;</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex53">53</a>)</dt><dd>
+<tt>&sol;^(.+)-&#8288;(TPC|EPD)&#92;b(.*)$&sol;#1&#92;%start#3&#92;%end=x&nbsp;&lt;&nbsp;__</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;&sol;^.*$&sol;&#92;%{start}&#92;%{end}&sol;</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex42">42</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-TPC-OB1&nbsp;(Q;_nphd_&nbsp;All)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;work)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;we)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;*ICH*-130))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HVD;~Tn&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN-EPD-130&nbsp;(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(PRO&nbsp;she))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(PRO&nbsp;me))))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;141_a_joyce_1914))</tt><br>
+<dl><dt>(<a name="ex54">54</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;TPC-&#8288;OB1&nbsp;(Q;&#8288;_nphd_&nbsp;All)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;work)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;we)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;*ICH*-&#8288;130))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HVD;&#8288;~Tn&nbsp;had)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN-&#8288;EPD-&#8288;130&nbsp;(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(PRO&nbsp;she))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(PRO&nbsp;me))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex43">43</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-OB1&nbsp;(Q;_nphd_&nbsp;All)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(D&nbsp;the)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;work)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;we)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;*ICH*-130))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HVD;~Tn&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN-130&nbsp;(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(PRO&nbsp;she))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(PRO&nbsp;me))))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;141_a_joyce_1914))</tt><br>
+<dl><dt>(<a name="ex55">55</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;OB1&nbsp;(Q;&#8288;_nphd_&nbsp;All)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(D&nbsp;the)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;work)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;we)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN&nbsp;*ICH*-&#8288;130))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HVD;&#8288;~Tn&nbsp;had)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PRN-&#8288;130&nbsp;(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(PRO&nbsp;she))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(PRO&nbsp;me))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,))</tt><br>
 </dd></dl>
 
 <p align="justify">This example illustrates the content from two variable groups (<tt>start</tt> and <tt>end</tt>) being carried over from the matched node to serve as the replacement content.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program <a href="#program8">8</a> will look for a terminal node immediately dominated by an <tt>ID</tt> node and add the content of this node to every non-terminal node with content that is not <tt>ID</tt> and that does not already contain the to-be-added content.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program (<a href="#ex56">56</a>) will look for a terminal node immediately dominated by an <tt>ID</tt> node and add the content of this node together with deliminators &lsquo;<tt>;&lt;</tt>&rsquo; and &lsquo;<tt>&gt;</tt>&rsquo; to every non-terminal node that is not <tt>ID</tt> and that does not already contain the to-be-added content.</p>
 
-<h3><a name="sec__exidnodes__">Program 8</h3>
-<hr/>
-
-<tt>&nbsp;ID&nbsp;&lt;&nbsp;(__=label&nbsp;!&lt;&nbsp;__)&nbsp;:&nbsp;(&sol;^.&sol;=x&nbsp;&lt;&nbsp;__&nbsp;!==&nbsp;ID&nbsp;!==&nbsp;&sol;;(.+)&sol;#1&#92;%label)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;={x};={label}&sol;</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex56">56</a>)</dt><dd>
+<tt>ID&nbsp;&lt;&nbsp;(__=label&nbsp;!&lt;&nbsp;__)&nbsp;:&nbsp;(&sol;^.&sol;=x&nbsp;&lt;&nbsp;__&nbsp;!==&nbsp;ID&nbsp;!==&nbsp;&sol;;&#8288;(.+)&sol;#1&#92;%label)</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;&sol;^.*$&sol;={x};&#8288;&lt;={label}&gt;&sol;</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex44">44</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
+<dl><dt>(<a name="ex57">57</a>)</dt><dd>
+<tt>(&nbsp;(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;laughs)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
 <tt>&nbsp;&nbsp;(ID&nbsp;8_example))</tt><br>
@@ -699,188 +658,187 @@
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex45">45</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT;8_example&nbsp;(NP-SBJ;8_example&nbsp;(PRO;8_example&nbsp;He))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;8_example&nbsp;laughs)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU;8_example&nbsp;.))</tt><br>
+<dl><dt>(<a name="ex58">58</a>)</dt><dd>
+<tt>(&nbsp;(IP-&#8288;MAT;&#8288;&lt;8_example&gt;&nbsp;(NP-&#8288;SBJ;&#8288;&lt;8_example&gt;&nbsp;(PRO;&#8288;&lt;8_example&gt;&nbsp;He))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;&#8288;&lt;8_example&gt;&nbsp;laughs)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU;&#8288;&lt;8_example&gt;&nbsp;.))</tt><br>
 <tt>&nbsp;&nbsp;(ID&nbsp;8_example))</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.5">5.5</a>&nbsp;&nbsp;&nbsp;&nbsp;move</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>move&nbsp;&lt;name&gt;&nbsp;&lt;position&gt;</tt><br>
+<p align="justify">Action (59) moves the named node into the specified position.</p>
 
-<p align="justify">moves the named node into the specified position. To be precise, it deletes (*NOT* prunes) the node from the tree, and re-inserts it into the specified position. See section <a href="#sec5.7">5.7</a> for how to specify position.</p>
+<dl><dt>(<a name="ex59">59</a>)</dt><dd>
+<tt>move&nbsp;&lt;name&gt;&nbsp;&lt;position&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program9">9</a> demonstrates the promotion of punctuation (<tt>PU</tt>) to a higher constituent layer when on the left or right edge of a constituent layer (identified as &lsquo;<tt>y</tt>&rsquo;) that is dominated by at least one more node, that is, when &lsquo;<tt>y</tt>&rsquo; is not the root node of the tree. The first pattern-action pair covers the left edge scenario, while the second pattern-action pair covers the right edge scenario.</p>
+<p align="justify">To be precise, (59) deletes (*NOT* prunes) the node from the tree, and re-inserts it into the specified position. See section <a href="#sec5.7">5.7</a> for how to specify position.</p>
 
-<h3><a name="sec__exmovepu__">Program 9</h3>
-<hr/>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex60">60</a>) demonstrates the promotion of punctuation (<tt>PU</tt>) to a higher constituent layer when on the left or right edge of a constituent layer (identified as &lsquo;<tt>y</tt>&rsquo;) that is dominated by at least one more node, that is, when &lsquo;<tt>y</tt>&rsquo; is not the root node of the tree. The first pattern-action pair covers the left edge scenario, while the second pattern-action pair covers the right edge scenario.</p>
 
-<tt>&nbsp;PU=x&nbsp;&gt;1&nbsp;(__=y&nbsp;&gt;&nbsp;__)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;$+&nbsp;y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;PU=x&nbsp;&gt;-1&nbsp;(__=y&nbsp;&gt;&nbsp;__)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;$-&nbsp;y</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex60">60</a>)</dt><dd>
+<tt>PU=x&nbsp;&gt;1&nbsp;(__=y&nbsp;&gt;&nbsp;__)</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;$+&nbsp;y</tt><br>
+<br>
+<tt>PU=x&nbsp;&gt;-&#8288;1&nbsp;(__=y&nbsp;&gt;&nbsp;__)</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;$-&#8288;&nbsp;y</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex46">46</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Ben)</tt><br>
+<dl><dt>(<a name="ex61">61</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;Ben)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Affleck))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP&nbsp;is)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD&nbsp;(D&nbsp;an)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;(D&nbsp;an)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;actor))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-MOD&nbsp;(PU&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;MOD&nbsp;(PU&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADV&nbsp;too)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.)))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex47">47</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;Ben)</tt><br>
+<dl><dt>(<a name="ex62">62</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;Ben)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Affleck))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP&nbsp;is)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-PRD&nbsp;(D&nbsp;an)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;(D&nbsp;an)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;actor))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-MOD&nbsp;(ADV&nbsp;too))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;MOD&nbsp;(ADV&nbsp;too))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both patterns of Program <a href="#program10">10</a> contain a disjunction with two parts. The first part captures quantifier movement within the same (clause) layer. Here, the pattern involves a relation of sisterhood and precedence (&lsquo;<tt>&dollar;..</tt>&rsquo;) to a constituent to move (&lsquo;<tt>b</tt>&rsquo;) that share its <tt>index</tt> with a node beginning <tt>*ICH*-</tt> that is immediately under &lsquo;<tt>a</tt>&rsquo;. The second part of the disjunction captures quantifier raising that involves a move to a higher layer of structure, with the pattern involving a relation of domination (&lsquo;<tt>&lt;&lt;</tt>&rsquo;) from a sister of the target position (&lsquo;<tt>a</tt>&rsquo;).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both patterns of Program (<a href="#ex63">63</a>) contain a disjunction with two parts. The first part captures quantifier movement within the same (clause) layer. Here, the pattern involves a relation of sisterhood and precedence (&lsquo;<tt>&dollar;..</tt>&rsquo;) to a constituent to move (&lsquo;<tt>b</tt>&rsquo;) that shares its <tt>index</tt> with a node beginning <tt>*ICH*-</tt> that is immediately under &lsquo;<tt>a</tt>&rsquo;. The second part of the disjunction captures quantifier raising that involves a move to a higher layer of structure, with the pattern involving a relation of domination (&lsquo;<tt>&lt;&lt;</tt>&rsquo;) from a sister of the target position (&lsquo;<tt>a</tt>&rsquo;).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The action for the first pattern involves inserting a place holder node <tt>(PLACE)</tt> so that it becomes an immediate right sister of the node named &lsquo;<tt>a</tt>&rsquo;.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The action for the first pattern involves inserting a place holder node <tt>(PLACE)</tt> which becomes an immediate right sister of the node named &lsquo;<tt>a</tt>&rsquo;.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The actions for the second pattern involve relabelling the &lsquo;<tt>a</tt>&rsquo; node with the <tt>main</tt> content from the &lsquo;<tt>b</tt>&rsquo; node (that is, the &lsquo;<tt>b</tt>&rsquo; node content minus the index and any material that either comes after the index or before the index but after a semi-colon (<tt>;</tt>)), relabelling the &lsquo;<tt>b</tt>&rsquo; node as <tt>NP</tt> together with the content of the &lsquo;<tt>b</tt>&rsquo; node that includes the index and any extra content that either comes after the index or comes before the index but after a semi-colon, followed by movement of &lsquo;<tt>a</tt>&rsquo; to be an immediate left sister of &lsquo;<tt>b</tt>&rsquo;, followed by movement of &lsquo;<tt>b</tt>&rsquo; to be an immediate left sister of the place holder (&lsquo;<tt>x</tt>&rsquo;) inserted with the action of the first pattern, followed by deletion of the place holder &lsquo;<tt>x</tt>&rsquo;.</p>
 
-<h3><a name="sec__exmoveright__">Program 10</h3>
-<hr/>
-
-<tt>&nbsp;NP=a&nbsp;&lt;&nbsp;&sol;^&#92;*ICH&#92;*-(&#92;p{Digit}+)$&sol;#1&#92;%index&nbsp;!$.&nbsp;PLACE</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;[&nbsp;$..&nbsp;&sol;^(NP&#92;b[^;]*)(.*)-(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b&nbsp;|</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;(__&nbsp;&lt;&lt;&nbsp;&sol;^(NP&#92;b[^;]*)(.*)-(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;]</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;insert&nbsp;(PLACE)&nbsp;$-&nbsp;a</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;PLACE=x&nbsp;!&lt;&nbsp;__&nbsp;$,&nbsp;(NP=a&nbsp;&lt;&nbsp;&sol;^&#92;*ICH&#92;*-(&#92;p{Digit}+)$&sol;#1&#92;%index)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;[&nbsp;$..&nbsp;&sol;^(NP&#92;b[^;]*)(.*)-(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b&nbsp;|</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;(__&nbsp;&lt;&lt;&nbsp;&sol;^(NP&#92;b[^;]*)(.*)-(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;]</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;a&nbsp;&sol;^.*$&sol;&#92;%{main}&sol;</tt><br>
-<tt>&nbsp;relabel&nbsp;b&nbsp;&sol;^.*$&sol;NP&#92;%{extra}-&#92;%{index}&#92;%{rest}&sol;</tt><br>
-<tt>&nbsp;move&nbsp;a&nbsp;$+&nbsp;b</tt><br>
-<tt>&nbsp;move&nbsp;b&nbsp;$+&nbsp;x</tt><br>
-<tt>&nbsp;delete&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex63">63</a>)</dt><dd>
+<tt>NP=a&nbsp;&lt;&nbsp;&sol;^&#92;*ICH&#92;*-&#8288;(&#92;p{Digit}+)$&sol;#1&#92;%index&nbsp;!$.&nbsp;PLACE</tt><br>
+<tt>&nbsp;&nbsp;[&nbsp;$..&nbsp;&sol;^(NP&#92;b[^;&#8288;]*)(.*)-&#8288;(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b&nbsp;|</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;(__&nbsp;&lt;&lt;&nbsp;&sol;^(NP&#92;b[^;&#8288;]*)(.*)-&#8288;(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b)</tt><br>
+<tt>&nbsp;&nbsp;]</tt><br>
+<br>
+<tt>insert&nbsp;(PLACE)&nbsp;$-&#8288;&nbsp;a</tt><br>
+<br>
+<tt>PLACE=x&nbsp;!&lt;&nbsp;__&nbsp;$,&nbsp;(NP=a&nbsp;&lt;&nbsp;&sol;^&#92;*ICH&#92;*-&#8288;(&#92;p{Digit}+)$&sol;#1&#92;%index)</tt><br>
+<tt>&nbsp;&nbsp;[&nbsp;$..&nbsp;&sol;^(NP&#92;b[^;&#8288;]*)(.*)-&#8288;(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b&nbsp;|</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;(__&nbsp;&lt;&lt;&nbsp;&sol;^(NP&#92;b[^;&#8288;]*)(.*)-&#8288;(&#92;p{Digit}+)(.*)$&sol;#1&#92;%main#2&#92;%extra#3&#92;%index#4&#92;%rest=b)</tt><br>
+<tt>&nbsp;&nbsp;]</tt><br>
+<br>
+<tt>relabel&nbsp;a&nbsp;&sol;^.*$&sol;&#92;%{main}&sol;</tt><br>
+<tt>relabel&nbsp;b&nbsp;&sol;^.*$&sol;NP&#92;%{extra}-&#8288;&#92;%{index}&#92;%{rest}&sol;</tt><br>
+<tt>move&nbsp;a&nbsp;$+&nbsp;b</tt><br>
+<tt>move&nbsp;b&nbsp;$+&nbsp;x</tt><br>
+<tt>delete&nbsp;x</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex48">48</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP&nbsp;*ICH*-136)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;We))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;should)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Cn.g&nbsp;keep)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1;{PERSON}-136&nbsp;(Q&nbsp;every)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-PRD&nbsp;(VAG;~I&nbsp;working)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-NIM-LOC&nbsp;(ADV&nbsp;here))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;138_a_dick_1952))</tt><br>
+<dl><dt>(<a name="ex64">64</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP&nbsp;*ICH*-&#8288;136)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;We))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;&#8288;~cat_Vi&nbsp;should)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(VB;&#8288;~Cn.g&nbsp;keep)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1;&#8288;{PERSON}-&#8288;136&nbsp;(Q&nbsp;every)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;PRD&nbsp;(VAG;&#8288;~I&nbsp;working)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;NIM&nbsp;(ADV&nbsp;here))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex49">49</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP;{PERSON}-136&nbsp;(Q&nbsp;every)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;We))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;~cat_Vi&nbsp;should)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~Cn.g&nbsp;keep)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-136)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-PRD&nbsp;(VAG;~I&nbsp;working)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-NIM-LOC&nbsp;(ADV&nbsp;here))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;138_a_dick_1952))</tt><br>
+<dl><dt>(<a name="ex65">65</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP;&#8288;{PERSON}-&#8288;136&nbsp;(Q&nbsp;every)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;man))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;We))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(MD;&#8288;~cat_Vi&nbsp;should)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(VB;&#8288;~Cn.g&nbsp;keep)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;*ICH*-&#8288;136)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;PRD&nbsp;(VAG;&#8288;~I&nbsp;working)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;NIM&nbsp;(ADV&nbsp;here))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;replace</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>replace&nbsp;&lt;name1&gt;&nbsp;&lt;name2&gt;</tt><br>
+<p align="justify">Action (66) deletes <tt>&lt;name1&gt;</tt> and inserts a copy of <tt>&lt;name2&gt;</tt> in its place.</p>
 
-<p align="justify">deletes <tt>&lt;name1&gt;</tt> and inserts a copy of <tt>&lt;name2&gt;</tt> in its place.</p>
+<dl><dt>(<a name="ex66">66</a>)</dt><dd>
+<tt>replace&nbsp;&lt;name1&gt;&nbsp;&lt;name2&gt;</tt><br>
+</dd></dl>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>replace&nbsp;&lt;name&gt;&nbsp;&lt;tree&gt;&nbsp;&lt;tree2&gt;...</tt><br>
+<p align="justify">Action (67) deletes <tt>&lt;name&gt;</tt> and inserts the new tree(s) in its place.</p>
 
-<p align="justify">deletes <tt>&lt;name&gt;</tt> and inserts the new tree(s) in its place. If more than one replacement tree is given, each of the new subtrees will be added in order where the old tree was. Multiple subtrees at the root is an illegal Tsurgeon action and will throw an exception.</p>
+<dl><dt>(<a name="ex67">67</a>)</dt><dd>
+<tt>replace&nbsp;&lt;name&gt;&nbsp;&lt;tree&gt;&nbsp;&lt;tree2&gt;...</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Program <a href="#program11">11</a>, replacement is of punctuation that begins with three dots by three instances of full stop punctuation.</p>
+<p align="justify">If more than one replacement tree is given, each of the new subtrees will be added in order where the old tree was. Multiple subtrees at the root is an illegal Tsurgeon action and will throw an exception.</p>
 
-<h3><a name="sec__exreplace__">Program 11</h3>
-<hr/>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In Program (<a href="#ex68">68</a>), replacement is of punctuation that begins with three dots by three instances of full stop punctuation.</p>
 
-<tt>&nbsp;PUNC=x&nbsp;&lt;&nbsp;&sol;^&#92;.&#92;.&#92;.&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;replace&nbsp;x&nbsp;(PUNC&nbsp;.)&nbsp;(PUNC&nbsp;.)&nbsp;(PUNC&nbsp;.)</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex68">68</a>)</dt><dd>
+<tt>PUNC=x&nbsp;&lt;&nbsp;&sol;^&#92;.&#92;.&#92;.&sol;</tt><br>
+<br>
+<tt>replace&nbsp;x&nbsp;(PUNC&nbsp;.)&nbsp;(PUNC&nbsp;.)&nbsp;(PUNC&nbsp;.)</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex50">50</a>)</dt><dd>
-<tt>(&nbsp;(FRAG&nbsp;(ADVP-CNT&nbsp;(ADV&nbsp;So))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;......))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;5_lucy_child_12_f03))</tt><br>
+<dl><dt>(<a name="ex69">69</a>)</dt><dd>
+<tt>(FRAG&nbsp;(ADVP-&#8288;CNT&nbsp;(ADV&nbsp;So))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;......))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex51">51</a>)</dt><dd>
-<tt>(&nbsp;(FRAG&nbsp;(ADVP-CNT&nbsp;(ADV&nbsp;So))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;5_lucy_child_12_f03))</tt><br>
+<dl><dt>(<a name="ex70">70</a>)</dt><dd>
+<tt>(FRAG&nbsp;(ADVP-&#8288;CNT&nbsp;(ADV&nbsp;So))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.7">5.7</a>&nbsp;&nbsp;&nbsp;&nbsp;insert</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>insert&nbsp;&lt;name&gt;&nbsp;&lt;position&gt;</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>insert&nbsp;&lt;tree&gt;&nbsp;&lt;position&gt;</tt><br>
+<p align="justify">The actions of (71) insert the named node or tree into the position specified.</p>
 
-<p align="justify">inserts the named node or tree into the position specified. The ways to specify position are:</p>
+<dl><dt>(<a name="ex71">71</a>)</dt><dd>
+<tt>insert&nbsp;&lt;name&gt;&nbsp;&lt;position&gt;</tt><br>
+<tt>insert&nbsp;&lt;tree&gt;&nbsp;&lt;position&gt;</tt><br>
+</dd></dl>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>$+&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;left&nbsp;sister&nbsp;of&nbsp;the&nbsp;named&nbsp;node</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>$-&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;right&nbsp;sister&nbsp;of&nbsp;the&nbsp;named&nbsp;node</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>&gt;i&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;i_th&nbsp;daughter&nbsp;of&nbsp;the&nbsp;named&nbsp;node.</tt><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>&gt;-i&nbsp;&lt;name&gt;&nbsp;&nbsp;the&nbsp;i_th&nbsp;daughter,&nbsp;counting&nbsp;from&nbsp;the&nbsp;right,&nbsp;of&nbsp;the&nbsp;named&nbsp;node.</tt><br>
+<p align="justify">The ways to specify position are:</p>
 
-<p align="justify">The transformation seen with Program <a href="#program11">11</a> can be achieved more generally with Program <a href="#program12">12</a>:</p>
+<dl><dt>(<a name="ex72">72</a>)</dt><dd>
+<tt>$+&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;left&nbsp;sister&nbsp;of&nbsp;the&nbsp;named&nbsp;node</tt><br>
+<tt>$-&#8288;&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;right&nbsp;sister&nbsp;of&nbsp;the&nbsp;named&nbsp;node</tt><br>
+<tt>&gt;i&nbsp;&lt;name&gt;&nbsp;&nbsp;&nbsp;the&nbsp;i_th&nbsp;daughter&nbsp;of&nbsp;the&nbsp;named&nbsp;node.</tt><br>
+<tt>&gt;-&#8288;i&nbsp;&lt;name&gt;&nbsp;&nbsp;the&nbsp;i_th&nbsp;daughter,&nbsp;counting&nbsp;from&nbsp;the&nbsp;right,&nbsp;of&nbsp;the&nbsp;named&nbsp;node.</tt><br>
+</dd></dl>
 
-<h3><a name="sec__exinsert__">Program 12</h3>
-<hr/>
+<p align="justify">The transformation seen with Program (<a href="#ex68">68</a>) can be achieved more generally with Program (<a href="#ex73">73</a>):</p>
 
-<tt>&nbsp;&sol;^B[EA]&sol;=x&nbsp;$&nbsp;(ILYR=y&nbsp;&lt;1&nbsp;&sol;^(HVN|BEN|DON|VVN)&#92;b&sol;)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;={x};~cat_Ve_passive_&sol;</tt><br>
-<tt>&nbsp;relabel&nbsp;y&nbsp;IP-PPL-CAT</tt><br>
-<tt>&nbsp;insert&nbsp;(NP-LGS&nbsp;*)&nbsp;&gt;1&nbsp;y</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex73">73</a>)</dt><dd>
+<tt>&sol;^B[EA]&sol;=x&nbsp;$&nbsp;(ILYR=y&nbsp;&lt;1&nbsp;&sol;^(HVN|BEN|DON|VVN)&#92;b&sol;)</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;&sol;^.*$&sol;={x};&#8288;~cat_Ve_passive_&sol;</tt><br>
+<tt>relabel&nbsp;y&nbsp;IP-&#8288;PPL-&#8288;CAT</tt><br>
+<tt>insert&nbsp;(NP-&#8288;LGS&nbsp;*)&nbsp;&gt;1&nbsp;y</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex52">52</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(NP&nbsp;(D&nbsp;These)</tt><br>
+<dl><dt>(<a name="ex74">74</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP&nbsp;(D&nbsp;These)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP&nbsp;are)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VVN&nbsp;observed))</tt><br>
@@ -889,106 +847,104 @@
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex53">53</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(NP&nbsp;(D&nbsp;These)</tt><br>
+<dl><dt>(<a name="ex75">75</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP&nbsp;(D&nbsp;These)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;rules))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP;~cat_Ve_passive_&nbsp;are)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BEP;&#8288;~cat_Ve_passive_&nbsp;are)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VVN&nbsp;observed))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.8">5.8</a>&nbsp;&nbsp;&nbsp;&nbsp;createSubtree</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>createSubtree&nbsp;&lt;auxiliary-tree-or-label&gt;&nbsp;&lt;name1&gt;&nbsp;[&lt;name2&gt;]</tt><br>
+<p align="justify">Action (76) creates a subtree out of all the nodes from <tt>name1</tt> through <tt>name2</tt>.</p>
 
-<p align="justify">creates a subtree out of all the nodes from <tt>name1</tt> through <tt>name2</tt>. The subtree is moved to the foot of the given auxiliary tree, and the tree is inserted where the nodes of the subtree used to reside. If a simple label is provided as the first argument, the subtree is given a single parent with a name corresponding to the label. To limit the Tsurgeon action to just one node, elide <tt>name2</tt>.</p>
+<dl><dt>(<a name="ex76">76</a>)</dt><dd>
+<tt>createSubtree&nbsp;&lt;auxiliary-&#8288;tree-&#8288;or-&#8288;label&gt;&nbsp;&lt;name1&gt;&nbsp;[&lt;name2&gt;]</tt><br>
+</dd></dl>
+
+<p align="justify">The subtree is moved to the foot of the given auxiliary tree, and the tree is inserted where the nodes of the subtree used to reside. If a simple label is provided as the first argument, the subtree is given a single parent with a name corresponding to the label. To limit the Tsurgeon action to just one node, elide <tt>name2</tt>.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Auxiliary trees must have exactly one frontier node ending in the character &lsquo;<tt>&#64;</tt>&rsquo;, which marks it as the &lsquo;foot&rsquo; node for adjunction. Final instances of the character &lsquo;<tt>&#64;</tt>&rsquo; in terminal node labels will be removed from the actual label of the tree.</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;All other instances of &lsquo;<tt>&#64;</tt>&rsquo; in terminal nodes must be escaped (i.e., appear as <tt>&#92;&#64;</tt>); this escaping will be removed by Tsurgeon.</p>
 
-<p align="justify">The first pattern-action pair of Program <a href="#program13">13</a> creates a right binarization of the input tree with the creation of &lsquo;artificial&rsquo; non-terminal nodes (<tt>ILYR</tt>) that span between the second node (&lsquo;<tt>&lt;2 __=x</tt>&rsquo;) and the end node (&lsquo;<tt>&lt;-1 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;) and that contains a main verb that has a preceding sister (&lsquo;<tt>&lt; (/^V/ &dollar;, __)</tt>&rsquo;).</p>
+<p align="justify">The first pattern-action pair of Program (<a href="#ex77">77</a>) creates a right binarization of the input tree with the creation of &lsquo;artificial&rsquo; non-terminal nodes (<tt>ILYR</tt>) that span between the second node (&lsquo;<tt>&lt;2 __=x</tt>&rsquo;) and the end node (&lsquo;<tt>&lt;-1 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;) and that contains a main verb that has a preceding sister (&lsquo;<tt>&lt; (/^V/ &dollar;, __)</tt>&rsquo;).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second pattern-action pair of Program <a href="#program13">13</a> creates a left binarization of the input tree with the creation of <tt>ILYR</tt> nodes that span between the first node (&lsquo;<tt>&lt;1 __=x</tt>&rsquo;) and the second to last node (&lsquo;<tt>&lt;-2 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The second pattern-action pair of Program (<a href="#ex77">77</a>) creates a left binarization of the input tree with the creation of <tt>ILYR</tt> nodes that span between the first node (&lsquo;<tt>&lt;1 __=x</tt>&rsquo;) and the second to last node (&lsquo;<tt>&lt;-2 __=y</tt>&rsquo;) of a constituent with at least three nodes (&lsquo;<tt>&lt;3 __</tt>&rsquo;).</p>
 
-<h3><a name="sec__exbinarizationsimple__">Program 13</h3>
-<hr/>
-
-<tt>&nbsp;__&nbsp;&lt;2&nbsp;__=x&nbsp;&lt;-1&nbsp;__=y&nbsp;&lt;3&nbsp;__&nbsp;&lt;&nbsp;(&sol;^V&sol;&nbsp;$,&nbsp;__)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;__&nbsp;&lt;1&nbsp;__=x&nbsp;&lt;-2&nbsp;__=y&nbsp;&lt;3&nbsp;__</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex77">77</a>)</dt><dd>
+<tt>__&nbsp;&lt;2&nbsp;__=x&nbsp;&lt;-&#8288;1&nbsp;__=y&nbsp;&lt;3&nbsp;__&nbsp;&lt;&nbsp;(&sol;^V&sol;&nbsp;$,&nbsp;__)</tt><br>
+<br>
+<tt>createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
+<br>
+<tt>__&nbsp;&lt;1&nbsp;__=x&nbsp;&lt;-&#8288;2&nbsp;__=y&nbsp;&lt;3&nbsp;__</tt><br>
+<br>
+<tt>createSubtree&nbsp;ILYR&nbsp;x&nbsp;y</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex54">54</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(ADVP-TMP&nbsp;(ADV&nbsp;Yesterday))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD&nbsp;ate)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(N&nbsp;pizza))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-COM&nbsp;(P-ROLE&nbsp;with)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-LOC&nbsp;(P-ROLE&nbsp;in)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;8_texts_purple_basic))</tt><br>
+<dl><dt>(<a name="ex78">78</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(ADVP-&#8288;TMP&nbsp;(ADV&nbsp;Yesterday))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBD&nbsp;ate)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(N&nbsp;pizza))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;COM&nbsp;(P-&#8288;ROLE&nbsp;with)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;LOC&nbsp;(P-&#8288;ROLE&nbsp;in)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex55">55</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(ADVP-TMP&nbsp;(ADV&nbsp;Yesterday))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PU&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(NP-SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(VBD&nbsp;ate)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(N&nbsp;pizza)))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-COM&nbsp;(P-ROLE&nbsp;with)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-LOC&nbsp;(P-ROLE&nbsp;in)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.)))))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;8_texts_purple_basic))</tt><br>
+<dl><dt>(<a name="ex79">79</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(ADVP-&#8288;TMP&nbsp;(ADV&nbsp;Yesterday))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PU&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(NP-&#8288;SBJ&nbsp;(N&nbsp;Mr.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Ito))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(ILYR&nbsp;(VBD&nbsp;ate)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(N&nbsp;pizza)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;COM&nbsp;(P-&#8288;ROLE&nbsp;with)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(N&nbsp;Ms.)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Yamada))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;LOC&nbsp;(P-&#8288;ROLE&nbsp;in)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Shibuya))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.)))))</tt><br>
 </dd></dl>
 
 <p align="justify">Notably, the output gives the main verb as the most embedded element surrounded by the left binarization of following elements, which in turn is followed by the right binarization of preceding elements.</p>
 
 <h3><a name="sec5.9">5.9</a>&nbsp;&nbsp;&nbsp;&nbsp;adjoin</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoin&nbsp;&lt;auxiliary-tree&gt;&nbsp;&lt;target-node&gt;</tt><br>
+<p align="justify">Action (80) adjoins the specified <tt>&lt;auxiliary-tree&gt;</tt> into the specified <tt>&lt;target-node&gt;</tt>.</p>
 
-<p align="justify">adjoins the specified <tt>&lt;auxiliary-tree&gt;</tt> into the specified <tt>&lt;target-node&gt;</tt>. The daughters of the target node will become the daughters of the foot of the auxiliary tree.</p>
+<dl><dt>(<a name="ex80">80</a>)</dt><dd>
+<tt>adjoin&nbsp;&lt;auxiliary-&#8288;tree&gt;&nbsp;&lt;target-&#8288;node&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program14">14</a> has a pattern to find nodes labelled <tt>NLYR</tt> that have a sister node that is either <tt>N</tt> or <tt>NS</tt>. This pattern is paired with an action that replaces the matched <tt>NLYR</tt> node with an <tt>NP</tt> node that furthermore has a <tt>PP</tt> projection and that contains an initial <tt>(P-ROLE of)</tt> element. There is a second pattern to find nodes labelled <tt>PP</tt> that have a sister node that is either <tt>N</tt> or <tt>NS</tt>. This second pattern is paired with an action that moves the <tt>PP</tt> node so that it occurs immediately after the matched <tt>N</tt> or <tt>NS</tt> node.</p>
+<p align="justify">The daughters of the target node will become the daughters of the foot of the auxiliary tree.</p>
 
-<h3><a name="sec__exadjoin__">Program 14</h3>
-<hr/>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex81">81</a>) has a pattern to find nodes labelled <tt>NLYR</tt> that have a sister node that is either <tt>N</tt> or <tt>NS</tt>. This pattern is paired with an action that replaces the matched <tt>NLYR</tt> node with an <tt>NP</tt> node that furthermore has a <tt>PP</tt> projection and that contains an initial <tt>(P-ROLE of)</tt> element. There is a second pattern to find nodes labelled <tt>PP</tt> that have a sister node that is either <tt>N</tt> or <tt>NS</tt>. This second pattern is paired with an action that moves the <tt>PP</tt> node so that it occurs immediately after the matched <tt>N</tt> or <tt>NS</tt> node.</p>
 
-<tt>&nbsp;NLYR=x&nbsp;$..&nbsp;N|NS</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoin&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)&nbsp;NP@)&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;PP=x&nbsp;$..&nbsp;N|NS=y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;$-&nbsp;y</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex81">81</a>)</dt><dd>
+<tt>NLYR=x&nbsp;$..&nbsp;N|NS</tt><br>
+<br>
+<tt>adjoin&nbsp;(PP&nbsp;(P-&#8288;ROLE&nbsp;of)&nbsp;NP@)&nbsp;x</tt><br>
+<br>
+<tt>PP=x&nbsp;$..&nbsp;N|NS=y</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;$-&#8288;&nbsp;y</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex56">56</a>)</dt><dd>
+<dl><dt>(<a name="ex82">82</a>)</dt><dd>
 <tt>(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(ADJP&nbsp;(ADJ&nbsp;liquid))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;phase))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;thermal))</tt><br>
@@ -998,36 +954,35 @@
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex57">57</a>)</dt><dd>
+<dl><dt>(<a name="ex83">83</a>)</dt><dd>
 <tt>(NP&nbsp;(NS&nbsp;studies)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(ADJP&nbsp;(ADJ&nbsp;thermal))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;reaction)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-ROLE&nbsp;of)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(P-&#8288;ROLE&nbsp;of)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(ADJP&nbsp;(ADJ&nbsp;liquid))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;phase))))))</tt><br>
 </dd></dl>
 
 <h3><a name="sec5.10">5.10</a>&nbsp;&nbsp;&nbsp;&nbsp;adjoinH</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoinH&nbsp;&lt;auxiliary-tree&gt;&nbsp;&lt;target-node&gt;</tt><br>
+<p align="justify">Action (84) is similar to <tt>adjoin</tt>, but preserves the <tt>&lt;target-node&gt;</tt> and makes it the root of <tt>&lt;auxiliary-tree&gt;</tt>. The root of the <tt>&lt;auxiliary-tree&gt;</tt> is ignored.</p>
 
-<p align="justify">is similar to <tt>adjoin</tt>, but preserves the <tt>&lt;target-node&gt;</tt> and makes it the root of <tt>&lt;auxiliary-tree&gt;</tt>. The root of the <tt>&lt;auxiliary-tree&gt;</tt> is ignored.</p>
+<dl><dt>(<a name="ex84">84</a>)</dt><dd>
+<tt>adjoinH&nbsp;&lt;auxiliary-&#8288;tree&gt;&nbsp;&lt;target-&#8288;node&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program <a href="#program15">15</a> illustrates the addition of an <tt>NLYR</tt> layer into a noun phrase that dominates a <tt>CONJP</tt> node.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Program (<a href="#ex85">85</a>) illustrates the addition of an <tt>NLYR</tt> layer into a noun phrase that dominates a <tt>CONJP</tt> node.</p>
 
-<h3><a name="sec__exadjoinh__">Program 15</h3>
-<hr/>
-
-<tt>&nbsp;&sol;^NP&#92;b&sol;=x&nbsp;&lt;&nbsp;(CONJP&nbsp;!&gt;&nbsp;&sol;^NLYR&sol;)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoinH&nbsp;(&nbsp;NLYR@)&nbsp;x</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex85">85</a>)</dt><dd>
+<tt>&sol;^NP&#92;b&sol;=x&nbsp;&lt;&nbsp;(CONJP&nbsp;!&gt;&nbsp;&sol;^NLYR&sol;)</tt><br>
+<br>
+<tt>adjoinH&nbsp;(&nbsp;NLYR@)&nbsp;x</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex58">58</a>)</dt><dd>
+<dl><dt>(<a name="ex86">86</a>)</dt><dd>
 <tt>(NP&nbsp;(NP&nbsp;(NLYR&nbsp;Pat))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(NPR&nbsp;Tony))))</tt><br>
@@ -1035,7 +990,7 @@
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex59">59</a>)</dt><dd>
+<dl><dt>(<a name="ex87">87</a>)</dt><dd>
 <tt>(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(NP&nbsp;Pat))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NLYR&nbsp;(NPR&nbsp;Tony)))))</tt><br>
@@ -1043,39 +998,35 @@
 
 <h3><a name="sec5.11">5.11</a>&nbsp;&nbsp;&nbsp;&nbsp;adjoinF</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>adjoinF&nbsp;&lt;auxiliary-tree&gt;&nbsp;&lt;target-node&gt;</tt><br>
+<p align="justify">Action (88) is similar to <tt>adjoin</tt>, but preserves the <tt>&lt;target-node&gt;</tt> and makes it the foot of <tt>&lt;auxiliary-tree&gt;</tt>. The foot of the <tt>&lt;auxiliary-tree&gt;</tt> is ignored.</p>
 
-<p align="justify">is similar to <tt>adjoin</tt>, but preserves the <tt>&lt;target-node&gt;</tt> and makes it the foot of <tt>&lt;auxiliary-tree&gt;</tt>. The foot of the <tt>&lt;auxiliary-tree&gt;</tt> is ignored.</p>
+<dl><dt>(<a name="ex88">88</a>)</dt><dd>
+<tt>adjoinF&nbsp;&lt;auxiliary-&#8288;tree&gt;&nbsp;&lt;target-&#8288;node&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first pattern-action pair of Program <a href="#program16">16</a> adds a <tt>ZERO</tt> node above terminal nodes that start with <tt>&lsquo;*&rsquo;</tt> and are dominated by an <tt>NP</tt> node. The second pattern-action pair adds a <tt>WORD</tt> node above terminal nodes that are not dominated by <tt>WORD</tt> (thus, ensuring termination), <tt>ZERO</tt>, or a node that begins with <tt>PU</tt>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first pattern-action pair of Program (<a href="#ex89">89</a>) adds a <tt>ZERO</tt> node above terminal nodes that start with <tt>&lsquo;*&rsquo;</tt> and are dominated by an <tt>NP</tt> node. The second pattern-action pair adds a <tt>WORD</tt> node above terminal nodes that are not dominated by <tt>WORD</tt> (thus, ensuring termination), <tt>ZERO</tt>, or a node that begins with <tt>PU</tt>.</p>
 
-<h3><a name="sec__exadjoinf__">Program 16</h3>
-<hr/>
-
-<tt>&nbsp;&sol;^(N|NS|NPR|NPRS)&#92;b&sol;=x&nbsp;$&nbsp;CONJ</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoinF&nbsp;(NLYR&nbsp;@)&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;CONJ=x&nbsp;$.&nbsp;(NLYR=y&nbsp;!&gt;2&nbsp;&sol;^NP&#92;b&sol;)&nbsp;!&gt;&nbsp;CONJP</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;createSubtree&nbsp;CONJP&nbsp;x&nbsp;y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;NLYR=x&nbsp;$,,&nbsp;NLYR</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoinF&nbsp;(CONJP&nbsp;@)&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;NLYR=x&nbsp;$..&nbsp;(CONJP=y&nbsp;!$..&nbsp;CONJP)&nbsp;&gt;&nbsp;&sol;^NP&#92;b&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;createSubtree&nbsp;NLYR&nbsp;x&nbsp;y</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex89">89</a>)</dt><dd>
+<tt>&sol;^(N|NS|NPR|NPRS)&#92;b&sol;=x&nbsp;$&nbsp;CONJ</tt><br>
+<br>
+<tt>adjoinF&nbsp;(NLYR&nbsp;@)&nbsp;x</tt><br>
+<br>
+<tt>CONJ=x&nbsp;$.&nbsp;(NLYR=y&nbsp;!&gt;2&nbsp;&sol;^NP&#92;b&sol;)&nbsp;!&gt;&nbsp;CONJP</tt><br>
+<br>
+<tt>createSubtree&nbsp;CONJP&nbsp;x&nbsp;y</tt><br>
+<br>
+<tt>NLYR=x&nbsp;$,,&nbsp;NLYR</tt><br>
+<br>
+<tt>adjoinF&nbsp;(CONJP&nbsp;@)&nbsp;x</tt><br>
+<br>
+<tt>NLYR=x&nbsp;$..&nbsp;(CONJP=y&nbsp;!$..&nbsp;CONJP)&nbsp;&gt;&nbsp;&sol;^NP&#92;b&sol;</tt><br>
+<br>
+<tt>createSubtree&nbsp;NLYR&nbsp;x&nbsp;y</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex60">60</a>)</dt><dd>
+<dl><dt>(<a name="ex90">90</a>)</dt><dd>
 <tt>(NP&nbsp;(NPR&nbsp;Pat)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(NPR&nbsp;Tony)</tt><br>
@@ -1085,7 +1036,7 @@
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex61">61</a>)</dt><dd>
+<dl><dt>(<a name="ex91">91</a>)</dt><dd>
 <tt>(NP&nbsp;(NLYR&nbsp;(NLYR&nbsp;(NPR&nbsp;Pat))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(NLYR&nbsp;(NPR&nbsp;Tony)))</tt><br>
@@ -1095,162 +1046,146 @@
 
 <h3><a name="sec5.12">5.12</a>&nbsp;&nbsp;&nbsp;&nbsp;coindex</h3>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<tt>coindex&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+<p align="justify">Action (92) puts a (Penn Treebank style) coindexation suffix of the form &lsquo;<tt>-n</tt>&rsquo; on each of nodes <tt>&lt;name_1&gt;</tt> through <tt>&lt;name_m&gt;</tt>. The value of <tt>n</tt> will be generated in reference to the existing coindexations in the tree, thus avoiding an accidental clash of indices for nodes that are not meant to be coindexed.</p>
 
-<p align="justify">puts a (Penn Treebank style) coindexation suffix of the form &lsquo;<tt>-n</tt>&rsquo; on each of nodes <tt>&lt;name_1&gt;</tt> through <tt>&lt;name_m&gt;</tt>. The value of <tt>n</tt> will be generated in reference to the existing coindexations in the tree, thus avoiding an accidental clash of indices for nodes that are not meant to be coindexed.</p>
+<dl><dt>(<a name="ex92">92</a>)</dt><dd>
+<tt>coindex&nbsp;&lt;name_1&gt;&nbsp;&lt;name_2&gt;&nbsp;...&nbsp;&lt;name_m&gt;</tt><br>
+</dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program <a href="#program17">17</a> contains two pattern segments (see section <a href="#sec4.6">4.6</a>). The first pattern segment matches a node (identified as &lsquo;<tt>x</tt>&rsquo;) that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and that is referenced with the variable group name <tt>index</tt>, (ii) doesn't dominate a <tt>PRO</tt> node, (iii) is contained within a node (identified as &lsquo;<tt>y</tt>&rsquo;) that has <tt>CND</tt> as a substring (a constituent layer that will be the antecedent of a conditional), and (iv) has a leftmost terminal descendant (identified as &lsquo;<tt>a</tt>&rsquo;) that doesn't end within an index string. The second pattern segment matches a node that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and is the same string referenced with the variable group name <tt>index</tt> of the first pattern segment, (ii) dominates a <tt>PRO</tt> node, (iii) precedes the node referenced as &lsquo;<tt>x</tt>&rsquo; by the first pattern segment, (iv) is not contained within the node referenced as &lsquo;<tt>y</tt>&rsquo; by the first pattern segment, and (v) has a leftmost terminal descendant (identified as &lsquo;<tt>b</tt>&rsquo;) that doesn't end within an index string. When the overall pattern is satisfied an action is triggered to coindex the nodes identified with &lsquo;<tt>a</tt>&rsquo; and &lsquo;<tt>b</tt>&rsquo;.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The pattern of Program (<a href="#ex93">93</a>) contains two pattern segments (see section <a href="#sec4.6">4.6</a>). The first pattern segment matches a node (identified as &lsquo;<tt>x</tt>&rsquo;) that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and that is referenced with the variable group name <tt>index</tt>, (ii) doesn't dominate a <tt>PRO</tt> node, (iii) is contained within a node (identified as &lsquo;<tt>y</tt>&rsquo;) that has <tt>CND</tt> as a substring (a constituent layer that will be the antecedent of a conditional), and (iv) has a leftmost terminal descendant (identified as &lsquo;<tt>a</tt>&rsquo;) that doesn't end within an index string. The second pattern segment matches a node that: (i) contains a non-empty substring that starts with &lsquo;<tt>;&lcub;</tt>&rsquo; and ends with &lsquo;<tt>&rcub;</tt>&rsquo; and is the same string referenced with the variable group name <tt>index</tt> of the first pattern segment, (ii) dominates a <tt>PRO</tt> node, (iii) precedes the node referenced as &lsquo;<tt>x</tt>&rsquo; by the first pattern segment, (iv) is not contained within the node referenced as &lsquo;<tt>y</tt>&rsquo; by the first pattern segment, and (v) has a leftmost terminal descendant (identified as &lsquo;<tt>b</tt>&rsquo;) that doesn't end within an index string. When the overall pattern is satisfied an action is triggered to coindex the nodes identified with &lsquo;<tt>a</tt>&rsquo; and &lsquo;<tt>b</tt>&rsquo;.</p>
 
-<h3><a name="sec__excoindex__">Program 17</h3>
-<hr/>
-
-<tt>&nbsp;&sol;;(&#92;{[^}]+&#92;})&sol;#1&#92;%index=x&nbsp;!&lt;&nbsp;&sol;^PRO&#92;b&sol;&nbsp;&gt;&gt;&nbsp;&sol;&#92;bCND&#92;b&sol;=y&nbsp;&lt;&lt;,&nbsp;(!&sol;-&#92;p{Digit}+$&sol;=a&nbsp;!&lt;&nbsp;__)&nbsp;:</tt><br>
-<tt>&nbsp;(&sol;;(&#92;{[^}]+&#92;})&sol;#1&#92;%index&nbsp;&lt;&nbsp;&sol;^PRO&#92;b&sol;&nbsp;,,&nbsp;=x&nbsp;!&gt;&gt;&nbsp;=y&nbsp;&lt;&lt;,&nbsp;(!&sol;-&#92;p{Digit}+$&sol;=b&nbsp;!&lt;&nbsp;__))</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;coindex&nbsp;a&nbsp;b</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex93">93</a>)</dt><dd>
+<tt>&sol;;&#8288;(&#92;{[^}]+&#92;})&sol;#1&#92;%index=x&nbsp;!&lt;&nbsp;&sol;^PRO&#92;b&sol;&nbsp;&gt;&gt;&nbsp;&sol;&#92;bCND&#92;b&sol;=y&nbsp;&lt;&lt;,&nbsp;(!&sol;-&#8288;&#92;p{Digit}+$&sol;=a&nbsp;!&lt;&nbsp;__)&nbsp;:</tt><br>
+<tt>(&sol;;&#8288;(&#92;{[^}]+&#92;})&sol;#1&#92;%index&nbsp;&lt;&nbsp;&sol;^PRO&#92;b&sol;&nbsp;,,&nbsp;=x&nbsp;!&gt;&gt;&nbsp;=y&nbsp;&lt;&lt;,&nbsp;(!&sol;-&#8288;&#92;p{Digit}+$&sol;=b&nbsp;!&lt;&nbsp;__))</tt><br>
+<br>
+<tt>coindex&nbsp;a&nbsp;b</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex62">62</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(PP-SCON-CNT-CND&nbsp;(P-CONN&nbsp;If)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(NP-SBJ;{FARMER}&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;farmer))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;owns)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1;{DONKEY}&nbsp;(D&nbsp;a)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;donkey))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ;{FARMER}&nbsp;(PRO&nbsp;he))</tt><br>
+<dl><dt>(<a name="ex94">94</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(PP-&#8288;SCON&nbsp;(P-&#8288;CONN&nbsp;If)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;ADV&nbsp;(NP-&#8288;SBJ;&#8288;{FARMER}&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;farmer))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;owns)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1;&#8288;{DONKEY}&nbsp;(D&nbsp;a)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;donkey))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ;&#8288;{FARMER}&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;beats)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1;{DONKEY}&nbsp;(PRO&nbsp;it))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1;&#8288;{DONKEY}&nbsp;(PRO&nbsp;it))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex63">63</a>)</dt><dd>
-<tt>(IP-MAT&nbsp;(PP-SCON-CNT-CND&nbsp;(P-CONN&nbsp;If)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV&nbsp;(NP-SBJ;{FARMER}&nbsp;(D&nbsp;a-1)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;farmer))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;owns)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1;{DONKEY}&nbsp;(D&nbsp;a-2)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;donkey))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ;{FARMER}&nbsp;(PRO&nbsp;he-1))</tt><br>
+<dl><dt>(<a name="ex95">95</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(PP-&#8288;SCON&nbsp;(P-&#8288;CONN&nbsp;If)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;ADV&nbsp;(NP-&#8288;SBJ;&#8288;{FARMER}&nbsp;(D&nbsp;a-&#8288;1)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;farmer))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;owns)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1;&#8288;{DONKEY}&nbsp;(D&nbsp;a-&#8288;2)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;donkey))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ;&#8288;{FARMER}&nbsp;(PRO&nbsp;he-&#8288;1))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP&nbsp;beats)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1;{DONKEY}&nbsp;(PRO&nbsp;it-2))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1;&#8288;{DONKEY}&nbsp;(PRO&nbsp;it-&#8288;2))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PU&nbsp;.))</tt><br>
 </dd></dl>
 
-<p align="justify">While a yield of the input tree gives (<a href="#ex64">64</a>):</p>
+<p align="justify">While a yield of the input tree gives (<a href="#ex96">96</a>):</p>
 
-<dl><dt>(<a name="ex64">64</a>)</dt><dd>
-
+<dl><dt>(<a name="ex96">96</a>)</dt><dd>
 <tt>If&nbsp;a&nbsp;farmer&nbsp;owns&nbsp;a&nbsp;donkey&nbsp;he&nbsp;beats&nbsp;it&nbsp;.</tt><br>
 </dd></dl>
 
-<p align="justify">a yield of the output tree gives (<a href="#ex65">65</a>):</p>
+<p align="justify">a yield of the output tree gives (<a href="#ex97">97</a>):</p>
 
-<dl><dt>(<a name="ex65">65</a>)</dt><dd>
-
-<tt>If&nbsp;a-1&nbsp;farmer&nbsp;owns&nbsp;a-2&nbsp;donkey&nbsp;he-1&nbsp;beats&nbsp;it-2&nbsp;.</tt><br>
+<dl><dt>(<a name="ex97">97</a>)</dt><dd>
+<tt>If&nbsp;a-&#8288;1&nbsp;farmer&nbsp;owns&nbsp;a-&#8288;2&nbsp;donkey&nbsp;he-&#8288;1&nbsp;beats&nbsp;it-&#8288;2&nbsp;.</tt><br>
 </dd></dl>
 
 <p align="justify">That is, the change serves to retain the anaphoric link information following a yield.</p>
 
 <br><h2><a name="sec6">6</a>&nbsp;&nbsp;&nbsp;&nbsp;An extended example</h2>
 
-<p align="justify">Clause-level coordination in the Kainoki Treebank is represented by placing the content of clausal conjuncts that are prior to the last conjunct under stacked subordinate <tt>IP-ADV</tt> nodes that contain a <tt>-CONJ</tt> extension or that are followed by a conjunction marker (<tt>CONJ</tt>) (possibly with intervening punctuation) (or both). Program <a href="#program18">18</a> demonstrates how it is possible to transform this coding of clause-level coordination with subordinate structure into a coding that has coordinate structure with <tt>CONJP</tt> and <tt>ILYR</tt> (clause internal layer) nodes.</p>
+<p align="justify">Clause-level coordination in the Kainoki Treebank is represented by placing the content of clausal conjuncts that are prior to the last conjunct under stacked subordinate <tt>IP-ADV</tt> nodes that contain a <tt>-CONJ</tt> extension or that are followed by a conjunction marker (<tt>CONJ</tt>) (possibly with intervening punctuation) (or both). Program (<a href="#ex98">98</a>) demonstrates how it is possible to transform this coding of clause-level coordination with subordinate structure into a coding that has coordinate structure with <tt>CONJP</tt> and <tt>ILYR</tt> (clause internal layer) nodes.</p>
 
-<h3><a name="sec__exconjp__">Program 18</h3>
-<hr/>
-
-<tt>&nbsp;%&nbsp;create&nbsp;coordinate&nbsp;structure&nbsp;from&nbsp;IP-ADV&nbsp;followed&nbsp;by&nbsp;conjunction&nbsp;marker</tt><br>
-<tt>&nbsp;&sol;^IP-ADV-CONJ&sol;=x&nbsp;$.&nbsp;(&sol;^PU&sol;&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^IP-ADV-CONJ(.*)$&sol;IP-ADV$1&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^IP-ADV&sol;&nbsp;$.&nbsp;(&sol;^PU&sol;=y&nbsp;$.&nbsp;(&sol;^CONJ&#92;b&sol;=x&nbsp;$.&nbsp;__))</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;@&nbsp;ILYR)&nbsp;x</tt><br>
-<tt>&nbsp;move&nbsp;y&nbsp;$+&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^IP-ADV-CONJ&sol;=x&nbsp;!$.&nbsp;&sol;^CONJ&#92;b&sol;&nbsp;$.&nbsp;__</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^IP-ADV-CONJ(.*)$&sol;IP-ADV$1&sol;</tt><br>
-<tt>&nbsp;insert&nbsp;(CONJ&nbsp;_*_)&nbsp;$-&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^IP-ADV&sol;&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;@&nbsp;ILYR)&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^IP-ADV(.*)$&sol;#1&#92;%extra=x&nbsp;$.&nbsp;(&sol;^ILYR&#92;b&sol;&nbsp;&lt;1&nbsp;(&sol;^CONJP&#92;b&sol;=y&nbsp;!&lt;&nbsp;__))</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;&gt;1&nbsp;y</tt><br>
-<tt>&nbsp;relabel&nbsp;x&nbsp;&sol;^.*$&sol;ILYR&#92;%{extra}&sol;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^ILYR&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^CONJ&#92;b&sol;&nbsp;&lt;-1&nbsp;&sol;^ILYR&#92;b&sol;=y&nbsp;$.&nbsp;__=x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;&gt;-1&nbsp;y</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^CONJP&#92;n&sol;&nbsp;$.&nbsp;(&sol;^CONJ&#92;b&sol;=x&nbsp;&lt;&nbsp;&sol;^&#92;*$&sol;)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;delete&nbsp;x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^CONJP&#92;b&sol;=z&nbsp;$.&nbsp;(&sol;^PU&sol;=y&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x)</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;y&nbsp;&gt;-1&nbsp;z</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;&gt;-1&nbsp;z</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;&sol;^CONJP&#92;b&sol;=z&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x</tt><br>
-<tt>&nbsp;</tt><br>
-<tt>&nbsp;move&nbsp;x&nbsp;&gt;-1&nbsp;z</tt><br>
-
-<hr/>
+<dl><dt>(<a name="ex98">98</a>)</dt><dd>
+<tt>%&nbsp;create&nbsp;coordinate&nbsp;structure&nbsp;from&nbsp;IP-&#8288;ADV&nbsp;followed&nbsp;by&nbsp;conjunction&nbsp;marker</tt><br>
+<tt>&sol;^IP-&#8288;ADV-&#8288;CONJ&sol;=x&nbsp;$.&nbsp;(&sol;^PU&sol;&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;)</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;&sol;^IP-&#8288;ADV-&#8288;CONJ(.*)$&sol;IP-&#8288;ADV$1&sol;</tt><br>
+<br>
+<tt>&sol;^IP-&#8288;ADV&sol;&nbsp;$.&nbsp;(&sol;^PU&sol;=y&nbsp;$.&nbsp;(&sol;^CONJ&#92;b&sol;=x&nbsp;$.&nbsp;__))</tt><br>
+<br>
+<tt>adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;@&nbsp;ILYR)&nbsp;x</tt><br>
+<tt>move&nbsp;y&nbsp;$+&nbsp;x</tt><br>
+<br>
+<tt>&sol;^IP-&#8288;ADV-&#8288;CONJ&sol;=x&nbsp;!$.&nbsp;&sol;^CONJ&#92;b&sol;&nbsp;$.&nbsp;__</tt><br>
+<br>
+<tt>relabel&nbsp;x&nbsp;&sol;^IP-&#8288;ADV-&#8288;CONJ(.*)$&sol;IP-&#8288;ADV$1&sol;</tt><br>
+<tt>insert&nbsp;(CONJ&nbsp;_*_)&nbsp;$-&#8288;&nbsp;x</tt><br>
+<br>
+<tt>&sol;^IP-&#8288;ADV&sol;&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x</tt><br>
+<br>
+<tt>adjoinF&nbsp;(ILYR&nbsp;CONJP&nbsp;@&nbsp;ILYR)&nbsp;x</tt><br>
+<br>
+<tt>&sol;^IP-&#8288;ADV(.*)$&sol;#1&#92;%extra=x&nbsp;$.&nbsp;(&sol;^ILYR&#92;b&sol;&nbsp;&lt;1&nbsp;(&sol;^CONJP&#92;b&sol;=y&nbsp;!&lt;&nbsp;__))</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;&gt;1&nbsp;y</tt><br>
+<tt>relabel&nbsp;x&nbsp;&sol;^.*$&sol;ILYR&#92;%{extra}&sol;</tt><br>
+<br>
+<tt>&sol;^ILYR&#92;b&sol;&nbsp;&lt;&nbsp;&sol;^CONJ&#92;b&sol;&nbsp;&lt;-&#8288;1&nbsp;&sol;^ILYR&#92;b&sol;=y&nbsp;$.&nbsp;__=x</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;&gt;-&#8288;1&nbsp;y</tt><br>
+<br>
+<tt>&sol;^CONJP&#92;n&sol;&nbsp;$.&nbsp;(&sol;^CONJ&#92;b&sol;=x&nbsp;&lt;&nbsp;&sol;^&#92;*$&sol;)</tt><br>
+<br>
+<tt>delete&nbsp;x</tt><br>
+<br>
+<tt>&sol;^CONJP&#92;b&sol;=z&nbsp;$.&nbsp;(&sol;^PU&sol;=y&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x)</tt><br>
+<br>
+<tt>move&nbsp;y&nbsp;&gt;-&#8288;1&nbsp;z</tt><br>
+<tt>move&nbsp;x&nbsp;&gt;-&#8288;1&nbsp;z</tt><br>
+<br>
+<tt>&sol;^CONJP&#92;b&sol;=z&nbsp;$.&nbsp;&sol;^CONJ&#92;b&sol;=x</tt><br>
+<br>
+<tt>move&nbsp;x&nbsp;&gt;-&#8288;1&nbsp;z</tt><br>
+</dd></dl>
 
 <p align="justify">Input:</p>
 
-<dl><dt>(<a name="ex66">66</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;*speaker*))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-ADV-CONJ&nbsp;(NP-OB1&nbsp;(PRO&nbsp;*pro*))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;Wakari)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;mashi)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;ta))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;dewa)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-OB1&nbsp;(NP&nbsp;(PRO&nbsp;sore))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;o))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;kakunin)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;shi)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-CONN&nbsp;te))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;42_spoken_jf2))</tt><br>
+<dl><dt>(<a name="ex99">99</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;*speaker*))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;ADV-&#8288;CONJ&nbsp;(NP-&#8288;OB1&nbsp;(PRO&nbsp;*pro*))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;Wakari)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;mashi)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;ta))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;dewa)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;OB1&nbsp;(NP&nbsp;(PRO&nbsp;sore))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;ROLE&nbsp;o))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;kakunin)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;shi)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;CONN&nbsp;te))</tt><br>
 </dd></dl>
 
 <p align="justify">Output:</p>
 
-<dl><dt>(<a name="ex67">67</a>)</dt><dd>
-<tt>(&nbsp;(IP-MAT&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;*speaker*))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(CONJP&nbsp;(ILYR&nbsp;(NP-OB1&nbsp;(PRO&nbsp;*pro*))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;Wakari)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;mashi)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;ta))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;dewa))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-OB1&nbsp;(NP&nbsp;(PRO&nbsp;sore))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-ROLE&nbsp;o))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;kakunin)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;shi)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-CONN&nbsp;te))))</tt><br>
-<tt>&nbsp;&nbsp;(ID&nbsp;42_spoken_jf2))</tt><br>
+<dl><dt>(<a name="ex100">100</a>)</dt><dd>
+<tt>(IP-&#8288;MAT&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;*speaker*))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(CONJP&nbsp;(ILYR&nbsp;(NP-&#8288;OB1&nbsp;(PRO&nbsp;*pro*))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;Wakari)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AX&nbsp;mashi)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AXD&nbsp;ta))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJ&nbsp;dewa))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(PUNC&nbsp;,)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;OB1&nbsp;(NP&nbsp;(PRO&nbsp;sore))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;ROLE&nbsp;o))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB&nbsp;kakunin)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VB0&nbsp;shi)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P-&#8288;CONN&nbsp;te))))</tt><br>
 </dd></dl>
 <br>
 <br>
