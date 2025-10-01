@@ -1,0 +1,24 @@
+<br><br><h1><a name="ch7">Chapter 7</a></h1>
+<h1>Closing remarks</h1>
+
+<p align="justify">We have now reached the end of the presentation of Definite Clause Grammar (DCG) definitions in this book. When taken together, they provide a system for parsing contemporary English with a wide coverage. However, keeping phrase structure rules straightforward and reducing structural ambiguity has placed limits on direct coverage:</p>
+
+<ul>
+<li>Phrase heads need to always be present in the word list. A work around is to have zero heads explicitly represented in the word list, e.g.&nbsp;<tt>w('P-CONN','_*_')</tt>.</li>
+<li>There is no mechanism to capture extrapositioning that happens with rightward displacements of relative clauses, <i>that</i>-clauses or <i>to</i>-infinitive clauses.</li>
+<li>There is no support for parentheticals.</li>
+<li>The support for punctuation is limited.</li>
+</ul>
+
+<p align="justify">In regard to limitations on punctuation:</p>
+
+<ul>
+<li>There is no support for punctuation internal to phrase layers.</li>
+<li>Commas have to occur between conjuncts, except between the penultimate and last conjunct which must have a represented conjunction word (<tt>CONJ</tt>) instead.</li>
+<li>Commas can occur optionally after adverbials with a clause initial placement or before adverbials with a clause final placement when attached at the highest layer of clause structure.</li>
+<li>A declarative or imperative sentence requires a full stop or exclamation mark (<tt>final</tt> punctuation) with a final position.</li>
+<li>An interrogative sentence requires a question mark (<tt>final_question</tt> punctuation) with a final position.</li>
+</ul>
+<br>
+<br>
+<br>

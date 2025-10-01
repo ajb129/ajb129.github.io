@@ -1,0 +1,986 @@
+<br><br><h1><a name="ch2">Chapter 2</a></h1>
+<h1>Words</h1>
+
+<br><h2><a name="sec2.1">2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
+
+<p align="justify">This chapter presents all the types of words we will aim to distinguish. We will do this by introducing <b>word classes</b> to which words belong. Also, some words, notably verbs, take a grammatical code that is additional to their word class information.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen in the queries of section <a href="chapter1.html#sec1.7">1.7</a>, we capture parse consequences for a word by having it as an item in a word list <b>together with</b> its word class and any grammatical code. The work of this chapter is to establish the initial parse outcome of encountering a class(code)/word pairing in a word list.</p>
+
+<br><h2><a name="sec2.2">2.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Noun words</h2>
+
+<p align="justify">We start off with the <tt>noun</tt> rules of (<a href="chapter2.html#ex2.1">2.1</a>) for establishing the contribution of the common noun words and proper noun words of Table <a href="chapter2.html#table2.1">2.1</a>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>NS</tt></td><td>plural common noun (e.g.&nbsp;<tt>children</tt>, <tt>revelations</tt>, <tt>times</tt>, <tt>wishes</tt>)</td></tr>
+<tr><td><tt>N</tt></td><td>common noun not subclassified as <tt>NS</tt>, that is, either singular (e.g.&nbsp;<tt>child</tt>, <tt>revelation</tt>, <tt>time</tt>, <tt>wish</tt>) or neutral for number (e.g.&nbsp;<tt>committee</tt>, <tt>fish</tt>, <tt>information</tt>)</td></tr>
+<tr><td><tt>NPRS</tt></td><td>plural proper noun (e.g.&nbsp;<tt>Clintons</tt>, <tt>Koreas</tt>)</td></tr>
+<tr><td><tt>NPR</tt></td><td>proper noun not subclassified as <tt>NPRS</tt>, that is either singular (e.g.&nbsp;<tt>Clinton</tt>, <tt>Tokyo</tt>) or neutral for number (e.g.&nbsp;<tt>Andes</tt>, <tt>IBM</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.1"><b>Table 2.1</b>: Tags for common noun words and proper noun words</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.1">2.1</a>)</dt><dd>
+<tt>noun([node('NS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('NS',Word)].</tt><br>
+<tt>noun([node('N',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('N',Word)].</tt><br>
+<tt>noun([node('NPRS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('NPRS',Word)].</tt><br>
+<tt>noun([node('NPR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('NPR',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">Prolog query (<a href="chapter2.html#ex2.2">2.2</a>) asks whether a word list with <tt>w('NS','boys')</tt> has content for a successful parse of <tt>noun</tt> structure.</p>
+
+<dl><dt>(<a name="ex2.2">2.2</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;&nbsp;tphrase_set_string([w('NS','boys')]),&nbsp;parse(noun).</tt><br>
+<br>
+<tt>(NS&nbsp;boys)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When we connect the <tt>noun</tt> rules of (<a href="chapter2.html#ex2.1">2.1</a>) to rules for parsing the internal content of noun phrases in section <a href="chapter3.html#sec3.2">3.2</a>, we will find that they contribute nouns that can be either:</p>
+
+<ul>
+<li>the head word for a noun phrase</li>
+<li>a noun modifier of another noun word</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also the words of Table <a href="chapter2.html#table2.2">2.2</a> that are noun phrase head words that cannot have premodifiers. In order to distinguish this kind of head word for the purpose of placing restrictions on compatible noun phrase structure, there are the <tt>noun_head</tt> rules of (<a href="chapter2.html#ex2.3">2.3</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>Q;_nphd_</tt></td><td>indefinite pronoun with quantification, which can be a compound (e.g.&nbsp;<tt>everybody</tt>, <tt>nothing</tt>) or a word which often occurs with the preposition <tt>of</tt> (e.g.&nbsp;<tt>much</tt>, <tt>many</tt>, <tt>a_lot</tt>)</td></tr>
+<tr><td><tt>D;_nphd_</tt></td><td>indefinite pronoun not subclassified as <tt>Q</tt> (e.g.&nbsp;<tt>someone</tt>, <tt>anything</tt>, <tt>another</tt>) and demonstrative pronoun (e.g.&nbsp;<tt>this</tt>, <tt>that</tt>, <tt>these</tt>, <tt>those</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.2"><b>Table 2.2</b>: Tags for noun phrase head words that cannot have premodifiers</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.3">2.3</a>)</dt><dd>
+<tt>noun_head([node('Q;_nphd_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('Q;_nphd_',Word)].</tt><br>
+<tt>noun_head([node('D;_nphd_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('D;_nphd_',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Additionally, there are the head words of Table <a href="chapter2.html#table2.3">2.3</a>. These give full noun phrase content, leaving no place for modifiers. We distinguish them with the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>PNX</tt></td><td>reflexive pronoun (e.g.&nbsp;<tt>myself</tt>, <tt>yourself</tt>, <tt>itself</tt>, <tt>ourselves</tt>) or reciprocal pronoun (<tt>each_other</tt>, <tt>one_another</tt>)</td></tr>
+<tr><td><tt>PRO</tt></td><td>personal pronoun (e.g.&nbsp;<tt>I</tt>, <tt>you</tt>, <tt>them</tt>, <tt>us</tt>)</td></tr>
+<tr><td><tt>PRO;_expletive_</tt></td><td>expletive <tt>it</tt> e.g.&nbsp;occuring in a weather construction (<i>it's raining</i>)</td></tr>
+<tr><td><tt>PRO;_ppge_</tt></td><td>nominal possessive personal pronoun (e.g.&nbsp;<tt>mine</tt>, <tt>yours</tt>, <tt>ours</tt>)</td></tr>
+<tr><td><tt>WPRO</tt></td><td>wh-pronoun (<tt>what</tt>, <tt>who</tt>, <tt>whom</tt>)</td></tr>
+<tr><td><tt>RPRO</tt></td><td>relative pronoun (<tt>which</tt>, <tt>who</tt>, <tt>whom</tt>, <tt>that</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.3"><b>Table 2.3</b>: Tags for noun phrase head words that are full content for noun phrases</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.4">2.4</a>)</dt><dd>
+<tt>noun_head_full(non_privileged,[node('PNX',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PNX',Word)].</tt><br>
+<tt>noun_head_full(Type,[node('PRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO',Word)].</tt><br>
+<tt>noun_head_full(Type,[node('PRO;_expletive_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
+<tt>noun_head_full(Type,[node('NP-&#8288;GEN',[node('PRO;_ppge_',[node(Word,[])])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_ppge_',Word)].</tt><br>
+<tt>noun_head_full(Type,[node('WPRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('WPRO',Word)].</tt><br>
+<tt>noun_head_full(relative,[node('RPRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rule 4] of (<a href="chapter2.html#ex2.4">2.4</a>) involves the word class with code <tt>PRO;_ppge_</tt>. This results in a genitive case marked noun phrase layer (<tt>NP-GEN</tt>) which goes on to be the only element of a containing noun phrase layer. This is seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
+
+<dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<br>
+<tt>(IP-&#8288;MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;SBJ</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;GEN&nbsp;(PRO;_ppge_&nbsp;Theirs)))</tt><br>
+<tt>&nbsp;&nbsp;(BEP;~La&nbsp;is)</tt><br>
+<tt>&nbsp;&nbsp;(ADJP-&#8288;PRD&nbsp;(ADJ&nbsp;large))</tt><br>
+<tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<p align="justify">Section <a href="chapter2.html#sec2.4">2.4</a> below will introduce other words that lead to genitive case marked noun phrases, with the difference that the identified genitive noun phrase layer will need to occur inside a noun phrase layer where there is a head word to modify.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We should also note how the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>) are of four types that depend on the value of the first parameter:</p>
+
+<ul>
+<li><tt>non_privileged</tt></li>
+<li><tt>established</tt></li>
+<li><tt>interrogative</tt></li>
+<li><tt>relative</tt></li>
+</ul>
+
+<p align="justify">These parameter settings will go on to have implications for the placement of any identified noun phrase in wider structure, that is, we will start to see ripple effects.</p>
+
+<h4>Question</h4>
+
+<p align="justify">What do the results of (<a href="chapter2.html#ex2.6">2.6</a>)&ndash;(<a href="chapter2.html#ex2.21">2.21</a>) tell us about where words with the different word classes of Table <a href="chapter2.html#table2.3">2.3</a> can occur?</p>
+
+<dl><dt>(<a name="ex2.6">2.6</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<br>
+<tt>(PNX&nbsp;itself)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.7">2.7</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.8">2.8</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.9">2.9</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.10">2.10</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<br>
+<tt>(PRO&nbsp;it)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.11">2.11</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<br>
+<tt>(PRO&nbsp;it)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.12">2.12</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.13">2.13</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.14">2.14</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<br>
+<tt>(WPRO&nbsp;who)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.15">2.15</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.16">2.16</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<br>
+<tt>(WPRO&nbsp;who)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.17">2.17</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.18">2.18</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.19">2.19</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<br>
+<tt>no</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.20">2.20</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<br>
+<tt>no</tt><br>
+<br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.21">2.21</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<br>
+<tt>(RPRO&nbsp;who)</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<br><h2><a name="sec2.3">2.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Determiner words</h2>
+
+<p align="justify">The <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) establish the contribution of the determiner words of Table <a href="chapter2.html#table2.4">2.4</a>. These words can only serve as noun head premodifiers. There can be at most one occurrence of such a word following on from an initial noun phrase layer (see section <a href="chapter3.html#sec3.2.2">3.2.2</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>Q</tt></td><td>quantifier (e.g.&nbsp;<tt>every</tt>, <tt>no</tt>)</td></tr>
+<tr><td><tt>D</tt></td><td>determiner, which includes articles (e.g.&nbsp;<tt>a</tt>, <tt>the</tt>) and demonstratives (e.g.&nbsp;<tt>this</tt>, <tt>that</tt>)</td></tr>
+<tr><td><tt>WD</tt></td><td>wh-determiner (e.g.&nbsp;<tt>which</tt>, <tt>what</tt>, <tt>whichever</tt>)</td></tr>
+<tr><td><tt>RD</tt></td><td>relative determiner of a relative clause (e.g.&nbsp;<tt>what</tt>, <tt>whatever</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.4"><b>Table 2.4</b>: Tags for determiner words</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.22">2.22</a>)</dt><dd>
+<tt>det(Type,[node('Q',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('Q',Word)].</tt><br>
+<tt>det(Type,[node('D',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('D',Word)].</tt><br>
+<tt>det(Type,[node('WD',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('WD',Word)].</tt><br>
+<tt>det(relative,[node('RD',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('RD',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Like the words detected by the <tt>noun_head_full</tt> rules of (<a href="chapter2.html#ex2.4">2.4</a>), words detected by the <tt>det</tt> rules of (<a href="chapter2.html#ex2.22">2.22</a>) are of four types that depend on the value of the first parameter:</p>
+
+<ul>
+<li><tt>non_privileged</tt></li>
+<li><tt>established</tt></li>
+<li><tt>interrogative</tt></li>
+<li><tt>relative</tt></li>
+</ul>
+
+<br><h2><a name="sec2.4">2.4</a>&nbsp;&nbsp;&nbsp;&nbsp;Genitive markers</h2>
+
+<p align="justify">A genitive noun phrase which itself acts as the premodifier of an external noun phrase head follows from presence of either a genitive marker or genitive pronoun word from Table <a href="chapter2.html#table2.5">2.5</a>. Phrase structure integration occurs with <tt>genm</tt> of (<a href="chapter2.html#ex2.23">2.23</a>) and <tt>pronoun_genm</tt> of (<a href="chapter2.html#ex2.24">2.24</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>GENM</tt></td><td>genitive marker (<tt>&lt;apos&gt;s</tt> or <tt>&lt;apos&gt;</tt>)</td></tr>
+<tr><td><tt>PRO;_genm_</tt></td><td>possessive pronoun, pre-nominal (<tt>my</tt>, <tt>your</tt>, <tt>our</tt>)</td></tr>
+<tr><td><tt>WPRO;_genm_</tt></td><td>genitive wh-pronoun (<tt>whose</tt>)</td></tr>
+<tr><td><tt>RPRO;_genm_</tt></td><td>genitive relative pronoun (<tt>whose</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.5"><b>Table 2.5</b>: Tags for genitive markers</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.23">2.23</a>)</dt><dd>
+<tt>genm([node('GENM',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('GENM',Word)].</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.24">2.24</a>)</dt><dd>
+<tt>pronoun_genm(Type,[node('PRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_genm_',Word)].</tt><br>
+<tt>pronoun_genm(Type,[node('WPRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
+<tt>&nbsp;&nbsp;},</tt><br>
+<tt>&nbsp;&nbsp;[w('WPRO;_genm_',Word)].</tt><br>
+<tt>pronoun_genm(relative,[node('RPRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('RPRO;_genm_',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words detected by the <tt>pronoun_genm</tt> rules of (<a href="chapter2.html#ex2.24">2.24</a>) are of four types that depend on the value of the first parameter:</p>
+
+<ul>
+<li><tt>non_privileged</tt></li>
+<li><tt>established</tt></li>
+<li><tt>interrogative</tt></li>
+<li><tt>relative</tt></li>
+</ul>
+
+<br><h2><a name="sec2.5">2.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Subject indicating words</h2>
+
+<p align="justify">Except when the clause <tt>Type</tt> setting is <tt>imperative_clause</tt>, there is always the requirement that a finite clause should include a subject. The rules of (<a href="chapter2.html#ex2.25">2.25</a>) integrate the subject requirement, provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
+
+<dl><dt>(<a name="ex2.25">2.25</a>)</dt><dd>
+<tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('EX',Word)].</tt><br>
+<tt>subject(provisional_sbj,[node('NP-&#8288;SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
+<tt>subject(filled_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-&#8288;SBJ',established,L,L0).</tt><br>
+<tt>subject(derived_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-&#8288;SBJ',established,L,L0).</tt><br>
+<tt>subject(filled_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_active('-&#8288;SBJ',store([],[]),filled_sbj,ing_participle,L,L0).</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first three rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
+
+<ul>
+<li>[rule 1] <tt>there_sbj</tt></li>
+<li>[rule 2] <tt>provisional_sbj</tt></li>
+</ul>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>EX</tt></td><td>existential <tt>there</tt>, i.e., <i>there</i> of the <i>there is ...</i> or <i>there are ...</i> construction co-occurring with an existential subject (<tt>NP-ESBJ</tt>)</td></tr>
+<tr><td><tt>PRO;_provisional_</tt></td><td>provisional <tt>it</tt> occuring with extraposition (<i>it bothered her that she probably would never know</i>) or a cleft construction (<i>so it was you that got them together</i>)</td></tr>
+</table>
+<br>
+<a name="table2.6"><b>Table 2.6</b>: Tags for subject indicating words</a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The subject is more typically a contentful noun phrase. [rule 3] of (<a href="chapter2.html#ex2.25">2.25</a>) identifies such a noun phrase while also setting the clause <tt>SbjType</tt> parameter to the value of:</p>
+
+<ul>
+<li>[rule 3] <tt>filled_sbj</tt></li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, in the case of a <i>tough</i>-construction (see section <a href="chapter6.html#sec6.6.2">6.6.2</a>), a contentful noun phrase can lead to the clause <tt>SbjType</tt> parameter being set to the value of:</p>
+
+<ul>
+<li>[rule 4] <tt>derived_sbj</tt></li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;A contentful subject can also be a participle clause to set the clause <tt>SbjType</tt> parameter to the value of:</p>
+
+<ul>
+<li>[rule 5] <tt>filled_sbj</tt></li>
+</ul>
+
+<br><h2><a name="sec2.6">2.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Adverb words</h2>
+
+<p align="justify">Table <a href="chapter2.html#table2.7">2.7</a> sets out the range of support for adverb words. Parse integration follows from the <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>ADV</tt></td><td>general adverb (e.g.&nbsp;<tt>often</tt>, <tt>well</tt>, <tt>really</tt>).</td></tr>
+<tr><td><tt>ADVR</tt></td><td>comparative adverb (e.g.&nbsp;<tt>more</tt>, <tt>less</tt>, <tt>farther</tt>)</td></tr>
+<tr><td><tt>ADVS</tt></td><td>superlative adverb (e.g.&nbsp;<tt>most</tt>, <tt>least</tt>, <tt>farthest</tt>)</td></tr>
+<tr><td><tt>WADV</tt></td><td>wh-adverb (e.g.&nbsp;<tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>why</tt>)</td></tr>
+<tr><td><tt>RADV</tt></td><td>relative adverb of a relative clause (e.g.&nbsp;<tt>how</tt>, <tt>when</tt>, <tt>where</tt>, <tt>whereby</tt>)</td></tr>
+<tr><td><tt>RP</tt></td><td>adverbial particle (e.g.&nbsp;<tt>up</tt>, <tt>off</tt>, <tt>out</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.7"><b>Table 2.7</b>: Tags for adverb words</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.26">2.26</a>)</dt><dd>
+<tt>adv(established,[node('ADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADV',Word)].</tt><br>
+<tt>adv(established,[node('ADVR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADVR',Word)].</tt><br>
+<tt>adv(established,[node('ADVS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADVS',Word)].</tt><br>
+<tt>adv(interrogative,[node('WADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('WADV',Word)].</tt><br>
+<tt>adv(relative,[node('RADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('RADV',Word)].</tt><br>
+<tt>adv(particle,[node('RP',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('RP',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">The <tt>adv</tt> rules of (<a href="chapter2.html#ex2.26">2.26</a>) are of five types that depend on the value of the first parameter:</p>
+
+<ul>
+<li><tt>established</tt></li>
+<li><tt>interrogative</tt></li>
+<li><tt>relative</tt></li>
+<li><tt>particle</tt></li>
+</ul>
+
+<br><h2><a name="sec2.7">2.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Adjective words</h2>
+
+<p align="justify">Table <a href="chapter2.html#table2.8">2.8</a> sets out the range of support for adjective words. Parse integration follows from the <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>ADJ</tt></td><td>general adjective (e.g.&nbsp;<tt>old</tt>, <tt>good</tt>, <tt>male</tt>)</td></tr>
+<tr><td><tt>ADJR</tt></td><td>comparative adjective (e.g.&nbsp;<tt>older</tt>, <tt>better</tt>)</td></tr>
+<tr><td><tt>ADJS</tt></td><td>superlative adjective (e.g.&nbsp;<tt>oldest</tt>, <tt>best</tt>)</td></tr>
+<tr><td><tt>ADJ;_cat_</tt></td><td>catenative adjective (<tt>able</tt> in <i>be able to</i>, <tt>willing</tt> in <i>be willing to</i>)</td></tr>
+</table>
+<br>
+<a name="table2.8"><b>Table 2.8</b>: Tags for adjective words</a>
+</center>
+<br>
+
+<dl><dt>(<a name="ex2.27">2.27</a>)</dt><dd>
+<tt>adj(established,[node('ADJ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADJ',Word)].</tt><br>
+<tt>adj(established,[node('ADJR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADJR',Word)].</tt><br>
+<tt>adj(established,[node('ADJS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADJS',Word)].</tt><br>
+<tt>adj(catenative,[node('ADJ;_cat_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('ADJ;_cat_',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">The <tt>adj</tt> rules of (<a href="chapter2.html#ex2.27">2.27</a>) are of two types that depend on the value of the first parameter:</p>
+
+<ul>
+<li><tt>established</tt></li>
+<li><tt>catenative</tt></li>
+</ul>
+
+<br><h2><a name="sec2.8">2.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb words</h2>
+
+<p align="justify">This section covers how verb words are integrated into a parse. The <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) matches verb words from the word list, collecting information for three parameters: <tt>Tag</tt>, <tt>Code</tt> and <tt>Word</tt>.</p>
+
+<dl><dt>(<a name="ex2.28">2.28</a>)</dt><dd>
+<tt>verb(Infl,Code,[node(TagCode,[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
+<tt>&nbsp;&nbsp;{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_tag(Infl,TagList),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,TagList),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;sub_atom(Tag,0,1,_,C),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_code(C,Infl,Code),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat(Tag,Code,TagCode)</tt><br>
+<tt>&nbsp;&nbsp;}.</tt><br>
+</dd></dl>
+
+<p align="justify">There is a check of collected word information:</p>
+
+<ul>
+<li><tt>Tag</tt> has to be a member of <tt>Tag_list</tt>, which is a list of candidate tags obtained with a call to <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>) below restricted by the inflection information of <tt>Infl</tt> inherited from the clause context</li>
+<li><tt>Code</tt> has to be a code licensed by a call to <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) below restricted by the first character of <tt>Tag</tt> and the local clause inflection information</li>
+</ul>
+
+<p align="justify">Once matched and licensed, the verb word information goes into the parse tree information accumulated with <tt>L</tt>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The remainder of this section recognises verb classes with tags that further distinguish verb form (section <a href="chapter2.html#sec2.8.1">2.8.1</a>), and establishes the grammatical codes that are compatible with combinations of verb classes and inflection information (section <a href="chapter2.html#sec2.8.2">2.8.2</a>). Complement selection for grammatical codes is the topic of chapter <a href="chapter4.html#ch4">4</a>.</p>
+
+<h3><a name="sec2.8.1">2.8.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb classes</h3>
+
+<p align="justify">The aim of this section is to provide tags to distinguish the following classes of verb words:</p>
+
+<ul>
+<li>lexical verb words</li>
+<li><small style="font-size: 75%">DO</small> verb words</li>
+<li><small style="font-size: 75%">HAVE</small> verb words</li>
+<li><small style="font-size: 75%">BE</small> verb words</li>
+</ul>
+
+<p align="justify">Tags of the same class will have the same initial letter (<tt>V</tt>, <tt>D</tt>, <tt>H</tt> or <tt>B</tt>) and then vary to distinguish form:</p>
+
+<ul>
+<li>present tense form</li>
+<li>past tense form</li>
+<li>infinitive form</li>
+<li>present participle (&lcub;ing&rcub;) form</li>
+<li>past participle (&lcub;ed&rcub;&sol;&lcub;en&rcub;) form</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.9">2.9</a> gives tags for the different forms of lexical verbs.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>VBP</tt></td><td>present tense form of lexical verbs (e.g.&nbsp;<tt>reaches</tt>, <tt>supports</tt>, <tt>writes</tt>, <tt>sinks</tt>, <tt>puts</tt>, <tt>reach</tt>, <tt>support</tt>, <tt>write</tt>, <tt>sink</tt>, <tt>put</tt>)</td></tr>
+<tr><td><tt>VBD</tt></td><td>past tense form of lexical verbs (e.g.&nbsp;<tt>reached</tt>, <tt>supported</tt>, <tt>wrote</tt>, <tt>sank</tt>, <tt>put</tt>)</td></tr>
+<tr><td><tt>VB</tt></td><td>infinitive form of lexical verbs (e.g.&nbsp;<tt>reach</tt>, <tt>support</tt>, <tt>write</tt>, <tt>sink</tt>, <tt>put</tt>)</td></tr>
+<tr><td><tt>VAG</tt></td><td>present participle (&lcub;ing&rcub;) form of lexical verbs (used in the progressive construction) (e.g.&nbsp;<tt>reaching</tt>, <tt>supporting</tt>, <tt>writing</tt>, <tt>sinking</tt>, <tt>putting</tt>)</td></tr>
+<tr><td><tt>VVN</tt></td><td>past participle (&lcub;ed&rcub;&sol;&lcub;en&rcub;) form of lexical verbs (used in the perfect construction and the passive construction) (e.g.&nbsp;<tt>reached</tt>, <tt>supported</tt>, <tt>written</tt>, <tt>sunk</tt>, <tt>put</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.9"><b>Table 2.9</b>: Tags for lexical verb words</a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.10">2.10</a> gives tags for the different forms of <small style="font-size: 75%">DO</small>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>DOP</tt></td><td>present tense forms of the verb <small style="font-size: 75%">DO</small>: <tt>do</tt>, <tt>does</tt>, <tt>&lt;apos&gt;s</tt></td></tr>
+<tr><td><tt>DOD</tt></td><td>past tense form of the verb <small style="font-size: 75%">DO</small>: <tt>did</tt></td></tr>
+<tr><td><tt>DO</tt></td><td>infinitive form of the verb <small style="font-size: 75%">DO</small>: <tt>do</tt></td></tr>
+<tr><td><tt>DAG</tt></td><td>present participle form of the verb <small style="font-size: 75%">DO</small>: <tt>doing</tt></td></tr>
+<tr><td><tt>DON</tt></td><td>past participle form of the verb <small style="font-size: 75%">DO</small>: <tt>done</tt></td></tr>
+</table>
+<br>
+<a name="table2.10"><b>Table 2.10</b>: Tags for <small style="font-size: 75%">DO</small></a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.11">2.11</a> gives tags for the different forms of <small style="font-size: 75%">HAVE</small>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>HVP</tt></td><td>present tense forms of the verb <small style="font-size: 75%">HAVE</small>: <tt>have</tt>, <tt>&lt;apos&gt;ve</tt>, <tt>has</tt>, <tt>&lt;apos&gt;s</tt></td></tr>
+<tr><td><tt>HVD</tt></td><td>past tense form of the verb <small style="font-size: 75%">HAVE</small>: <tt>had</tt>, <tt>&lt;apos&gt;d</tt></td></tr>
+<tr><td><tt>HV</tt></td><td>infinitive form of the verb <small style="font-size: 75%">HAVE</small>: <tt>have</tt></td></tr>
+<tr><td><tt>HAG</tt></td><td>present participle form of the verb <small style="font-size: 75%">HAVE</small>: <tt>having</tt></td></tr>
+<tr><td><tt>HVN</tt></td><td>past participle form of the verb <small style="font-size: 75%">HAVE</small>: <tt>had</tt></td></tr>
+</table>
+<br>
+<a name="table2.11"><b>Table 2.11</b>: Tags for <small style="font-size: 75%">HAVE</small></a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Table <a href="chapter2.html#table2.12">2.12</a> gives tags for the different forms of <small style="font-size: 75%">BE</small>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>BEP</tt></td><td>present tense forms of the verb <small style="font-size: 75%">BE</small>: i.e.&nbsp;<tt>is</tt>, <tt>am</tt>, <tt>are</tt>, <tt>&lt;apos&gt;m</tt>, <tt>&lt;apos&gt;re</tt> and <tt>&lt;apos&gt;s</tt></td></tr>
+<tr><td><tt>BED</tt></td><td>past tense forms of the verb <small style="font-size: 75%">BE</small>: <tt>was</tt> and <tt>were</tt></td></tr>
+<tr><td><tt>BE</tt></td><td>infinitive form of the verb <small style="font-size: 75%">BE</small>: <tt>be</tt></td></tr>
+<tr><td><tt>BAG</tt></td><td>present participle form of the verb <small style="font-size: 75%">BE</small>: <tt>being</tt></td></tr>
+<tr><td><tt>BEN</tt></td><td>past participle form of the verb <small style="font-size: 75%">BE</small>: <tt>been</tt></td></tr>
+</table>
+<br>
+<a name="table2.12"><b>Table 2.12</b>: Tags for <small style="font-size: 75%">BE</small></a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can access the verb tag information of tables <a href="chapter2.html#table2.9">2.9</a>&ndash;<a href="chapter2.html#table2.12">2.12</a> on the basis of inflection information with <tt>verb_tag</tt> of (<a href="chapter2.html#ex2.29">2.29</a>).</p>
+
+<dl><dt>(<a name="ex2.29">2.29</a>)</dt><dd>
+<tt>verb_tag(finite,['VBP','VBD','DOP','DOD','HVP','HVD','BEP','BED']).</tt><br>
+<tt>verb_tag(imperative,['VB','DO','HV','BE']).</tt><br>
+<tt>verb_tag(infinitive,['VB','DO','HV','BE']).</tt><br>
+<tt>verb_tag(do_supported_infinitive,['VB','DO','HV']).</tt><br>
+<tt>verb_tag(ing_participle,['VAG','DAG','HAG','BAG']).</tt><br>
+<tt>verb_tag(en_participle,['VVN','DON','HVN','BEN']).</tt><br>
+</dd></dl>
+
+<p align="justify">When seeking to match a verb word together with tag and verb code from the word list, the <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) above calls the <tt>verb_tag</tt> rules of (<a href="chapter2.html#ex2.29">2.29</a>) to ensure that the tag is compatible with the inflection inherited from the <tt>Infl</tt> parameter.</p>
+
+<h3><a name="sec2.8.2">2.8.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Verb codes</h3>
+
+<p align="justify">This section outlines verb codes as tag extensions. The codes allow for a distinction of verbs to reflect the selection criteria each verb has for its complements, detailed in chapter <a href="chapter4.html#ch4">4</a>.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To get a handle on the complement information for main verbs, we adopt the verb code system from the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). In this dictionary, there is matching of verb codes to word sense definitions and example sentences. The system is a mnemonic based reworking of the earlier system of Hornby (1975). A code from the system has:</p>
+
+<ul>
+<li>a capital letter (<tt>L</tt>, <tt>I</tt>, <tt>T</tt>, <tt>C</tt> or <tt>D</tt>; see Table <a href="chapter2.html#table2.13">2.13</a>) to signal the number and function of clause elements required by the main verb</li>
+<li>zero or more lower case letters (<tt>a</tt>, <tt>n</tt>, <tt>p</tt>, <tt>pr</tt>, <tt>n&sol;pr</tt>, <tt>n&sol;a</tt>, <tt>t</tt>, <tt>f</tt>, <tt>w</tt>, <tt>g</tt>, <tt>i</tt> and <tt>r</tt>; see Table <a href="chapter2.html#table2.14">2.14</a>), possibly separated by the dot (&lsquo;<tt>.</tt>&rsquo;) character, to represent information about the form of the required elements</li>
+</ul>
+
+<p align="justify">For example, the <tt>La</tt> code marks clause structure (<tt>L</tt>) with a linking verb + a subject predicative constituent that is an adjective phrase (<tt>a</tt>). As an example with the dot character, the <tt>Cn.a</tt> code marks a complex-transitive verb in clause structure (<tt>C</tt>) with the complex-transitive verb + a direct object constituent that is a noun phrase (<tt>n</tt>) + an object predicative constituent that is an adjective phrase (<tt>a</tt>).</p>
+
+<center>
+<table border="1" cellpadding="10px">
+  <tr>
+    <td><tt>L</tt></td>
+    <td colspan="2"><b>Linking</b> verb</td>
+    <td>selects a <b>subject predicative</b> (<tt>-PRD</tt>), an element which provides information about the subject of the clause.</td>
+  </tr>
+  <tr>
+    <td><tt>I</tt></td>
+    <td colspan="2"><b>Intransitive</b> verb</td>
+    <td>there is no selection of a subject predicative or an object, although there may be selection of an <b>adverbial</b>, an element which tells us about time, place, manner, etc of the action of the verb.</td>
+  </tr>
+  <tr>
+    <td><tt>T</tt></td>
+    <td rowspan="3"><b>Transitive</b> verb</td>
+    <td><b>Mono-transitive</b> verb</td>
+    <td>selects a <b>direct object</b> (<tt>-OB1</tt>), an element which often refers to the person or thing affected by the action of the verb.</td>
+  </tr>
+  <tr>
+    <td><tt>C</tt></td>
+    <td><b>Complex-transitive</b> verb</td>
+    <td>selects both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>object predicative</b> (<tt>-PRD</tt>), an element which provides more information about the direct object. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the object predicative.</td>
+  </tr>
+  <tr>
+    <td><tt>D</tt></td>
+    <td><b>Ditransitive</b> verb</td>
+    <td>selects both a <b>direct object</b> (<tt>-OB1</tt>) and an <b>indirect object</b> (<tt>-OB2</tt>), an element which refers to a person who receives something or benefits from an action. Note: in the code, a dot divides information about the realisation of the direct object from information about the realisation of the indirect object.</td>
+  </tr>
+</table>
+<br>
+<a name="table2.13"><b>Table 2.13</b>: Capital letters <tt>L</tt>, <tt>I</tt>, <tt>T</tt>, <tt>C</tt> and <tt>D</tt></a>
+</center>
+<br>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>a</tt></td><td>adjective phrase</td></tr>
+<tr><td><tt>n</tt></td><td>noun phrase</td></tr>
+<tr><td><tt>p</tt></td><td>adverb particle</td></tr>
+<tr><td><tt>pr</tt></td><td>preposition phrase</td></tr>
+<tr><td><tt>n&sol;pr</tt></td><td>noun phrase&sol;preposition phrase</td></tr>
+<tr><td><tt>n&sol;a</tt></td><td><i>as</i> + noun phrase&sol;adjective phrase</td></tr>
+<tr><td><tt>t</tt></td><td>non-finite clause (<i>to</i>-infinitive) (<tt>IP-INF</tt> with <i>to</i> tagged <tt>TO</tt> and verb tagged <tt>VB</tt>)</td></tr>
+<tr><td><tt>f</tt></td><td><i>that</i>-clause (<tt>CP-THT</tt>)</td></tr>
+<tr><td><tt>w</tt></td><td>finite or non-finite clause with <i>wh</i> element (<tt>CP-QUE</tt>)</td></tr>
+<tr><td><tt>g</tt></td><td>participle clause (&lcub;ing&rcub; form) (<tt>IP-PPL</tt> with verb tagged <tt>VAG</tt>)</td></tr>
+<tr><td><tt>i</tt></td><td>non-finite clause (bare infinitive) (<tt>IP-INF</tt> with verb tagged <tt>VB</tt> but no <tt>TO</tt> tagged word)</td></tr>
+<tr><td><tt>r</tt></td><td>utterance</td></tr>
+</table>
+<br>
+<a name="table2.14"><b>Table 2.14</b>: Lower case letters <tt>a</tt>, <tt>n</tt>, <tt>p</tt>, <tt>pr</tt>, <tt>n&sol;pr</tt>, <tt>n&sol;a</tt>, <tt>t</tt>, <tt>f</tt>, <tt>w</tt>, <tt>g</tt>, <tt>i</tt> and <tt>r</tt></a>
+</center>
+<br>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Also, we source three codes directly from Hornby (1975):</p>
+
+<ul>
+<li><tt>VP24A</tt></li>
+<li><tt>VP24B</tt></li>
+<li><tt>VP24C</tt></li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;In addition, further verb codes distinguish:</p>
+
+<ul>
+<li>catenative verbs (prefixed <tt>cat_</tt>)</li>
+<li>existential verbs (prefixed <tt>ex_</tt>)</li>
+<li>equative verbs (prefixed <tt>equ_</tt>)</li>
+<li>cleft verbs (prefixed <tt>cleft_</tt>)</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Different verb classes allow for different verb codes. <tt>verb_code</tt> of (<a href="chapter2.html#ex2.30">2.30</a>) determines compatible verb codes, taking a capital letter as the value for its first parameter to identify verb class:</p>
+
+<ul>
+<li><tt>V</tt> for lexical verbs</li>
+<li><tt>D</tt> for <small style="font-size: 75%">DO</small> verbs</li>
+<li><tt>H</tt> for <small style="font-size: 75%">HAVE</small> verbs</li>
+<li><tt>B</tt> for <small style="font-size: 75%">BE</small> verbs</li>
+</ul>
+
+<p align="justify">A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
+
+<dl><dt>(<a name="ex2.30">2.30</a>)</dt><dd>
+<tt>verb_code('V',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',';~In&sol;pr',';~It',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Tn',';~Tn.p',';~Tn.pr',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Tf',';~Tw',';~Tr',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Tt',';~Tnt',';~Tprt',';~Tni',';~Tg',';~Tng',';~Tsg',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Dn.n',';~Dn.f',';~Dn.w',';~Dn.r',';~Dn.t',';~Dn.*',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Dn.pr',';~Dpr.f',';~Dpr.r',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Cn.a',';~Cn.n',';~Cn.n&sol;a',';~Cn.pr',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~Cn.t',';~Cn.i',';~Cn.g',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~V_as_though&sol;as_if&sol;like',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
+<tt>verb_code('V',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_supported_infinitive]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
+<tt>verb_code('V',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',';~cat_Ve_passive_']).</tt><br>
+<tt>verb_code('D',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~Tn']).</tt><br>
+<tt>verb_code('H',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~Tn',';~VP24B',';~VP24C']).</tt><br>
+<tt>verb_code('H',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt',';~cat_Ve']).</tt><br>
+<tt>verb_code('H',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt']).</tt><br>
+<tt>verb_code('B',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vt',';~cat_Vt_passive_',';~cat_Ve_passive_',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
+<tt>verb_code('B',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,ing_participle,en_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[';~ex_V',';~ex_Vp',';~ex_Vpr']).</tt><br>
+<tt>verb_code('B',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,en_participle]),</tt><br>
+<tt>&nbsp;&nbsp;member(Code,[</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vg',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~ex_cat_Vt',';~ex_cat_Vt_passive_',';~ex_cat_Vg',';~ex_cat_Ve_passive_',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cleft_Vn'</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
+</dd></dl>
+
+<p align="justify">Note how returned codes sometimes depend on inflection information from the <tt>Infl</tt> parameter.</p>
+
+<h4>Question</h4>
+
+<p align="justify">What does the Prolog query of (<a href="chapter2.html#ex2.31">2.31</a>) achieve?</p>
+
+<dl><dt>(<a name="ex2.31">2.31</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([Word]),&nbsp;parse(verb(Infl,Code)),&nbsp;fail.</tt><br>
+</dd></dl>
+
+<h4>Question</h4>
+
+<p align="justify">How do the tree results from the Prolog query of (<a href="chapter2.html#ex2.32">2.32</a>) differ?</p>
+
+<dl><dt>(<a name="ex2.32">2.32</a>)</dt><dd>
+<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('N','Business'), w('NS','people'), w('VBP',Y,'make'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<br>
+<tt>(IP-&#8288;MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(N&nbsp;Business)&nbsp;(NS&nbsp;people))</tt><br>
+<tt>&nbsp;&nbsp;(VBP;~I&nbsp;make)</tt><br>
+<tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<br>
+<tt>(IP-&#8288;MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;TPC-&#8288;190&nbsp;(N&nbsp;Business))</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NS&nbsp;people))</tt><br>
+<tt>&nbsp;&nbsp;(VBP;~Ln&nbsp;make)</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;*ICH*-&#8288;190)</tt><br>
+<tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<br>
+<tt>(IP-&#8288;MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;TPC-&#8288;190&nbsp;(N&nbsp;Business))</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NS&nbsp;people))</tt><br>
+<tt>&nbsp;&nbsp;(VBP;~Tn&nbsp;make)</tt><br>
+<tt>&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;*ICH*-&#8288;190)</tt><br>
+<tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
+<br>
+<tt>Y&nbsp;=&nbsp;_h771</tt><br>
+<br>
+<tt>yes</tt><br>
+</dd></dl>
+
+<br><h2><a name="sec2.9">2.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Modal verbs</h2>
+
+<p align="justify">Modal verbs have the tags and verb codes of Table <a href="chapter2.html#table2.15">2.15</a>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td>Present tense</td><td>Past tense</td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','shall')</tt></td><td><tt>w('MD',';~cat_Vi','should')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','will')</tt></td><td><tt>w('MD',';~cat_Vi','would')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','can')</tt></td><td><tt>w('MD',';~cat_Vi','could')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','may')</tt></td><td><tt>w('MD',';~cat_Vi','might')</tt></td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','must')</tt></td><td>&#8203;</td></tr>
+<tr><td><tt>w('MD',';~cat_Vt','ought')</tt></td><td>&#8203;</td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','need')</tt></td><td>&#8203;</td></tr>
+<tr><td><tt>w('MD',';~cat_Vi','dare')</tt></td><td>&#8203;</td></tr>
+<tr><td>&#8203;</td><td><tt>w('MD',';~cat_Vt','used')</tt></td></tr>
+</table>
+<br>
+<a name="table2.15"><b>Table 2.15</b>: Modal verbs with tags and verb codes</a>
+</center>
+<br>
+
+<p align="justify">The <tt>modal</tt> rules of (<a href="chapter2.html#ex2.33">2.33</a>) support the integration of the modal words of Table <a href="chapter2.html#table2.15">2.15</a>.</p>
+
+<dl><dt>(<a name="ex2.33">2.33</a>)</dt><dd>
+<tt>modal(';~cat_Vi',[node('MD;~cat_Vi',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('MD',';~cat_Vi',Word)].</tt><br>
+<tt>modal(';~cat_Vt',[node('MD;~cat_Vt',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('MD',';~cat_Vt',Word)].</tt><br>
+</dd></dl>
+
+<br><h2><a name="sec2.10">2.10</a>&nbsp;&nbsp;&nbsp;&nbsp;Other clause level words</h2>
+
+<p align="justify">Besides verbs, other clause level components are words with the tags of Table <a href="chapter2.html#table2.16">2.16</a>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>NEG</tt></td><td>negative particle <tt>not</tt></td></tr>
+<tr><td><tt>NEG;_clitic_</tt></td><td>negative clitic particle <tt>n&lt;apos&gt;t</tt></td></tr>
+<tr><td><tt>TO</tt></td><td>infinitive marker <tt>to</tt></td></tr>
+<tr><td><tt>CONJ;_cl_</tt></td><td>discourse coordination (e.g.&nbsp;<tt>And</tt>, <tt>But</tt>)</td></tr>
+<tr><td><tt>INTJ</tt></td><td>interjection (e.g.&nbsp;<tt>aah</tt>, <tt>eh</tt>, <tt>ummmmm</tt>)</td></tr>
+<tr><td><tt>REACT</tt></td><td>reaction signal (e.g.&nbsp;<tt>good_grief</tt>, <tt>really</tt>, <tt>yes</tt>, <tt>wow</tt>)</td></tr>
+<tr><td><tt>FRM</tt></td><td>formulaic expression (e.g.&nbsp;<tt>good_afternoon</tt>, <tt>you_see</tt>, <tt>thank_you</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.16"><b>Table 2.16</b>: Tags for other clause level words</a>
+</center>
+<br>
+
+<p align="justify">The <tt>optional_clitic_negation</tt>, <tt>neg</tt> and <tt>to</tt> rules of (<a href="chapter2.html#ex2.34">2.34</a>) and the <tt>initial_adverbial</tt> rules of (<a href="chapter2.html#ex2.35">2.35</a>) support the integration of the words of Table <a href="chapter2.html#table2.16">2.16</a>.</p>
+
+<dl><dt>(<a name="ex2.34">2.34</a>)</dt><dd>
+<tt>optional_clitic_negation([node('NEG;_clitic_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('NEG;_clitic_',Word)].</tt><br>
+<tt>optional_clitic_negation(L,L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[].</tt><br>
+<tt>neg([node('NEG',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('NEG',Word)].</tt><br>
+<tt>to([node('TO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('TO',Word)].</tt><br>
+</dd></dl>
+
+<dl><dt>(<a name="ex2.35">2.35</a>)</dt><dd>
+<tt>initial_adverbial([node('CONJ;_cl_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('CONJ;_cl_',Word)].</tt><br>
+<tt>initial_adverbial([node('INTJ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('INTJ',Word)].</tt><br>
+<tt>initial_adverbial([node('REACT',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('REACT',Word)].</tt><br>
+<tt>initial_adverbial([node('FRM',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('FRM',Word)].</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-&#8288;NIM',established,L,L0).</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('-&#8288;NIM-&#8288;TPC',established,L,L0).</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;scon_clause(L,L0).</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As single word content, <tt>initial_adverbial</tt> calls can pick up:</p>
+
+<ul>
+<li>[rule 1] discourse coordination words (e.g.&nbsp;<i>And</i>, <i>But</i>)</li>
+<li>[rule 2] clause level interjection (e.g.&nbsp;<i>aah</i>, <i>eh</i>, <i>ummmmm</i>)</li>
+<li>[rule 3] reaction signals (e.g.&nbsp;<i>good_grief</i>, <i>really</i>, <i>yes</i>, <i>wow</i>)</li>
+<li>[rule 4] formulaic expressions (e.g.&nbsp;<i>good_afternoon</i>, <i>you_see</i>, <i>thank_you</i>)</li>
+</ul>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;<tt>initial_adverbial</tt> calls can also pick up:</p>
+
+<ul>
+<li>[rule 5] non-interrogative adverb phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
+<li>[rule 6] non-interrogative preposition phrases with <tt>-NIM</tt> (unselected adverbial) function</li>
+<li>[rule 7] the subordinate component of a subordinate conjunction</li>
+</ul>
+
+<br><h2><a name="sec2.11">2.11</a>&nbsp;&nbsp;&nbsp;&nbsp;Connective words</h2>
+
+<p align="justify">So far, we have considered words that serve as components of either phrases or clauses. There is a further class of words with the tags of Table <a href="chapter2.html#table2.17">2.17</a> that serve as the means to connect phrases and clauses.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>CONJ</tt></td><td>coordinating conjunction (<tt>and</tt>, <tt>or</tt>, <tt>but</tt>)</td></tr>
+<tr><td><tt>C</tt></td><td>the complementizer <tt>that</tt></td></tr>
+<tr><td><tt>WQ</tt></td><td>marker of indirect question (<tt>whether</tt> or <tt>if</tt>)</td></tr>
+<tr><td><tt>P-CONN</tt></td><td>subordinating conjunction (e.g.&nbsp;<tt>although</tt>, <tt>when</tt>, <tt>in_order</tt>)</td></tr>
+<tr><td><tt>P-ROLE</tt></td><td>role preposition (e.g.&nbsp;<tt>in</tt>, <tt>of</tt>, <tt>under</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.17"><b>Table 2.17</b>: Tags for connective words</a>
+</center>
+<br>
+
+<p align="justify">The <tt>conj</tt>, <tt>comp</tt>, <tt>comp_wq</tt>, <tt>conn</tt> and <tt>role</tt> rules of (<a href="chapter2.html#ex2.36">2.36</a>) support the integration of the connective words of Table <a href="chapter2.html#table2.17">2.17</a>.</p>
+
+<dl><dt>(<a name="ex2.36">2.36</a>)</dt><dd>
+<tt>conj(node('CONJ',[node(Word,[])]))&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('CONJ',Word)].</tt><br>
+<tt>comp([node('C',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('C',Word)].</tt><br>
+<tt>comp_wq([node('WQ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('WQ',Word)].</tt><br>
+<tt>conn([node('P-&#8288;CONN',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('P-&#8288;CONN',Word)].</tt><br>
+<tt>role([node('P-&#8288;ROLE',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('P-&#8288;ROLE',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also the tag and code combination of Table <a href="chapter2.html#table2.18">2.18</a> included with passive constructions in sections <a href="chapter4.html#sec4.4">4.4</a> and <a href="#sec"></a>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>P-ROLE;_lgs_</tt></td><td>preposition marking a logical subject (<tt>by</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.18"><b>Table 2.18</b>: Marking for a logical subject</a>
+</center>
+<br>
+
+<br><h2><a name="sec2.12">2.12</a>&nbsp;&nbsp;&nbsp;&nbsp;Punctuation</h2>
+
+<p align="justify">Punctuation points are treated as words for the purposes of word tagging with the tags of Table <a href="chapter2.html#table2.19">2.19</a>.</p>
+
+<center>
+<table border="1" cellpadding="10px">
+<tr><td><tt>PUNC</tt></td><td>punctuation: general separating mark (<tt>?</tt> <tt>.</tt> <tt>!</tt> <tt>,</tt>)</td></tr>
+<tr><td><tt>PULQ</tt></td><td>punctuation: left quotation mark (<tt>&lt;ldquo&gt;</tt> <tt>&lt;lsquo&gt;</tt>)</td></tr>
+<tr><td><tt>PURQ</tt></td><td>punctuation: right quotation mark (<tt>&lt;rdquo&gt;</tt> <tt>&lt;rsquo&gt;</tt>)</td></tr>
+</table>
+<br>
+<a name="table2.19"><b>Table 2.19</b>: Tag for punctuation</a>
+</center>
+<br>
+
+<p align="justify">This makes punctuation part of a sentence in its own right. Within constituent structure, punctuation occurs as high as possible. A full stop that ends a sentence is the last constituent of the highest clause layer.</p>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>punc</tt> rules of (<a href="chapter2.html#ex2.37">2.37</a>) give support for the integration of punctuation, with an initial parameter to distinguish types:</p>
+
+<ul>
+<li><tt>final</tt></li>
+<li><tt>final_question</tt></li>
+<li><tt>non_final</tt></li>
+<li><tt>left_quotation_mark</tt></li>
+<li><tt>right_quotation_mark</tt></li>
+</ul>
+
+<dl><dt>(<a name="ex2.37">2.37</a>)</dt><dd>
+<tt>punc(final,[node('PUNC',[node('.',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC','.')].</tt><br>
+<tt>punc(final,[node('PUNC',[node('!',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC','!')].</tt><br>
+<tt>punc(final_question,[node('PUNC',[node('?',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC','?')].</tt><br>
+<tt>punc(non_final,[node('PUNC',[node(',',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC',',')].</tt><br>
+<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;ldquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PULQ','&lt;ldquo&gt;')].</tt><br>
+<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;lsquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PULQ','&lt;lsquo&gt;')].</tt><br>
+<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rsquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PURQ','&lt;rsquo&gt;')].</tt><br>
+<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rdquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PURQ','&lt;rdquo&gt;')].</tt><br>
+<tt>punc(final,[node('PUNC;_final_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC;_final_',Word)].</tt><br>
+<tt>punc(final_question,[node('PUNC;_final_question_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC;_final_question_',Word)].</tt><br>
+<tt>punc(non_final,[node('PUNC;_non_final_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('PUNC;_non_final_',Word)].</tt><br>
+</dd></dl>
+
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional non-final punctuation follows from (<a href="chapter2.html#ex2.38">2.38</a>).</p>
+
+<dl><dt>(<a name="ex2.38">2.38</a>)</dt><dd>
+<tt>optional_punc_non_final(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,L,L0).</tt><br>
+<tt>optional_punc_non_final(L,L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;[].</tt><br>
+</dd></dl>
+
+<br>
+<br>
+<br>
