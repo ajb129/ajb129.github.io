@@ -70,11 +70,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For example, the five rules of (<a href="chapter1.html#ex1.1">1.1</a>) involve labelled layers: <tt>vp</tt>, <tt>np_sbj</tt> and <tt>ip</tt>; and terminal elements: <tt>[smiles]</tt>, <tt>[and]</tt> and <tt>[he]</tt>.</p>
 
 <dl><dt>(<a name="ex1.1">1.1</a>)</dt><dd>
-<tt>1.&nbsp;&nbsp;vp&nbsp;-&#8288;-&#8288;&gt;&nbsp;[smiles].</tt><br>
-<tt>2.&nbsp;&nbsp;vp&nbsp;-&#8288;-&#8288;&gt;&nbsp;vp,&nbsp;[and],&nbsp;vp.</tt><br>
-<tt>3.&nbsp;&nbsp;np_sbj&nbsp;-&#8288;-&#8288;&gt;&nbsp;[he].</tt><br>
-<tt>4.&nbsp;&nbsp;ip&nbsp;-&#8288;-&#8288;&gt;&nbsp;np_sbj,&nbsp;vp.</tt><br>
-<tt>5.&nbsp;&nbsp;ip&nbsp;-&#8288;-&#8288;&gt;&nbsp;ip,&nbsp;[and],&nbsp;ip.</tt><br>
+<tt>1.&nbsp;&nbsp;vp&nbsp;--&gt;&nbsp;[smiles].</tt><br>
+<tt>2.&nbsp;&nbsp;vp&nbsp;--&gt;&nbsp;vp,&nbsp;[and],&nbsp;vp.</tt><br>
+<tt>3.&nbsp;&nbsp;np_sbj&nbsp;--&gt;&nbsp;[he].</tt><br>
+<tt>4.&nbsp;&nbsp;ip&nbsp;--&gt;&nbsp;np_sbj,&nbsp;vp.</tt><br>
+<tt>5.&nbsp;&nbsp;ip&nbsp;--&gt;&nbsp;ip,&nbsp;[and],&nbsp;ip.</tt><br>
 </dd></dl>
 
 <p align="justify">By following the rules of (<a href="chapter1.html#ex1.1">1.1</a>), we can identify the structure of (<a href="chapter1.html#ex1.2">1.2</a>): We can start with [rule 4], where an <tt>ip</tt> layer can consist of an <tt>np_sbj</tt> layer followed by a <tt>vp</tt> layer. [rule 3] gives a complete <tt>np_sbj</tt> with the terminal word <tt>[he]</tt>. [rule 2] gives a <tt>vp</tt> which is itself made up of a <tt>vp</tt>, followed by terminal word <tt>[and]</tt>, followed by a <tt>vp</tt>. Finally, [rule 1] gives <tt>vp</tt> layers with the terminal word <tt>[smiles]</tt>.</p>
@@ -279,8 +279,8 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With this background, consider (<a href="chapter1.html#ex1.4">1.4</a>) as an example of encircling layers gathered with <tt>node</tt> structures.</p>
 
 <dl><dt>(<a name="ex1.4">1.4</a>)</dt><dd>
-<tt>node('IP-&#8288;MAT',</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('NP-&#8288;SBJ',</tt><br>
+<tt>node('IP-MAT',</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('NP-SBJ',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('PRO',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[node('He',[])])]),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node('ILYR',</tt><br>
@@ -300,8 +300,8 @@
 <p align="justify">We will more typically present <tt>node</tt> structure as labelled bracketed structure, as in (<a href="chapter1.html#ex1.5">1.5</a>).</p>
 
 <dl><dt>(<a name="ex1.5">1.5</a>)</dt><dd>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;He))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;(ILYR</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VBP;~I&nbsp;smiles))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
@@ -347,42 +347,7 @@
 
 <p align="justify">These internal layers are required when their corresponding levels of structure include conjunction (<tt>CONJP</tt>) layers.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are codes to classify catenative verbs following Huddleston (1988, p.63) and Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and internal structure with <tt>IP-PPL-CAT</tt> labelled layers is included with the clause annotation to support this verb type. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional codes with very particular distributions are included from Hornby (1975).</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The most innovative aspect of the annotation gives the TSPC its name: The Treebank Semantics system can evaluate it. Treebank Semantics (Butler 2021) processes constituency tree annotations and returns logic-based meaning representations. While the annotation seldom includes indexing, results from Treebank Semantics can resolve both inter and intra clause dependencies, including cross sentential anaphoric dependencies.</p>
-
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of sending parse structures from this book to the calculation routine of Treebank Semantics, consider (<a href="chapter1.html#ex1.6">1.6</a>) (an example sentence from Postal 2004, p.283) as input and its result shown as a dependency graph in (<a href="chapter1.html#ex1.7">1.7</a>).</p>
-
-<dl><dt>(<a name="ex1.6">1.6</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('NPR','Janet'), w('BED',';~cat_Ve_passive_','was'), w('VVN',';~Tn','praised'), w('P-&#8288;ROLE;_lgs_','by'), w('NPR','Rodney'), w('PUNC',','), w('VVN',';~Tn','criticized'), w('P-&#8288;ROLE;_lgs_','by'), w('NPR','Sidney'), w('CONJ','and'), w('VVN',';~Tn','ignored'), w('P-&#8288;ROLE;_lgs_','by'), w('NPR','Gregory'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
-<br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;Janet))</tt><br>
-<tt>&nbsp;&nbsp;(BED;~cat_Ve_passive_&nbsp;was)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ILYR</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VVN;~Tn&nbsp;praised)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;LGS&nbsp;(P-&#8288;ROLE;_lgs_&nbsp;by)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Rodney))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VVN;~Tn&nbsp;criticized)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;LGS&nbsp;(P-&#8288;ROLE;_lgs_&nbsp;by)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Sidney)))))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VVN;~Tn&nbsp;ignored)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;LGS&nbsp;(P-&#8288;ROLE;_lgs_&nbsp;by)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(NPR&nbsp;Gregory)))))))</tt><br>
-<tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
-<br>
-<tt>yes</tt><br>
-</dd></dl>
-
-<dl><dt>(<a name="ex1.7">1.7</a>)</dt><dd>
-<img src="1janetpraised.png">
-</dd></dl>
-
-<p align="justify"><i>Janet</i> is the surface subject in (<a href="chapter1.html#ex1.6">1.6</a>), while appearing as an <tt>[arg1]</tt> (logical object) for <i>praised</i>, <i>criticized</i> and <i>ignored</i> in (<a href="chapter1.html#ex1.7">1.7</a>). Such results from Treebank Semantics unlock a fuller story of the information content that the parsed annotation encodes.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Another area of innovation is verb code integration. There are verb codes to classify catenative verbs following Huddleston (1988, p.63) and Huddleston and Pullum (2002, p.1220). These are verbs of a verb sequence that are prior to the main verb of a clause and intermediate layers of structure labelled with a <tt>-CAT</tt> extension are included with the clause annotation to support this verb type. The verb codes for main verbs are from the mnemonic system of the fourth edition of the <i>Oxford Advanced Learner's Dictionary</i> (OALD4; Cowie 1989). Additional verb codes with very particular distributions are included from Hornby (1975).</p>
 
 <br><h2><a name="sec1.6">1.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Orientation</h2>
 
@@ -392,24 +357,24 @@
 
 <br><h2><a name="sec1.7">1.7</a>&nbsp;&nbsp;&nbsp;&nbsp;Sentences</h2>
 
-<p align="justify">The Prolog code of (<a href="chapter1.html#ex1.8">1.8</a>) gives phrase structure rules to initiate finding layered content for a sentence.</p>
+<p align="justify">The Prolog code of (<a href="chapter1.html#ex1.6">1.6</a>) gives phrase structure rules to initiate finding layered content for a sentence.</p>
 
-<dl><dt>(<a name="ex1.8">1.8</a>)</dt><dd>
-<tt>sentence([node('IP-&#8288;MAT',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.6">1.6</a>)</dt><dd>
+<tt>sentence([node('IP-MAT',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,store([],[]),IL,IL1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,IL1,[]).</tt><br>
-<tt>sentence([node('IP-&#8288;IMP',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>sentence([node('IP-IMP',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(imperative_clause,store([],[]),IL,IL1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,IL1,[]).</tt><br>
-<tt>sentence([node('CP-&#8288;QUE-&#8288;MAT',[node('IP-&#8288;SUB',IL),PU])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>sentence([node('CP-QUE-MAT',[node('IP-SUB',IL),PU])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(matrix_interrogative,store([],[]),IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;punc(final_question,[PU],[]).</tt><br>
-<tt>sentence([node('IP-&#8288;MAT',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>sentence([node('IP-MAT',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,store([],[]),IL,IL2),</tt><br>
-<tt>&nbsp;&nbsp;punc(non_final,IL2,[node('CP-&#8288;QUE-&#8288;TAG',[node('IP-&#8288;SUB',TL)])|IL1]),</tt><br>
+<tt>&nbsp;&nbsp;punc(non_final,IL2,[node('CP-QUE-TAG',[node('IP-SUB',TL)])|IL1]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(tag_question,store([],[]),TL,[]),</tt><br>
 <tt>&nbsp;&nbsp;punc(final_question,IL1,[]).</tt><br>
-<tt>sentence([node('IP-&#8288;MAT',[node('ILYR',[node('ILYR',IL1),node('CONJP',[CONJ,node('ILYR',[node('ADVP-&#8288;CLR',[node('ADV',[node('so',[])])])|IL2])])]),PU])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>sentence([node('IP-MAT',[node('ILYR',[node('ILYR',IL1),node('CONJP',[CONJ,node('ILYR',[node('ADVP-CLR',[node('ADV',[node('so',[])])])|IL2])])]),PU])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,store([],[]),IL1,[]),</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;[w('ADV','so')],</tt><br>
@@ -417,105 +382,105 @@
 <tt>&nbsp;&nbsp;punc(final,[PU],[]).</tt><br>
 </dd></dl>
 
-<p align="justify">[rule 1] of (<a href="chapter1.html#ex1.8">1.8</a>) will identify a <tt>node</tt> structure with list <tt>IL</tt> collecting layer content and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, [rule 1] needs a list, where all items except the last are directed to a call of <tt>clause_top_layer</tt> (see section <a href="chapter5.html#sec5.2">5.2</a>), while the last item needs to be sentence final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
+<p align="justify">[rule 1] of (<a href="chapter1.html#ex1.6">1.6</a>) will identify a <tt>node</tt> structure with list <tt>IL</tt> collecting layer content and <tt>'IP-MAT'</tt> (statement matrix clause) as the node label. <tt>IP</tt> is an abbreviation for Inflectional Phrase, which is another way to say &lsquo;clause&rsquo;. To succeed, [rule 1] needs a list, where all items except the last are directed to a call of <tt>clause_top_layer</tt> (see section <a href="chapter5.html#sec5.2">5.2</a>), while the last item needs to be sentence final punctuation (see section <a href="chapter2.html#sec2.12">2.12</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Prolog query of (<a href="chapter1.html#ex1.9">1.9</a>) first calls <tt>tphrase_set_string</tt> to store a list of word items to parse. Let's call this the <b>word list</b>. The second and last call is to <tt>parse</tt> (see the section <a href="chapter1.html#sec1.10.7">1.10.7</a> below for its definition). This questions whether the stored word list can be input for a <tt>sentence</tt> rule. Note that parameters for accumulating <tt>node</tt> structure, seen as the two parameters of <tt>sentence</tt> in (<a href="chapter1.html#ex1.8">1.8</a>), are hidden by the <tt>parse</tt> call, which presents any gathered <tt>node</tt> structure as bracketed tree output.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The Prolog query of (<a href="chapter1.html#ex1.7">1.7</a>) first calls <tt>tphrase_set_string</tt> to store a list of word items to parse. Let's call this the <b>word list</b>. The second and last call is to <tt>parse</tt> (see the section <a href="chapter1.html#sec1.10.7">1.10.7</a> below for its definition). This questions whether the stored word list can be input for a <tt>sentence</tt> rule. Note that parameters for accumulating <tt>node</tt> structure, seen as the two parameters of <tt>sentence</tt> in (<a href="chapter1.html#ex1.6">1.6</a>), are hidden by the <tt>parse</tt> call, which presents any gathered <tt>node</tt> structure as bracketed tree output.</p>
 
-<dl><dt>(<a name="ex1.9">1.9</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.7">1.7</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;He))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;(VBP;~I&nbsp;smiles)</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The output from (<a href="chapter1.html#ex1.9">1.9</a>) is structure with <tt>IP-MAT</tt> as the topmost node, so [rule 1] of (<a href="chapter1.html#ex1.8">1.8</a>) completed successfully.</p>
+<p align="justify">The output from (<a href="chapter1.html#ex1.7">1.7</a>) is structure with <tt>IP-MAT</tt> as the topmost node, so [rule 1] of (<a href="chapter1.html#ex1.6">1.6</a>) completed successfully.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="chapter1.html#ex1.10">1.10</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Now consider (<a href="chapter1.html#ex1.8">1.8</a>).</p>
 
-<dl><dt>(<a name="ex1.10">1.10</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('VB',';~I','Smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.8">1.8</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~I','Smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;IMP&nbsp;(VB;~I&nbsp;Smile)&nbsp;(PUNC&nbsp;.))</tt><br>
+<tt>(IP-IMP&nbsp;(VB;~I&nbsp;Smile)&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The output from (<a href="chapter1.html#ex1.10">1.10</a>) is structure with <tt>IP-IMP</tt> (imperative clause) as the topmost node: [rule 1] of (<a href="chapter1.html#ex1.8">1.8</a>) fails, but [rule 2] succeeds. Both rules call <tt>clause_top_layer</tt>, but do so with different clause type settings:</p>
+<p align="justify">The output from (<a href="chapter1.html#ex1.8">1.8</a>) is structure with <tt>IP-IMP</tt> (imperative clause) as the topmost node: [rule 1] of (<a href="chapter1.html#ex1.6">1.6</a>) fails, but [rule 2] succeeds. Both rules call <tt>clause_top_layer</tt>, but do so with different clause type settings:</p>
 
 <ul>
 <li>[rule 1] <tt>statement_order</tt></li>
 <li>[rule 2] <tt>imperative_clause</tt></li>
 </ul>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen with (<a href="chapter1.html#ex1.10">1.10</a>), an imperative clause should have no subject and an initial verb with imperative form (a word with <tt>VB</tt>, <tt>DO</tt>, <tt>HV</tt> or <tt>BE</tt> word class information). If we try (<a href="chapter1.html#ex1.11">1.11</a>), which is unsuitable as a statement sentence because of the lack of content for a subject but then also unsuitable as an imperative sentence because the verb has <tt>VBP</tt> (present tense) word class, then there can be no parse result, as (<a href="chapter1.html#ex1.11">1.11</a>) shows.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As seen with (<a href="chapter1.html#ex1.8">1.8</a>), an imperative clause should have no subject and an initial verb with imperative form (a word with <tt>VB</tt>, <tt>DO</tt>, <tt>HV</tt> or <tt>BE</tt> word class information). If we try (<a href="chapter1.html#ex1.9">1.9</a>), which is unsuitable as a statement sentence because of the lack of content for a subject but then also unsuitable as an imperative sentence because the verb has <tt>VBP</tt> (present tense) word class, then there can be no parse result, as (<a href="chapter1.html#ex1.9">1.9</a>) shows.</p>
 
-<dl><dt>(<a name="ex1.11">1.11</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('VBP',';~I','Smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.9">1.9</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VBP',';~I','Smiles'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a further example of checking if there is word list content for a sentence, consider (<a href="chapter1.html#ex1.12">1.12</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a further example of checking if there is word list content for a sentence, consider (<a href="chapter1.html#ex1.10">1.10</a>).</p>
 
-<dl><dt>(<a name="ex1.12">1.12</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.10">1.10</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(CP-&#8288;QUE-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;SUB&nbsp;(DOD&nbsp;Did)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>(CP-QUE-MAT</tt><br>
+<tt>&nbsp;&nbsp;(IP-SUB&nbsp;(DOD&nbsp;Did)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(VB;~I&nbsp;smile))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The output from (<a href="chapter1.html#ex1.12">1.12</a>) shows the return of a structure with <tt>CP-QUE-MAT</tt> (matrix interrogative clause) as the topmost node. This follows from [rule 3] of (<a href="chapter1.html#ex1.8">1.8</a>), which expects the word list to provide content for the success of a <tt>clause_top_layer</tt> rule with the clause <tt>Type</tt> set to <tt>matrix_interrogative</tt>.</p>
+<p align="justify">The output from (<a href="chapter1.html#ex1.10">1.10</a>) shows the return of a structure with <tt>CP-QUE-MAT</tt> (matrix interrogative clause) as the topmost node. This follows from [rule 3] of (<a href="chapter1.html#ex1.6">1.6</a>), which expects the word list to provide content for the success of a <tt>clause_top_layer</tt> rule with the clause <tt>Type</tt> set to <tt>matrix_interrogative</tt>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of checking word list content for being a sentence, consider (<a href="chapter1.html#ex1.13">1.13</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As another example of checking word list content for being a sentence, consider (<a href="chapter1.html#ex1.11">1.11</a>).</p>
 
-<dl><dt>(<a name="ex1.13">1.13</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','He'), w('MD',';~cat_Vi','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD',';~cat_Vi','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.11">1.11</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('MD',';~cat_Vi','might'), w('VB',';~I','smile'), w('PUNC',','), w('MD',';~cat_Vi','might'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;He))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;(MD;~cat_Vi&nbsp;might)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(VB;~I&nbsp;smile))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~I&nbsp;smile))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;(CP-&#8288;QUE-&#8288;TAG</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;SUB&nbsp;(MD;~cat_Vi&nbsp;might)&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))))</tt><br>
+<tt>&nbsp;&nbsp;(CP-QUE-TAG</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-SUB&nbsp;(MD;~cat_Vi&nbsp;might)&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The output from (<a href="chapter1.html#ex1.13">1.13</a>) shows the return of a sentence ending in a tag question, which follows from [rule 4] of (<a href="chapter1.html#ex1.8">1.8</a>).</p>
+<p align="justify">The output from (<a href="chapter1.html#ex1.11">1.11</a>) shows the return of a sentence ending in a tag question, which follows from [rule 4] of (<a href="chapter1.html#ex1.6">1.6</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As yet another example of checking word list content for being a sentence, consider (<a href="chapter1.html#ex1.14">1.14</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As yet another example of checking word list content for being a sentence, consider (<a href="chapter1.html#ex1.12">1.12</a>).</p>
 
-<dl><dt>(<a name="ex1.14">1.14</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('CONJ','and'), w('ADV','so'), w('DOP','','does'), w('PRO','she'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.12">1.12</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','He'), w('VBP',';~I','smiles'), w('CONJ','and'), w('ADV','so'), w('DOP','','does'), w('PRO','she'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
+<tt>(IP-MAT</tt><br>
 <tt>&nbsp;&nbsp;(ILYR</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(ILYR</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;He))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;He))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VBP;~I&nbsp;smiles))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;CLR&nbsp;(ADV&nbsp;so))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(ADV&nbsp;so))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DOP&nbsp;does)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;she)))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;she)))))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">The output from (<a href="chapter1.html#ex1.14">1.14</a>) shows the conjunction of two main clauses with the first a clause that has statement order and the second a clause that has an initial <i>so</i> followed by content with the shape of a tag question, which follows from [rule 5] of (<a href="chapter1.html#ex1.8">1.8</a>).</p>
+<p align="justify">The output from (<a href="chapter1.html#ex1.12">1.12</a>) shows the conjunction of two main clauses with the first a clause that has statement order and the second a clause that has an initial <i>so</i> followed by content with the shape of a tag question, which follows from [rule 5] of (<a href="chapter1.html#ex1.6">1.6</a>).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;To sum up, this section has shown how to query whether a word list contains content for an English sentence. With success, returned structure tells us about the kind of sentence:</p>
 
@@ -527,19 +492,19 @@
 
 <h4>Question</h4>
 
-<p align="justify">Why do the failure and success results of (<a href="chapter1.html#ex1.15">1.15</a>)&ndash;(<a href="chapter1.html#ex1.17">1.17</a>) obtain? (Also, note the result of (<a href="chapter1.html#ex1.12">1.12</a>) above.)</p>
+<p align="justify">Why do the failure and success results of (<a href="chapter1.html#ex1.13">1.13</a>)&ndash;(<a href="chapter1.html#ex1.15">1.15</a>) obtain? (Also, note the result of (<a href="chapter1.html#ex1.10">1.10</a>) above.)</p>
 
-<dl><dt>(<a name="ex1.15">1.15</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.13">1.13</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('DOD','','Did'), w('PRO','he'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex1.16">1.16</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.14">1.14</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
 <tt>&nbsp;&nbsp;(VB;~I&nbsp;smile)</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
@@ -547,21 +512,21 @@
 <tt>yes</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex1.17">1.17</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.15">1.15</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('VB',';~I','smile'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec1.8">1.8</a>&nbsp;&nbsp;&nbsp;&nbsp;Right node raising</h2>
 
-<p align="justify">As another <tt>sentence</tt> rule, consider (<a href="chapter1.html#ex1.18">1.18</a>). This allows a displaced item to occur as the right-most element of a sentence when immediately preceeded by non-final punctuation.</p>
+<p align="justify">As another <tt>sentence</tt> rule, consider (<a href="chapter1.html#ex1.16">1.16</a>). This allows a displaced item to occur as the right-most element of a sentence when immediately preceeded by non-final punctuation.</p>
 
-<dl><dt>(<a name="ex1.18">1.18</a>)</dt><dd>
-<tt>sentence([node('IP-&#8288;MAT',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.16">1.16</a>)</dt><dd>
+<tt>sentence([node('IP-MAT',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-&#8288;',Index),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('-&#8288;RNR',Index,Extra),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('-RNR',Index,Extra),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,store([],[ICH_item]),IL,IL3),</tt><br>
@@ -570,76 +535,72 @@
 <tt>&nbsp;&nbsp;punc(final,IL1,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Displaced items are formed with the rules of (<a href="chapter1.html#ex1.19">1.19</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Displaced items are formed with the rules of (<a href="chapter1.html#ex1.17">1.17</a>). In addition to matching a particular phrase or clause, each rule adds information about what is matched to the index as information to carry through to the store.</p>
 
-<dl><dt>(<a name="ex1.19">1.19</a>)</dt><dd>
-<tt>displaced_item(ICH,np(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.17">1.17</a>)</dt><dd>
+<tt>displaced_item(ICH,np(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase(Ext,established,L,L0).</tt><br>
-<tt>displaced_item(ICH,pp(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,pp(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase(Ext,established,L,L0).</tt><br>
-<tt>displaced_item(ICH,pp_lgs(node(ICH,[])),Ext,[node(Label,[node('P-&#8288;ROLE;_lgs_',[node(Word,[])]),NP])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,pp_lgs(node(ICH,[])),Ext,[node(Label,[node('P-ROLE;_lgs_',[node(Word,[])]),NP])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;[w('P-&#8288;ROLE;_lgs_',Word)],</tt><br>
+<tt>&nbsp;&nbsp;[w('P-ROLE;_lgs_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',established,[NP],[]).</tt><br>
-<tt>displaced_item(ICH,cp_that(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,cp_that(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_that(Ext,_,store([],[]),L,L0).</tt><br>
-<tt>displaced_item(ICH,cp_embedded_que(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,cp_embedded_que(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;cp_embedded_que(Ext,store([],[]),L,L0).</tt><br>
-<tt>displaced_item(ICH,ip_to_inf(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,ip_to_inf(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf(Ext,store([],[]),L,L0).</tt><br>
-<tt>displaced_item(ICH,ip_ppl(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,ip_ppl(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_active(Ext,store([],[]),filled_sbj,ing_participle,L,L0).</tt><br>
-<tt>displaced_item(ICH,utterance(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>displaced_item(ICH,utterance(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(left_quotation_mark,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;utterance(Ext,L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;punc(right_quotation_mark,L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a word list with sentence final information for a displaced noun phrase that will trigger a call to the <tt>sentence</tt> rule of (<a href="chapter1.html#ex1.18">1.18</a>), consider (<a href="chapter1.html#ex1.20">1.20</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of a word list with sentence final information for a displaced noun phrase that will trigger a call to the <tt>sentence</tt> rule of (<a href="chapter1.html#ex1.16">1.16</a>), consider (<a href="chapter1.html#ex1.18">1.18</a>).</p>
 
-<dl><dt>(<a name="ex1.20">1.20</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','I'), w('BEP',';~cat_Vg','am'), w('VAG',';~Ipr','talking'), w('P-&#8288;ROLE','about'), w('CONJ','and'), w('VAG',';~Ipr','campaigning'), w('P-&#8288;ROLE','for'), w('PUNC',','), w('D','the'), w('N','hedgehog'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<dl><dt>(<a name="ex1.18">1.18</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('BEP',';~cat_Vg','am'), w('VAG',';~Ipr','talking'), w('P-ROLE','about'), w('CONJ','and'), w('VAG',';~Ipr','campaigning'), w('P-ROLE','for'), w('PUNC',','), w('D','the'), w('N','hedgehog'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;I))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
 <tt>&nbsp;&nbsp;(BEP;~cat_Vg&nbsp;am)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(ILYR</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VAG;~Ipr&nbsp;talking)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;CLR&nbsp;(P-&#8288;ROLE&nbsp;about)&nbsp;(NP&nbsp;*ICH*-&#8288;132)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;about)&nbsp;(NP&nbsp;*ICH*-132)))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CONJP&nbsp;(CONJ&nbsp;and)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ILYR&nbsp;(VAG;~Ipr&nbsp;campaigning)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-&#8288;CLR&nbsp;(P-&#8288;ROLE&nbsp;for)&nbsp;(NP&nbsp;*ICH*-&#8288;132))))))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;for)&nbsp;(NP&nbsp;*ICH*-132))))))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;,)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;RNR-&#8288;132&nbsp;(D&nbsp;the)&nbsp;(N&nbsp;hedgehog))</tt><br>
+<tt>&nbsp;&nbsp;(NP-RNR-132&nbsp;(D&nbsp;the)&nbsp;(N&nbsp;hedgehog))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how the displaced noun phrase from its sentence final position recieves an index (<tt>-132</tt>) that is coindexed with <tt>*ICH*</tt> (interpret constituent here) markings within the clause annotation. This indexing information is created when the displaced item is parsed and added to the second parameter of the <tt>store/2</tt> information that is passed down through the clause structure and duplicated with conjunction.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how the displaced noun phrase from its sentence final position recieves an index (<tt>-132</tt>) that is coindexed with <tt>*ICH*</tt> (interpret constituent here) markings within the clause annotation. This indexing information is created when the displaced item is parsed and, since the displaced items is on the right, it is added to the second parameter of the <tt>store/2</tt> information that is passed down through the clause structure and duplicated for each conjunct with conjunction.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Evaluation with Treebank Semantics changes the parse information of (<a href="chapter1.html#ex1.20">1.20</a>) into the dependencies of (<a href="chapter1.html#ex1.21">1.21</a>).</p>
-
-<dl><dt>(<a name="ex1.21">1.21</a>)</dt><dd>
-<img src="1campaignforhedgehog.png">
-</dd></dl>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Displaced material from the left (from topicalisation, a clause initial phrase with an under question element, or a clause initial phrase with a relative element) is added to the first parameter of the <tt>store/2</tt> information. This allows sensitivily to displacement origin when differentiating properties for displacement integration.</p>
 
 <br><h2><a name="sec1.9">1.9</a>&nbsp;&nbsp;&nbsp;&nbsp;Sentence fragments and utterances</h2>
 
 <p align="justify">An overall utterance can consist of a single sentence or sentence fragment or multiple instances of sentences and/or sentence fragments and might itself form part of an embedding as reported speech.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule (<a href="chapter1.html#ex1.22">1.22</a>) identifies a sentence fragment as content for a fragment layer followed by sentence final punctuation.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Rule (<a href="chapter1.html#ex1.19">1.19</a>) identifies a sentence fragment as content for a fragment layer followed by sentence final punctuation.</p>
 
-<dl><dt>(<a name="ex1.22">1.22</a>)</dt><dd>
-<tt>fragment([node('FRAG',FL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.19">1.19</a>)</dt><dd>
+<tt>fragment([node('FRAG',FL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;fragment_layer(FL,FL1),</tt><br>
 <tt>&nbsp;&nbsp;punc(final,FL1,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">Calls of (<a href="chapter1.html#ex1.23">1.23</a>) find fragment layer content as:</p>
+<p align="justify">Calls of (<a href="chapter1.html#ex1.20">1.20</a>) find fragment layer content as:</p>
 
 <ul>
 <li>[rule 1] a noun phrase (see section <a href="chapter3.html#sec3.2">3.2</a>)</li>
@@ -651,65 +612,65 @@
 <li>[rule 7] a participle clause with an internal subject (see section <a href="chapter6.html#sec6.8.3">6.8.3</a>)</li>
 </ul>
 
-<dl><dt>(<a name="ex1.23">1.23</a>)</dt><dd>
-<tt>fragment_layer(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.20">1.20</a>)</dt><dd>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',_,L,L0).</tt><br>
-<tt>fragment_layer(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[established,interrogative,relative,filled_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase('',store([],[]),Type,L,L0).</tt><br>
-<tt>fragment_layer(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;initial_adverbial(L,L0).</tt><br>
-<tt>fragment_layer(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverbial(L,L0).</tt><br>
-<tt>fragment_layer(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_to_inf('',store([],[]),L,L0).</tt><br>
-<tt>fragment_layer([node('IP-&#8288;PPL',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer([node('IP-PPL',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Infl,[hag_participle,en_participle,ing_participle])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(filled_sbj,Infl,IL,[]).</tt><br>
-<tt>fragment_layer([node('IP-&#8288;PPL3',IL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>fragment_layer([node('IP-PPL3',IL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Infl,[hag_participle,en_participle,ing_participle])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_adverbial_layer(unfilled_sbj,Infl,IL,[]).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.24">1.24</a>) calls the rules of (<a href="chapter1.html#ex1.25">1.25</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4] of (<a href="chapter1.html#ex1.25">1.25</a>). The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2] of (<a href="chapter1.html#ex1.25">1.25</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With the rules to identify sentence fragments and the sentence rules from section <a href="chapter1.html#sec1.7">1.7</a>, rule (<a href="chapter1.html#ex1.21">1.21</a>) calls the rules of (<a href="chapter1.html#ex1.22">1.22</a>) to recursively find the content of sentences and/or sentence fragments [rules 3 and 4] of (<a href="chapter1.html#ex1.22">1.22</a>). The recursion ends by picking up a final sentence or sentence fragment (which could be the only utterance element) [rules 1 and 2] of (<a href="chapter1.html#ex1.22">1.22</a>).</p>
 
-<dl><dt>(<a name="ex1.24">1.24</a>)</dt><dd>
-<tt>utterance(Ext,[node(Label,UL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.21">1.21</a>)</dt><dd>
+<tt>utterance(Ext,[node(Label,UL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('utterance',Ext,Label)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;utterance_collect(UL,[]).</tt><br>
 </dd></dl>
 
-<dl><dt>(<a name="ex1.25">1.25</a>)</dt><dd>
-<tt>utterance_collect(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<dl><dt>(<a name="ex1.22">1.22</a>)</dt><dd>
+<tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;sentence(L,L0).</tt><br>
-<tt>utterance_collect(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;fragment(L,L0).</tt><br>
-<tt>utterance_collect(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;sentence(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;utterance_collect(L1,L0).</tt><br>
-<tt>utterance_collect(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>utterance_collect(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;fragment(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;utterance_collect(L1,L0).</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Example (<a href="chapter1.html#ex1.26">1.26</a>) illustrates the parse of an utterance that has an initial imperative sentence and ends with a sentence fragment that has a noun phrase as content for its fragment layer.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Example (<a href="chapter1.html#ex1.23">1.23</a>) illustrates the parse of an utterance that has an initial imperative sentence and ends with a sentence fragment that has a noun phrase as content for its fragment layer.</p>
 
-<dl><dt>(<a name="ex1.26">1.26</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('VB',';~I','Beware'), w('PUNC','!'), w('PRO;_genm_','His'), w('ADJ','flashing'), w('NS','eyes'), w('PUNC','!')]),&nbsp;parse(utterance('')).</tt><br>
+<dl><dt>(<a name="ex1.23">1.23</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('VB',';~I','Beware'), w('PUNC','!'), w('PRO;_genm_','His'), w('ADJ','flashing'), w('NS','eyes'), w('PUNC','!')]),&nbsp;parse(utterance('')).</tt><br>
 <br>
 <tt>(utterance</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;IMP&nbsp;(VB;~I&nbsp;Beware)&nbsp;(PUNC&nbsp;!))</tt><br>
+<tt>&nbsp;&nbsp;(IP-IMP&nbsp;(VB;~I&nbsp;Beware)&nbsp;(PUNC&nbsp;!))</tt><br>
 <tt>&nbsp;&nbsp;(FRAG</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;GEN&nbsp;(PRO;_genm_&nbsp;His))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-GEN&nbsp;(PRO;_genm_&nbsp;His))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;flashing))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;eyes))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(PUNC&nbsp;!)))</tt><br>
@@ -738,33 +699,33 @@
 
 <p align="justify">An atom is a general-purpose name with no inherent meaning. Atoms are usually bare words (character sequences) written with no special syntax. However, if spaces or certain other special characters (e.g.&nbsp;punctuation characters) are contained, then single quotes must surround the atom. Such quotation is also necessary when atoms begin with either a capital letter or the underscore character, to distinguish them from variables. Examples of atoms include: <tt>foo</tt>, <tt>'foo bar'</tt> and <tt>'Bar'</tt>. The empty list, written <tt>[]</tt>, is also an atom.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="chapter1.html#ex1.27">1.27</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As a built-in predicate, <tt>atom_concat/3</tt> allows concatenation and splitting of atoms, as in (<a href="chapter1.html#ex1.24">1.24</a>).</p>
 
-<dl><dt>(<a name="ex1.27">1.27</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;atom_concat('BEP',&nbsp;';~La',&nbsp;A).</tt><br>
+<dl><dt>(<a name="ex1.24">1.24</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;atom_concat('BEP',&nbsp;';~La',&nbsp;A).</tt><br>
 <br>
 <tt>A&nbsp;=&nbsp;BEP;~La</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="chapter1.html#ex1.28">1.28</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;For <tt>sub_atom(Atom,Before,Length,After,SubAtom)</tt>, <tt>Before</tt> is the number of characters in <tt>Atom</tt> <i>before</i> the sub-atom <tt>SubAtom</tt>, <tt>Length</tt> is the number of characters that make up <tt>SubAtom</tt>, and <tt>After</tt> is the number of characters in <tt>Atom</tt> that come <i>after</i> <tt>SubAtom</tt>. Thus, <tt>sub_atom/5</tt> allows extracting sub-atoms from position and length information, as in (<a href="chapter1.html#ex1.25">1.25</a>).</p>
 
-<dl><dt>(<a name="ex1.28">1.28</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;sub_atom('BEP',0,1,_,C).</tt><br>
+<dl><dt>(<a name="ex1.25">1.25</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;sub_atom('BEP',0,1,_,C).</tt><br>
 <br>
 <tt>C&nbsp;=&nbsp;B</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="chapter1.html#ex1.29">1.29</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>gensym/2</tt> library predicate provides a way to generate unique atoms. The predicate <tt>gensym(Atom,Var)</tt> generates a new integer and concatenates this integer with <tt>Atom</tt>, unifying the result with <tt>Var</tt>, as in (<a href="chapter1.html#ex1.26">1.26</a>).</p>
 
-<dl><dt>(<a name="ex1.29">1.29</a>)</dt><dd>
-<tt>|?-&#8288;&nbsp;gensym('-&#8288;',Index),&nbsp;atom_concat('*ICH*',Index,ICH).</tt><br>
+<dl><dt>(<a name="ex1.26">1.26</a>)</dt><dd>
+<tt>|?-&nbsp;gensym('-',Index),&nbsp;atom_concat('*ICH*',Index,ICH).</tt><br>
 <br>
-<tt>Index&nbsp;=&nbsp;-&#8288;5</tt><br>
-<tt>ICH&nbsp;=&nbsp;*ICH*-&#8288;5</tt><br>
+<tt>Index&nbsp;=&nbsp;-5</tt><br>
+<tt>ICH&nbsp;=&nbsp;*ICH*-5</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -779,10 +740,10 @@
 
 <p align="justify">Lists are a special case of compound terms. Constructors for lists are the atom <tt>[]</tt> (empty list) and the functor <tt>'.'/2</tt>, where the first argument is a term and the second argument a list. A list of <tt>N</tt> elements is the term <tt>.(a1, .( ... .(aN, []) ... ))</tt>, which may also be written with square bracket notation: <tt>[a1, ..., aN]</tt>. List construction is also possible with a concatenation function &lsquo;<tt>[_|_]/2</tt>&rsquo;: <tt>[a1, ..., aN|t]</tt> is the term <tt>.(a1, .( ... .(aN, t)))</tt>. The concatenation function makes it possible to process the first element(s) of a list, before turning to process the rest of the list in a recursive manner.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="chapter1.html#ex1.30">1.30</a>) demonstrates.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is made of the <tt>member/2</tt> library predicate, where: <tt>member(Term,List)</tt> succeeds if <tt>Term</tt> is a list element of <tt>List</tt>, as (<a href="chapter1.html#ex1.27">1.27</a>) demonstrates.</p>
 
-<dl><dt>(<a name="ex1.30">1.30</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;member(E,[a,b,c]).</tt><br>
+<dl><dt>(<a name="ex1.27">1.27</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;member(E,[a,b,c]).</tt><br>
 <br>
 <tt>E&nbsp;=&nbsp;a;</tt><br>
 <br>
@@ -793,10 +754,10 @@
 <tt>no</tt><br>
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is also made of the <tt>append/3</tt> library predicate, where: <tt>append(List1, List2, List12)</tt> succeeds if the concatenation of the list <tt>List1</tt> and the list <tt>List2</tt> is the list <tt>List12</tt>. This predicate is re-executable on backtracking, so if <tt>List12</tt> is instantiated and both <tt>List1</tt> and <tt>List2</tt> are variables, then there is behaviour like (<a href="chapter1.html#ex1.31">1.31</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Use is also made of the <tt>append/3</tt> library predicate, where: <tt>append(List1, List2, List12)</tt> succeeds if the concatenation of the list <tt>List1</tt> and the list <tt>List2</tt> is the list <tt>List12</tt>. This predicate is re-executable on backtracking, so if <tt>List12</tt> is instantiated and both <tt>List1</tt> and <tt>List2</tt> are variables, then there is behaviour like (<a href="chapter1.html#ex1.28">1.28</a>).</p>
 
-<dl><dt>(<a name="ex1.31">1.31</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;append(L1,L2,[a,b,c]).</tt><br>
+<dl><dt>(<a name="ex1.28">1.28</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;append(L1,L2,[a,b,c]).</tt><br>
 <br>
 <tt>L1&nbsp;=&nbsp;[]</tt><br>
 <tt>L2&nbsp;=&nbsp;[a,b,c];</tt><br>
@@ -815,20 +776,20 @@
 
 <h3><a name="sec1.10.5">1.10.5</a>&nbsp;&nbsp;&nbsp;&nbsp;Incomplete lists</h3>
 
-<p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="chapter1.html#ex1.32">1.32</a>) is such a structure.</p>
+<p align="justify">Incomplete lists are a special type of list structure. Instead of ending in <tt>[]</tt>, an incomplete list has a free variable as its tail. For example, <tt>L</tt> of (<a href="chapter1.html#ex1.29">1.29</a>) is such a structure.</p>
 
-<dl><dt>(<a name="ex1.32">1.32</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
+<dl><dt>(<a name="ex1.29">1.29</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[a,b,c|_].</tt><br>
 <br>
 <tt>L&nbsp;=&nbsp;[a,b,c|_h383];</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
-<p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="chapter1.html#ex1.33">1.33</a>).</p>
+<p align="justify">The free variable at the end of an incomplete list can be (partially) instantiated. This makes possible the efficient (constant time) method of list concatenation seen with (<a href="chapter1.html#ex1.30">1.30</a>).</p>
 
-<dl><dt>(<a name="ex1.33">1.33</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;L&nbsp;=&nbsp;[1,2,3|L1],&nbsp;L1&nbsp;=&nbsp;[4,5|L0].</tt><br>
+<dl><dt>(<a name="ex1.30">1.30</a>)</dt><dd>
+<tt>|&nbsp;?-&nbsp;L&nbsp;=&nbsp;[1,2,3|L1],&nbsp;L1&nbsp;=&nbsp;[4,5|L0].</tt><br>
 <br>
 <tt>L&nbsp;=&nbsp;[1,2,3,4,5|_h527]</tt><br>
 <tt>L1&nbsp;=&nbsp;[4,5|_h527]</tt><br>
@@ -839,24 +800,24 @@
 
 <h3><a name="sec1.10.6">1.10.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Pretty printing trees</h3>
 
-<p align="justify">Trees seen throughout this book have been pretty printed with (<a href="chapter1.html#ex1.34">1.34</a>). <tt>pp_ptree_list</tt> takes a list of <tt>node</tt> structures, as described in section <a href="chapter1.html#sec1.4">1.4</a>, and prints each tree with a following new line. Trees are printed as labelled bracketed structures with indentation to indicate embedding depth.</p>
+<p align="justify">Trees seen throughout this book have been pretty printed with (<a href="chapter1.html#ex1.31">1.31</a>). <tt>pp_ptree_list</tt> takes a list of <tt>node</tt> structures, as described in section <a href="chapter1.html#sec1.4">1.4</a>, and prints each tree with a following new line. Trees are printed as labelled bracketed structures with indentation to indicate embedding depth.</p>
 
-<dl><dt>(<a name="ex1.34">1.34</a>)</dt><dd>
+<dl><dt>(<a name="ex1.31">1.31</a>)</dt><dd>
 <tt>pp_ptree_list([],_,_).</tt><br>
-<tt>pp_ptree_list([node(Label1,[node(Label2,[])])|T],Indent,Embedding)&nbsp;:-&#8288;</tt><br>
+<tt>pp_ptree_list([node(Label1,[node(Label2,[])])|T],Indent,Embedding)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;!,</tt><br>
-<tt>&nbsp;&nbsp;(&nbsp;Embedding&nbsp;==&nbsp;0&nbsp;-&#8288;&gt;&nbsp;write('&nbsp;(')&nbsp;;&nbsp;nl,&nbsp;tab(Indent),&nbsp;write('(')&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;Embedding&nbsp;==&nbsp;0&nbsp;-&gt;&nbsp;write('&nbsp;(')&nbsp;;&nbsp;nl,&nbsp;tab(Indent),&nbsp;write('(')&nbsp;),</tt><br>
 <tt>&nbsp;&nbsp;write(Label1),</tt><br>
 <tt>&nbsp;&nbsp;write('&nbsp;'),</tt><br>
 <tt>&nbsp;&nbsp;write(Label2),</tt><br>
 <tt>&nbsp;&nbsp;write(')'),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(T,Indent,Embedding).</tt><br>
-<tt>pp_ptree_list([node(Label,NodeList)|T],Indent,_)&nbsp;:-&#8288;</tt><br>
+<tt>pp_ptree_list([node(Label,NodeList)|T],Indent,_)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;pp_nonpreterminal_node(Label,NodeList,Indent),</tt><br>
-<tt>&nbsp;&nbsp;(&nbsp;Indent&nbsp;==&nbsp;0&nbsp;-&#8288;&gt;&nbsp;nl&nbsp;;&nbsp;true&nbsp;),</tt><br>
+<tt>&nbsp;&nbsp;(&nbsp;Indent&nbsp;==&nbsp;0&nbsp;-&gt;&nbsp;nl&nbsp;;&nbsp;true&nbsp;),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(T,Indent,1).</tt><br>
 <br>
-<tt>pp_nonpreterminal_node(Label,NodeList,Indent)&nbsp;:-&#8288;</tt><br>
+<tt>pp_nonpreterminal_node(Label,NodeList,Indent)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;nl,</tt><br>
 <tt>&nbsp;&nbsp;tab(Indent),</tt><br>
 <tt>&nbsp;&nbsp;write('('),</tt><br>
@@ -868,16 +829,16 @@
 
 <h3><a name="sec1.10.7">1.10.7</a>&nbsp;&nbsp;&nbsp;&nbsp;The parse routine</h3>
 
-<p align="justify">The <tt>parse</tt> routine introduced in section <a href="chapter1.html#sec1.7">1.7</a> and called with examples throughout the book is defined in (<a href="chapter1.html#ex1.35">1.35</a>).</p>
+<p align="justify">The <tt>parse</tt> routine introduced in section <a href="chapter1.html#sec1.7">1.7</a> and called with examples throughout the book is defined in (<a href="chapter1.html#ex1.32">1.32</a>).</p>
 
-<dl><dt>(<a name="ex1.35">1.35</a>)</dt><dd>
-<tt>parse(Goal)&nbsp;:-&#8288;</tt><br>
+<dl><dt>(<a name="ex1.32">1.32</a>)</dt><dd>
+<tt>parse(Goal)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;Goal&nbsp;=..&nbsp;L1,</tt><br>
 <tt>&nbsp;&nbsp;append(L1,[[X],[]],L2),</tt><br>
 <tt>&nbsp;&nbsp;Goal2&nbsp;=..&nbsp;L2,</tt><br>
 <tt>&nbsp;&nbsp;setof(X,&nbsp;tphrase(Goal2),&nbsp;R),</tt><br>
 <tt>&nbsp;&nbsp;pp_ptree_list(R,0,0).</tt><br>
-<tt>parse(Goal)&nbsp;:-&#8288;</tt><br>
+<tt>parse(Goal)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;Goal&nbsp;=..&nbsp;L1,</tt><br>
 <tt>&nbsp;&nbsp;append(L1,[[X,Y|T],[]],L2),</tt><br>
 <tt>&nbsp;&nbsp;Goal2&nbsp;=..&nbsp;L2,</tt><br>
@@ -887,7 +848,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of single <tt>node</tt> compound terms in the case of [rule 1] or lists with at least two <tt>node</tt> compound terms in the case of [rule 2]. For [rule 2], the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. Both rules collect the set of all results and pretty print them with calls to <tt>pp_ptree_list</tt> of (<a href="chapter1.html#ex1.34">1.34</a>) above.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of single <tt>node</tt> compound terms in the case of [rule 1] or lists with at least two <tt>node</tt> compound terms in the case of [rule 2]. For [rule 2], the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. Both rules collect the set of all results and pretty print them with calls to <tt>pp_ptree_list</tt> of (<a href="chapter1.html#ex1.31">1.31</a>) above.</p>
 
 <br>
 <br>

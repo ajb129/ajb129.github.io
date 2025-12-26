@@ -28,32 +28,32 @@
 </ul>
 
 <dl><dt>(<a name="ex5.1">5.1</a>)</dt><dd>
-<tt>clause_top_layer(statement_order,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(statement_order,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L1,L0).</tt><br>
-<tt>clause_top_layer(imperative_clause,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(imperative_clause,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,filled_sbj,imperative,active,L,L0).</tt><br>
-<tt>clause_top_layer(tag_question,store([],[]),L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(tag_question,store([],[]),L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;subject(filled_sbj,L1,L0).</tt><br>
-<tt>clause_top_layer(tag_question,store([],[]),L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(tag_question,store([],[]),L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_finite_layer(_,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;subject(filled_sbj,L1,L0).</tt><br>
-<tt>clause_top_layer(Type,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative,inversion_order])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_supported_infinitive,active,L1,L0).</tt><br>
-<tt>clause_top_layer(Type,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[matrix_interrogative,matrix_constituent_interrogative,inversion_order])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_finite_layer(Code,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;subject(SbjType,L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,SbjType,active,L1,L0).</tt><br>
-<tt>clause_top_layer(matrix_constituent_interrogative,store([np(ICH)|Left],Right),[node('NP-&#8288;SBJ',[ICH])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(matrix_constituent_interrogative,store([np(ICH)|Left],Right),[node('NP-SBJ',[ICH])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(SbjType,[filled_sbj,derived_sbj])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
@@ -115,9 +115,9 @@
 </ul>
 
 <dl><dt>(<a name="ex5.2">5.2</a>)</dt><dd>
-<tt>clause_top_layer(Type,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;Type==statement_order&nbsp;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;Type==statement_order&nbsp;-&gt;</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;member(Type2,[statement_order,inversion_order])</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;;</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type2=Type</tt><br>
@@ -126,30 +126,30 @@
 <tt>&nbsp;&nbsp;initial_adverbial(L,L2),</tt><br>
 <tt>&nbsp;&nbsp;optional_punc_non_final(L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type2,Store,L1,L0).</tt><br>
-<tt>clause_top_layer(Type,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(Type,Store,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Store,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;optional_punc_non_final(L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
-<tt>clause_top_layer(matrix_interrogative,store(Left,Right),L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(matrix_interrogative,store(Left,Right),L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-&#8288;',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;interrogative_item(ICH,ICH_item,Index,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(matrix_constituent_interrogative,store([ICH_item|Left],Right),L1,L0).</tt><br>
-<tt>clause_top_layer(matrix_interrogative,Store,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverb_phrase('-&#8288;NIM',interrogative,L,L1),</tt><br>
+<tt>clause_top_layer(matrix_interrogative,Store,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',interrogative,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(matrix_constituent_interrogative,Store,L1,L0).</tt><br>
-<tt>clause_top_layer(statement_order,store(Left,Right),L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(statement_order,store(Left,Right),L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-&#8288;',Index),</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('-&#8288;TPC',Index,Extra),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;gensym('-',Index),</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('-TPC',Index,Extra),</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('*ICH*',Index,ICH)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;displaced_item(ICH,ICH_item,Extra,L,L2),</tt><br>
 <tt>&nbsp;&nbsp;optional_punc_non_final(L2,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(statement_order,store([ICH_item|Left],Right),L1,L0).</tt><br>
-<tt>clause_top_layer(Type,Store,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_layer(Type,Store,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Store,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_tail(Type,Store,CL,[]).</tt><br>
 </dd></dl>
@@ -157,10 +157,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 6] of (<a href="chapter5.html#ex5.2">5.2</a>) identifies non-initial conjuncts with <tt>clause_top_tail</tt> of (<a href="chapter5.html#ex5.3">5.3</a>).</p>
 
 <dl><dt>(<a name="ex5.3">5.3</a>)</dt><dd>
-<tt>clause_top_tail(Type,Store,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_tail(Type,Store,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Store,IL,[]).</tt><br>
-<tt>clause_top_tail(Type,Store,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_top_tail(Type,Store,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_layer(Type,Store,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_top_tail(Type,Store,L,L0).</tt><br>
@@ -176,19 +176,19 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 3] of (<a href="chapter5.html#ex5.2">5.2</a>) calls <tt>interrogative_item</tt> of (<a href="chapter5.html#ex5.4">5.4</a>) to introduce an initial item carrying <tt>interrogative</tt> type information.</p>
 
 <dl><dt>(<a name="ex5.4">5.4</a>)</dt><dd>
-<tt>interrogative_item(ICH,np(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>interrogative_item(ICH,np(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase(Ext,interrogative,L,L0).</tt><br>
-<tt>interrogative_item(ICH,pp(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>interrogative_item(ICH,pp(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;preposition_phrase(Ext,interrogative,L,L0).</tt><br>
-<tt>interrogative_item(ICH,pp_lgs(node(ICH,[])),Ext,[node(Label,[node('P-&#8288;ROLE;_lgs_',[node(Word,[])]),NP])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>interrogative_item(ICH,pp_lgs(node(ICH,[])),Ext,[node(Label,[node('P-ROLE;_lgs_',[node(Word,[])]),NP])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('PP',Ext,Label)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;[w('P-&#8288;ROLE;_lgs_',Word)],</tt><br>
+<tt>&nbsp;&nbsp;[w('P-ROLE;_lgs_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',interrogative,[NP],[]).</tt><br>
-<tt>interrogative_item(ICH,adjp(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>interrogative_item(ICH,adjp(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adjective_phrase(Ext,store([],[]),interrogative,L,L0).</tt><br>
-<tt>interrogative_item(ICH,advp(node(ICH,[])),Ext,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>interrogative_item(ICH,advp(node(ICH,[])),Ext,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;adverb_phrase(Ext,interrogative,L,L0).</tt><br>
 </dd></dl>
 
@@ -209,17 +209,17 @@
 <p align="justify">An initial adverbial allows for a declarative clause which starts with a <tt>statement_order</tt> setting for its <tt>Type</tt> parameter to change to <tt>inversion_order</tt>. This makes parsing examples like (<a href="chapter5.html#ex5.5">5.5</a>) possible.</p>
 
 <dl><dt>(<a name="ex5.5">5.5</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('P-&#8288;ROLE','Only_after'), w('ADJ','prolonged'), w('NS','discussions'), w('DOD','','did'), w('PRO','they'), w('VB',';~Ipr','come'), w('P-&#8288;ROLE','to'), w('D','an'), w('N','agreement')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('P-ROLE','Only_after'), w('ADJ','prolonged'), w('NS','discussions'), w('DOD','','did'), w('PRO','they'), w('VB',';~Ipr','come'), w('P-ROLE','to'), w('D','an'), w('N','agreement')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(PP-&#8288;NIM-&#8288;TPC&nbsp;(P-&#8288;ROLE&nbsp;Only_after)</tt><br>
+<tt>&nbsp;&nbsp;(PP-NIM-TPC&nbsp;(P-ROLE&nbsp;Only_after)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ADJP&nbsp;(ADJ&nbsp;prolonged))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NS&nbsp;discussions)))</tt><br>
 <tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;they))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;they))</tt><br>
 <tt>&nbsp;&nbsp;(VB;~Ipr&nbsp;come)</tt><br>
-<tt>&nbsp;&nbsp;(PP-&#8288;CLR&nbsp;(P-&#8288;ROLE&nbsp;to)</tt><br>
+<tt>&nbsp;&nbsp;(PP-CLR&nbsp;(P-ROLE&nbsp;to)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(D&nbsp;an)&nbsp;(N&nbsp;agreement))))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -258,10 +258,10 @@
 </ul>
 
 <dl><dt>(<a name="ex5.6">5.6</a>)</dt><dd>
-<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb(Infl,Code,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,SbjType,Voice,L1,L0).</tt><br>
-<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,[node('DO',[node(Word,[])])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,[node('DO',[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;SbjType&nbsp;==&nbsp;filled_sbj,</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;Infl&nbsp;==&nbsp;imperative,</tt><br>
@@ -270,13 +270,13 @@
 <tt>&nbsp;&nbsp;[w('DO','',Word)],</tt><br>
 <tt>&nbsp;&nbsp;optional_clitic_negation(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,infinitive,Voice,L1,L0).</tt><br>
-<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverb_phrase('-&#8288;NIM',non_privileged,L,L1),</tt><br>
+<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',non_privileged,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,Voice,L1,L0).</tt><br>
-<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,Voice,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;adverbial(L1,L0).</tt><br>
-<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_layer(Store,SbjType,Infl,Voice,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,Voice,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_tail(Store,SbjType,Infl,Voice,CL,[]).</tt><br>
 </dd></dl>
@@ -284,10 +284,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 5] of (<a href="chapter5.html#ex5.6">5.6</a>) identifies non-initial conjuncts with <tt>verb_phrase_tail</tt> of (<a href="chapter5.html#ex5.7">5.7</a>).</p>
 
 <dl><dt>(<a name="ex5.7">5.7</a>)</dt><dd>
-<tt>verb_phrase_tail(Store,SbjType,Infl,Voice,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_tail(Store,SbjType,Infl,Voice,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,Voice,IL,[]).</tt><br>
-<tt>verb_phrase_tail(Store,SbjType,Infl,Voice,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb_phrase_tail(Store,SbjType,Infl,Voice,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,Voice,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_tail(Store,SbjType,Infl,Voice,L,L0).</tt><br>
@@ -298,7 +298,7 @@
 <p align="justify">Query (<a href="chapter5.html#ex5.8">5.8</a>) illustrates how a word list can have content for the top layer of a resulting clause, placed under a <tt>clause_top_layer</tt> node for presentation as a tree structure.</p>
 
 <dl><dt>(<a name="ex5.8">5.8</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('FRM','Please'), w('VB',';~I','smile')]),&nbsp;parse(clause_top_layer(imperative_clause,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('FRM','Please'), w('VB',';~I','smile')]),&nbsp;parse(clause_top_layer(imperative_clause,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(FRM&nbsp;Please)&nbsp;(VB;~I&nbsp;smile))</tt><br>
 <br>
@@ -436,7 +436,7 @@
 <p align="justify">Having the <tt>do_operator_layer</tt> rule of (<a href="chapter5.html#ex5.10">5.10</a>) leads to inclusion of a finite <small style="font-size: 75%">DO</small> and also allows for an optional presence for negation as clitic <i>n't</i> (integrated with <tt>optional_clitic_negation</tt> from section <a href="chapter2.html#sec2.10">2.10</a>).</p>
 
 <dl><dt>(<a name="ex5.10">5.10</a>)</dt><dd>
-<tt>do_operator_layer([node(Tag,[node(Word,[])])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>do_operator_layer([node(Tag,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w(Tag,'',Word)],</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['DOP','DOD'])</tt><br>
@@ -447,13 +447,13 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs a <tt>do_operator_layer</tt> call to parse a finite <small style="font-size: 75%">DO</small>, consider (<a href="chapter5.html#ex5.11">5.11</a>).</p>
 
 <dl><dt>(<a name="ex5.11">5.11</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WADV','Why'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','you'), w('VB',';~I','go')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WADV','Why'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','you'), w('VB',';~I','go')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(ADVP-&#8288;NIM&nbsp;(WADV&nbsp;Why))</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-NIM&nbsp;(WADV&nbsp;Why))</tt><br>
 <tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
 <tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;you))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;you))</tt><br>
 <tt>&nbsp;&nbsp;(VB;~I&nbsp;go))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -660,7 +660,7 @@
 <p align="justify">All three rules allow for an optional presence for negation as clitic <i>n't</i> with calls of <tt>optional_clitic_negation</tt> from section <a href="chapter2.html#sec2.10">2.10</a>.</p>
 
 <dl><dt>(<a name="ex5.13">5.13</a>)</dt><dd>
-<tt>have_be_or_md_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>have_be_or_md_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['HVP','HVD']),</tt><br>
@@ -668,7 +668,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat(Tag,Code,TagCode)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;optional_clitic_negation(L,L0).</tt><br>
-<tt>have_be_or_md_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>have_be_or_md_finite_layer(Code,[node(TagCode,[node(Word,[])])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Tag,['BEP','BED']),</tt><br>
@@ -676,7 +676,7 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat(Tag,Code,TagCode)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;optional_clitic_negation(L,L0).</tt><br>
-<tt>have_be_or_md_finite_layer(Code,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>have_be_or_md_finite_layer(Code,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;modal(Code,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;optional_clitic_negation(L1,L0).</tt><br>
 </dd></dl>
@@ -684,11 +684,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a yes/no question that needs a <tt>have_be_or_md_finite_layer</tt> call to parse a finite <small style="font-size: 75%">HAVE</small>, consider (<a href="chapter5.html#ex5.14">5.14</a>).</p>
 
 <dl><dt>(<a name="ex5.14">5.14</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('HVP',';~Tn','Has'), w('PRO','he'), w('D','a'), w('N','fever')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('HVP',';~Tn','Has'), w('PRO','he'), w('D','a'), w('N','fever')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(HVP;~Tn&nbsp;Has)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;fever)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;fever)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -901,19 +901,19 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As example content for a constituent question that needs a <tt>have_be_or_md_finite_layer</tt> call to parse a finite <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.16">5.16</a>).</p>
 
 <dl><dt>(<a name="ex5.16">5.16</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','What'), w('BEP',';~Ln','is'), w('PRO','it')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','What'), w('BEP',';~Ln','is'), w('PRO','it')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;26&nbsp;(WPRO&nbsp;What))</tt><br>
+<tt>&nbsp;&nbsp;(NP-26&nbsp;(WPRO&nbsp;What))</tt><br>
 <tt>&nbsp;&nbsp;(BEP;~Ln&nbsp;is)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;it))</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;*ICH*-&#8288;26))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;it))</tt><br>
+<tt>&nbsp;&nbsp;(NP-PRD&nbsp;*ICH*-26))</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;26&nbsp;(WPRO&nbsp;What))</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;*ICH*-&#8288;26)</tt><br>
+<tt>&nbsp;&nbsp;(NP-26&nbsp;(WPRO&nbsp;What))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;*ICH*-26)</tt><br>
 <tt>&nbsp;&nbsp;(BEP;~Ln&nbsp;is)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;(PRO&nbsp;it)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-PRD&nbsp;(PRO&nbsp;it)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1100,11 +1100,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with selection of a bare infinitive clause as the complement of a modal verb, consider (<a href="chapter5.html#ex5.18">5.18</a>).</p>
 
 <dl><dt>(<a name="ex5.18">5.18</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('MD',';~cat_Vi','Can'), w('PRO','I'), w('VB',';~I','help')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD',';~cat_Vi','Can'), w('PRO','I'), w('VB',';~I','help')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(MD;~cat_Vi&nbsp;Can)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;I))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(VB;~I&nbsp;help)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(VB;~I&nbsp;help)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1299,12 +1299,12 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with selection of a <i>to</i>-infinitive clause as the complement of a modal verb, consider (<a href="chapter5.html#ex5.20">5.20</a>).</p>
 
 <dl><dt>(<a name="ex5.20">5.20</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('MD',';~cat_Vt','Ought'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('MD',';~cat_Vt','Ought'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('PRO','he'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(MD;~cat_Vt&nbsp;Ought)&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(TO&nbsp;to)&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;CLR&nbsp;(RP&nbsp;up))))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1535,9 +1535,9 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The <tt>ip_ppl_active</tt> rule of (<a href="chapter5.html#ex5.22">5.22</a>) identifies content for an active participle clause to place under a node structure labelled <tt>IP-PPL</tt>, together with any extension from the <tt>Ext</tt> parameter. This works with a subsequent call to <tt>verb_phrase_layer</tt> with an <tt>active</tt> setting for <tt>Voice</tt>. Having <tt>Infl</tt> set to <tt>en_participle</tt> identifies a past participle clause.</p>
 
 <dl><dt>(<a name="ex5.22">5.22</a>)</dt><dd>
-<tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_active(Ext,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-&#8288;PPL',Ext,Label)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;atom_concat('IP-PPL',Ext,Label)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,active,VL,[]).</tt><br>
 </dd></dl>
@@ -1545,11 +1545,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">HAVE</small>, consider (<a href="chapter5.html#ex5.23">5.23</a>).</p>
 
 <dl><dt>(<a name="ex5.23">5.23</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('HVP',';~cat_Ve','Has'), w('PRO','he'), w('VVN',';~I','gone')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('HVP',';~cat_Ve','Has'), w('PRO','he'), w('VVN',';~I','gone')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(HVP;~cat_Ve&nbsp;Has)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(VVN;~I&nbsp;gone)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VVN;~I&nbsp;gone)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1735,11 +1735,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with selection of a present participle (<i>-ing</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.25">5.25</a>).</p>
 
 <dl><dt>(<a name="ex5.25">5.25</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('BEP',';~cat_Vg','Is'), w('PRO','he'), w('VAG',';~I','going')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~cat_Vg','Is'), w('PRO','he'), w('VAG',';~I','going')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(BEP;~cat_Vg&nbsp;Is)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(VAG;~I&nbsp;going)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~I&nbsp;going)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -1936,13 +1936,13 @@
 </ul>
 
 <dl><dt>(<a name="ex5.27">5.27</a>)</dt><dd>
-<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,[node('NP-&#8288;LGS',[node('*',[])])|VL])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,[node('NP-LGS',[node('*',[])])|VL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,lgs_passive,VL,[]).</tt><br>
-<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,lgs_passive,VL,[node('PP-&#8288;LGS',[node('P-&#8288;ROLE;_lgs_',[node(Word,[])]),NP])]),</tt><br>
-<tt>&nbsp;&nbsp;[w('P-&#8288;ROLE;_lgs_',Word)],</tt><br>
+<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,lgs_passive,VL,[node('PP-LGS',[node('P-ROLE;_lgs_',[node(Word,[])]),NP])]),</tt><br>
+<tt>&nbsp;&nbsp;[w('P-ROLE;_lgs_',Word)],</tt><br>
 <tt>&nbsp;&nbsp;noun_phrase('',non_privileged,[NP],[]).</tt><br>
-<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store&nbsp;=&nbsp;store([pp_lgs(ICH)|Left],Right)</tt><br>
@@ -1950,10 +1950,10 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store&nbsp;=&nbsp;store(Left,[pp_lgs(ICH)|Right])</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;)</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
-<tt>&nbsp;&nbsp;verb_phrase_layer(store(Left,Right),SbjType,Infl,lgs_passive,VL,[node('PP-&#8288;LGS',[ICH])]).</tt><br>
-<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>&nbsp;&nbsp;verb_phrase_layer(store(Left,Right),SbjType,Infl,lgs_passive,VL,[node('PP-LGS',[ICH])]).</tt><br>
+<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,VL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,Infl,passive,VL,[]).</tt><br>
-<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,[node('ILYR',AL)])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_passive(Label,Store,SbjType,Infl,[node(Label,[node('ILYR',AL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('ILYR',Store,SbjType,Infl,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive_tail(Store,SbjType,Infl,CL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{&nbsp;append(IL,CL,AL)&nbsp;}.</tt><br>
@@ -1962,11 +1962,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[rule 5] of (<a href="chapter5.html#ex5.27">5.27</a>) identifies conjunction structure, capturing non-initial conjuncts with <tt>ip_ppl_passive_tail</tt> of (<a href="chapter5.html#ex5.28">5.28</a>).</p>
 
 <dl><dt>(<a name="ex5.28">5.28</a>)</dt><dd>
-<tt>ip_ppl_passive_tail(Store,SbjType,Infl,[node('CONJP',AL)|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_passive_tail(Store,SbjType,Infl,[node('CONJP',AL)|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('ILYR',Store,SbjType,Infl,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;{&nbsp;append([CONJ],IL,AL)&nbsp;}.</tt><br>
-<tt>ip_ppl_passive_tail(Store,SbjType,Infl,[PU,node('CONJP',IL)|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>ip_ppl_passive_tail(Store,SbjType,Infl,[PU,node('CONJP',IL)|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive('ILYR',Store,SbjType,Infl,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;ip_ppl_passive_tail(Store,SbjType,Infl,L,L0).</tt><br>
@@ -1975,11 +1975,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with selection of a past participle (<i>-ed&sol;-en</i>) clause as the complement of a catenative verb that is a form of <small style="font-size: 75%">BE</small>, consider (<a href="chapter5.html#ex5.29">5.29</a>).</p>
 
 <dl><dt>(<a name="ex5.29">5.29</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('BED',';~cat_Ve_passive_','Was'), w('PRO','he'), w('VVN',';~Tn','scolded')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BED',';~cat_Ve_passive_','Was'), w('PRO','he'), w('VVN',';~Tn','scolded')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(BED;~cat_Ve_passive_&nbsp;Was)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)&nbsp;(VVN;~Tn&nbsp;scolded)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)&nbsp;(VVN;~Tn&nbsp;scolded)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2171,27 +2171,27 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There are also recursive rules allowing initial adverb phrases with <tt>-NIM</tt> (unselected adverbial) function [rule 4] and coordination at this middle clause level [rule 5] with non-initial conjuncts identified with <tt>clause_middle_tail</tt> of (<a href="chapter5.html#ex5.32">5.32</a>).</p>
 
 <dl><dt>(<a name="ex5.31">5.31</a>)</dt><dd>
-<tt>clause_middle_layer(Store,SbjType,L1,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_layer(Store,SbjType,L1,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,finite,active,L1,L0).</tt><br>
-<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;do_operator_layer(L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_phrase_layer(Store,SbjType,do_supported_infinitive,active,L1,L0).</tt><br>
-<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;have_be_or_md_finite_layer(Code,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;verb_complements_top_layer(Code,Store,SbjType,active,L1,L0).</tt><br>
-<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverb_phrase('-&#8288;NIM',established,L,L1),</tt><br>
+<tt>clause_middle_layer(Store,SbjType,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',established,L,L1),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,L1,L0).</tt><br>
-<tt>clause_middle_layer(Store,SbjType,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_layer(Store,SbjType,[node('ILYR',[node('ILYR',IL)|CL])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_tail(Store,SbjType,CL,[]).</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.32">5.32</a>)</dt><dd>
-<tt>clause_middle_tail(Store,SbjType,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_tail(Store,SbjType,[node('CONJP',[CONJ,node('ILYR',IL)])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;conj(CONJ),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,IL,[]).</tt><br>
-<tt>clause_middle_tail(Store,SbjType,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>clause_middle_tail(Store,SbjType,[PU,node('CONJP',[node('ILYR',IL)])|L],L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,[PU],[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_layer(Store,SbjType,IL,[]),</tt><br>
 <tt>&nbsp;&nbsp;clause_middle_tail(Store,SbjType,L,L0).</tt><br>
@@ -2200,14 +2200,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example of <i>didn't</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.33">5.33</a>).</p>
 
 <dl><dt>(<a name="ex5.33">5.33</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('DOD','','did'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
 <tt>&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
 <tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;(ADVP-&#8288;CLR&nbsp;(RP&nbsp;up)))</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2398,14 +2398,14 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with catenative modal <i>ought</i> occurring with statement word order, consider (<a href="chapter5.html#ex5.35">5.35</a>).</p>
 
 <dl><dt>(<a name="ex5.35">5.35</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','he'), w('ADV','really'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','he'), w('ADV','really'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('VB',';~Ip','stand'), w('RP','up')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;he))</tt><br>
-<tt>&nbsp;&nbsp;(ADVP-&#8288;NIM&nbsp;(ADV&nbsp;really))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;he))</tt><br>
+<tt>&nbsp;&nbsp;(ADVP-NIM&nbsp;(ADV&nbsp;really))</tt><br>
 <tt>&nbsp;&nbsp;(MD;~cat_Vt&nbsp;ought)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(TO&nbsp;to)&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-&#8288;CLR&nbsp;(RP&nbsp;up))))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)&nbsp;(VB;~Ip&nbsp;stand)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADVP-CLR&nbsp;(RP&nbsp;up))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -2690,15 +2690,15 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with modal <i>may</i> occurring with statement word order in a clause that also has catenative <i>have</i> followed by catenative <i>been</i> followed by catenative <i>being</i>, consider (<a href="chapter5.html#ex5.37">5.37</a>).</p>
 
 <dl><dt>(<a name="ex5.37">5.37</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('D','A'), w('N','ship'), w('MD',';~cat_Vi','may'), w('HV',';~cat_Ve','have'), w('BEN',';~cat_Vg','been'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','sunk')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('D','A'), w('N','ship'), w('MD',';~cat_Vi','may'), w('HV',';~cat_Ve','have'), w('BEN',';~cat_Vg','been'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','sunk')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
 <br>
 <tt>(</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(D&nbsp;A)&nbsp;(N&nbsp;ship))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(D&nbsp;A)&nbsp;(N&nbsp;ship))</tt><br>
 <tt>&nbsp;&nbsp;(MD;~cat_Vi&nbsp;may)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(BEN;~cat_Vg&nbsp;been)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(BAG;~cat_Ve_passive_&nbsp;being)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(NP-&#8288;LGS&nbsp;*)&nbsp;(VVN;~Tn&nbsp;sunk))))))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~cat_Vg&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BAG;~cat_Ve_passive_&nbsp;being)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(NP-LGS&nbsp;*)&nbsp;(VVN;~Tn&nbsp;sunk))))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -3123,42 +3123,42 @@
 <p align="justify">Why do the success and failure results of (<a href="chapter5.html#ex5.39">5.39</a>)&ndash;(<a href="chapter5.html#ex5.42">5.42</a>) obtain?</p>
 
 <dl><dt>(<a name="ex5.39">5.39</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','Who'), w('VBD',';~Tn','saw'), w('WPRO','who'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('VBD',';~Tn','saw'), w('WPRO','who'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(CP-&#8288;QUE-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;SUB</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;433&nbsp;(WPRO&nbsp;Who))</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;*ICH*-&#8288;433)</tt><br>
+<tt>(CP-QUE-MAT</tt><br>
+<tt>&nbsp;&nbsp;(IP-SUB</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-433&nbsp;(WPRO&nbsp;Who))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;*ICH*-433)</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(VBD;~Tn&nbsp;saw)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(WPRO&nbsp;who)))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(WPRO&nbsp;who)))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.40">5.40</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','Who'), w('WPRO','who'), w('VBD',';~Tn','saw'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('WPRO','who'), w('VBD',';~Tn','saw'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.41">5.41</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOD','','did'), w('NPR','John'), w('VB',';~Tn','see'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOD','','did'), w('NPR','John'), w('VB',';~Tn','see'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(CP-&#8288;QUE-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;SUB</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;495&nbsp;(WPRO&nbsp;Who))</tt><br>
+<tt>(CP-QUE-MAT</tt><br>
+<tt>&nbsp;&nbsp;(IP-SUB</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-495&nbsp;(WPRO&nbsp;Who))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(DOD&nbsp;did)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;John))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;John))</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;(VB;~Tn&nbsp;see)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;*ICH*-&#8288;495))</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-495))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;?))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.42">5.42</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOD','','did'), w('WPRO','who'), w('VB',';~Tn','see'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','Who'), w('DOD','','did'), w('WPRO','who'), w('VB',';~Tn','see'), w('PUNC','?')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
@@ -3168,34 +3168,34 @@
 <p align="justify">Why do the success and failure results of (<a href="chapter5.html#ex5.43">5.43</a>)&ndash;(<a href="chapter5.html#ex5.45">5.45</a>) obtain?</p>
 
 <dl><dt>(<a name="ex5.43">5.43</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;John))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;John))</tt><br>
 <tt>&nbsp;&nbsp;(HVD;~cat_Ve&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(HVN;~Tn&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(D&nbsp;some)&nbsp;(N&nbsp;tea)))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(HVN;~Tn&nbsp;had)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;some)&nbsp;(N&nbsp;tea)))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.44">5.44</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Ve','had'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.45">5.45</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Vt','had'), w('TO','to'), w('HV',';~cat_Ve','have'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('NPR','John'), w('HVD',';~cat_Ve','had'), w('HVN',';~cat_Vt','had'), w('TO','to'), w('HV',';~cat_Ve','have'), w('HVN',';~Tn','had'), w('D','some'), w('N','tea'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NPR&nbsp;John))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(NPR&nbsp;John))</tt><br>
 <tt>&nbsp;&nbsp;(HVD;~cat_Ve&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(HVN;~cat_Vt&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(TO&nbsp;to)&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(HVN;~Tn&nbsp;had)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(D&nbsp;some)&nbsp;(N&nbsp;tea)))))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(HVN;~cat_Vt&nbsp;had)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(HVN;~Tn&nbsp;had)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;some)&nbsp;(N&nbsp;tea)))))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -3206,49 +3206,49 @@
 <p align="justify">Why do the success and failure results of (<a href="chapter5.html#ex5.46">5.46</a>)&ndash;(<a href="chapter5.html#ex5.50">5.50</a>) obtain?</p>
 
 <dl><dt>(<a name="ex5.46">5.46</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('DO','','Do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('BE',';~La','be'), w('ADJ','shy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('DO','','Do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('BE',';~La','be'), w('ADJ','shy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;IMP&nbsp;(DO&nbsp;Do)&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)&nbsp;(BE;~La&nbsp;be)</tt><br>
-<tt>&nbsp;&nbsp;(ADJP-&#8288;PRD&nbsp;(ADJ&nbsp;shy))</tt><br>
+<tt>(IP-IMP&nbsp;(DO&nbsp;Do)&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)&nbsp;(BE;~La&nbsp;be)</tt><br>
+<tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;shy))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.47">5.47</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('BE',';~La','be'), w('ADJ','shy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('BE',';~La','be'), w('ADJ','shy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.48">5.48</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','I'), w('HVP',';~cat_Ve','have'), w('BEN',';~La','been'), w('ADJ','busy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('HVP',';~cat_Ve','have'), w('BEN',';~La','been'), w('ADJ','busy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;I))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
 <tt>&nbsp;&nbsp;(HVP;~cat_Ve&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(BEN;~La&nbsp;been)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-&#8288;PRD&nbsp;(ADJ&nbsp;busy)))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~La&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;busy)))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.49">5.49</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('HV',';~cat_Ve','have'), w('BEN',';~La','been'), w('ADJ','busy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('HV',';~cat_Ve','have'), w('BEN',';~La','been'), w('ADJ','busy'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.50">5.50</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('HV',';~Tn','have'), w('D','any'), w('N','money'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','I'), w('DOP','','do'), w('NEG;_clitic_','n&lt;apos&gt;t'), w('HV',';~Tn','have'), w('D','any'), w('N','money'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(PRO&nbsp;I))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(PRO&nbsp;I))</tt><br>
 <tt>&nbsp;&nbsp;(DOP&nbsp;do)</tt><br>
 <tt>&nbsp;&nbsp;(NEG;_clitic_&nbsp;n&lt;apos&gt;t)</tt><br>
 <tt>&nbsp;&nbsp;(HV;~Tn&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;(D&nbsp;any)&nbsp;(N&nbsp;money))</tt><br>
+<tt>&nbsp;&nbsp;(NP-OB1&nbsp;(D&nbsp;any)&nbsp;(N&nbsp;money))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -3259,19 +3259,19 @@
 <p align="justify">At what levels of the clause structure do the coordinations of (<a href="chapter5.html#ex5.51">5.51</a>)&ndash;(<a href="chapter5.html#ex5.54">5.54</a>) happen?</p>
 
 <dl><dt>(<a name="ex5.51">5.51</a>)</dt><dd>
-<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VVN',';~Tn.pr','put'), w('P-&#8288;ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VVN',';~Tn.pr','put'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.52">5.52</a>)</dt><dd>
-<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VAG',';~Ipr','going'), w('P-&#8288;ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VAG',';~Ipr','going'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.53">5.53</a>)</dt><dd>
-<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VBD',';~Ipr','went'), w('P-&#8288;ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('VBD',';~Ipr','went'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex5.54">5.54</a>)</dt><dd>
-<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('NS','computers'), w('VBD',';~Ipr','went'), w('P-&#8288;ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
+<tt>[w('NS','Phones'), w('BED',';~cat_Vg','were'), w('BAG',';~cat_Ve_passive_','being'), w('VVN',';~Tn','tapped'), w('CONJ','and'), w('NS','computers'), w('VBD',';~Ipr','went'), w('P-ROLE','out_of'), w('N','action'), w('PUNC','.')]</tt><br>
 </dd></dl>
 
 <br><h2><a name="sec5.6">5.6</a>&nbsp;&nbsp;&nbsp;&nbsp;Existential there</h2>
@@ -3281,10 +3281,10 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;As an example with <i>there</i> and an existential verb with code <tt>;~ex_V</tt>, consider (<a href="chapter5.html#ex5.55">5.55</a>).</p>
 
 <dl><dt>(<a name="ex5.55">5.55</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('BEP',';~ex_V','Is'), w('EX','there'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_V','Is'), w('EX','there'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(BEP;~ex_V&nbsp;Is)&nbsp;(EX&nbsp;there)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;ESBJ&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;doctor)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;doctor)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -3464,12 +3464,12 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is in principle no limit to the distance between the instance of <i>there</i> which sets the clause <tt>SbjType</tt> to <tt>there_sbj</tt> and the occurrence of the existential verb that needs this setting, provided this happens in the same clause and the <tt>there_sbj</tt> setting of the <tt>SbjType</tt> parameter is able to hold at the location where the existential verb occurs. As an example of distance, consider (<a href="chapter5.html#ex5.57">5.57</a>).</p>
 
 <dl><dt>(<a name="ex5.57">5.57</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('EX','there'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('HV',';~cat_Ve','have'), w('BEN',';~ex_V','been'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('EX','there'), w('MD',';~cat_Vt','ought'), w('TO','to'), w('HV',';~cat_Ve','have'), w('BEN',';~ex_V','been'), w('D','a'), w('N','doctor')]),&nbsp;parse(clause_top_layer(statement_order,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(EX&nbsp;there)&nbsp;(MD;~cat_Vt&nbsp;ought)</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;INF-&#8288;CAT&nbsp;(TO&nbsp;to)&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(BEN;~ex_V&nbsp;been)</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;ESBJ&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;doctor)))))</tt><br>
+<tt>&nbsp;&nbsp;(IP-INF-CAT&nbsp;(TO&nbsp;to)&nbsp;(HV;~cat_Ve&nbsp;have)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(BEN;~ex_V&nbsp;been)</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP-ESBJ&nbsp;(D&nbsp;a)&nbsp;(N&nbsp;doctor)))))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>
@@ -3790,11 +3790,11 @@
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;If the existential verb is a catenative verb, then the subject parameter changes from its initial <tt>there_sbj</tt> value to having a <tt>filled_sbj</tt> value for the <tt>-CAT</tt> complement selected by the catenative verb. We can see this change happen by considering (<a href="chapter5.html#ex5.59">5.59</a>), with its existential verb that has code <tt>;~ex_cat_Vg</tt>.</p>
 
 <dl><dt>(<a name="ex5.59">5.59</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('BEP',';~ex_cat_Vg','Is'), w('EX','there'), w('Q;_nphd_','nobody_else'), w('VAG',';~I','coming')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('BEP',';~ex_cat_Vg','Is'), w('EX','there'), w('Q;_nphd_','nobody_else'), w('VAG',';~I','coming')]),&nbsp;parse(clause_top_layer(matrix_interrogative,store([],[]))).</tt><br>
 <br>
 <tt>(&nbsp;(BEP;~ex_cat_Vg&nbsp;Is)&nbsp;(EX&nbsp;there)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;ESBJ&nbsp;(Q;_nphd_&nbsp;nobody_else))</tt><br>
-<tt>&nbsp;&nbsp;(IP-&#8288;PPL-&#8288;CAT&nbsp;(VAG;~I&nbsp;coming)))</tt><br>
+<tt>&nbsp;&nbsp;(NP-ESBJ&nbsp;(Q;_nphd_&nbsp;nobody_else))</tt><br>
+<tt>&nbsp;&nbsp;(IP-PPL-CAT&nbsp;(VAG;~I&nbsp;coming)))</tt><br>
 <br>
 <tt>yes</tt><br>
 </dd></dl>

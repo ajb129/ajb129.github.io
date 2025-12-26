@@ -24,20 +24,20 @@
 <br>
 
 <dl><dt>(<a name="ex2.1">2.1</a>)</dt><dd>
-<tt>noun([node('NS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun([node('NS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('NS',Word)].</tt><br>
-<tt>noun([node('N',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun([node('N',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('N',Word)].</tt><br>
-<tt>noun([node('NPRS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun([node('NPRS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('NPRS',Word)].</tt><br>
-<tt>noun([node('NPR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun([node('NPR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('NPR',Word)].</tt><br>
 </dd></dl>
 
 <p align="justify">Prolog query (<a href="chapter2.html#ex2.2">2.2</a>) asks whether a word list with <tt>w('NS','boys')</tt> has content for a successful parse of <tt>noun</tt> structure.</p>
 
 <dl><dt>(<a name="ex2.2">2.2</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;&nbsp;tphrase_set_string([w('NS','boys')]),&nbsp;parse(noun).</tt><br>
+<tt>|&nbsp;?-&nbsp;&nbsp;tphrase_set_string([w('NS','boys')]),&nbsp;parse(noun).</tt><br>
 <br>
 <tt>(NS&nbsp;boys)</tt><br>
 <br>
@@ -64,9 +64,9 @@
 <br>
 
 <dl><dt>(<a name="ex2.3">2.3</a>)</dt><dd>
-<tt>noun_head([node('Q;_nphd_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head([node('Q;_nphd_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('Q;_nphd_',Word)].</tt><br>
-<tt>noun_head([node('D;_nphd_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head([node('D;_nphd_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('D;_nphd_',Word)].</tt><br>
 </dd></dl>
 
@@ -87,42 +87,42 @@
 <br>
 
 <dl><dt>(<a name="ex2.4">2.4</a>)</dt><dd>
-<tt>noun_head_full(non_privileged,[node('PNX',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(non_privileged,[node('PNX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PNX',Word)].</tt><br>
-<tt>noun_head_full(Type,[node('PRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(Type,[node('PRO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO',Word)].</tt><br>
-<tt>noun_head_full(Type,[node('PRO;_expletive_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(Type,[node('PRO;_expletive_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_expletive_',Word)].</tt><br>
-<tt>noun_head_full(Type,[node('NP-&#8288;GEN',[node('PRO;_ppge_',[node(Word,[])])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(Type,[node('NP-GEN',[node('PRO;_ppge_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_ppge_',Word)].</tt><br>
-<tt>noun_head_full(Type,[node('WPRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(Type,[node('WPRO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('WPRO',Word)].</tt><br>
-<tt>noun_head_full(relative,[node('RPRO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>noun_head_full(relative,[node('RPRO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('RPRO',Word)].</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Note how [rule 4] of (<a href="chapter2.html#ex2.4">2.4</a>) involves the word class with code <tt>PRO;_ppge_</tt>. This results in a genitive case marked noun phrase layer (<tt>NP-GEN</tt>) which goes on to be the only element of a containing noun phrase layer. This is seen with <tt>NP-SBJ</tt> in the parse result of (<a href="chapter2.html#ex2.5">2.5</a>).</p>
 
 <dl><dt>(<a name="ex2.5">2.5</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO;_ppge_','Theirs'), w('BEP',';~La','is'), w('ADJ','large'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ</tt><br>
-<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-&#8288;GEN&nbsp;(PRO;_ppge_&nbsp;Theirs)))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;(NP-GEN&nbsp;(PRO;_ppge_&nbsp;Theirs)))</tt><br>
 <tt>&nbsp;&nbsp;(BEP;~La&nbsp;is)</tt><br>
-<tt>&nbsp;&nbsp;(ADJP-&#8288;PRD&nbsp;(ADJ&nbsp;large))</tt><br>
+<tt>&nbsp;&nbsp;(ADJP-PRD&nbsp;(ADJ&nbsp;large))</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>yes</tt><br>
@@ -146,7 +146,7 @@
 <p align="justify">What do the results of (<a href="chapter2.html#ex2.6">2.6</a>)&ndash;(<a href="chapter2.html#ex2.21">2.21</a>) tell us about where words with the different word classes of Table <a href="chapter2.html#table2.3">2.3</a> can occur?</p>
 
 <dl><dt>(<a name="ex2.6">2.6</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
 <br>
 <tt>(PNX&nbsp;itself)</tt><br>
 <br>
@@ -154,25 +154,25 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.7">2.7</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.8">2.8</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.9">2.9</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PNX','itself')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.10">2.10</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
 <br>
 <tt>(PRO&nbsp;it)</tt><br>
 <br>
@@ -180,7 +180,7 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.11">2.11</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>(PRO&nbsp;it)</tt><br>
 <br>
@@ -188,19 +188,19 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.12">2.12</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.13">2.13</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('PRO','it')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.14">2.14</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
 <br>
 <tt>(WPRO&nbsp;who)</tt><br>
 <br>
@@ -208,13 +208,13 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.15">2.15</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.16">2.16</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
 <br>
 <tt>(WPRO&nbsp;who)</tt><br>
 <br>
@@ -222,32 +222,32 @@
 </dd></dl>
 
 <dl><dt>(<a name="ex2.17">2.17</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('WPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.18">2.18</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(non_privileged)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.19">2.19</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(established)).</tt><br>
 <br>
 <tt>no</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.20">2.20</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(interrogative)).</tt><br>
 <br>
 <tt>no</tt><br>
 <br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.21">2.21</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('RPRO','who')]),&nbsp;parse(noun_head_full(relative)).</tt><br>
 <br>
 <tt>(RPRO&nbsp;who)</tt><br>
 <br>
@@ -271,22 +271,22 @@
 <br>
 
 <dl><dt>(<a name="ex2.22">2.22</a>)</dt><dd>
-<tt>det(Type,[node('Q',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>det(Type,[node('Q',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('Q',Word)].</tt><br>
-<tt>det(Type,[node('D',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>det(Type,[node('D',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('D',Word)].</tt><br>
-<tt>det(Type,[node('WD',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>det(Type,[node('WD',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('WD',Word)].</tt><br>
-<tt>det(relative,[node('RD',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>det(relative,[node('RD',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('RD',Word)].</tt><br>
 </dd></dl>
 
@@ -316,22 +316,22 @@
 <br>
 
 <dl><dt>(<a name="ex2.23">2.23</a>)</dt><dd>
-<tt>genm([node('GENM',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>genm([node('GENM',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('GENM',Word)].</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.24">2.24</a>)</dt><dd>
-<tt>pronoun_genm(Type,[node('PRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>pronoun_genm(Type,[node('PRO;_genm_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,established])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_genm_',Word)].</tt><br>
-<tt>pronoun_genm(Type,[node('WPRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>pronoun_genm(Type,[node('WPRO;_genm_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;member(Type,[non_privileged,interrogative])</tt><br>
 <tt>&nbsp;&nbsp;},</tt><br>
 <tt>&nbsp;&nbsp;[w('WPRO;_genm_',Word)].</tt><br>
-<tt>pronoun_genm(relative,[node('RPRO;_genm_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>pronoun_genm(relative,[node('RPRO;_genm_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('RPRO;_genm_',Word)].</tt><br>
 </dd></dl>
 
@@ -349,16 +349,16 @@
 <p align="justify">Except when the clause <tt>Type</tt> setting is <tt>imperative_clause</tt>, there is always the requirement that a finite clause should include a subject. The rules of (<a href="chapter2.html#ex2.25">2.25</a>) integrate the subject requirement, provided the clause is not a main clause interrogative whose subject contains an interrogative word.</p>
 
 <dl><dt>(<a name="ex2.25">2.25</a>)</dt><dd>
-<tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>subject(there_sbj,[node('EX',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('EX',Word)].</tt><br>
-<tt>subject(provisional_sbj,[node('NP-&#8288;SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>subject(provisional_sbj,[node('NP-SBJ',[node('PRO;_provisional_',[node(Word,[])])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PRO;_provisional_',Word)].</tt><br>
-<tt>subject(filled_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-&#8288;SBJ',established,L,L0).</tt><br>
-<tt>subject(derived_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;noun_phrase('-&#8288;SBJ',established,L,L0).</tt><br>
-<tt>subject(filled_sbj,L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;ip_ppl_active('-&#8288;SBJ',store([],[]),filled_sbj,ing_participle,L,L0).</tt><br>
+<tt>subject(filled_sbj,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',established,L,L0).</tt><br>
+<tt>subject(derived_sbj,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;noun_phrase('-SBJ',established,L,L0).</tt><br>
+<tt>subject(filled_sbj,L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;ip_ppl_active('-SBJ',store([],[]),filled_sbj,ing_participle,L,L0).</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;The first three rules of (<a href="chapter2.html#ex2.25">2.25</a>) allow for the subject to be a formal word from Table <a href="chapter2.html#table2.6">2.6</a> that will set the value of the clause <tt>SbjType</tt> parameter to:</p>
@@ -415,17 +415,17 @@
 <br>
 
 <dl><dt>(<a name="ex2.26">2.26</a>)</dt><dd>
-<tt>adv(established,[node('ADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(established,[node('ADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADV',Word)].</tt><br>
-<tt>adv(established,[node('ADVR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(established,[node('ADVR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADVR',Word)].</tt><br>
-<tt>adv(established,[node('ADVS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(established,[node('ADVS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADVS',Word)].</tt><br>
-<tt>adv(interrogative,[node('WADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(interrogative,[node('WADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('WADV',Word)].</tt><br>
-<tt>adv(relative,[node('RADV',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(relative,[node('RADV',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('RADV',Word)].</tt><br>
-<tt>adv(particle,[node('RP',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adv(particle,[node('RP',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('RP',Word)].</tt><br>
 </dd></dl>
 
@@ -455,13 +455,13 @@
 <br>
 
 <dl><dt>(<a name="ex2.27">2.27</a>)</dt><dd>
-<tt>adj(established,[node('ADJ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adj(established,[node('ADJ',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJ',Word)].</tt><br>
-<tt>adj(established,[node('ADJR',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adj(established,[node('ADJR',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJR',Word)].</tt><br>
-<tt>adj(established,[node('ADJS',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adj(established,[node('ADJS',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJS',Word)].</tt><br>
-<tt>adj(catenative,[node('ADJ;_cat_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>adj(catenative,[node('ADJ;_cat_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('ADJ;_cat_',Word)].</tt><br>
 </dd></dl>
 
@@ -477,7 +477,7 @@
 <p align="justify">This section covers how verb words are integrated into a parse. The <tt>verb</tt> rule of (<a href="chapter2.html#ex2.28">2.28</a>) matches verb words from the word list, collecting information for three parameters: <tt>Tag</tt>, <tt>Code</tt> and <tt>Word</tt>.</p>
 
 <dl><dt>(<a name="ex2.28">2.28</a>)</dt><dd>
-<tt>verb(Infl,Code,[node(TagCode,[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>verb(Infl,Code,[node(TagCode,[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w(Tag,Code,Word)],</tt><br>
 <tt>&nbsp;&nbsp;{</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;verb_tag(Infl,TagList),</tt><br>
@@ -689,7 +689,7 @@
 <p align="justify">A <tt>verb_code</tt> call will then return through the <tt>Code</tt> parameter a code picked from the corresponding list for compatible codes.</p>
 
 <dl><dt>(<a name="ex2.30">2.30</a>)</dt><dd>
-<tt>verb_code('V',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('V',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',';~In&sol;pr',';~It',</tt><br>
@@ -703,34 +703,34 @@
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~V_as_though&sol;as_if&sol;like',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~VP24A',';~VP24C'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
-<tt>verb_code('V',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,do_supported_infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Ve_passive_',';~ex_V',';~ex_Vpr',';~ex_cat_Vt']).</tt><br>
-<tt>verb_code('V',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('V',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vt',';~cat_Vi',';~cat_Vg',';~cat_Vg_passive_',';~cat_Ve_passive_']).</tt><br>
-<tt>verb_code('D',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('D',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~Tn']).</tt><br>
-<tt>verb_code('H',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('H',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~Tn',';~VP24B',';~VP24C']).</tt><br>
-<tt>verb_code('H',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt',';~cat_Ve']).</tt><br>
-<tt>verb_code('H',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('H',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[imperative,ing_participle,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~cat_Vi',';~cat_Vt']).</tt><br>
-<tt>verb_code('B',_,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('B',_,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~La',';~Ln',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~I',';~Ip',';~Ipr',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vt',';~cat_Vt_passive_',';~cat_Ve_passive_',</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~equ_Vf',';~equ_Vw',';~equ_Vt',';~equ_Vg'</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;]).</tt><br>
-<tt>verb_code('B',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,ing_participle,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[';~ex_V',';~ex_Vp',';~ex_Vpr']).</tt><br>
-<tt>verb_code('B',Infl,Code)&nbsp;:-&#8288;</tt><br>
+<tt>verb_code('B',Infl,Code)&nbsp;:-</tt><br>
 <tt>&nbsp;&nbsp;member(Infl,[finite,infinitive,en_participle]),</tt><br>
 <tt>&nbsp;&nbsp;member(Code,[</tt><br>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';~cat_Vg',</tt><br>
@@ -746,7 +746,7 @@
 <p align="justify">What does the Prolog query of (<a href="chapter2.html#ex2.31">2.31</a>) achieve?</p>
 
 <dl><dt>(<a name="ex2.31">2.31</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([Word]),&nbsp;parse(verb(Infl,Code)),&nbsp;fail.</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([Word]),&nbsp;parse(verb(Infl,Code)),&nbsp;fail.</tt><br>
 </dd></dl>
 
 <h4>Question</h4>
@@ -754,25 +754,25 @@
 <p align="justify">How do the tree results from the Prolog query of (<a href="chapter2.html#ex2.32">2.32</a>) differ?</p>
 
 <dl><dt>(<a name="ex2.32">2.32</a>)</dt><dd>
-<tt>|&nbsp;?-&#8288;&nbsp;tphrase_set_string([w('N','Business'), w('NS','people'), w('VBP',Y,'make'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
+<tt>|&nbsp;?-&nbsp;tphrase_set_string([w('N','Business'), w('NS','people'), w('VBP',Y,'make'), w('PUNC','.')]),&nbsp;parse(sentence).</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(N&nbsp;Business)&nbsp;(NS&nbsp;people))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(N&nbsp;Business)&nbsp;(NS&nbsp;people))</tt><br>
 <tt>&nbsp;&nbsp;(VBP;~I&nbsp;make)</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;TPC-&#8288;190&nbsp;(N&nbsp;Business))</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NS&nbsp;people))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-TPC-190&nbsp;(N&nbsp;Business))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(NS&nbsp;people))</tt><br>
 <tt>&nbsp;&nbsp;(VBP;~Ln&nbsp;make)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;PRD&nbsp;*ICH*-&#8288;190)</tt><br>
+<tt>&nbsp;&nbsp;(NP-PRD&nbsp;*ICH*-190)</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
-<tt>(IP-&#8288;MAT</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;TPC-&#8288;190&nbsp;(N&nbsp;Business))</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;SBJ&nbsp;(NS&nbsp;people))</tt><br>
+<tt>(IP-MAT</tt><br>
+<tt>&nbsp;&nbsp;(NP-TPC-190&nbsp;(N&nbsp;Business))</tt><br>
+<tt>&nbsp;&nbsp;(NP-SBJ&nbsp;(NS&nbsp;people))</tt><br>
 <tt>&nbsp;&nbsp;(VBP;~Tn&nbsp;make)</tt><br>
-<tt>&nbsp;&nbsp;(NP-&#8288;OB1&nbsp;*ICH*-&#8288;190)</tt><br>
+<tt>&nbsp;&nbsp;(NP-OB1&nbsp;*ICH*-190)</tt><br>
 <tt>&nbsp;&nbsp;(PUNC&nbsp;.))</tt><br>
 <br>
 <tt>Y&nbsp;=&nbsp;_h771</tt><br>
@@ -805,9 +805,9 @@
 <p align="justify">The <tt>modal</tt> rules of (<a href="chapter2.html#ex2.33">2.33</a>) support the integration of the modal words of Table <a href="chapter2.html#table2.15">2.15</a>.</p>
 
 <dl><dt>(<a name="ex2.33">2.33</a>)</dt><dd>
-<tt>modal(';~cat_Vi',[node('MD;~cat_Vi',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>modal(';~cat_Vi',[node('MD;~cat_Vi',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('MD',';~cat_Vi',Word)].</tt><br>
-<tt>modal(';~cat_Vt',[node('MD;~cat_Vt',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>modal(';~cat_Vt',[node('MD;~cat_Vt',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('MD',';~cat_Vt',Word)].</tt><br>
 </dd></dl>
 
@@ -833,30 +833,30 @@
 <p align="justify">The <tt>optional_clitic_negation</tt>, <tt>neg</tt> and <tt>to</tt> rules of (<a href="chapter2.html#ex2.34">2.34</a>) and the <tt>initial_adverbial</tt> rules of (<a href="chapter2.html#ex2.35">2.35</a>) support the integration of the words of Table <a href="chapter2.html#table2.16">2.16</a>.</p>
 
 <dl><dt>(<a name="ex2.34">2.34</a>)</dt><dd>
-<tt>optional_clitic_negation([node('NEG;_clitic_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>optional_clitic_negation([node('NEG;_clitic_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('NEG;_clitic_',Word)].</tt><br>
-<tt>optional_clitic_negation(L,L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>optional_clitic_negation(L,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
-<tt>neg([node('NEG',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>neg([node('NEG',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('NEG',Word)].</tt><br>
-<tt>to([node('TO',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>to([node('TO',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('TO',Word)].</tt><br>
 </dd></dl>
 
 <dl><dt>(<a name="ex2.35">2.35</a>)</dt><dd>
-<tt>initial_adverbial([node('CONJ;_cl_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>initial_adverbial([node('CONJ;_cl_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('CONJ;_cl_',Word)].</tt><br>
-<tt>initial_adverbial([node('INTJ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>initial_adverbial([node('INTJ',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('INTJ',Word)].</tt><br>
-<tt>initial_adverbial([node('REACT',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>initial_adverbial([node('REACT',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('REACT',Word)].</tt><br>
-<tt>initial_adverbial([node('FRM',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>initial_adverbial([node('FRM',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('FRM',Word)].</tt><br>
-<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;adverb_phrase('-&#8288;NIM',established,L,L0).</tt><br>
-<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;preposition_phrase('-&#8288;NIM-&#8288;TPC',established,L,L0).</tt><br>
-<tt>initial_adverbial(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;adverb_phrase('-NIM',established,L,L0).</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;preposition_phrase('-NIM-TPC',established,L,L0).</tt><br>
+<tt>initial_adverbial(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;scon_clause(L,L0).</tt><br>
 </dd></dl>
 
@@ -897,16 +897,16 @@
 <p align="justify">The <tt>conj</tt>, <tt>comp</tt>, <tt>comp_wq</tt>, <tt>conn</tt> and <tt>role</tt> rules of (<a href="chapter2.html#ex2.36">2.36</a>) support the integration of the connective words of Table <a href="chapter2.html#table2.17">2.17</a>.</p>
 
 <dl><dt>(<a name="ex2.36">2.36</a>)</dt><dd>
-<tt>conj(node('CONJ',[node(Word,[])]))&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>conj(node('CONJ',[node(Word,[])]))&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('CONJ',Word)].</tt><br>
-<tt>comp([node('C',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>comp([node('C',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('C',Word)].</tt><br>
-<tt>comp_wq([node('WQ',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>comp_wq([node('WQ',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('WQ',Word)].</tt><br>
-<tt>conn([node('P-&#8288;CONN',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;[w('P-&#8288;CONN',Word)].</tt><br>
-<tt>role([node('P-&#8288;ROLE',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
-<tt>&nbsp;&nbsp;[w('P-&#8288;ROLE',Word)].</tt><br>
+<tt>conn([node('P-CONN',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('P-CONN',Word)].</tt><br>
+<tt>role([node('P-ROLE',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
+<tt>&nbsp;&nbsp;[w('P-ROLE',Word)].</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;There is also the tag and code combination of Table <a href="chapter2.html#table2.18">2.18</a> included with passive constructions in sections <a href="chapter4.html#sec4.4">4.4</a> and <a href="#sec"></a>.</p>
@@ -948,36 +948,36 @@
 </ul>
 
 <dl><dt>(<a name="ex2.37">2.37</a>)</dt><dd>
-<tt>punc(final,[node('PUNC',[node('.',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(final,[node('PUNC',[node('.',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC','.')].</tt><br>
-<tt>punc(final,[node('PUNC',[node('!',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(final,[node('PUNC',[node('!',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC','!')].</tt><br>
-<tt>punc(final_question,[node('PUNC',[node('?',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(final_question,[node('PUNC',[node('?',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC','?')].</tt><br>
-<tt>punc(non_final,[node('PUNC',[node(',',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(non_final,[node('PUNC',[node(',',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC',',')].</tt><br>
-<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;ldquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;ldquo&gt;',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PULQ','&lt;ldquo&gt;')].</tt><br>
-<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;lsquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(left_quotation_mark,[node('PULQ',[node('&lt;lsquo&gt;',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PULQ','&lt;lsquo&gt;')].</tt><br>
-<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rsquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rsquo&gt;',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PURQ','&lt;rsquo&gt;')].</tt><br>
-<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rdquo&gt;',[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(right_quotation_mark,[node('PURQ',[node('&lt;rdquo&gt;',[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PURQ','&lt;rdquo&gt;')].</tt><br>
-<tt>punc(final,[node('PUNC;_final_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(final,[node('PUNC;_final_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC;_final_',Word)].</tt><br>
-<tt>punc(final_question,[node('PUNC;_final_question_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(final_question,[node('PUNC;_final_question_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC;_final_question_',Word)].</tt><br>
-<tt>punc(non_final,[node('PUNC;_non_final_',[node(Word,[])])|L],L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>punc(non_final,[node('PUNC;_non_final_',[node(Word,[])])|L],L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[w('PUNC;_non_final_',Word)].</tt><br>
 </dd></dl>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Optional non-final punctuation follows from (<a href="chapter2.html#ex2.38">2.38</a>).</p>
 
 <dl><dt>(<a name="ex2.38">2.38</a>)</dt><dd>
-<tt>optional_punc_non_final(L,L0)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>optional_punc_non_final(L,L0)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;punc(non_final,L,L0).</tt><br>
-<tt>optional_punc_non_final(L,L)&nbsp;-&#8288;-&#8288;&gt;</tt><br>
+<tt>optional_punc_non_final(L,L)&nbsp;--&gt;</tt><br>
 <tt>&nbsp;&nbsp;[].</tt><br>
 </dd></dl>
 
