@@ -848,7 +848,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Both rules of <tt>parse</tt> add two extra parameters to the initial compound term content of <tt>Goal</tt>. These two extra parameters act together to collect the parse tree results produced with the subsequent calls of <tt>tphrase</tt>. <tt>tphrase</tt> is a library function of the XSB Tabling Prolog system (Swift and Warren 2022).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of single <tt>node</tt> compound terms in the case of [rule 1] or lists with at least two <tt>node</tt> compound terms in the case of [rule 2]. For [rule 2], the list results are placed under single <tt>node</tt> compound terms with the empty string as their node label. Both rules collect the set of all results and pretty print them with calls to <tt>pp_ptree_list</tt> of (<a href="chapter1.html#ex1.31">1.31</a>) above.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Results from <tt>parse</tt> can consist of single <tt>node</tt> compound terms in the case of [rule 1] or lists with at least two <tt>node</tt> compound terms in the case of [rule 2]. For [rule 2], the list results are placed under single <tt>node</tt> compound terms with the empty atom as their node label. Both rules collect the set of all results and pretty print them with calls to <tt>pp_ptree_list</tt> of (<a href="chapter1.html#ex1.31">1.31</a>) above.</p>
 
 <br>
 <br>
