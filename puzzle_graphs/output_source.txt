@@ -1,0 +1,976 @@
+.TITLE
+About English Puzzle Graphs
+.AUTHOR
+Alastair Butler
+.ADDRESS
+Hirosaki University
+
+.SECTION __aims__
+Aims
+
+.L
+You can study English while having fun with English puzzle graphs.
+You will learn about word interactions while solving puzzles.
+The puzzles will help you understand
+how word connections can guide the building of sentences.
+Goals for working through the puzzles are:
+
+.POINTSTART
+
+.POINT
+to get a feeling for
+how words interact with each other (word dependencies)
+
+.POINT
+to learn about the components that go into building up connected sentences;
+this includes
+complex sentences,
+which are sentences with multiple clauses,
+and
+when sentences occur one after another
+
+.POINTEND
+
+.P
+A puzzle takes the form of a graph of words
+with labelled arrows that connect the graph nodes.
+The labelled arrows are clues for building sentence components.
+The puzzle task is to turn
+each graph of words with its clues into
+a &lsquo;solution&rsquo; that is
+a sentence fragment,
+a single sentence (that is possibly complex)
+or multiple sentences (each of which can be complex).
+You can check your success by seeing
+if your solution matches the suggested answer.
+
+.SECTION __aboutgraphs__
+How to read a puzzle graph
+
+.L
+In a puzzle graph,
+word content for a puzzle solution
+occurs outside of square brackets (&lsquo;<tt>[</tt>&rsquo;, &lsquo;<tt>]</tt>&rsquo;).
+
+.P
+The content inside square brackets
+tells us about word function,
+which is
+what words <i>do</i> in their sentences.
+These are clues that inform
+where words should go in puzzle solutions.
+
+.P
+Square bracket content should not be included in a puzzle solution.
+In contrast,
+all word content should be included.
+You never have to modify the forms of words,
+so a word should occur in a puzzle solution as you find it in the graph.
+
+.P
+Words and&sol;or square bracket content
+can be the label content for a graph node.
+They can also provide the label content
+for a directed arrow that connects graph nodes.
+An arrow connects one node
+(the <b>governor node</b>)
+to another node
+(the <b>dependent node</b>).
+It is typical for the label content of an arrow
+to be square bracket content
+(what the dependent is <i>doing</i> for the governor).
+
+.P
+Most of the words needed for a puzzle solution are found in the graph,
+but sometimes you will need to add additional &lsquo;invisible&rsquo; words.
+Some of the invisible words will turn out to be words
+that are involved with referencing what is talked about.
+These words can be:
+
+.POINTSTART
+
+.POINT
+<b>bound pronouns</b> (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>)
+which are used to reference already established graph nodes introduced because of earlier words
+
+// .POINT
+// <b>definites together with following nouns</b>
+// (e.g., <i>the garden</i>, <i>the tool-shed</i>)
+// when used to reference already familiar graph nodes introduced because of earlier words
+
+.POINT
+<b>proper nouns</b> (e.g., <i>Peter</i>, <i>Mr.&nbsp;McGregor</i>)
+when used to reference already familiar graph nodes introduced
+because of earlier instances of the same proper noun
+
+.POINTEND
+
+.L
+Note that pronouns
+that cannot be associated with something else from the discourse context
+(called unbound pronouns) do have graph presence.
+// Similarly,
+// definites (e.g., <i>the</i>, <i>these</i>, <i>this</i>)
+// that cannot be associated with something else from the discourse context
+// have a graph presence as graph node content together with any following noun content.
+
+.P
+Other invisible words
+are words that have a formal role marking grammatical structure:
+
+.POINTSTART
+
+.POINT
+<b>relative pronouns</b>,
+e.g., <i>who</i>, <i>which</i>, <i>where</i>, <i>when</i>,
+used at the start of a relative clause
+(<i>Mr.&nbsp;McGregor came up with a sieve, <u>which</u> he intended to pop upon the top of Peter</i>)
+
+// .POINT
+// the <b>complementizer</b> <i>that</i>
+// used at the start of an embedded clause (<i>Mr.&nbsp;McGregor was sure <u>that</u> Peter was somewhere</i>,
+// <i>I am sorry to say <u>that</u> Peter was not very well</i>)
+
+// .POINT
+// the <b>infinitive marker</b> <i>to</i>
+// used at the start of a <i>to</i>-infinitive clause
+// (<i>a beautiful thing <u>to</u> hide in</i>, <i>Peter sat down <u>to</u> rest</i>)
+
+// .POINT
+// the <b>connective particle</b> <i>for</i>
+// placed before the grammatical subject of a <i>to</i>-infinitive clause
+// (<i>Mr.&nbsp;McGregor hung up the little jacket and the shoes <u>for</u> a scare-crow to frighten the blackbirds</i>,
+// <i>no room <u>for</u> a fat little rabbit to squeeze underneath</i>)
+
+// .POINT
+// the <b>existential marker</b> <i>there</i>
+// used to signal a <i>there</i> construction (<i><u>there</u> were four Rabbits</i>)
+
+.POINT
+<b>dummy</b> <i>it</i>,
+e.g., in extraposition constructions
+(<i>Peter thought <u>it</u> best to go away</i>),
+cleft constructions
+(<i><u>It</u> was the second jacket that Peter had lost</i>)
+and
+weather reports
+(<i><u>it</u> is raining</i>)
+
+.POINTEND
+
+.P
+It is also possible for a node to have no content.
+This indicates an absence from a puzzle solution that
+we are nevertheless able to associate to a meaning,
+as is illustrated
+with the discussion of ellipsis
+in section sectionref:[__ellipsisexampl__] below.
+
+.SECTION __tips__
+Tips for reaching puzzle solutions
+
+.L
+This section
+offers tips for reaching puzzle solutions.
+This starts with a simple puzzle.
+Then we gradually pick up skills to tackle more complex puzzles.
+
+.SUBSECTION __initialexampl__
+A simple puzzle
+
+.L
+To form a puzzle solution,
+start by looking into a puzzle graph
+for an arrow that includes <tt>[arg0]</tt> in its label.
+The governor node for such an arrow will be the main verb content for a clause,
+possibly with other supporting words,
+while the dependent node will be
+the <b>logical subject</b> for the clause,
+which is the &lsquo;do-er&rsquo;
+or &lsquo;be-er&rsquo;
+or &lsquo;have-er&rsquo; of the clause.
+
+.P
+Consider Figure figureref:[__clausetherewere__].
+This gives the puzzle graph for a single clause.
+By finding the arrow labelled <tt>[arg0]</tt>,
+we identify <tt>were</tt> as the main verb.
+We also identify <tt>four_Rabbits</tt> as the &lsquo;be-er&rsquo; (logical subject).
+
+.FIGURESTART __clausetherewere__
+Puzzle graph for a single clause
+
+.GRAPHFROMTREE clausetherewerepic scale=0.55
+( (IP-MAT (ADVP-NIM (ADV Once_upon_a_time)) (EX there) (BED;_ex_V_ were) (NP-ESBJ;{RABBITS} (NUM four) (ADJP (ADJ little)) (NS Rabbits))) (ID 1_clausetherewereex))
+
+.FIGUREEND
+
+.P
+When the main verb of a clause is a form of the verb <smallcaps>BE</smallcaps>
+(like <i>were</i>)
+and
+there is no predicative connection (<tt>[prd]</tt>,
+as in Figure figureref:[__clausenameswere__] below),
+then
+a typical clause will have
+existential marker <i>there</i>
+as its initial word
+followed by a <smallcaps>BE</smallcaps> verb
+followed by an <tt>[arg0]</tt> dependent.
+With this knowledge,
+we can construct (exref:[__therewererabbits__]).
+
+.EX __therewererabbits__
+there were four Rabbits
+
+// .L
+// Note that (exref:[__therewererabbits__])
+// includes <i>there</i> as the first word,
+// and yet this word is not part of Figure figureref:[__clausetherewere__].
+// This is an example of an &lsquo;invisible&rsquo; word.
+// As noted in section sectionref:[__aboutgraphs__] above,
+// the puzzle solution might need to include
+// words that are not found in the puzzle graph.
+
+.P
+With (exref:[__therewererabbits__]),
+we already have a full sentence of English!
+However,
+(exref:[__therewererabbits__]) is not a complete puzzle solution
+for Figure figureref:[__clausetherewere__],
+since there are words that have yet to be used.
+One of these words comes at the end of an arrow
+that has <tt>four_Rabbits</tt> as its governor node.
+This word acts as an attributive modifier (<tt>[attrib]</tt>)
+to tell us about the size of the four rabbits (<tt>little</tt>).
+In English,
+numeral <tt>four</tt> should occur before an attributive adjective modifier
+to give (exref:[__therewerefourlittlerabbits__]).
+
+.EX __therewerefourlittlerabbits__
+there were four little Rabbits
+
+.P
+Figure figureref:[__clausetherewere__] also has
+an arrow labelled <tt>[nim]</tt>
+(unselected adverbial function)
+that has the main verb as its governor node
+and
+that points to the complex adverb <tt>Once_upon_a_time</tt>.
+Connecting these words
+gives the final puzzle solution
+for Figure figureref:[__clausetherewere__]
+of (exref:[__oncetherewererabbits__]).
+
+.EX __oncetherewererabbits__
+Once upon a time there were four little Rabbits
+
+.P
+As another example,
+consider Figure figureref:[__clausenameswere__],
+which also has content for a single clause sentence.
+
+.FIGURESTART __clausenameswere__
+Puzzle graph for another single clause
+
+.GRAPHFROMTREE clausenameswerepic scale=0.55
+( (IP-MAT (NP-SBJ (NP-GEN;{RABBITS} (PRO;_genm_ their)) (NS names)) (BED;_Ln_ were) (PUNC <mdash>) (NP-PRD (NLYR (NLYR (NPR Flopsy)) (PUNC ,) (CONJP (NLYR (NPR Mopsy))) (PUNC ,) (CONJP (NLYR (NPR Cotton-tail))) (PUNC ,) (CONJP (CONJ and) (NLYR (NPR Peter)))))) (ID 1_clausenameswereex))
+
+.FIGUREEND
+
+.L
+Searching for an <tt>[arg0]</tt> labelled arrow,
+we find <i>were</i> once again
+as the main verb of the clause.
+The &lsquo;be-er&rsquo; (logical subject) of the clause is <tt>names</tt>,
+which itself has an arrow labelled <tt>[gen]</tt> (genitive/possessive),
+which takes us to the genitive pronoun <tt>their</tt>.
+There is also an arrow labelled <tt>[prd]</tt> (predicative),
+which provides name content
+with dependent <tt>and</tt>,
+which in turn has four dependent conjuncts.
+Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow,
+where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts.
+Turning all this into an English sentence gives (exref:[__nameswereand__]).
+
+.EX __nameswereand__
+their names were Flopsy, Mopsy, Cotton-tail, and Peter
+
+.P
+Now consider Figure figureref:[__twoconjoinedclauses__].
+
+.FIGURESTART __twoconjoinedclauses__
+Puzzle graph combining Figures figureref:[__clausetherewere__] and figureref:[__clausenameswere__]
+
+.GRAPHFROMTREE twoconjoinedclausespic scale=0.5
+( (IP-MAT (ILYR (ILYR (ADVP-NIM (ADV Once_upon_a_time)) (EX there) (BED;_ex_V_ were) (NP-ESBJ;{RABBITS} (NUM four) (ADJP (ADJ little)) (NS Rabbits))) (PUNC ,) (CONJP (CONJ and) (ILYR (NP-SBJ (NP-GEN;{RABBITS} (PRO;_genm_ their)) (NS names)) (BED;_Ln_ were) (PUNC <mdash>) (NP-PRD (NLYR (NLYR (NPR Flopsy)) (PUNC ,) (CONJP (NLYR (NPR Mopsy))) (PUNC ,) (CONJP (NLYR (NPR Cotton-tail))) (PUNC ,) (CONJP (CONJ and) (NLYR (NPR Peter)))))))) (PUNC .)) (ID 1_twoconjoinedclausesex))
+
+.FIGUREEND
+
+.L
+This third puzzle graph brings together content from the two previous puzzle graphs
+with connections of material at two different graph nodes.
+First,
+there is connection from the very top node of the graph
+with the word <tt>and</tt>.
+Nodes corresponding to the main verb nodes of the two earlier graphs
+form the dependent nodes of arrows labelled <tt>[conjN]</tt>,
+much as we saw with the connections that led to
+<i>Flopsy, Mopsy, Cotton-tail, <bi>and</bi> Peter</i>.
+We can therefore expect to reach a puzzle solution that is essentially
+the content of (exref:[__oncetherewererabbits__]) connected by <i>and</i>
+to the content of (exref:[__nameswereand__]).
+
+.P
+But there is one further point of connection that we also need to make sense of:
+The arrow labelled <tt>[gen]</tt> of Figure figureref:[__twoconjoinedclauses__]
+does not have a node with content <i>their</i> as its dependent
+like in Figure figureref:[__clausenameswere__],
+but rather
+takes as its dependent <tt>four_Rabbits</tt>,
+which corresponds to the <tt>four_Rabbits</tt>
+of Figure figureref:[__clausetherewere__].
+
+.P
+We can interpret the <tt>[gen]</tt> labelled arrow
+as having an &lsquo;invisible&rsquo; instance of <i>their</i> as its dependent.
+This absence of <i>their</i> from the puzzle graph occurs
+because presence of <i>their</i>
+in the solution sentence is instead captured
+in the graph
+as a direct arrow connection
+(referential link) to the already occurring <tt>four_Rabbits</tt>.
+We are therefore justified to take
+&lsquo;(exref:[__oncetherewererabbits__]) <i>and</i> (exref:[__nameswereand__])&rsquo;
+&mdash; namely (exref:[__twoconjoinedclausessolution__]) &mdash;
+to be the overall puzzle solution for the graph of Figure figureref:[__twoconjoinedclauses__].
+
+.EX __twoconjoinedclausessolution__
+Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.
+
+.SUBSECTION __ellipsisexampl__
+An example with ellipsis
+
+.L
+Figure figureref:[__withellipsis__] has a similar structure to Figure figureref:[__twoconjoinedclauses__],
+in the sense that there are two verbs connected
+by <tt>[conj1]</tt> and <tt>[conj2]</tt> labelled arrows
+from <tt>and</tt> occurring topmost in the graph.
+However,
+while the verb of the first conjunct is overtly realised with <tt>lost</tt>,
+the content for the verb of the second conjunct
+is shown as a node without a label
+to indicate an absence
+from the puzzle solution (a lost <i>lost</i>!).
+
+.FIGURESTART __withellipsis__
+Puzzle graph with ellipsis
+
+.GRAPHFROMTREE withellipsispic scale=0.55
+( (IP-MAT (NP-SBJ;{PETER} (PRO He)) (ILYR (ILYR (VBD;_Tn_ lost) (NP-OB1 (D;_nphd_ one) (PP (P-ROLE of) (NP;{SHOES} (NP-GEN;{PETER} (PRO;_genm_ his)) (NS shoes)))) (PP-NIM (P-ROLE among) (NP (D the) (NS cabbages)))) (PUNC ,) (CONJP (CONJ and) (ILYR (NP-OB1 (D the) (ADJP (ADJ other)) (N shoe)) (PP-NIM (P-ROLE amongst) (NP (D the) (NS potatoes)))))) (PUNC .)) (ID 1_withellipsisex))
+
+.FIGUREEND
+
+.L
+Following all the links of Figure figureref:[__withellipsis__],
+we can arrive at puzzle solution (exref:[__withellipsissol__]).
+
+.EX __withellipsissol__
+He lost one of his shoes among the cabbages, and the other shoe amongst the potatoes.
+
+.SUBSECTION __complexpuzzle__
+A complex puzzle
+
+.L
+This section
+demonstrates how to approach a complex puzzle.
+We will break this into stages,
+first building content for simpler graphs,
+which then combine to give larger graphs,
+and so ultimately lead to the final graph
+for reaching the overall puzzle solution.
+
+.P
+To start,
+consider figure __handsandknees__.
+
+.FIGURESTART __handsandknees__
+Puzzle graph for a single clause
+
+.GRAPHFROMTREE handsandkneespic scale=0.55
+( (IP-MAT (NP-SBJ;{MRMCG} (N Mr<dot>) (NPR McGregor)) (BED;_Ipr_ was) (PP-CLR (P-ROLE on) (NP (NP-GEN;{MRMCG} (PRO;_genm_ his)) (NLYR (NLYR (NS hands)) (CONJP (CONJ and) (NLYR (NS knees))))))) (ID 1_handsandkneesex))
+
+.FIGUREEND
+
+.L
+By finding <tt>[arg0]</tt>,
+we can identify <tt>was</tt> as a verb
+with <tt>Mr._McGregor</tt> as the &lsquo;be-er&rsquo; (logical subject).
+One other arrow extends from <tt>was</tt>.
+This is labelled <tt>on [clr]</tt>
+and connects to
+<tt>and</tt>,
+which takes us to two conjuncts via
+the labelled connections
+<tt>[conj1]</tt> leading to <tt>hands</tt>
+and
+<tt>[conj2]</tt> leading to <tt>knees</tt>.
+One more connection,
+labelled <tt>[gen]</tt> (genitive/possessive),
+originates from <tt>and</tt> and leads to <tt>Mr._McGregor</tt>
+to capture the information that the
+<tt>hands</tt> and <tt>knees</tt> are those of <i>Mr.&nbsp;McGregor</i>.
+By following these connections
+and including <i>his</i> to capture the genitive/possessive connection,
+we can reach (exref:[__mcghandsandknees__]) as the puzzle solution.
+
+.EX __mcghandsandknees__
+Mr.&nbsp;McGregor was on his hands and knees
+
+.P
+Now consider Figure figureref:[__planting__].
+
+.FIGURESTART __planting__
+Puzzle content for a participle clause
+
+.GRAPHFROMTREE plantingpic scale=0.55
+( (IP-IMP (VAG;_Tn.p_ planting) (ADVP-CLR (RP out)) (NP-OB1 (ADJP (ADJ young)) (NS cabbages))) (ID 1_plantingex))
+
+.FIGUREEND
+
+.L
+An arrow labelled <tt>[arg1]</tt> (logical object)
+extends to <tt>cabbages</tt>
+having started from <tt>planting</tt>.
+In turn,
+<tt>cabbages</tt> leads via an <tt>[attrib]</tt> (attribute) labelled arrow to <tt>young</tt>.
+There is also a <tt>[clr]</tt> (closely related) labelled arrow
+from <tt>planting</tt>
+to <tt>out</tt>.
+By following these connections of the graph
+(and ignoring the <tt>["arg0"]</tt> connection to an unlabelled node),
+we reach the sentence fragment (exref:[__mcgplanting__]).
+
+.EX __mcgplanting__
+planting out young cabbages
+
+.P
+Now consider Figure figureref:[__handsandkneesandplanting__].
+
+.FIGURESTART __handsandkneesandplanting__
+Puzzle graph combining Figures figureref:[__handsandknees__] and figureref:[__planting__]
+
+.GRAPHFROMTREE handsandkneesandplantingpic scale=0.55
+( (IP-MAT (NP-SBJ;{MRMCG} (N Mr<dot>) (NPR McGregor)) (BED;_Ipr_ was) (PP-CLR (P-ROLE on) (NP (NP-GEN;{MRMCG} (PRO;_genm_ his)) (NLYR (NLYR (NS hands)) (CONJP (CONJ and) (NLYR (NS knees)))))) (PP-SCON (IP-PPL2 (VAG;_Tn.p_ planting) (ADVP-CLR (RP out)) (NP-OB1 (ADJP (ADJ young)) (NS cabbages))))) (ID 1_handsandkneesandplantingex))
+
+.FIGUREEND
+
+.L
+Figure figureref:[__handsandkneesandplanting__]
+has connections to bring together node content from
+Figures figureref:[__handsandknees__] and figureref:[__planting__].
+There is an unlabelled triangular node
+to capture how <tt>planting</tt>
+together with its connections
+acts as a restriction on the content from <tt>was</tt>.
+There is also the <tt>[arg0]</tt> connection
+from <tt>planting</tt>
+which now connects to <tt>Mr._McGregor</tt>,
+the &lsquo;be-er&rsquo; (logical subject) of the main clause.
+A puzzle solution that meets these new criteria
+of Figure figureref:[__handsandkneesandplanting__] is (exref:[__mcghandsandkneesandplanting__]).
+
+.EX __mcghandsandkneesandplanting__
+Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages
+
+.P
+Now consider Figure figureref:[__jumpedup__].
+
+.FIGURESTART __jumpedup__
+Puzzle graph for a single clause
+
+.GRAPHFROMTREE jumpeduppic scale=0.55
+( (IP-MAT (NP-SBJ;{MRMCG} (PRO he)) (VBD;_Ip_ jumped) (ADVP-CLR (RP up))) (ID 1_jumpedupex))
+
+.FIGUREEND
+
+.L
+Looking at <tt>jumped</tt>,
+this is linked to
+<tt>he</tt> with an <tt>[arg0]</tt> labelled arrow
+and
+<tt>up</tt> with a <tt>[clr]</tt> labelled arrow.
+Therefore,
+we can identify <i>jumped</i> as a verb
+with
+<i>he</i> as its &lsquo;do-er&rsquo; (logical subject),
+to derive the simple sentence of (exref:[__jumpedupsent__]).
+
+.EX __jumpedupsent__
+he jumped up
+
+.P
+Now consider Figure figureref:[__ranafter__].
+
+.FIGURESTART __ranafter__
+Puzzle graph for another single clause
+
+.GRAPHFROMTREE ranafterpic scale=0.55
+( (IP-MAT (NP-SBJ;{MRMCG} (PRO he)) (VBD;_Ipr_ ran) (PP-CLR (P-ROLE after) (NP;{PETER} (NPR Peter)))) (ID 1_ranafterex))
+
+.FIGUREEND
+
+.L
+Looking at <tt>ran</tt>,
+this is linked to
+<tt>he</tt> with an <tt>[arg0]</tt> labelled arrow.
+Also,
+<tt>ran</tt> is linked to <tt>Peter</tt> with an <tt>after [clr]</tt> labelled arrow.
+With these words and connections,
+we can derive the puzzle solution (exref:[__ranaftersent__]).
+
+.EX __ranaftersent__
+he ran after Peter
+
+.P
+Now consider Figure figureref:[__jumpedupranafter__].
+
+.FIGURESTART __jumpedupranafter__
+Puzzle graph combining Figures figureref:[__jumpedup__] and figureref:[__ranafter__]
+
+.GRAPHFROMTREE jumpedupranafterpic scale=0.55
+( (IP-MAT (NP-SBJ;{MRMCG} (PRO he)) (ILYR (ILYR (VBD;_Ip_ jumped) (ADVP-CLR (RP up))) (CONJP (CONJ and) (ILYR (VBD;_Ipr_ ran) (PP-CLR (P-ROLE after) (NP;{PETER} (NPR Peter))))))) (ID 1_jumpedupranafterex))
+
+.FIGUREEND
+
+.L
+This combines Figures figureref:[__jumpedup__] and figureref:[__ranafter__],
+with <tt>and</tt> to connect <tt>jumped</tt>
+and <tt>ran</tt>.
+Note how the single <tt>he</tt>
+connects as the &lsquo;do-er&rsquo; (logical subject) to both predicates.
+A puzzle solution is (exref:[__jumpedupranaftersent__]).
+
+.EX __jumpedupranaftersent__
+he jumped up and ran after Peter
+
+.P
+Now consider Figure figureref:[__waving__].
+
+.FIGURESTART __waving__
+Puzzle graph for a participle clause
+
+.GRAPHFROMTREE wavingpic scale=0.55
+( (IP-IMP (VAG;_Tn_ waving) (NP-OB1 (D a) (N rake))) (ID 1_wavingex))
+
+.FIGUREEND
+
+.L
+We can see <tt>waving</tt> is connected to
+<tt>rake</tt> with an <tt>[arg1]</tt> &lsquo;done to&rsquo; (logical object) arrow.
+A puzzle solution is (exref:[__wavingsent__]).
+
+.EX __wavingsent__
+waving a rake
+
+.P
+Now consider Figure figureref:[__stopthief__].
+
+.FIGURESTART __stopthief__
+Puzzle graph for an imperative clause
+
+.GRAPHFROMTREE stopthiefpic scale=0.55
+( (IP-IMP (VB;_I_ Stop) (NP-VOC (N thief))) (ID 1_stopthiefex))
+
+.FIGUREEND
+
+.L
+An imperative is an order or instruction
+for an unmentioned &lsquo;do-er&rsquo; to do something,
+but also the &lsquo;do-er&rsquo; can be addressed
+with a <tt>[nim]</tt> (unselected item) connection.
+Such an unselected item (called a vocative) can occur
+either at the front or end of an imperative,
+making (exref:[__stopthiefsol__]) a possible puzzle solution.
+
+.EX __stopthiefsol__
+Stop thief!
+
+.P
+Now consider Figure figureref:[__calling__].
+
+.FIGURESTART __calling__
+Puzzle graph for a clause with Figure figureref:[__stopthief__] as an embedding
+
+.GRAPHFROMTREE callingpic scale=0.55
+( (IP-IMP (VAG;_Tr.p_ calling) (ADVP-CLR (RP out)) (PUNC ,) (PULQ <lquo>) (utterance-OB1 (IP-IMP (VB;_I_ Stop) (NP-VOC (N thief)) (PUNC !))) (PURQ <rquo>)) (ID 1_callingex))
+
+.FIGUREEND
+
+.L
+This is the puzzle graph for a clause with an embedding
+with the content of Figure figureref:[__stopthief__].
+This embedding is connected by an <tt>[arg1]</tt> (logical object) arrow
+as an <tt>[utterance]</tt> (reported speech)
+that has <tt>calling</tt> as its content.
+A puzzle solution is (exref:[__callingsol__]).
+
+.EX __callingsol__
+calling out, &lsquo;Stop thief!&rsquo;
+
+.P
+Now consider Figure figureref:[__wavingandcalling__].
+
+.FIGURESTART __wavingandcalling__
+Puzzle graph combining Figures figureref:[__waving__] and figureref:[__calling__]
+
+.GRAPHFROMTREE wavingandcallingpic scale=0.55
+( (IP-IMP (ILYR (ILYR (VAG;_Tn_ waving) (NP-OB1 (D a) (N rake))) (CONJP (CONJ and) (ILYR (VAG;_Tr.p_ calling) (ADVP-CLR (RP out)) (PUNC ,) (PULQ <lquo>) (utterance-OB1 (IP-IMP (VB;_I_ Stop) (NP-VOC (N thief)) (PUNC !))) (PURQ <rquo>))))) (ID 1_wavingandcallingex))
+
+.FIGUREEND
+
+.L
+Figure figureref:[__wavingandcalling__] results from combining Figure figureref:[__waving__] and figureref:[__calling__].
+Here,
+<tt>and</tt> has conjuncts <tt>waving</tt>
+and <tt>calling</tt>.
+A puzzle solution is (exref:[__wavingandcallingsol__]).
+
+.EX __wavingandcallingsol__
+waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+
+.P
+Now consider Figure figureref:[__jumpedupranafterwavingandcalling__].
+
+.FIGURESTART __jumpedupranafterwavingandcalling__
+Puzzle graph combining Figures figureref:[__jumpedupranafter__] and figureref:[__wavingandcalling__]
+
+.GRAPHFROMTREE jumpedupranafterwavingandcallingpic scale=0.45
+( (IP-MAT (NP-SBJ;{MRMCG} (PRO he)) (ILYR (ILYR (VBD;_Ip_ jumped) (ADVP-CLR (RP up))) (CONJP (CONJ and) (ILYR (VBD;_Ipr_ ran) (PP-CLR (P-ROLE after) (NP;{PETER} (NPR Peter))) (PUNC ,) (PP-SCON (IP-PPL2 (ILYR (ILYR (VAG;_Tn_ waving) (NP-OB1 (D a) (N rake))) (CONJP (CONJ and) (ILYR (VAG;_Tr.p_ calling) (ADVP-CLR (RP out)) (PUNC ,) (PULQ <lquo>) (utterance-OB1 (IP-IMP (VB;_I_ Stop) (NP-VOC (N thief)) (PUNC !))) (PURQ <rquo>)))))))))) (ID 1_jumpedupranafterwavingandcallingex))
+
+.FIGUREEND
+
+.L
+Figure figureref:[__jumpedupranafterwavingandcalling__]
+has an unlabelled triangular node
+to combine Figures figureref:[__jumpedupranafter__] and figureref:[__wavingandcalling__],
+much like we saw happen with Figure figureref:[__handsandkneesandplanting__].
+Note how
+the verbs
+<tt>jumped</tt>,
+<tt>ran</tt>,
+<tt>waving</tt>, and
+<tt>calling</tt>
+all have <tt>[arg0]</tt> &lsquo;do-er&rsquo; (logical subject) arrows that
+connect to the same <tt>he</tt>.
+A puzzle solution is (exref:[__jumpedupranafterwavingandcallingsol__]).
+
+.EX __jumpedupranafterwavingandcallingsol__
+he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+
+.P
+We are finally able to consider the overall puzzle graph of Figure figureref:[__handscalling__].
+
+.FIGURESTART __handscalling__
+Puzzle graph combining Figures figureref:[__handsandkneesandplanting__] and figureref:[__jumpedupranafterwavingandcalling__]
+
+// .GRAPHFROMTREE handscallingpic angle=90,origin=c,scale=0.45
+
+.GRAPHFROMTREE handscallingpic scale=0.45
+( (IP-MAT (ILYR (ILYR (NP-SBJ;{MRMCG} (N Mr<dot>) (NPR McGregor)) (BED;_Ipr_ was) (PP-CLR (P-ROLE on) (NP (NP-GEN;{MRMCG} (PRO;_genm_ his)) (NLYR (NLYR (NS hands)) (CONJP (CONJ and) (NLYR (NS knees)))))) (PP-SCON (IP-PPL2 (VAG;_Tn.p_ planting) (ADVP-CLR (RP out)) (NP-OB1 (ADJP (ADJ young)) (NS cabbages))))) (PUNC ,) (CONJP (CONJ but) (ILYR (NP-SBJ;{MRMCG} (PRO he)) (ILYR (ILYR (VBD;_Ip_ jumped) (ADVP-CLR (RP up))) (CONJP (CONJ and) (ILYR (VBD;_Ipr_ ran) (PP-CLR (P-ROLE after) (NP;{PETER} (NPR Peter))) (PUNC ,) (PP-SCON (IP-PPL2 (ILYR (ILYR (VAG;_Tn_ waving) (NP-OB1 (D a) (N rake))) (CONJP (CONJ and) (ILYR (VAG;_Tr.p_ calling) (ADVP-CLR (RP out)) (PUNC ,) (PULQ <lquo>) (utterance-OB1 (IP-IMP (VB;_I_ Stop) (NP-VOC (N thief)) (PUNC !))) (PURQ <rquo>))))))))))))) (ID 1_handscallingex))
+
+.FIGUREEND
+
+.L
+This has <tt>but</tt> to combine Figures figureref:[__handsandkneesandplanting__] and figureref:[__jumpedupranafterwavingandcalling__].
+Note how
+the verbs
+<tt>was</tt>,
+<tt>planting</tt>,
+<tt>jumped</tt>,
+<tt>ran</tt>,
+<tt>waving</tt>, and
+<tt>calling</tt>
+all have <tt>[arg0]</tt> &lsquo;be-er&sol;do-er&rsquo; (logical subject) arrows
+that connect to the same instance of <tt>Mr._McGregor</tt>.
+An overall puzzle solution
+for Figure figureref:[__handscalling__] is (exref:[__handscallingsol__]).
+
+.EX __handscallingsol__
+Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he jumped up and ran after Peter, waving a rake and calling out, &lsquo;Stop thief!&rsquo;
+
+
+.SECTION __squarebracketcontent__
+Square bracket content
+
+.L
+This section presents tables of
+square brackets content together with illustrative examples.
+
+.SUBSECTION __forrelationlabels__
+For relation labels
+
+// .L
+// Let's first present square brackets content
+// that is limited to relation labels.
+
+.TABLESTART __squarebracketlabelsmodifiertable__
+modifiers
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[attrib]</tt>	attribute
+<tt>[gen]</tt>	genitive
+<tt>[qual]</tt>	qualifier
+
+.TABLEEND
+
+.EXSTART __attribex1__
+
+.L
+four little Rabbits
+
+.GRAPHFROMTREE attribex1graph scale=0.55
+( (FRAG (NP (NUM four) (ADJP (ADJ little)) (NS Rabbits))) (ID 1_attribex1))
+
+.EXEND
+
+.EXSTART __genex1__
+
+.L
+Mr. McGregor's garden
+
+.GRAPHFROMTREE genex1graph scale=0.55
+( (FRAG (NP (NP-GEN (N Mr.) (NPR McGregor) (GENM <apos>s)) (N garden))) (ID 1_genex1))
+
+.EXEND
+
+.EXSTART __qualex1__
+
+.L
+very big
+
+.GRAPHFROMTREE qualex1graph scale=0.55
+( (FRAG (ADJP (ADVP (ADV very)) (ADJ big))) (ID 1_qualex1))
+
+.EXEND
+
+.TABLESTART __squarebracketlabelsclausetable__
+clause arguments/complements
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[arg0]</tt>	logical subject
+<tt>[arg1]</tt>	logical direct object
+<tt>[arg2]</tt>	logical indirect object
+<tt>[prd]</tt>	predicative
+
+.TABLEEND
+
+.EXSTART __arg1ex1__
+
+.L
+Baroness Burdet Coutts founded the village.
+
+.GRAPHFROMTREE arg1ex1graph scale=0.55
+( (IP-MAT (NP-SBJ (N Baroness) (NPR Burdet) (NPR Coutts)) (VBD;_Tn_ founded) (NP-OB1 (D the) (N village)) (PUNC .)) (ID 1_example_1))
+
+.EXEND
+
+.EXSTART __arg1ex2__
+
+.L
+The village was founded by Baroness Burdet Coutts.
+
+.GRAPHFROMTREE arg1ex2graph scale=0.55
+( (IP-MAT (NP-SBJ (D The) (N village)) (BED;_cat_Ve_passive__ was) (IP-PPL-CAT (VVN;_Tn_ founded) (PP-LGS (P-ROLE;_lgs_ by) (NP (N Baroness) (NPR Burdet) (NPR Coutts)))) (PUNC .)) (ID 1_arg1ex2))
+
+.EXEND
+
+.EXSTART __clrex1__
+
+.L
+He was put in a pie.
+
+.GRAPHFROMTREE clrex1graph scale=0.55
+( (IP-MAT (NP-SBJ (PRO He)) (BED;_cat_Ve_passive__ was) (IP-PPL-CAT (NP-LGS *) (VVN;_Tn.pr_ put) (PP-CLR (P-ROLE in) (NP (D a) (N pie)))) (PUNC .)) (ID 1_clrex1))
+
+.EXEND
+
+.EXSTART __arg2ex1__
+
+.L
+Peter asked her the way.
+
+.GRAPHFROMTREE arg2ex1graph scale=0.55
+( (IP-MAT (NP-SBJ (NPR Peter)) (VBD;_Dn.n_ asked) (NP-OB2 (PRO her)) (NP-OB1 (D the) (N way)) (PUNC .)) (ID 1_arg2ex1))
+
+.EXEND
+
+.EXSTART __prdex1__
+
+.L
+It was a hoax.
+
+.GRAPHFROMTREE prdex1graph scale=0.55
+( (IP-MAT (NP-SBJ (PRO It)) (BED;_Ln_ was) (NP-PRD (D a) (N hoax)) (PUNC .)) (ID 1_prdex1))
+
+.EXEND
+
+.EXSTART __prdex2__
+
+.L
+I find this interesting.
+
+.GRAPHFROMTREE prdex2graph scale=0.55
+( (IP-MAT (NP-SBJ (PRO I)) (VBP;_Cn.a_ find) (NP-OB1 (D;_nphd_ this)) (ADJP-PRD (ADJ interesting)) (PUNC .)) (ID 1_prdex2))
+
+.EXEND
+
+.TABLESTART __squarebracketlabelsadverbialtable__
+adverbial functions
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[clr]</tt>	closely related, obligatory function
+<tt>[nim]</tt>	not important, non-obligatory adverbial function
+
+.TABLEEND
+
+.EXSTART __clrex3__
+
+.L
+Nasha went to the window.
+
+.GRAPHFROMTREE clrex3graph scale=0.55
+( (IP-MAT (NP-SBJ;{NASHA} (NPR Nasha)) (VBD;_Ipr_ went) (PP-CLR (P-ROLE to) (NP (D the) (N window))) (PUNC .)) (ID 104_a_dick_1952))
+
+.EXEND
+
+.EXSTART __nimex1__
+
+.L
+He was safe in the wood.
+
+.GRAPHFROMTREE nimex1graph scale=0.55
+( (IP-MAT (NP-SBJ (PRO He)) (BED;_La_ was) (ADJP-PRD (ADJ safe)) (PP-NIM (P-ROLE in) (NP (D the) (N wood))) (PUNC .)) (ID 1_nimex1))
+
+.EXEND
+
+// .TABLESTART __squarebracketlabelstable__
+// extra clause relations
+// 
+// .MAKETABLE |p{1.25in}|p{3in}|
+// label	description
+// <tt>[rfl]</tt>	reflexive
+// <tt>[voc]</tt>	vocative
+// 
+// .TABLEEND
+// 
+// .EXSTART __rflex1__
+// 
+// .L
+// The 1401 does the work itself.
+// 
+// .GRAPHFROMTREE rflex1graph scale=0.55
+// ( (IP-MAT (NP-SBJ (D The) (N 1401)) (DOP;_Tn_ does) (NP-OB1 (D the) (N work)) (NP-RFL (PNX itself)) (PUNC .)) (ID 1_rflex1))
+// 
+// .EXEND
+// 
+// .EXSTART __vocex1__
+// 
+// .L
+// what's up El?
+// 
+// .GRAPHFROMTREE vocex1graph scale=0.55
+// ( (CP-QUE-MAT (IP-SUB (NP-SBJ (WPRO what)) (BEP <apos>s) (ADVP-CLR (RP up)) (NP-VOC (NPR El))) (PUNC ?)) (ID 34_christine_t12))
+// 
+// .EXEND
+
+.TABLESTART __squarebracketlabelsembeddingtable__
+embedding marking
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[emb]</tt>	embedding
+
+.TABLEEND
+
+.EXSTART __embex1__
+
+.L
+the idea to go
+
+.GRAPHFROMTREE embex1graph scale=0.55
+( (FRAG (NP (D the) (N idea) (IP-INF (TO to) (VB;_I_ go)))) (ID 1_embex1))
+
+.EXEND
+
+.SUBSECTION __forconjunction__
+For conjunction
+
+.TABLESTART __squarebracketlabelsconjuncttable__
+conjunct marking
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[conj</tt><i>n</i><tt>]</tt>	<i>n</i>-th conjunct
+<tt>[part</tt><i>n</i><tt>]</tt>	<i>n</i>-th utterance part
+<tt>[utterance]</tt>	utterance
+
+.TABLEEND
+
+.EXSTART __conjex1__
+
+.L
+Janet was praised by Rodney, criticized by Sidney and ignored by Gregory.
+
+.GRAPHFROMTREE conjex1graph scale=0.55
+( (IP-MAT (NP-SBJ (NPR Janet)) (BED;_cat_Ve_passive__ was) (IP-PPL-CAT (ILYR (ILYR (VVN;_Tn_ praised) (PP-LGS (P-ROLE;_lgs_ by) (NP (NPR Rodney)))) (PUNC ,) (CONJP (ILYR (VVN;_Tn_ criticized) (PP-LGS (P-ROLE;_lgs_ by) (NP (NPR Sidney))))) (CONJP (CONJ and) (ILYR (VVN;_Tn_ ignored) (PP-LGS (P-ROLE;_lgs_ by) (NP (NPR Gregory))))))) (PUNC .)) (ID 1_example))
+
+.EXEND
+
+.EXSTART __utteranceex1__
+
+.L
+He said <ldquo>Beware! His eyes flash!<rdquo>
+
+.GRAPHFROMTREE utteranceex1graph scale=0.55
+( (IP-MAT (NP-SBJ;{PERSON} (PRO He)) (VBD;_Tr_ said) (PULQ <ldquo>) (utterance-OB1 (IP-IMP (VB;_I_ Beware) (PUNC !)) (IP-MAT (NP-SBJ (NP-GEN;{MONSTER} (PRO;_genm_ His)) (NS eyes)) (VBP;_I_ flash) (PUNC !))) (PURQ <rdquo>) (PUNC;_final_ _*_)) (ID 1_utteranceex1))
+
+.EXEND
+
+.SUBSECTION __forquantification__
+For quantification
+
+.TABLESTART __squarebracketlabelsoperatorsstable__
+scope operations
+
+.MAKETABLE |p{1.25in}|p{3in}|
+label	description
+<tt>[quant]</tt>	quantification
+<tt>[restriction]</tt>	restriction of an operation
+<tt>[scope]</tt>	scope of an operation
+
+.TABLEEND
+
+.EXSTART __quantex1__
+
+.L
+Merchandise orders came from every client.
+
+.GRAPHFROMTREE quantex1graph scale=0.55
+( (IP-MAT (NP-SBJ (N Merchandise) (NS orders)) (VBD;_I_ came) (PP-NIM (P-ROLE from) (NP (Q every) (N client))) (PUNC .)) (ID 1_quantex1))
+
+.EXEND
+
+.EXSTART __cndex1__
+
+.L
+A player wins if they reach the mousehole.
+
+.GRAPHFROMTREE cndex1graph scale=0.55
+( (IP-MAT (NP-SBJ;{PERSON} (D A) (N player)) (VBP;_I_ wins) (PP-SCON (P-CONN if) (IP-ADV (NP-SBJ;{PERSON} (PRO they)) (VBP;_Tn_ reach) (NP-OB1 (D the) (N mousehole)))) (PUNC .)) (ID 1_cndex1))
+
+.EXEND
+
