@@ -52,7 +52,7 @@
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Square bracket content should not be included in a puzzle solution. In contrast, all word content should be included. You never have to modify the forms of words, so a word should occur in a puzzle solution as you find it in the graph.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words and&sol;or square bracket content can be the label content for a graph node. They can also provide the label content for a directed arrow that connects graph nodes. An arrow connects one node (the <b>head node</b>) to another node (the <b>tail node</b>). It is typical for the label content of an arrow to be square bracket content (what the tail is <i>doing</i> for the head).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Words and&sol;or square bracket content can be the label content for a graph node. They can also provide the label content for a directed arrow that connects graph nodes. Each arrow connects two nodes by pointing from one node (the <b>tail node</b>) towards another node (the <b>head node</b>). It is typical for the label content of an arrow to be square bracket content (what the head node is <i>doing</i> for the tail node).</p>
 
 <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Most of the words needed for a puzzle solution are found in the graph, but sometimes you will need to add additional &lsquo;invisible&rsquo; words. Some of the invisible words will turn out to be <b>bound pronouns</b> (e.g., <i>he</i>, <i>her</i>, <i>themselves</i>) which are used to reference already established graph nodes introduced because of earlier words. Note that pronouns that cannot be associated with something else from the discourse context (called unbound pronouns) do have graph presence.</p>
 
@@ -71,9 +71,9 @@
 
 <h3><a name="sec3.1">3.1</a>&nbsp;&nbsp;&nbsp;&nbsp;A simple puzzle</h3>
 
-<p align="justify">To form a puzzle solution, start by looking into a puzzle graph for an arrow that includes <tt>[arg0]</tt> in its label. The head node for such an arrow will be the main verb content for a clause, possibly with other supporting words, while the tail node will be the <b>logical subject</b> for the clause, which is the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the clause.</p>
+<p align="justify">To form a puzzle solution, start by looking into a puzzle graph for an arrow labelled <tt>[arg0]</tt>. The tail node for such an arrow will be the main verb content for a clause, possibly with other supporting words, while the head node will be the <b>logical subject</b> for the clause, which is the &lsquo;do-er&rsquo; or &lsquo;be-er&rsquo; or &lsquo;have-er&rsquo; of the clause.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider Figure <a href="#figure1">1</a>. This gives the puzzle graph for a single clause. By finding the arrow labelled <tt>[arg0]</tt>, we identify <tt>were</tt> as the main verb. We also identify <tt>four_Rabbits</tt> as the &lsquo;be-er&rsquo; (logical subject).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Consider Figure <a href="#figure1">1</a>. This gives the puzzle graph for a single clause. From the arrow labelled <tt>[arg0]</tt>, we can identify <tt>were</tt> as the main verb and <tt>four_Rabbits</tt> as its &lsquo;be-er&rsquo; (logical subject).</p>
 
 <center>
 <img src="clausetherewerepic.png">
@@ -82,19 +82,19 @@
 <a name="figure1"><b>Figure 1</b>: Puzzle graph for a single clause</a>
 </center>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;When the main verb of a clause is a form of the verb <small style="font-size: 75%">BE</small> (like <i>were</i>) and there is no predicative connection (<tt>[prd]</tt>, as in Figure <a href="#figure2">2</a> below), then a typical clause will have existential marker <i>there</i> as its initial word followed by a <small style="font-size: 75%">BE</small> verb followed by an <tt>[arg0]</tt> connection to a tail node. With this knowledge, we can construct (<a href="#ex1">1</a>).</p>
+<p align="justify">When <i>were</i> (a form of <small style="font-size: 75%">BE</small>) occurs with existential marker <i>there</i>, it will typically be followed by its logical subject. With this knowledge, we can construct (<a href="#ex1">1</a>).</p>
 
 <dl><dt>(<a name="ex1">1</a>)</dt><dd>
 there were four Rabbits
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete puzzle solution for Figure <a href="#figure1">1</a>, since there are words that have yet to be used. One of these words comes at the end of an arrow that has <tt>four_Rabbits</tt> as its head node. This word acts as an attributive modifier (<tt>[attrib]</tt>) to tell us about the size of the four rabbits (<tt>little</tt>). In English, numeral <tt>four</tt> should occur before an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;With (<a href="#ex1">1</a>), we already have a full sentence of English! However, (<a href="#ex1">1</a>) is not a complete puzzle solution for Figure <a href="#figure1">1</a>, since there are words that have yet to be used. One of these words comes as the head node of an arrow that has <tt>four_Rabbits</tt> as its tail node. This word acts as an attributive modifier (<tt>[attrib]</tt>) to tell us about the size of the four rabbits (<tt>little</tt>). In English, numeral <tt>four</tt> should occur before an attributive adjective modifier to give (<a href="#ex2">2</a>).</p>
 
 <dl><dt>(<a name="ex2">2</a>)</dt><dd>
 there were four little Rabbits
 </dd></dl>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#figure1">1</a> also has an arrow labelled <tt>[nim]</tt> (unselected adverbial function) that has the main verb as its head node and that points to the complex adverb <tt>Once_upon_a_time</tt>. Connecting these words gives the final puzzle solution for Figure <a href="#figure1">1</a> of (<a href="#ex3">3</a>).</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;Figure <a href="#figure1">1</a> also has an arrow labelled <tt>[nim]</tt> (unselected adverbial function) that has the main verb as its tail node and that has as its head node the complex adverb <tt>Once_upon_a_time</tt>. Connecting these words gives the final puzzle solution for Figure <a href="#figure1">1</a> of (<a href="#ex3">3</a>).</p>
 
 <dl><dt>(<a name="ex3">3</a>)</dt><dd>
 Once upon a time there were four little Rabbits
@@ -109,7 +109,7 @@ Once upon a time there were four little Rabbits
 <a name="figure2"><b>Figure 2</b>: Puzzle graph for another single clause</a>
 </center>
 
-<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find <i>were</i> once again as the main verb of the clause. The &lsquo;be-er&rsquo; (logical subject) of the clause is <tt>names</tt>, which itself has an arrow labelled <tt>[gen]</tt> (genitive/possessive), which takes us to the genitive pronoun <tt>their</tt>. There is also an arrow labelled <tt>[prd]</tt> (predicative), which provides name content with tail <tt>and</tt>, which in turn acts as the head node for four conjunct tail nodes. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all this into an English sentence gives (<a href="#ex4">4</a>).</p>
+<p align="justify">Searching for an <tt>[arg0]</tt> labelled arrow, we find <i>were</i> once again as the main verb of the clause. The &lsquo;be-er&rsquo; (logical subject) of the clause is <tt>names</tt>, which itself has an arrow labelled <tt>[gen]</tt> (genitive/possessive), which takes us to the genitive pronoun <tt>their</tt>. There is also an arrow labelled <tt>[prd]</tt> (predicative), which provides name content with head node <tt>and</tt>, which in turn acts as the tail node for four conjunct head nodes. Each conjunct is linked with a <tt>[conjN]</tt> labelled arrow, where <tt>N</tt> is a conjunct's place in an ordering of all the conjuncts. Turning all this into an English sentence gives (<a href="#ex4">4</a>).</p>
 
 <dl><dt>(<a name="ex4">4</a>)</dt><dd>
 their names were Flopsy, Mopsy, Cotton-tail, and Peter
@@ -124,11 +124,11 @@ their names were Flopsy, Mopsy, Cotton-tail, and Peter
 <a name="figure3"><b>Figure 3</b>: Puzzle graph combining Figures <a href="#figure1">1</a> and <a href="#figure2">2</a></a>
 </center>
 
-<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and</tt>. Nodes corresponding to the main verbs of the two earlier graphs form the tail nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a puzzle solution that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex4">4</a>).</p>
+<p align="justify">This third puzzle graph brings together content from the two previous puzzle graphs with connections of material at two different graph nodes. First, there is connection from the very top node of the graph with the word <tt>and</tt>. Nodes corresponding to the main verbs of the two earlier graphs form the head nodes of arrows labelled <tt>[conjN]</tt>, much as we saw with the connections that led to <i>Flopsy, Mopsy, Cotton-tail, <b><i>and</i></b> Peter</i>. We can therefore expect to reach a puzzle solution that is essentially the content of (<a href="#ex3">3</a>) connected by <i>and</i> to the content of (<a href="#ex4">4</a>).</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow labelled <tt>[gen]</tt> of Figure <a href="#figure3">3</a> does not have a node with content <i>their</i> as its tail node like in Figure <a href="#figure2">2</a>, but rather takes as its tail node <tt>four_Rabbits</tt>, which corresponds to the <tt>four_Rabbits</tt> of Figure <a href="#figure1">1</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;But there is one further point of connection that we also need to make sense of: The arrow labelled <tt>[gen]</tt> of Figure <a href="#figure3">3</a> does not have a node with content <i>their</i> as its head node like in Figure <a href="#figure2">2</a>, but rather takes as its head node <tt>four_Rabbits</tt>, which corresponds to the <tt>four_Rabbits</tt> of Figure <a href="#figure1">1</a>.</p>
 
-<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can interpret the <tt>[gen]</tt> labelled arrow as having an &lsquo;invisible&rsquo; instance of <i>their</i> as its tail node. This absence of <i>their</i> from the puzzle graph occurs because presence of <i>their</i> in the solution sentence is instead captured in the graph as a direct arrow connection (referential link) to the already occurring <tt>four_Rabbits</tt>. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex4">4</a>)&rsquo; &mdash; namely (<a href="#ex5">5</a>) &mdash; to be the overall puzzle solution for the graph of Figure <a href="#figure3">3</a>.</p>
+<p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;We can interpret the <tt>[gen]</tt> labelled arrow as having an &lsquo;invisible&rsquo; instance of <i>their</i> as its head node. This absence of <i>their</i> from the puzzle graph occurs because presence of <i>their</i> in the solution sentence is instead captured in the graph as a direct arrow connection (referential link) to the already occurring <tt>four_Rabbits</tt>. We are therefore justified to take &lsquo;(<a href="#ex3">3</a>) <i>and</i> (<a href="#ex4">4</a>)&rsquo; &mdash; namely (<a href="#ex5">5</a>) &mdash; to be the overall puzzle solution for the graph of Figure <a href="#figure3">3</a>.</p>
 
 <dl><dt>(<a name="ex5">5</a>)</dt><dd>
 Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter.
@@ -339,7 +339,7 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he
 
 <p align="justify">This section presents tables of square brackets content together with illustrative examples.</p>
 
-<h3><a name="sec4.1">4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;For relation labels</h3>
+<h3><a name="sec4.1">4.1</a>&nbsp;&nbsp;&nbsp;&nbsp;Relation labels</h3>
 
 <center>
 <table border="1" cellpadding="10px">
@@ -459,7 +459,7 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he
 <img src="embex1graph.png">
 </dd></dl>
 
-<h3><a name="sec4.2">4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;For conjunction</h3>
+<h3><a name="sec4.2">4.2</a>&nbsp;&nbsp;&nbsp;&nbsp;Conjunction</h3>
 
 <center>
 <table border="1" cellpadding="10px">
@@ -485,17 +485,17 @@ Mr.&nbsp;McGregor was on his hands and knees planting out young cabbages, but he
 <img src="utteranceex1graph.png">
 </dd></dl>
 
-<h3><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;For quantification</h3>
+<h3><a name="sec4.3">4.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Operators</h3>
 
 <center>
 <table border="1" cellpadding="10px">
 <tr><td>label</td><td>description</td></tr>
-<tr><td><tt>[quant]</tt></td><td>quantification</td></tr>
-<tr><td><tt>[restriction]</tt></td><td>restriction of an operation</td></tr>
-<tr><td><tt>[scope]</tt></td><td>scope of an operation</td></tr>
+<tr><td><tt>[quant]</tt></td><td>quantifier operator</td></tr>
+<tr><td><tt>[restriction]</tt></td><td>restriction of an operator</td></tr>
+<tr><td><tt>[scope]</tt></td><td>scope of an operator</td></tr>
 </table>
 <br>
-<a name="table6"><b>Table 6</b>: scope operations</a>
+<a name="table6"><b>Table 6</b>: operator components</a>
 </center>
 <br>
 
